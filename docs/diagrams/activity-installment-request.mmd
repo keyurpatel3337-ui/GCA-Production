@@ -1,0 +1,119 @@
+%% Fee Installment Request Activity Diagram
+%% Shows the flow of requesting and approving fee installments
+
+flowchart TD
+    Start([Student/Counsellor Initiates Request]) --> CheckLogin{User<br/>Logged In?}
+    CheckLogin -->|No| RedirectLogin[Redirect to Login]
+    CheckLogin -->|Yes| CheckRole{Check User<br/>Role}
+    
+    RedirectLogin --> LoginPage[Login Page]
+    LoginPage --> CheckLogin
+    
+    CheckRole -->|Student| ViewOwnFees[View My Fees]
+    CheckRole -->|Counsellor| SelectStudent[Select Student]
+    
+    SelectStudent --> ViewStudentFees[View Student Fees]
+    ViewStudentFees --> CheckAssignment{Student<br/>Assigned?}
+    CheckAssignment -->|No| AccessDenied[Access Denied]
+    CheckAssignment -->|Yes| CheckPendingFees
+    
+    AccessDenied --> End([End])
+    
+    ViewOwnFees --> CheckPendingFees{Pending<br/>Fees?}
+    CheckPendingFees -->|No| NoFeeDue[No Fee Due]
+    CheckPendingFees -->|Yes| SelectFeeComponent{Select Fee<br/>Component}
+    
+    NoFeeDue --> End
+    
+    SelectFeeComponent -->|School Fee| SchoolFeeSelected[School Fee]
+    SelectFeeComponent -->|Trust Fee| TrustFeeSelected[Trust Facilities Fee]
+    SelectFeeComponent -->|Tuition Part 2| TuitionFeeSelected[Tuition Fee Part 2]
+    SelectFeeComponent -->|Hostel Fee| HostelFeeSelected[Hostel Fee]
+    
+    SchoolFeeSelected --> CheckEligibility
+    TrustFeeSelected --> CheckEligibility
+    TuitionFeeSelected --> CheckEligibility
+    HostelFeeSelected --> CheckEligibility[Check Eligibility]
+    
+    CheckEligibility --> ValidateEligibility{Eligible for<br/>Installment?}
+    ValidateEligibility -->|No| ShowReason[Show Ineligibility Reason]
+    ValidateEligibility -->|Yes| SelectInstallmentPlan{Select<br/>Installment Plan}
+    
+    ShowReason --> End
+    
+    SelectInstallmentPlan -->|2 Installments| TwoInstallments[2 Monthly Installments]
+    SelectInstallmentPlan -->|3 Installments| ThreeInstallments[3 Monthly Installments]
+    SelectInstallmentPlan -->|4 Installments| FourInstallments[4 Monthly Installments]
+    SelectInstallmentPlan -->|Custom| CustomPlan[Custom Plan]
+    
+    TwoInstallments --> CalculateInstallments
+    ThreeInstallments --> CalculateInstallments
+    FourInstallments --> CalculateInstallments
+    CustomPlan --> DefineCustom[Define Custom Terms]
+    DefineCustom --> CalculateInstallments[Calculate Installment Amounts]
+    
+    CalculateInstallments --> SetDueDates[Set Due Dates]
+    SetDueDates --> DisplayBreakdown[Display Installment Breakdown]
+    
+    DisplayBreakdown --> AddReason[Add Reason for Request]
+    AddReason --> AttachDocs{Attach<br/>Documents?}
+    AttachDocs -->|Yes| UploadSupporting[Upload Supporting Documents]
+    AttachDocs -->|No| ReviewRequest
+    
+    UploadSupporting --> ReviewRequest{Review<br/>Request?}
+    ReviewRequest -->|Needs Changes| AddReason
+    ReviewRequest -->|Submit| SaveRequest[(Save Installment Request)]
+    
+    SaveRequest --> UpdateStatus[Set Status: Pending]
+    UpdateStatus --> NotifyAccountant[Notify Accountant]
+    NotifyAccountant --> NotifyPrincipal[Notify Principal]
+    NotifyPrincipal --> SendEmailStudent[Send Confirmation Email to Student]
+    
+    SendEmailStudent --> WaitApproval[Wait for Approval]
+    WaitApproval --> ReviewByAccountant{Accountant<br/>Reviews}
+    
+    ReviewByAccountant -->|Approve| AccountantApproves[Mark as Approved by Accountant]
+    ReviewByAccountant -->|Reject| AccountantRejects[Reject with Reason]
+    ReviewByAccountant -->|Request Info| RequestMoreInfo[Request Additional Info]
+    
+    RequestMoreInfo --> NotifyRequester[Notify Requester]
+    NotifyRequester --> WaitResponse[Wait for Response]
+    WaitResponse --> UpdateRequest[Update Request]
+    UpdateRequest --> ReviewByAccountant
+    
+    AccountantRejects --> UpdateStatusRejected[Update Status: Rejected]
+    UpdateStatusRejected --> NotifyRejection[Send Rejection Email]
+    NotifyRejection --> End
+    
+    AccountantApproves --> PrincipalReview{Principal<br/>Reviews}
+    PrincipalReview -->|Approve| PrincipalApproves[Final Approval]
+    PrincipalReview -->|Reject| PrincipalRejects[Reject Request]
+    
+    PrincipalRejects --> UpdateStatusRejected
+    
+    PrincipalApproves --> CreateInstallments[(Create Installment Records)]
+    CreateInstallments --> UpdateFeeAllocation[Update Fee Allocation]
+    UpdateFeeAllocation --> GenerateSchedule[Generate Payment Schedule]
+    GenerateSchedule --> SendApprovalEmail[Send Approval Email]
+    
+    SendApprovalEmail --> SetReminders[Set Payment Reminders]
+    SetReminders --> LogActivity[Log Activity]
+    LogActivity --> DisplaySuccess[Display Success Message]
+    
+    DisplaySuccess --> End
+    
+    style Start fill:#C8E6C9
+    style End fill:#FFCDD2
+    style SaveRequest fill:#E1BEE7
+    style CreateInstallments fill:#E1BEE7
+    style CheckLogin fill:#FFF9C4
+    style CheckRole fill:#FFF9C4
+    style CheckAssignment fill:#FFF9C4
+    style CheckPendingFees fill:#FFF9C4
+    style SelectFeeComponent fill:#FFF9C4
+    style ValidateEligibility fill:#FFF9C4
+    style SelectInstallmentPlan fill:#FFF9C4
+    style AttachDocs fill:#FFF9C4
+    style ReviewRequest fill:#FFF9C4
+    style ReviewByAccountant fill:#FFF9C4
+    style PrincipalReview fill:#FFF9C4

@@ -1,0 +1,277 @@
+[2026-05-16 08:48:39] INFO: WhatsApp BhashSMS sent successfully to 7984874524. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: SHETH VIDHI MEHULBHAI
+  Var 2: 95440
+  Var 3: Cheque
+  Var 4: <258,327,309>
+  Var 5: 16-May-2026
+ Message ID: S.487092
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=7984874524&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=SHETH%20VIDHI%20MEHULBHAI%2C95440%2CCheque%2C%3C258%2C327%2C309%3E%2C16-May-2026
+--------------------------------------------------
+
+[2026-05-16 08:48:40] INFO: WhatsApp BhashSMS sent successfully to 9998994020. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: SHETH VIDHI MEHULBHAI
+  Var 2: 95440
+  Var 3: Cheque
+  Var 4: <258,327,309>
+  Var 5: 16-May-2026
+ Message ID: S.819001
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9998994020&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=SHETH%20VIDHI%20MEHULBHAI%2C95440%2CCheque%2C%3C258%2C327%2C309%3E%2C16-May-2026
+--------------------------------------------------
+
+[2026-05-16 08:48:40] INFO: WhatsApp Template message sent successfully to 7984874524. Provider: bhashsms
+[2026-05-16 08:52:39] INFO: WhatsApp BhashSMS sent successfully to 9512917805. Template: daily_summary_simple.
+Variables Sent:
+  Var 1: 15-May-2026
+  Var 2: 28
+  Var 3: 7
+  Var 4: 212480
+  Var 5: 18
+  Var 6: 544340
+  Var 7: 3
+  Var 8: 95440
+  Var 9: 852260
+ Message ID: S.466645
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9512917805&text=daily_summary_simple&priority=wa&stype=normal&Params=15-May-2026%2C28%2C7%2C212480%2C18%2C544340%2C3%2C95440%2C852260
+--------------------------------------------------
+
+[2026-05-16 08:52:39] INFO: WhatsApp Template message sent successfully to 9512917805. Provider: bhashsms
+[2026-05-16 08:53:48] INFO: WhatsApp BhashSMS sent successfully to 9512917805. Template: detailed_summary_report.
+Variables Sent:
+  Var 1: 15-May-2026
+  Var 2: 4
+  Var 3: 166880
+  Var 4: 12
+  Var 5: 450740
+  Var 6: 2
+  Var 7: 83440
+  Var 8: 701060
+  Var 9: 0
+  Var 10: 0
+  Var 11: 0
+  Var 12: 0
+  Var 13: 0
+  Var 14: 0
+  Var 15: 0
+  Var 16: 0
+  Var 17: 0
+  Var 18: 0
+  Var 19: 0
+  Var 20: 0
+  Var 21: 0
+  Var 22: 0
+  Var 23: 1
+  Var 24: 21600
+  Var 25: 0
+  Var 26: 0
+  Var 27: 0
+  Var 28: 0
+  Var 29: 21600
+  Var 30: 2
+  Var 31: 24000
+  Var 32: 6
+  Var 33: 93600
+  Var 34: 1
+  Var 35: 12000
+  Var 36: 129600
+  Var 37: 852260
+ Message ID: S.538575
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9512917805&text=detailed_summary_report&priority=wa&stype=normal&Params=15-May-2026%2C4%2C166880%2C12%2C450740%2C2%2C83440%2C701060%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C1%2C21600%2C0%2C0%2C0%2C0%2C21600%2C2%2C24000%2C6%2C93600%2C1%2C12000%2C129600%2C852260
+--------------------------------------------------
+
+[2026-05-16 08:53:48] INFO: WhatsApp Template message sent successfully to 9512917805. Provider: bhashsms
+[2026-05-16 08:53:55] INFO: WhatsApp BhashSMS sent successfully to 9512917805. Template: daily_summary_simple.
+Variables Sent:
+  Var 1: 15-May-2026
+  Var 2: 28
+  Var 3: 7
+  Var 4: 212480
+  Var 5: 18
+  Var 6: 544340
+  Var 7: 3
+  Var 8: 95440
+  Var 9: 852260
+ Message ID: S.466767
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9512917805&text=daily_summary_simple&priority=wa&stype=normal&Params=15-May-2026%2C28%2C7%2C212480%2C18%2C544340%2C3%2C95440%2C852260
+--------------------------------------------------
+
+[2026-05-16 08:53:55] INFO: WhatsApp Template message sent successfully to 9512917805. Provider: bhashsms
+[2026-05-16 08:54:02] INFO: WhatsApp BhashSMS sent successfully to 9512917805. Template: daily_summary_coursewise.
+Variables Sent:
+  Var 1: 15-May-2026
+  Var 2: *12th English*  _School Fee_   Online: 2 | Rs. 30000  _Trust Facilities Fee_   Online: 1 | Rs. 33600  _Tuition Fee Part 2_   Online: 1 | Rs. 71980  Course Total: Rs. 135580    *12th Gujarati*  _School Fee_   Cash: 2 | Rs. 30000   Online: 5 | Rs. 75000   Cheque: 1 | Rs. 15000  _Trust Facilities Fee_   Cash: 2 | Rs. 24000   Online: 5 | Rs. 60000   Cheque: 1 | Rs. 12000  _Tuition Fee Part 2_   Cash: 2 | Rs. 136880   Online: 4 | Rs. 273760   Cheque: 1 | Rs. 68440  _Transport Fee_   Cash: 1 | Rs. 21600  Course Total: Rs. 716680
+  Var 3: 852260
+ Message ID: S.518952
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9512917805&text=daily_summary_coursewise&priority=wa&stype=normal&Params=15-May-2026%2C%2A12th%20English%2A%20%20_School%20Fee_%20%20%20Online%3A%202%20%7C%20Rs.%2030000%20%20_Trust%20Facilities%20Fee_%20%20%20Online%3A%201%20%7C%20Rs.%2033600%20%20_Tuition%20Fee%20Part%202_%20%20%20Online%3A%201%20%7C%20Rs.%2071980%20%20Course%20Total%3A%20Rs.%20135580%20%20%20%20%2A12th%20Gujarati%2A%20%20_School%20Fee_%20%20%20Cash%3A%202%20%7C%20Rs.%2030000%20%20%20Online%3A%205%20%7C%20Rs.%2075000%20%20%20Cheque%3A%201%20%7C%20Rs.%2015000%20%20_Trust%20Facilities%20Fee_%20%20%20Cash%3A%202%20%7C%20Rs.%2024000%20%20%20Online%3A%205%20%7C%20Rs.%2060000%20%20%20Cheque%3A%201%20%7C%20Rs.%2012000%20%20_Tuition%20Fee%20Part%202_%20%20%20Cash%3A%202%20%7C%20Rs.%20136880%20%20%20Online%3A%204%20%7C%20Rs.%20273760%20%20%20Cheque%3A%201%20%7C%20Rs.%2068440%20%20_Transport%20Fee_%20%20%20Cash%3A%201%20%7C%20Rs.%2021600%20%20Course%20Total%3A%20Rs.%20716680%2C852260
+--------------------------------------------------
+
+[2026-05-16 08:54:02] INFO: WhatsApp Template message sent successfully to 9512917805. Provider: bhashsms
+[2026-05-16 08:55:41] INFO: WhatsApp BhashSMS sent successfully to 9016868629. Template: daily_summary_simple.
+Variables Sent:
+  Var 1: 15-May-2026
+  Var 2: 28
+  Var 3: 7
+  Var 4: 212480
+  Var 5: 18
+  Var 6: 544340
+  Var 7: 3
+  Var 8: 95440
+  Var 9: 852260
+ Message ID: S.368897
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9016868629&text=daily_summary_simple&priority=wa&stype=normal&Params=15-May-2026%2C28%2C7%2C212480%2C18%2C544340%2C3%2C95440%2C852260
+--------------------------------------------------
+
+[2026-05-16 08:55:41] INFO: WhatsApp Template message sent successfully to 9016868629. Provider: bhashsms
+[2026-05-16 10:36:14] INFO: WhatsApp BhashSMS sent successfully to 9512917805. Template: detailed_summary_report.
+Variables Sent:
+  Var 1: 16-May-2026
+  Var 2: 0
+  Var 3: 0
+  Var 4: 0
+  Var 5: 0
+  Var 6: 2
+  Var 7: 83440
+  Var 8: 83440
+  Var 9: 0
+  Var 10: 0
+  Var 11: 0
+  Var 12: 0
+  Var 13: 0
+  Var 14: 0
+  Var 15: 0
+  Var 16: 0
+  Var 17: 0
+  Var 18: 0
+  Var 19: 0
+  Var 20: 0
+  Var 21: 0
+  Var 22: 0
+  Var 23: 0
+  Var 24: 0
+  Var 25: 0
+  Var 26: 0
+  Var 27: 0
+  Var 28: 0
+  Var 29: 0
+  Var 30: 0
+  Var 31: 0
+  Var 32: 0
+  Var 33: 0
+  Var 34: 1
+  Var 35: 12000
+  Var 36: 12000
+  Var 37: 95440
+ Message ID: S.964966
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9512917805&text=detailed_summary_report&priority=wa&stype=normal&Params=16-May-2026%2C0%2C0%2C0%2C0%2C2%2C83440%2C83440%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C0%2C1%2C12000%2C12000%2C95440
+--------------------------------------------------
+
+[2026-05-16 10:36:14] INFO: WhatsApp Template message sent successfully to 9512917805. Provider: bhashsms
+[2026-05-16 10:39:27] INFO: WhatsApp BhashSMS sent successfully to 9512917805. Template: daily_summary_simple.
+Variables Sent:
+  Var 1: 16-May-2026
+  Var 2: 3
+  Var 3: 0
+  Var 4: 0
+  Var 5: 0
+  Var 6: 0
+  Var 7: 3
+  Var 8: 95440
+  Var 9: 95440
+ Message ID: S.358002
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9512917805&text=daily_summary_simple&priority=wa&stype=normal&Params=16-May-2026%2C3%2C0%2C0%2C0%2C0%2C3%2C95440%2C95440
+--------------------------------------------------
+
+[2026-05-16 10:39:27] INFO: WhatsApp Template message sent successfully to 9512917805. Provider: bhashsms
+[2026-05-16 10:44:40] INFO: WhatsApp BhashSMS sent successfully to 9824398182. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: PANDYA TANAY PARIKSHITBHAI
+  Var 2: 98980
+  Var 3: Cash
+  Var 4: <259,328,310>
+  Var 5: 16-May-2026
+ Message ID: S.493378
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9824398182&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=PANDYA%20TANAY%20PARIKSHITBHAI%2C98980%2CCash%2C%3C259%2C328%2C310%3E%2C16-May-2026
+--------------------------------------------------
+
+[2026-05-16 10:44:40] INFO: WhatsApp BhashSMS sent successfully to 9998994020. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: PANDYA TANAY PARIKSHITBHAI
+  Var 2: 98980
+  Var 3: Cash
+  Var 4: <259,328,310>
+  Var 5: 16-May-2026
+ Message ID: S.252717
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9998994020&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=PANDYA%20TANAY%20PARIKSHITBHAI%2C98980%2CCash%2C%3C259%2C328%2C310%3E%2C16-May-2026
+--------------------------------------------------
+
+[2026-05-16 10:44:40] INFO: WhatsApp Template message sent successfully to 9824398182. Provider: bhashsms
+[2026-05-16 11:25:04] INFO: WhatsApp BhashSMS sent successfully to 9714225630. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: RATHOD MAAHI HIRENBHAI
+  Var 2: 98980
+  Var 3: Cash
+  Var 4: <260,329,311>
+  Var 5: 16-May-2026
+ Message ID: S.566529
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9714225630&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=RATHOD%20MAAHI%20HIRENBHAI%2C98980%2CCash%2C%3C260%2C329%2C311%3E%2C16-May-2026
+--------------------------------------------------
+
+[2026-05-16 11:25:05] INFO: WhatsApp BhashSMS sent successfully to 9998994020. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: RATHOD MAAHI HIRENBHAI
+  Var 2: 98980
+  Var 3: Cash
+  Var 4: <260,329,311>
+  Var 5: 16-May-2026
+ Message ID: S.26246
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9998994020&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=RATHOD%20MAAHI%20HIRENBHAI%2C98980%2CCash%2C%3C260%2C329%2C311%3E%2C16-May-2026
+--------------------------------------------------
+
+[2026-05-16 11:25:05] INFO: WhatsApp Template message sent successfully to 9714225630. Provider: bhashsms
+[2026-05-16 11:47:37] INFO: WhatsApp BhashSMS sent successfully to 9979078666. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: SHEIKH HAMZA HUSAIN RIZWAN HUSAIN
+  Var 2: 81280
+  Var 3: Cash
+  Var 4: <261,330,312>
+  Var 5: 16-May-2026
+ Message ID: S.483429
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9979078666&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=SHEIKH%20HAMZA%20HUSAIN%20RIZWAN%20HUSAIN%2C81280%2CCash%2C%3C261%2C330%2C312%3E%2C16-May-2026
+--------------------------------------------------
+
+[2026-05-16 11:47:37] INFO: WhatsApp BhashSMS sent successfully to 9998994020. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: SHEIKH HAMZA HUSAIN RIZWAN HUSAIN
+  Var 2: 81280
+  Var 3: Cash
+  Var 4: <261,330,312>
+  Var 5: 16-May-2026
+ Message ID: S.25025
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9998994020&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=SHEIKH%20HAMZA%20HUSAIN%20RIZWAN%20HUSAIN%2C81280%2CCash%2C%3C261%2C330%2C312%3E%2C16-May-2026
+--------------------------------------------------
+
+[2026-05-16 11:47:37] INFO: WhatsApp Template message sent successfully to 9979078666. Provider: bhashsms
+[2026-05-16 13:33:39] INFO: WhatsApp BhashSMS sent successfully to 9099483657. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: HARDI
+  Var 2: 98980
+  Var 3: Online
+  Var 4: <262,332,314>
+  Var 5: 16-May-2026
+ Message ID: S.680420
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9099483657&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=HARDI%2C98980%2COnline%2C%3C262%2C332%2C314%3E%2C16-May-2026
+--------------------------------------------------
+
+[2026-05-16 13:33:39] INFO: WhatsApp BhashSMS sent successfully to 9998994020. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: HARDI
+  Var 2: 98980
+  Var 3: Online
+  Var 4: <262,332,314>
+  Var 5: 16-May-2026
+ Message ID: S.900757
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9998994020&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=HARDI%2C98980%2COnline%2C%3C262%2C332%2C314%3E%2C16-May-2026
+--------------------------------------------------
+
+[2026-05-16 13:33:39] INFO: WhatsApp Template message sent successfully to 9099483657. Provider: bhashsms

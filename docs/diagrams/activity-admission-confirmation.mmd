@@ -1,0 +1,79 @@
+%% Admission Confirmation Activity Diagram
+%% Shows the flow of confirming student admission
+
+flowchart TD
+    Start([Counsellor/Principal Initiates Confirmation]) --> CheckAuth{User<br/>Authorized?}
+    CheckAuth -->|No| AccessDenied[Access Denied]
+    CheckAuth -->|Yes| SelectStudent[Select Student]
+    
+    AccessDenied --> End([End])
+    
+    SelectStudent --> FetchStudentData[(Fetch Student Details)]
+    FetchStudentData --> DisplayStudentInfo[Display Student Information]
+    
+    DisplayStudentInfo --> VerifyDocuments{All Documents<br/>Uploaded?}
+    VerifyDocuments -->|No| RequestDocs[Request Missing Documents]
+    VerifyDocuments -->|Yes| CheckEligibility{Meets<br/>Eligibility?}
+    
+    RequestDocs --> NotifyStudent[Notify Student]
+    NotifyStudent --> End
+    
+    CheckEligibility -->|No| RejectAdmission[Reject Admission]
+    CheckEligibility -->|Yes| SelectCourse[Confirm Course Details]
+    
+    RejectAdmission --> RecordReason[Record Rejection Reason]
+    RecordReason --> NotifyRejection[Send Rejection Email]
+    NotifyRejection --> End
+    
+    SelectCourse --> SelectSchool[Select School]
+    SelectSchool --> SelectMedium[Select Medium & Group]
+    SelectMedium --> FetchFeeConfig[(Get Fee Configuration)]
+    
+    FetchFeeConfig --> CalculateFees[Calculate Total Fees]
+    CalculateFees --> CheckScholarship{Scholarship<br/>Applicable?}
+    
+    CheckScholarship -->|Yes| ApplyScholarship[Apply Scholarship Rules]
+    CheckScholarship -->|No| ShowFeeBreakdown
+    
+    ApplyScholarship --> CalculateScholarship[Calculate Scholarship Amount]
+    CalculateScholarship --> DeductFromFees[Deduct from Tuition Fee]
+    DeductFromFees --> ShowFeeBreakdown[Display Fee Breakdown]
+    
+    ShowFeeBreakdown --> CheckHostel{Hostel<br/>Required?}
+    CheckHostel -->|Yes| AddHostelFee[Add Hostel Fee]
+    CheckHostel -->|No| CheckTransport
+    AddHostelFee --> CheckTransport{Transport<br/>Required?}
+    
+    CheckTransport -->|Yes| AddTransportFee[Add Transport Fee]
+    CheckTransport -->|No| SelectPaymentMode
+    AddTransportFee --> SelectPaymentMode[Select Payment Mode]
+    
+    SelectPaymentMode --> ReviewConfirmation{Review &<br/>Confirm?}
+    ReviewConfirmation -->|No| ModifyDetails[Modify Details]
+    ReviewConfirmation -->|Yes| SaveAdmission[(Save Admission Confirmation)]
+    
+    ModifyDetails --> SelectCourse
+    
+    SaveAdmission --> UpdateStatus[Update Student Status]
+    UpdateStatus --> GenerateAdmissionLetter[Generate Admission Letter]
+    GenerateAdmissionLetter --> SendConfirmation[Send Confirmation Email]
+    
+    SendConfirmation --> NotifyCounsellor[Notify Assigned Counsellor]
+    NotifyCounsellor --> NotifyAccountant[Notify Accountant]
+    NotifyAccountant --> LogActivity[Log Activity]
+    
+    LogActivity --> DisplaySuccess[Display Success Message]
+    DisplaySuccess --> End
+    
+    style Start fill:#C8E6C9
+    style End fill:#FFCDD2
+    style FetchStudentData fill:#E1BEE7
+    style SaveAdmission fill:#E1BEE7
+    style FetchFeeConfig fill:#E1BEE7
+    style CheckAuth fill:#FFF9C4
+    style VerifyDocuments fill:#FFF9C4
+    style CheckEligibility fill:#FFF9C4
+    style CheckScholarship fill:#FFF9C4
+    style CheckHostel fill:#FFF9C4
+    style CheckTransport fill:#FFF9C4
+    style ReviewConfirmation fill:#FFF9C4

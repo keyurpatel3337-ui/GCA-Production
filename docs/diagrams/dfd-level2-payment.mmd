@@ -1,0 +1,90 @@
+%% Data Flow Diagram - Level 2
+%% Process 5.0: Payment Processing (Detailed)
+
+graph TB
+    %% External Entities
+    Student([Student])
+    Accountant([Accountant])
+    PaymentGW([Payment<br/>Gateway])
+    
+    %% Sub-Processes
+    P51[("5.1<br/>Select<br/>Fee<br/>Component")]
+    P52[("5.2<br/>Calculate<br/>Payable<br/>Amount")]
+    P53[("5.3<br/>Choose<br/>Payment<br/>Mode")]
+    P54[("5.4<br/>Process<br/>Online<br/>Payment")]
+    P55[("5.5<br/>Record<br/>Offline<br/>Payment")]
+    P56[("5.6<br/>Update<br/>Fee<br/>Status")]
+    P57[("5.7<br/>Generate<br/>Receipt")]
+    P58[("5.8<br/>Check<br/>Enrollment<br/>Trigger")]
+    
+    %% Data Stores
+    D1[(D1: Students)]
+    D2[(D2: Fee Config)]
+    D3[(D3: Fee Allocation)]
+    D4[(D4: Payments)]
+    D5[(D5: Enrollments)]
+    D6[(D6: Scholarships)]
+    
+    %% Student to Process 5.1
+    Student -->|Payment Request| P51
+    
+    %% Process 5.1 - Select Fee Component
+    P51 <-->|Student Fee Details| D3
+    P51 -->|Fee Components List| Student
+    Student -->|Selected Component| P51
+    P51 -->|Component Selection| P52
+    
+    %% Process 5.2 - Calculate Amount
+    P52 <-->|Fee Configuration| D2
+    P52 <-->|Scholarship Info| D6
+    P52 <-->|Previous Payments| D4
+    P52 -->|Calculated Amount| P53
+    P52 -->|Amount Details| Student
+    
+    %% Process 5.3 - Payment Mode Selection
+    P53 -->|Payment Options| Student
+    Student -->|Selected Mode| P53
+    P53 -->|Online Mode| P54
+    P53 -->|Offline Mode| P55
+    
+    %% Process 5.4 - Online Payment
+    P54 -->|Payment Request<br/>Amount, Student ID<br/>Transaction Ref| PaymentGW
+    PaymentGW -->|Payment Response<br/>Success/Failure<br/>Transaction ID| P54
+    P54 -->|Failed| Student
+    P54 -->|Success| P56
+    
+    %% Process 5.5 - Offline Payment
+    Accountant -->|Payment Details<br/>Amount, Mode<br/>Cheque/DD No<br/>Reference No| P55
+    P55 <-->|Verify Student| D1
+    P55 -->|Recorded| P56
+    
+    %% Process 5.6 - Update Fee Status
+    P56 -->|Payment Record| D4
+    P56 <-->|Update Paid Amount<br/>Update Pending| D3
+    P56 -->|Updated| P57
+    
+    %% Process 5.7 - Generate Receipt
+    P57 <-->|Student Details| D1
+    P57 <-->|Payment Details| D4
+    P57 <-->|Fee Details| D2
+    P57 -->|Receipt PDF| Student
+    P57 -->|Receipt Copy| Accountant
+    P57 -->|Receipt Generated| P58
+    
+    %% Process 5.8 - Check Enrollment
+    P58 <-->|Payment Record| D4
+    P58 -->|Check Token Fee| P58
+    P58 -->|Trigger Enrollment| D5
+    P58 <-->|Update Enrollment Flag| D1
+    P58 -->|Enrollment Initiated| Student
+    
+    %% Styling
+    classDef entityStyle fill:#E3F2FD,stroke:#1976D2,stroke-width:3px
+    classDef processStyle fill:#C8E6C9,stroke:#388E3C,stroke-width:3px
+    classDef datastoreStyle fill:#FFE0B2,stroke:#E65100,stroke-width:3px
+    classDef externalStyle fill:#FFCCBC,stroke:#D84315,stroke-width:3px
+    
+    class Student,Accountant entityStyle
+    class P51,P52,P53,P54,P55,P56,P57,P58 processStyle
+    class D1,D2,D3,D4,D5,D6 datastoreStyle
+    class PaymentGW externalStyle

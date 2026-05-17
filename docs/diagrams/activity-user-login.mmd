@@ -1,0 +1,98 @@
+%% User Login Activity Diagram
+%% Shows the authentication and authorization flow
+
+flowchart TD
+    Start([User Accesses System]) --> DisplayLogin[Display Login Page]
+    DisplayLogin --> EnterCredentials[Enter Email & Password]
+    
+    EnterCredentials --> ValidateInput{Input<br/>Valid?}
+    ValidateInput -->|No| ShowInputError[Show Input Validation Error]
+    ShowInputError --> EnterCredentials
+    
+    ValidateInput -->|Yes| SubmitLogin[Submit Login Form]
+    SubmitLogin --> CheckDatabase[(Query User Database)]
+    
+    CheckDatabase --> UserExists{User<br/>Exists?}
+    UserExists -->|No| LoginFailed[Login Failed]
+    
+    UserExists -->|Yes| VerifyPassword{Password<br/>Correct?}
+    VerifyPassword -->|No| IncrementAttempt[Increment Failed Attempts]
+    
+    IncrementAttempt --> CheckAttempts{Attempts<br/>> 5?}
+    CheckAttempts -->|Yes| LockAccount[Lock Account]
+    CheckAttempts -->|No| LoginFailed
+    
+    LockAccount --> SendLockAlert[Send Account Lock Alert]
+    SendLockAlert --> LoginFailed
+    
+    LoginFailed --> LogFailedAttempt[Log Failed Login Attempt]
+    LogFailedAttempt --> ShowError[Display Error Message]
+    ShowError --> RetryOption{Retry or<br/>Forgot Password?}
+    
+    RetryOption -->|Retry| EnterCredentials
+    RetryOption -->|Forgot Password| ForgotPassword[Initiate Password Reset]
+    ForgotPassword --> End([End])
+    
+    VerifyPassword -->|Yes| CheckStatus{Account<br/>Active?}
+    CheckStatus -->|Inactive| AccountInactive[Account Inactive]
+    CheckStatus -->|Suspended| AccountSuspended[Account Suspended]
+    CheckStatus -->|Active| ResetAttempts[Reset Failed Attempts]
+    
+    AccountInactive --> ShowStatusError[Display Account Status Error]
+    AccountSuspended --> ShowStatusError
+    ShowStatusError --> End
+    
+    ResetAttempts --> CreateSession[Create Session]
+    CreateSession --> StoreSessionData[(Store Session Data)]
+    StoreSessionData --> FetchUserRole[Fetch User Role]
+    
+    FetchUserRole --> CheckRole{Determine<br/>User Role}
+    
+    CheckRole -->|Super Admin| LoadAdminDashboard[Load Admin Dashboard]
+    CheckRole -->|Principal| LoadPrincipalDashboard[Load Principal Dashboard]
+    CheckRole -->|Counsellor| LoadCounsellorDashboard[Load Counsellor Dashboard]
+    CheckRole -->|Accountant| LoadAccountantDashboard[Load Accountant Dashboard]
+    CheckRole -->|Student| LoadStudentPortal[Load Student Portal]
+    CheckRole -->|Website Admin| LoadCMSDashboard[Load CMS Dashboard]
+    
+    LoadAdminDashboard --> LoadPermissions
+    LoadPrincipalDashboard --> LoadPermissions
+    LoadCounsellorDashboard --> LoadPermissions
+    LoadAccountantDashboard --> LoadPermissions
+    LoadStudentPortal --> LoadPermissions
+    LoadCMSDashboard --> LoadPermissions[Load User Permissions]
+    
+    LoadPermissions --> FetchUserData[(Fetch User Profile Data)]
+    FetchUserData --> LogSuccessfulLogin[Log Successful Login]
+    LogSuccessfulLogin --> SendLoginNotification{Send Login<br/>Notification?}
+    
+    SendLoginNotification -->|Yes| SendEmail[Send Login Alert Email]
+    SendLoginNotification -->|No| RedirectDashboard
+    SendEmail --> RedirectDashboard[Redirect to Dashboard]
+    
+    RedirectDashboard --> CheckFirstLogin{First Time<br/>Login?}
+    CheckFirstLogin -->|Yes| ShowWelcome[Show Welcome Tour]
+    CheckFirstLogin -->|No| ShowDashboard
+    ShowWelcome --> PromptPasswordChange{Prompt Password<br/>Change?}
+    
+    PromptPasswordChange -->|Yes| ChangePassword[Change Password Screen]
+    PromptPasswordChange -->|No| ShowDashboard
+    ChangePassword --> ShowDashboard[Display Dashboard]
+    
+    ShowDashboard --> End
+    
+    style Start fill:#C8E6C9
+    style End fill:#FFCDD2
+    style CheckDatabase fill:#E1BEE7
+    style StoreSessionData fill:#E1BEE7
+    style FetchUserData fill:#E1BEE7
+    style ValidateInput fill:#FFF9C4
+    style UserExists fill:#FFF9C4
+    style VerifyPassword fill:#FFF9C4
+    style CheckAttempts fill:#FFF9C4
+    style CheckStatus fill:#FFF9C4
+    style CheckRole fill:#FFF9C4
+    style RetryOption fill:#FFF9C4
+    style SendLoginNotification fill:#FFF9C4
+    style CheckFirstLogin fill:#FFF9C4
+    style PromptPasswordChange fill:#FFF9C4

@@ -1,0 +1,107 @@
+# Force PHP to be processed
+<FilesMatch "\.php$">
+    SetHandler application/x-httpd-php
+</FilesMatch>
+
+# Enable Rewrite Engine
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+    Options +FollowSymLinks
+    RewriteEngine On
+    RewriteBase /
+    
+    # Allow Let's Encrypt / Certify The Web validation
+    RewriteRule ^\.well-known/acme-challenge/ - [L]
+    
+    # =========================================
+    # Exclude captcha.php and other special files
+    # =========================================
+    RewriteRule ^(.*/)?captcha(-new)?\.php$ - [L]
+    
+    # =========================================
+    # Hide .php Extension (All Directories)
+    # =========================================
+    
+    # External redirect from any .php URL to clean URL
+    # Works for all subdirectories: portal/, about/, academics/, etc.
+    RewriteCond %{THE_REQUEST} ^GET\ /(.+)\.php(\?[^\ ]*)?\ HTTP
+    RewriteRule ^ /%1%2 [R=301,L]
+    
+    # =========================================
+    # Handle PHP files properly
+    # =========================================
+    
+    # Don't apply to existing directories
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+    
+    # Serve existing non-PHP files directly (images, css, js, etc.)
+    RewriteCond %{REQUEST_URI} !\.php$
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+    
+    # Internal rewrite from clean URL to .php file
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    RewriteRule ^(.*)$ $1.php [L,QSA]
+    
+    # Redirect favicon requests to the actual logo file
+    RewriteRule ^favicon\.ico$ /assets/images/logogm.png [L]
+</IfModule>
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Browser caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+    # Prevent clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevent XSS attacks
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Referrer policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data: blob:; font-src 'self' https: data:; worker-src 'self' blob:;"
+    
+    # Permissions Policy
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Protect sensitive files from direct access
+<FilesMatch "\.(env|config\.php|sql|log|bak|backup|git|gitignore)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Deny access to hidden files (except .well-known - handled in Apache vhost config)
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>

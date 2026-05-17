@@ -1,0 +1,78 @@
+%% Data Flow Diagram - Level 0 (Context Diagram)
+%% Shows system interaction with external entities
+
+graph TB
+    %% External Entities
+    Student([Student])
+    Counsellor([Counsellor])
+    Principal([Principal])
+    Accountant([Accountant])
+    SuperAdmin([Super Admin])
+    
+    %% Central System
+    System[("Counselling<br/>Management<br/>System")]
+    
+    %% External Systems
+    PaymentGateway[(Payment<br/>Gateway)]
+    EmailServer[(Email<br/>Server)]
+    SMSGateway[(SMS<br/>Gateway)]
+    
+    %% Student Interactions
+    Student -->|Registration Data| System
+    Student -->|Payment Request| System
+    Student -->|Appointment Request| System
+    Student -->|Document Upload| System
+    System -->|Admission Letter| Student
+    System -->|Fee Details| Student
+    System -->|Payment Receipt| Student
+    System -->|Email Notifications| Student
+    
+    %% Counsellor Interactions
+    Counsellor -->|Session Notes| System
+    Counsellor -->|Installment Request| System
+    Counsellor -->|Admission Confirmation| System
+    System -->|Assigned Students List| Counsellor
+    System -->|Student Details| Counsellor
+    System -->|Appointment Schedule| Counsellor
+    
+    %% Principal Interactions
+    Principal -->|Student Assignment| System
+    Principal -->|Installment Approval| System
+    Principal -->|Scholarship Approval| System
+    System -->|Management Reports| Principal
+    System -->|System Analytics| Principal
+    System -->|Daily Summary| Principal
+    
+    %% Accountant Interactions
+    Accountant -->|Payment Processing| System
+    Accountant -->|Fee Configuration| System
+    Accountant -->|Installment Creation| System
+    System -->|Collection Reports| Accountant
+    System -->|Payment History| Accountant
+    System -->|Overdue Report| Accountant
+    
+    %% Super Admin Interactions
+    SuperAdmin -->|User Management| System
+    SuperAdmin -->|System Configuration| System
+    SuperAdmin -->|Database Backup| System
+    System -->|System Logs| SuperAdmin
+    System -->|Audit Reports| SuperAdmin
+    
+    %% External System Interactions
+    System -->|Payment Request| PaymentGateway
+    PaymentGateway -->|Payment Status| System
+    
+    System -->|Email Requests| EmailServer
+    EmailServer -->|Delivery Status| System
+    
+    System -->|SMS Requests| SMSGateway
+    SMSGateway -->|Delivery Status| System
+    
+    %% Styling
+    classDef entityStyle fill:#E3F2FD,stroke:#1976D2,stroke-width:3px
+    classDef systemStyle fill:#FFF9C4,stroke:#F57C00,stroke-width:4px,font-size:16px
+    classDef externalStyle fill:#FFCCBC,stroke:#D84315,stroke-width:3px
+    
+    class Student,Counsellor,Principal,Accountant,SuperAdmin entityStyle
+    class System systemStyle
+    class PaymentGateway,EmailServer,SMSGateway externalStyle

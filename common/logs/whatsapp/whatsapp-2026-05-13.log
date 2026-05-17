@@ -1,0 +1,82 @@
+[2026-05-13 19:02:23] INFO: WhatsApp BhashSMS sent successfully to 9998994020. Template: daily_summary_simple.
+Variables Sent:
+  Var 1: 13-May-2026
+  Var 2: 37
+  Var 3: 19
+  Var 4: 524300
+  Var 5: 18
+  Var 6: 540500
+  Var 7: 0
+  Var 8: 0
+  Var 9: 1064800
+ Message ID: S.931092
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9998994020&text=daily_summary_simple&priority=wa&stype=normal&Params=13-May-2026%2C37%2C19%2C524300%2C18%2C540500%2C0%2C0%2C1064800
+--------------------------------------------------
+
+[2026-05-13 19:02:23] INFO: WhatsApp Template message sent successfully to 9998994020. Provider: bhashsms
+[2026-05-13 19:04:28] INFO: WhatsApp BhashSMS sent successfully to 9998994020. Template: daily_summary_coursewise.
+Variables Sent:
+  Var 1: 13-May-2026
+  Var 2: *12th English*  _Tuition Fee Part 2_   Cash: 2 | Rs. 143960   Online: 2 | Rs. 143960  _School Fee_   Cash: 2 | Rs. 30000   Online: 1 | Rs. 15000  _Trust Facilities Fee_   Cash: 2 | Rs. 24000   Online: 1 | Rs. 12000  _Transport Fee_   Online: 1 | Rs. 21600  Course Total: Rs. 390520    *12th Gujarati*  _School Fee_   Cash: 4 | Rs. 60000   Online: 4 | Rs. 60000  _Trust Facilities Fee_   Cash: 4 | Rs. 48000   Online: 4 | Rs. 69600  _Tuition Fee Part 2_   Cash: 4 | Rs. 208340   Online: 4 | Rs. 208340  _Hostel Security_   Cash: 1 | Rs. 10000   Online: 1 | Rs. 10000  Course Total: Rs. 674280
+  Var 3: 1064800
+ Message ID: S.410859
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9998994020&text=daily_summary_coursewise&priority=wa&stype=normal&Params=13-May-2026%2C%2A12th%20English%2A%20%20_Tuition%20Fee%20Part%202_%20%20%20Cash%3A%202%20%7C%20Rs.%20143960%20%20%20Online%3A%202%20%7C%20Rs.%20143960%20%20_School%20Fee_%20%20%20Cash%3A%202%20%7C%20Rs.%2030000%20%20%20Online%3A%201%20%7C%20Rs.%2015000%20%20_Trust%20Facilities%20Fee_%20%20%20Cash%3A%202%20%7C%20Rs.%2024000%20%20%20Online%3A%201%20%7C%20Rs.%2012000%20%20_Transport%20Fee_%20%20%20Online%3A%201%20%7C%20Rs.%2021600%20%20Course%20Total%3A%20Rs.%20390520%20%20%20%20%2A12th%20Gujarati%2A%20%20_School%20Fee_%20%20%20Cash%3A%204%20%7C%20Rs.%2060000%20%20%20Online%3A%204%20%7C%20Rs.%2060000%20%20_Trust%20Facilities%20Fee_%20%20%20Cash%3A%204%20%7C%20Rs.%2048000%20%20%20Online%3A%204%20%7C%20Rs.%2069600%20%20_Tuition%20Fee%20Part%202_%20%20%20Cash%3A%204%20%7C%20Rs.%20208340%20%20%20Online%3A%204%20%7C%20Rs.%20208340%20%20_Hostel%20Security_%20%20%20Cash%3A%201%20%7C%20Rs.%2010000%20%20%20Online%3A%201%20%7C%20Rs.%2010000%20%20Course%20Total%3A%20Rs.%20674280%2C1064800
+--------------------------------------------------
+
+[2026-05-13 19:04:28] INFO: WhatsApp Template message sent successfully to 9998994020. Provider: bhashsms
+[2026-05-13 19:05:48] INFO: WhatsApp BhashSMS sent successfully to 9998994020. Template: daily_summary_coursewise.
+Variables Sent:
+  Var 1: 09-May-2026
+  Var 2: *12th English*  _Hostel Security_   Online: 2 | Rs. 20000  _School Fee_   Online: 3 | Rs. 45000   Cheque: 3 | Rs. 45000  _Trust Facilities Fee_   Online: 3 | Rs. 36000   Cheque: 3 | Rs. 36000  _Tuition Fee Part 2_   Cash: 1 | Rs. 17000   Online: 3 | Rs. 215940   Cheque: 2 | Rs. 143960  _Transport Fee_   Cash: 1 | Rs. 21600   Cheque: 2 | Rs. 43200  Course Total: Rs. 623700    *12th Gujarati*  _School Fee_   Online: 2 | Rs. 30000   Cheque: 1 | Rs. 15000  _Trust Facilities Fee_   Online: 2 | Rs. 24000   Cheque: 1 | Rs. 12000  _Tuition Fee Part 2_   Online: 2 | Rs. 136880   Cheque: 1 | Rs. 68440  _Hostel Security_   Cash: 3 | Rs. 30000   Online: 6 | Rs. 60000  Course Total: Rs. 376320    *Re-Neet*  _Trust Facilities Fee_   Cash: 1 | Rs. 25000  Course Total: Rs. 25000
+  Var 3: 1025020
+ Message ID: S.872895
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9998994020&text=daily_summary_coursewise&priority=wa&stype=normal&Params=09-May-2026%2C%2A12th%20English%2A%20%20_Hostel%20Security_%20%20%20Online%3A%202%20%7C%20Rs.%2020000%20%20_School%20Fee_%20%20%20Online%3A%203%20%7C%20Rs.%2045000%20%20%20Cheque%3A%203%20%7C%20Rs.%2045000%20%20_Trust%20Facilities%20Fee_%20%20%20Online%3A%203%20%7C%20Rs.%2036000%20%20%20Cheque%3A%203%20%7C%20Rs.%2036000%20%20_Tuition%20Fee%20Part%202_%20%20%20Cash%3A%201%20%7C%20Rs.%2017000%20%20%20Online%3A%203%20%7C%20Rs.%20215940%20%20%20Cheque%3A%202%20%7C%20Rs.%20143960%20%20_Transport%20Fee_%20%20%20Cash%3A%201%20%7C%20Rs.%2021600%20%20%20Cheque%3A%202%20%7C%20Rs.%2043200%20%20Course%20Total%3A%20Rs.%20623700%20%20%20%20%2A12th%20Gujarati%2A%20%20_School%20Fee_%20%20%20Online%3A%202%20%7C%20Rs.%2030000%20%20%20Cheque%3A%201%20%7C%20Rs.%2015000%20%20_Trust%20Facilities%20Fee_%20%20%20Online%3A%202%20%7C%20Rs.%2024000%20%20%20Cheque%3A%201%20%7C%20Rs.%2012000%20%20_Tuition%20Fee%20Part%202_%20%20%20Online%3A%202%20%7C%20Rs.%20136880%20%20%20Cheque%3A%201%20%7C%20Rs.%2068440%20%20_Hostel%20Security_%20%20%20Cash%3A%203%20%7C%20Rs.%2030000%20%20%20Online%3A%206%20%7C%20Rs.%2060000%20%20Course%20Total%3A%20Rs.%20376320%20%20%20%20%2ARe-Neet%2A%20%20_Trust%20Facilities%20Fee_%20%20%20Cash%3A%201%20%7C%20Rs.%2025000%20%20Course%20Total%3A%20Rs.%2025000%2C1025020
+--------------------------------------------------
+
+[2026-05-13 19:05:48] INFO: WhatsApp Template message sent successfully to 9998994020. Provider: bhashsms
+[2026-05-13 20:01:09] INFO: WhatsApp BhashSMS sent successfully to 9714815233. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: SHREY
+  Var 2: 95440
+  Var 3: Online
+  Var 4: <234,299,283>
+  Var 5: 13-May-2026
+ Message ID: S.23102
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9714815233&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=SHREY%2C95440%2COnline%2C%3C234%2C299%2C283%3E%2C13-May-2026
+--------------------------------------------------
+
+[2026-05-13 20:01:09] INFO: WhatsApp BhashSMS sent successfully to 9998994020. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: SHREY
+  Var 2: 95440
+  Var 3: Online
+  Var 4: <234,299,283>
+  Var 5: 13-May-2026
+ Message ID: S.142853
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9998994020&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=SHREY%2C95440%2COnline%2C%3C234%2C299%2C283%3E%2C13-May-2026
+--------------------------------------------------
+
+[2026-05-13 20:01:09] INFO: WhatsApp Template message sent successfully to 9714815233. Provider: bhashsms
+[2026-05-13 22:06:53] INFO: WhatsApp BhashSMS sent successfully to 9909940026. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: DEVANSHI
+  Var 2: 81280
+  Var 3: Online
+  Var 4: <235,300,284>
+  Var 5: 13-May-2026
+ Message ID: S.797364
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9909940026&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=DEVANSHI%2C81280%2COnline%2C%3C235%2C300%2C284%3E%2C13-May-2026
+--------------------------------------------------
+
+[2026-05-13 22:06:54] INFO: WhatsApp BhashSMS sent successfully to 9998994020. Template: feepaymentsuccess_002.
+Variables Sent:
+  Var 1: DEVANSHI
+  Var 2: 81280
+  Var 3: Online
+  Var 4: <235,300,284>
+  Var 5: 13-May-2026
+ Message ID: S.431855
+API URL: http://bhashsms.com/api/sendmsgutil.php?user=GYANMANJARI_CAREER&pass=********&sender=BUZWAP&phone=9998994020&text=feepaymentsuccess_002&priority=wa&stype=normal&Params=DEVANSHI%2C81280%2COnline%2C%3C235%2C300%2C284%3E%2C13-May-2026
+--------------------------------------------------
+
+[2026-05-13 22:06:54] INFO: WhatsApp Template message sent successfully to 9909940026. Provider: bhashsms

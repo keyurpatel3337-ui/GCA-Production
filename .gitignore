@@ -1,0 +1,15 @@
+# Environment variables (sensitive credentials)
+.env
+
+# Editor & Tool directories
+.vscode/
+.claude/
+.gemini/
+
+# Large database dumps
+*.sql
+
+# Uploads & Temp files
+uploads/
+api_temp_uploads/
+*.xlsx

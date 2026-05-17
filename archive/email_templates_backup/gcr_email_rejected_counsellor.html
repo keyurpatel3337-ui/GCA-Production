@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div class="container">
+    <div class="header" style="background: #dc3545;">
+      <h3>❌ Request Rejected</h3>
+    </div>
+    <div class="content">
+      <div class="danger-box">
+        <strong>Request {{request_number}}</strong> has been rejected.
+      </div>
+
+      <p><strong>Student:</strong> {{student_name}}</p>
+      <p><strong>Requested Change:</strong> {{current_group}} → {{requested_group}}</p>
+      <p><strong>Rejected By:</strong> {{rejected_by}}</p>
+      <p><strong>Date:</strong> {{rejection_date}}</p>
+
+      <p><strong>Rejection Reason:</strong></p>
+      <p style="background: #fff; padding: 10px; border: 1px solid #ddd;">{{rejection_reason}}</p>
+
+      <p>Student has been notified via WhatsApp.</p>
+    </div>
+  </div>
+</body>
+
+</html>

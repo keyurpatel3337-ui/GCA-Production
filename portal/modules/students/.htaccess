@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /counselling/portal/modules/students/
+
+# If the request is for a file or directory that exists, serve it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite clean URLs to .php files
+RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [QSA,L]

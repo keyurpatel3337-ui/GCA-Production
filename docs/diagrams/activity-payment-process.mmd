@@ -1,0 +1,79 @@
+%% Payment Process Activity Diagram
+%% Shows the flow of fee payment process
+
+flowchart TD
+    Start([Student Initiates Payment]) --> Login{Student<br/>Logged In?}
+    Login -->|No| RedirectLogin[Redirect to Login]
+    Login -->|Yes| ViewFees[View Fee Details]
+    
+    RedirectLogin --> LoginPage[Login Page]
+    LoginPage --> Login
+    
+    ViewFees --> CheckToken{Token Fee<br/>Paid?}
+    CheckToken -->|No| ShowTokenFee[Show Token Fee Payment]
+    CheckToken -->|Yes| ShowAllFees[Show All Fee Components]
+    
+    ShowTokenFee --> SelectToken[Select Token Fee]
+    SelectToken --> TokenAmount[Amount: ₹11,800]
+    
+    ShowAllFees --> SelectComponent{Select Fee<br/>Component}
+    SelectComponent -->|School Fee| SchoolFee[School Fee]
+    SelectComponent -->|Trust Fee| TrustFee[Trust Facilities Fee]
+    SelectComponent -->|Tuition Part 2| TuitionFee[Tuition Fee Part 2]
+    SelectComponent -->|Hostel Fee| HostelFee[Hostel Fee]
+    
+    SchoolFee --> CalculateAmount[Calculate Total Amount]
+    TrustFee --> CalculateAmount
+    TuitionFee --> ApplyScholarship{Scholarship<br/>Applicable?}
+    HostelFee --> CalculateAmount
+    
+    ApplyScholarship -->|Yes| DeductScholarship[Deduct Scholarship Amount]
+    ApplyScholarship -->|No| CalculateAmount
+    DeductScholarship --> CalculateAmount
+    
+    TokenAmount --> SelectPaymentMode{Select Payment<br/>Mode}
+    CalculateAmount --> SelectPaymentMode
+    
+    SelectPaymentMode -->|Online| InitiateOnline[Initiate Online Payment]
+    SelectPaymentMode -->|Offline| ShowOfflineInstructions[Show Offline Payment Instructions]
+    
+    InitiateOnline --> PaymentGateway[Redirect to Payment Gateway]
+    PaymentGateway --> ProcessPayment[Process Payment]
+    ProcessPayment --> PaymentStatus{Payment<br/>Successful?}
+    
+    PaymentStatus -->|No| PaymentFailed[Payment Failed]
+    PaymentFailed --> RetryPayment{Retry?}
+    RetryPayment -->|Yes| SelectPaymentMode
+    RetryPayment -->|No| End
+    
+    PaymentStatus -->|Yes| SavePayment[(Save Payment Record)]
+    ShowOfflineInstructions --> WaitForConfirmation[Wait for Admin Confirmation]
+    WaitForConfirmation --> SavePayment
+    
+    SavePayment --> UpdateFeeStatus[Update Fee Status]
+    UpdateFeeStatus --> GenerateReceipt[Generate Receipt]
+    GenerateReceipt --> SendReceipt[Send Receipt via Email]
+    
+    SendReceipt --> CheckEnrollment{Token Fee<br/>Payment?}
+    CheckEnrollment -->|Yes| EnrollStudent[Enroll Student]
+    CheckEnrollment -->|No| UpdateBalance[Update Pending Balance]
+    
+    EnrollStudent --> GenerateEnrollmentNo[Generate Enrollment Number]
+    GenerateEnrollmentNo --> CreateFeeAllocation[Create Fee Allocation]
+    CreateFeeAllocation --> NotifyAdmission[Send Admission Confirmation]
+    NotifyAdmission --> DisplaySuccess
+    
+    UpdateBalance --> DisplaySuccess[Display Success Message]
+    DisplaySuccess --> End([Payment Complete])
+    
+    style Start fill:#C8E6C9
+    style End fill:#FFCDD2
+    style SavePayment fill:#E1BEE7
+    style Login fill:#FFF9C4
+    style CheckToken fill:#FFF9C4
+    style SelectComponent fill:#FFF9C4
+    style ApplyScholarship fill:#FFF9C4
+    style SelectPaymentMode fill:#FFF9C4
+    style PaymentStatus fill:#FFF9C4
+    style CheckEnrollment fill:#FFF9C4
+    style PaymentGateway fill:#B3E5FC

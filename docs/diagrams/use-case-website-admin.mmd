@@ -1,0 +1,109 @@
+%% Website Admin Use Case Diagram
+%% Standard UML format with system boundary
+
+graph TB
+    %% External Actor
+    WebsiteAdmin(("👤<br/>Website Admin"))
+    
+    %% System Boundary
+    subgraph System["<<System>><br/>CMS Portal"]
+        direction TB
+        
+        %% Main Use Cases
+        UC1([Manage<br/>Content])
+        UC2([Update<br/>Gallery])
+        UC3([Manage<br/>Facilities])
+        UC4([Update Contact<br/>Info])
+        UC5([Manage About<br/>Section])
+        UC6([Manage Academics<br/>Section])
+        UC7([Update<br/>Homepage])
+        UC8([Manage<br/>Announcements])
+        UC9([Manage News<br/>& Events])
+        UC10([Update Privacy<br/>Policy])
+
+        %% Extended Use Cases
+        UC1A([Add Page<br/>Content])
+        UC1B([Edit<br/>Content])
+        UC1C([Delete<br/>Content])
+        UC1D([Publish/<br/>Unpublish])
+        
+        UC2A([Upload<br/>Images])
+        UC2B([Edit Image<br/>Details])
+        UC2C([Delete<br/>Images])
+        UC2D([Create<br/>Albums])
+        UC2E([Compress<br/>Images])
+        
+        UC3A([Update Computer<br/>Lab Info])
+        UC3B([Update Library<br/>Info])
+        UC3C([Update Playground<br/>Info])
+        UC3D([Update Dining<br/>Hall Info])
+        
+        UC5A([Update Founder<br/>Info])
+        UC5B([Update Administrator<br/>Info])
+        UC5C([Update Advisory<br/>Committee])
+        
+        UC7A([Update Hero<br/>Section])
+        UC7B([Update<br/>Features])
+        UC7C([Update<br/>Testimonials])
+        
+        UC8A([Create<br/>Announcement])
+        UC8B([Edit<br/>Announcement])
+        UC8C([Schedule<br/>Announcement])
+    end
+    
+    %% Actor Associations
+    WebsiteAdmin --- UC1
+    WebsiteAdmin --- UC2
+    WebsiteAdmin --- UC3
+    WebsiteAdmin --- UC4
+    WebsiteAdmin --- UC5
+    WebsiteAdmin --- UC6
+    WebsiteAdmin --- UC7
+    WebsiteAdmin --- UC8
+    WebsiteAdmin --- UC9
+    WebsiteAdmin --- UC10
+    
+    %% Relationships
+    UC1 -.->|«extend»| UC1A
+    UC1 -.->|«extend»| UC1B
+    UC1 -.->|«extend»| UC1C
+    UC1 -.->|«extend»| UC1D
+    
+    UC2 -.->|«extend»| UC2A
+    UC2 -.->|«extend»| UC2B
+    UC2 -.->|«extend»| UC2C
+    UC2 -.->|«extend»| UC2D
+    UC2 -.->|«include»| UC2E
+    
+    UC3 -.->|«extend»| UC3A
+    UC3 -.->|«extend»| UC3B
+    UC3 -.->|«extend»| UC3C
+    UC3 -.->|«extend»| UC3D
+    
+    UC5 -.->|«extend»| UC5A
+    UC5 -.->|«extend»| UC5B
+    UC5 -.->|«extend»| UC5C
+    
+    UC7 -.->|«extend»| UC7A
+    UC7 -.->|«extend»| UC7B
+    UC7 -.->|«extend»| UC7C
+    
+    UC8 -.->|«extend»| UC8A
+    UC8 -.->|«extend»| UC8B
+    UC8 -.->|«extend»| UC8C
+
+    %% Styling
+    classDef actorStyle fill:#FFF3E0,stroke:#E65100,stroke-width:3px,color:#000
+    classDef mainUseCase fill:#DCEDC8,stroke:#558B2F,stroke-width:2px,color:#000
+    classDef extendedUseCase fill:#FFF9C4,stroke:#F57C00,stroke-width:1px,color:#000
+    classDef systemStyle fill:#E8EAF6,stroke:#3F51B5,stroke-width:3px
+    
+    class WebsiteAdmin actorStyle
+    class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10 mainUseCase
+    class UC1A,UC1B,UC1C,UC1D extendedUseCase
+    class UC2A,UC2B,UC2C,UC2D,UC2E extendedUseCase
+    class UC3A,UC3B,UC3C,UC3D extendedUseCase
+    class UC5A,UC5B,UC5C extendedUseCase
+    class UC7A,UC7B,UC7C extendedUseCase
+    class UC8A,UC8B,UC8C extendedUseCase
+    class System systemStyle

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .content {
+      background: #f9f9f9;
+      padding: 25px;
+      border: 1px solid #ddd;
+    }
+
+    .receipt-box {
+      background: white;
+      padding: 20px;
+      border: 2px solid #667eea;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    .receipt-header {
+      text-align: center;
+      border-bottom: 2px dashed #ccc;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+
+    .receipt-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    .details-table td {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .details-table td:first-child {
+      font-weight: bold;
+      width: 40%;
+    }
+
+    .amount-row {
+      background: #e7f3ff;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .footer-note {
+      background: #fff3cd;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      font-size: 0.9em;
+    }
+
+    .download-btn {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 12px 30px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 10px 5px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 15px;
+      color: #666;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>💳 Fee Receipt</h2>
+      <p>Gyan Manjari Counselling System</p>
+    </div>
+    <div class="content">
+      <p>Dear {{student_name}},</p>
+      <p>Thank you for your payment. Please find your fee receipt details below.</p>
+
+      <div class="receipt-box">
+        <div class="receipt-header">
+          <div class="receipt-number">Receipt No: {{receipt_no}}</div>
+          <p style="margin: 5px 0;">Date: {{receipt_date}}</p>
+        </div>
+
+        <h3 style="color: #495057; margin-top: 20px;">Student Details</h3>
+        <table class="details-table">
+          <tr>
+            <td>Name</td>
+            <td>{{student_name}}</td>
+          </tr>
+          <tr>
+            <td>Enrollment No</td>
+            <td>{{enrollment_no}}</td>
+          </tr>
+          <tr>
+            <td>Course</td>
+            <td>{{course_name}}</td>
+          </tr>
+          <tr>
+            <td>Mobile</td>
+            <td>{{student_mobile}}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>{{student_email}}</td>
+          </tr>
+        </table>
+
+        <h3 style="color: #495057; margin-top: 20px;">Payment Details</h3>
+        <table class="details-table">
+          <tr>
+            <td>Payment Mode</td>
+            <td>{{payment_mode}}</td>
+          </tr>
+          <tr>
+            <td>Transaction ID</td>
+            <td>{{transaction_id}}</td>
+          </tr>
+          <tr>
+            <td>Payment Date</td>
+            <td>{{payment_date}}</td>
+          </tr>
+          <tr>
+            <td>Payment Time</td>
+            <td>{{payment_time}}</td>
+          </tr>
+          {{#cheque_details}}
+          <tr>
+            <td>Cheque No</td>
+            <td>{{cheque_no}}</td>
+          </tr>
+          <tr>
+            <td>Bank Name</td>
+            <td>{{bank_name}}</td>
+          </tr>
+          {{/cheque_details}}
+        </table>
+
+        <h3 style="color: #495057; margin-top: 20px;">Fee Breakdown</h3>
+        <table class="details-table">
+          {{#fee_items}}
+          <tr>
+            <td>{{fee_type}}</td>
+            <td>₹{{amount}}</td>
+          </tr>
+          {{/fee_items}}
+          <tr class="amount-row">
+            <td>Total Amount Paid</td>
+            <td>₹{{total_amount}}</td>
+          </tr>
+        </table>
+
+        <table class="details-table" style="margin-top: 15px;">
+          <tr>
+            <td>Previous Balance</td>
+            <td>₹{{previous_balance}}</td>
+          </tr>
+          <tr>
+            <td>Amount Paid</td>
+            <td>₹{{amount_paid}}</td>
+          </tr>
+          <tr style="background: #d4edda; font-weight: bold;">
+            <td>Remaining Balance</td>
+            <td>₹{{remaining_balance}}</td>
+          </tr>
+        </table>
+
+        <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 2px dashed #ccc;">
+          <p style="margin: 5px 0;"><strong>Collected By:</strong> {{collected_by}}</p>
+          <p style="margin: 5px 0;"><strong>Receipt Type:</strong> {{receipt_type}}</p>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <strong>📌 Important Notes:</strong>
+        <ul style="margin: 10px 0; padding-left: 20px;">
+          <li>This is a computer-generated receipt</li>
+          <li>Please preserve this receipt for future reference</li>
+          <li>For any queries, contact the accounts department</li>
+          {{#cheque_payment}}
+          <li>Fee will be confirmed after cheque clearance</li>
+          {{/cheque_payment}}
+        </ul>
+      </div>
+
+      <div style="text-align: center; margin: 25px 0;">
+        <a href="{{download_pdf_url}}" class="download-btn">📄 Download PDF</a>
+        <a href="{{print_url}}" class="download-btn" style="background: #007bff;">🖨️ Print Receipt</a>
+      </div>
+
+      <p style="text-align: center; color: #666;">
+        For queries, contact: <strong>{{contact_number}}</strong> | <strong>{{contact_email}}</strong>
+      </p>
+    </div>
+    <div class="footer">
+      <p><strong>Gyan Manjari Counselling System</strong></p>
+      <p>{{institution_address}}</p>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+[2026-05-06 00:16:59] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:16:59] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:16:59] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:04] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending_count" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:04] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 295] PHP WARNING: Undefined array key "outstanding" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:04] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending_count" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:04] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 295] PHP WARNING: Undefined array key "outstanding" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:04] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending_count" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:04] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 295] PHP WARNING: Undefined array key "outstanding" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:07] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending_count" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:07] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 295] PHP WARNING: Undefined array key "outstanding" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:07] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending_count" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:07] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 295] PHP WARNING: Undefined array key "outstanding" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:07] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending_count" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:07] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 295] PHP WARNING: Undefined array key "outstanding" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:12] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending_count" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:12] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 295] PHP WARNING: Undefined array key "outstanding" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:12] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending_count" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:12] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 295] PHP WARNING: Undefined array key "outstanding" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:12] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 268] PHP WARNING: Undefined array key "pending_count" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:18:12] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\admin_dashboard.php] [Line: 295] PHP WARNING: Undefined array key "outstanding" | URI: /portal/modules/dashboard/admin_dashboard
+[2026-05-06 00:32:30] Student login successful | Student ID: 1492 | Name: PANDYA AYUSH ASHISHBHAI | IP: 172.68.55.116 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 07:25:04] Student login successful | Student ID: 1465 | Name: DESAI DHYANA VISHAL | IP: 162.158.162.134 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 07:29:24] Student login successful | Student ID: 1465 | Name: DESAI DHYANA VISHAL | IP: 162.158.162.135 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 07:30:17] Student login successful | Student ID: 1465 | Name: DESAI DHYANA VISHAL | IP: 162.158.162.135 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 07:46:14] Student login successful | Student ID: 1465 | Name: DESAI DHYANA VISHAL | IP: 172.70.208.138 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 08:07:50] Student login successful | Student ID: 1565 | Name: BARIA VAISHALIBEN HARISINH | IP: 104.22.14.73 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 08:57:03] Student login successful | Student ID: 1741 | Name: SHAH YUG MANOJBHAI | IP: 172.70.108.167 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:11:53] Student login successful | Student ID: 1741 | Name: SHAH YUG MANOJBHAI | IP: 162.159.122.192 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:17:24] Student login failed - Invalid credentials | Identifier: 713015073276 | IP: 172.70.108.167 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:18:03] Student login successful | Student ID: 2174 | Name: RANA DHAIRYARAJSINH KULDIPSINH | IP: 162.158.22.66 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:21:54] Student login successful | Student ID: 1565 | Name: BARIA VAISHALIBEN HARISINH | IP: 162.158.190.108 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:27:42] Student login failed - Invalid credentials | Identifier: 9687888587 | IP: 172.71.198.206 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:28:18] Student login successful | Student ID: 1565 | Name: BARIA VAISHALIBEN HARISINH | IP: 172.68.164.4 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:28:24] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 172.71.198.207 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:29:45] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 172.71.198.207 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:31:18] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 172.71.198.207 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:32:19] Student login successful | Student ID: 1565 | Name: BARIA VAISHALIBEN HARISINH | IP: 162.158.108.91 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:33:43] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 162.159.99.24 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:44:02] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 104.22.14.161 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:45:36] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 104.22.14.161 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:47:03] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 104.22.14.161 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:48:41] Student login failed - Invalid credentials | Identifier: 9687888587 | IP: 104.22.14.160 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:50:06] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 104.22.14.161 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:52:42] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 172.68.55.117 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:53:00] Student login successful | Student ID: 1483 | Name: JINJALA MAHARSHI RAJESH | IP: 162.158.162.135 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:54:54] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 172.68.55.116 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 09:55:27] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 172.68.55.116 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 10:03:15] Student login successful | Student ID: 1483 | Name: JINJALA MAHARSHI RAJESH | IP: 162.158.162.135 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 10:12:42] Student login successful | Student ID: 1565 | Name: BARIA VAISHALIBEN HARISINH | IP: 104.22.66.171 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 10:14:09] [File: C:\xampp\htdocs\GCA-Production\portal\modules\student-portal\hostel-services.php] [Line: 12] PHP WARNING: require_once(C:\xampp\htdocs\GCA-Production/common/hostel_db_connect.php): Failed to open stream: No such file or directory | URI: /portal/modules/student-portal/hostel-services
+[2026-05-06 10:14:09] [File: C:\xampp\htdocs\GCA-Production\portal\modules\student-portal\hostel-services.php] [Line: 12] Uncaught Exception: Failed opening required 'C:\xampp\htdocs\GCA-Production/common/hostel_db_connect.php' (include_path='C:\xampp\php\PEAR') | Exception: Failed opening required 'C:\xampp\htdocs\GCA-Production/common/hostel_db_connect.php' (include_path='C:\xampp\php\PEAR') | Trace: #0 {main} | URI: /portal/modules/student-portal/hostel-services
+[2026-05-06 10:39:23] Student login successful | Student ID: 1565 | Name: BARIA VAISHALIBEN HARISINH | IP: 127.0.0.1 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 10:44:46] Student login failed - Invalid credentials | Identifier: 818325399917 | IP: 104.22.14.40 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 10:45:40] Student login failed - Invalid password | Aadhaar: 8153057390 | Student ID: 3383 | IP: 172.68.54.38 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 10:48:38] Student login failed - Invalid credentials | Identifier: 818325399917 | IP: 162.159.99.63 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 11:20:45] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 443] PHP WARNING: Undefined array key "response" | User ID: 70 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-05-06 11:20:45] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 443] PHP WARNING: Undefined array key "response" | User ID: 70 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-05-06 11:31:39] Student login successful | Student ID: 2194 | Name: GALIYA JANVI YOGESHKUMAR | IP: 162.159.122.193 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 11:33:00] Student login successful | Student ID: 2361 | Name: SAVALIYA MANAN MUKESHBHAI | IP: 172.70.92.201 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 11:35:12] Student login successful | Student ID: 1565 | Name: BARIA VAISHALIBEN HARISINH | IP: 172.68.54.139 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:17:53] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 104.22.14.99 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:18:52] Student login successful | Student ID: 2116 | Name: MAHETA RAJVI JITENDRAKUMAR | IP: 172.68.164.4 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:19:03] Student login failed - Invalid password | Aadhaar: 919509200581 | Student ID: 2011 | IP: 104.22.14.99 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:21:47] Student login successful | Student ID: 2350 | Name: GOHIL DIGVIJAYSINH NARSINH | IP: 104.22.14.145 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:22:25] Student login failed - Invalid password | Aadhaar: 438835621950 | Student ID: 2611 | IP: 172.69.176.130 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:23:30] Student login failed - Invalid password | Aadhaar: 438835621950 | Student ID: 2611 | IP: 172.69.176.130 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:24:21] Student login successful | Student ID: 2017 | Name: CHAREL JANVI SHAILESHBHAI | IP: 172.69.176.130 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:24:57] Student login successful | Student ID: 2198 | Name: HIRANI SHRADHDHABEN VINODBHAI | IP: 162.158.88.91 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:26:00] Student login failed - Invalid captcha | Aadhaar: 849995281256 | IP: 104.22.14.144 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:26:41] Student login successful | Student ID: 2017 | Name: CHAREL JANVI SHAILESHBHAI | IP: 104.22.14.144 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:27:20] Student login failed - Invalid password | Aadhaar: 587863041374 | Student ID: 2104 | IP: 162.159.99.27 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:27:38] Student login failed - Invalid captcha | Aadhaar: 438835621950 | IP: 172.69.176.131 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:28:15] Student login failed - Invalid password | Aadhaar: 438835621950 | Student ID: 2611 | IP: 172.69.176.130 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:28:41] Student login failed - Invalid password | Aadhaar: 587863041374 | Student ID: 2104 | IP: 104.22.14.98 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:28:55] Student login successful | Student ID: 2017 | Name: CHAREL JANVI SHAILESHBHAI | IP: 162.159.99.27 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:29:14] Student login successful | Student ID: 2083 | Name: PATEL SHLOKKUMAR GIRISHBHAI | IP: 104.22.14.99 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:29:47] Student login failed - Invalid password | Aadhaar: 9265528325 | Student ID: 2611 | IP: 162.159.99.27 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:30:16] Student login failed - Invalid password | Aadhaar: 9265528325 | Student ID: 2611 | IP: 162.159.99.27 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:30:32] Student login successful | Student ID: 2017 | Name: CHAREL JANVI SHAILESHBHAI | IP: 162.159.99.27 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:33:01] Student login successful | Student ID: 2483 | Name: VITHANI TIRTH BHARATBHAI | IP: 162.158.88.91 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:33:34] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 401] Uncaught Exception: Call to a member function prepare() on string | Exception: Call to a member function prepare() on string | Trace: #0 C:\xampp\htdocs\GCA-Production\brain\41d299ec-f976-420b-a98f-3497f35803d1\scratch\test_lowest_vars.php(11): sendWhatsAppTemplate()
+#1 {main}
+[2026-05-06 12:35:15] Student login successful | Student ID: 2350 | Name: GOHIL DIGVIJAYSINH NARSINH | IP: 162.158.88.90 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:36:30] Student login successful | Student ID: 2350 | Name: GOHIL DIGVIJAYSINH NARSINH | IP: 172.68.164.4 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:39:25] Student login failed - Invalid password | Aadhaar: 438835621950 | Student ID: 2611 | IP: 162.159.99.27 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:44:13] Student login failed - Invalid password | Aadhaar: 438835621950 | Student ID: 2611 | IP: 162.159.99.61 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:44:39] Student login failed - Invalid captcha | Aadhaar: 9586724783 | IP: 162.159.99.61 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:44:49] Student login failed - Invalid password | Aadhaar: 438835621950 | Student ID: 2611 | IP: 162.159.122.193 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:45:03] Student login successful | Student ID: 2611 | Name: CHAREL JAYNIL SHAILESHBHAI | IP: 162.159.99.60 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:45:25] Student login successful | Student ID: 2017 | Name: CHAREL JANVI SHAILESHBHAI | IP: 162.159.122.193 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:49:11] Student login failed - Invalid credentials | Identifier: 9565528325 | IP: 172.68.234.41 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:49:15] Student login successful | Student ID: 2611 | Name: CHAREL JAYNIL SHAILESHBHAI | IP: 162.159.99.60 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:50:08] Student login failed - Invalid captcha | Aadhaar: 9586724783 | IP: 162.159.99.60 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:50:12] Student login successful | Student ID: 2483 | Name: VITHANI TIRTH BHARATBHAI | IP: 104.23.175.226 | User ID: 2 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:50:20] Student login successful | Student ID: 2017 | Name: CHAREL JANVI SHAILESHBHAI | IP: 162.159.99.61 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:50:24] Student login successful | Student ID: 2611 | Name: CHAREL JAYNIL SHAILESHBHAI | IP: 162.159.122.192 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:50:43] Student login successful | Student ID: 2483 | Name: VITHANI TIRTH BHARATBHAI | IP: 104.23.175.226 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:54:57] Student login successful | Student ID: 1553 | Name: GOHEL YASHVI TUSHAR | IP: 172.68.234.41 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 12:55:12] Student login successful | Student ID: 1565 | Name: BARIA VAISHALIBEN HARISINH | IP: 104.22.14.144 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 13:15:40] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 397] Uncaught Exception: syntax error, unexpected token "if", expecting "{" | Exception: syntax error, unexpected token "if", expecting "{" | Trace: #0 C:\xampp\htdocs\GCA-Production\portal\api\notifications.php(35): require_once()
+#1 {main} | User ID: 1 | URI: /portal/api/notifications?action=count
+[2026-05-06 13:17:38] Student login successful | Student ID: 1571 | Name: KAPDI RAJVIBEN JAGDISHBHAI | IP: 162.159.122.192 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 13:18:04] Student login successful | Student ID: 2483 | Name: VITHANI TIRTH BHARATBHAI | IP: 104.23.216.38 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 13:22:03] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 897] Uncaught Exception: Undefined constant "WHATSAPP_BHASHSMS_USER" | Exception: Undefined constant "WHATSAPP_BHASHSMS_USER" | Trace: #0 C:\xampp\htdocs\GCA-Production\brain\41d299ec-f976-420b-a98f-3497f35803d1\scratch\test_dynamic_send.php(10): sendWhatsAppDynamic()
+#1 {main}
+[2026-05-06 13:28:09] Student login failed - Invalid password | Aadhaar: 348380945182 | Student ID: 2624 | IP: 104.22.14.192 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:02:29] Student login failed - Invalid password | Aadhaar: 9913647347 | Student ID: 2553 | IP: 172.68.164.4 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:04:35] Student login successful | Student ID: 2553 | Name: HADIYA DHARMIK DIPAKBHAI | IP: 172.71.82.69 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:07:34] Student login failed - Invalid password | Aadhaar: 712822639262 | Student ID: 1517 | IP: 162.158.190.107 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:08:03] Student login successful | Student ID: 1517 | Name: RATHVA HELI LALASINGBHAI | IP: 162.158.190.107 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:23:36] Student login successful | Student ID: 2058 | Name: DABHI AARAV DILIPBHAI | IP: 162.159.99.26 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:28:46] Student login failed - Invalid credentials | Identifier: 9601907650 | IP: 172.69.179.85 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:29:00] Student login failed - Invalid credentials | Identifier: 9601907650 | IP: 172.69.179.86 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:29:55] Student login failed - Invalid credentials | Identifier: 952469332807 | IP: 172.71.202.84 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:31:12] Student login successful | Student ID: 2058 | Name: DABHI AARAV DILIPBHAI | IP: 162.159.99.27 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:34:11] Student login successful | Student ID: 1741 | Name: SHAH YUG MANOJBHAI | IP: 162.159.122.193 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:39:28] Student login successful | Student ID: 1741 | Name: SHAH YUG MANOJBHAI | IP: 172.68.234.41 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:44:11] Student login successful | Student ID: 2301 | Name: MAKWANA PALASH GOKULBHAI | IP: 172.69.176.131 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:51:06] Student login successful | Student ID: 2182 | Name: VALA HARSH MAHENDRABHAI | IP: 172.68.164.4 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:55:14] Student login failed - Invalid password | Aadhaar: 850074680622 | Student ID: 2182 | IP: 162.158.170.113 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 14:56:02] Student login successful | Student ID: 2182 | Name: VALA HARSH MAHENDRABHAI | IP: 162.158.170.113 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 15:17:09] Student login failed - Invalid password | Aadhaar: 903284281786 | Student ID: 1941 | IP: 172.68.55.158 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 15:19:28] Student login successful | Student ID: 1941 | Name: LABANA RAJANBEN ASHVINBHAI | IP: 162.159.99.62 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 15:33:16] Student login successful | Student ID: 1565 | Name: BARIA VAISHALIBEN HARISINH | IP: 172.70.208.138 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 15:39:46] [File: C:\xampp\htdocs\GCA-Production\portal\modules\students\students.php] [Line: 528] PHP WARNING: Undefined array key "phone" | URI: /portal/modules/students/students.php?view=enrolled
+[2026-05-06 15:39:46] [File: C:\xampp\htdocs\GCA-Production\portal\modules\students\students.php] [Line: 547] PHP WARNING: Undefined array key "course" | URI: /portal/modules/students/students.php?view=enrolled
+[2026-05-06 15:39:46] [File: C:\xampp\htdocs\GCA-Production\portal\modules\students\students.php] [Line: 528] PHP WARNING: Undefined array key "phone" | URI: /portal/modules/students/students.php?view=enrolled
+[2026-05-06 15:39:46] [File: C:\xampp\htdocs\GCA-Production\portal\modules\students\students.php] [Line: 547] PHP WARNING: Undefined array key "course" | URI: /portal/modules/students/students.php?view=enrolled
+[2026-05-06 15:39:57] [File: C:\xampp\htdocs\GCA-Production\portal\modules\students\students.php] [Line: 528] PHP WARNING: Undefined array key "phone" | URI: /portal/modules/students/students.php?view=enrolled
+[2026-05-06 15:39:57] [File: C:\xampp\htdocs\GCA-Production\portal\modules\students\students.php] [Line: 547] PHP WARNING: Undefined array key "course" | URI: /portal/modules/students/students.php?view=enrolled
+[2026-05-06 15:39:57] [File: C:\xampp\htdocs\GCA-Production\portal\modules\students\students.php] [Line: 528] PHP WARNING: Undefined array key "phone" | URI: /portal/modules/students/students.php?view=enrolled
+[2026-05-06 15:39:57] [File: C:\xampp\htdocs\GCA-Production\portal\modules\students\students.php] [Line: 547] PHP WARNING: Undefined array key "course" | URI: /portal/modules/students/students.php?view=enrolled
+[2026-05-06 15:50:26] Student login successful | Student ID: 2099 | Name: BARAIYA HARIKA CHANDANKUMAR | IP: 172.70.208.139 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 15:53:38] [File: C:\xampp\htdocs\GCA-Production\portal\include\sidebar.php] [Line: 1231] Uncaught Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Trace: #0 C:\xampp\htdocs\GCA-Production\portal\modules\reports\financial\student-ledger.php(163): include()
+#1 {main} | User ID: 70 | URI: /portal/modules/reports/financial/student-ledger
+[2026-05-06 15:53:46] [File: C:\xampp\htdocs\GCA-Production\portal\include\sidebar.php] [Line: 1231] Uncaught Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Trace: #0 C:\xampp\htdocs\GCA-Production\portal\modules\reports\financial\student-ledger.php(163): include()
+#1 {main} | URI: /portal/modules/reports/financial/student-ledger?student_id=2099
+[2026-05-06 15:53:52] [File: C:\xampp\htdocs\GCA-Production\portal\include\sidebar.php] [Line: 1231] Uncaught Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Trace: #0 C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\accountant_dashboard.php(57): include()
+#1 {main} | URI: /portal/modules/dashboard/accountant_dashboard
+[2026-05-06 15:54:12] [File: C:\xampp\htdocs\GCA-Production\portal\include\sidebar.php] [Line: 1231] Uncaught Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Trace: #0 C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\accountant_dashboard.php(57): include()
+#1 {main} | URI: /portal/modules/dashboard/accountant_dashboard
+[2026-05-06 15:54:18] Student login failed - Invalid credentials | Identifier: 240685783622 | IP: 172.68.55.159 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 15:54:35] [File: C:\xampp\htdocs\GCA-Production\portal\include\sidebar.php] [Line: 1231] Uncaught Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Trace: #0 C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\accountant_dashboard.php(57): include()
+#1 {main} | URI: /portal/modules/dashboard/accountant_dashboard
+[2026-05-06 15:55:01] Student login failed - Invalid credentials | Identifier: 240685783622 | IP: 172.68.54.140 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 15:55:52] Student login failed - Invalid credentials | Identifier: 240685783622 | IP: 172.68.54.141 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 15:56:47] [File: C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\computer_operator_dashboard.php] [Line: 9] Uncaught Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Trace: #0 {main} | User ID: 230 | URI: /portal/modules/dashboard/computer_operator_dashboard
+[2026-05-06 15:57:22] Student login failed - Invalid credentials | Identifier: 240685783622 | IP: 172.68.54.141 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 15:57:48] [File: C:\xampp\htdocs\GCA-Production\portal\include\sidebar.php] [Line: 1231] Uncaught Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Exception: Undefined constant "ROLE_COMPUTER_OPERATOR" | Trace: #0 C:\xampp\htdocs\GCA-Production\portal\modules\dashboard\accountant_dashboard.php(57): include()
+#1 {main} | URI: /portal/modules/dashboard/accountant_dashboard
+[2026-05-06 15:58:38] Student login failed - Invalid credentials | Identifier: 9825638496 | IP: 172.68.54.141 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 16:25:55] Student login successful | Student ID: 2083 | Name: PATEL SHLOKKUMAR GIRISHBHAI | IP: 162.158.108.91 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 16:25:56] Student login failed - Invalid captcha | Aadhaar: 874463513960 | IP: 162.158.108.90 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 16:26:11] Student login successful | Student ID: 2083 | Name: PATEL SHLOKKUMAR GIRISHBHAI | IP: 162.158.108.91 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 16:26:50] Student login successful | Student ID: 2272 | Name: SABALPARA KUSHKUMAR PRAVINKUMAR | IP: 172.70.208.139 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 16:35:53] [File: C:\xampp\htdocs\GCA-Production\test_dynamic_whatsapp.php] [Line: 14] Uncaught Exception: Call to undefined function getConnection() | Exception: Call to undefined function getConnection() | Trace: #0 {main}
+[2026-05-06 16:36:08] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:36:08] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:36:56] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:37:33] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:38:03] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:38:54] [File: C:\xampp\htdocs\GCA-Production\portal\modules\reports\reports.php] [Line: 112] PHP WARNING: Undefined variable $top_performers | URI: /portal/modules/reports/reports
+[2026-05-06 16:38:54] [File: C:\xampp\htdocs\GCA-Production\portal\modules\reports\reports.php] [Line: 112] PHP WARNING: foreach() argument must be of type array|object, null given | URI: /portal/modules/reports/reports
+[2026-05-06 16:40:26] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:41:15] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:41:30] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:41:59] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:44:10] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:44:46] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:45:21] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:45:57] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:49:52] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 109] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:50:35] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:51:39] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 113] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:52:46] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 112] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 16:53:12] [File: C:\xampp\htdocs\GCA-Production\portal\modules\reports\reports.php] [Line: 112] PHP WARNING: Undefined variable $top_performers | URI: /portal/modules/reports/reports
+[2026-05-06 16:53:12] [File: C:\xampp\htdocs\GCA-Production\portal\modules\reports\reports.php] [Line: 112] PHP WARNING: foreach() argument must be of type array|object, null given | URI: /portal/modules/reports/reports
+[2026-05-06 17:21:17] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 112] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 17:40:49] Student login successful | Student ID: 1666 | Name: MANGUKIYA SIDDHI ASHOKBHAI | IP: 172.69.179.86 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 17:49:18] Student login successful | Student ID: 2083 | Name: PATEL SHLOKKUMAR GIRISHBHAI | IP: 104.22.14.191 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 17:59:10] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 112] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 18:10:33] Student login successful | Student ID: 2176 | Name: RATHVA VAIBHAVSINH BHAVJITSINH | IP: 172.68.55.116 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 18:10:44] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 109] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 18:11:20] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 109] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 18:11:52] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 109] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 18:12:31] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 109] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 18:17:18] Student login successful | Student ID: 2176 | Name: RATHVA VAIBHAVSINH BHAVJITSINH | IP: 162.158.108.90 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 18:24:31] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 109] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 18:25:05] [File: C:\xampp\htdocs\GCA-Production\common\helpers\whatsapp_functions.php] [Line: 109] PHP DEPRECATED: Function curl_close() is deprecated since 8.5, as it has no effect since PHP 8.0
+[2026-05-06 18:30:38] Student login failed - Invalid password | Aadhaar: 9428787404 | Student ID: 1472 | IP: 104.22.66.171 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 18:31:24] Student login failed - Invalid password | Aadhaar: 529765835768 | Student ID: 1472 | IP: 104.22.66.170 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 18:36:07] Student login failed - Invalid password | Aadhaar: 529765835768 | Student ID: 1472 | IP: 172.70.108.166 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 18:36:31] Student login successful | Student ID: 1472 | Name: BARAI SHAURYA URMILBHAI | IP: 172.70.208.139 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 18:36:54] Student login successful | Student ID: 1472 | Name: BARAI SHAURYA URMILBHAI | IP: 172.68.234.41 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 19:52:32] Student login failed - Invalid password | Aadhaar: 960808383384 | Student ID: 1755 | IP: 172.71.82.69 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 19:56:24] Student login failed - Invalid credentials | Identifier: 8780773958 | IP: 172.71.124.104 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 21:42:09] Student login failed - Invalid captcha | Aadhaar: 308236099773 | IP: 104.22.14.25 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 21:43:20] Student login successful | Student ID: 1928 | Name: CHAUHAN PRIYANSHIBEN NALINSINH | IP: 104.22.14.43 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 22:19:54] Student login failed - Invalid password | Aadhaar: 438835621950 | Student ID: 2611 | IP: 162.159.122.192 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 22:20:30] Student login failed - Invalid credentials | Identifier: 9565528325 | IP: 172.70.108.166 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 22:21:06] Student login failed - Invalid password | Aadhaar: 9586724783 | Student ID: 2017 | IP: 162.159.122.193 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 22:21:48] Student login successful | Student ID: 2017 | Name: CHAREL JANVI SHAILESHBHAI | IP: 172.70.108.166 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-06 23:47:36] Student login successful | Student ID: 1672 | Name: NAYAK RIBA ANISHBHAI | IP: 172.70.189.62 | URI: /portal/modules/student-portal/student-login-process.php

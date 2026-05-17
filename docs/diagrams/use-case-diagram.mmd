@@ -1,0 +1,154 @@
+%% Counselling Management System - Complete Use Case Diagram
+%% Standard UML Use Case Diagram with System Boundary
+
+graph TB
+    %% External Actors
+    Student(("👤<br/>Student"))
+    Counsellor(("👤<br/>Counsellor"))
+    Principal(("👤<br/>Principal"))
+    Accountant(("👤<br/>Accountant"))
+    SuperAdmin(("👤<br/>Super Admin"))
+    WebsiteAdmin(("👤<br/>Website Admin"))
+    
+    %% System Boundary
+    subgraph System["&lt;&lt;System&gt;&gt;<br/>Counselling Management Platform"]
+        direction TB
+
+        %% Core Use Cases - Student Domain
+        UC1([Register for<br/>Admission])
+        UC2([View Profile])
+        UC3([Book<br/>Appointments])
+        UC4([View My Fees])
+        UC5([Make Payment])
+        UC6([Request<br/>Installments])
+        UC7([View Receipts])
+        UC8([View Test<br/>Results])
+        UC9([View Admission<br/>Letter])
+        UC10([Submit<br/>Documents])
+
+        %% Core Use Cases - Counsellor Domain
+        UC11([View Assigned<br/>Students])
+        UC12([Manage<br/>Appointments])
+        UC13([Create<br/>Session])
+        UC14([View Session<br/>History])
+        UC15([Request Fee<br/>Installment])
+        UC16([Confirm<br/>Admission])
+        UC17([View Student<br/>Details])
+        UC18([Upload<br/>Documents])
+
+        %% Core Use Cases - Principal Domain
+        UC19([View All<br/>Students])
+        UC20([Manage<br/>Counsellors])
+        UC21([Assign Students<br/>to Counsellors])
+        UC22([Auto-assign<br/>Students])
+        UC23([View Reports])
+        UC24([Manage<br/>Divisions])
+        UC25([Approve<br/>Installments])
+        UC26([View Dashboard])
+        UC27([Manage<br/>Scholarships])
+        UC28([Manage<br/>Academic Years])
+
+    %% Accountant Use Cases
+    Accountant --> UC31[Process Payments]
+        %% Core Use Cases - Accountant Domain
+        UC29([Process<br/>Payments])
+        UC30([Generate<br/>Receipts])
+        UC31([Create<br/>Installments])
+        UC32([View Payment<br/>History])
+        UC33([Manage Fee<br/>Configuration])
+        UC34([Process<br/>Refunds])
+        UC35([View Daily<br/>Collections])
+        UC36([Approve/Reject<br/>Installments])
+    SuperAdmin --> UC40[Manage Users]
+    SuperAdmin --> UC41[Manage Roles & Permissions]
+        %% Core Use Cases - Admin Domain
+        UC37([Manage Users])
+        UC38([Manage Roles])
+        UC39([System<br/>Configuration])
+        UC40([View System<br/>Logs])
+        UC41([Manage<br/>Schools])
+        UC42([Manage<br/>Courses])
+        UC43([Database<br/>Backup])
+        UC44([View All<br/>Reports])
+    WebsiteAdmin --> UC51[Update Gallery]
+    WebsiteAdmin --> UC52[Manage Facilities Info]
+    WebsiteAdmin --> UC53[Update Contact Info]
+    %% Core Use Cases - Website Admin
+        UC45([Manage<br/>Content])
+        UC46([Update<br/>Gallery])
+        UC47([Manage<br/>Facilities])
+        UC48([Update<br/>Contact Info])
+        
+    end
+    
+    %% Actor to Use Case Associations
+    Student --- UC1
+    Student --- UC2
+    Student --- UC3
+    Student --- UC4
+    Student --- UC5
+    Student --- UC6
+    Student --- UC7
+    Student --- UC8
+    Student --- UC9
+    Student --- UC10
+    
+    Counsellor --- UC11
+    Counsellor --- UC12
+    Counsellor --- UC13
+    Counsellor --- UC14
+    Counsellor --- UC15
+    Counsellor --- UC16
+    Counsellor --- UC17
+    Counsellor --- UC18
+    
+    Principal --- UC19
+    Principal --- UC20
+    Principal --- UC21
+    Principal --- UC22
+    Principal --- UC23
+    Principal --- UC24
+    Principal --- UC25
+    Principal --- UC26
+    Principal --- UC27
+    Principal --- UC28
+    Principal --- UC11
+    Principal --- UC17
+    
+    Accountant --- UC29
+    Accountant --- UC30
+    Accountant --- UC31
+    Accountant --- UC32
+    Accountant --- UC33
+    Accountant --- UC34
+    Accountant --- UC35
+    Accountant --- UC36
+    Accountant --- UC23
+    
+    SuperAdmin --- UC37
+    SuperAdmin --- UC38
+    SuperAdmin --- UC39
+    SuperAdmin --- UC40
+    SuperAdmin --- UC41
+    SuperAdmin --- UC42
+    SuperAdmin --- UC43
+    SuperAdmin --- UC44
+    SuperAdmin --- UC19
+    SuperAdmin --- UC20
+    SuperAdmin --- UC23
+    
+    WebsiteAdmin --- UC45
+    WebsiteAdmin --- UC46
+    WebsiteAdmin --- UC47
+    WebsiteAdmin --- UC48
+    
+    %% Styling
+    classDef actorStyle fill:#E3F2FD,stroke:#1976D2,stroke-width:3px,color:#000,font-size:11px
+    classDef useCaseStyle fill:#FFF9C4,stroke:#F57C00,stroke-width:2px,color:#000,font-size:10px
+    classDef systemStyle fill:#E8EAF6,stroke:#3F51B5,stroke-width:3px,color:#000
+    
+    class Student,Counsellor,Principal,Accountant,SuperAdmin,WebsiteAdmin actorStyle
+    class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10,UC11,UC12,UC13,UC14,UC15,UC16,UC17,UC18 useCaseStyle
+    class UC19,UC20,UC21,UC22,UC23,UC24,UC25,UC26,UC27,UC28,UC29,UC30,UC31,UC32,UC33,UC34 useCaseStyle
+    class UC35,UC36,UC37,UC38,UC39,UC40,UC41,UC42,UC43,UC44,UC45,UC46,UC47,UC48 useCaseStyle
+    class System system

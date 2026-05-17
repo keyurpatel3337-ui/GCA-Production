@@ -1,0 +1,141 @@
+%% Super Admin Use Case Diagram
+%% Standard UML format with system boundary
+
+graph TB
+    %% External Actor
+    SuperAdmin(("👤<br/>Super Admin"))
+    
+    %% System Boundary
+    subgraph System["<<System>><br/>Admin Portal"]
+        direction TB
+        
+        %% Main Use Cases
+        UC1([Manage<br/>Users])
+        UC2([Manage Roles<br/>& Permissions])
+        UC3([System<br/>Configuration])
+        UC4([View System<br/>Logs])
+        UC5([Manage<br/>Schools])
+        UC6([Manage<br/>Courses])
+        UC7([Manage Fee<br/>Structures])
+        UC8([Database Backup<br/>& Restore])
+        UC9([View All<br/>Reports])
+        UC10([Manage Hostel<br/>Configuration])
+        UC11([Manage Academic<br/>Years])
+        UC12([System<br/>Maintenance])
+        UC13([Manage Test<br/>Management])
+        UC14([Configure OMR<br/>Settings])
+        UC15([Monitor System<br/>Performance])
+        UC16([Security<br/>Settings])
+        UC17([Email<br/>Configuration])
+
+        %% Extended Use Cases
+        UC1A([Add<br/>User])
+        UC1B([Edit<br/>User])
+        UC1C([Deactivate<br/>User])
+        UC1D([Reset<br/>Password])
+        
+        UC2A([Create<br/>Role])
+        UC2B([Modify<br/>Role])
+        UC2C([Assign<br/>Permissions])
+        
+        UC3A([General<br/>Settings])
+        UC3B([Email<br/>Settings])
+        UC3C([Payment Gateway<br/>Settings])
+        UC3D([Backup<br/>Settings])
+        
+        UC4A([View Login<br/>Logs])
+        UC4B([View Error<br/>Logs])
+        UC4C([View Payment<br/>Logs])
+        UC4D([Export<br/>Logs])
+        
+        UC5A([Add<br/>School])
+        UC5B([Edit<br/>School])
+        UC5C([Deactivate<br/>School])
+        
+        UC7A([Define Fee<br/>Structure])
+        UC7B([Set Fee by<br/>Course])
+        UC7C([Configure<br/>GST])
+        UC7D([Validate Fee<br/>Configuration])
+        
+        UC8A([Manual<br/>Backup])
+        UC8B([Schedule<br/>Backup])
+        UC8C([Restore<br/>Database])
+        
+        UC12A([Clear<br/>Cache])
+        UC12B([Update<br/>System])
+        UC12C([Optimize<br/>Database])
+    end
+    
+    %% Actor Associations
+    SuperAdmin --- UC1
+    SuperAdmin --- UC2
+    SuperAdmin --- UC3
+    SuperAdmin --- UC4
+    SuperAdmin --- UC5
+    SuperAdmin --- UC6
+    SuperAdmin --- UC7
+    SuperAdmin --- UC8
+    SuperAdmin --- UC9
+    SuperAdmin --- UC10
+    SuperAdmin --- UC11
+    SuperAdmin --- UC12
+    SuperAdmin --- UC13
+    SuperAdmin --- UC14
+    SuperAdmin --- UC15
+    SuperAdmin --- UC16
+    SuperAdmin --- UC17
+    
+    %% Relationships
+    UC1 -.->|«extend»| UC1A
+    UC1 -.->|«extend»| UC1B
+    UC1 -.->|«extend»| UC1C
+    UC1 -.->|«extend»| UC1D
+    
+    UC2 -.->|«extend»| UC2A
+    UC2 -.->|«extend»| UC2B
+    UC2 -.->|«extend»| UC2C
+    
+    UC3 -.->|«extend»| UC3A
+    UC3 -.->|«extend»| UC3B
+    UC3 -.->|«extend»| UC3C
+    UC3 -.->|«extend»| UC3D
+    
+    UC4 -.->|«extend»| UC4A
+    UC4 -.->|«extend»| UC4B
+    UC4 -.->|«extend»| UC4C
+    UC4 -.->|«extend»| UC4D
+    
+    UC5 -.->|«extend»| UC5A
+    UC5 -.->|«extend»| UC5B
+    UC5 -.->|«extend»| UC5C
+    
+    UC7 -.->|«extend»| UC7A
+    UC7 -.->|«extend»| UC7B
+    UC7 -.->|«extend»| UC7C
+    UC7 -.->|«include»| UC7D
+    
+    UC8 -.->|«extend»| UC8A
+    UC8 -.->|«extend»| UC8B
+    UC8 -.->|«extend»| UC8C
+    
+    UC12 -.->|«extend»| UC12A
+    UC12 -.->|«extend»| UC12B
+    UC12 -.->|«extend»| UC12C
+
+    %% Styling
+    classDef actorStyle fill:#FFEBEE,stroke:#C62828,stroke-width:3px,color:#000
+    classDef mainUseCase fill:#B2DFDB,stroke:#00796B,stroke-width:2px,color:#000
+    classDef extendedUseCase fill:#FFF9C4,stroke:#F57C00,stroke-width:1px,color:#000
+    classDef systemStyle fill:#E8EAF6,stroke:#3F51B5,stroke-width:3px
+    
+    class SuperAdmin actorStyle
+    class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10,UC11,UC12,UC13,UC14,UC15,UC16,UC17 mainUseCase
+    class UC1A,UC1B,UC1C,UC1D extendedUseCase
+    class UC2A,UC2B,UC2C extendedUseCase
+    class UC3A,UC3B,UC3C,UC3D extendedUseCase
+    class UC4A,UC4B,UC4C,UC4D extendedUseCase
+    class UC5A,UC5B,UC5C extendedUseCase
+    class UC7A,UC7B,UC7C,UC7D extendedUseCase
+    class UC8A,UC8B,UC8C extendedUseCase
+    class UC12A,UC12B,UC12C extendedUseCase
+    class System systemStyle

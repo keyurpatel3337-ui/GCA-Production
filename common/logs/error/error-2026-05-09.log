@@ -1,0 +1,48 @@
+[2026-05-09 08:13:46] Student login successful | Student ID: 1471 | Name: BAMANIA DIRGH ANANDKUMAR | IP: 104.22.14.165 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 08:26:33] Student login successful | Student ID: 1564 | Name: BARIA JANVIBEN HARISHKUMAR | IP: 172.71.202.85 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 08:33:11] Student login successful | Student ID: 1667 | Name: MINAMA DHRUVIKA BHARATSINH | IP: 172.69.176.131 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 08:44:17] Student login successful | Student ID: 1564 | Name: BARIA JANVIBEN HARISHKUMAR | IP: 172.71.198.207 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 09:55:41] Student login successful | Student ID: 2197 | Name: HALA FORAM RAMESHKUMAR | IP: 172.70.108.167 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 10:10:16] Student login failed - Invalid credentials | Identifier: 815741963687 | IP: 172.68.234.40 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 10:43:06] Student login successful | Student ID: 2123 | Name: PUNANI PRIYANSHI HARSHADBHAI | IP: 172.70.208.139 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 10:47:12] Student login failed - Invalid credentials | Identifier: 9687942115 | IP: 172.68.164.4 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 11:11:21] Student login successful | Student ID: 1585 | Name: PATEL HEER PRATIKBHAI | IP: 172.69.176.130 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 11:14:44] Student login successful | Student ID: 1471 | Name: BAMANIA DIRGH ANANDKUMAR | IP: 172.68.54.162 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 11:48:11] Student login failed - Invalid captcha | Aadhaar: 6353613413 | IP: 162.158.10.153 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 11:48:34] Student login failed - Invalid credentials | Identifier: 6353613413 | IP: 162.158.10.152 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 11:48:36] Student login failed - Invalid captcha | Aadhaar: 6353613413 | IP: 162.158.10.152 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 11:48:55] Student login failed - Invalid credentials | Identifier: 6353613413 | IP: 162.158.10.152 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 11:52:25] Student login failed - Invalid password | Aadhaar: 410602705446 | Student ID: 2543 | IP: 172.69.166.116 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 11:54:53] Student login successful | Student ID: 2506 | Name: RATHVA PRIYANSHI UDAYSINH | IP: 172.71.198.207 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 12:01:49] Student login successful | Student ID: 2543 | Name: RAJVANI SNEHA RAFIKBHAI | IP: 172.70.208.139 | User ID: 143 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 12:02:21] Student login failed - Invalid password | Aadhaar: 410602705446 | Student ID: 2543 | IP: 172.69.166.117 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 12:02:46] Student login successful | Student ID: 2543 | Name: RAJVANI SNEHA RAFIKBHAI | IP: 172.69.166.116 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 12:12:27] Student login successful | Student ID: 1494 | Name: PARMAR NIRMIT NIKHILKUMAR | IP: 172.71.124.105 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 12:52:11] Student login successful | Student ID: 2046 | Name: VADHEL RIPALBEN NARESHBHAI | IP: 172.69.176.131 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 13:06:17] Student login successful | Student ID: 1471 | Name: BAMANIA DIRGH ANANDKUMAR | IP: 162.158.162.135 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 13:28:49] Student login successful | Student ID: 3391 | Name: Chauhan Aarjav Abheshangbhai | IP: 104.22.66.170 | User ID: 2 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 13:31:16] Student login successful | Student ID: 3421 | Name: Patel Pranshuben Alpeshkumar | IP: 104.22.14.164 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 14:31:13] Student login successful | Student ID: 2213 | Name: PATEL HITESHREE ROHITKUMAR | IP: 104.22.14.164 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 15:18:10] Student login successful | Student ID: 2046 | Name: VADHEL RIPALBEN NARESHBHAI | IP: 172.68.164.4 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 16:32:26] Student login successful | Student ID: 2012 | Name: BARIA KINJALBEN JAGALABHAI | IP: 172.70.92.201 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 17:00:51] Student login successful | Student ID: 2046 | Name: VADHEL RIPALBEN NARESHBHAI | IP: 172.71.124.104 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 17:18:02] Student login successful | Student ID: 2046 | Name: VADHEL RIPALBEN NARESHBHAI | IP: 104.23.175.227 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 17:19:16] Student login successful | Student ID: 2585 | Name: BAMBHANIYA DEVANGBHAI BHARATBHAI | IP: 172.71.198.207 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 17:24:37] Student login successful | Student ID: 2046 | Name: VADHEL RIPALBEN NARESHBHAI | IP: 104.22.66.171 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 17:28:54] Student login failed - Invalid password | Aadhaar: 412112779649 | Student ID: 2585 | IP: 172.70.219.172 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 17:29:37] Student login successful | Student ID: 2585 | Name: BAMBHANIYA DEVANGBHAI BHARATBHAI | IP: 172.71.198.206 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 19:24:08] Student login failed - Invalid password | Aadhaar: 881614194376 | Student ID: 3440 | IP: 162.159.122.192 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 19:24:46] Student login failed - Invalid password | Aadhaar: 881614194376 | Student ID: 3440 | IP: 162.159.122.193 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 19:25:24] Student login failed - Invalid password | Aadhaar: 8905555397 | Student ID: 3440 | IP: 162.159.122.192 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 19:27:20] Student login failed - Invalid password | Aadhaar: 881614194376 | Student ID: 3440 | IP: 162.159.122.193 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 19:27:21] Student login failed - Invalid captcha | Aadhaar: 881614194376 | IP: 162.159.122.193 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 20:15:27] Student login successful | Student ID: 2176 | Name: RATHVA VAIBHAVSINH BHAVJITSINH | IP: 104.22.14.165 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 20:15:31] Student login failed - Invalid captcha | Aadhaar: 908017756263 | IP: 104.22.14.165 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 20:16:11] Student login successful | Student ID: 2176 | Name: RATHVA VAIBHAVSINH BHAVJITSINH | IP: 162.159.99.24 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 20:27:04] Student login successful | Student ID: 2176 | Name: RATHVA VAIBHAVSINH BHAVJITSINH | IP: 172.69.176.130 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 20:31:36] Student login failed - Invalid credentials | Identifier: 9825374018 | IP: 172.68.234.40 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 20:46:49] Student login successful | Student ID: 1731 | Name: PANDYA HEET KRUSHNAKUMAR | IP: 162.159.122.193 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 21:04:43] Student login failed - Invalid password | Aadhaar: 881641494186 | Student ID: 3442 | IP: 172.68.55.117 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 21:04:45] Student login failed - Invalid captcha | Aadhaar: 881641494186 | IP: 172.68.55.117 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 21:05:23] Student login failed - Invalid password | Aadhaar: 9925129124 | Student ID: 3442 | IP: 104.22.14.164 | URI: /portal/modules/student-portal/student-login-process.php
+[2026-05-09 21:05:54] Student login failed - Invalid password | Aadhaar: 9925129124 | Student ID: 3442 | IP: 104.22.14.165 | URI: /portal/modules/student-portal/student-login-process.php

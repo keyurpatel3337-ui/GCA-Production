@@ -1,0 +1,93 @@
+%% Data Flow Diagram - Level 2
+%% Process 3.0: Admission Management (Detailed)
+
+graph TB
+    %% External Entities
+    Student([Student])
+    Counsellor([Counsellor])
+    Principal([Principal])
+    
+    %% Sub-Processes
+    P31[("3.1<br/>Verify<br/>Student<br/>Eligibility")]
+    P32[("3.2<br/>Verify<br/>Documents")]
+    P33[("3.3<br/>Calculate<br/>Total<br/>Fees")]
+    P34[("3.4<br/>Apply<br/>Scholarship")]
+    P35[("3.5<br/>Create<br/>Enrollment<br/>Record")]
+    P36[("3.6<br/>Allocate<br/>Fees")]
+    P37[("3.7<br/>Generate<br/>Admission<br/>Letter")]
+    P38[("3.8<br/>Send<br/>Admission<br/>Notification")]
+    
+    %% Data Stores
+    D1[(D1: Students)]
+    D2[(D2: Payments)]
+    D3[(D3: Documents)]
+    D4[(D4: Fee Config)]
+    D5[(D5: Scholarships)]
+    D6[(D6: Enrollments)]
+    D7[(D7: Fee Allocation)]
+    
+    %% Counsellor/Principal initiates
+    Counsellor -->|Admission Request<br/>Student ID| P31
+    Principal -->|Admission Request<br/>Student ID| P31
+    
+    %% Process 3.1 - Verify Eligibility
+    P31 <-->|Student Details<br/>Token Fee Status| D1
+    P31 <-->|Check Token Payment<br/>₹11,800 paid?| D2
+    P31 -->|Not Eligible<br/>Token Fee Pending| Counsellor
+    P31 -->|Not Eligible<br/>Token Fee Pending| Principal
+    P31 -->|Eligible| P32
+    
+    %% Process 3.2 - Verify Documents
+    P32 <-->|Document List| D3
+    P32 -->|Document Check| P32
+    P32 -->|Documents Missing| Counsellor
+    P32 -->|Documents Complete| P33
+    
+    %% Process 3.3 - Calculate Total Fees
+    P33 <-->|Student Course<br/>School, Medium, Group| D1
+    P33 <-->|Fee Structure| D4
+    P33 -->|Total Fees| P34
+    
+    %% Process 3.4 - Apply Scholarship
+    P34 <-->|Scholarship Rules| D5
+    P34 <-->|Student Qualification| D1
+    P34 -->|Net Payable Amount| P35
+    P34 -->|Scholarship Details| Student
+    
+    %% Process 3.5 - Create Enrollment
+    P35 -->|Generate Enrollment No| P35
+    P35 -->|Enrollment Record| D6
+    P35 <-->|Update Enrollment Status| D1
+    P35 -->|Enrollment Created| P36
+    
+    %% Process 3.6 - Allocate Fees
+    P36 <-->|Fee Configuration| D4
+    P36 <-->|Scholarship Amount| D5
+    P36 -->|Fee Allocation Record| D7
+    P36 -->|Allocation Complete| P37
+    
+    %% Process 3.7 - Generate Admission Letter
+    P37 <-->|Student Details| D1
+    P37 <-->|Enrollment Info| D6
+    P37 <-->|Fee Details| D7
+    P37 -->|Admission Letter PDF| Student
+    P37 -->|Letter Generated| P38
+    
+    %% Process 3.8 - Send Notifications
+    P38 <-->|Admission Details| D6
+    P38 -->|Admission Confirmed Email| Student
+    P38 -->|Admission Alert| Counsellor
+    P38 -->|Daily Summary| Principal
+    
+    %% Return flows
+    P35 -->|Enrollment Status| Counsellor
+    P35 -->|Enrollment Status| Principal
+    
+    %% Styling
+    classDef entityStyle fill:#E3F2FD,stroke:#1976D2,stroke-width:3px
+    classDef processStyle fill:#C8E6C9,stroke:#388E3C,stroke-width:3px
+    classDef datastoreStyle fill:#FFE0B2,stroke:#E65100,stroke-width:3px
+    
+    class Student,Counsellor,Principal entityStyle
+    class P31,P32,P33,P34,P35,P36,P37,P38 processStyle
+    class D1,D2,D3,D4,D5,D6,D7 datastoreStyle

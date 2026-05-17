@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .warning-box {
+      background: #fff3cd;
+      padding: 15px;
+      border-left: 4px solid #ffc107;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header" style="background: #ffc107; color: #333;">
+      <h3>📄 Document Verification Required</h3>
+    </div>
+    <div class="content">
+      <p>Dear {{counsellor_name}},</p>
+
+      <div class="warning-box">
+        Student <strong>{{student_name}}</strong> has uploaded documents pending verification.
+      </div>
+
+      <p><strong>Documents Uploaded:</strong></p>
+      <ul>
+        {{#documents}}
+        <li>{{document_name}} - Uploaded on {{upload_date}}</li>
+        {{/documents}}
+      </ul>
+
+      <p><a href="{{verify_url}}">Click here to verify documents →</a></p>
+    </div>
+  </div>
+</body>
+
+</html>

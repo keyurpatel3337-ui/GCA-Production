@@ -1,0 +1,107 @@
+%% Data Flow Diagram - Level 1 (System Processes)
+%% Shows main processes and data stores
+
+graph TB
+    %% External Entities
+    Student([Student])
+    Counsellor([Counsellor])
+    Principal([Principal])
+    Accountant([Accountant])
+    
+    %% Main Processes
+    P1[("1.0<br/>User<br/>Authentication")]
+    P2[("2.0<br/>Student<br/>Registration")]
+    P3[("3.0<br/>Admission<br/>Management")]
+    P4[("4.0<br/>Fee<br/>Management")]
+    P5[("5.0<br/>Payment<br/>Processing")]
+    P6[("6.0<br/>Counselling<br/>Management")]
+    P7[("7.0<br/>Report<br/>Generation")]
+    P8[("8.0<br/>Notification<br/>System")]
+    
+    %% Data Stores
+    D1[(D1: Users)]
+    D2[(D2: Students)]
+    D3[(D3: Enrollments)]
+    D4[(D4: Fee Config)]
+    D5[(D5: Payments)]
+    D6[(D6: Sessions)]
+    D7[(D7: Documents)]
+    
+    %% Student Flows
+    Student -->|Login Credentials| P1
+    P1 -->|Access Token| Student
+    
+    Student -->|Registration Form| P2
+    P2 -->|Student ID| Student
+    P2 -->|Student Data| D2
+    
+    Student -->|Payment Info| P5
+    P5 -->|Receipt| Student
+    
+    %% Counsellor Flows
+    Counsellor -->|Login Credentials| P1
+    P1 -->|Access Token| Counsellor
+    
+    Counsellor -->|Session Notes| P6
+    P6 -->|Session Confirmation| Counsellor
+    P6 -->|Session Data| D6
+    
+    Counsellor -->|Admission Details| P3
+    P3 -->|Confirmation| Counsellor
+    
+    %% Principal Flows
+    Principal -->|Login Credentials| P1
+    Principal -->|Report Request| P7
+    P7 -->|Reports| Principal
+    
+    Principal -->|Assignment Data| P6
+    
+    %% Accountant Flows
+    Accountant -->|Login Credentials| P1
+    Accountant -->|Fee Config| P4
+    Accountant -->|Process Payment| P5
+    P5 -->|Payment Status| Accountant
+    
+    %% Data Store Interactions
+    P1 <-->|User Info| D1
+    
+    P2 <-->|Student Records| D2
+    P2 -->|Documents| D7
+    
+    P3 <-->|Student Data| D2
+    P3 -->|Enrollment Data| D3
+    P3 <-->|Fee Info| D4
+    
+    P4 <-->|Fee Structure| D4
+    P4 <-->|Student Data| D2
+    
+    P5 <-->|Payment Records| D5
+    P5 <-->|Student Data| D2
+    P5 <-->|Fee Data| D4
+    
+    P6 <-->|Session Records| D6
+    P6 <-->|Student Data| D2
+    
+    P7 <-->|All Data Stores| D1
+    P7 <-->|Student Info| D2
+    P7 <-->|Payment Info| D5
+    
+    %% Inter-Process Communication
+    P2 -->|Student Created| P8
+    P3 -->|Admission Confirmed| P8
+    P5 -->|Payment Successful| P8
+    P6 -->|Session Completed| P8
+    
+    P8 -->|Email/SMS| Student
+    P8 -->|Email/SMS| Counsellor
+    P8 -->|Email/SMS| Principal
+    P8 -->|Email/SMS| Accountant
+    
+    %% Styling
+    classDef entityStyle fill:#E3F2FD,stroke:#1976D2,stroke-width:3px
+    classDef processStyle fill:#C8E6C9,stroke:#388E3C,stroke-width:3px
+    classDef datastoreStyle fill:#FFE0B2,stroke:#E65100,stroke-width:3px
+    
+    class Student,Counsellor,Principal,Accountant entityStyle
+    class P1,P2,P3,P4,P5,P6,P7,P8 processStyle
+    class D1,D2,D3,D4,D5,D6,D7 datastoreStyle

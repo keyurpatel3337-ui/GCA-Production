@@ -1,0 +1,249 @@
+%% System Architecture / Flow Chart - Counselling Management System
+%% Shows system components, layers, and data flow
+
+graph TB
+    %% External Actors
+    subgraph Actors["👥 External Actors"]
+        Student([Student])
+        Counsellor([Counsellor])
+        Principal([Principal])
+        Accountant([Accountant])
+        SuperAdmin([Super Admin])
+        WebAdmin([Website Admin])
+    end
+    
+    %% Presentation Layer
+    subgraph PresentationLayer["🖥️ Presentation Layer"]
+        direction LR
+        WebInterface[Web Interface<br/>HTML/CSS/JS]
+        StudentPortal[Student Portal]
+        CounsellorPortal[Counsellor Portal]
+        AdminPortal[Admin Portal]
+        CMSPortal[CMS Portal]
+    end
+    
+    %% Application Layer
+    subgraph ApplicationLayer["⚙️ Application Layer - PHP"]
+        direction TB
+        
+        subgraph AuthModule["Authentication Module"]
+            Login[Login Controller]
+            SessionMgmt[Session Management]
+            RoleCheck[Role-Based Access Control]
+        end
+        
+        subgraph StudentModule["Student Module"]
+            Registration[Registration Controller]
+            StudentProfile[Profile Controller]
+            StudentDetails[Details Controller]
+        end
+        
+        subgraph CounsellingModule["Counselling Module"]
+            SessionController[Session Controller]
+            AppointmentController[Appointment Controller]
+            AssignmentController[Assignment Controller]
+        end
+        
+        subgraph FeesModule["Fees & Payment Module"]
+            PaymentController[Payment Controller]
+            InstallmentController[Installment Controller]
+            FeeConfigController[Fee Config Controller]
+            ReceiptController[Receipt Controller]
+        end
+        
+        subgraph AdmissionModule["Admission Module"]
+            AdmissionConfirm[Admission Confirmation]
+            EnrollmentController[Enrollment Controller]
+            AdmissionLetter[Admission Letter Generator]
+        end
+        
+        subgraph ScholarshipModule["Scholarship Module"]
+            ScholarshipRules[Scholarship Rules]
+            ScholarshipCalc[Scholarship Calculator]
+        end
+        
+        subgraph ReportModule["Report Module"]
+            DailyReport[Daily Reports]
+            MonthlyReport[Monthly Reports]
+            CustomReport[Custom Reports]
+        end
+        
+        subgraph TestModule["Test Management Module"]
+            TestController[Test Controller]
+            OMRController[OMR Controller]
+            ResultController[Result Controller]
+        end
+    end
+    
+    %% Business Logic Layer
+    subgraph BusinessLayer["📊 Business Logic Layer"]
+        direction LR
+        
+        Operations[Operation Class<br/>Database Operations]
+        DatabaseOps[DatabaseOperations Class<br/>CRUD Operations]
+        EnrollmentFunc[Enrollment Functions]
+        ValidationRules[Validation Rules]
+        EmailService[Email Service]
+        SMSService[SMS Service]
+    end
+    
+    %% Data Access Layer
+    subgraph DataLayer["💾 Data Access Layer"]
+        direction LR
+        DBConnect[Database Connection<br/>PDO]
+        QueryBuilder[Query Builder]
+        TransactionMgmt[Transaction Management]
+    end
+    
+    %% Database Layer
+    subgraph DatabaseLayer["🗄️ Database Layer - MySQL"]
+        direction TB
+        
+        subgraph UserTables["User Tables"]
+            TblUsers[(tbl_users)]
+            TblRoles[(tbl_roles)]
+        end
+        
+        subgraph StudentTables["Student Tables"]
+            TblRegistration[(tbl_gm_std_registration)]
+            TblEnrolled[(tbl_enrolled_students)]
+            TblDocuments[(tbl_documents)]
+        end
+        
+        subgraph FeeTables["Fee Tables"]
+            TblFeeConfig[(tbl_fee_config)]
+            TblFeeAllocation[(tbl_student_fee_allocation)]
+            TblPayments[(tbl_payments)]
+            TblInstallments[(tbl_installments)]
+            TblInstallmentReq[(tbl_installment_requests)]
+        end
+        
+        subgraph AcademicTables["Academic Tables"]
+            TblCourses[(tbl_courses)]
+            TblSchools[(tbl_schools)]
+            TblBoards[(tbl_boards)]
+            TblMediums[(tbl_mediums)]
+            TblGroups[(tbl_groups)]
+        end
+        
+        subgraph CounsellingTables["Counselling Tables"]
+            TblSessions[(tbl_counselling_sessions)]
+            TblAppointments[(tbl_appointments)]
+        end
+        
+        subgraph TestTables["Test Tables"]
+            TblTests[(tbl_tests)]
+            TblAnswerKeys[(tbl_answer_keys)]
+            TblResults[(tbl_test_results)]
+            TblOMR[(tbl_omr_sheets)]
+        end
+        
+        subgraph ScholarshipTables["Scholarship Tables"]
+            TblScholarshipTypes[(tbl_scholarship_types)]
+            TblScholarshipRules[(tbl_scholarship_rules)]
+        end
+    end
+    
+    %% External Services
+    subgraph ExternalServices["🌐 External Services"]
+        PaymentGateway[Payment Gateway<br/>Easebuzz]
+        EmailServer[Email Server<br/>SMTP]
+        SMSGateway[SMS Gateway]
+        FileStorage[File Storage<br/>Local/Cloud]
+    end
+    
+    %% Configuration & Logs
+    subgraph SystemConfig["🔧 Configuration & Logs"]
+        EnvConfig[env.config.php<br/>Environment Variables]
+        GlobalVars[globalvariable.php<br/>System Constants]
+        ErrorLogs[Error Logger]
+        DBLogs[Database Logs]
+        AuditLogs[Audit Logs]
+    end
+    
+    %% Actor to Presentation Layer
+    Student --> WebInterface
+    Counsellor --> WebInterface
+    Principal --> WebInterface
+    Accountant --> WebInterface
+    SuperAdmin --> WebInterface
+    WebAdmin --> WebInterface
+    
+    %% Presentation to Application
+    WebInterface --> StudentPortal
+    WebInterface --> CounsellorPortal
+    WebInterface --> AdminPortal
+    WebInterface --> CMSPortal
+    
+    StudentPortal --> StudentModule
+    StudentPortal --> FeesModule
+    
+    CounsellorPortal --> CounsellingModule
+    CounsellorPortal --> AdmissionModule
+    
+    AdminPortal --> AuthModule
+    AdminPortal --> ReportModule
+    AdminPortal --> ScholarshipModule
+    
+    %% Application to Business Logic
+    AuthModule --> Operations
+    StudentModule --> Operations
+    CounsellingModule --> Operations
+    FeesModule --> Operations
+    AdmissionModule --> EnrollmentFunc
+    ScholarshipModule --> Operations
+    ReportModule --> Operations
+    TestModule --> Operations
+    
+    Operations --> ValidationRules
+    Operations --> EmailService
+    Operations --> SMSService
+    
+    %% Business Logic to Data Layer
+    Operations --> DBConnect
+    DatabaseOps --> DBConnect
+    EnrollmentFunc --> DBConnect
+    
+    DBConnect --> QueryBuilder
+    DBConnect --> TransactionMgmt
+    
+    %% Data Layer to Database
+    QueryBuilder --> UserTables
+    QueryBuilder --> StudentTables
+    QueryBuilder --> FeeTables
+    QueryBuilder --> AcademicTables
+    QueryBuilder --> CounsellingTables
+    QueryBuilder --> TestTables
+    QueryBuilder --> ScholarshipTables
+    
+    %% External Service Integration
+    FeesModule --> PaymentGateway
+    EmailService --> EmailServer
+    SMSService --> SMSGateway
+    StudentModule --> FileStorage
+    
+    %% Configuration Usage
+    AuthModule --> EnvConfig
+    Operations --> GlobalVars
+    Operations --> ErrorLogs
+    DBConnect --> DBLogs
+    PaymentController --> AuditLogs
+    
+    %% Styling
+    classDef actorStyle fill:#E3F2FD,stroke:#1976D2,stroke-width:2px
+    classDef presentationStyle fill:#C8E6C9,stroke:#388E3C,stroke-width:2px
+    classDef applicationStyle fill:#FFF9C4,stroke:#F57C00,stroke-width:2px
+    classDef businessStyle fill:#FFE0B2,stroke:#E65100,stroke-width:2px
+    classDef dataStyle fill:#E1BEE7,stroke:#7B1FA2,stroke-width:2px
+    classDef databaseStyle fill:#B3E5FC,stroke:#0277BD,stroke-width:2px
+    classDef externalStyle fill:#FFCCBC,stroke:#D84315,stroke-width:2px
+    classDef configStyle fill:#CFD8DC,stroke:#455A64,stroke-width:2px
+    
+    class Student,Counsellor,Principal,Accountant,SuperAdmin,WebAdmin actorStyle
+    class WebInterface,StudentPortal,CounsellorPortal,AdminPortal,CMSPortal presentationStyle
+    class Login,Registration,PaymentController,SessionController,AdmissionConfirm applicationStyle
+    class Operations,DatabaseOps,EnrollmentFunc,ValidationRules,EmailService businessStyle
+    class DBConnect,QueryBuilder,TransactionMgmt dataStyle
+    class TblUsers,TblRegistration,TblPayments,TblCourses,TblSessions databaseStyle
+    class PaymentGateway,EmailServer,SMSGateway,FileStorage externalStyle
+    class EnvConfig,GlobalVars,ErrorLogs,DBLogs,AuditLogs configStyle

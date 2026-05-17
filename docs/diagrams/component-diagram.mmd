@@ -1,0 +1,196 @@
+%% Component Diagram - Counselling Management System
+%% Shows system components and their dependencies
+
+graph TB
+    %% Frontend Components
+    subgraph Frontend["Frontend Layer"]
+        direction TB
+        WebUI[Web UI Components<br/>HTML/CSS/JavaScript]
+        StudentUI[Student Portal UI]
+        CounsellorUI[Counsellor Portal UI]
+        AdminUI[Admin Portal UI]
+        
+        WebUI --> StudentUI
+        WebUI --> CounsellorUI
+        WebUI --> AdminUI
+    end
+    
+    %% API Layer
+    subgraph APILayer["API Layer"]
+        direction LR
+        RESTEndpoints[REST API Endpoints<br/>index.php Router]
+        APIAuth[API Authentication]
+        APIValidator[Request Validator]
+        
+        RESTEndpoints --> APIAuth
+        RESTEndpoints --> APIValidator
+    end
+    
+    %% Core Modules
+    subgraph CoreModules["Core Application Modules"]
+        direction TB
+        
+        subgraph AuthComponent["🔐 Authentication Component"]
+            AuthController[Auth Controller]
+            SessionManager[Session Manager]
+            RBACManager[RBAC Manager]
+        end
+        
+        subgraph StudentComponent["👨‍🎓 Student Component"]
+            RegistrationService[Registration Service]
+            ProfileService[Profile Service]
+            DocumentService[Document Service]
+        end
+        
+        subgraph CounsellingComponent["💬 Counselling Component"]
+            SessionService[Session Service]
+            AppointmentService[Appointment Service]
+            AssignmentService[Assignment Service]
+        end
+        
+        subgraph FeeComponent["💰 Fee Component"]
+            FeeCalculator[Fee Calculator]
+            PaymentProcessor[Payment Processor]
+            InstallmentManager[Installment Manager]
+            ReceiptGenerator[Receipt Generator]
+        end
+        
+        subgraph AdmissionComponent["🎓 Admission Component"]
+            AdmissionService[Admission Service]
+            EnrollmentService[Enrollment Service]
+            ScholarshipEngine[Scholarship Engine]
+        end
+        
+        subgraph ReportComponent["📊 Report Component"]
+            ReportGenerator[Report Generator]
+            DashboardService[Dashboard Service]
+            AnalyticsEngine[Analytics Engine]
+        end
+        
+        subgraph NotificationComponent["📧 Notification Component"]
+            EmailService[Email Service]
+            SMSService[SMS Service]
+            NotificationQueue[Notification Queue]
+        end
+    end
+    
+    %% Data Access Layer
+    subgraph DataAccess["Data Access Layer"]
+        direction LR
+        DBManager[Database Manager<br/>PDO Connection]
+        OperationsClass[Operations Class]
+        DatabaseOpsClass[DatabaseOperations Class]
+        QueryBuilder[Query Builder]
+        
+        OperationsClass --> DBManager
+        DatabaseOpsClass --> DBManager
+        QueryBuilder --> DBManager
+    end
+    
+    %% External Service Adapters
+    subgraph ExternalAdapters["External Service Adapters"]
+        direction LR
+        PaymentAdapter[Payment Gateway Adapter<br/>Easebuzz]
+        EmailAdapter[Email Service Adapter<br/>SMTP]
+        SMSAdapter[SMS Gateway Adapter]
+        StorageAdapter[Storage Adapter<br/>File System]
+    end
+    
+    %% Database
+    Database[(MySQL Database<br/>counselling_db)]
+    
+    %% Configuration
+    Config[Configuration Manager<br/>env.config.php<br/>globalvariable.php]
+    
+    %% Logging
+    Logger[Logging System<br/>error_logger.php]
+    
+    %% Component Dependencies
+    
+    %% Frontend to API
+    StudentUI -.->|HTTP Requests| RESTEndpoints
+    CounsellorUI -.->|HTTP Requests| RESTEndpoints
+    AdminUI -.->|HTTP Requests| RESTEndpoints
+    
+    %% API to Core Modules
+    RESTEndpoints --> AuthComponent
+    RESTEndpoints --> StudentComponent
+    RESTEndpoints --> CounsellingComponent
+    RESTEndpoints --> FeeComponent
+    RESTEndpoints --> AdmissionComponent
+    RESTEndpoints --> ReportComponent
+    
+    %% Core Module Dependencies
+    AuthController --> SessionManager
+    AuthController --> RBACManager
+    
+    RegistrationService --> DocumentService
+    RegistrationService --> NotificationComponent
+    
+    SessionService --> NotificationComponent
+    AppointmentService --> NotificationComponent
+    
+    FeeCalculator --> ScholarshipEngine
+    PaymentProcessor --> ReceiptGenerator
+    PaymentProcessor --> PaymentAdapter
+    PaymentProcessor --> NotificationComponent
+    InstallmentManager --> NotificationComponent
+    
+    AdmissionService --> EnrollmentService
+    AdmissionService --> FeeCalculator
+    AdmissionService --> ScholarshipEngine
+    AdmissionService --> NotificationComponent
+    
+    ReportGenerator --> DashboardService
+    ReportGenerator --> AnalyticsEngine
+    
+    EmailService --> EmailAdapter
+    SMSService --> SMSAdapter
+    
+    %% Core Modules to Data Access
+    AuthController --> OperationsClass
+    RegistrationService --> OperationsClass
+    ProfileService --> DatabaseOpsClass
+    SessionService --> OperationsClass
+    FeeCalculator --> OperationsClass
+    PaymentProcessor --> DatabaseOpsClass
+    InstallmentManager --> OperationsClass
+    AdmissionService --> OperationsClass
+    EnrollmentService --> DatabaseOpsClass
+    ReportGenerator --> QueryBuilder
+    
+    %% Data Access to Database
+    DBManager --> Database
+    
+    %% Storage
+    DocumentService --> StorageAdapter
+    
+    %% Configuration Usage
+    Config --> AuthComponent
+    Config --> FeeComponent
+    Config --> NotificationComponent
+    Config --> ExternalAdapters
+    Config --> DataAccess
+    
+    %% Logging
+    Logger --> AuthComponent
+    Logger --> StudentComponent
+    Logger --> FeeComponent
+    Logger --> PaymentProcessor
+    Logger --> DataAccess
+    
+    %% Styling
+    classDef frontendStyle fill:#E3F2FD,stroke:#1976D2,stroke-width:2px
+    classDef apiStyle fill:#C8E6C9,stroke:#388E3C,stroke-width:2px
+    classDef moduleStyle fill:#FFF9C4,stroke:#F57C00,stroke-width:2px
+    classDef dataStyle fill:#E1BEE7,stroke:#7B1FA2,stroke-width:2px
+    classDef externalStyle fill:#FFCCBC,stroke:#D84315,stroke-width:2px
+    classDef utilStyle fill:#CFD8DC,stroke:#455A64,stroke-width:2px
+    
+    class WebUI,StudentUI,CounsellorUI,AdminUI frontendStyle
+    class RESTEndpoints,APIAuth,APIValidator apiStyle
+    class AuthController,RegistrationService,SessionService,FeeCalculator moduleStyle
+    class PaymentProcessor,AdmissionService,ReportGenerator moduleStyle
+    class DBManager,OperationsClass,DatabaseOpsClass,QueryBuilder,Database dataStyle
+    class PaymentAdapter,EmailAdapter,SMSAdapter,StorageAdapter externalStyle
+    class Config,Logger utilStyle

@@ -1,0 +1,130 @@
+%% Data Flow Diagram - Level 2
+%% Process 7.0: Report Generation (Detailed)
+
+graph TB
+    %% External Entities
+    Counsellor([Counsellor])
+    Principal([Principal])
+    Accountant([Accountant])
+    SuperAdmin([Super Admin])
+    
+    %% Sub-Processes
+    P71[("7.1<br/>Generate<br/>Daily<br/>Reports")]
+    P72[("7.2<br/>Generate<br/>Weekly<br/>Reports")]
+    P73[("7.3<br/>Generate<br/>Monthly<br/>Reports")]
+    P74[("7.4<br/>Generate<br/>Custom<br/>Reports")]
+    P75[("7.5<br/>Generate<br/>Financial<br/>Reports")]
+    P76[("7.6<br/>Generate<br/>Analytics<br/>Dashboard")]
+    P77[("7.7<br/>Export<br/>Reports")]
+    P78[("7.8<br/>Schedule<br/>Auto<br/>Reports")]
+    
+    %% Data Stores
+    D1[(D1: Students)]
+    D2[(D2: Enrollments)]
+    D3[(D3: Payments)]
+    D4[(D4: Sessions)]
+    D5[(D5: Appointments)]
+    D6[(D6: Installments)]
+    D7[(D7: Test Results)]
+    D8[(D8: Users)]
+    
+    %% Process 7.1 - Daily Reports
+    P71 <-->|Registration Data| D1
+    P71 <-->|Payment Data| D3
+    P71 <-->|Session Data| D4
+    P71 <-->|Appointment Data| D5
+    P71 -->|Daily Reports:<br/>- New Registrations<br/>- Payments Collected<br/>- Sessions Conducted<br/>- Appointments Booked<br/>- Token Fee Collection| P71
+    P71 -->|Daily Summary Email| Principal
+    P71 -->|Payment Summary| Accountant
+    P71 -->|Session Summary| Counsellor
+    
+    %% Process 7.2 - Weekly Reports
+    P72 <-->|Student Data| D1
+    P72 <-->|Enrollment Data| D2
+    P72 <-->|Payment Data| D3
+    P72 <-->|Session Data| D4
+    P72 <-->|Installment Data| D6
+    P72 -->|Weekly Reports:<br/>- Total Registrations<br/>- Enrollment Status<br/>- Collection Summary<br/>- Overdue Payments<br/>- Session Statistics<br/>- Counsellor Performance| P72
+    P72 -->|Weekly Summary| Principal
+    P72 -->|Collection Report| Accountant
+    P72 -->|Performance Report| Counsellor
+    
+    %% Process 7.3 - Monthly Reports
+    P73 <-->|All Data Sources| D1
+    P73 <-->|Enrollment Trends| D2
+    P73 <-->|Financial Data| D3
+    P73 <-->|Session Analytics| D4
+    P73 <-->|Test Results| D7
+    P73 -->|Monthly Reports:<br/>- Registration Trends<br/>- Enrollment Analysis<br/>- Revenue Analysis<br/>- Fee Collection Rate<br/>- Counselling Effectiveness<br/>- Student Performance<br/>- Pending Admissions<br/>- Outstanding Dues| P73
+    P73 -->|Management Report| Principal
+    P73 -->|Financial Report| Accountant
+    P73 -->|Comprehensive Report| SuperAdmin
+    
+    %% Process 7.4 - Custom Reports
+    Principal -->|Custom Report Request<br/>Filters, Date Range<br/>Data Points| P74
+    Accountant -->|Custom Financial Query| P74
+    SuperAdmin -->|System Analytics Request| P74
+    P74 <-->|Query All Stores| D1
+    P74 <-->|Students| D1
+    P74 <-->|Enrollments| D2
+    P74 <-->|Payments| D3
+    P74 <-->|Sessions| D4
+    P74 <-->|Appointments| D5
+    P74 <-->|Tests| D7
+    P74 -->|Apply Filters:<br/>- Date Range<br/>- Course/School<br/>- Status<br/>- Payment Mode<br/>- Counsellor<br/>- Custom Criteria| P74
+    P74 -->|Custom Report<br/>As per Request| Principal
+    P74 -->|Custom Report| Accountant
+    P74 -->|Custom Report| SuperAdmin
+    
+    %% Process 7.5 - Financial Reports
+    Accountant -->|Financial Report Request| P75
+    Principal -->|Financial Overview Request| P75
+    P75 <-->|Payment Records| D3
+    P75 <-->|Installment Data| D6
+    P75 <-->|Student Fee Info| D1
+    P75 <-->|Enrollment Data| D2
+    P75 -->|Financial Reports:<br/>- Collection Summary<br/>- Payment Mode Wise<br/>- Fee Component Wise<br/>- Outstanding Dues<br/>- Overdue Analysis<br/>- Refund Report<br/>- Scholarship Impact<br/>- Installment Status| P75
+    P75 -->|Detailed Financial Report| Accountant
+    P75 -->|Executive Summary| Principal
+    
+    %% Process 7.6 - Analytics Dashboard
+    P76 <-->|Real-time Data| D1
+    P76 <-->|Enrollment Stats| D2
+    P76 <-->|Payment Trends| D3
+    P76 <-->|Session Metrics| D4
+    P76 <-->|User Activity| D8
+    P76 -->|Dashboard Widgets:<br/>- Total Students<br/>- Enrolled vs Registered<br/>- Collection Today/Month<br/>- Pending Dues<br/>- Active Sessions<br/>- Counsellor Load<br/>- Recent Activities<br/>- Key Metrics| P76
+    P76 -->|Live Dashboard| Principal
+    P76 -->|Financial Dashboard| Accountant
+    P76 -->|System Dashboard| SuperAdmin
+    P76 -->|Session Dashboard| Counsellor
+    
+    %% Process 7.7 - Export Reports
+    P77 <-->|Report Data| P71
+    P77 <-->|Report Data| P72
+    P77 <-->|Report Data| P73
+    P77 <-->|Report Data| P74
+    P77 <-->|Report Data| P75
+    Principal -->|Export Request<br/>Format: PDF/Excel/CSV| P77
+    Accountant -->|Export Request| P77
+    P77 -->|Generate File<br/>Apply Formatting| P77
+    P77 -->|Download Link<br/>Exported File| Principal
+    P77 -->|Exported File| Accountant
+    
+    %% Process 7.8 - Schedule Auto Reports
+    SuperAdmin -->|Schedule Configuration<br/>Report Type<br/>Frequency<br/>Recipients| P78
+    P78 -->|Schedule Rules:<br/>- Daily at 6 PM<br/>- Weekly on Monday<br/>- Monthly 1st day<br/>- Custom Schedule| P78
+    P78 -->|Trigger at Scheduled Time| P71
+    P78 -->|Trigger| P72
+    P78 -->|Trigger| P73
+    P78 -->|Email Reports<br/>Auto-generated| Principal
+    P78 -->|Email Reports| Accountant
+    
+    %% Styling
+    classDef entityStyle fill:#E3F2FD,stroke:#1976D2,stroke-width:3px
+    classDef processStyle fill:#C8E6C9,stroke:#388E3C,stroke-width:3px
+    classDef datastoreStyle fill:#FFE0B2,stroke:#E65100,stroke-width:3px
+    
+    class Counsellor,Principal,Accountant,SuperAdmin entityStyle
+    class P71,P72,P73,P74,P75,P76,P77,P78 processStyle
+    class D1,D2,D3,D4,D5,D6,D7,D8 datastoreStyle

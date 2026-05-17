@@ -1,0 +1,162 @@
+[2026-04-29 14:38:44] [INFO] Payment processing started for request: {"student_id":"442","amount":"12600","payment_mode":"cash"} | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:38:44] [INFO] Payment validation passed for student 442. Proceeding with payment record creation. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:38:44] [INFO] Database transaction started for student 442 payment processing. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:38:44] [INFO] Payment record created: ID 2460, Receipt: , Component: transport_fee | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:38:44] [INFO] Synchronized tbl_student_fee_allocation for student 442 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:38:44] [INFO] Attempting to enroll student 442 after payment. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:38:44] [INFO] Student 442 enrolled successfully. Enrollment ID: 1988 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:38:44] [INFO] Payment transaction log created for payment ID: 2460 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:38:44] [INFO] Payment transaction committed successfully for student 442. Receipt No:  | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:38:45] [INFO] Updated student requirement flags for student 442: transport_required = 'Yes' | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:39:47] [INFO] Payment processing started for request: {"student_id":"2731","amount":"12600","payment_mode":"cash"} | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:39:47] [INFO] Payment validation passed for student 2731. Proceeding with payment record creation. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:39:47] [INFO] Database transaction started for student 2731 payment processing. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:39:47] [INFO] Payment record created: ID 2461, Receipt: , Component: transport_fee | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:39:47] [INFO] Synchronized tbl_student_fee_allocation for student 2731 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:39:48] [INFO] Attempting to enroll student 2731 after payment. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:39:48] [INFO] Student 2731 enrolled successfully. Enrollment ID: 1989 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:39:48] [INFO] Payment transaction log created for payment ID: 2461 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:39:48] [INFO] Payment transaction committed successfully for student 2731. Receipt No:  | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:39:49] [INFO] Updated student requirement flags for student 2731: transport_required = 'Yes' | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:40:32] [INFO] Payment processing started for request: {"student_id":"826","amount":"12600","payment_mode":"cash"} | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:40:32] [INFO] Payment validation passed for student 826. Proceeding with payment record creation. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:40:32] [INFO] Database transaction started for student 826 payment processing. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:40:32] [INFO] Payment record created: ID 2462, Receipt: , Component: transport_fee | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:40:32] [INFO] Synchronized tbl_student_fee_allocation for student 826 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:40:32] [INFO] Attempting to enroll student 826 after payment. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:40:32] [INFO] Student 826 enrolled successfully. Enrollment ID: 1990 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:40:32] [INFO] Payment transaction log created for payment ID: 2462 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:40:32] [INFO] Payment transaction committed successfully for student 826. Receipt No:  | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:40:33] [INFO] Updated student requirement flags for student 826: transport_required = 'Yes' | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:42:12] [INFO] Payment processing started for request: {"student_id":"579","amount":"12600","payment_mode":"cheque"} | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:42:12] [INFO] Payment validation passed for student 579. Proceeding with payment record creation. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:42:12] [INFO] Database transaction started for student 579 payment processing. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:42:12] [INFO] Payment record created: ID 2463, Receipt: , Component: transport_fee | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:42:12] [INFO] Synchronized tbl_student_fee_allocation for student 579 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:42:12] [INFO] Attempting to enroll student 579 after payment. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:42:12] [INFO] Student 579 enrolled successfully. Enrollment ID: 1991 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:42:12] [INFO] Payment transaction log created for payment ID: 2463 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:42:12] [INFO] Payment transaction committed successfully for student 579. Receipt No:  | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:42:13] [INFO] Updated student requirement flags for student 579: transport_required = 'Yes' | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:43:36] [INFO] Payment processing started for request: {"student_id":"416","amount":"12600","payment_mode":"cheque"} | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:43:36] [INFO] Payment validation passed for student 416. Proceeding with payment record creation. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:43:36] [INFO] Database transaction started for student 416 payment processing. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:43:36] [INFO] Payment record created: ID 2464, Receipt: , Component: transport_fee | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:43:36] [INFO] Synchronized tbl_student_fee_allocation for student 416 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:43:37] [INFO] Attempting to enroll student 416 after payment. | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:43:37] [INFO] Student 416 enrolled successfully. Enrollment ID: 1992 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:43:37] [INFO] Payment transaction log created for payment ID: 2464 | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:43:37] [INFO] Payment transaction committed successfully for student 416. Receipt No:  | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 14:43:37] [INFO] Updated student requirement flags for student 416: transport_required = 'Yes' | User ID: 31 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Payment processing started for request: {"student_id":"2058","amount":"95440","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Payment validation passed for student 2058. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Database transaction started for student 2058 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Generating receipt number - Student: 2058, Fee Component: school_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Payment record created: ID 2465, Receipt: 84, Component: school_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Synchronized tbl_student_fee_allocation for student 2058 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Generating receipt number - Student: 2058, Fee Component: trust_facilities_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Payment record created: ID 2466, Receipt: 103, Component: trust_facilities_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Synchronized tbl_student_fee_allocation for student 2058 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Generating receipt number - Student: 2058, Fee Component: tuition_fee_part2 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Payment record created: ID 2467, Receipt: 103, Component: tuition_fee_part2 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Synchronized tbl_student_fee_allocation for student 2058 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Payment transaction log created for payment ID: 2465 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 15:44:12] [INFO] Payment transaction committed successfully for student 2058. Receipt No: 84, 103, 103 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:28:42] [INFO] Payment processing started for request: {"student_id":"1053","amount":"1800","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:28:42] [INFO] Payment validation passed for student 1053. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:28:42] [INFO] Database transaction started for student 1053 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:28:42] [INFO] Payment record created: ID 2468, Receipt: , Component: transport_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:28:42] [INFO] Synchronized tbl_student_fee_allocation for student 1053 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:28:42] [INFO] Attempting to enroll student 1053 after payment. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:28:42] [INFO] Student 1053 enrolled successfully. Enrollment ID: 1993 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:28:42] [INFO] Payment transaction log created for payment ID: 2468 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:28:42] [INFO] Payment transaction committed successfully for student 1053. Receipt No:  | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:28:43] [INFO] Updated student requirement flags for student 1053: transport_required = 'Yes' | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:30:04] [INFO] Payment processing started for request: {"student_id":"245","amount":"1800","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:30:04] [INFO] Payment validation passed for student 245. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:30:04] [INFO] Database transaction started for student 245 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:30:04] [INFO] Payment record created: ID 2469, Receipt: , Component: transport_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:30:04] [INFO] Synchronized tbl_student_fee_allocation for student 245 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:30:04] [INFO] Attempting to enroll student 245 after payment. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:30:04] [INFO] Student 245 enrolled successfully. Enrollment ID: 1994 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:30:04] [INFO] Payment transaction log created for payment ID: 2469 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:30:04] [INFO] Payment transaction committed successfully for student 245. Receipt No:  | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:30:04] [INFO] Updated student requirement flags for student 245: transport_required = 'Yes' | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:31:20] [INFO] Payment processing started for request: {"student_id":"3279","amount":"1800","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:31:20] [INFO] Payment validation passed for student 3279. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:31:20] [INFO] Database transaction started for student 3279 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:31:20] [INFO] Payment record created: ID 2470, Receipt: , Component: transport_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:31:21] [INFO] Synchronized tbl_student_fee_allocation for student 3279 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:31:21] [INFO] Attempting to enroll student 3279 after payment. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:31:21] [INFO] Student 3279 enrolled successfully. Enrollment ID: 1995 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:31:21] [INFO] Payment transaction log created for payment ID: 2470 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:31:21] [INFO] Payment transaction committed successfully for student 3279. Receipt No:  | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:31:21] [INFO] Updated student requirement flags for student 3279: transport_required = 'Yes' | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:33:01] [INFO] Payment processing started for request: {"student_id":"2769","amount":"1800","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:33:01] [INFO] Payment validation passed for student 2769. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:33:01] [INFO] Database transaction started for student 2769 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:33:01] [INFO] Payment record created: ID 2471, Receipt: , Component: transport_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:33:01] [INFO] Synchronized tbl_student_fee_allocation for student 2769 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:33:02] [INFO] Attempting to enroll student 2769 after payment. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:33:02] [INFO] Student 2769 enrolled successfully. Enrollment ID: 1996 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:33:02] [INFO] Payment transaction log created for payment ID: 2471 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:33:02] [INFO] Payment transaction committed successfully for student 2769. Receipt No:  | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:33:02] [INFO] Updated student requirement flags for student 2769: transport_required = 'Yes' | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:34:54] [INFO] Payment processing started for request: {"student_id":"1075","amount":"1800","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:34:54] [INFO] Payment validation passed for student 1075. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:34:54] [INFO] Database transaction started for student 1075 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:34:54] [INFO] Payment record created: ID 2472, Receipt: , Component: transport_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:34:54] [INFO] Synchronized tbl_student_fee_allocation for student 1075 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:34:54] [INFO] Attempting to enroll student 1075 after payment. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:34:54] [INFO] Student 1075 enrolled successfully. Enrollment ID: 1997 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:34:54] [INFO] Payment transaction log created for payment ID: 2472 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:34:54] [INFO] Payment transaction committed successfully for student 1075. Receipt No:  | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:34:54] [INFO] Updated student requirement flags for student 1075: transport_required = 'Yes' | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:42:52] [INFO] Payment processing started for request: {"student_id":"241","amount":"1800","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:42:52] [INFO] Payment validation passed for student 241. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:42:52] [INFO] Database transaction started for student 241 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:42:52] [INFO] Payment record created: ID 2473, Receipt: , Component: transport_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:42:52] [INFO] Synchronized tbl_student_fee_allocation for student 241 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:42:52] [INFO] Payment transaction log created for payment ID: 2473 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:42:52] [INFO] Payment transaction committed successfully for student 241. Receipt No:  | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:42:52] [INFO] Updated student requirement flags for student 241: transport_required = 'Yes' | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:44:58] [INFO] Payment processing started for request: {"student_id":"944","amount":"1800","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:44:58] [INFO] Payment validation passed for student 944. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:44:58] [INFO] Database transaction started for student 944 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:44:58] [INFO] Payment record created: ID 2474, Receipt: , Component: transport_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:44:58] [INFO] Synchronized tbl_student_fee_allocation for student 944 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:44:58] [INFO] Attempting to enroll student 944 after payment. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:44:58] [INFO] Student 944 enrolled successfully. Enrollment ID: 1998 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:44:58] [INFO] Payment transaction log created for payment ID: 2474 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:44:58] [INFO] Payment transaction committed successfully for student 944. Receipt No:  | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:00] [INFO] Updated student requirement flags for student 944: transport_required = 'Yes' | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:34] [INFO] Payment processing started for request: {"student_id":"509","amount":"1800","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:34] [INFO] Payment validation passed for student 509. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:34] [INFO] Database transaction started for student 509 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:34] [INFO] Payment record created: ID 2475, Receipt: , Component: transport_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:34] [INFO] Synchronized tbl_student_fee_allocation for student 509 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:34] [INFO] Attempting to enroll student 509 after payment. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:34] [INFO] Student 509 enrolled successfully. Enrollment ID: 1999 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:34] [INFO] Payment transaction log created for payment ID: 2475 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:34] [INFO] Payment transaction committed successfully for student 509. Receipt No:  | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:45:34] [INFO] Updated student requirement flags for student 509: transport_required = 'Yes' | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:46:10] [INFO] Payment processing started for request: {"student_id":"2806","amount":"1800","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:46:10] [INFO] Payment validation passed for student 2806. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:46:10] [INFO] Database transaction started for student 2806 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:46:10] [INFO] Payment record created: ID 2476, Receipt: , Component: transport_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:46:10] [INFO] Synchronized tbl_student_fee_allocation for student 2806 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:46:10] [INFO] Attempting to enroll student 2806 after payment. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:46:10] [INFO] Student 2806 enrolled successfully. Enrollment ID: 2000 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:46:10] [INFO] Payment transaction log created for payment ID: 2476 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:46:10] [INFO] Payment transaction committed successfully for student 2806. Receipt No:  | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:46:10] [INFO] Updated student requirement flags for student 2806: transport_required = 'Yes' | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:48:49] [INFO] Payment processing started for request: {"student_id":"591","amount":"1800","payment_mode":"cash"} | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:48:49] [INFO] Payment validation passed for student 591. Proceeding with payment record creation. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:48:49] [INFO] Database transaction started for student 591 payment processing. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:48:49] [INFO] Payment record created: ID 2477, Receipt: , Component: transport_fee | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:48:49] [INFO] Synchronized tbl_student_fee_allocation for student 591 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:48:49] [INFO] Attempting to enroll student 591 after payment. | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:48:49] [INFO] Student 591 enrolled successfully. Enrollment ID: 2001 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:48:49] [INFO] Payment transaction log created for payment ID: 2477 | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:48:49] [INFO] Payment transaction committed successfully for student 591. Receipt No:  | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save
+[2026-04-29 17:48:49] [INFO] Updated student requirement flags for student 591: transport_required = 'Yes' | User ID: 69 | URI: /counselling-backend/index.php?route=payments/payment-save

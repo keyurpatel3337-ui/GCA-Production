@@ -1,0 +1,423 @@
+[2026-05-01 11:03:44] [FAILED] Email to: test@example.com | Subject: Token Fee Payment Successful - Receipt #{{receipt_no}} | Template: email_token_fee_success
+    [2026-05-01 11:13:24] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 467484.
+[2026-05-01 11:30:30] [SENT] Email to: joshikanaiyalal8837@gmail.com | Subject: Token Fee Payment Successful - Receipt #{{receipt_no}} | Template: email_token_fee_success
+[2026-05-01 11:40:39] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Welcome to Gyan Manjari - Registration Successful | Template: email_registration_success
+[2026-05-01 11:40:39] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Congratulations! Admission Confirmed - {{admission_no}} | Template: email_admission_confirmed
+[2026-05-01 11:40:39] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Your Student Portal Login Credentials | Template: email_login_credentials
+[2026-05-01 11:40:40] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Token Fee Payment Successful - Receipt #RCPT_9999 | Template: email_token_fee_success
+[2026-05-01 11:40:40] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [New Registration] John Doe - Bachelor of Technology | Template: email_new_registration_counsellor
+[2026-05-01 11:40:41] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Payment Received] Token Fee - John Doe | Template: email_token_payment_accountant
+[2026-05-01 11:40:41] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [New Registration] John Doe - Bachelor of Technology | Template: email_new_registration
+[2026-05-01 11:40:41] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Admission Confirmed] John Doe - {{admission_no}} | Template: email_admission_confirmed_counsellor
+[2026-05-01 11:40:42] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Daily Report] Registration Summary - {{date}} | Template: email_daily_registration_summary
+[2026-05-01 11:40:42] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Action Required] Document Verification - John Doe | Template: email_document_verification
+[2026-05-01 11:40:42] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Payment] ₹15,000 received - John Doe | Template: email_payment_received
+[2026-05-01 11:40:43] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Daily Report] Fee Collection - {{date}} - ₹{{total}} | Template: email_daily_collection
+[2026-05-01 11:40:43] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Alert] Payment Failed - John Doe - ₹15,000 | Template: email_payment_failed
+[2026-05-01 11:40:43] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Refund] ₹15,000 processed - John Doe | Template: email_refund_processed
+[2026-05-01 11:40:44] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Alert] Overdue Fees Summary - {{count}} students - ₹{{total}} | Template: email_overdue_summary
+[2026-05-01 11:40:44] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Appointment] New request from John Doe | Template: email_appointment_request
+[2026-05-01 11:40:44] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Today's Schedule] {{count}} appointments - {{date}} | Template: email_daily_appointments
+[2026-05-01 11:40:45] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Missed] Appointment - John Doe | Template: email_missed_appointment
+[2026-05-01 11:40:45] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Action Required] New Group Change Request - {{request_number}} | Template: gcr_email_new_request_principal
+[2026-05-01 11:40:46] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Approved] Group Change Request - {{request_number}} | Template: gcr_email_approved_staff
+[2026-05-01 11:40:46] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Rejected] Group Change Request - {{request_number}} | Template: gcr_email_rejected_counsellor
+[2026-05-01 11:40:46] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Fee Update] Group Change Fee Adjustment - John Doe | Template: gcr_email_fee_adjusted
+[2026-05-01 11:40:47] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Info] Student Group Change Request - John Doe | Template: gcr_email_new_request_counsellor
+[2026-05-01 11:40:47] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Welcome to Gyan Manjari - Your Login Details | Template: email_student_welcome
+[2026-05-01 11:40:47] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Refund Request Submitted - Request #{{request_number}} | Template: email_refund_request_submitted
+[2026-05-01 11:40:48] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Refund Approved - Request #{{request_number}} | Template: email_refund_approved
+[2026-05-01 11:40:48] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Refund Request Rejected - Request #{{request_number}} | Template: email_refund_rejected
+[2026-05-01 11:40:49] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Group Change Request Submitted - Request #{{request_id}} | Template: email_group_change_submitted
+[2026-05-01 11:40:49] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Group Change Approved - Request #{{request_id}} | Template: email_group_change_approved
+[2026-05-01 11:40:49] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Group Change Request Rejected - Request #{{request_id}} | Template: email_group_change_rejected
+[2026-05-01 11:40:50] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Fee Payment Reminder - Installment Due on {{due_date}} | Template: email_fee_reminder
+[2026-05-01 11:40:50] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Appointment Reminder - Tomorrow at {{appointment_time}} | Template: email_appointment_reminder
+[2026-05-01 11:40:50] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Admission Reminder | Template: email_admission_reminder
+[2026-05-01 11:40:51] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Daily Summary | Template: email_daily_summary
+[2026-05-01 11:40:51] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Database Backup Alert | Template: email_database_backup_alert
+[2026-05-01 11:40:51] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Fee Overdue Notice | Template: email_fee_overdue_notice
+[2026-05-01 11:40:52] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Fee Receipt | Template: email_fee_receipt
+[2026-05-01 11:40:52] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Login Failed Alert | Template: email_login_failed_alert
+[2026-05-01 11:40:53] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Monthly Report | Template: email_monthly_report
+[2026-05-01 11:40:53] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Password Reset | Template: email_password_reset
+[2026-05-01 11:40:53] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Quarterly Report | Template: email_quarterly_report
+[2026-05-01 11:40:54] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Server Maintenance Alert | Template: email_server_maintenance_alert
+[2026-05-01 11:40:54] [SENT] Email to: keyurpatel3337@gmail.com | Subject: System Error | Template: email_system_error
+[2026-05-01 11:40:54] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Weekly Report | Template: email_weekly_report
+[2026-05-01 11:40:55] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Your Login Credentials - GCA | Template: STUDENT_CREDENTIALS
+[2026-05-01 11:42:44] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Welcome to Gyan Manjari - Registration Successful | Template: email_registration_success
+[2026-05-01 11:42:44] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Congratulations! Admission Confirmed - {{admission_no}} | Template: email_admission_confirmed
+[2026-05-01 11:42:44] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Your Student Portal Login Credentials | Template: email_login_credentials
+[2026-05-01 11:42:45] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Token Fee Payment Successful - Receipt #RCPT_9999 | Template: email_token_fee_success
+[2026-05-01 11:42:45] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [New Registration] John Doe - Bachelor of Technology | Template: email_new_registration_counsellor
+[2026-05-01 11:42:45] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Payment Received] Token Fee - John Doe | Template: email_token_payment_accountant
+[2026-05-01 11:42:46] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [New Registration] John Doe - Bachelor of Technology | Template: email_new_registration
+[2026-05-01 11:42:46] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Admission Confirmed] John Doe - {{admission_no}} | Template: email_admission_confirmed_counsellor
+[2026-05-01 11:42:47] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Daily Report] Registration Summary - {{date}} | Template: email_daily_registration_summary
+[2026-05-01 11:42:47] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Action Required] Document Verification - John Doe | Template: email_document_verification
+[2026-05-01 11:42:47] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Payment] ₹15,000 received - John Doe | Template: email_payment_received
+[2026-05-01 11:42:48] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Daily Report] Fee Collection - {{date}} - ₹{{total}} | Template: email_daily_collection
+[2026-05-01 11:42:48] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Alert] Payment Failed - John Doe - ₹15,000 | Template: email_payment_failed
+[2026-05-01 11:42:48] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Refund] ₹15,000 processed - John Doe | Template: email_refund_processed
+[2026-05-01 11:42:49] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Alert] Overdue Fees Summary - {{count}} students - ₹{{total}} | Template: email_overdue_summary
+[2026-05-01 11:42:49] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Appointment] New request from John Doe | Template: email_appointment_request
+[2026-05-01 11:42:49] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Today's Schedule] {{count}} appointments - {{date}} | Template: email_daily_appointments
+[2026-05-01 11:42:50] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Missed] Appointment - John Doe | Template: email_missed_appointment
+[2026-05-01 11:42:50] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Action Required] New Group Change Request - {{request_number}} | Template: gcr_email_new_request_principal
+[2026-05-01 11:42:50] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Approved] Group Change Request - {{request_number}} | Template: gcr_email_approved_staff
+[2026-05-01 11:42:51] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Rejected] Group Change Request - {{request_number}} | Template: gcr_email_rejected_counsellor
+[2026-05-01 11:42:51] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Fee Update] Group Change Fee Adjustment - John Doe | Template: gcr_email_fee_adjusted
+[2026-05-01 11:42:52] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Info] Student Group Change Request - John Doe | Template: gcr_email_new_request_counsellor
+[2026-05-01 11:42:52] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Welcome to Gyan Manjari - Your Login Details | Template: email_student_welcome
+[2026-05-01 11:42:52] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Refund Request Submitted - Request #{{request_number}} | Template: email_refund_request_submitted
+[2026-05-01 11:42:53] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Refund Approved - Request #{{request_number}} | Template: email_refund_approved
+[2026-05-01 11:42:53] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Refund Request Rejected - Request #{{request_number}} | Template: email_refund_rejected
+[2026-05-01 11:42:53] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Group Change Request Submitted - Request #{{request_id}} | Template: email_group_change_submitted
+[2026-05-01 11:42:54] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Group Change Approved - Request #{{request_id}} | Template: email_group_change_approved
+[2026-05-01 11:42:54] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Group Change Request Rejected - Request #{{request_id}} | Template: email_group_change_rejected
+[2026-05-01 11:42:54] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Fee Payment Reminder - Installment Due on {{due_date}} | Template: email_fee_reminder
+[2026-05-01 11:42:55] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Appointment Reminder - Tomorrow at {{appointment_time}} | Template: email_appointment_reminder
+[2026-05-01 11:42:55] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Admission Reminder | Template: email_admission_reminder
+[2026-05-01 11:42:56] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Daily Summary | Template: email_daily_summary
+[2026-05-01 11:42:56] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Database Backup Alert | Template: email_database_backup_alert
+[2026-05-01 11:42:56] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Fee Overdue Notice | Template: email_fee_overdue_notice
+[2026-05-01 11:42:57] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Fee Receipt | Template: email_fee_receipt
+[2026-05-01 11:42:57] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Login Failed Alert | Template: email_login_failed_alert
+[2026-05-01 11:42:57] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Monthly Report | Template: email_monthly_report
+[2026-05-01 11:42:58] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Password Reset | Template: email_password_reset
+[2026-05-01 11:42:58] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Quarterly Report | Template: email_quarterly_report
+[2026-05-01 11:42:59] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Server Maintenance Alert | Template: email_server_maintenance_alert
+[2026-05-01 11:42:59] [SENT] Email to: keyurpatel3337@gmail.com | Subject: System Error | Template: email_system_error
+[2026-05-01 11:42:59] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Weekly Report | Template: email_weekly_report
+[2026-05-01 11:43:00] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Your Login Credentials - GCA | Template: STUDENT_CREDENTIALS
+[2026-05-01 11:47:12] [SENT] Email to: padwaldeven1947@gmail.com | Subject: Token Fee Payment Successful - Receipt #{{receipt_no}} | Template: email_token_fee_success
+[2026-05-01 12:22:01] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 878288.
+[2026-05-01 16:25:46] [SENT] Email to: kanzariyarasikbhai@gmail.com | Subject: Token Fee Payment Successful - Receipt #{{receipt_no}} | Template: email_token_fee_success
+[2026-05-02 08:26:08] [SENT] Email to: kahaanganava004@gmail.com | Subject: Token Fee Payment Successful - Receipt #{{receipt_no}} | Template: email_token_fee_success
+[2026-05-02 08:32:44] [SENT] Email to: brshingad@gmail.com | Subject: Token Fee Payment Successful - Receipt #{{receipt_no}} | Template: email_token_fee_success
+[2026-05-02 08:40:23] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 067695.
+[2026-05-02 08:51:05] ERROR: Failed to send email to gyanmanjariesta@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 655606. Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server
+[2026-05-02 08:51:34] ERROR: Failed to send email to gyanmanjariesta@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 174498. Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server
+[2026-05-02 08:53:28] ERROR: Failed to send email to gyanmanjariesta@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 245801. Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server
+[2026-05-02 09:55:16] [SENT] Email to: dipakgauswami30@gmail.com | Subject: Token Fee Payment Successful - Receipt #{{receipt_no}} | Template: email_token_fee_success
+[2026-05-02 09:56:41] INFO: Email sent successfully to bgohel360@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 912327.
+[2026-05-02 10:09:38] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 979092.
+[2026-05-02 10:20:02] INFO: Email sent successfully to gyanmanjariesta@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 228511.
+[2026-05-02 10:29:12] [SENT] Email to: dharmeshmakwana7@gmail.com | Subject: Token Fee Payment Successful - Receipt #{{receipt_no}} | Template: email_token_fee_success
+[2026-05-02 11:35:56] [SENT] Email to: vishwapatel125@gmail.com | Subject: [Payment] ₹95,440 received - PATEL NEEL CHANDRAHARSH | Template: email_payment_received
+[2026-05-02 12:00:37] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Payment] ₹68,440.00 received - NEEL (Test) | Template: email_payment_received
+[2026-05-02 12:23:55] [SENT] Email to: shaileshleuva123@gmail.com | Subject: [Payment] ₹1,05,440 received - LEUVA DEVANSHI SHAILESHKUMAR | Template: email_payment_received
+[2026-05-02 12:51:41] [SENT] Email to: shaileshleuva123@gmail.com | Subject: [Payment] ₹45,000 received - LEUVA DEVANSHI SHAILESHKUMAR | Template: email_payment_received
+[2026-05-02 14:08:08] [SENT] Email to: jorsing.mavi@gmail.com | Subject: [Payment] ₹98,980 received - MAVI MILAN JORSINGBHAI | Template: email_payment_received
+[2026-05-02 15:33:01] INFO: Email sent successfully to gyanmanjariesta@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 129245.
+[2026-05-02 16:40:19] [SENT] Email to: devalchandrasinh@gmail.com | Subject: [Payment] ₹95,440 received - DEVAL SARTHAK CHANDRASINH | Template: email_payment_received
+[2026-05-02 16:41:10] [SENT] Email to: prakashrathod.ap@gmail.com | Subject: [Payment] ₹95,440 received - RATHOD HETKUMAR PRAKASHBHAI | Template: email_payment_received
+[2026-05-02 16:50:40] [SENT] Email to: damorarvind512@gmail.com | Subject: [Payment] ₹95,440 received - DAMOR KRISHKUMAR ARVINDBHAI | Template: email_payment_received
+[2026-05-02 16:52:24] [SENT] Email to: manojkumarpalas@gmail.com | Subject: [Payment] ₹95,440 received - PALAS YASHASVIBEN MANOJKUMAR | Template: email_payment_received
+[2026-05-02 16:57:06] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 255663.
+[2026-05-02 17:21:56] [SENT] Email to: jagmalghusar@gmail.com | Subject: [Payment] ₹95,440 received - GHUSAR MANASKUMAR JAGAMALBHAI | Template: email_payment_received
+[2026-05-02 17:46:36] [SENT] Email to: jayeshbaraiya264@gmail.com | Subject: [Payment] ₹95,440 received - BARAIYA SHUBHAM JAYESHBHAI | Template: email_payment_received
+[2026-05-03 08:28:59] [SENT] Email to: bharat12167@gmail.com | Subject: [Payment] ₹95,440 received - PRAJAPATI JVAL BHARATBHAI | Template: email_payment_received
+[2026-05-03 08:33:13] [SENT] Email to: ajaykoli1984@gmail.com | Subject: [Payment] ₹95,440 received - PARMAR JEETKUMAR AJAYKUMAR | Template: email_payment_received
+[2026-05-03 09:02:28] [SENT] Email to: sunilvalaki23@gmail.com | Subject: [Payment] ₹98,980 received - VALAKI YAGNIK SUNILBHAI | Template: email_payment_received
+[2026-05-03 09:24:26] [FAILED] Email to: janikaran75@gmail.com | Subject: [Payment] ₹35,000 received - JANI KARAN PARAGBHAI | Template: email_payment_received
+[2026-05-03 09:29:34] [SENT] Email to: sanjaypatel64436@gmail.com | Subject: [Payment] ₹77,740 received - PATEL UTPALKUMAR SANJAYKUMAR | Template: email_payment_received
+[2026-05-03 09:32:25] [SENT] Email to: parmarrakeshkumar90@gmail.com | Subject: [Payment] ₹98,980 received - PARMAR PRITAMKUMAR RAKESHKUMAR | Template: email_payment_received
+[2026-05-03 09:41:53] [SENT] Email to: nehal743h@gmail.com | Subject: [Payment] ₹98,980 received - PATEL MEGH JITENDRAKUMAR | Template: email_payment_received
+[2026-05-03 09:57:23] [SENT] Email to: hareshvaliya999@gmail.com | Subject: [Payment] ₹98,980 received - VALIYA MILAN HARESHBHAI | Template: email_payment_received
+[2026-05-03 10:03:56] [SENT] Email to: narendrakumara@gmail.com | Subject: [Payment] ₹95,440 received - GOHEL ARTIBEN NARENDRAKUMAR | Template: email_payment_received
+[2026-05-03 10:14:16] [SENT] Email to: queencyhamid@gmail.com | Subject: [Payment] ₹98,980 received - HAMID QUEENCY KARIMBHAI | Template: email_payment_received
+[2026-05-03 10:18:18] [SENT] Email to: vipulkanjariya8271@gmail.com | Subject: [Payment] ₹95,440 received - KANJARIYA KEVAL VIPULBHAI | Template: email_payment_received
+[2026-05-03 10:22:02] [SENT] Email to: rajeshsolanki1588@gmail.com | Subject: [Payment] ₹95,440 received - SOLANKI JAHANVI RAJESHKUMAR | Template: email_payment_received
+[2026-05-03 10:30:11] [SENT] Email to: hareshmakwana09@gmail.com | Subject: [Payment] ₹98,980 received - MAKWANA JEEL HARESHBHAI | Template: email_payment_received
+[2026-05-03 10:31:12] [SENT] Email to: drajaydholakiya@gmail.com | Subject: [Payment] ₹98,980 received - DHOLAKIA SHUBH AJAYBHAI | Template: email_payment_received
+[2026-05-03 10:34:28] [SENT] Email to: mandippatel50@gmail.com | Subject: [Payment] ₹77,740 received - PATEL DISHWA MANDIPBHAI | Template: email_payment_received
+[2026-05-03 10:36:55] [SENT] Email to: pujannavadiya@gmail.com | Subject: [Payment] ₹95,440 received - NAVADIYA PUJAN MANISHBHAI | Template: email_payment_received
+[2026-05-03 10:38:51] [SENT] Email to: mitanshugohil327@gmail.com | Subject: [Payment] ₹95,440 received - GOHIL MITANSHU PRATIKBHAI | Template: email_payment_received
+[2026-05-03 10:41:58] [SENT] Email to: rathodrameshkumar1985@gmail.com | Subject: [Payment] ₹95,440 received - RATHOD SHARVIL RAMESHBHAI | Template: email_payment_received
+[2026-05-03 10:42:57] [SENT] Email to: jidiyameet9129@gmail.com | Subject: [Payment] ₹95,440 received - JIDIYA MEET RAMESHBHAI | Template: email_payment_received
+[2026-05-03 10:44:12] [SENT] Email to: ashishparmar265@gmail.com | Subject: [Payment] ₹98,980 received - PARMAR DEEP ASHISHKUMAR | Template: email_payment_received
+[2026-05-03 10:47:42] [SENT] Email to: haribhaisolanki007@gmail.com | Subject: [Payment] ₹95,440 received - SOLANKI SHANIBHAI HARIBHAI | Template: email_payment_received
+[2026-05-03 10:47:43] [SENT] Email to: chaitanya_nadiyadra@yahoo.co.in | Subject: [Payment] ₹1,17,040 received - NADIYADRA HETARTH CHAITANYA | Template: email_payment_received
+[2026-05-03 10:50:46] [SENT] Email to: suhiparmar1982@gmail.com | Subject: [Payment] ₹77,740 received - PARMAR YAKSH SURESHBHAI | Template: email_payment_received
+[2026-05-03 10:52:58] [SENT] Email to: mkawanapravin178@gmail.com | Subject: [Payment] ₹95,440 received - MAKAWANA NIRAL PRAVINBHAI | Template: email_payment_received
+[2026-05-03 10:58:28] [SENT] Email to: shreyraj1977@gmail.com | Subject: [Payment] ₹98,980 received - GOHIL SHREYRAJSINH MAHENDRASINH | Template: email_payment_received
+[2026-05-03 11:04:52] [SENT] Email to: darjipranavkumar1979@gmail.com | Subject: [Payment] ₹95,440 received - DARJI DHARMIK PRANAVKUMAR | Template: email_payment_received
+[2026-05-03 11:11:33] [SENT] Email to: malay21viral@gmail.com | Subject: [Payment] ₹10,000 received - PATEL MALAY JAYESHBHAI | Template: email_payment_received
+[2026-05-03 11:16:13] [SENT] Email to: smitamishra75@gmail.com | Subject: [Payment] ₹98,980 received - MISHRA ANANYA NARENDRAKUMAR | Template: email_payment_received
+[2026-05-03 11:20:16] [SENT] Email to: rathodasharath@yahoo.com | Subject: [Payment] ₹98,980 received - RATHOD SHAURYARAJSINH DASHARATHSINH | Template: email_payment_received
+[2026-05-03 11:25:46] [SENT] Email to: jayrajrajput863@gmail.com | Subject: [Payment] ₹42,500 received - CHAUHAN YUVRAJ YOGESHBHAI | Template: email_payment_received
+[2026-05-03 11:32:18] [SENT] Email to: vainshbharat3735@gmail.com | Subject: [Payment] ₹76,500 received - VAINSH VAIBHAVI BHARATKUMAR | Template: email_payment_received
+[2026-05-03 11:49:30] [SENT] Email to: parmarsajjanba@gmail.com | Subject: [Payment] ₹77,740 received - PARMAR PRUTHILSINH VALLABHBHAI | Template: email_payment_received
+[2026-05-03 11:53:53] [SENT] Email to: kataramayankkumar9@gmail.com | Subject: [Payment] ₹10,000 received - KATARA KASHISHKUMARI MAYANKKUMAR | Template: email_payment_received
+[2026-05-03 12:11:31] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 116142.
+[2026-05-03 12:12:16] [SENT] Email to: jitrshchavda91@gmail.com | Subject: [Payment] ₹95,440 received - CHAVDA VRAJ JITESHBHAI | Template: email_payment_received
+[2026-05-03 12:19:02] [SENT] Email to: harishkhaped695@gmail.com | Subject: [Payment] ₹95,440 received - KHAPED DHRUVIBEN HARISHBHAI | Template: email_payment_received
+[2026-05-03 12:21:35] [SENT] Email to: arinaryahi@gmail.com | Subject: [Payment] ₹98,980 received - PATIDAR ARYAHI MADAN | Template: email_payment_received
+[2026-05-03 12:23:29] [SENT] Email to: hsdamor6576@gmail.com | Subject: [Payment] ₹95,440 received - DAMOR MANTHAN SURESHBHAI | Template: email_payment_received
+[2026-05-03 12:26:17] [SENT] Email to: patelnikunj2156@gmail.com | Subject: [Payment] ₹77,740 received - PATEL KRISHA NIKUNJKUMAR | Template: email_payment_received
+[2026-05-03 13:01:55] [SENT] Email to: kmalivad188@gmail.com | Subject: [Payment] ₹95,440 received - MALIVAD ANKITBHAI SHAILESHBHAI | Template: email_payment_received
+[2026-05-03 13:13:09] [SENT] Email to: mkawanapravin178@gmail.com | Subject: [Payment] ₹10,000 received - MAKAWANA NIRAL PRAVINBHAI | Template: email_payment_received
+[2026-05-03 13:13:45] [SENT] Email to: mkawanapravin178@gmail.com | Subject: [Payment] ₹20,000 received - MAKAWANA NIRAL PRAVINBHAI | Template: email_payment_received
+[2026-05-03 13:25:56] [SENT] Email to: hiteshvala111@gmail.com | Subject: [Payment] ₹95,440 received - VALA RAVI HITESHBHAI | Template: email_payment_received
+[2026-05-03 13:30:32] [SENT] Email to: pateljayraj850@gmail.com | Subject: [Payment] ₹10,000 received - PATEL JAYRAJKUMAR MAHENDRABHAI | Template: email_payment_received
+[2026-05-03 13:31:36] [SENT] Email to: jaypatel84184@gmail.com | Subject: [Payment] ₹10,000 received - PATEL SHREYA JAYESHBHAI | Template: email_payment_received
+[2026-05-03 13:34:59] [SENT] Email to: y.b.9408194804@gmail.com | Subject: [Payment] ₹95,440 received - PATEL SWAPNILKUMAR YOGESHBHAI | Template: email_payment_received
+[2026-05-03 13:40:34] [SENT] Email to: gohilbharat021084@gmail.com | Subject: [Payment] ₹98,980 received - GOHIL AYUSHI BHARATBHAI | Template: email_payment_received
+[2026-05-03 13:43:04] [SENT] Email to: satbhaimeet@gmail.com | Subject: [Payment] ₹95,440 received - SATBHAI MEET KAMLESHBHAI | Template: email_payment_received
+[2026-05-03 13:57:36] [SENT] Email to: jatinpatel131180@gmail.com | Subject: [Payment] ₹98,980 received - PATEL PARTH JATINBHAI | Template: email_payment_received
+[2026-05-03 13:59:26] [SENT] Email to: dankhara.bhavesh6@gmail.com | Subject: [Payment] ₹63,750 received - DANKHARA RUDRA RAMESHBHAI | Template: email_payment_received
+[2026-05-03 14:08:48] [SENT] Email to: aakonacrc@gmail.com | Subject: [Payment] ₹10,000 received - BHIL PANKTI MUKESHKUMAR | Template: email_payment_received
+[2026-05-03 14:45:34] [SENT] Email to: bharat2721978@gmail.com | Subject: [Payment] ₹95,440 received - DAMOR PARTHKUMAR BHARATBHAI | Template: email_payment_received
+[2026-05-03 14:48:03] [SENT] Email to: vrund2009@gmail.com | Subject: [Payment] ₹95,440 received - PRAJAPATI VRUND RAJESHBHAI | Template: email_payment_received
+[2026-05-03 14:50:16] [SENT] Email to: dipakdamor65@gmail.com | Subject: [Payment] ₹95,440 received - DAMOR GAURAVKUMAR DIPAKBHAI | Template: email_payment_received
+[2026-05-03 14:56:51] [SENT] Email to: jivanshuamaliyar07@gmail.com | Subject: [Payment] ₹95,440 received - AMALIYAR JIVANSHU KANUBHAI | Template: email_payment_received
+[2026-05-03 14:59:12] [SENT] Email to: tejassangada70@gmail.com | Subject: [Payment] ₹95,440 received - SANGADA DHRUMILKUMAR CHANDRESHBHAI | Template: email_payment_received
+[2026-05-03 15:04:14] [SENT] Email to: manutahir@gmail.com | Subject: [Payment] ₹95,440 received - BALDANIYA TANVI MANUBHAI | Template: email_payment_received
+[2026-05-03 15:11:13] [SENT] Email to: shaileshkanjariya97@gmail.com | Subject: [Payment] ₹10,000 received - KANJARIYA JENSIBEN SHAILESHBHAI | Template: email_payment_received
+[2026-05-03 15:12:22] [SENT] Email to: manutahir@gmail.com | Subject: [Payment] ₹10,000 received - BALDANIYA TANVI MANUBHAI | Template: email_payment_received
+[2026-05-03 15:14:24] [SENT] Email to: tirthdevanshi@gmail.com | Subject: [Payment] ₹95,440 received - VASVELIYA TIRTH CHETANKUMAR | Template: email_payment_received
+[2026-05-03 15:16:54] [SENT] Email to: sanjaybhuriya690@gmail.com | Subject: [Payment] ₹95,440 received - BHURIYA GUNJANBEN SANJAYBHAI | Template: email_payment_received
+[2026-05-03 15:18:23] [SENT] Email to: sanjaybhuriya690@gmail.com | Subject: [Payment] ₹10,000 received - BHURIYA GUNJANBEN SANJAYBHAI | Template: email_payment_received
+[2026-05-03 15:18:54] [SENT] Email to: bilwalasha16@gmail.com | Subject: [Payment] ₹95,440 received - GANAVA ANURAGBHAI JASVANTBHAI | Template: email_payment_received
+[2026-05-03 15:37:00] [SENT] Email to: drketanpatel@gmail.com | Subject: [Payment] ₹10,000 received - MATARIYA SWAPNIL KANTIBHAI | Template: email_payment_received
+[2026-05-03 15:56:24] [SENT] Email to: dilippipaliya3116@gmail.com | Subject: [Payment] ₹10,000 received - PIPALIYA UTTAM DILIPBHAI | Template: email_payment_received
+[2026-05-03 15:57:56] [SENT] Email to: m.jayesh79@gmail.com | Subject: [Payment] ₹95,440 received - MAKWANA KUNJ SANDIPBHAI | Template: email_payment_received
+[2026-05-03 16:00:25] [SENT] Email to: rathodpuspa@gmail.com | Subject: [Payment] ₹98,980 received - PARMAR HETARTH JAYESHKUMAR | Template: email_payment_received
+[2026-05-03 16:07:37] [SENT] Email to: bapasitaram71@gmail.com | Subject: [Payment] ₹10,000 received - HADIYA SAHADEV NARESHBHAI | Template: email_payment_received
+[2026-05-04 08:29:25] [SENT] Email to: nileshpasaya915@gmail.com | Subject: [Payment] ₹10,000 received - PASAYA KRUSHANTKUMAR NILESHBHAI | Template: email_payment_received
+[2026-05-04 08:30:47] [SENT] Email to: navalsinhninama935@gmail.com | Subject: [Payment] ₹10,000 received - NINAMA YASH NAVALSINH | Template: email_payment_received
+[2026-05-04 10:04:08] [SENT] Email to: hvvala@yahoo.co.in | Subject: [Payment] ₹77,740 received - VALA YASHRAJSINH HARPALSINH | Template: email_payment_received
+[2026-05-04 10:13:22] [SENT] Email to: navinlaxman1983@gmail.com | Subject: [Payment] ₹95,440 received - MUNIYA RIYABEN NAVINKUMAR | Template: email_payment_received
+[2026-05-04 10:20:16] [SENT] Email to: govindpargi56@gmail.com | Subject: [Payment] ₹10,000 received - PARGI YUVRAJKUMAR GOVINDBHAI | Template: email_payment_received
+[2026-05-04 10:22:42] [SENT] Email to: kbbhammar89@gmail.com | Subject: [Payment] ₹95,440 received - BHAMMAR AJAYBHAI KHODABHAI | Template: email_payment_received
+[2026-05-04 10:50:14] [SENT] Email to: patelvg18984@gmail.com | Subject: [Payment] ₹95,440 received - PATEL JAIMISH VISHALKUMAR | Template: email_payment_received
+[2026-05-04 11:02:55] [SENT] Email to: jagdishbhaigopalbhai@gmail.com | Subject: [Payment] ₹95,440 received - BAMBHANIYA BHAVANSHI JAGDISHBHAI | Template: email_payment_received
+[2026-05-04 11:29:07] [SENT] Email to: maulikbaria96@gmail.com | Subject: [Payment] ₹98,980 received - BARIA VANSHIKABEN PANKAJBHAI | Template: email_payment_received
+[2026-05-04 11:32:38] [SENT] Email to: sonamhathila1234@gmail.com | Subject: [Payment] ₹44,000 received - BHABHOR VANSH DILIPBHAI | Template: email_payment_received
+[2026-05-04 12:16:48] [SENT] Email to: mugi15@gmail.com | Subject: [Payment] ₹95,440 received - JADAV MRUGAXI KALUBHAI | Template: email_payment_received
+[2026-05-04 12:35:41] [SENT] Email to: dodiyahetvi467@gmail.com | Subject: [Payment] ₹1,20,580 received - DODIYA HETAVIBA INDRAJITSINH | Template: email_payment_received
+[2026-05-04 12:39:10] [SENT] Email to: harshgadhiya2010@gmail.com | Subject: [Payment] ₹95,440 received - GADHIYA HARSH PRAKASHBHAI | Template: email_payment_received
+[2026-05-04 12:53:47] [SENT] Email to: jadejaharshini@gmail.com | Subject: [Payment] ₹21,600 received - JADEJA HARSHINIBA HARSHVARDHANSINH | Template: email_payment_received
+[2026-05-04 13:31:25] [SENT] Email to: bhabhorr846@gmail.com | Subject: [Payment] ₹10,000 received - BHABHOR SHANI RAJESHBHAI | Template: email_payment_received
+[2026-05-04 13:37:22] [SENT] Email to: rajeshparmar30772@gmail.com | Subject: [Payment] ₹95,440 received - PARMAR VISHVA RAJESHBHAI | Template: email_payment_received
+[2026-05-04 14:10:47] [SENT] Email to: rajeshparmar30772@gmail.com | Subject: [Payment] ₹10,000 received - PARMAR VISHVA RAJESHBHAI | Template: email_payment_received
+[2026-05-04 14:15:12] [SENT] Email to: bathuelchharel10@gmail.com | Subject: [Payment] ₹95,440 received - CHHAREL MIZAR BATHUELBHAI | Template: email_payment_received
+[2026-05-04 15:11:24] [SENT] Email to: narolavipul996@gmail.com | Subject: [Payment] ₹98,980 received - NAROLA DISHA VIPULBHAI | Template: email_payment_received
+[2026-05-04 16:59:32] [SENT] Email to: dineshnisarta5@gmail.com | Subject: [Payment] ₹95,440 received - NISARTA KRISHNABEN DINESHBHAI | Template: email_payment_received
+[2026-05-05 08:39:48] [SENT] Email to: paramvalaa@gmail.com | Subject: [Payment] ₹72,250 received - VALA PARAMJIT RANJITBHAI | Template: email_payment_received
+[2026-05-05 09:57:20] [SENT] Email to: lekharajkumar007@gmail.com | Subject: [Payment] ₹10,000 received - NAIR ABHIJITH RAJKUMAR | Template: email_payment_received
+[2026-05-05 10:06:08] [SENT] Email to: kalpritbamania@gmail.com | Subject: [Payment] ₹95,440 received - BAMANYA SRUSHTI RITESHKUMAR | Template: email_payment_received
+[2026-05-05 10:09:25] [SENT] Email to: jayrajrajput863@gmail.com | Subject: [Payment] ₹21,600 received - CHAUHAN YUVRAJ YOGESHBHAI | Template: email_payment_received
+[2026-05-05 10:19:31] [SENT] Email to: karmadeepsinhgohil12@gmail.com | Subject: [Payment] ₹10,000 received - GOHIL KARMDEEPSINH JAYVANTSINH | Template: email_payment_received
+[2026-05-05 10:32:41] [SENT] Email to: kinjalbenpatel123456@gmail.com | Subject: [Payment] ₹42,500 received - PATEL KHUSHI RAJESHBHAI | Template: email_payment_received
+[2026-05-05 10:55:01] [SENT] Email to: m.jayesh79@gmail.com | Subject: [Payment] ₹21,600 received - MAKWANA KUNJ SANDIPBHAI | Template: email_payment_received
+[2026-05-05 10:58:25] [SENT] Email to: raghubhaibarad4@gmail.com | Subject: [Payment] ₹98,980 received - BARAD PRIYANSHI RAGHUBHAI | Template: email_payment_received
+[2026-05-05 12:03:01] [SENT] Email to: milankumardave2263@gmail.com | Subject: [Payment] ₹95,440 received - DAVE NANDINI MILANBHAI | Template: email_payment_received
+[2026-05-05 12:28:06] [SENT] Email to: bhaveshchudasama60755@gmail.com | Subject: [Payment] ₹10,000 received - CHUDASAMA BHAVESHBHAI GORDHANBHAI | Template: email_payment_received
+[2026-05-05 12:34:30] [SENT] Email to: nareshbhai1983@gmail.com | Subject: [Payment] ₹10,000 received - BARAIYA SHRADDHABEN NARESHBHAI | Template: email_payment_received
+[2026-05-05 12:50:26] INFO: Email sent successfully to bgohel360@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 605227.
+[2026-05-05 12:53:46] [SENT] Email to: ganpatpandor1980@gmail.com | Subject: [Payment] ₹10,000 received - PANDOR NEHABEN GANPATBHAI | Template: email_payment_received
+[2026-05-05 13:42:44] [SENT] Email to: ketandixit1983@gmail.com | Subject: [Payment] ₹95,440 received - DIXIT MANTRA KETANKUMAR | Template: email_payment_received
+[2026-05-05 14:11:10] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 490633.
+[2026-05-05 16:37:55] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 476911.
+[2026-05-05 19:17:13] INFO: Email sent successfully to dumaniyabhautik@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 078531.
+[2026-05-05 21:00:54] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 317695.
+[2026-05-05 21:01:57] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 294090.
+[2026-05-05 21:02:13] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 475425.
+[2026-05-05 21:02:23] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 463435.
+[2026-05-06 00:28:20] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 371022.
+[2026-05-06 08:17:18] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 902433.
+[2026-05-06 09:19:35] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 280059.
+[2026-05-06 09:35:21] [SENT] Email to: sentameet11@gmail.com | Subject: [Payment] ₹95,440 received - SENTA MEETKUMAR MAGANBHAI | Template: email_payment_received
+[2026-05-06 11:20:47] [SENT] Email to: jaydipsinhhadalabhal@gmail.com | Subject: [Payment] ₹95,440 received - SOLANKI NIYATIBA JAYDIPSINH | Template: email_payment_received
+[2026-05-06 12:01:40] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 784763.
+[2026-05-06 12:45:32] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 946769.
+[2026-05-06 13:47:48] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 140554.
+[2026-05-06 13:48:09] INFO: Email sent successfully to gyanmanjariesta@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 289167.
+[2026-05-06 14:20:26] [SENT] Email to: aarav7mithani@gmail.com | Subject: [Payment] ₹98,980 received - MITHANI AARAV FIROZ | Template: email_payment_received
+[2026-05-06 15:37:14] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 099642.
+[2026-05-06 15:43:45] [SENT] Email to: chandanbaraiya92@gmail.com | Subject: [Payment] ₹95,440 received - BARAIYA HARIKA CHANDANKUMAR | Template: email_payment_received
+[2026-05-06 15:46:47] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 555693.
+[2026-05-06 15:56:27] INFO: Email sent successfully to keyurpatel3337@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 711122.
+[2026-05-06 15:59:35] INFO: Email sent successfully to keyurpatel3337@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 247662.
+[2026-05-06 16:06:39] INFO: Email sent successfully to keyurpatel3337@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 575742.
+[2026-05-06 17:31:58] [SENT] Email to: deliwala8001@gmail.com | Subject: [Payment] ₹1,20,580 received - DELIWALA HALAK NIKUNJ | Template: email_payment_received
+[2026-05-07 09:12:58] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 348317.
+[2026-05-07 09:25:53] [SENT] Email to: hvvala@yahoo.co.in | Subject: [Payment] ₹21,600 received - VALA YASHRAJSINH HARPALSINH | Template: email_payment_received
+[2026-05-07 09:27:30] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 071643.
+[2026-05-07 09:28:26] [SENT] Email to: prvinpatel7406@gmail.com | Subject: [Payment] ₹95,440 received - PATEL BHAVYKUMAR PRAVINBHAI | Template: email_payment_received
+[2026-05-07 10:01:36] [SENT] Email to: aatish2232@gmail.com | Subject: [Payment] ₹1,17,040 received - RATHOD VANDITABA ATISHBHAI | Template: email_payment_received
+[2026-05-07 10:31:54] [SENT] Email to: rajnimaulik@yahoo.com | Subject: [Payment] ₹98,980 received - PARIKH GATHA MAULIK | Template: email_payment_received
+[2026-05-07 10:35:18] [SENT] Email to: ranjitsinhmori1982@gmail.com | Subject: [Payment] ₹95,440 received - MORI RAJVEERSINH RANJITBHAI | Template: email_payment_received
+[2026-05-07 12:03:03] [SENT] Email to: vikramchauhan365@gmail.com | Subject: [Payment] ₹1,17,040 received - CHAUHAN KAVYA VIKRAMBHAI | Template: email_payment_received
+[2026-05-07 12:32:41] [SENT] Email to: pankajpandya2006@gmail.com | Subject: [Payment] ₹25,000 received - Pandya Bhargav Pankaj | Template: email_payment_received
+[2026-05-07 12:55:40] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 289164.
+[2026-05-07 13:00:17] INFO: Email sent successfully to bgohel360@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 438621.
+[2026-05-07 13:15:58] [SENT] Email to: binaramani763@gmail.com | Subject: [Payment] ₹21,600 received - RAMANI MAHARSHI HARIKRUSHNBHAI | Template: email_payment_received
+[2026-05-08 08:54:42] [SENT] Email to: bhatbhai007@gmail.com | Subject: [Payment] ₹98,980 received - BHATT YASH VIJAYKRUSHNA | Template: email_payment_received
+[2026-05-08 09:09:29] [SENT] Email to: vijaythorat151@gmail.com | Subject: [Payment] ₹10,000 received - THORAT KRINAL VIJAYBHAI | Template: email_payment_received
+[2026-05-08 09:18:41] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 932983.
+[2026-05-08 09:19:59] [SENT] Email to: valakimukeshbhai@gmail.com | Subject: [Payment] ₹95,440 received - VALAKI ARNAV MUKESHBHAI | Template: email_payment_received
+[2026-05-08 09:22:57] [SENT] Email to: darshilpandit1307@gmail.com | Subject: [Payment] ₹95,440 received - PANDIT DARSHIL ANILBHAI | Template: email_payment_received
+[2026-05-08 09:57:01] [SENT] Email to: malay21viral@gmail.com | Subject: [Payment] ₹95,440 received - PATEL MALAY JAYESHBHAI | Template: email_payment_received
+[2026-05-08 10:12:14] [SENT] Email to: jaiminbaldaniya754@gmail.com | Subject: [Payment] ₹59,500 received - BALDANIYA JAIMIN KISHORBHAI | Template: email_payment_received
+[2026-05-08 10:14:34] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 509238.
+[2026-05-08 10:23:59] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 354630.
+[2026-05-08 10:24:57] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 799272.
+[2026-05-08 10:28:43] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 180499.
+[2026-05-08 10:31:25] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 974719.
+[2026-05-08 10:33:34] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 511699.
+[2026-05-08 11:34:41] [SENT] Email to: rajendraprajapati09876@gmail.com | Subject: [Payment] ₹10,000 received - PRAJAPATI BHAVYKUMAR RAJENDRAKUMAR | Template: email_payment_received
+[2026-05-08 11:51:05] [SENT] Email to: bansrikoradiya@gmail.com | Subject: [Payment] ₹10,000 received - KORDIYA BANSRI PANKAJBHAI | Template: email_payment_received
+[2026-05-08 11:53:34] [SENT] Email to: bhikhabhaimoradiya@gmail.com | Subject: [Payment] ₹95,440 received - MORADIYA ANSH BHIKHABHAI | Template: email_payment_received
+[2026-05-08 12:31:11] [SENT] Email to: patelparulben217@gmail.com | Subject: [Payment] ₹10,000 received - PATEL BHAVYKUMAR KALPESHBHAI | Template: email_payment_received
+[2026-05-08 14:00:13] [SENT] Email to: drharishgoswami1980@gmail.com | Subject: [Payment] ₹98,980 received - GOSWAMI NIYATI HARISHGIRI | Template: email_payment_received
+[2026-05-08 17:01:16] [SENT] Email to: jagdishbhai03jb@gmail.com | Subject: [Payment] ₹98,980 received - GADHAVI NAITIK JAGDISHBHAI | Template: email_payment_received
+[2026-05-08 17:03:24] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 923008.
+[2026-05-08 17:09:02] [SENT] Email to: kasamaniinayat786@gmail.com | Subject: [Payment] ₹35,000 received - Kasamani Inayat Ikbal bhai | Template: email_payment_received
+[2026-05-08 18:09:11] [SENT] Email to: bhavesh7383@gmail.com | Subject: [Payment] ₹35,000 received - Vala Mitrajsinh Balbhadrasinh | Template: email_payment_received
+[2026-05-08 19:24:59] INFO: Email sent successfully to gyan.jkp@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 335537.
+[2026-05-09 08:16:53] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 957880.
+[2026-05-09 08:20:02] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 018958.
+[2026-05-09 08:31:31] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 366173.
+[2026-05-09 09:10:46] INFO: Email sent successfully to gyanmanjariesta@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 155358.
+[2026-05-09 09:20:17] [SENT] Email to: postbasic087@gmail.com | Subject: [Payment] ₹95,440 received - MEHTA HETVIBEN VIPULKUMAR | Template: email_payment_received
+[2026-05-09 09:51:22] [SENT] Email to: 23chintan@gmail.com | Subject: [Payment] ₹1,20,580 received - CHAUHAN DIVYAJEET CHINTAN | Template: email_payment_received
+[2026-05-09 09:54:43] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 475891.
+[2026-05-09 09:59:13] INFO: Email sent successfully to dmg462409@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 776690.
+[2026-05-09 10:37:42] [SENT] Email to: dishasheth1984@gmail.com | Subject: [Payment] ₹38,600 received - MAKWANA PRAMAN HEMAL | Template: email_payment_received
+[2026-05-09 11:15:08] [SENT] Email to: nbria67@gmail.com | Subject: [Payment] ₹10,000 received - CHAUHAN PRIYANSHIBEN NALINSINH | Template: email_payment_received
+[2026-05-09 11:16:00] [SENT] Email to: bariajignesh58@gmail.com | Subject: [Payment] ₹10,000 received - BARIA DHRUVI JIGNESHKUMAR | Template: email_payment_received
+[2026-05-09 11:46:19] [SENT] Email to: daparmar84@gmail.com | Subject: [Payment] ₹98,980 received - PARMAR PALAKBA DASHRATHSINH | Template: email_payment_received
+[2026-05-09 13:42:52] [SENT] Email to: alpeshk.patel012@gmail.com | Subject: [Payment] ₹25,000 received - Patel Pranshuben Alpeshkumar | Template: email_payment_received
+[2026-05-09 16:23:15] [SENT] Email to: hareshmakwana09@gmail.com | Subject: [Payment] ₹21,600 received - MAKWANA JEEL HARESHBHAI | Template: email_payment_received
+[2026-05-09 17:00:20] [SENT] Email to: ishitamamedu@gmail.com | Subject: [Payment] ₹98,980 received - SHAH TARANYA BHAVINKUMAR | Template: email_payment_received
+[2026-05-09 17:03:27] [SENT] Email to: ksandeshbhai@gmail.com | Subject: [Payment] ₹10,000 received - KISHORI AAROHIBEN CHANDUBHAI | Template: email_payment_received
+[2026-05-10 09:09:18] [SENT] Email to: shaileshcharel2903@gmail.com | Subject: [Payment] ₹10,000 received - CHAREL JAYNIL SHAILESHBHAI | Template: email_payment_received
+[2026-05-10 09:09:45] [SENT] Email to: shaileshbhaicharel2903@gmail.com | Subject: [Payment] ₹10,000 received - CHAREL JANVI SHAILESHBHAI | Template: email_payment_received
+[2026-05-10 09:10:31] [SENT] Email to: taviyadbharat438@gmail.com | Subject: [Payment] ₹10,000 received - TAVIYAD HARIPRIYA BHARATBHAI | Template: email_payment_received
+[2026-05-10 11:36:20] [SENT] Email to: kamleshdinhgohil351@gmail.com | Subject: [Payment] ₹79,200 received - GOHIL VISHWABA KAMLESHSINH | Template: email_payment_received
+[2026-05-10 12:27:02] [SENT] Email to: bhutraju8@gmail.com | Subject: [Payment] ₹10,000 received - BHUT VAIBHAV RAJUBHAI | Template: email_payment_received
+[2026-05-10 12:28:05] [SENT] Email to: rajubhaibhut40@gmail.com | Subject: [Payment] ₹10,000 received - BHUT VIVEK CHHAGANBHAI | Template: email_payment_received
+[2026-05-10 12:31:32] [SENT] Email to: bhutraju8@gmail.com | Subject: [Payment] ₹95,440 received - BHUT VAIBHAV RAJUBHAI | Template: email_payment_received
+[2026-05-10 15:57:31] [SENT] Email to: rhadia26@gmail.com | Subject: [Payment] ₹10,000 received - HADIYA BHAVY RAHULBHAI | Template: email_payment_received
+[2026-05-11 09:27:18] [SENT] Email to: bbthaker5@gmail.com | Subject: [Payment] ₹98,980 received - THAKAR DHYEY BHAVESHBHAI | Template: email_payment_received
+[2026-05-11 09:39:46] [SENT] Email to: mustufa.solanki786@gmail.com | Subject: [Payment] ₹95,440 received - SOLANKI MAHIN MUSTUFABHAI | Template: email_payment_received
+[2026-05-11 09:53:35] [SENT] Email to: drrrshah143@gmail.com | Subject: [Payment] ₹98,980 received - SHAH MAYUR RAKESHBHAI | Template: email_payment_received
+[2026-05-11 10:48:14] [SENT] Email to: rameshlitaliya@gmail.com | Subject: [Payment] ₹95,440 received - ITALIYA MAN RAMESHBHAI | Template: email_payment_received
+[2026-05-11 11:02:12] [SENT] Email to: valaharesh61@gmail.com | Subject: [Payment] ₹10,000 received - VALA JITIKSHA HARESH BHAI | Template: email_payment_received
+[2026-05-11 11:04:32] [SENT] Email to: vaidehivala20@gmail.com | Subject: [Payment] ₹10,000 received - Vala Madhuri Lakhamanbhai | Template: email_payment_received
+[2026-05-11 11:23:36] [SENT] Email to: sahdevsinhsarvaiya3597@gmail.com | Subject: [Payment] ₹95,440 received - SARVAIYA SURYADIPSINH SAHDEVSINH | Template: email_payment_received
+[2026-05-11 13:28:54] [SENT] Email to: vinoddodiya69@gmail.com | Subject: [Payment] ₹95,440 received - DODIYA ANMOL VINODKUMAR | Template: email_payment_received
+[2026-05-11 14:09:13] [SENT] Email to: sunilkukadiya628@gmail.com | Subject: [Payment] ₹25,000 received - Kukadiya Kajal Somabhai | Template: email_payment_received
+[2026-05-11 15:51:58] [FAILED] Email to: test@example.com | Subject: Token Fee Payment Successful - Receipt #REC_123 | Template: email_token_fee_success
+[2026-05-11 15:52:25] [FAILED] Email to: test@example.com | Subject: Token Fee Payment Successful - Receipt #REC_123 | Template: email_token_fee_success
+[2026-05-11 15:55:31] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Token Fee Payment Successful - Receipt #REC_123_TEST | Template: email_token_fee_success
+[2026-05-11 15:56:45] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Token Fee Payment Successful - Receipt #REC_123_TEST | Template: email_token_fee_success
+[2026-05-11 16:10:22] [SENT] Email to: keyurpatel3337@gmail.com | Subject: Token Fee Payment Successful - Receipt #REC_SYNC_TEST | Template: email_token_fee_success
+[2026-05-11 17:00:33] [SENT] Email to: vasavaraysingbhaivasava280@gmail.com | Subject: [Payment] ₹10,000 received - VASAVA AYUSH RAYSINGBHAI | Template: email_payment_received
+[2026-05-12 09:32:04] [SENT] Email to: hsjamod1989@gmail.com | Subject: [Payment] ₹27,000 received - JAMOD SOHAM SHAMJIBHAI | Template: email_payment_received
+[2026-05-12 09:55:07] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 691978.
+[2026-05-12 09:55:24] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 266665.
+[2026-05-12 09:55:26] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 892990.
+[2026-05-12 09:55:27] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 069281.
+[2026-05-12 09:57:01] [SENT] Email to: riteshmukhi2801@gmail.com | Subject: [Payment] ₹98,980 received - PATEL KALP RITESHKUMAR | Template: email_payment_received
+[2026-05-12 09:57:04] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 324034.
+[2026-05-12 09:57:56] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 027074.
+[2026-05-12 09:58:21] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 681468.
+[2026-05-12 09:59:19] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 122485.
+[2026-05-12 10:06:56] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 558470.
+[2026-05-12 10:13:06] [SENT] Email to: mustufa.solanki786@gmail.com | Subject: [Payment] ₹21,600 received - SOLANKI MAHIN MUSTUFABHAI | Template: email_payment_received
+[2026-05-12 10:17:16] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 687891.
+[2026-05-12 10:19:04] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 599998.
+[2026-05-12 10:27:44] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 370367.
+[2026-05-12 11:00:55] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 096143.
+[2026-05-12 11:29:29] [SENT] Email to: keyurpatel3337@gmail.com | Subject: [Payment] ₹1000 received - Keyur Patel | Template: email_payment_received
+[2026-05-12 11:30:05] INFO: Email sent successfully to keyurpatel3337@gmail.com. Subject: Your Student Portal Login Credentials. Template: email_login_credentials. OTP: 334155.
+[2026-05-12 11:30:05] INFO: Email sent successfully to keyurpatel3337@gmail.com. Subject: [Payment] ₹1000 received - Keyur Patel. Template: email_payment_received.
+[2026-05-12 11:31:11] ERROR: Failed to send email to keyurpatel3337@gmail.com. Subject: Your Student Portal Login Credentials. Template: email_login_credentials. OTP: 334155. Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server SMTP code: 10061 Additional SMTP info: No connection could be made because the target machine actively refused it
+[2026-05-12 11:31:13] ERROR: Failed to send email to keyurpatel3337@gmail.com. Subject: [Payment] ₹1000 received - Keyur Patel. Template: email_payment_received. Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server SMTP code: 10061 Additional SMTP info: No connection could be made because the target machine actively refused it
+[2026-05-12 12:13:15] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 547640.
+[2026-05-12 13:18:51] [SENT] Email to: bhavnitbhai82@gmail.com | Subject: [Payment] ₹1,05,440 received - RATHVA JANVIBEN BHAVNITBHAI | Template: email_payment_received
+[2026-05-12 13:44:19] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 207559.
+[2026-05-12 13:46:40] [SENT] Email to: patelghanshyam847831@gmail.com | Subject: [Payment] ₹95,440 received - PATEL PRACHI GHANSHYAMBHAI | Template: email_payment_received
+[2026-05-12 13:49:26] [SENT] Email to: krishbaraiya@gmail.com | Subject: [Payment] ₹95,440 received - KRISHABAHEN | Template: email_payment_received
+[2026-05-12 13:51:34] [SENT] Email to: krishbaraiya@gmail.com | Subject: [Payment] ₹95,440 received - KRISHABAHEN | Template: email_payment_received
+[2026-05-12 13:52:32] [SENT] Email to: darshilpandit1307@gmail.com | Subject: [Payment] ₹95,440 received - DARSHIL | Template: email_payment_received
+[2026-05-12 13:57:36] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 945349.
+[2026-05-12 14:13:33] [SENT] Email to: krishbaraiya@gmail.com | Subject: [Payment] ₹95,440 received - KRISHABAHEN | Template: email_payment_received
+[2026-05-12 14:23:16] [SENT] Email to: gokul.makwana666@gmail.com | Subject: [Payment] ₹21,600 received - PALASH | Template: email_payment_received
+[2026-05-12 16:14:31] [SENT] Email to: trivedibalvant01@gmail.com | Subject: [Payment] ₹95,440 received - TRIVEDI YUG BALVANTBHAI | Template: email_payment_received
+[2026-05-12 18:26:56] INFO: Email sent successfully to krishnamori99@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 116539.
+[2026-05-12 18:43:07] [SENT] Email to: janikeyur8000@gmail.com | Subject: Fee Payment Reminder - Installment Due on 12-May-2026 | Template: email_fee_reminder
+[2026-05-12 18:44:29] [SENT] Email to: janikeyur8000@gmail.com | Subject: Fee Payment Reminder - Installment Due on 12-May-2026 | Template: email_fee_reminder
+[2026-05-12 18:45:11] [FAILED] Email to: test@example.com | Subject: Fee Payment Reminder - Installment Due on 12-May-2026 | Template: email_fee_reminder
+[2026-05-12 19:01:41] [FAILED] Email to: test@example.com | Subject: Fee Payment Reminder - Installment Due on 18-Mar-2026 | Template: email_fee_reminder
+[2026-05-12 19:01:43] [FAILED] Email to: test@example.com | Subject: Fee Payment Reminder - Installment Due on 18-Mar-2026 | Template: email_fee_reminder
+[2026-05-12 19:01:44] [FAILED] Email to: test@example.com | Subject: Fee Payment Reminder - Installment Due on 18-Mar-2026 | Template: email_fee_reminder
+[2026-05-12 19:01:46] [FAILED] Email to: test@example.com | Subject: Fee Payment Reminder - Installment Due on 18-Mar-2026 | Template: email_fee_reminder
+[2026-05-12 19:01:47] [FAILED] Email to: test@example.com | Subject: Fee Payment Reminder - Installment Due on 18-Mar-2026 | Template: email_fee_reminder
+[2026-05-13 08:19:28] [SENT] Email to: manisharaju251@gmail.com | Subject: [Payment] ₹98,980 received - PARTH | Template: email_payment_received
+[2026-05-13 08:30:52] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 469596.
+[2026-05-13 09:22:26] [SENT] Email to: krishbaraiya@gmail.com | Subject: [Payment] ₹12,000 received - KRISHABAHEN | Template: email_payment_received
+[2026-05-13 09:42:49] [SENT] Email to: gohiljasvantsinh08@gmail.com | Subject: [Payment] ₹98,980 received - GOHIL JASVANTSINH VIRENDRASINH | Template: email_payment_received
+[2026-05-13 09:45:19] [SENT] Email to: vdmakvana88@gmail.com | Subject: [Payment] ₹99,340 received - PARTHBHAI | Template: email_payment_received
+[2026-05-13 09:46:46] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 162160.
+[2026-05-13 09:46:46] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 504841.
+[2026-05-13 09:47:53] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 033953.
+[2026-05-13 10:14:25] [SENT] Email to: dharmraj11033@gmail.com | Subject: [Payment] ₹47,720 received - GOHIL SHIVALIBA KISHORSINH | Template: email_payment_received
+[2026-05-13 10:43:21] [SENT] Email to: adityaramani211@gmail.com | Subject: [Payment] ₹68,440 received - ADITYA | Template: email_payment_received
+[2026-05-13 10:44:44] [SENT] Email to: adityaramani211@gmail.com | Subject: [Payment] ₹15,000 received - ADITYA | Template: email_payment_received
+[2026-05-13 10:45:57] [SENT] Email to: adityaramani211@gmail.com | Subject: [Payment] ₹12,000 received - ADITYA | Template: email_payment_received
+[2026-05-13 11:05:59] [SENT] Email to: rahulpari945@gmail.com | Subject: [Payment] ₹10,000 received - HETVIBEN | Template: email_payment_received
+[2026-05-13 11:54:18] [SENT] Email to: aghola9346@gmail.com | Subject: [Payment] ₹77,740 received - AGHOLA PRINCE ALPESHBHAI | Template: email_payment_received
+[2026-05-13 12:01:06] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 609004.
+[2026-05-13 13:14:47] [SENT] Email to: kalpeshpadiya123@gmail.com | Subject: [Payment] ₹98,980 received - PADIYA KRUPA KALPESHBHAI | Template: email_payment_received
+[2026-05-13 14:32:00] [SENT] Email to: rameshjbaraiya222@gmail.com | Subject: [Payment] ₹95,440 received - BARAIYA ZANKHANABEN RAMESHBHAI | Template: email_payment_received
+[2026-05-13 16:00:53] [SENT] Email to: krishbaraiya@gmail.com | Subject: [Payment] ₹68,440 received - KRISHABAHEN | Template: email_payment_received
+[2026-05-13 16:29:12] [SENT] Email to: niksav8517@gmail.com | Subject: [Payment] ₹95,440 received - PANDYA VRAJ NIKUNJBHAI | Template: email_payment_received
+[2026-05-13 20:01:10] [SENT] Email to: barads18@gmail.com | Subject: [Payment] ₹95,440 received - SHREY | Template: email_payment_received
+[2026-05-13 22:06:55] [SENT] Email to: goheljalpen4@gmail.com | Subject: [Payment] ₹81,280 received - DEVANSHI | Template: email_payment_received
+[2026-05-14 08:16:01] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 026775.
+[2026-05-14 08:18:01] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 989740.
+[2026-05-14 09:05:55] [SENT] Email to: parvinbhaipateliya10@gmail.com | Subject: [Payment] ₹95,440 received - PATELIYA ABHAYBHAI PRAVINBHAI | Template: email_payment_received
+[2026-05-14 09:14:47] [SENT] Email to: dr.bhavnarathod77@gmail.com | Subject: [Payment] ₹98,980 received - VAINAVI | Template: email_payment_received
+[2026-05-14 09:38:42] [SENT] Email to: aumprint89@gmail.com | Subject: [Payment] ₹1,20,580 received - PANDYA ARYAMAN TAPASBHAI | Template: email_payment_received
+[2026-05-14 09:47:27] [SENT] Email to: rakeshviradiya2764@gmail.com | Subject: [Payment] ₹99,340 received - VIRADIYA MAHI RAKESHBHAI | Template: email_payment_received
+[2026-05-14 09:51:25] [SENT] Email to: dnpatel5036@gmail.com | Subject: [Payment] ₹98,980 received - PATEL DHYEY BHAVESH | Template: email_payment_received
+[2026-05-14 09:55:08] [SENT] Email to: alpeshgadhiya04@gmail.com | Subject: [Payment] ₹95,440 received - GADHIYA TIRTHKUMAR ALPESHBHAI | Template: email_payment_received
+[2026-05-14 10:15:55] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 350171.
+[2026-05-14 10:23:39] [SENT] Email to: bharatbaraiya1510@gmail.com | Subject: [Payment] ₹95,440 received - BARAIYA SHIVAM BHARATBHAI | Template: email_payment_received
+[2026-05-14 10:30:48] [SENT] Email to: mp325925@gmail.com | Subject: [Payment] ₹95,440 received - PATEL VRAJ MEHULKUMAR | Template: email_payment_received
+[2026-05-14 10:33:06] [SENT] Email to: dineshjagu@gmail.com | Subject: [Payment] ₹95,440 received - PATEL JENIL DINESHKUMAR | Template: email_payment_received
+[2026-05-14 10:35:59] [SENT] Email to: vegadrajesh1@gmail.com | Subject: [Payment] ₹21,600 received - VEGAD MEET RAJESHBHAI | Template: email_payment_received
+[2026-05-14 10:48:23] [SENT] Email to: chauhanvallabhbhai90@gmail.com | Subject: [Payment] ₹95,440 received - CHAUHAN KARINABEN VALLABHBHAI | Template: email_payment_received
+[2026-05-14 11:09:44] [SENT] Email to: mahijani61212@gmail.com | Subject: [Payment] ₹1,17,040 received - JANI DEVANGI BRIJESHBHAI | Template: email_payment_received
+[2026-05-14 11:23:43] INFO: Email sent successfully to bgohel360@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 505887.
+[2026-05-14 11:24:05] INFO: Email sent successfully to bgohel360@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 435563.
+[2026-05-14 11:25:44] INFO: Email sent successfully to bgohel360@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 774711.
+[2026-05-14 11:30:56] INFO: Email sent successfully to bgohel360@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 386533.
+[2026-05-14 11:31:47] [SENT] Email to: setupatel7716@gmail.com | Subject: [Payment] ₹95,440 received - PATEL SETUL VISHNUBHAI | Template: email_payment_received
+[2026-05-14 12:39:51] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 308317.
+[2026-05-14 12:40:18] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 429951.
+[2026-05-14 13:02:38] [SENT] Email to: mayurupadhyay310@gmail.com | Subject: [Payment] ₹1,17,040 received - UPADHYAY JAY MAYURKUMAR | Template: email_payment_received
+[2026-05-14 16:53:42] INFO: Email sent successfully to gyanmanjariac@gmail.com. Subject: Your Login Verification Code. Template: login_otp. OTP: 363679.
+[2026-05-14 21:41:30] [SENT] Email to: diyabrahmbhatt2009@gmail.com | Subject: [Payment] ₹10,000 received - DIYA | Template: email_payment_received
+[2026-05-15 11:29:05] [SENT] Email to: jaysinh.rajput738@gmail.com | Subject: [Payment] ₹95,440 received - JADAV VISHVAJITSINH JAYENDRASINH | Template: email_payment_received
+[2026-05-15 12:31:54] [SENT] Email to: ashokvaliya011978@gmail.com | Subject: [Payment] ₹95,440 received - KRISHNA | Template: email_payment_received
+[2026-05-15 13:32:18] [SENT] Email to: dharmendrashukla74@gmail.com | Subject: [Payment] ₹95,440 received - SHUKLA DEVANGEEBEN DHARMENDRAKUMAR | Template: email_payment_received
+[2026-05-15 13:49:59] [SENT] Email to: bbharathadiya@yahoo.com | Subject: [Payment] ₹21,600 received - HADIYA MANSI BHARATBHAI | Template: email_payment_received
+[2026-05-15 14:28:47] [SENT] Email to: mdsapra12@gmail.com | Subject: [Payment] ₹95,440 received - ANGEL | Template: email_payment_received
+[2026-05-15 14:31:55] [SENT] Email to: harp89849@gmail.com | Subject: [Payment] ₹15,000 received - HARSHITKUMAR | Template: email_payment_received
+[2026-05-15 14:33:40] [SENT] Email to: harp89849@gmail.com | Subject: [Payment] ₹12,000 received - HARSHITKUMAR | Template: email_payment_received
+[2026-05-15 15:22:44] [SENT] Email to: shaileshbagthariya@gmail.com | Subject: [Payment] ₹10,000 received - BAGATHARIYA YAGNA SHAILESHBHAI | Template: email_payment_received
+[2026-05-15 16:33:25] [SENT] Email to: amitasavaliya23@gmail.com | Subject: [Payment] ₹95,440 received - PRASUN | Template: email_payment_received
+[2026-05-15 16:49:04] [SENT] Email to: ashishpandya1808@gmail.com | Subject: [Payment] ₹95,440 received - PANDYA KRISHA GAURANGBHAI | Template: email_payment_received
+[2026-05-15 19:42:24] [SENT] Email to: ridhikakrishna143@gmail.com | Subject: [Payment] ₹15,000 received - RIDHIKA | Template: email_payment_received
+[2026-05-16 08:48:41] [SENT] Email to: mehulsheth482@gmail.com | Subject: [Payment] ₹95,440 received - SHETH VIDHI MEHULBHAI | Template: email_payment_received
+[2026-05-16 10:44:43] [SENT] Email to: pp11829@gmail.com | Subject: [Payment] ₹98,980 received - PANDYA TANAY PARIKSHITBHAI | Template: email_payment_received
+[2026-05-16 11:25:06] [SENT] Email to: khyatimalaviya211@gmail.com | Subject: [Payment] ₹98,980 received - RATHOD MAAHI HIRENBHAI | Template: email_payment_received
+[2026-05-16 11:47:39] [SENT] Email to: hamzasheikhfcps@gmail.com | Subject: [Payment] ₹81,280 received - SHEIKH HAMZA HUSAIN RIZWAN HUSAIN | Template: email_payment_received
+[2026-05-16 13:33:40] [SENT] Email to: deepa.thacker86@gmail.com | Subject: [Payment] ₹98,980 received - HARDI | Template: email_payment_received

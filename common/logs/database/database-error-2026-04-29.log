@@ -1,0 +1,42 @@
+[2026-04-29 15:54:30] [File: C:\xampp\htdocs\GCA-Production\common\lib\Operation.php] [Line: 509] Database Error during SELECT with JOIN Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Trace: #0 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(659): DatabaseOperations->logError('SELECT with JOI...', 'SQLSTATE[42S22]...', 'SELECT e.*, sch...')
+#1 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(676): DatabaseOperations->selectWithJoin('tbl_enrolled_st...', Array, Array, Array, '', 1, 0)
+#2 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\AbstractGenerator.php(45): DatabaseOperations->readWithJoin('tbl_enrolled_st...', Array, Array, Array)
+#3 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\BonafideGenerator.php(8): AbstractGenerator->fetchStudentDetails('21')
+#4 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generate.php(66): BonafideGenerator->generate('21', 38)
+#5 {main} | User ID: 38 | URI: /portal/modules/certificates/generate.php
+[2026-04-29 15:55:03] [File: C:\xampp\htdocs\GCA-Production\common\lib\Operation.php] [Line: 509] Database Error during SELECT with JOIN Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Trace: #0 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(659): DatabaseOperations->logError('SELECT with JOI...', 'SQLSTATE[42S22]...', 'SELECT e.*, sch...')
+#1 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(676): DatabaseOperations->selectWithJoin('tbl_enrolled_st...', Array, Array, Array, '', 1, 0)
+#2 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\AbstractGenerator.php(45): DatabaseOperations->readWithJoin('tbl_enrolled_st...', Array, Array, Array)
+#3 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\SLCGenerator.php(8): AbstractGenerator->fetchStudentDetails('21')
+#4 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generate.php(66): SLCGenerator->generate('21', 38)
+#5 {main} | User ID: 38 | URI: /portal/modules/certificates/generate.php
+[2026-04-29 15:55:23] [File: C:\xampp\htdocs\GCA-Production\common\lib\Operation.php] [Line: 509] Database Error during SELECT with JOIN Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Trace: #0 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(659): DatabaseOperations->logError('SELECT with JOI...', 'SQLSTATE[42S22]...', 'SELECT e.*, sch...')
+#1 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(676): DatabaseOperations->selectWithJoin('tbl_enrolled_st...', Array, Array, Array, '', 1, 0)
+#2 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\AbstractGenerator.php(45): DatabaseOperations->readWithJoin('tbl_enrolled_st...', Array, Array, Array)
+#3 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\AttemptGenerator.php(8): AbstractGenerator->fetchStudentDetails('21')
+#4 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generate.php(66): AttemptGenerator->generate('21', 38)
+#5 {main} | User ID: 38 | URI: /portal/modules/certificates/generate.php
+[2026-04-29 15:55:44] [File: C:\xampp\htdocs\GCA-Production\common\lib\Operation.php] [Line: 509] Database Error during SELECT with JOIN Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Trace: #0 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(659): DatabaseOperations->logError('SELECT with JOI...', 'SQLSTATE[42S22]...', 'SELECT e.*, sch...')
+#1 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(676): DatabaseOperations->selectWithJoin('tbl_enrolled_st...', Array, Array, Array, '', 1, 0)
+#2 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\AbstractGenerator.php(45): DatabaseOperations->readWithJoin('tbl_enrolled_st...', Array, Array, Array)
+#3 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\SportsGenerator.php(8): AbstractGenerator->fetchStudentDetails('21')
+#4 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generate.php(66): SportsGenerator->generate('21', 38)
+#5 {main} | User ID: 38 | URI: /portal/modules/certificates/generate.php
+[2026-04-29 15:55:59] [File: C:\xampp\htdocs\GCA-Production\common\lib\Operation.php] [Line: 509] Database Error during SELECT with JOIN Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Trace: #0 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(659): DatabaseOperations->logError('SELECT with JOI...', 'SQLSTATE[42S22]...', 'SELECT e.*, sch...')
+#1 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(676): DatabaseOperations->selectWithJoin('tbl_enrolled_st...', Array, Array, Array, '', 1, 0)
+#2 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\AbstractGenerator.php(45): DatabaseOperations->readWithJoin('tbl_enrolled_st...', Array, Array, Array)
+#3 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\CharacterGenerator.php(8): AbstractGenerator->fetchStudentDetails('21')
+#4 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generate.php(66): CharacterGenerator->generate('21', 38)
+#5 {main} | User ID: 38 | URI: /portal/modules/certificates/generate.php
+[2026-04-29 15:56:12] [File: C:\xampp\htdocs\GCA-Production\common\lib\Operation.php] [Line: 509] Database Error during SELECT with JOIN Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Trace: #0 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(659): DatabaseOperations->logError('SELECT with JOI...', 'SQLSTATE[42S22]...', 'SELECT e.*, sch...')
+#1 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(676): DatabaseOperations->selectWithJoin('tbl_enrolled_st...', Array, Array, Array, '', 1, 0)
+#2 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\AbstractGenerator.php(45): DatabaseOperations->readWithJoin('tbl_enrolled_st...', Array, Array, Array)
+#3 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\BonafideGenerator.php(8): AbstractGenerator->fetchStudentDetails('21')
+#4 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generate.php(66): BonafideGenerator->generate('21', 38)
+#5 {main} | User ID: 38 | URI: /portal/modules/certificates/generate.php
+[2026-04-29 15:59:34] [File: C:\xampp\htdocs\GCA-Production\common\lib\Operation.php] [Line: 509] Database Error during SELECT with JOIN Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.school_id' in 'on clause' | Trace: #0 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(659): DatabaseOperations->logError('SELECT with JOI...', 'SQLSTATE[42S22]...', 'SELECT e.*, sch...')
+#1 C:\xampp\htdocs\GCA-Production\common\lib\Operation.php(676): DatabaseOperations->selectWithJoin('tbl_enrolled_st...', Array, Array, Array, '', 1, 0)
+#2 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\AbstractGenerator.php(45): DatabaseOperations->readWithJoin('tbl_enrolled_st...', Array, Array, Array)
+#3 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generators\FeesPaidGenerator.php(8): AbstractGenerator->fetchStudentDetails('21')
+#4 C:\xampp\htdocs\GCA-Production\portal\modules\certificates\generate.php(66): FeesPaidGenerator->generate('21', 38)
+#5 {main} | User ID: 38 | URI: /portal/modules/certificates/generate.php
