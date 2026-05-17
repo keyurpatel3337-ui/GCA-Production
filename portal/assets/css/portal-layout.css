@@ -69,7 +69,141 @@ body.sidebar-collapsed .content-wrapper {
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* Sidebar Icon Colors */
+  --icon-home: #3b82f6;      /* Blue */
+  --icon-students: #10b981;  /* Green */
+  --icon-users: #8b5cf6;     /* Purple */
+  --icon-database: #f59e0b;  /* Amber */
+  --icon-fees: #ef4444;      /* Red */
+  --icon-payments: #06b6d4;  /* Cyan */
+  --icon-academics: #f43f5e; /* Rose */
+  --icon-settings: #64748b;  /* Slate */
+  --icon-reports: #0ea5e9;   /* Sky Blue */
+  --icon-whatsapp: #25d366;  /* WhatsApp Green */
+  --icon-exams: #fb923c;     /* Orange */
+  --icon-results: #a855f7;    /* Deep Purple */
+  --icon-hostel: #795548;    /* Brown */
+  --icon-scholarship: #ffd700; /* Gold */
 }
+
+/* Colorful Sidebar Icons Styling */
+.sidebar-menu .nav-link .nav-icon {
+    width: 1.6rem;
+    text-align: center;
+    transition: transform 0.2s ease, color 0.2s ease;
+    margin-right: 0.5rem;
+    display: inline-block;
+}
+
+.sidebar-menu .nav-link:hover .nav-icon {
+    transform: scale(1.15);
+    filter: brightness(1.1);
+}
+
+/* Base Icon Colors by Category/Class */
+.sidebar-menu .fa-home { color: var(--icon-home) !important; }
+
+/* Student Related */
+.sidebar-menu .fa-user-graduate, 
+.sidebar-menu .fa-users,
+.sidebar-menu .fa-user-plus,
+.sidebar-menu .fa-user-check,
+.sidebar-menu .fa-id-card,
+.sidebar-menu .fa-file-import { color: var(--icon-students) !important; }
+
+/* User & Access */
+.sidebar-menu .fa-users-cog,
+.sidebar-menu .fa-user,
+.sidebar-menu .fa-user-tag,
+.sidebar-menu .fa-user-lock,
+.sidebar-menu .fa-shield-alt { color: var(--icon-users) !important; }
+
+/* Data & Academic Master */
+.sidebar-menu .fa-database,
+.sidebar-menu .fa-university,
+.sidebar-menu .fa-chalkboard,
+.sidebar-menu .fa-calendar-alt,
+.sidebar-menu .fa-calendar-week,
+.sidebar-menu .fa-language,
+.sidebar-menu .fa-layer-group { color: var(--icon-database) !important; }
+
+/* Fees & Wallet */
+.sidebar-menu .fa-money-bill-wave,
+.sidebar-menu .fa-file-invoice-dollar,
+.sidebar-menu .fa-wallet,
+.sidebar-menu .fa-hand-holding-usd { color: var(--icon-fees) !important; }
+
+/* Payments & Transactions */
+.sidebar-menu .fa-credit-card,
+.sidebar-menu .fa-receipt,
+.sidebar-menu .fa-file-invoice,
+.sidebar-menu .fa-history { color: var(--icon-payments) !important; }
+
+/* Academics & Subjects */
+.sidebar-menu .fa-book,
+.sidebar-menu .fa-book-open,
+.sidebar-menu .fa-graduation-cap,
+.sidebar-menu .fa-school { color: var(--icon-academics) !important; }
+
+/* Settings & Tools */
+.sidebar-menu .fa-cogs,
+.sidebar-menu .fa-cog,
+.sidebar-menu .fa-sliders-h,
+.sidebar-menu .fa-tools,
+.sidebar-menu .fa-wrench { color: var(--icon-settings) !important; }
+
+/* Reports & Analytics */
+.sidebar-menu .fa-chart-line,
+.sidebar-menu .fa-file-alt,
+.sidebar-menu .fa-chart-bar,
+.sidebar-menu .fa-table,
+.sidebar-menu .fa-clipboard-list { color: var(--icon-reports) !important; }
+
+/* Communications */
+.sidebar-menu .fa-whatsapp,
+.sidebar-menu .fab.fa-whatsapp,
+.sidebar-menu .fa-envelope,
+.sidebar-menu .fa-comment-alt { color: var(--icon-whatsapp) !important; }
+
+/* Exams & Tests */
+.sidebar-menu .fa-pencil-alt,
+.sidebar-menu .fa-file-signature,
+.sidebar-menu .fa-laptop-code,
+.sidebar-menu .fa-question-circle { color: var(--icon-exams) !important; }
+
+/* Results & Performance */
+.sidebar-menu .fa-poll,
+.sidebar-menu .fa-award,
+.sidebar-menu .fa-trophy,
+.sidebar-menu .fa-check-double { color: var(--icon-results) !important; }
+
+/* Hostel & Services */
+.sidebar-menu .fa-bed,
+.sidebar-menu .fa-hotel,
+.sidebar-menu .fa-concierge-bell { color: var(--icon-hostel) !important; }
+
+/* Scholarships */
+.sidebar-menu .fa-medal,
+.sidebar-menu .fa-hand-holding-heart { color: var(--icon-scholarship) !important; }
+
+/* Logout special color */
+.sidebar-menu .fa-sign-out-alt { color: #dc3545 !important; }
+
+/* Active state icon color - white for contrast */
+.sidebar-menu .nav-link.active .nav-icon {
+    color: #fff !important;
+    transform: scale(1.1);
+}
+
+/* Treeview icon colors - subtle effect */
+.nav-treeview .nav-link .fas, 
+.nav-treeview .nav-link .far {
+    font-size: 0.85rem;
+    opacity: 0.85;
+}
+
+
 
 /* ============================================
    BUTTONS - Global Styling
@@ -3134,6 +3268,7 @@ body.sidebar-collapse .app-main {
     white-space: nowrap;
 }
 
+body.sidebar-collapse .brand-info,
 body.sidebar-collapse .brand-text,
 body.sidebar-collapse .nav-link p {
     display: none;
