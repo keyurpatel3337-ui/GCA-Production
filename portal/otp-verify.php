@@ -106,32 +106,16 @@ $timeLeft = max(0, 60 - $seconds_passed);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-        .verify-container { background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); width: 100%; max-width: 440px; text-align: center; }
-        .icon-box { width: 48px; height: 48px; background: #2563eb; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.25rem; }
-        h2 { margin: 0 0 0.5rem; color: #0f172a; font-weight: 700; font-size: 1.5rem; }
-        p { color: #475569; font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.5; }
-        
-        /* OTP 6-Digit Slots */
-        .otp-wrapper { display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 2rem; }
-        .digit-input { width: 50px; height: 56px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 1.5rem; font-weight: 700; text-align: center; color: #0f172a; transition: all 0.2s; background: #fff; }
-        .digit-input:focus { border-color: #2563eb; outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); background: #f0f7ff; }
-        .digit-input.active { border-color: #2563eb; }
-
-        .btn-verify { width: 100%; padding: 1rem; background: #0f172a; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-size: 1rem; margin-top: 0.5rem; }
-        .btn-verify:hover { background: #1e293b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15); }
-        .btn-verify:active { transform: translateY(0); }
-        
-        .error { color: #dc2626; background: #fef2f2; padding: 0.75rem; border-radius: 8px; font-size: 0.875rem; margin-bottom: 1.5rem; border: 1px solid #fee2e2; }
-        .success { color: #16a34a; background: #f0fdf4; padding: 0.75rem; border-radius: 8px; font-size: 0.875rem; margin-bottom: 1.5rem; border: 1px solid #dcfce7; }
-        
-        .timer-container { margin-top: 2rem; font-size: 0.875rem; color: #64748b; }
-        .timer-container span { font-weight: 500; }
-        .resend-link { color: #2563eb; text-decoration: none; font-weight: 600; cursor: pointer; display: none; }
-        .resend-link:hover { text-decoration: underline; }
-        .countdown { color: #94a3b8; }
-    </style>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verify Login | <?php echo SYSTEM_NAME; ?></title>
+    <!-- Google Font: Inter -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/vendor/font-awesome/all.min.css">
+    <!-- Custom Verification Styles -->
+    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/otp-verify.css">
 </head>
 <body>
     <div class="verify-container">

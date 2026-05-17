@@ -651,12 +651,4 @@ if (file_exists($jsonFile)) {
     });
 </script>
 
-<style>
-    .tiny {
-        font-size: 0.7rem;
-    }
-
-    .uppercase {
-        text-transform: uppercase;
-    }
-</style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/settings/email-templates.php.css">

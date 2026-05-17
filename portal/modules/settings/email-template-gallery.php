@@ -171,10 +171,7 @@ if (file_exists($jsonFile)) {
         doc.write(`
             <html>
                 <head>
-                    <style>
-                        body { margin: 20px; font-family: 'Inter', sans-serif; }
-                        * { max-width: 100%; box-sizing: border-box; }
-                    </style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/settings/email-template-gallery.php.css">
                 </head>
                 <body>${content}</body>
             </html>
@@ -305,41 +302,4 @@ if (file_exists($jsonFile)) {
         });
     });
 </script>
-
-<style>
-    .template-card-wrapper {
-        page-break-inside: avoid;
-    }
-    .tiny {
-        font-size: 0.7rem;
-    }
-    .uppercase {
-        text-transform: uppercase;
-    }
-    @media print {
-        .app-content {
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        .container-fluid {
-            width: 100% !important;
-            max-width: 100% !important;
-            padding: 0 !important;
-        }
-        .row {
-            display: block !important;
-        }
-        .template-card-wrapper {
-            width: 100% !important;
-            margin-bottom: 2rem !important;
-            page-break-after: always;
-        }
-        .card {
-            box-shadow: none !important;
-            border: 1px solid #eee !important;
-        }
-        body {
-            background-color: white !important;
-        }
-    }
-</style>
+

@@ -106,6 +106,7 @@ try {
 }
 ?>
 <?php include '../../include/header.php'; ?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/students/session-details.css">
 <?php include '../../include/navbar.php'; ?>
 <?php include '../../include/sidebar.php'; ?>
 
@@ -342,84 +343,6 @@ try {
             <?php endif; ?>
         </div>
     </div>
-</div>
-
-<?php include '../../include/footer.php'; ?>
-<style>
-    .timeline {
-        margin: 0 0 45px;
-        padding: 0;
-        position: relative;
-    }
-
-    .timeline::before {
-        border-radius: .25rem;
-        background-color: #dee2e6;
-        bottom: 0;
-        content: "";
-        left: 31px;
-        margin: 0;
-        position: absolute;
-        top: 0;
-        width: 4px;
-    }
-
-    .timeline>div {
-        margin-bottom: 15px;
-        margin-right: 10px;
-        position: relative;
-    }
-
-    .timeline>div>.timeline-item {
-        border-radius: .25rem;
-        background-color: #fff;
-        color: #495057;
-        margin-left: 60px;
-        margin-right: 15px;
-        margin-top: 0;
-        padding: 0;
-        position: relative;
-    }
-
-    .timeline>div>i {
-        background-color: #adb5bd;
-        border-radius: 50%;
-        font-size: 16px;
-        height: 30px;
-        left: 18px;
-        line-height: 30px;
-        position: absolute;
-        text-align: center;
-        top: 0;
-        width: 30px;
-        color: #fff;
-        z-index: 1;
-    }
-
-    .timeline>.time-label>span {
-        border-radius: 4px;
-        display: inline-block;
-        font-weight: 600;
-        padding: 5px;
-        color: #fff;
-    }
-
-    .timeline>div>.timeline-item>.time {
-        color: #999;
-        float: right;
-        font-size: 12px;
-        padding: 15px;
-    }
-
-    .timeline>div>.timeline-item>.timeline-header {
-        border-bottom: 1px solid rgba(0, 0, 0, .125);
-        color: #495057;
-        font-size: 16px;
-        line-height: 1.1;
-        margin: 0;
-        padding: 10px;
-    }
-</style>
 </div>
 
 <?php include '../../include/footer.php'; ?>

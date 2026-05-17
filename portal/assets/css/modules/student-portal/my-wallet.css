@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+
+.font-outfit {
+    font-family: 'Outfit', sans-serif !important;
+}
+
+.bg-success-light {
+    background-color: rgba(46, 213, 115, 0.1) !important;
+}
+
+.bg-danger-light {
+    background-color: rgba(255, 71, 87, 0.1) !important;
+}
+
+.bg-warning-light {
+    background-color: rgba(255, 159, 67, 0.1) !important;
+}
+
+.bg-primary-light {
+    background-color: rgba(0, 123, 255, 0.1) !important;
+}
+
+.bg-gray-100 {
+    background-color: #f8f9fa !important;
+}
+
+.bg-gray-50 {
+    background-color: #fdfdfd !important;
+}
+
+.card-wallet {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+}
+
+.tracking-wider {
+    letter-spacing: 0.1em;
+}
+
+.tracking-tighter {
+    letter-spacing: -0.02em;
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #0d6efd;
+    border: 0;
+}
+
+.btn-outline-white {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-white:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-outline-white:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}
+
+.rounded-4 {
+    border-radius: 1.25rem !important;
+}
+
+.rounded-lg {
+    border-radius: 0.75rem !important;
+}
+
+.btn-xl {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#pinForm input:focus {
+    background-color: #fff !important;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+    border: 1px solid #007bff !important;
+}
+
+.card-enhanced {
+    transition: transform 0.3s ease;
+}
+
+.card-enhanced:hover {
+    transform: translateY(-5px);
+}

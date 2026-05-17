@@ -44,22 +44,7 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<style>
-    .target-header {
-        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        border-radius: 12px;
-        padding: 40px;
-        color: white;
-        margin-bottom: 25px;
-        text-align: center;
-    }
-
-    .gauge-container {
-        width: 300px;
-        height: 200px;
-        margin: 0 auto;
-    }
-</style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/financial/target-vs-actual.php.css">
 
 <div class="container-fluid text-end mb-3">
     <button class="btn btn-danger btn-sm" onclick="exportToPDF()">

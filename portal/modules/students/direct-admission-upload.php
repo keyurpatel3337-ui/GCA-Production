@@ -186,11 +186,7 @@ include '../../include/sidebar.php';
     </form>
 </div>
 
-<style>
-    .border-dashed {
-        border: 2px dashed #dee2e6 !important;
-    }
-</style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/students/direct-admission-upload.css">
 
 <script>
     document.getElementById('directAdmissionForm').addEventListener('submit', function () {

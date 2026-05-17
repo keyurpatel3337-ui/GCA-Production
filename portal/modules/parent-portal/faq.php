@@ -15,6 +15,9 @@ $page_title = "Parent Frequently Asked Questions";
 $page_breadcrumb = "FAQ";
 
 include '../../include/header.php';
+?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/parent-portal/faq.css">
+<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
@@ -160,22 +163,5 @@ include '../../include/sidebar.php';
         </div>
     </div>
 </div>
-
-<style>
-    .custom-accordion .accordion-button:not(.collapsed) {
-        background-color: transparent;
-        color: var(--bs-primary);
-        box-shadow: none;
-    }
-
-    .custom-accordion .accordion-button:focus {
-        box-shadow: none;
-        border-color: rgba(0, 0, 0, .125);
-    }
-
-    .custom-accordion .accordion-item {
-        background-color: transparent;
-    }
-</style>
 
 <?php include '../../include/footer.php'; ?>

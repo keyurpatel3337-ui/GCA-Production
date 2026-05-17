@@ -114,6 +114,9 @@ $required_docs += [
 
 $page_title = "Document Repository - " . $student_name;
 include '../../include/header.php';
+?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/students/upload-documents.css">
+<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
@@ -226,31 +229,5 @@ include '../../include/sidebar.php';
         </div>
     </div>
 </div>
-
-<style>
-    .glass-card {
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 20px;
-    }
-
-    .table-hover tbody tr:hover {
-        background-color: rgba(79, 70, 229, 0.02) !important;
-    }
-
-    .smaller {
-        font-size: 0.75rem;
-    }
-
-    .form-check-input:checked {
-        background-color: #10b981;
-        border-color: #10b981;
-    }
-
-    .welcome-banner {
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-</style>
 
 <?php include '../../include/footer.php'; ?>

@@ -123,8 +123,6 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
     </div>
 </main>
 
-<style>
-    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-</style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>assets/css/modules/student-portal/online-exams.css">
 
 <?php include PORTAL_INCLUDE_PATH . 'footer.php'; ?>

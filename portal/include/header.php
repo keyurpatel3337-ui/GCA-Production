@@ -31,25 +31,14 @@ ob_start();
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/vendor/bootstrap/bootstrap.min.css">
-    <!-- GCA Custom Layout CSS (Replaces AdminLTE) -->
-    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/gca-layout.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/vendor/select2/select2.min.css">
     <!-- Flatpickr -->
     <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/vendor/flatpickr/flatpickr.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/vendor/sweetalert2/sweetalert2.min.css">
-    <!-- Global Theme CSS -->
-    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/global-theme.css">
-    <!-- Fixed Layout CSS -->
-    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/fixed-layout.css">
-    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modal-fixes.css">
-    <!-- Student Search Component CSS -->
-    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/student-search.css">
-    <!-- Notification Bell CSS -->
-    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/notification-bell.css">
-    <!-- Portal Custom CSS -->
-    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/portal-custom.css">
+    <!-- GCA Portal Layout Bundle (Includes: Global Theme, Layout Engine, Components, and Include styles) -->
+    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/portal-layout.css">
 
     <!-- Online Exam System (OES) Dependencies -->
     <script src="<?php echo PORTAL_URL; ?>/assets/vendor/tailwind/tailwind.min.js"></script>

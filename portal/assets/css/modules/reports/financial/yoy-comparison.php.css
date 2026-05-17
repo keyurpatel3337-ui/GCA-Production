@@ -1,0 +1,27 @@
+/* Styles for portal/modules/reports/financial/yoy-comparison.php */
+
+.yoy-header {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        border-radius: 12px;
+        padding: 30px;
+        color: white;
+        margin-bottom: 25px;
+    }
+
+    .year-box {
+        text-align: center;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+    }
+
+    .year-box h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 400px;
+    }

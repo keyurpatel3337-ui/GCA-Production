@@ -36,23 +36,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<style>
-    .btn-success-custom {
-        background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        transition: all 0.2s ease;
-    }
-
-    .btn-success-custom:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 8px -1px rgba(16, 185, 129, 0.2);
-        color: white;
-        background: linear-gradient(135deg, #047857 0%, #059669 100%);
-    }
-</style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>assets/css/modules/test-marks/add.css">
 
 
 

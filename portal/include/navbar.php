@@ -61,7 +61,6 @@ if (!empty($user_name)) {
 ?>
 
 <!-- AdminLTE 4 Navbar -->
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/include/navbar.css">
 <nav class="app-header navbar navbar-expand bg-body">
     <div class="container-fluid">
         <!-- Start navbar links -->

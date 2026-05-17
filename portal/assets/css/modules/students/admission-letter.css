@@ -1,0 +1,22 @@
+/* Styles for portal/modules/students/admission-letter.php */
+@media print {
+    .content-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .card-header,
+    .card-tools,
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        background: white !important;
+    }
+}

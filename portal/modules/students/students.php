@@ -143,43 +143,14 @@ else {
 }
 
 include '../../include/header.php';
+?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/students/students.css">
+<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
 <?php // Excel exports handled via export.php (server-side) ?>
-
-<style>
-    .view-switcher .btn {
-        border-radius: 20px;
-        padding: 5px 20px;
-        font-weight: 600;
-        margin-right: 5px;
-    }
-
-    .view-switcher .btn.active {
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .status-badge {
-        font-size: 0.75rem;
-        padding: 0.35em 0.65em;
-    }
-
-    .table-students th {
-        background: #f8f9fa;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        color: #6c757d;
-        border-bottom: 2px solid #dee2e6;
-    }
-
-    /* Select2 Placeholder fix */
-    .select2-container--bootstrap4 .select2-selection--single .select2-selection__placeholder {
-        color: #6c757d !important;
-        opacity: 0.8;
-    }
-</style>
 
 <div class="content-wrapper">
     <section class="content">

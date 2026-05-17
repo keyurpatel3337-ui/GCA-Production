@@ -138,17 +138,7 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<style>
-    @media print {
-        .no-print {
-            display: none !important;
-        }
-
-        .card {
-            border: 1px solid #ddd !important;
-        }
-    }
-</style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/financial/day-book.php.css">
 
 
 

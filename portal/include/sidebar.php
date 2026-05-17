@@ -66,7 +66,6 @@ $website_prefix = $portal_root . 'modules/website/';
 $maintenance_prefix = $portal_root . 'modules/maintenance/';
 ?>
 <!-- GCA Portal Sidebar -->
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/include/sidebar.css">
 <script>console.log('Sidebar element rendering...');</script>
 <aside id="main-sidebar" class="app-sidebar bg-white shadow-sm d-flex flex-column" data-bs-theme="light">
     <!-- Sidebar Brand -->

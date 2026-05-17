@@ -179,26 +179,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<style>
-    .installment-card {
-        margin-bottom: 10px;
-    }
-
-    .installment-paid {
-        background-color: #d4edda;
-        border-left: 4px solid #28a745;
-    }
-
-    .installment-pending {
-        background-color: #fff3cd;
-        border-left: 4px solid #ffc107;
-    }
-
-    .installment-partial {
-        background-color: #cce5ff;
-        border-left: 4px solid #0066cc;
-    }
-</style>
+<link rel="stylesheet" href="<?= PORTAL_URL ?>/assets/css/modules/student-portal/my-fees.css">
 </head>
 
 <body>

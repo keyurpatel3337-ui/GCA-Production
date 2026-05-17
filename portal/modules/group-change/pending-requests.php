@@ -282,33 +282,4 @@ include '../../include/footer.php'; ?>
     });
 </script>
 
-<style>
-    /* Custom styles for this page */
-    .nav-pills .nav-link {
-        color: #495057;
-        border-radius: 0.375rem;
-        margin-right: 0.5rem;
-    }
-
-    .nav-pills .nav-link.active {
-        background-color: var(--primary-color, #321fdb);
-    }
-
-    .nav-pills .nav-link:hover:not(.active) {
-        background-color: #e9ecef;
-    }
-
-    .table thead th {
-        font-weight: 600;
-        white-space: nowrap;
-    }
-
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-    }
-
-    .card-tools .input-group {
-        flex-wrap: nowrap;
-    }
-</style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/group-change/pending-requests.css">

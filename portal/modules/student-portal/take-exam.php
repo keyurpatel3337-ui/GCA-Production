@@ -57,13 +57,7 @@ include PORTAL_INCLUDE_PATH . 'navbar.php';
 include PORTAL_INCLUDE_PATH . 'sidebar.php';
 ?>
 
-<style>
-    body { font-family: 'Outfit', sans-serif; }
-    .question-palette-btn.active { border-color: #4f46e5; background-color: #e0e7ff; color: #4338ca; }
-    .question-palette-btn.answered { background-color: #10b981; color: white; border-color: #10b981; }
-    .question-palette-btn.marked { background-color: #8b5cf6; color: white; border-color: #8b5cf6; }
-    .exam-container { height: calc(100vh - 160px); overflow: hidden; }
-</style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>assets/css/modules/student-portal/take-exam.css">
 
 <main class="app-main">
     <div class="app-content-header bg-white border-bottom shadow-sm">

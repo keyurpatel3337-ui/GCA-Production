@@ -128,39 +128,6 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
-<style>
-    .bg-success-light {
-        background-color: rgba(46, 213, 115, 0.1) !important;
-    }
-
-    .bg-info-light {
-        background-color: rgba(0, 123, 255, 0.05) !important;
-    }
-
-    .avatar-box .rounded-circle {
-        border: 2px solid white;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    #studentSearch:focus {
-        background-color: white !important;
-        box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
-    }
-
-    .rounded-4 {
-        border-radius: 1rem !important;
-    }
-
-    .search-item:hover {
-        background-color: #f8f9fa;
-        cursor: pointer;
-    }
-
-    .btn-xl {
-        font-size: 1.1rem;
-    }
-</style>
-
 <script>
     const searchInput = document.getElementById('studentSearch');
     const searchResults = document.getElementById('searchResults');

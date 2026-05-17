@@ -341,28 +341,4 @@ if (file_exists($jsonFile)) {
     });
 </script>
 
-<style>
-    .card {
-        border-radius: 12px;
-        overflow: hidden;
-    }
-    .card-header {
-        padding: 1.25rem;
-    }
-    .form-control:focus, .form-select:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-    }
-    .btn {
-        padding: 0.5rem 1.5rem;
-        border-radius: 8px;
-        font-weight: 500;
-    }
-    .preview-container {
-        height: 500px;
-        transition: max-width 0.3s ease;
-        margin: 0 auto;
-        background-color: #f8f9fa !important;
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-    }
-</style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/settings/email-template-manage.php.css">

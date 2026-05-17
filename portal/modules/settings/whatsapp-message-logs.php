@@ -482,29 +482,4 @@ $date_to = date('Y-m-d');
         });
     </script>
 
-    <style>
-        .tiny {
-            font-size: 0.75rem;
-        }
-
-        .uppercase {
-            text-transform: uppercase;
-        }
-
-        .col-md-5th {
-            flex: 0 0 auto;
-            width: 20%;
-        }
-
-        @media (max-width: 991.98px) {
-            .col-md-5th {
-                width: 33.333%;
-            }
-        }
-
-        @media (max-width: 767.98px) {
-            .col-md-5th {
-                width: 50%;
-            }
-        }
-    </style>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/settings/whatsapp-message-logs.php.css">

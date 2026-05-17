@@ -9,18 +9,7 @@ require_once PORTAL_PATH . 'session_config.php';
 <head>
     <title>Mic Diagnostic</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: Arial, sans-serif; padding: 30px; max-width: 600px; margin: 0 auto; }
-        .log { background: #1e1e1e; color: #0f0; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 13px; min-height: 200px; margin-top: 20px; white-space: pre-wrap; }
-        button { padding: 10px 20px; margin: 5px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; }
-        .btn-blue { background: #0d6efd; color: white; }
-        .btn-green { background: #198754; color: white; }
-        .btn-red { background: #dc3545; color: white; }
-        .status { padding: 8px 15px; border-radius: 20px; display: inline-block; font-size: 13px; font-weight: 600; margin: 5px; }
-        .granted { background: #d1e7dd; color: #0f5132; }
-        .denied { background: #f8d7da; color: #842029; }
-        .prompt { background: #fff3cd; color: #664d03; }
-    </style>
+    <link rel="stylesheet" href="<?= PORTAL_URL ?>/assets/css/modules/online-exam/mic-test.css">
 </head>
 <body>
     <h3>🎤 Microphone Diagnostic Tool</h3>
