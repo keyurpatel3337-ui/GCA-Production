@@ -78,7 +78,7 @@ try {
                    FROM tbl_test_results tr
                    LEFT JOIN tbl_omr_sheets os ON tr.omr_sheet_id = os.id
                    WHERE tr.student_id IN (SELECT id FROM tbl_gm_std_registration WHERE counsellor_id = ?)
-                   ORDER BY tr.percentage DESC LIMIT 10";
+                   ORDER BY tr.percentage ASC LIMIT 10";
         $top_performers = $dbOps->customSelect($sql_top, [$counsellor_id]);
     } else {
         $stats['omr_total'] = $dbOps->count('tbl_omr_sheets');
@@ -94,7 +94,7 @@ try {
         $sql_top = "SELECT tr.*, os.student_name, os.roll_number 
                    FROM tbl_test_results tr
                    LEFT JOIN tbl_omr_sheets os ON tr.omr_sheet_id = os.id
-                   ORDER BY tr.percentage DESC LIMIT 10";
+                   ORDER BY tr.percentage ASC LIMIT 10";
         $top_performers = $dbOps->customSelect($sql_top);
     }
 } catch (PDOException $e) {

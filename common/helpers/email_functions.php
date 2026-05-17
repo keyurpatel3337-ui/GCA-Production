@@ -471,7 +471,7 @@ function getEmailStats($conn, $days = 30)
             FROM tbl_email_logs 
             WHERE sent_at >= DATE_SUB(NOW(), INTERVAL ? DAY)
             GROUP BY status, DATE(sent_at)
-            ORDER BY date DESC
+            ORDER BY date ASC
         ");
         $stmt->execute([$days]);
         return $stmt->fetchAll();

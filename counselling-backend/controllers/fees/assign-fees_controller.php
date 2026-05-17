@@ -271,7 +271,7 @@ $sql_configs = "SELECT
     LEFT JOIN tbl_schools s ON fc.school_id = s.id
     LEFT JOIN tbl_group g ON fc.group_id = g.id
     WHERE fc.is_active = 1 
-    ORDER BY fc.academic_year DESC, fc.course_name desc";
+    ORDER BY fc.academic_year ASC, fc.course_name desc";
 $fee_configs = $dbOps->customSelect($sql_configs);
 
 // Fetch only enrolled students with enrollment details

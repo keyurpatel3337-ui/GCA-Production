@@ -71,7 +71,7 @@ try {
                 WHEN 'under_review' THEN 2 
                 ELSE 3 
             END,
-            gcr.request_date DESC";
+            gcr.request_date ASC";
 
     $requests = $dbOps->customSelect($query, $params);
 

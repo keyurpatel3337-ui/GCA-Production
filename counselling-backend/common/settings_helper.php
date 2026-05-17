@@ -202,7 +202,7 @@ function getAuditLogs($conn, $limit = 100, $module = null)
             $params[] = $module;
         }
 
-        $sql .= " ORDER BY created_at DESC LIMIT ?";
+        $sql .= " ORDER BY created_at ASC LIMIT ?";
         $params[] = $limit;
 
         $stmt = $conn->prepare($sql);

@@ -585,7 +585,7 @@ function getUserActivitySummary($conn, $user_id, $start_date = null, $end_date =
         FROM tbl_audit_logs 
         {$where}
         GROUP BY action_category
-        ORDER BY action_count DESC
+        ORDER BY action_count ASC
     ");
     $stmt->execute($params);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -694,7 +694,7 @@ function getAllWhatsAppTemplates($conn, $filters = [])
             $params[] = $filters['active'];
         }
 
-        $query .= " ORDER BY t.created_at DESC";
+        $query .= " ORDER BY t.created_at ASC";
 
         $stmt = $conn->prepare($query);
         $stmt->execute($params);

@@ -143,7 +143,7 @@ try {
               LEFT JOIN tbl_courses c ON sr.course_id = c.id
               LEFT JOIN tbl_group g ON sr.group_id = g.id
               $whereClause
-              ORDER BY sr.id DESC
+              ORDER BY sr.id ASC
               LIMIT $per_page OFFSET $offset";
 
     $rules = $dbOps->customSelect($query, $whereParams);

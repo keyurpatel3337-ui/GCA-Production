@@ -452,7 +452,7 @@ try {
                         // Handle Overpayment Refund
                         if ($overpayment > 0) {
                             // Fetch the latest payment ID to link the refund
-                            $latestPayStmt = $conn->prepare("SELECT id FROM tbl_payments WHERE student_id = ? AND status = 'paid' ORDER BY payment_date DESC, id desc LIMIT 1");
+                            $latestPayStmt = $conn->prepare("SELECT id FROM tbl_payments WHERE student_id = ? AND status = 'paid' ORDER BY payment_date ASC, id desc LIMIT 1");
                             $latestPayStmt->execute([$student_id]);
                             $latest_payment = $latestPayStmt->fetch(PDO::FETCH_ASSOC);
                             $payment_id = $latest_payment ? $latest_payment['id'] : null;

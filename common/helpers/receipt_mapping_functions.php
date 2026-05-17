@@ -94,7 +94,7 @@ function getAllReceiptConfigs($conn, $organization_type = null)
                 return $dbOps->customSelect("
                     SELECT * FROM tbl_receipt_configuration 
                     WHERE is_active = 1
-                    ORDER BY organization_type, organization_name DESC
+                    ORDER BY organization_type, organization_name ASC
                 ", []);
             } else {
                 $stmt = $conn->query("

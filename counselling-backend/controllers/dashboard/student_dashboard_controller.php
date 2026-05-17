@@ -127,7 +127,7 @@ try {
                            FROM tbl_test_results tr 
                            INNER JOIN tbl_answer_keys ak ON tr.answer_key_id = ak.id 
                            WHERE tr.student_id = ? 
-                           ORDER BY tr.created_at DESC LIMIT 5");
+                           ORDER BY tr.created_at ASC LIMIT 5");
     $stmt->execute([$user_id]);
     $recent_results = $stmt->fetchAll();
 } catch (PDOException $e) {

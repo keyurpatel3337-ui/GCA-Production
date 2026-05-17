@@ -125,7 +125,7 @@ try {
         GROUP BY name");
 
     // 5. Recently Modified Records
-    $stats['recent_modified'] = $dbOps->customSelect("SELECT id, surname, student_name, fathers_name, mob, updated_at FROM tbl_gm_std_registration ORDER BY updated_at DESC LIMIT 5");
+    $stats['recent_modified'] = $dbOps->customSelect("SELECT id, surname, student_name, fathers_name, mob, updated_at FROM tbl_gm_std_registration ORDER BY updated_at ASC LIMIT 5");
 
     $success = true;
     $error = null;

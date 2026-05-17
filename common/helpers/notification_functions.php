@@ -452,7 +452,7 @@ function processEmailQueue($conn, $limit = 50)
                 WHERE status = 'pending' 
                 AND (scheduled_at IS NULL OR scheduled_at <= NOW())
                 AND retry_count < max_retries
-                ORDER BY priority DESC, created_at desc
+                ORDER BY priority ASC, created_at asc
                 LIMIT ?";
 
         $stmt = $conn->prepare($sql);

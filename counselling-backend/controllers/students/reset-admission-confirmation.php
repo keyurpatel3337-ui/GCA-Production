@@ -93,7 +93,7 @@ try {
                                         LEFT JOIN tbl_users u ON r.admission_confirmed_by = u.id
                                         WHERE r.admission_confirmed = 1
                                         AND r.id NOT IN (SELECT registration_id FROM tbl_enrolled_students WHERE registration_id IS NOT NULL)
-                                        ORDER BY r.admission_confirmed_date DESC", []) ?: [];
+                                        ORDER BY r.admission_confirmed_date ASC", []) ?: [];
 
     // Get statistics by course
     $statsByCourse = $dbOps->customSelect("SELECT c.course_name, COUNT(*) as count
@@ -102,7 +102,7 @@ try {
                                   WHERE r.admission_confirmed = 1
                                   AND r.id NOT IN (SELECT registration_id FROM tbl_enrolled_students WHERE registration_id IS NOT NULL)
                                   GROUP BY r.course_id, c.course_name
-                                  ORDER BY count DESC", []) ?: [];
+                                  ORDER BY count ASC", []) ?: [];
 
     // Get statistics by confirmed by user
     $statsByUser = $dbOps->customSelect("SELECT u.name as user_name, COUNT(*) as count
@@ -111,7 +111,7 @@ try {
                                 WHERE r.admission_confirmed = 1
                                 AND r.id NOT IN (SELECT registration_id FROM tbl_enrolled_students WHERE registration_id IS NOT NULL)
                                 GROUP BY r.admission_confirmed_by, u.name
-                                ORDER BY count DESC", []) ?: [];
+                                ORDER BY count ASC", []) ?: [];
 
     // Get date range
     $dateRange = $dbOps->customSelectOne("SELECT MIN(admission_confirmed_date) as earliest, 

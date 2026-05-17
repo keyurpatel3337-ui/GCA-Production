@@ -164,13 +164,13 @@ try {
         "SELECT t.*, ay.year_name 
          FROM tbl_term t
          LEFT JOIN tbl_academic_years ay ON t.academic_year_id = ay.id
-         ORDER BY ay.year_name DESC, t.term_number desc"
+         ORDER BY ay.year_name ASC, t.term_number desc"
     );
     if ($terms === false)
         $terms = [];
 
     // Also fetch academic years for dropdown
-    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name DESC');
+    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name ASC');
     if ($academic_years === false)
         $academic_years = [];
 } catch (PDOException $e) {

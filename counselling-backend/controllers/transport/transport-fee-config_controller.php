@@ -36,7 +36,7 @@ try {
             LEFT JOIN tbl_users u ON tfs.created_by = u.id 
             LEFT JOIN tbl_academic_years ay ON tfs.academic_year_id = ay.id 
             LEFT JOIN tbl_courses c ON tfs.course_id = c.id
-            ORDER BY ay.year_name DESC, c.course_name ASC";
+            ORDER BY ay.year_name ASC, c.course_name ASC";
     $transport_settings = $dbOps->customSelect($sql);
 } catch (PDOException $e) {
     if (!$is_api_call && function_exists('logDatabaseError')) {
@@ -50,7 +50,7 @@ try {
 }
 
 try {
-    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name DESC');
+    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name ASC');
 } catch (PDOException $e) {
     if (!$is_api_call && function_exists('logDatabaseError')) {
         logDatabaseError($e, "Fetch Academic Years");

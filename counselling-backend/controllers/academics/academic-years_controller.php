@@ -157,7 +157,7 @@ if ($is_api_call && $route === 'settings/academic-year-get') {
 
 // Fetch all academic years (for listing or direct inclusion)
 try {
-    $academic_years = $dbOps->select('tbl_academic_years', ['*'], [], 'year_name DESC');
+    $academic_years = $dbOps->select('tbl_academic_years', ['*'], [], 'year_name ASC');
 
     // If false or null, set to empty array
     if (!is_array($academic_years)) {

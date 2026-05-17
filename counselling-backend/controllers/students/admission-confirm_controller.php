@@ -272,7 +272,7 @@ try {
                                      AND (sr.group_id = ? OR sr.group_id IS NULL)
                                      AND sr.is_active = 1 
                                      AND st.is_active = 1
-                                   ORDER BY st.id, sr.scholarship_discount_amount DESC");
+                                   ORDER BY st.id, sr.scholarship_discount_amount ASC");
     $stmt_rules->execute([$student['course_id'], $student['group_id']]);
     $scholarship_rules = $stmt_rules->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {

@@ -100,16 +100,16 @@ try {
             $dataQuery .= " ORDER BY sfa.pending_amount ASC";
             break;
         case 'pending_desc':
-            $dataQuery .= " ORDER BY sfa.pending_amount DESC";
+            $dataQuery .= " ORDER BY sfa.pending_amount ASC";
             break;
         case 'due_date':
-            $dataQuery .= " ORDER BY sfa.due_date ASC, sfa.pending_amount DESC";
+            $dataQuery .= " ORDER BY sfa.due_date ASC, sfa.pending_amount ASC";
             break;
         case 'name':
             $dataQuery .= " ORDER BY r.surname ASC, r.student_name ASC";
             break;
         default:
-            $dataQuery .= " ORDER BY sfa.pending_amount DESC";
+            $dataQuery .= " ORDER BY sfa.pending_amount ASC";
     }
 
     // Add Pagination

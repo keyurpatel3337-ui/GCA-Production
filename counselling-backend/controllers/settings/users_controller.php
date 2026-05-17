@@ -258,7 +258,7 @@ if ($routeAction === 'user-get') {
                               LEFT JOIN tbl_roles r ON u.role_id = r.id 
                               LEFT JOIN tbl_staff s ON u.id = s.user_id
                               $where
-                              ORDER BY u.id DESC
+                              ORDER BY u.id ASC
                               LIMIT $perPage OFFSET $offset");
         $stmt->execute($params);
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);

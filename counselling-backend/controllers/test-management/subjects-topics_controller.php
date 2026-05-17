@@ -33,7 +33,7 @@ try {
                 (SELECT COUNT(*) FROM tbl_blueprint_questions WHERE topic_id = t.id) as question_count
          FROM tbl_topics t 
          WHERE t.subject_id = ? 
-         ORDER BY t.topic_name_english DESC",
+         ORDER BY t.topic_name_english ASC",
         [$subject_id]
     );
 

@@ -113,7 +113,7 @@ try {
                 WHERE payment_date BETWEEN ? AND ? 
                 AND status = 'paid'
                 GROUP BY DATE(payment_date), payment_type
-                ORDER BY date DESC, payment_type";
+                ORDER BY date ASC, payment_type";
     $pivot_raw = $dbOps->customSelect($sql_pivot, [$from_date, $to_date]);
 
     // 3. Get daily totals with mode breakdown
@@ -126,7 +126,7 @@ try {
                 WHERE payment_date BETWEEN ? AND ? 
                 AND status = 'paid'
                 GROUP BY DATE(payment_date)
-                ORDER BY date DESC";
+                ORDER BY date ASC";
     $daily_totals = $dbOps->customSelect($sql_daily_totals, [$from_date, $to_date]);
 
     // 4. Get payment type totals per date
@@ -138,7 +138,7 @@ try {
                 WHERE payment_date BETWEEN ? AND ? 
                 AND status = 'paid'
                 GROUP BY DATE(payment_date), payment_type
-                ORDER BY date DESC";
+                ORDER BY date ASC";
     $type_per_date = $dbOps->customSelect($sql_type_per_date, [$from_date, $to_date]);
 
     // Build pivot data structure
@@ -199,7 +199,7 @@ try {
                 WHERE p.payment_date BETWEEN ? AND ?
                   AND p.status = 'paid'
                 GROUP BY r.course_id, p.payment_type
-                ORDER BY r.course_id, total DESC";
+                ORDER BY r.course_id, total ASC";
     $course_type_raw = $dbOps->customSelect($sql_course_type, [$from_date, $to_date]) ?: [];
 
     // Per-course mode breakdown
@@ -213,7 +213,7 @@ try {
                 WHERE p.payment_date BETWEEN ? AND ?
                   AND p.status = 'paid'
                 GROUP BY r.course_id, p.payment_mode
-                ORDER BY r.course_id, total DESC";
+                ORDER BY r.course_id, total ASC";
     $course_mode_raw = $dbOps->customSelect($sql_course_mode, [$from_date, $to_date]) ?: [];
 
     // Build detail maps keyed by course_id

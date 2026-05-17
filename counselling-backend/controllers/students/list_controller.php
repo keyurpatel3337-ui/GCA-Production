@@ -80,7 +80,7 @@ try {
         $boards = [];
 
     // Academic Years
-    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name DESC');
+    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name ASC');
     if ($academic_years === false)
         $academic_years = [];
 
@@ -115,7 +115,7 @@ try {
         $divisions = [];
 
     // Counsellors (all active users with counsellor role)
-    $counsellors = $dbOps->customSelect("SELECT id, name FROM tbl_users WHERE status = 'active' ORDER BY name DESC", []) ?: [];
+    $counsellors = $dbOps->customSelect("SELECT id, name FROM tbl_users WHERE status = 'active' ORDER BY name ASC", []) ?: [];
 } catch (PDOException $e) {
     logDatabaseError($e, "Fetch Filter Dropdowns");
     $boards = $academic_years = $groups = $courses = $mediums = $schools = [];

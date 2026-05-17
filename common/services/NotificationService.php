@@ -154,7 +154,7 @@ class NotificationService
                 $sql .= " AND is_read = 0";
             }
 
-            $sql .= " ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
+            $sql .= " ORDER BY created_at ASC LIMIT :limit OFFSET :offset";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':user_type', $userType, PDO::PARAM_STR);

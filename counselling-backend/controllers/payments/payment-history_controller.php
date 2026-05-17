@@ -78,7 +78,7 @@ try {
 
     // Get all payments for this student (Only regular payments for history view per user request)
     $sql_payments = "SELECT *, (CASE WHEN receipt_no = '0' AND payment_mode != 'deduction' THEN 1 ELSE 0 END) as is_without_gst FROM tbl_payments WHERE student_id = ?
-                    ORDER BY payment_date DESC, created_at DESC";
+                    ORDER BY payment_date ASC, created_at DESC";
     $payments = $dbOps->customSelect($sql_payments, [$student_id]);
     if ($payments === false)
         $payments = [];

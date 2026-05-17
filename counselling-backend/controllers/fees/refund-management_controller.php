@@ -96,7 +96,7 @@ try {
             WHEN 'processing' THEN 4
             ELSE 5
         END,
-        requested_at DESC
+        requested_at ASC
         LIMIT " . (int) $perPage . " OFFSET " . (int) $offset;
 
     $refund_requests = $dbOps->customSelect($sql, $params) ?: [];

@@ -107,7 +107,7 @@ try {
         "SELECT p.*, r.student_name, r.id as student_id 
          FROM tbl_payments p
          LEFT JOIN tbl_gm_std_registration r ON p.student_id = r.id
-         ORDER BY p.payment_date DESC, p.created_at desc
+         ORDER BY p.payment_date ASC, p.created_at desc
          LIMIT 10"
     );
     $stats['recent_transactions'] = $recent !== false ? $recent : [];

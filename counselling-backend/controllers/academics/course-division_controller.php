@@ -132,7 +132,7 @@ try {
         LEFT JOIN tbl_group g ON cd.group_id = g.id
         LEFT JOIN tbl_division d ON cd.division_id = d.id
         LEFT JOIN tbl_users u ON cd.created_by = u.id
-        ORDER BY c.course_name DESC, g.group_name desc, d.display_order DESC"
+        ORDER BY c.course_name ASC, g.group_name desc, d.display_order DESC"
     );
 
     // Also fetch dropdown data
