@@ -83,7 +83,7 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
 
     <!-- Sidebar Wrapper -->
     <div class="sidebar-wrapper px-2">
-        <nav class="mt-2">
+        <nav>
             <ul class="nav nav-pills sidebar-menu flex-column" data-lte-toggle="treeview" role="menu"
                 data-accordion="true">
 
@@ -96,7 +96,7 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                 </li>
                 <?php if (hasRole(ROLE_COMPUTER_OPERATOR)): ?>
                     <!-- ===== COMPUTER OPERATOR MENU ===== -->
-                    <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Data Management</li>
+                    <li class="nav-header text-uppercase opacity-75 small fw-bold">Data Management</li>
                     <!-- Student Management -->
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -1084,7 +1084,7 @@ endif; ?>
                         </a>
                     </li>
 
-                    <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Active Child: <?php
+                    <li class="nav-header text-uppercase opacity-75 small fw-bold">Active Child: <?php
     $active_child_name = 'Student';
     foreach ($_SESSION['children'] as $child) {
         if ($child['id'] == $_SESSION['active_student_id']) {
@@ -1115,7 +1115,7 @@ endif; ?>
                         </ul>
                     </li>
 
-                    <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Academic & Fees</li>
+                    <li class="nav-header text-uppercase opacity-75 small fw-bold">Academic & Fees</li>
 
                     <li class="nav-item">
                         <a href="<?php echo $student_portal_prefix; ?>my-fees.php" class="nav-link">
@@ -1372,7 +1372,7 @@ endif; ?>
                 </li>
 
                 <!-- Logout -->
-                <li class="nav-item mt-3 border-top pt-2">
+                <li class="nav-item border-top">
                     <a href="<?php echo $logout_path; ?>" class="nav-link text-danger">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>Logout</p>
