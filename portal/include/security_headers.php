@@ -31,7 +31,7 @@ $csp .= "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapi
 $csp .= "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; ";
 $csp .= "font-src 'self' https://fonts.gstatic.com; ";
 $csp .= "img-src 'self' data: https:; ";
-$csp .= "connect-src 'self' https:; ";
+$csp .= "connect-src 'self' http: https:; ";
 $csp .= "frame-src 'self';";
 
 header("Content-Security-Policy: " . $csp);

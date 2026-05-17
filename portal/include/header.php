@@ -53,3 +53,15 @@ ob_start();
 
     <!-- Online Exam System (OES) Dependencies -->
     <script src="<?php echo PORTAL_URL; ?>/assets/vendor/tailwind/tailwind.min.js"></script>
+
+    <script>
+        // System URLs for JavaScript
+        const BASE_URL = <?php echo gca_safe_js(BASE_URL); ?>;
+        const PORTAL_URL = <?php echo gca_safe_js(PORTAL_URL); ?>;
+        const BACKEND_URL = <?php echo gca_safe_js(BACKEND_URL); ?>;
+        const API_URL = <?php echo gca_safe_js(API_URL); ?>;
+    </script>
+</head>
+
+<body class="bg-body-tertiary preload-transitions">
+    <div class="app-wrapper">

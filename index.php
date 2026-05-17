@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/common/global_firewall.php';
+require_once __DIR__ . '/../common/global_firewall.php';
 ob_start(); // Start buffering
 
 // Include request sanitizer first - Auto-sanitizes all $_GET, $_POST, $_COOKIE
@@ -916,19 +916,6 @@ else {
         });
       }, {
         threshold: 0.2
-      });
-
-      titleObserver.observe(title);
-    });
-  </script>
-</body>
-
-</html>itle);
-    });
-  </script>
-</body>
-
-</html> 0.2
       });
 
       titleObserver.observe(title);
