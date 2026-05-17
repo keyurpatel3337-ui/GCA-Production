@@ -1,6 +1,6 @@
 /**
  * GCA Custom Layout CSS
- * Replaces AdminLTE 4 structural dependencies
+ * Primary Layout Engine for GCA Portal
  */
 
 :root {
@@ -13,19 +13,48 @@
     --gca-sidebar-hover-bg: rgba(0,0,0,0.05);
     --gca-sidebar-active-color: #0d6efd;
     --gca-transition-speed: 0.25s;
+    --lte-shell-bg: #f4f6fb;
+    --lte-border-color: #eee;
 }
 
-/* Base Layout Structure */
+/* Media query for laptops and small desktops (1366x768 context) */
+@media (min-width: 992px) and (max-width: 1400px) {
+    :root {
+        --gca-sidebar-width: 240px;
+        --gca-header-height: 55px;
+    }
+}
+
+/* Global Reset & Base Structure */
+html,
 body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100%;
     background-color: var(--gca-primary-bg);
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+    font-family: 'Inter', sans-serif;
 }
 
 .app-wrapper {
     width: 100%;
+    min-height: 100vh;
     position: relative;
+    overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
 }
 
 /* Sidebar Styling */
@@ -40,8 +69,11 @@ body {
     z-index: 1030;
     transition: width var(--gca-transition-speed) ease-in-out, transform var(--gca-transition-speed) ease-in-out;
     overflow-y: auto;
+    overflow-x: hidden;
     box-shadow: 1px 0 10px rgba(0,0,0,0.05);
     border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Main Content Area */
@@ -71,6 +103,16 @@ body {
     transition: left var(--gca-transition-speed) ease-in-out;
 }
 
+.app-header.navbar {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.app-header .container-fluid {
+    padding-left: 0;
+    padding-right: 1rem;
+}
+
 /* Sidebar Toggling Logic */
 body.sidebar-collapse .app-sidebar {
     width: var(--gca-sidebar-collapsed-width);
@@ -82,11 +124,6 @@ body.sidebar-collapse .app-header {
 
 body.sidebar-collapse .app-main {
     margin-left: var(--gca-sidebar-collapsed-width);
-}
-
-/* Support for Fixed Layout Override */
-body.fixed-layout .app-main {
-    margin: 0 !important; /* Disable margins when fixed layout handles positioning via top/left */
 }
 
 /* Sidebar Menu Items */
@@ -105,20 +142,20 @@ body.fixed-layout .app-main {
 .nav-sidebar .nav-link, .sidebar-menu .nav-link {
     display: flex;
     align-items: center;
-    padding: 6px 12px !important;
+    padding: 10px 16px !important;
     color: var(--gca-sidebar-color);
     text-decoration: none;
     border-radius: 0;
     transition: background-color 0.2s;
     margin: 0 !important;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
 }
 
 .nav-sidebar .nav-link i, .sidebar-menu .nav-link i {
-    width: 18px;
+    width: 20px;
     text-align: center;
-    margin-right: 0.5rem;
-    font-size: 0.9rem;
+    margin-right: 0.75rem;
+    font-size: 1rem;
 }
 
 .nav-sidebar .nav-link:hover, .sidebar-menu .nav-link:hover {
@@ -127,7 +164,7 @@ body.fixed-layout .app-main {
 
 .nav-sidebar .nav-link.active, .sidebar-menu .nav-link.active {
     background-color: #f0f4f8;
-    color: #0d6efd;
+    color: var(--gca-sidebar-active-color);
     font-weight: 600;
 }
 
@@ -141,7 +178,7 @@ body.fixed-layout .app-main {
 }
 
 .nav-treeview .nav-link {
-    padding-left: 2rem !important;
+    padding-left: 2.5rem !important;
 }
 
 .menu-open > .nav-treeview {
@@ -150,22 +187,23 @@ body.fixed-layout .app-main {
 
 /* Sidebar Header */
 .nav-header {
-    padding: 8px 12px 2px !important;
+    padding: 12px 16px 4px !important;
     margin: 0 !important;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: #bbb;
+    color: #999;
+    letter-spacing: 0.5px;
 }
 
-
-/* Brand Section Spacing */
+/* Brand Section */
 .sidebar-brand {
     padding: 0 1rem;
     height: var(--gca-header-height);
     display: flex;
     align-items: center;
     border-bottom: 1px solid #eee;
+    flex-shrink: 0;
 }
 
 .brand-image {
@@ -177,14 +215,7 @@ body.fixed-layout .app-main {
     font-weight: 700;
     font-size: 1.1rem;
     color: #333;
-}
-
-.sidebar-wrapper {
-    padding: 0 !important;
-}
-
-.sidebar-wrapper nav {
-    margin: 0 !important;
+    white-space: nowrap;
 }
 
 body.sidebar-collapse .brand-text,
@@ -200,6 +231,41 @@ body.sidebar-collapse .nav-link p {
     margin-left: auto;
     transition: transform 0.3s;
     font-size: 0.8rem;
+}
+
+/* Force text visibility/wrapping in sidebar */
+.sidebar-menu .nav-link>p,
+.nav-sidebar .nav-link>p {
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    margin-bottom: 0;
+}
+
+/* ============================================ */
+/* DISABLE ALL SIDEBAR TRANSITIONS ON PAGE LOAD */
+/* ============================================ */
+body.preload-transitions *,
+body.preload-transitions aside,
+body.preload-transitions .app-sidebar,
+body.preload-transitions .nav-item,
+body.preload-transitions .nav-link {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    transition: none !important;
+    -webkit-animation: none !important;
+    animation: none !important;
+}
+
+/* Sidebar toggle button highlight */
+[data-lte-toggle="sidebar"] {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+[data-lte-toggle="sidebar"]:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 0.25rem;
 }
 
 /* Responsive adjustments */
@@ -232,3 +298,8 @@ body.sidebar-collapse .nav-link p {
     background: rgba(0,0,0,0.5);
     z-index: 1025;
 }
+
+/* Utility classes from custom */
+.card { border: none; box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); }
+.card-header { background: transparent; border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
+.info-box, .small-box { border-radius: 0.5rem; }
