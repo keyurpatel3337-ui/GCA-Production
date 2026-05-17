@@ -1,9 +1,0 @@
-[2026-05-13 19:01:49] [File: C:\xampp\htdocs\GCA-Production\portal\api\whatsapp\send-daily-report.php] [Line: 19] Uncaught Exception: Call to undefined function hasRole() | Exception: Call to undefined function hasRole() | Trace: #0 {main} | User ID: 1 | URI: /portal/api/whatsapp/send-daily-report.php
-[2026-05-13 19:03:26] Student login successful | Student ID: 1723 | Name: MARETHA JATIN AMRIT | IP: 172.68.55.117 | URI: /portal/modules/student-portal/student-login-process.php
-[2026-05-13 19:54:31] Student login failed - Invalid password | Aadhaar: 363346049051 | Student ID: 2138 | IP: 162.159.99.24 | URI: /portal/modules/student-portal/student-login-process.php
-[2026-05-13 19:57:46] Student login failed - Invalid captcha | Aadhaar: 363346049051 | IP: 172.68.55.117 | URI: /portal/modules/student-portal/student-login-process.php
-[2026-05-13 19:58:08] Student login successful | Student ID: 2138 | Name: BARAD SHREY SUDHIRBHAI | IP: 172.68.55.116 | URI: /portal/modules/student-portal/student-login-process.php
-[2026-05-13 22:01:44] Student login failed - Invalid password | Aadhaar: 975415661454 | Student ID: 1421 | IP: 162.158.162.134 | URI: /portal/modules/student-portal/student-login-process.php
-[2026-05-13 22:03:00] Student login failed - Invalid password | Aadhaar: 975415661454 | Student ID: 1421 | IP: 104.23.175.226 | URI: /portal/modules/student-portal/student-login-process.php
-[2026-05-13 22:03:54] Student login failed - Invalid credentials | Identifier: 8160930074 | IP: 172.68.164.4 | URI: /portal/modules/student-portal/student-login-process.php
-[2026-05-13 22:05:15] Student login successful | Student ID: 1421 | Name: GOHEL DEVANSHI JALPENBHAI | IP: 162.158.190.107 | URI: /portal/modules/student-portal/student-login-process.php
