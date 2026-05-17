@@ -12,9 +12,9 @@ require_once ENV_CONFIG_FILE;
     <title>Distance Learning Program - Gyanmanjari Vidyapith</title>
     <link rel="icon" type="image/x-icon" href="../assets/images/logogmn.png">
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="<?php echo BASE_URL; ?>/assets/vendor/tailwind/tailwind.min.js"></script>
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/vendor/font-awesome/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link

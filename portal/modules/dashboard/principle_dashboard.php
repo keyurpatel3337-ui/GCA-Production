@@ -40,6 +40,7 @@ $page_breadcrumb = "Dashboard";
 
 <?php
 include '../../include/header.php'; ?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/dashboard/principle_dashboard.css">
 <?php
 include '../../include/navbar.php'; ?>
 <?php
@@ -201,7 +202,7 @@ include '../../include/sidebar.php'; ?>
     <div class="row g-4 mb-5">
         <div class="col-lg-3 col-md-6">
             <div class="glass-card p-3 d-flex align-items-center h-100">
-                <div class="stat-icon bg-icon-info me-3" style="width: 50px; height: 50px;">
+                <div class="stat-icon bg-icon-info me-3 principle_dashboard-custom-1">
                     <i class="fas fa-clock"></i>
                 </div>
                 <div>

@@ -14,22 +14,22 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <!-- Bootstrap 5 Bundle (includes Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap Toasts Container -->
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;" id="toastPlacement"></div>
 
-<!-- AdminLTE 4 -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta3/dist/js/adminlte.min.js"></script>
+<!-- GCA Custom Layout JS (Replaces AdminLTE) -->
+<script src="<?php echo BASE_URL; ?>/assets/js/gca-layout.js"></script>
 <!-- Select2 -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/vendor/select2/select2.min.js"></script>
 <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/vendor/chartjs/chart.umd.min.js"></script>
 <!-- Fixed Layout JS -->
-<script src="<?php echo PORTAL_URL; ?>/assets/js/fixed-layout.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/js/fixed-layout.js"></script>
 <!-- Student Search Component -->
-<script src="<?php echo PORTAL_URL; ?>/assets/js/student-search.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/js/student-search.js"></script>
 <!-- Notification Bell Component -->
-<script src="<?php echo PORTAL_URL; ?>/assets/js/notification-bell.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/js/notification-bell.js"></script>
 <script>
     // Set API URL for notification bell before it initializes
     document.addEventListener('DOMContentLoaded', () => {

@@ -32,7 +32,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
 ?>
 
-
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/maintenance/logs/errors.css">
 
     <div class="container-fluid">
 
@@ -81,8 +81,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
                 <?php if (empty($log_content)): ?>
                     <div class="alert alert-info m-3">No log entries found or file does not exist.</div>
                 <?php else: ?>
-                    <div class="log-viewer"
-                        style="max-height: 600px; overflow-y: auto; background: #1e1e1e; padding: 15px;">
+                    <div class="log-viewer errors-custom-1">
                         <?php foreach ($log_content as $line): ?>
                             <?php
                             $class = 'text-white';
@@ -93,8 +92,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
                             elseif (stripos($line, 'notice') !== false)
                                 $class = 'text-info';
                             ?>
-                            <div class="<?php echo $class; ?>"
-                                style="font-family: monospace; font-size: 12px; white-space: pre-wrap; word-break: break-all; border-bottom: 1px solid #333; padding: 5px 0;">
+                            <div class="<?php echo $class; ?> errors-custom-2">
                                 <?php echo htmlspecialchars($line ?? ''); ?>
                             </div>
                         <?php endforeach; ?>

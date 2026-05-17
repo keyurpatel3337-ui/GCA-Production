@@ -113,91 +113,11 @@ define('SERVICE_NOTIFICATION', SERVICES_PATH . 'NotificationService.php');
 define('SERVICE_WHATSAPP', SERVICES_PATH . 'WhatsAppHelper.php');
 
 // ============================================================================
-// URL PATHS (with environment detection)
+// SYSTEM IDENTIFICATION
 // ============================================================================
-
-// Get current host information for URL generation
-$current_host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-if (empty($current_host)) {
-    $current_host = $_SERVER['SERVER_NAME'] ?? 'localhost';
-}
-$script_path = $_SERVER['SCRIPT_FILENAME'] ?? '';
-
-// Detect protocol (HTTP or HTTPS)
-$protocol = 'http';
-if (
-    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
-    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
-    (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on') ||
-    (!empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
-) {
-    $protocol = 'https';
-}
-
-// Determine if local environment
-$is_local_env = (
-    strpos($current_host, 'localhost') !== false ||
-    strpos($current_host, '127.0.0.1') !== false ||
-    strpos($script_path, 'wamp64') !== false ||
-    strpos($script_path, 'xampp') !== false ||
-    strpos($script_path, 'C:') !== false ||
-    strpos($script_path, 'D:') !== false
-);
-
-// Base URL
-if (!defined('BASE_URL')) {
-    if ($is_local_env && stripos($current_host, 'gyanmanjari.com') === false) {
-        define('BASE_URL', $protocol . '://' . $current_host . '/GCA-Production');
-    } else {
-        define('BASE_URL', $protocol . '://' . $current_host);
-    }
-}
-
-// Frontend URL (same as BASE_URL)
-if (!defined('FRONTEND_URL')) {
-    define('FRONTEND_URL', BASE_URL);
-}
-
-// Portal URL
-if (!defined('PORTAL_URL')) {
-    define('PORTAL_URL', BASE_URL . '/portal');
-}
-
-// Backend URL
-if (!defined('BACKEND_URL')) {
-    define('BACKEND_URL', BASE_URL . '/counselling-backend');
-}
-
-// API URL
-if (!defined('API_URL')) {
-    define('API_URL', BACKEND_URL . '/api');
-}
-
-// Assets URL
-if (!defined('ASSETS_URL')) {
-    define('ASSETS_URL', BASE_URL . '/assets');
-}
-
-// Uploads URL
-if (!defined('UPLOADS_URL')) {
-    define('UPLOADS_URL', BASE_URL . '/uploads');
-}
-
-// Environment constant
-if (!defined('ENVIRONMENT')) {
-    define('ENVIRONMENT', $is_local_env ? 'development' : 'production');
-}
 
 // System Name
 if (!defined('SYSTEM_NAME')) {
     define('SYSTEM_NAME', 'GCA');
 }
 
-// Error Reporting based on environment
-if (ENVIRONMENT === 'development') {
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-} else {
-    error_reporting(0);
-    ini_set('display_errors', 0);
-}

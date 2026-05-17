@@ -15,51 +15,13 @@ if (!hasRole(ROLE_SUPER_ADMIN) && !hasRole(ROLE_PRINCIPLE)) {
 $page_title = "Manage Counsellors";
 $page_breadcrumb = "Counsellors";
 
-// Get search and filter parameters
-$search = trim($_GET['search'] ?? '');
-$status_filter = $_GET['status'] ?? '';
-
-// Get all counsellors with filters
-try {
-    $where_clauses = ["u.role_id = ?"];
-    $params = [ROLE_COUNSELLOR];
-
-    if ($search) {
-        $where_clauses[] = "(u.name LIKE ? OR u.email LIKE ? OR u.phone LIKE ? OR s.name LIKE ? OR s.personal_email LIKE ?)";
-        $search_param = "%$search%";
-        $params = array_merge($params, [$search_param, $search_param, $search_param, $search_param, $search_param]);
-    }
-
-    if ($status_filter) {
-        $where_clauses[] = "u.status = ?";
-        $params[] = $status_filter;
-    }
-
-    $where_sql = implode(" AND ", $where_clauses);
-
-    $stmt = $conn->prepare("SELECT u.*, r.role_name, s.name as staff_name, s.personal_email as staff_email
-                            FROM tbl_users u 
-                            INNER JOIN tbl_roles r ON u.role_id = r.id 
-                            LEFT JOIN tbl_staff s ON u.id = s.user_id
-                            WHERE $where_sql 
-                            ORDER BY u.id DESC");
-    $stmt->execute($params);
-    $counsellors = $stmt->fetchAll();
-
-    // Get all roles except Super Admin for the modal selection
-    $role_stmt = $conn->prepare("SELECT id, role_name FROM tbl_roles WHERE id != ? ORDER BY role_name DESC");
-    $role_stmt->execute([ROLE_SUPER_ADMIN]);
-    $available_roles = $role_stmt->fetchAll();
-} catch (PDOException $e) {
-    logDatabaseError($e, "Fetch Counsellors for Admin");
-    $counsellors = [];
-    $available_roles = [];
-}
+include '../../include/header.php';
 ?>
-
-<?php include '../../include/header.php'; ?>
-<?php include '../../include/navbar.php'; ?>
-<?php include '../../include/sidebar.php'; ?>
+<link rel="stylesheet" href="<?= PORTAL_URL ?>/assets/css/modules/counsellors/list.css">
+<?php
+include '../../include/navbar.php';
+include '../../include/sidebar.php';
+?>
 
 
 
@@ -159,8 +121,7 @@ try {
                                     <td class="ps-4 text-muted small fw-bold">#<?php echo $counsellor['id']; ?></td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-initial rounded-circle bg-primary-subtle text-primary fw-bold me-3 d-flex align-items-center justify-content-center"
-                                                style="width: 40px; height: 40px; font-size: 1.2rem;">
+                                            <div class="avatar-initial rounded-circle bg-primary-subtle text-primary fw-bold me-3 d-flex align-items-center justify-content-center">
                                                 <?php echo strtoupper(substr($counsellor['name'], 0, 1)); ?>
                                             </div>
                                             <div>

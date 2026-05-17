@@ -182,7 +182,7 @@ $date_to = date('Y-m-d');
 </div>
 
 <!-- Include SheetJS for modern Excel exports -->
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
 <script src="../../assets/js/table-utilities.js"></script>
 <?php require_once '../../include/footer.php'; ?>
 

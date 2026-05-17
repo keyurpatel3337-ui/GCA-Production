@@ -30,7 +30,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
 ?>
 
-
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/maintenance/tools/sessions.css">
 
     <div class="container-fluid">
 
@@ -72,7 +72,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
                     <div class="card-header">
                         <h3 class="card-title"><i class="fas fa-list"></i> Active Sessions</h3>
                     </div>
-                    <div class="card-body p-0" style="max-height: 400px; overflow-y: auto;">
+                    <div class="card-body p-0 sessions-custom-1">
                         <?php if (empty($sessions)): ?>
                             <div class="alert alert-info m-3">No session files found.</div>
                         <?php else: ?>

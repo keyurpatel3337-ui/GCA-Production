@@ -31,6 +31,9 @@ if ($response && isset($response['success'])) {
 
 $page_title = 'Academic Years';
 include '../../include/header.php';
+?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/academics/academic-years.css">
+<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
@@ -115,7 +118,7 @@ include '../../include/sidebar.php';
                     data-bs-target="#addModal">
                     <i class="fas fa-plus me-1"></i> Add New Year
                 </button>
-                <div id="deleteSelectedBtn" style="display: none;">
+                <div id="deleteSelectedBtn" class="academic-years-custom-1">
                     <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="deleteSelected()">
                         <i class="fas fa-trash-alt me-1"></i> Delete Selected
                     </button>
@@ -146,7 +149,7 @@ include '../../include/sidebar.php';
                                         <i class="fas fa-calendar-times fa-3x text-muted"></i>
                                     </div>
                                     <h5 class="text-dark fw-bold">No Records Found</h5>
-                                    <p class="text-muted mx-auto" style="max-width: 300px;">Begin by setting up your first
+                                    <p class="text-muted mx-auto academic-years-custom-2">Begin by setting up your first
                                         academic cycle using the "Add" button above.</p>
                                 </div>
                             </td>
@@ -252,8 +255,8 @@ include '../../include/sidebar.php';
                                     <div class="text-muted smaller">Enable this cycle for new registrations</div>
                                 </div>
                                 <div class="form-check form-switch p-0 m-0">
-                                    <input type="checkbox" name="is_active" value="1" class="form-check-input ms-0"
-                                        id="add_active" checked style="width: 3rem; height: 1.5rem;">
+                                    <input type="checkbox" name="is_active" value="1" class="form-check-input ms-0 academic-years-custom-3"
+                                        id="add_active" checked>
                                 </div>
                             </div>
                         </div>
@@ -306,8 +309,8 @@ include '../../include/sidebar.php';
                                     <div class="text-muted smaller">Update active status for this year</div>
                                 </div>
                                 <div class="form-check form-switch p-0 m-0">
-                                    <input type="checkbox" name="is_active" value="1" class="form-check-input ms-0"
-                                        id="edit_active" style="width: 3rem; height: 1.5rem;">
+                                    <input type="checkbox" name="is_active" value="1" class="form-check-input ms-0 academic-years-custom-3"
+                                        id="edit_active">
                                 </div>
                             </div>
                         </div>
@@ -324,73 +327,8 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
-<style>
-    .glass-card {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 20px;
-    }
-
-    .welcome-banner {
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .stat-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1) !important;
-    }
-
-    .year-icon {
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .btn-icon {
-        width: 32px;
-        height: 32px;
-        padding: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s ease;
-    }
-
-    .btn-icon:hover {
-        transform: scale(1.1);
-        filter: brightness(0.9);
-    }
-
-    .smaller {
-        font-size: 0.75rem;
-    }
-
-    .fw-600 {
-        font-weight: 600;
-    }
-
-    .fw-500 {
-        font-weight: 500;
-    }
-
-    .table-hover tbody tr:hover {
-        background-color: rgba(79, 70, 229, 0.02) !important;
-    }
-
-    .text-primary-light {
-        color: #60a5fa;
-    }
-</style>
-
 <!-- Include SheetJS for modern Excel exports -->
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
 <script src="../../assets/js/table-utilities.js"></script>
 <?php include '../../include/footer.php'; ?>
 

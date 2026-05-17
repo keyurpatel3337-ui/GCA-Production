@@ -1,0 +1,9 @@
+.database-custom-1 {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.database-custom-2 {
+    max-height: 300px;
+    overflow: auto;
+}

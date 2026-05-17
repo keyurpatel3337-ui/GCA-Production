@@ -50,7 +50,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
 ?>
 
-
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/maintenance/backup/receipt-pdf-batch.css">
 
     <div class="container-fluid">
 
@@ -160,16 +160,16 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
                     </div>
                 </div>
 
-                <div id="backupProgress" style="display: none;">
+                <div id="backupProgress" class="receipt-pdf-batch-custom-1">
                     <div class="text-center mb-3">
                         <h4 id="progressStatus">Initializing...</h4>
                         <p id="progressSubStatus" class="text-muted">Fetching receipt count...</p>
                     </div>
-                    <div class="progress mb-3" style="height: 25px;">
+                    <div class="progress mb-3 receipt-pdf-batch-custom-2">
                         <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
                             role="progressbar" style="width: 0%">0%</div>
                     </div>
-                    <div class="list-group list-group-flush border rounded" style="max-height: 200px; overflow-y: auto;"
+                    <div class="list-group list-group-flush border rounded receipt-pdf-batch-custom-3"
                         id="logList">
                         <!-- Logs will appear here -->
                     </div>

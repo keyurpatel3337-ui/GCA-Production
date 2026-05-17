@@ -32,65 +32,61 @@ if (hasRole(ROLE_SUPER_ADMIN)) {
 <?php include '../../include/navbar.php'; ?>
 <?php include '../../include/sidebar.php'; ?>
 
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/common/welcome.css">
 
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <!-- Welcome Card -->
-            <div class="card text-center" style="margin-top: 3rem;">
-                <div class="card-body" style="padding: 3rem;">
+            <div class="card text-center welcome-custom-1">
+                <div class="card-body welcome-custom-2">
                     <!-- Icon -->
-                    <div style="margin-bottom: 2rem;">
-                        <div
-                            style="width: 100px; height: 100px; margin: 0 auto; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-rocket" style="font-size: 3rem; color: white;"></i>
+                    <div class="welcome-custom-3">
+                        <div class="welcome-icon-container">
+                            <i class="fas fa-rocket welcome-icon"></i>
                         </div>
                     </div>
 
                     <!-- Welcome Message -->
-                    <h2 style="font-size: 2rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;">
+                    <h2 class="welcome-title">
                         Welcome to <?php echo $page_name; ?>!
                     </h2>
 
-                    <p
-                        style="font-size: 1.125rem; color: #64748b; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <p class="welcome-description">
                         Hello <strong><?php echo htmlspecialchars($user_name ?? ''); ?></strong>
                         (<?php echo $role_display; ?>)!
                         This page is currently under development. We're working hard to bring you amazing features.
                     </p>
 
                     <!-- Features Coming Soon -->
-                    <div style="background: #f8fafc; border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
-                        <h4 style="font-size: 1.25rem; font-weight: 600; color: #1e293b; margin-bottom: 1.5rem;">
-                            <i class="fas fa-star" style="color: #f59e0b;"></i> Coming Soon
+                    <div class="welcome-features-container">
+                        <h4 class="welcome-features-title">
+                            <i class="fas fa-star welcome-star-icon"></i> Coming Soon
                         </h4>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <div style="padding: 1rem;">
-                                    <i class="fas fa-check-circle"
-                                        style="font-size: 2rem; color: #10b981; margin-bottom: 0.5rem;"></i>
-                                    <p style="margin: 0; color: #475569; font-weight: 500;">Intuitive Interface</p>
+                                <div class="welcome-feature-item">
+                                    <i class="fas fa-check-circle welcome-feature-icon-1"></i>
+                                    <p class="welcome-feature-text">Intuitive Interface</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <div style="padding: 1rem;">
-                                    <i class="fas fa-bolt"
-                                        style="font-size: 2rem; color: #f59e0b; margin-bottom: 0.5rem;"></i>
-                                    <p style="margin: 0; color: #475569; font-weight: 500;">Fast Performance</p>
+                                <div class="welcome-feature-item">
+                                    <i class="fas fa-bolt welcome-feature-icon-2"></i>
+                                    <p class="welcome-feature-text">Fast Performance</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <div style="padding: 1rem;">
-                                    <i class="fas fa-shield-alt"
-                                        style="font-size: 2rem; color: #3b82f6; margin-bottom: 0.5rem;"></i>
-                                    <p style="margin: 0; color: #475569; font-weight: 500;">Secure & Reliable</p>
+                                <div class="welcome-feature-item">
+                                    <i class="fas fa-shield-alt welcome-feature-icon-3"></i>
+                                    <p class="welcome-feature-text">Secure & Reliable</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Action Buttons -->
-                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <div class="welcome-actions">
                         <a href="javascript:history.back()" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i> Go Back
                         </a>
@@ -110,8 +106,8 @@ if (hasRole(ROLE_SUPER_ADMIN)) {
                     </div>
 
                     <!-- Additional Info -->
-                    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
-                        <p style="color: #94a3b8; font-size: 0.875rem; margin: 0;">
+                    <div class="welcome-footer-info">
+                        <p class="welcome-footer-text">
                             <i class="fas fa-info-circle"></i>
                             If you believe this is an error, please contact your system administrator.
                         </p>
@@ -124,10 +120,9 @@ if (hasRole(ROLE_SUPER_ADMIN)) {
                 <div class="col-md-4 mb-3">
                     <div class="card">
                         <div class="card-body text-center">
-                            <i class="fas fa-question-circle"
-                                style="font-size: 2rem; color: #3b82f6; margin-bottom: 0.5rem;"></i>
-                            <h5 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Need Help?</h5>
-                            <p style="font-size: 0.875rem; color: #64748b; margin: 0;">Contact support for assistance
+                            <i class="fas fa-question-circle welcome-quicklink-icon-1"></i>
+                            <h5 class="welcome-quicklink-title">Need Help?</h5>
+                            <p class="welcome-quicklink-text">Contact support for assistance
                             </p>
                         </div>
                     </div>
@@ -135,19 +130,18 @@ if (hasRole(ROLE_SUPER_ADMIN)) {
                 <div class="col-md-4 mb-3">
                     <div class="card">
                         <div class="card-body text-center">
-                            <i class="fas fa-book" style="font-size: 2rem; color: #10b981; margin-bottom: 0.5rem;"></i>
-                            <h5 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Documentation</h5>
-                            <p style="font-size: 0.875rem; color: #64748b; margin: 0;">Learn how to use the system</p>
+                            <i class="fas fa-book welcome-quicklink-icon-2"></i>
+                            <h5 class="welcome-quicklink-title">Documentation</h5>
+                            <p class="welcome-quicklink-text">Learn how to use the system</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="card">
                         <div class="card-body text-center">
-                            <i class="fas fa-lightbulb"
-                                style="font-size: 2rem; color: #f59e0b; margin-bottom: 0.5rem;"></i>
-                            <h5 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Suggestions</h5>
-                            <p style="font-size: 0.875rem; color: #64748b; margin: 0;">Share your ideas with us</p>
+                            <i class="fas fa-lightbulb welcome-quicklink-icon-3"></i>
+                            <h5 class="welcome-quicklink-title">Suggestions</h5>
+                            <p class="welcome-quicklink-text">Share your ideas with us</p>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/academics/schools.css">
 
 <div class="container-fluid py-4">
     <div class="card shadow-sm overflow-hidden border-0">
@@ -37,7 +37,7 @@ include '../../include/sidebar.php';
                     data-bs-target="#addModal">
                     <i class="fas fa-plus me-1"></i> Add School
                 </button>
-                <div id="deleteSelectedBtn" style="display: none;">
+                <div id="deleteSelectedBtn" class="schools-custom-1">
                     <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="deleteSelected()">
                         <i class="fas fa-trash-alt me-1"></i> Delete Selected
                     </button>
@@ -296,7 +296,7 @@ include '../../include/sidebar.php';
     </div>
 
     <!-- Include SheetJS for modern Excel exports -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
     <script src="../../assets/js/table-utilities.js"></script>
     <?php include '../../include/footer.php'; ?>
 

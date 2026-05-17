@@ -10,6 +10,7 @@ $stmt->execute([$_SESSION['user_id']]);
 $pending_requests = $stmt->fetchAll();
 
 if (!empty($pending_requests)): ?>
+    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/include/mfa_alert.css">
     <div class="alert alert-warning border-0 shadow-sm mb-4 rounded-3 p-4">
         <div class="d-flex align-items-center mb-3">
             <i class="fas fa-user-shield fs-3 me-3 text-warning"></i>
@@ -21,7 +22,7 @@ if (!empty($pending_requests)): ?>
                     <div class="bg-white p-3 rounded-3 border d-flex justify-content-between align-items-center">
                         <div>
                             <div class="fw-bold text-dark small"><?php echo htmlspecialchars($req['device_name'] ?? ''); ?></div>
-                            <div class="text-muted" style="font-size: 0.75rem;">
+                            <div class="text-muted mfa_alert-custom-1">
                                 Requested: <?php echo date('h:i A, d M', strtotime($req['created_at'])); ?>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../common/global_firewall.php';
+require_once __DIR__ . '/common/global_firewall.php';
 ob_start(); // Start buffering
 
 // Include request sanitizer first - Auto-sanitizes all $_GET, $_POST, $_COOKIE
@@ -79,15 +79,15 @@ catch (Exception $e) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GCA</title>
   <link rel="icon" type="image/x-icon" href="<?php echo BASE_URL; ?>/assets/images/logogmn.png">
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome for icons (if needed, but not strictly used in this basic template) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Tailwind CSS -->
+  <script src="<?php echo BASE_URL; ?>/assets/vendor/tailwind/tailwind.min.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/vendor/font-awesome/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/vendor/swiper/swiper-bundle.min.css" />
   <!-- AOS CSS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="<?php echo BASE_URL; ?>/assets/vendor/aos/aos.css" rel="stylesheet">
 
   <!-- Link to external CSS file -->
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/gm-public.css">
@@ -293,11 +293,11 @@ endif; ?>
               </svg>
             </a>
             <div class="flex -space-x-2 md:-space-x-3">
-              <img class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white" src="assets/images/1.1.png"
+              <img class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white" src="<?php echo BASE_URL; ?>/assets/images/1.1.png"
                 alt="User">
-              <img class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white" src="assets/images/1.2.png"
+              <img class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white" src="<?php echo BASE_URL; ?>/assets/images/1.2.png"
                 alt="User">
-              <img class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white" src="assets/images/1.3.png"
+              <img class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white" src="<?php echo BASE_URL; ?>/assets/images/1.3.png"
                 alt="User">
               <div
                 class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-[9px] md:text-[10px] font-bold text-gray-600">
@@ -544,7 +544,7 @@ if (!empty($dbTestimonials)) {
                                     src="https://www.youtube.com/embed/' . htmlspecialchars($t['youtube_video_id'] ?? '') . '?controls=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3" 
                                     title="' . htmlspecialchars($t['student_name'] ?? '') . '" 
                                     frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                     lipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                     allowfullscreen>
                                 </iframe>
                                 <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
@@ -727,9 +727,9 @@ else {
   <?php include __DIR__ . '/include/public-footer.php'; ?>
 
   <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="<?php echo BASE_URL; ?>/assets/vendor/swiper/swiper-bundle.min.js"></script>
   <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="<?php echo BASE_URL; ?>/assets/vendor/aos/aos.js"></script>
   <script>
     // Initialize AOS
     AOS.init({
@@ -916,6 +916,19 @@ else {
         });
       }, {
         threshold: 0.2
+      });
+
+      titleObserver.observe(title);
+    });
+  </script>
+</body>
+
+</html>itle);
+    });
+  </script>
+</body>
+
+</html> 0.2
       });
 
       titleObserver.observe(title);

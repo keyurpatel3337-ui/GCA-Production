@@ -85,6 +85,8 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/establishment/attendance_mark.css">
+
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
@@ -194,7 +196,7 @@ include '../../include/sidebar.php';
                                                         <tr>
                                                             <td class="text-center fw-bold text-muted small"><?php echo $s['roll_no'] ?: '-'; ?></td>
                                                             <td>
-                                                                <span class="fw-bold d-block text-truncate" style="max-width: 200px;">
+                                                                <span class="fw-bold d-block text-truncate attendance_mark-custom-1">
                                                                     <?php echo htmlspecialchars($s['surname'] . ' ' . $s['student_name'] ?? ''); ?>
                                                                 </span>
                                                                 <small class="text-muted d-block small"><i class="fas fa-phone-alt me-1"></i> <?php echo $s['mob']; ?></small>

@@ -60,6 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $tables = $conn->query("SHOW TABLE STATUS")->fetchAll(PDO::FETCH_ASSOC);
 
 include PORTAL_PATH . 'include/header.php';
+?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/maintenance/tools/database.css">
+<?php
 include PORTAL_PATH . 'include/sidebar.php';
 ?>
 
@@ -81,7 +84,7 @@ include PORTAL_PATH . 'include/sidebar.php';
                 <div class="card-header">
                     <h3 class="card-title"><i class="fas fa-table"></i> Table Status</h3>
                 </div>
-                <div class="card-body p-0" style="max-height: 400px; overflow-y: auto;">
+                <div class="card-body p-0 database-custom-1">
                     <form method="POST">
                         <input type="hidden" name="action" value="optimize">
                         <table class="table table-striped table-hover mb-0">
@@ -130,13 +133,13 @@ include PORTAL_PATH . 'include/sidebar.php';
                         <input type="hidden" name="action" value="query">
                         <div class="mb-3">
                             <textarea name="query" class="form-control font-monospace" rows="4"
-                                placeholder="SELECT * FROM tbl_roles LIMIT 10"><?php echo $_POST['query'] ?? ''; ?></textarea>
+                                placeholder="SELECT * FROM tbl_roles LIMIT 10"><?php echo htmlspecialchars($_POST['query'] ?? '', ENT_QUOTES, 'UTF-8'); ?></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="fas fa-play"></i> Run Query</button>
                     </form>
 
                     <?php if ($query_result && !empty($query_result)): ?>
-                        <div class="mt-3" style="max-height: 300px; overflow: auto;">
+                        <div class="mt-3 database-custom-2">
                             <table class="table table-sm table-bordered">
                                 <thead>
                                     <tr>

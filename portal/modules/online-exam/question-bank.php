@@ -96,6 +96,8 @@ require_once PORTAL_PATH . 'common/pagination.php';
 
 include PORTAL_INCLUDE_PATH . 'header.php';
 ?>
+<!-- OES Custom CSS -->
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/online-exam.css">
 <!-- KaTeX for math rendering -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
@@ -352,13 +354,6 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
     </div>
 </main>
 
-<style>
-    .question-content img { max-width: 150px; }
-    .border-left-primary { border-left: .25rem solid #4e73df!important; }
-    .badge { padding: 5px 10px; border-radius: 5px; font-weight: 600; }
-    .filter-step { transition: all 0.3s ease; }
-</style>
-
 <script>
 const allSubjects = <?php 
     $sub_all = $conn->query("SELECT id, standard_id, subject_name FROM tbl_subjects WHERE activated = 1 AND is_deleted = 0 ORDER BY subject_name ASC")->fetchAll(PDO::FETCH_ASSOC);
@@ -510,60 +505,60 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================
      BULK IMPORT MODAL
      ============================ -->
-<div id="bulkImportModal" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); overflow-y:auto;">
-  <div style="background:#fff; border-radius:16px; max-width:980px; width:94%; margin:40px auto; padding:0; box-shadow:0 20px 60px rgba(0,0,0,0.3); overflow:hidden;">
+<div id="bulkImportModal" class="bulk-import-modal-wrap" style="display:none;">
+  <div class="bulk-import-modal-content">
 
     <!-- Modal Header -->
-    <div style="background:linear-gradient(135deg,#1a73e8,#0d47a1); padding:20px 28px; display:flex; align-items:center; justify-content:space-between;">
-      <div style="color:#fff;">
-        <h5 style="margin:0; font-weight:700; font-size:1.1rem;"><i class="fas fa-layer-group mr-2"></i> Bulk Question Import</h5>
-        <small id="bulk-source-label" style="opacity:.8;">Preparing...</small>
+    <div class="bulk-import-header">
+      <div>
+        <h5><i class="fas fa-layer-group mr-2"></i> Bulk Question Import</h5>
+        <small id="bulk-source-label">Preparing...</small>
       </div>
-      <button onclick="closeBulkModal()" style="background:rgba(255,255,255,.2); border:none; color:#fff; border-radius:50%; width:34px; height:34px; font-size:1.1rem; cursor:pointer;">&times;</button>
+      <button onclick="closeBulkModal()" class="bulk-import-close-btn">&times;</button>
     </div>
 
     <!-- Progress Bar -->
-    <div id="bulk-progress-wrap" style="display:none; padding:12px 28px 0;">
-      <div style="height:6px; background:#e9ecef; border-radius:4px; overflow:hidden;">
-        <div id="bulk-progress-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#1a73e8,#34a853); transition:width .3s;"></div>
+    <div id="bulk-progress-wrap" class="bulk-progress-wrap" style="display:none;">
+      <div class="bulk-progress-container">
+        <div id="bulk-progress-bar" class="bulk-progress-bar"></div>
       </div>
-      <p id="bulk-progress-text" style="font-size:0.8rem; color:#555; margin:6px 0 0;">Importing...</p>
+      <p id="bulk-progress-text" class="bulk-progress-text">Importing...</p>
     </div>
 
     <!-- Modal Body -->
-    <div style="padding:20px 28px;">
+    <div class="bulk-body">
 
       <!-- Stats Row -->
-      <div id="bulk-stats" style="display:none; margin-bottom:16px;">
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <div style="background:#e8f5e9; border-radius:10px; padding:10px 18px; flex:1; min-width:120px; text-align:center;">
-            <div id="stat-total" style="font-size:1.6rem; font-weight:800; color:#2e7d32;">0</div>
-            <div style="font-size:0.75rem; color:#555;">Total Rows</div>
+      <div id="bulk-stats" style="display:none;">
+        <div class="bulk-stats-row">
+          <div class="bulk-stat-card total">
+            <div id="stat-total" class="bulk-stat-val total">0</div>
+            <div class="bulk-stat-label">Total Rows</div>
           </div>
-          <div style="background:#e3f2fd; border-radius:10px; padding:10px 18px; flex:1; min-width:120px; text-align:center;">
-            <div id="stat-valid" style="font-size:1.6rem; font-weight:800; color:#1565c0;">0</div>
-            <div style="font-size:0.75rem; color:#555;">Valid</div>
+          <div class="bulk-stat-card valid">
+            <div id="stat-valid" class="bulk-stat-val valid">0</div>
+            <div class="bulk-stat-label">Valid</div>
           </div>
-          <div style="background:#fff3e0; border-radius:10px; padding:10px 18px; flex:1; min-width:120px; text-align:center;">
-            <div id="stat-skip" style="font-size:1.6rem; font-weight:800; color:#e65100;">0</div>
-            <div style="font-size:0.75rem; color:#555;">Skipped</div>
+          <div class="bulk-stat-card skip">
+            <div id="stat-skip" class="bulk-stat-val skip">0</div>
+            <div class="bulk-stat-label">Skipped</div>
           </div>
         </div>
       </div>
 
       <!-- Validation Errors -->
-      <div id="bulk-errors" style="display:none; background:#fff3e0; border:1px solid #ffb300; border-radius:10px; padding:12px 16px; margin-bottom:14px; max-height:120px; overflow-y:auto;">
-        <strong style="font-size:0.85rem; color:#e65100;"><i class="fas fa-exclamation-triangle mr-1"></i> Validation Issues (skipped rows):</strong>
-        <ul id="bulk-error-list" style="margin:6px 0 0; padding-left:18px; font-size:0.8rem; color:#6d4c41;"></ul>
+      <div id="bulk-errors" class="bulk-errors-box" style="display:none;">
+        <strong class="bulk-error-title"><i class="fas fa-exclamation-triangle mr-1"></i> Validation Issues (skipped rows):</strong>
+        <ul id="bulk-error-list" class="bulk-error-list"></ul>
       </div>
 
       <!-- Global Metadata Selection -->
-      <div id="bulk-metadata-wrap" style="display:none; background:#f8f9fa; border-radius:12px; padding:15px; margin-bottom:16px; border:1px solid #e9ecef;">
-        <p style="font-size:0.8rem; font-weight:700; color:#444; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.5px;"><i class="fas fa-cog mr-1 text-primary"></i> Apply to all questions in this file:</p>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <div style="flex:1; min-width:150px;">
-                <label style="font-size:0.7rem; color:#888; font-weight:600; margin-bottom:4px; display:block;">Standard</label>
-                <select id="bulk_std" class="form-control form-control-sm" style="border-radius:8px; font-size:0.8rem; height:35px; border-color:#dce0e4;">
+      <div id="bulk-metadata-wrap" class="bulk-metadata-box" style="display:none;">
+        <p class="bulk-metadata-title"><i class="fas fa-cog mr-1 text-primary"></i> Apply to all questions in this file:</p>
+        <div class="bulk-metadata-grid">
+            <div class="bulk-metadata-item">
+                <label class="bulk-metadata-label">Standard</label>
+                <select id="bulk_std" class="form-control form-control-sm bulk-metadata-select">
                     <option value="">Select Standard</option>
                     <?php
                     $stds = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext ASC");
@@ -571,21 +566,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     ?>
                 </select>
             </div>
-            <div style="flex:1; min-width:150px;">
-                <label style="font-size:0.7rem; color:#888; font-weight:600; margin-bottom:4px; display:block;">Subject</label>
-                <select id="bulk_sub" class="form-control form-control-sm" style="border-radius:8px; font-size:0.8rem; height:35px; border-color:#dce0e4;">
+            <div class="bulk-metadata-item">
+                <label class="bulk-metadata-label">Subject</label>
+                <select id="bulk_sub" class="form-control form-control-sm bulk-metadata-select">
                     <option value="">Select Subject</option>
                 </select>
             </div>
-            <div style="flex:1; min-width:150px;">
-                <label style="font-size:0.7rem; color:#888; font-weight:600; margin-bottom:4px; display:block;">Chapter</label>
-                <select id="bulk_ch" class="form-control form-control-sm" style="border-radius:8px; font-size:0.8rem; height:35px; border-color:#dce0e4;">
+            <div class="bulk-metadata-item">
+                <label class="bulk-metadata-label">Chapter</label>
+                <select id="bulk_ch" class="form-control form-control-sm bulk-metadata-select">
                     <option value="">Select Chapter</option>
                 </select>
             </div>
-            <div style="flex:1; min-width:150px;">
-                <label style="font-size:0.7rem; color:#888; font-weight:600; margin-bottom:4px; display:block;">Topic</label>
-                <select id="bulk_tp" class="form-control form-control-sm" style="border-radius:8px; font-size:0.8rem; height:35px; border-color:#dce0e4;">
+            <div class="bulk-metadata-item">
+                <label class="bulk-metadata-label">Topic</label>
+                <select id="bulk_tp" class="form-control form-control-sm bulk-metadata-select">
                     <option value="">Select Topic</option>
                 </select>
             </div>
@@ -593,12 +588,12 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
 
       <!-- Preview Table -->
-      <div style="overflow-x:auto; max-height:360px; overflow-y:auto; border:1px solid #e0e0e0; border-radius:10px;">
-        <table id="bulk-preview-table" style="width:100%; border-collapse:collapse; font-size:0.78rem;">
-          <thead id="bulk-preview-head" style="background:#f5f5f5; position:sticky; top:0; z-index:1;"></thead>
+      <div class="bulk-preview-container">
+        <table id="bulk-preview-table" class="bulk-preview-table">
+          <thead id="bulk-preview-head"></thead>
           <tbody id="bulk-preview-body"></tbody>
         </table>
-        <div id="bulk-empty-state" style="padding:40px; text-align:center; color:#9e9e9e;">
+        <div id="bulk-empty-state" class="bulk-empty-state">
           <i class="fas fa-file-import" style="font-size:2rem; margin-bottom:10px; display:block;"></i>
           No file selected. Upload a CSV or Word (.docx) file to preview.
         </div>
@@ -606,8 +601,8 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- Modal Footer -->
-    <div style="padding:16px 28px; background:#f8f9fa; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-      <span id="bulk-footer-hint" style="font-size:0.8rem; color:#777;">Review the preview above before importing.</span>
+    <div class="bulk-footer">
+      <span id="bulk-footer-hint" class="bulk-footer-hint">Review the preview above before importing.</span>
       <div style="display:flex; gap:10px;">
         <button onclick="closeBulkModal()" class="btn btn-light" style="border-radius:10px;">Cancel</button>
         <button id="bulk-import-btn" onclick="submitBulkImport()" class="btn btn-primary" style="border-radius:10px; min-width:140px;" disabled>

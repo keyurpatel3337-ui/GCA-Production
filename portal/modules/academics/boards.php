@@ -16,6 +16,9 @@ $boards = (is_array($response) && isset($response['success']) && $response['succ
 
 $page_title = 'Education Boards';
 include '../../include/header.php';
+?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/academics/boards.css">
+<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
@@ -37,7 +40,7 @@ include '../../include/sidebar.php';
                     data-bs-target="#addModal">
                     <i class="fas fa-plus me-1"></i> Add Board
                 </button>
-                <div id="deleteSelectedBtn" style="display: none;">
+                <div id="deleteSelectedBtn" class="boards-custom-1">
                     <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="deleteSelected()">
                         <i class="fas fa-trash-alt me-1"></i> Delete Selected
                     </button>
@@ -181,7 +184,7 @@ include '../../include/sidebar.php';
     </div>
 
     <!-- Include SheetJS for modern Excel exports -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
     <script src="../../assets/js/table-utilities.js"></script>
     <?php include '../../include/footer.php'; ?>
 

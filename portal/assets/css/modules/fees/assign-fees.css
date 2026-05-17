@@ -1,0 +1,11 @@
+.assign-fees-custom-1 {
+    display: none;
+}
+
+.assign-fees-custom-2 {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+}

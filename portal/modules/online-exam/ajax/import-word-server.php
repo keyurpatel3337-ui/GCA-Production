@@ -308,11 +308,11 @@ function localName($node) {
 function getCellText($cell, $plainText = false) {
     $text = '';
     if ($cell instanceof \PhpOffice\PhpWord\Element\Table) {
-        if (!$plainText) $text .= '<table class="table table-bordered table-sm" style="width:auto; margin:10px 0;">';
+        if (!$plainText) $text .= '<table class="table table-bordered table-sm oes-import-table">';
         foreach ($cell->getRows() as $row) {
             if (!$plainText) $text .= '<tr>';
             foreach ($row->getCells() as $cellObj) {
-                if (!$plainText) $text .= '<td style="padding:5px; border:1px solid #ddd;">';
+                if (!$plainText) $text .= '<td>';
                 $text .= getCellText($cellObj, $plainText);
                 if (!$plainText) $text .= '</td>';
             }
@@ -360,10 +360,10 @@ function getElementContent($element, $plainText) {
                     $filePath = $uploadDir . $filename;
                     if (file_put_contents($filePath, $binaryData)) {
                         $imgUrl = BASE_URL . '/uploads/oes/' . $filename;
-                        $content .= '<img src="' . $imgUrl . '" style="max-width:300px; height:auto; margin:5px 0;" />';
+                        $content .= '<img src="' . $imgUrl . '" class="oes-import-img" />';
                     } else {
                         // Fallback to base64 if saving fails
-                        $content .= '<img src="data:image/png;base64,' . $imageData . '" style="max-width:100%; height:auto; margin:5px 0;" />';
+                        $content .= '<img src="data:image/png;base64,' . $imageData . '" class="oes-import-img" />';
                     }
                 } else {
                     $content .= ' [Image] ';

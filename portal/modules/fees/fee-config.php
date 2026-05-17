@@ -97,10 +97,10 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/fees/fee-config.css">
 
 <!-- Include SheetJS for modern Excel exports -->
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
 <script src="../../assets/js/table-utilities.js"></script>
 
 
@@ -135,7 +135,7 @@ include '../../include/sidebar.php';
                 <i class="fas fa-file-excel"></i> Export to Excel
             </button>
             <button type="button" class="btn btn-danger" id="deleteSelectedBtn" onclick="deleteSelected()"
-                style="display:none;">
+                class="fee-config-custom-1">
                 <i class="fas fa-trash"></i> Delete Selected
             </button>
         </div>
@@ -393,7 +393,7 @@ include '../../include/sidebar.php';
                     </div>
 
                     <!-- Fee Type Selection Section (Shows after Term, Medium, Group selected) -->
-                    <div id="feeTypeSection" style="display: none;">
+                    <div id="feeTypeSection" class="fee-config-custom-1">
                         <hr class="my-4">
                         <h6 class="mb-3 text-primary"><i class="fas fa-money-bill-wave"></i> Select Fee Types to
                             Configure</h6>
@@ -587,7 +587,7 @@ include '../../include/sidebar.php';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-3" id="installmentSection" style="display: none;">
+                                <div class="row mt-3" id="installmentSection" class="fee-config-custom-1">
                                     <div class="col-md-6 offset-md-3">
                                         <label class="form-label">Number of Installments</label>
                                         <input type="number" name="number_of_installments" id="number_of_installments"
@@ -610,7 +610,7 @@ include '../../include/sidebar.php';
                         </div>
                     </div>
 
-                    <div class="alert alert-info" id="installmentBreakdown" style="display: none;">
+                    <div class="alert alert-info" id="installmentBreakdown" class="fee-config-custom-1">
                         <h6><i class="fas fa-calculator"></i> Installment Breakdown:</h6>
                         <ul class="mb-0">
                             <li>Token Fee (Tuition Part-1 + GST): <strong id="displayTokenFee">?0.00</strong></li>
@@ -1002,7 +1002,7 @@ include '../../include/sidebar.php';
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-3" id="editInstallmentSection" style="display: none;">
+                            <div class="row mt-3" id="editInstallmentSection" class="fee-config-custom-1">
                                 <div class="col-md-6 offset-md-3">
                                     <label class="form-label">Number of Installments</label>
                                     <input type="number" name="number_of_installments" id="edit_number_of_installments"
@@ -1023,7 +1023,7 @@ include '../../include/sidebar.php';
                             </div>
                         </div>
                     </div>
-                    <div class="alert alert-info" id="editInstallmentBreakdown" style="display: none;">
+                    <div class="alert alert-info" id="editInstallmentBreakdown" class="fee-config-custom-1">
                         <h6><i class="fas fa-calculator"></i> Installment Breakdown:</h6>
                         <ul class="mb-0">
                             <li>Token Fee (Tuition Part-1 + GST): <strong id="editDisplayTokenFee">?0.00</strong></li>

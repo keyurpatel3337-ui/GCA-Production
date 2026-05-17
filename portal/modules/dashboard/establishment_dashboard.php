@@ -40,6 +40,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/dashboard/establishment_dashboard.css">
 
 <div class="container-fluid py-4 pb-5">
     <?php
@@ -236,123 +237,5 @@ include '../../include/sidebar.php';
         </div>
     </div>
 </div>
-
-<style>
-    /* Dashboard theme consistency */
-    .welcome-banner {
-        padding: 2.5rem;
-        background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-        border-radius: 20px;
-        color: white;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .glass-card {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
-    }
-
-    .stat-card {
-        padding: 1.5rem;
-    }
-
-    .stat-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 0.5rem;
-    }
-
-    .stat-value {
-        font-size: 2rem;
-        font-weight: 700;
-    }
-
-    .stat-label {
-        color: #718096;
-        font-size: 0.875rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.025em;
-    }
-
-    .stat-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-    }
-
-    .quick-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-    }
-
-    .bg-icon-primary {
-        background: rgba(0, 82, 204, 0.1);
-        color: #0052CC;
-    }
-
-    .bg-icon-success {
-        background: rgba(54, 179, 126, 0.1);
-        color: #36B37E;
-    }
-
-    .bg-icon-info {
-        background: rgba(0, 184, 217, 0.1);
-        color: #00B8D9;
-    }
-
-    .bg-purple-subtle {
-        background: rgba(139, 92, 246, 0.1);
-        color: #8b5cf6;
-    }
-
-    .quick-action-btn {
-        display: flex;
-        align-items: center;
-        padding: 1rem;
-        background: white;
-        border: 1px solid #edf2f7;
-        border-radius: 12px;
-        text-decoration: none;
-        color: inherit;
-        transition: all 0.2s ease;
-    }
-
-    .quick-action-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        border-color: #e2e8f0;
-    }
-
-    .quick-info strong {
-        display: block;
-        font-size: 0.95rem;
-        color: #2d3748;
-    }
-
-    .quick-info span {
-        font-size: 0.8rem;
-        color: #718096;
-    }
-
-    .stat-link {
-        font-size: 0.875rem;
-        font-weight: 600;
-        text-decoration: none;
-    }
-</style>
 
 <?php include '../../include/footer.php'; ?>

@@ -41,6 +41,8 @@ include PORTAL_INCLUDE_PATH . 'navbar.php';
 include PORTAL_INCLUDE_PATH . 'sidebar.php';
 ?>
 
+<link rel="stylesheet" href="<?= PORTAL_URL ?>/assets/css/modules/online-exam/edit-exam.css">
+
 <main class="app-main">
     <div class="app-content-header">
         <div class="container-fluid">
@@ -60,7 +62,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                     <h1 class="h3 mb-0 text-gray-800">Modify Exam Settings</h1>
                     <p class="text-muted small mb-0">Update schedule, title, and manage questions.</p>
                 </div>
-                <a href="manage-exams.php" class="btn btn-outline-secondary" style="border-radius: 10px;">
+                <a href="manage-exams.php" class="btn btn-outline-secondary btn-rounded-10">
                     <i class="fas fa-arrow-left mr-2"></i> Back to List
                 </a>
             </div>
@@ -111,7 +113,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             <span class="badge bg-primary px-3" id="selected-count"><?= count($selected_questions) ?> Selected</span>
                         </div>
                         <div class="card-body">
-                            <div id="questions-pool" class="p-3 bg-light rounded border border-dashed" style="max-height: 600px; overflow-y: auto;">
+                            <div id="questions-pool" class="p-3 bg-light rounded border border-dashed max-h-600-overflow">
                                 <?php foreach ($selected_questions as $q): ?>
                                     <div class="card mb-2 hover-shadow transition-all pointer border-primary" onclick="toggleCheck(this)">
                                         <div class="card-body p-3 d-flex align-items-start">
@@ -159,7 +161,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
                 <!-- Right Side: Scheduling -->
                 <div class="col-lg-4">
-                    <div class="card shadow-sm sticky-top" style="top: 20px;">
+                    <div class="card shadow-sm sticky-top sticky-top-20">
                         <div class="card-header py-3 bg-warning text-dark">
                             <h6 class="m-0 font-weight-bold">Update Scheduling</h6>
                         </div>
@@ -281,11 +283,5 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
         document.getElementById('selected-count').textContent = `${count} Selected`;
     }
 </script>
-
-<style>
-    .hover-shadow:hover { box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; border-color: #4e73df; }
-    .pointer { cursor: pointer; }
-    .transition-all { transition: all 0.2s; }
-</style>
 
 <?php include PORTAL_INCLUDE_PATH . 'footer.php'; ?>

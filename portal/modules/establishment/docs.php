@@ -142,6 +142,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/establishment/docs.css">
 
 <div class="container-fluid py-4 pb-5">
     <div class="mb-4 mt-2">
@@ -164,7 +165,7 @@ include '../../include/sidebar.php';
                 </form>
 
                 <?php if (isset($_GET['search'])): ?>
-                    <div class="mt-3 overflow-auto" style="max-height: 450px;">
+                    <div class="mt-3 overflow-auto docs-custom-1">
                         <?php
                         $search_term = $_GET['search'];
                         $search_wildcard = '%' . $search_term . '%';
@@ -180,11 +181,9 @@ include '../../include/sidebar.php';
                             $is_active = ($student_id == $row['id']);
                             ?>
                             <a href="docs.php?student_id=<?php echo $row['id']; ?>&search=<?php echo urlencode($search_term); ?>"
-                                class="text-decoration-none d-block py-3 border-bottom student-list-item <?php echo $is_active ? 'bg-primary bg-opacity-10 border-start border-primary border-4' : ''; ?>"
-                                style="transition: all 0.2s ease;">
+                                class="text-decoration-none d-block py-3 border-bottom student-list-item docs-custom-2 <?php echo $is_active ? 'bg-primary bg-opacity-10 border-start border-primary border-4' : ''; ?>">
                                 <div class="px-2">
-                                    <div class="fw-bold text-dark text-uppercase small mb-1"
-                                        style="letter-spacing: 0.01em; line-height: 1.4;">
+                                    <div class="fw-bold text-dark text-uppercase small mb-1 docs-custom-3">
                                         <?php echo htmlspecialchars($row['full_name'] ?? ''); ?>
                                     </div>
                                     <div class="text-muted smaller">ID: <?php echo $row['id']; ?></div>
@@ -324,7 +323,7 @@ include '../../include/sidebar.php';
 </div>
 
 <!-- Delete Confirmation Form (Hidden) -->
-<form id="deleteForm" method="POST" action="docs.php?student_id=<?php echo $student_id; ?>" style="display:none;">
+<form id="deleteForm" method="POST" action="docs.php?student_id=<?php echo $student_id; ?>" class="docs-custom-4">
     <input type="hidden" name="action" value="delete_document">
     <input type="hidden" name="document_id" id="delete_doc_id">
 </form>
@@ -386,32 +385,5 @@ include '../../include/sidebar.php';
         </div>
     </div>
 
-    <style>
-        .welcome-banner {
-            padding: 2.5rem;
-            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-            border-radius: 20px;
-            color: white;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
-        }
-
-        .list-group-item.active {
-            background: rgba(0, 82, 204, 0.1);
-            color: #0052CC;
-            border-color: #0052CC;
-        }
-
-        .bg-primary-subtle {
-            background: rgba(0, 82, 204, 0.1);
-            color: #0052CC;
-        }
-    </style>
     <?php include '../../include/footer.php'; ?>
 

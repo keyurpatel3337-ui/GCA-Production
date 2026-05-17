@@ -23,6 +23,20 @@ require_once OPERATION_FILE;
 $dbOps = new DatabaseOperations();
 require_once $base_path . '/../common/helpers/fee_allocation_helper.php';
 
+// Check if user is logged in and has appropriate role
+if (!hasRole(ROLE_SUPER_ADMIN) && !hasRole(ROLE_PRINCIPLE) && !hasRole(ROLE_COUNSELLOR)) {
+    if ($is_api_call) {
+        if (!function_exists('sendErrorResponse')) {
+            require_once $base_path . '/../common/bootstrap.php';
+        }
+        sendErrorResponse('Unauthorized access', 403);
+    } else {
+        set_flash_message('error', 'Unauthorized access');
+        header('Location: ' . BASE_URL . '/index.php');
+        exit;
+    }
+}
+
 // For API calls, we may receive JSON input
 if ($is_api_call) {
     $json_input = file_get_contents('php://input');
@@ -33,12 +47,6 @@ if ($is_api_call) {
 } else {
     // require_once OPERATION_FILE; // Removed to avoid duplicate class declaration
     require_once $base_path . '/../common/helpers/error_logger.php';
-    // Check if user is logged in and has appropriate role
-    if (!hasRole(ROLE_SUPER_ADMIN) && !hasRole(ROLE_PRINCIPLE) && !hasRole(ROLE_COUNSELLOR)) {
-        set_flash_message('error', 'Unauthorized access');
-        header('Location: ' . BASE_URL . '/index.php');
-        exit;
-    }
 }
 
 // Helper function for error handling

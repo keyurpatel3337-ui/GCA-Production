@@ -58,6 +58,7 @@ $page_breadcrumb = "Dashboard";
 ?>
 <?php
 include '../../include/header.php'; ?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/dashboard/student_dashboard.css">
 <?php
 include '../../include/navbar.php'; ?>
 <?php
@@ -119,7 +120,7 @@ include '../../include/sidebar.php'; ?>
     <!-- Token Payment Status Banner -->
     <?php
     if (!$student_info['token_fees_paid'] && ($student_info['course_id'] ?? 0) != 6): ?>
-        <div class="alert alert-warning mb-4 shadow-sm" style="border-start: 4px solid #ff9800;">
+        <div class="alert alert-warning mb-4 shadow-sm student_dashboard-custom-1">
             <div class="d-flex align-items-center">
                 <div class="me-3">
                     <i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
@@ -262,8 +263,7 @@ include '../../include/sidebar.php'; ?>
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                                    style="width: 60px; height: 60px;">
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center student_dashboard-custom-2">
                                     <i class="fas fa-id-card fa-2x"></i>
                                 </div>
                             </div>

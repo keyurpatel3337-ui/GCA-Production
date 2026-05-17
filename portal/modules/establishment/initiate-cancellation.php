@@ -68,6 +68,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/establishment/initiate-cancellation.css">
 
 <div class="container-fluid py-4 pb-5">
     <!-- Welcome Banner -->
@@ -91,7 +92,7 @@ include '../../include/sidebar.php';
                 </form>
 
                 <?php if (isset($_GET['search'])): ?>
-                    <div class="list-group list-group-flush overflow-auto" style="max-height: 400px;">
+                    <div class="list-group list-group-flush overflow-auto initiate-cancellation-custom-1">
                         <?php
                         $search_term = $_GET['search'];
                         $search_wildcard = '%' . $search_term . '%';
@@ -206,22 +207,22 @@ include '../../include/sidebar.php';
                                                 <small class="text-muted">ID: <?php echo $req['student_id']; ?> &nbsp;|&nbsp; <?php echo date('d M Y', strtotime($req['created_at'])); ?></small>
                                             </td>
                                             <td>
-                                                <span class="badge <?php echo $badge_class; ?> text-uppercase" style="font-size:0.65rem;">
+                                                <span class="badge <?php echo $badge_class; ?> text-uppercase initiate-cancellation-custom-2">
                                                     <?php echo $req['final_status']; ?>
                                                 </span>
                                             </td>
                                             <td>
-                                                <div class="progress mb-2" style="height:5px;min-width:120px;">
+                                                <div class="progress mb-2 initiate-cancellation-custom-3">
                                                     <div class="progress-bar bg-success" style="width:<?php echo $percentage; ?>%"></div>
                                                 </div>
                                                 <div class="d-flex gap-1 flex-wrap">
-                                                    <span class="badge <?php echo $approval_badge($req['account_status']); ?>" style="font-size:0.6rem;" title="Account">
+                                                    <span class="badge <?php echo $approval_badge($req['account_status']); ?> initiate-cancellation-custom-4" title="Account">
                                                         <i class="fas <?php echo $approval_icon($req['account_status']); ?> me-1"></i>Account
                                                     </span>
-                                                    <span class="badge <?php echo $approval_badge($req['reception_status']); ?>" style="font-size:0.6rem;" title="Reception">
+                                                    <span class="badge <?php echo $approval_badge($req['reception_status']); ?> initiate-cancellation-custom-4" title="Reception">
                                                         <i class="fas <?php echo $approval_icon($req['reception_status']); ?> me-1"></i>Reception
                                                     </span>
-                                                    <span class="badge <?php echo $approval_badge($req['principal_status']); ?>" style="font-size:0.6rem;" title="Principal">
+                                                    <span class="badge <?php echo $approval_badge($req['principal_status']); ?> initiate-cancellation-custom-4" title="Principal">
                                                         <i class="fas <?php echo $approval_icon($req['principal_status']); ?> me-1"></i>Principal
                                                     </span>
                                                 </div>
@@ -251,28 +252,6 @@ include '../../include/sidebar.php';
         </div>
     </div>
 </div>
-
-<style>
-    .welcome-banner {
-        padding: 2.5rem;
-        background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-        border-radius: 20px;
-        color: white;
-    }
-
-    .glass-card {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
-    }
-
-    .bg-danger-subtle {
-        background: rgba(220, 53, 69, 0.1) !important;
-        color: #dc3545 !important;
-    }
-</style>
 
 <?php include '../../include/footer.php'; ?>
 

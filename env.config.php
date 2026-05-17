@@ -24,89 +24,82 @@ $script_path = $_SERVER['SCRIPT_FILENAME'] ?? '';
 $host = "localhost"; // MySQL on same EC2 instance
 $dbname = "counselling"; // Production database name
 $username = "root"; // Database user
-$password = "GCA_Secure_#2026_Portal"; // Production database password
+$password = ""; // Production database password
 $is_local = false;
 
 // Determine environment (auto-detection)
-// 🚀 PRODUCTION MODE - Set $is_local = false to force production
-$force_production = false; // Set to true for production mode
+$force_production = false;
+
+// Detect protocol (HTTP or HTTPS)
+$protocol = 'http';
+if (
+    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on') ||
+    (!empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
+) {
+    $protocol = 'https';
+}
 
 if ($force_production) {
-    // 🌐 PRODUCTION MODE ENFORCED
     $is_local = false;
 } elseif (
     stripos($current_host, 'localhost') !== false ||
     stripos($current_host, '127.0.0.1') !== false ||
     stripos($script_path, 'wamp64') !== false ||
     stripos($script_path, 'xampp') !== false ||
-    stripos($script_path, 'C:') !== false || // Windows drive
+    stripos($script_path, 'C:') !== false ||
     stripos($script_path, 'D:') !== false
 ) {
-    // 💻 Local Development Environment (WAMP/XAMPP on Windows)
-    $host = "localhost";
-    $dbname = "counselling";
-    $username = "root";
-    $password = "GCA_Secure_#2026_Portal";
     $is_local = true;
+} else {
+    $is_local = false;
 }
+
+// Database Configuration
+$host = "localhost";
+$dbname = "counselling";
+$username = "root";
+$password = "";
 
 // Define URLs and Paths
 if (!defined('BASE_URL')) {
     if ($is_local) {
-        // Local development URLs - Dynamic to support Virtual Hosts
-        $protocol = "http";
-        // If accessed via the primary domain gyanmanjari.com, the docroot is already GCA-Production
-        if (stripos($current_host, 'gyanmanjari.com') !== false) {
-            define('BASE_URL', $protocol . '://' . $current_host);
-        } else {
-            define('BASE_URL', $protocol . '://' . $current_host . '/GCA-Production');
-        }
-        define('PORTAL_URL', BASE_URL . '/portal');
-        define('BACKEND_URL', BASE_URL . '/counselling-backend');
+        define('BASE_URL', $protocol . '://' . $current_host . '/gca');
     } else {
-        // Production URLs
         define('BASE_URL', 'https://gyanmanjari.com');
-        define('PORTAL_URL', 'https://gyanmanjari.com/portal');
-        define('BACKEND_URL', 'https://gyanmanjari.com/counselling-backend');
     }
 }
 
-// Ensure BACKEND_URL is always defined
+if (!defined('PORTAL_URL')) {
+    define('PORTAL_URL', BASE_URL . '/portal');
+}
+
 if (!defined('BACKEND_URL')) {
-    define('BACKEND_URL', $is_local ? 'http://gyanmanjari.com/counselling-backend' : 'https://gyanmanjari.com/counselling-backend');
+    define('BACKEND_URL', BASE_URL . '/counselling-backend');
 }
 
-// System Name - used in page titles and headers
-if (!defined('SYSTEM_NAME')) {
-    define('SYSTEM_NAME', 'GCA');
-}
-
-// Additional URL definitions
 if (!defined('FRONTEND_URL')) {
-    define('FRONTEND_URL', $is_local ? 'https://gyanmanjari.com' : 'https://gyanmanjari.com');
+    define('FRONTEND_URL', BASE_URL);
 }
 
-// API and Asset URLs
 if (!defined('API_URL')) {
     define('API_URL', BACKEND_URL . '/api');
 }
 
-if (!defined('WALLET_API_URL')) {
-    // For local dev, use the allowed domain gyanmanjari.com with the /wallet alias
-    define('WALLET_API_URL', $is_local ? 'http://gyanmanjari.com/wallet/api/v1' : 'https://gyanmanjari.com/wallet/api/v1');
-}
-
-if (!defined('GCA_PORTAL_KEY')) {
-    define('GCA_PORTAL_KEY', 'GCA_PORTAL_KEY_99xyz');
-}
-
 if (!defined('ASSETS_URL')) {
-    define('ASSETS_URL', FRONTEND_URL . '/public/assets');
+    define('ASSETS_URL', BASE_URL . '/assets');
 }
 
 if (!defined('UPLOADS_URL')) {
-    define('UPLOADS_URL', FRONTEND_URL . '/uploads');
+    define('UPLOADS_URL', BASE_URL . '/uploads');
 }
+
+// System Name
+if (!defined('SYSTEM_NAME')) {
+    define('SYSTEM_NAME', 'GCA');
+}
+
 
 // Environment constant
 if (!defined('ENVIRONMENT')) {

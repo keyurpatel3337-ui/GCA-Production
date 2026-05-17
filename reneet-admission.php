@@ -196,8 +196,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         content="Official admission form for GCA Re-NEET repeater program. Register now to excel in NEET 2027.">
 
     <!-- Stylesheets -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="<?php echo BASE_URL; ?>/assets/vendor/tailwind/tailwind.min.js"></script>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/vendor/font-awesome/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -351,7 +351,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="max-w-5xl w-full">
         <!-- Logo & Title -->
         <div class="text-center mb-14">
-            <img src="assets/images/logogmn.png" alt="GCA Logo" class="h-24 mx-auto mb-8 drop-shadow-sm">
+            <img src="<?php echo BASE_URL; ?>/assets/images/logogmn.png" alt="GCA Logo" class="h-24 mx-auto mb-8 drop-shadow-sm">
             <h1 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4">
                 Re-NEET <span class="text-blue-600">Admission</span> 2026-27
             </h1>

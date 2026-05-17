@@ -19,14 +19,14 @@ include '../../include/header.php';
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/fees/manual-wallet-deposit.css">
 
 <div class="container-fluid py-4 pb-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
                 <div class="card-header bg-white border-0 p-4 d-flex align-items-center">
-                    <div class="icon-box bg-success-light text-success rounded-circle p-2 me-3 d-flex align-items-center justify-content-center"
-                        style="width: 45px; height: 45px;">
+                    <div class="icon-box bg-success-light text-success rounded-circle p-2 me-3 d-flex align-items-center justify-content-center manual-wallet-deposit-custom-1">
                         <i class="fas fa-wallet fs-5"></i>
                     </div>
                     <h5 class="fw-bold mb-0">Manual Wallet Deposit</h5>
@@ -44,8 +44,7 @@ include '../../include/sidebar.php';
                                 <input type="text" class="form-control form-control-lg bg-light border-0 ps-5 rounded-3"
                                     id="studentSearch" placeholder="Search by ID, Name or Mobile..." autocomplete="off">
                                 <div id="searchResults"
-                                    class="position-absolute w-100 shadow-lg rounded-3 mt-1 bg-white overflow-auto d-none"
-                                    style="max-height: 300px; z-index: 1000;">
+                                    class="position-absolute w-100 shadow-lg rounded-3 mt-1 bg-white overflow-auto d-none manual-wallet-deposit-custom-2">
                                     <!-- Results will be injected here -->
                                 </div>
                             </div>
@@ -57,8 +56,7 @@ include '../../include/sidebar.php';
                             class="d-none mb-4 p-3 rounded-4 bg-light border-start border-primary border-4">
                             <div class="d-flex align-items-center">
                                 <div class="avatar-box me-3">
-                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold"
-                                        style="width: 50px; height: 50px; font-size: 1.2rem;">
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold manual-wallet-deposit-custom-3">
                                         <span id="previewInitials">S</span>
                                     </div>
                                 </div>

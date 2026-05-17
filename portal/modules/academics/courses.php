@@ -17,6 +17,9 @@ $boards = (is_array($response) && isset($response['success']) && $response['succ
 
 $page_title = 'Standard Management';
 include '../../include/header.php';
+?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/academics/courses.css">
+<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
@@ -38,7 +41,7 @@ include '../../include/sidebar.php';
                     data-bs-target="#addModal">
                     <i class="fas fa-plus me-1"></i> Add Standard
                 </button>
-                <div id="deleteSelectedBtn" style="display: none;">
+                <div id="deleteSelectedBtn" class="courses-custom-1">
                     <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="deleteSelected()">
                         <i class="fas fa-trash-alt me-1"></i> Delete Selected
                     </button>

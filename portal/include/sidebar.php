@@ -66,17 +66,16 @@ $website_prefix = $portal_root . 'modules/website/';
 $maintenance_prefix = $portal_root . 'modules/maintenance/';
 ?>
 <!-- GCA Portal Sidebar -->
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/include/sidebar.css">
 <script>console.log('Sidebar element rendering...');</script>
 <aside id="main-sidebar" class="app-sidebar bg-white shadow-sm d-flex flex-column" data-bs-theme="light">
     <!-- Sidebar Brand -->
     <div class="sidebar-brand bg-white border-bottom">
         <a href="<?php echo $dashboard_link; ?>"
             class="brand-link text-decoration-none d-flex align-items-center w-100">
-            <img src="<?php echo BASE_URL; ?>/assets/images/logo-icon.png" alt="Logo" class="brand-image me-2"
-                style="width: 32px; height: 32px;">
+            <img src="<?php echo BASE_URL; ?>/assets/images/logo-icon.png" alt="Logo" class="brand-image me-2 sidebar-custom-1">
             <div class="brand-info flex-grow-1">
-                <span class="brand-text fw-bold text-dark d-block"
-                    style="font-size: 1rem; line-height: 1.2;"><?php echo defined('SYSTEM_SHORT_NAME') ? SYSTEM_SHORT_NAME : 'GCA'; ?></span>
+                <span class="brand-text fw-bold text-dark d-block sidebar-custom-2"><?php echo defined('SYSTEM_SHORT_NAME') ? SYSTEM_SHORT_NAME : 'GCA'; ?></span>
                 <span class="brand-subtitle text-muted small d-block">Portal v2.0</span>
             </div>
         </a>

@@ -21,6 +21,7 @@
  */
 function renderPagination($currentPage, $totalPages, $baseUrl = '', $showPages = 2, $totalItems = null, $label = 'records')
 {
+    echo '<link rel="stylesheet" href="' . PORTAL_URL . '/assets/css/modules/common/pagination.css">';
     if ($totalPages <= 1) {
         if ($totalItems !== null && $totalItems > 0) {
             return '<div class="d-flex justify-content-end w-100"><div class="text-muted small">Total <strong>' . number_format($totalItems) . '</strong> ' . $label . ' found</div></div>';
@@ -114,6 +115,8 @@ function renderPagination($currentPage, $totalPages, $baseUrl = '', $showPages =
  */
 function renderPaginationPost($currentPage, $totalPages, $showPages = 2, $perPage = null, $extraParams = [], $totalItems = null, $label = 'records')
 {
+    $htmlArr = [];
+    $htmlArr[] = '<link rel="stylesheet" href="' . PORTAL_URL . '/assets/css/modules/common/pagination.css">';
     if ($totalPages <= 1) {
         if ($totalItems !== null && $totalItems > 0) {
             return '<div class="d-flex justify-content-end w-100"><div class="text-muted small">Total <strong>' . number_format($totalItems) . '</strong> ' . $label . ' found</div></div>';
@@ -150,14 +153,14 @@ function renderPaginationPost($currentPage, $totalPages, $showPages = 2, $perPag
 
     // << First button
     if ($currentPage > 1) {
-        $htmlArr[] = '<li class="page-item"><form method="POST" style="display:inline;margin:0;"><input type="hidden" name="page" value="1">' . $formFieldsHtml . '<button type="submit" class="page-link" title="First"><i class="fas fa-angle-double-left"></i></button></form></li>';
+        $htmlArr[] = '<li class="page-item"><form method="POST" class="pagination-form"><input type="hidden" name="page" value="1">' . $formFieldsHtml . '<button type="submit" class="page-link" title="First"><i class="fas fa-angle-double-left"></i></button></form></li>';
     } else {
         $htmlArr[] = '<li class="page-item disabled"><span class="page-link"><i class="fas fa-angle-double-left"></i></span></li>';
     }
 
     // Previous button
     if ($currentPage > 1) {
-        $htmlArr[] = '<li class="page-item"><form method="POST" style="display:inline;margin:0;"><input type="hidden" name="page" value="' . ($currentPage - 1) . '">' . $formFieldsHtml . '<button type="submit" class="page-link">Previous</button></form></li>';
+        $htmlArr[] = '<li class="page-item"><form method="POST" class="pagination-form"><input type="hidden" name="page" value="' . ($currentPage - 1) . '">' . $formFieldsHtml . '<button type="submit" class="page-link">Previous</button></form></li>';
     } else {
         $htmlArr[] = '<li class="page-item disabled"><span class="page-link">Previous</span></li>';
     }
@@ -180,20 +183,20 @@ function renderPaginationPost($currentPage, $totalPages, $showPages = 2, $perPag
         if ($i == $currentPage) {
             $htmlArr[] = '<li class="page-item active" aria-current="page"><span class="page-link shadow-sm">' . $i . '</span></li>';
         } else {
-            $htmlArr[] = '<li class="page-item"><form method="POST" style="display:inline;margin:0;"><input type="hidden" name="page" value="' . $i . '">' . $formFieldsHtml . '<button type="submit" class="page-link">' . $i . '</button></form></li>';
+            $htmlArr[] = '<li class="page-item"><form method="POST" class="pagination-form"><input type="hidden" name="page" value="' . $i . '">' . $formFieldsHtml . '<button type="submit" class="page-link">' . $i . '</button></form></li>';
         }
     }
 
     // Next button
     if ($currentPage < $totalPages) {
-        $htmlArr[] = '<li class="page-item"><form method="POST" style="display:inline;margin:0;"><input type="hidden" name="page" value="' . ($currentPage + 1) . '">' . $formFieldsHtml . '<button type="submit" class="page-link">Next</button></form></li>';
+        $htmlArr[] = '<li class="page-item"><form method="POST" class="pagination-form"><input type="hidden" name="page" value="' . ($currentPage + 1) . '">' . $formFieldsHtml . '<button type="submit" class="page-link">Next</button></form></li>';
     } else {
         $htmlArr[] = '<li class="page-item disabled"><span class="page-link">Next</span></li>';
     }
 
     // >> Last button
     if ($currentPage < $totalPages) {
-        $htmlArr[] = '<li class="page-item"><form method="POST" style="display:inline;margin:0;"><input type="hidden" name="page" value="' . $totalPages . '">' . $formFieldsHtml . '<button type="submit" class="page-link" title="Last"><i class="fas fa-angle-double-right"></i></button></form></li>';
+        $htmlArr[] = '<li class="page-item"><form method="POST" class="pagination-form"><input type="hidden" name="page" value="' . $totalPages . '">' . $formFieldsHtml . '<button type="submit" class="page-link" title="Last"><i class="fas fa-angle-double-right"></i></button></form></li>';
     } else {
         $htmlArr[] = '<li class="page-item disabled"><span class="page-link"><i class="fas fa-angle-double-right"></i></span></li>';
     }

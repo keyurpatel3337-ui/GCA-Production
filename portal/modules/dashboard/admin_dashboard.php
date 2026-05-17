@@ -55,7 +55,7 @@ include '../../include/navbar.php'; ?>
 <?php
 include '../../include/sidebar.php'; ?>
 
-
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/dashboard/admin_dashboard.css">
 
 <div class="container-fluid py-4 pb-5">
     <?php
@@ -102,7 +102,7 @@ include '../../include/sidebar.php'; ?>
                         </div>
                     </div>
                     <form method="POST" action="<?php echo PORTAL_URL; ?>/modules/settings/users.php"
-                        style="display:inline;">
+                        class="admin-dashboard-custom-1">
                         <input type="hidden" name="role" value="principle">
                         <button type="submit" class="stat-link btn btn-link p-0 text-decoration-none text-info">
                             View Details <i class="fas fa-arrow-right ms-1"></i>
@@ -126,7 +126,7 @@ include '../../include/sidebar.php'; ?>
                         </div>
                     </div>
                     <form method="POST" action="<?php echo PORTAL_URL; ?>/modules/settings/users.php"
-                        style="display:inline;">
+                        class="admin-dashboard-custom-1">
                         <input type="hidden" name="role" value="counsellor">
                         <button type="submit" class="stat-link btn btn-link p-0 text-decoration-none text-success">
                             View Details <i class="fas fa-arrow-right ms-1"></i>

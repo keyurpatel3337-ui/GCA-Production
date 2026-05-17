@@ -1,0 +1,30 @@
+.stat-card {
+    border-start: 4px solid;
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.action-buttons .btn {
+    margin: 2px;
+}
+
+.priority-high {
+    border-start-color: #dc3545 !important;
+}
+
+.priority-medium {
+    border-start-color: #ffc107 !important;
+}
+
+.priority-low {
+    border-start-color: #28a745 !important;
+}

@@ -66,6 +66,7 @@ include '../../include/header.php';
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/fees/assign-fees.css">
 
 
 
@@ -145,7 +146,7 @@ include '../../include/sidebar.php';
                         </div>
                     </div>
 
-                    <div id="individual-fee-details" class="alert alert-info" style="display: none;">
+                    <div id="individual-fee-details" class="alert alert-info assign-fees-custom-1">
                         <h6><i class="fas fa-info-circle"></i> Fee Details:</h6>
                         <ul class="mb-0">
                             <li>Course: <strong id="ind-course">-</strong></li>
@@ -205,7 +206,7 @@ include '../../include/sidebar.php';
                         </div>
                     </div>
 
-                    <div id="bulk-fee-details" class="alert alert-info" style="display: none;">
+                    <div id="bulk-fee-details" class="alert alert-info assign-fees-custom-1">
                         <h6><i class="fas fa-info-circle"></i> Fee Details:</h6>
                         <ul class="mb-0">
                             <li>Course: <strong id="bulk-course">-</strong></li>
@@ -227,8 +228,7 @@ include '../../include/sidebar.php';
                                 <strong>Select All Students</strong>
                             </label>
                         </div>
-                        <div
-                            style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 4px;">
+                        <div class="assign-fees-custom-2">
                             <?php
                             foreach ($students as $student): ?>
                                 <div class="form-check">

@@ -718,9 +718,9 @@ $full_name = trim(($receipts[0]['surname'] ?? '') . ' ' . ($receipts[0]['student
                         $sig_url = null;
                         if (isset($receipt['created_by']) && $receipt['created_by'] == 70) {
                             // Check if the image exists in assets
-                            $bhautik_sig_path = dirname(__DIR__, 3) . '/assets/images/Bhautik_dumaniya.png';
+                            $bhautik_sig_path = dirname(__DIR__, 3) . '/portal/assets/images/Bhautik_dumaniya.png';
                             if (file_exists($bhautik_sig_path)) {
-                                $sig_url = BASE_URL . '/assets/images/Bhautik_dumaniya.png';
+                                $sig_url = PORTAL_URL . '/assets/images/Bhautik_dumaniya.png';
                             }
                         }
 

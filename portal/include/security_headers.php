@@ -25,11 +25,11 @@ header("X-XSS-Protection: 1; mode=block");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 
 // Content Security Policy (Basic starting point, adjust as needed)
-// This policy allows scripts/styles from CDN and self
+// This policy allows scripts/styles from 'self'
 $csp = "default-src 'self'; ";
-$csp .= "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com https://code.jquery.com https://static.cloudflareinsights.com; ";
-$csp .= "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; ";
-$csp .= "font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.gstatic.com; ";
+$csp .= "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://code.jquery.com https://static.cloudflareinsights.com; ";
+$csp .= "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; ";
+$csp .= "font-src 'self' https://fonts.gstatic.com; ";
 $csp .= "img-src 'self' data: https:; ";
 $csp .= "connect-src 'self' https:; ";
 $csp .= "frame-src 'self';";

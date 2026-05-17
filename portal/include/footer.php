@@ -3,7 +3,7 @@
 <?php endif; ?>
 
 <!-- Footer -->
-<footer class="app-footer" style="display: none !important;">
+<footer class="app-footer hidden">
     <div class="float-end d-none d-sm-inline">
         <b>Version</b> <?php echo defined('SYSTEM_VERSION') ? SYSTEM_VERSION : '1.0.0'; ?>
     </div>
@@ -17,15 +17,15 @@
 </div><!-- /.app-wrapper -->
 
 <!-- Bootstrap 5 Bundle (includes Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
 <!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/assets/vendor/sweetalert2/sweetalert2.all.min.js"></script>
 <!-- Bootstrap Toasts Container -->
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;" id="toastPlacement"></div>
+<div class="toast-container position-fixed top-0 end-0 p-3 toast-container-portal" id="toastPlacement"></div>
 
 <!-- Generic Confirmation Modal -->
-<div class="modal fade" id="genericConfirmModal" tabindex="-1" aria-labelledby="genericConfirmModalLabel"
-    aria-hidden="true" style="z-index: 10000;">
+<div class="modal fade generic-confirm-modal" id="genericConfirmModal" tabindex="-1" aria-labelledby="genericConfirmModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -44,10 +44,11 @@
 </div>
 
 <!-- Core Portal JS -->
+<script src="<?php echo PORTAL_URL; ?>/assets/js/gca-layout.js"></script>
 <!-- Select2 -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="<?php echo PORTAL_URL; ?>/assets/vendor/select2/select2.min.js"></script>
 <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="<?php echo PORTAL_URL; ?>/assets/vendor/chartjs/chart.umd.min.js"></script>
 <!-- API Client -->
 <script src="<?php echo PORTAL_URL; ?>/assets/js/api-client.js"></script>
 <!-- Table Utilities (exportToExcel, selectAll, toggleDeleteButton) -->
@@ -65,7 +66,7 @@
 <!-- Receipt Utilities (downloadReceipt) -->
 <script src="<?php echo PORTAL_URL; ?>/assets/js/receipt-utils.js"></script>
 <!-- Flatpickr -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="<?php echo PORTAL_URL; ?>/assets/vendor/flatpickr/flatpickr.min.js"></script>
 
 <script>
     // Set API URL for notification bell before it initializes

@@ -35,7 +35,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
 ?>
 
-
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/maintenance/tools/cache.css">
 
 <div class="container-fluid py-4">
 
@@ -173,8 +173,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
                         <?php foreach ($cache_dirs as $name => $dir): ?>
                             <div class="list-group-item p-4 border-bottom-0">
                                 <div class="d-flex align-items-center mb-2">
-                                    <div class="icon-box bg-primary-subtle text-primary me-3 rounded p-2"
-                                        style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <div class="icon-box bg-primary-subtle text-primary me-3 rounded p-2 cache-custom-1">
                                         <i class="fas fa-hdd"></i>
                                     </div>
                                     <div class="fw-bold text-dark"><?php echo $name; ?> Path</div>
@@ -198,26 +197,5 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
     </div>
 </div>
 </div>
-
-<style>
-    .glass-card {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 15px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05) !important;
-    }
-
-    .bg-gradient-primary {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
-    }
-
-    .icon-box {
-        transition: transform 0.2s ease;
-    }
-
-    .list-group-item:hover .icon-box {
-        transform: scale(1.1);
-    }
-</style>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/footer.php'; ?>

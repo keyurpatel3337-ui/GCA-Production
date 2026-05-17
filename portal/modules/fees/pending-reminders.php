@@ -163,6 +163,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_reminders'])) {
 
 $page_title = "Pending Fee Reminders";
 include '../../include/header.php';
+?>
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/fees/pending-reminders.css">
+<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
@@ -226,7 +229,7 @@ include '../../include/sidebar.php';
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th style="width: 40px"><input type="checkbox" id="selectAll"></th>
+                                <th class="pending-reminders-custom-1"><input type="checkbox" id="selectAll"></th>
                                 <th>Student</th>
                                 <th>Standard</th>
                                 <th>Fee Type</th>

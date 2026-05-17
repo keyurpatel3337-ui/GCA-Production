@@ -61,6 +61,7 @@ if (!empty($user_name)) {
 ?>
 
 <!-- AdminLTE 4 Navbar -->
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/include/navbar.css">
 <nav class="app-header navbar navbar-expand bg-body">
     <div class="container-fluid">
         <!-- Start navbar links -->
@@ -78,10 +79,10 @@ if (!empty($user_name)) {
                 </a>
             </li>
             <li class="nav-item d-none d-md-block ms-2">
-                <div class="nav-link d-flex flex-column justify-content-center" style="line-height: normal;">
+                <div class="nav-link d-flex flex-column justify-content-center navbar-custom-1">
                     <span class="fw-bold text-dark"><?php echo $page_title_display; ?></span>
                     <?php if (!empty($breadcrumb_text)): ?>
-                        <small class="text-muted" style="font-size: 0.75rem;">
+                        <small class="text-muted navbar-custom-2">
                             <?php echo htmlspecialchars($breadcrumb_text ?? ''); ?>
                         </small>
                     <?php endif; ?>
@@ -119,16 +120,15 @@ if (!empty($user_name)) {
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                     <?php if (!empty($user_avatar)): ?>
-                        <img src="<?php echo $user_avatar; ?>" class="user-image rounded-circle shadow me-2"
-                            alt="User Image" style="width: 32px; height: 32px;">
+                        <img src="<?php echo $user_avatar; ?>" class="user-image rounded-circle shadow me-2 navbar-custom-3"
+                            alt="User Image">
                     <?php else: ?>
                         <span
-                            class="user-image rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center me-2"
-                            style="width: 32px; height: 32px; font-size: 12px;">
+                            class="user-image rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center me-2 navbar-custom-4">
                             <?php echo $initials; ?>
                         </span>
                     <?php endif; ?>
-                    <span class="d-none d-md-inline text-truncate" style="max-width: 200px;">
+                    <span class="d-none d-md-inline text-truncate navbar-custom-5">
                         <?php echo htmlspecialchars($user_name ?? ''); ?>
                     </span>
                 </a>
@@ -138,8 +138,7 @@ if (!empty($user_name)) {
                         <?php if (!empty($user_avatar)): ?>
                             <img src="<?php echo $user_avatar; ?>" class="rounded-circle shadow" alt="User Image">
                         <?php else: ?>
-                            <div class="rounded-circle bg-white text-primary d-inline-flex align-items-center justify-content-center mx-auto"
-                                style="width: 90px; height: 90px; font-size: 32px; font-weight: 600;">
+                            <div class="rounded-circle bg-white text-primary d-inline-flex align-items-center justify-content-center mx-auto navbar-custom-6">
                                 <?php echo $initials; ?>
                             </div>
                         <?php endif; ?>
