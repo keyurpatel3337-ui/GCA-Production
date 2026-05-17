@@ -211,6 +211,7 @@ if ($routeAction === 'user-get') {
     $page = max(1, (int) ($_GET['page'] ?? 1));
     $perPage = max(1, (int) ($_GET['per_page'] ?? 50));
     $search = $_GET['search'] ?? '';
+    $role_filter = $_GET['role'] ?? '';
 
     try {
         // Exclude Student and Website Admin roles from the dropdown
@@ -236,6 +237,11 @@ if ($routeAction === 'user-get') {
         if ($search) {
             $where_clauses[] = "(u.name LIKE ? OR u.email LIKE ? OR r.role_name LIKE ? OR s.name LIKE ? OR s.personal_email LIKE ?)";
             $params = array_merge($params, ["%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
+        }
+
+        if (!empty($role_filter)) {
+            $where_clauses[] = "r.role_slug = ?";
+            $params[] = $role_filter;
         }
 
         $where = !empty($where_clauses) ? "WHERE " . implode(' AND ', $where_clauses) : "";
@@ -275,7 +281,10 @@ if ($routeAction === 'user-get') {
                     'total_records' => $totalRecords,
                     'total_pages' => $totalPages
                 ],
-                'applied_filters' => ['search' => $search]
+                'applied_filters' => [
+                    'search' => $search,
+                    'role' => $role_filter
+                ]
             ]);
         }
     } catch (PDOException $e) {
