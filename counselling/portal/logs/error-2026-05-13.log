@@ -1,1 +1,0 @@
-[2026-05-13 19:12:13] [File: C:\xampp\htdocs\resultPortal\vendor\tecnickcom\tcpdf\tcpdf.php] [Line: 7424] PHP WARNING: imagecreatefrompng(): gd-png: libpng warning: iCCP: known incorrect sRGB profile | User ID: 1 | URI: /resultPortal/print-bulk-results-pdf.php?academic_year_id=2&course_id=1&group_id=1&page_size=A4&range_type=roll_no&range_from=1&range_to=500
