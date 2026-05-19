@@ -45,7 +45,7 @@ if (!empty($search)) {
     $params = array_merge($params, [$search_param, $search_param, $search_param]);
 }
 
-$query .= " ORDER BY r.id ASC";
+$query .= " ORDER BY r.id DESC";
 
 try {
     $stmt = $conn->prepare($query);

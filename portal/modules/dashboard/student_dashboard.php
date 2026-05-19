@@ -55,10 +55,24 @@ if ($response && isset($response['success']) && $response['success']) {
 // Set Page Title
 $page_title = "Student Dashboard";
 $page_breadcrumb = "Dashboard";
+
+// Check for restricted online payment (Standard 11, Course ID 1 & 2)
+require_once DB_CONNECT_FILE;
+require_once OPERATION_FILE;
+
+$is_restricted_payment = false;
+$std_check_res = $dbOps->customSelect("SELECT standard, course_id FROM tbl_gm_std_registration WHERE id = ?", [$user_id]);
+$std_check = !empty($std_check_res) ? $std_check_res[0] : null;
+if ($std_check) {
+    $std_val = isset($std_check['standard']) ? intval($std_check['standard']) : 0;
+    $course_val = isset($std_check['course_id']) ? intval($std_check['course_id']) : 0;
+    if ($std_val == 11 && ($course_val == 1 || $course_val == 2)) {
+        $is_restricted_payment = true;
+    }
+}
 ?>
 <?php
 include '../../include/header.php'; ?>
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/dashboard/student_dashboard.css">
 <?php
 include '../../include/navbar.php'; ?>
 <?php
@@ -120,7 +134,7 @@ include '../../include/sidebar.php'; ?>
     <!-- Token Payment Status Banner -->
     <?php
     if (!$student_info['token_fees_paid'] && ($student_info['course_id'] ?? 0) != 6): ?>
-        <div class="alert alert-warning mb-4 shadow-sm student_dashboard-custom-1">
+        <div class="alert alert-warning mb-4 shadow-sm" style="border-start: 4px solid #ff9800;">
             <div class="d-flex align-items-center">
                 <div class="me-3">
                     <i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
@@ -263,7 +277,8 @@ include '../../include/sidebar.php'; ?>
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center student_dashboard-custom-2">
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                    style="width: 60px; height: 60px;">
                                     <i class="fas fa-id-card fa-2x"></i>
                                 </div>
                             </div>
@@ -361,9 +376,11 @@ include '../../include/sidebar.php'; ?>
                                     <span class="ms-3">Amount Due:
                                         <strong>₹<?php echo formatIndianCurrency($total_pending); ?></strong></span>
                                 </div>
-                                <button type="button" onclick="payAllPendingFees()" class="btn btn-success btn-lg shadow-sm">
-                                    <i class="fas fa-credit-card me-1"></i> Pay All Outstanding
-                                </button>
+                                 <?php if (!$is_restricted_payment): ?>
+                                     <button type="button" onclick="payAllPendingFees()" class="btn btn-success btn-lg shadow-sm">
+                                         <i class="fas fa-credit-card me-1"></i> Pay All Outstanding
+                                     </button>
+                                 <?php endif; ?>
                             </div>
                             <?php
                         else: ?>
@@ -421,10 +438,13 @@ include '../../include/sidebar.php'; ?>
                                                     </button>
                                                     <?php
                                                 elseif ($alloc['pending_amount'] > 0): ?>
-                                                    <button type="button" onclick="payFee('<?php echo $key; ?>')"
-                                                        class="btn btn-warning btn-sm">
-                                                        <i class="fas fa-credit-card"></i> Pay Now
-                                                    </button>
+                                                     <?php if (!$is_restricted_payment): ?>
+                                                         <button type="button" onclick="payFee('<?php echo $key; ?>')"
+                                                             class="btn btn-warning btn-sm">
+                                                             <i class="fas fa-credit-card"></i> Pay Now
+                                                         </button>
+                                                     <?php endif; ?>
+
                                                     <?php
                                                 endif; ?>
                                             </td>

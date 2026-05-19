@@ -7,21 +7,41 @@
  * Supports categorized logging to separate log files:
  * - login-error.log    : Authentication/login errors
  * - payment-error.log  : Payment gateway errors
- * - database-error.log : Database/PDO errors
+ * - database-error.log : Database errors
  * - file-error.log     : File operation errors
- * - validation-error.log : Form validation errors
- * - error.log          : General errors (default)
+ * - validation-error.log : Input validation errors
+ * - error.log          : General application errors
+ * - upload-error.log   : File upload errors
+ * - payment-gateway.log: Payment gateway transaction logs
+ * - payment-offline.log: Offline payment logs
+ * 
+ * Separate log directories for each category:
+ * - logs/student/      : Authentication logs
+ * - logs/payment/      : Payment and gateway logs
+ * - logs/database/     : Database errors
+ * - logs/file/         : File operation errors
+ * - logs/validation/   : Validation errors
+ * - logs/error/        : General errors
+ * - logs/upload/       : Upload errors
+ * 
+ * Usage:
+ *   require_once __DIR__ . '/../../common/helpers/error_logger.php';
+ *   
+ *   // Log different types of errors
+ *   logError("Login failed", __FILE__, __LINE__, null, LOG_CATEGORY_AUTH);
+ *   logDatabaseError($e, "User registration");
+ *   logGatewayActivity("Payment request sent", "INFO", $data);
  */
 
-// Self-define LOGS_PATH so this file works correctly even without constants.php being loaded first.
-// This file always lives at common/helpers/error_logger.php, so common/logs is always one level up.
-if (!defined('LOGS_PATH')) {
-    define('LOGS_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR);
+if (!defined('APP_INIT')) {
+    define('APP_INIT', true);
 }
 
-// Create the log directory if it does not exist
-if (!file_exists(LOGS_PATH)) {
-    @mkdir(LOGS_PATH, 0755, true);
+// Error logging configuration
+// Primary log path is D:\GCA\Logs (defined in constants.php)
+// If constants.php was already included, LOGS_PATH is already set; otherwise define it here.
+if (!defined('LOGS_PATH')) {
+    define('LOGS_PATH', 'D:\\GCA\\Logs\\');
 }
 
 // Log categories for categorized logging
@@ -39,6 +59,10 @@ if (!defined('LOG_CATEGORY_GENERAL'))
     define('LOG_CATEGORY_GENERAL', 'general');     // error.log (default)
 if (!defined('LOG_CATEGORY_UPLOAD'))
     define('LOG_CATEGORY_UPLOAD', 'upload');       // upload-error.log
+if (!defined('LOG_CATEGORY_WARNING'))
+    define('LOG_CATEGORY_WARNING', 'warning');     // warning.log
+if (!defined('LOG_CATEGORY_AUTH_SUCCESS'))
+    define('LOG_CATEGORY_AUTH_SUCCESS', 'auth_success'); // login-success.log
 if (!defined('LOG_CATEGORY_GATEWAY'))
     define('LOG_CATEGORY_GATEWAY', 'gateway');     // payment-gateway.log
 if (!defined('LOG_CATEGORY_OFFLINE'))
@@ -54,6 +78,8 @@ if (!isset($GLOBALS['LOG_FILE_MAP'])) {
         LOG_CATEGORY_VALIDATION => 'validation-error',
         LOG_CATEGORY_GENERAL => 'error',
         LOG_CATEGORY_UPLOAD => 'upload',
+        LOG_CATEGORY_WARNING => 'warning',
+        LOG_CATEGORY_AUTH_SUCCESS => 'login-success',
         LOG_CATEGORY_GATEWAY => 'payment-gateway',
         LOG_CATEGORY_OFFLINE => 'payment-offline'
     ];
@@ -110,10 +136,11 @@ if (!function_exists('logError')) {
 
         // Category mapping to subdirectories
         $categorySubDir = $category;
-        if ($category === LOG_CATEGORY_AUTH) $categorySubDir = 'student';
+        if ($category === LOG_CATEGORY_AUTH || $category === LOG_CATEGORY_AUTH_SUCCESS) $categorySubDir = 'student';
         elseif ($category === LOG_CATEGORY_PAYMENT || $category === LOG_CATEGORY_GATEWAY || $category === LOG_CATEGORY_OFFLINE) $categorySubDir = 'payment';
         elseif ($category === LOG_CATEGORY_DATABASE) $categorySubDir = 'database';
         elseif ($category === LOG_CATEGORY_GENERAL) $categorySubDir = 'error';
+        elseif ($category === LOG_CATEGORY_WARNING) $categorySubDir = 'warning';
         
         $logDir = rtrim(LOGS_PATH, '/\\') . DIRECTORY_SEPARATOR . $categorySubDir;
         if (!file_exists($logDir)) {
@@ -168,8 +195,10 @@ if (!function_exists('logError')) {
             @error_log($logEntry, 3, $logFile);
         }
 
-        // Also log to PHP error log for server logs
-        @error_log($message);
+        // Also log to PHP error log for server logs ONLY if it's a general error or database error
+        if (in_array($category, [LOG_CATEGORY_GENERAL, LOG_CATEGORY_DATABASE, LOG_CATEGORY_AUTH, LOG_CATEGORY_FILE])) {
+            @error_log($message);
+        }
     }
 }
 
@@ -222,6 +251,19 @@ if (!function_exists('logAuthError')) {
     {
         $message = "Authentication Failed - Username: $username - Reason: $reason";
         logError($message, '', 0, null, LOG_CATEGORY_AUTH);
+    }
+}
+
+/**
+ * Log successful authentication
+ * 
+ * @param string $username Username/email
+ */
+if (!function_exists('logAuthSuccess')) {
+    function logAuthSuccess($username)
+    {
+        $message = "Authentication Successful - Username: $username";
+        logError($message, '', 0, null, LOG_CATEGORY_AUTH_SUCCESS);
     }
 }
 
@@ -572,7 +614,14 @@ set_error_handler(function ($errno, $errstr, $errfile, $errline) {
     ];
 
     $errorType = $errorTypes[$errno] ?? 'UNKNOWN ERROR';
-    logError("PHP $errorType: $errstr", $errfile, $errline);
+    
+    // Separate warnings/notices from actual errors
+    $category = LOG_CATEGORY_GENERAL;
+    if (in_array($errno, [E_WARNING, E_CORE_WARNING, E_COMPILE_WARNING, E_USER_WARNING, E_NOTICE, E_USER_NOTICE, E_DEPRECATED, E_USER_DEPRECATED])) {
+        $category = LOG_CATEGORY_WARNING;
+    }
+    
+    logError("PHP $errorType: $errstr", $errfile, $errline, null, $category);
 
     // Don't execute PHP internal error handler
     return true;

@@ -77,8 +77,6 @@ include PORTAL_INCLUDE_PATH . 'navbar.php';
 include PORTAL_INCLUDE_PATH . 'sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?= PORTAL_URL ?>/assets/css/modules/online-exam/create-template.css">
-
 <main class="app-main">
     <div class="app-content pt-4">
         <div class="container-fluid">
@@ -91,7 +89,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 <div class="row">
                     <!-- Basic Info -->
                     <div class="col-lg-4">
-                        <div class="card shadow-sm mb-4 border-0 card-rounded-15">
+                        <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px;">
                             <div class="card-header bg-white border-0 py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">1. Basic Information</h6>
                             </div>
@@ -124,7 +122,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         </div>
 
                         <!-- Summary Card -->
-                        <div class="card shadow-sm border-0 bg-primary text-white card-rounded-15">
+                        <div class="card shadow-sm border-0 bg-primary text-white" style="border-radius: 15px;">
                             <div class="card-body">
                                 <h6 class="font-weight-bold mb-3">Blueprint Summary</h6>
                                 <div class="d-flex justify-content-between mb-2">
@@ -141,10 +139,10 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
                     <!-- Rules Engine -->
                     <div class="col-lg-8">
-                        <div class="card shadow-sm mb-4 border-0 card-rounded-15">
+                        <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px;">
                             <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
                                 <h6 class="m-0 font-weight-bold text-primary">2. Question Rules Engine</h6>
-                                <button type="button" class="btn btn-sm btn-outline-primary btn-rounded-8" onclick="addRuleRow()">
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="addRuleRow()" style="border-radius: 8px;">
                                     <i class="fas fa-plus"></i> Add Rule
                                 </button>
                             </div>
@@ -167,8 +165,8 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                     </table>
                                 </div>
                                 <div class="p-4 bg-light rounded-bottom text-end">
-                                    <a href="exam-templates.php" class="btn btn-light px-4 me-2 btn-rounded-12-bold">Cancel</a>
-                                    <button type="submit" class="btn btn-primary px-5 shadow-sm btn-rounded-12-bold">Save Template</button>
+                                    <a href="exam-templates.php" class="btn btn-light px-4 me-2" style="border-radius: 12px; font-weight: 600;">Cancel</a>
+                                    <button type="submit" class="btn btn-primary px-5 shadow-sm" style="border-radius: 12px; font-weight: 600;">Save Template</button>
                                 </div>
                             </div>
                         </div>
@@ -200,10 +198,10 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             <option value="high">High</option>
         </select>
     </td>
-    <td class="w-80px">
+    <td style="width: 80px;">
         <input type="number" name="num_questions[]" class="form-control form-control-sm text-center num-q" min="1" value="1" required onchange="updateSummary()">
     </td>
-    <td class="w-80px">
+    <td style="width: 80px;">
         <input type="number" name="marks_per_question[]" class="form-control form-control-sm text-center marks-q" min="0.5" step="0.5" value="1" required onchange="updateSummary()">
     </td>
     <td class="pe-4 text-end">

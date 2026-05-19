@@ -10,7 +10,7 @@ if (typeof CounsellingAPI === 'undefined') {
       this.baseURL =
         typeof BACKEND_URL !== 'undefined'
           ? BACKEND_URL
-          : window.location.origin + '/gca/counselling-backend';
+          : 'http://localhost/counselling/counselling-backend';
     }
 
     /**
@@ -368,7 +368,7 @@ if (typeof CounsellingAPI === 'undefined') {
       const backendUrl =
         typeof BACKEND_URL !== 'undefined'
           ? BACKEND_URL
-          : window.location.origin + '/gca/counselling-backend';
+          : 'http://localhost/counselling/counselling-backend';
 
       $.api = {
         get: function (route, params) {

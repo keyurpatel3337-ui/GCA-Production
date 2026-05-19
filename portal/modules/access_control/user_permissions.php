@@ -86,7 +86,7 @@ include PORTAL_PATH . 'include/navbar.php';
 include PORTAL_PATH . 'include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/access_control/user_permissions.css">
+
 
     <div class="container-fluid">
 
@@ -186,7 +186,10 @@ include PORTAL_PATH . 'include/sidebar.php';
                                                 </td>
                                                 <td>
                                                     <select name="override[<?php echo $module['id']; ?>]"
-                                                        class="form-select form-select-sm user_permissions-custom-1 <?php echo $user_val === '1' ? 'user_permissions-bg-allow' : ($user_val === '0' ? 'user_permissions-bg-deny' : ''); ?>">
+                                                        class="form-select form-select-sm" style="width: 150px; <?php if ($user_val === '1')
+                                                            echo 'background-color:#d1e7dd;';
+                                                        elseif ($user_val === '0')
+                                                            echo 'background-color:#f8d7da;'; ?>">
                                                         <option value="" <?php echo $user_val === '' ? 'selected' : ''; ?>>Inherit
                                                             (Default)</option>
                                                         <option value="1" <?php echo $user_val === 1 ? 'selected' : ''; ?>>Allow

@@ -174,7 +174,7 @@ try {
                 WHEN 'approved' THEN 2 
                 WHEN 'rejected' THEN 3 
             END,
-            ir.created_at ASC",
+            ir.created_at DESC",
         $params
     );
 

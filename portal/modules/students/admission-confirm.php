@@ -212,7 +212,96 @@ include '../../include/header.php';
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/students/admission-confirm.css">
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        --glass-bg: rgba(255, 255, 255, 0.9);
+        --glass-border: rgba(255, 255, 255, 0.5);
+    }
+
+    .content-wrapper {
+        background: #f8fafc;
+        min-height: 100vh;
+    }
+
+    .confirm-header {
+        background: var(--primary-gradient);
+        padding: 3rem 2rem;
+        border-radius: 0 0 2rem 2rem;
+        margin-bottom: -4rem;
+        color: white;
+    }
+
+    .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 1.25rem;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .detail-item {
+        padding: 1rem;
+        border-bottom: 1px solid #f1f5f9;
+        display: flex;
+        align-items: center;
+    }
+
+    .detail-item:last-child {
+        border-bottom: none;
+    }
+
+    .detail-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        background: #eff6ff;
+        color: #2563eb;
+    }
+
+    .fee-badge {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+    }
+
+    .requirement-box {
+        padding: 1.5rem;
+        border-radius: 1rem;
+        background: white;
+        border: 1px solid #e2e8f0;
+        height: 100%;
+    }
+
+    .btn-check:checked+.btn-outline-success {
+        background: #22c55e;
+        color: white;
+        border-color: #22c55e;
+    }
+
+    .summary-card {
+        background: #0f172a;
+        color: white;
+        border-radius: 1.5rem;
+        padding: 2rem;
+    }
+
+    .payable-amount {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(to right, #60a5fa, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
 
 <div class="content-wrapper">
     <div class="confirm-header animate__animated animate__fadeIn">

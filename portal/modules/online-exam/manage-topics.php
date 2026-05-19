@@ -40,7 +40,7 @@ $totalPages = ceil($totalItems / $perPage);
 $topics = $conn->query("SELECT t.*, s.subject_name, c.chapter as chapter_name, std.stdtext 
                       FROM tbl_topics t 
                       LEFT JOIN tbl_subjects s ON t.subject_id = s.id 
-                      LEFT JOIN chapters c ON t.chapter_id = c.chpid 
+                      LEFT JOIN tbl_chapters c ON t.chapter_id = c.chpid 
                       LEFT JOIN standard std ON t.standard_id = std.stdid
                       ORDER BY std.stdid ASC, s.subject_name ASC, c.chapter ASC, t.topic_name_english ASC
                       LIMIT $perPage OFFSET $offset")->fetchAll();
@@ -79,6 +79,12 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             icon: icon,
                             title: title
                         });
+
+                        // Instantly clean msg parameter from URL address bar
+                        if (window.history.replaceState) {
+                            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search.replace(/[?&]msg=[^&]+/, '').replace(/^&/, '?');
+                            window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+                        }
                     });
                 </script>
             <?php endif; ?>
@@ -185,7 +191,7 @@ function deleteTopic(id) {
 
 // Data for filters
 const allSubjects = <?php echo json_encode($conn->query("SELECT id, subject_name, standard_id FROM tbl_subjects WHERE activated = 1 AND is_deleted = 0")->fetchAll(PDO::FETCH_ASSOC)); ?>;
-const allChapters = <?php echo json_encode($conn->query("SELECT chpid, chapter, subid FROM chapters WHERE activated = 1 AND is_deleted = 0")->fetchAll(PDO::FETCH_ASSOC)); ?>;
+const allChapters = <?php echo json_encode($conn->query("SELECT chpid, chapter, subid FROM tbl_chapters WHERE activated = 1 AND is_deleted = 0")->fetchAll(PDO::FETCH_ASSOC)); ?>;
 
 // Search and Filter Logic
 document.getElementById('searchInput').addEventListener('keyup', filterTable);

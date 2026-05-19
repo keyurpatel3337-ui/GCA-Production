@@ -15,7 +15,8 @@
         "firebase/php-jwt": "^7.0",
         "phpoffice/phpspreadsheet": "^2.1",
         "sonata-project/google-authenticator": "^2.3",
-        "phpoffice/phpword": "^1.4"
+        "phpoffice/phpword": "^1.4",
+        "mpdf/mpdf": "^8.3"
     },
     "config": {
         "platform": {

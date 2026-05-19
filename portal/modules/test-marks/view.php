@@ -358,4 +358,18 @@ include '../../include/sidebar.php';
 
 <?php include '../../include/footer.php'; ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/test-marks/view.css">
+<style>
+    @media print {
+
+        .sidebar,
+        .navbar,
+        .card-body>.btn,
+        .card-body>a.btn {
+            display: none !important;
+        }
+
+        .app-content {
+            margin-left: 0 !important;
+        }
+    }
+</style>

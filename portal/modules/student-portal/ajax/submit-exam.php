@@ -55,7 +55,7 @@ if ($data) {
     }
 
     // 4. Update Student Exam Status
-    $upd = $conn->prepare("UPDATE tbl_oes_student_exams SET status = 'Submitted', end_timestamp = NOW(), score = ?, correct_answers = ?, incorrect_answers = ? WHERE id = ?");
+    $upd = $conn->prepare("UPDATE tbl_oes_student_exams SET status = 'Submitted', submit_timestamp = NOW(), total_score = ?, correct_answers = ?, wrong_answers = ? WHERE id = ?");
     $upd->execute([$score, $correct_count, $incorrect_count, $attempt_id]);
 
     echo json_encode(['success' => true, 'score' => $score]);

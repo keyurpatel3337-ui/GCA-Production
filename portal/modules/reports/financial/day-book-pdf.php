@@ -154,7 +154,7 @@ try {
 
     $sno = 1;
     if (empty($transactions)) {
-        $html .= '<tr><td colspan="9" style="text-align:center;">No transactions recorded on this date</td></tr>';
+        $html .= '<tr><td colspan="8" style="text-align:center;">No transactions recorded on this date</td></tr>';
     } else {
         foreach ($transactions as $txn) {
             $html .= '

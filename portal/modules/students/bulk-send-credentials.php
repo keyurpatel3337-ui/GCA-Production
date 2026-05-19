@@ -233,15 +233,23 @@ include '../../include/sidebar.php';
 
 <script>
     document.getElementById('bulkSendForm')?.addEventListener('submit', function(e) {
-        if (!confirm('Are you sure you want to send credentials to all loaded students? This action will process <?php echo count($students); ?> emails.')) {
-            e.preventDefault();
-            return;
-        }
-
-        const btn = document.getElementById('confirmSendBtn');
-        btn.disabled = true;
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Processing...';
+        e.preventDefault();
+        const form = this;
+        const count = <?php echo count($students); ?>;
+        showConfirm({
+            title: 'Send Credentials',
+            message: `Are you sure you want to send credentials to all loaded students? This action will process <strong>${count}</strong> emails.`,
+            confirmText: 'Yes, Send Credentials',
+            confirmButtonClass: 'btn-primary',
+            onConfirm: function () {
+                const btn = document.getElementById('confirmSendBtn');
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Processing...';
+                form.submit();
+            }
+        });
     });
 </script>
 
 <?php include '../../include/footer.php'; ?>
+

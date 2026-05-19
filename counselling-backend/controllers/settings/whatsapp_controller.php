@@ -265,7 +265,7 @@ switch ($action) {
                                    FROM tbl_whatsapp_logs l
                                    LEFT JOIN tbl_whatsapp_templates t ON l.template_id = t.id
                                    WHERE $where_sql
-                                   ORDER BY l.id ASC
+                                   ORDER BY l.id DESC
                                    LIMIT $limit OFFSET $offset");
             $stmt->execute($params);
             $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);

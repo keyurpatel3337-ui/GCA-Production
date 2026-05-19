@@ -8,44 +8,45 @@
     Options -MultiViews
     Options +FollowSymLinks
     RewriteEngine On
-    RewriteBase /gca/
-
+    RewriteBase /
+    
     # Allow Let's Encrypt / Certify The Web validation
     RewriteRule ^\.well-known/acme-challenge/ - [L]
-
+    
     # =========================================
     # Exclude captcha.php and other special files
     # =========================================
     RewriteRule ^(.*/)?captcha(-new)?\.php$ - [L]
-
+    
     # =========================================
     # Hide .php Extension (All Directories)
     # =========================================
-
+    
     # External redirect from any .php URL to clean URL
-    RewriteCond %{THE_REQUEST} ^GET\ /gca/(.+)\.php(\?[^\ ]*)?\ HTTP
-    RewriteRule ^ /gca/%1%2 [R=301,L]
-
+    # Works for all subdirectories: portal/, about/, academics/, etc.
+    RewriteCond %{THE_REQUEST} ^GET\ /(.+)\.php(\?[^\ ]*)?\ HTTP
+    RewriteRule ^ /%1%2 [R=301,L]
+    
     # =========================================
     # Handle PHP files properly
     # =========================================
-
+    
     # Don't apply to existing directories
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
-
+    
     # Serve existing non-PHP files directly (images, css, js, etc.)
     RewriteCond %{REQUEST_URI} !\.php$
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
-
+    
     # Internal rewrite from clean URL to .php file
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}\.php -f
     RewriteRule ^(.*)$ $1.php [L,QSA]
-
+    
     # Redirect favicon requests to the actual logo file
-    RewriteRule ^favicon\.ico$ assets/images/logogmn.png [L]
+    RewriteRule ^favicon\.ico$ /assets/images/logogm.png [L]
 </IfModule>
 
 # Enable compression

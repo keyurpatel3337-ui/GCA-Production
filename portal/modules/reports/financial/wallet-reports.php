@@ -114,7 +114,15 @@ include '../../../include/sidebar.php';
     </div>
 </div>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/financial/wallet-reports.php.css">
+<style>
+    .bg-primary-light {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .bg-gray-50 {
+        background-color: #fdfdfd !important;
+    }
+</style>
 
 <script>
     function generateReport() {

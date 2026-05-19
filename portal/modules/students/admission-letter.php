@@ -326,7 +326,32 @@ include __DIR__ . '/../../include/sidebar.php';
     </div>
 </div>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/students/admission-letter.css">
+<?php
+include '../../include/footer.php'; ?>
+
+<style>
+    @media print {
+        .content-wrapper {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .card {
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .card-header,
+        .card-tools,
+        .no-print {
+            display: none !important;
+        }
+
+        body {
+            background: white !important;
+        }
+    }
+</style>
 
 <?php
 // Include footer

@@ -54,7 +54,7 @@ while ($s = $sub_res->fetch()) {
 }
 
 $chapters_map = [];
-$ch_res = $conn->query("SELECT chpid, subid, chapter FROM chapters WHERE activated = 1 AND is_deleted = 0");
+$ch_res = $conn->query("SELECT chpid, subid, chapter FROM tbl_chapters WHERE activated = 1 AND is_deleted = 0");
 while ($c = $ch_res->fetch()) {
     $chapters_map[$c['subid'] . '_' . strtolower(trim($c['chapter']))] = $c['chpid'];
 }
@@ -204,12 +204,12 @@ try {
             if (!$ch_id && $sub_id && $std_id) {
                 // Auto-create missing chapter
                 $ch_insert = $conn->prepare("
-                    INSERT INTO chapters (subid, standard_id, chapter, chapter_number, activated, created_by, updated_by, updated_on) 
+                    INSERT INTO tbl_chapters (subid, standard_id, chapter, chapter_number, activated, created_by, updated_by, updated_on) 
                     VALUES (?, ?, ?, ?, 1, ?, ?, NOW())
                 ");
                 $ch_name = trim($q['chapter']);
                 // Get next chapter number for this subject
-                $num_stmt = $conn->prepare("SELECT COALESCE(MAX(chapter_number), 0) + 1 FROM chapters WHERE subid = ?");
+                $num_stmt = $conn->prepare("SELECT COALESCE(MAX(chapter_number), 0) + 1 FROM tbl_chapters WHERE subid = ?");
                 $num_stmt->execute([$sub_id]);
                 $ch_num = $num_stmt->fetchColumn();
 

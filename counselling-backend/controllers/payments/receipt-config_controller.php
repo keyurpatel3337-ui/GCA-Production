@@ -32,7 +32,7 @@ try {
     $sql = "SELECT r.*, u.name as created_by_name 
         FROM tbl_receipt_configuration r
         LEFT JOIN tbl_users u ON r.created_by = u.id
-        ORDER BY r.is_active ASC, r.id desc";
+        ORDER BY r.is_active DESC, r.id desc";
     $receipts = $dbOps->customSelect($sql);
 } catch (PDOException $e) {
     $receipts = [];

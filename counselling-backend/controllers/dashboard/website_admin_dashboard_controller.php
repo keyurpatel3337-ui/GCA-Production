@@ -54,7 +54,7 @@ try {
         $result = $dbOps->customSelectOne("SELECT COUNT(*) as total FROM tbl_website_hero WHERE is_active = 1", []);
         $stats['active_hero_slides'] = $result['total'];
 
-        $recent_items['hero'] = $dbOps->customSelect("SELECT * FROM tbl_website_hero ORDER BY created_at ASC LIMIT 5", []);
+        $recent_items['hero'] = $dbOps->customSelect("SELECT * FROM tbl_website_hero ORDER BY created_at DESC LIMIT 5", []);
     } else {
         $stats['total_hero_slides'] = $stats['active_hero_slides'] = 0;
         $recent_items['hero'] = [];
@@ -68,7 +68,7 @@ try {
         $result = $dbOps->customSelectOne("SELECT COUNT(*) as total FROM tbl_website_gallery WHERE is_active = 1", []);
         $stats['active_gallery'] = $result['total'];
 
-        $recent_items['gallery'] = $dbOps->customSelect("SELECT * FROM tbl_website_gallery ORDER BY created_at ASC LIMIT 6", []);
+        $recent_items['gallery'] = $dbOps->customSelect("SELECT * FROM tbl_website_gallery ORDER BY created_at DESC LIMIT 6", []);
     } else {
         $stats['total_gallery'] = $stats['active_gallery'] = 0;
         $recent_items['gallery'] = [];
@@ -82,7 +82,7 @@ try {
         $result = $dbOps->customSelectOne("SELECT COUNT(*) as total FROM tbl_website_testimonials WHERE is_active = 1", []);
         $stats['active_testimonials'] = $result['total'];
 
-        $recent_items['testimonials'] = $dbOps->customSelect("SELECT * FROM tbl_website_testimonials ORDER BY created_at ASC LIMIT 5", []);
+        $recent_items['testimonials'] = $dbOps->customSelect("SELECT * FROM tbl_website_testimonials ORDER BY created_at DESC LIMIT 5", []);
     } else {
         $stats['total_testimonials'] = $stats['active_testimonials'] = 0;
         $recent_items['testimonials'] = [];

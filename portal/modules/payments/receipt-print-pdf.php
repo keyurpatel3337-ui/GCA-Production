@@ -83,8 +83,22 @@ try {
                     ['type' => 'LEFT', 'table' => 'tbl_academic_years ay', 'on' => 's.academic_year_id = ay.id']
                 ],
                 ['p.student_id' => $student_id, 'p.payment_type' => 'token_fee'],
-                "CASE p.fee_component WHEN 'school_fee' THEN 1 WHEN 'trust_facilities_fee' THEN 2 WHEN 'tuition_fee_part1' THEN 3 ELSE 4 END"
+                ""
             );
+
+            // Sort receipts in PHP to bypass Operation class ORDER BY restriction
+            if (!empty($receipts)) {
+                usort($receipts, function($a, $b) {
+                    $order = [
+                        'school_fee' => 1,
+                        'trust_facilities_fee' => 2,
+                        'tuition_fee_part1' => 3
+                    ];
+                    $valA = $order[$a['fee_component']] ?? 4;
+                    $valB = $order[$b['fee_component']] ?? 4;
+                    return $valA <=> $valB;
+                });
+            }
 
             // Format each receipt
             foreach ($receipts as &$r) {
@@ -239,8 +253,22 @@ try {
                             ['type' => 'LEFT', 'table' => 'tbl_academic_years ay', 'on' => 's.academic_year_id = ay.id']
                         ],
                         ['p.student_id' => $receipt['student_id'], 'p.payment_type' => 'token_fee'],
-                        "CASE p.fee_component WHEN 'school_fee' THEN 1 WHEN 'trust_facilities_fee' THEN 2 WHEN 'tuition_fee_part1' THEN 3 ELSE 4 END"
+                        ""
                     );
+
+                    // Sort receipts in PHP to bypass Operation class ORDER BY restriction
+                    if (!empty($receipts)) {
+                        usort($receipts, function($a, $b) {
+                            $order = [
+                                'school_fee' => 1,
+                                'trust_facilities_fee' => 2,
+                                'tuition_fee_part1' => 3
+                            ];
+                            $valA = $order[$a['fee_component']] ?? 4;
+                            $valB = $order[$b['fee_component']] ?? 4;
+                            return $valA <=> $valB;
+                        });
+                    }
 
                     // Format each receipt
                     foreach ($receipts as &$r) {

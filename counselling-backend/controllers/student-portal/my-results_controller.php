@@ -80,7 +80,7 @@ if ($is_api_call) {
 function fetchAcademicYears($dbOps)
 {
     try {
-        $sql = "SELECT * FROM tbl_academic_years ORDER BY start_date ASC";
+        $sql = "SELECT * FROM tbl_academic_years ORDER BY start_date DESC";
         return $dbOps->customSelect($sql);
     } catch (Exception $e) {
         return [];
@@ -132,7 +132,7 @@ function getStudentExamList($dbOps, $student_id)
                 FROM tbl_student_exam_marks m
                 JOIN tbl_academic_years ay ON m.academic_year_id = ay.id
                 WHERE m.student_id = ?
-                ORDER BY ay.start_date ASC, m.exam_type desc";
+                ORDER BY ay.start_date DESC, m.exam_type desc";
 
         $exams = $dbOps->customSelect($sql, [$student_id]);
         sendSuccessResponse($exams);

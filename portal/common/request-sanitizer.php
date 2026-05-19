@@ -50,7 +50,15 @@ if (!function_exists('gca_portal_sanitize_request')) {
 
     // Sanitize POST parameters
     if (!empty($_POST)) {
-      $richTextFields = ['description', 'content', 'message', 'notes'];
+      $richTextFields = [
+          'description', 'content', 'message', 'notes',
+          'question_text', 'option_a', 'option_b', 'option_c', 'option_d', 'explanation',
+          'desc_question_1', 'desc_solution_1',
+          'desc_question_2', 'desc_solution_2',
+          'desc_question_3', 'desc_solution_3',
+          'desc_question_4', 'desc_solution_4',
+          'desc_question_5', 'desc_solution_5'
+      ];
       array_walk_recursive($_POST, function (&$value, $key) use ($richTextFields) {
         if (is_string($value)) {
           // Trim whitespace

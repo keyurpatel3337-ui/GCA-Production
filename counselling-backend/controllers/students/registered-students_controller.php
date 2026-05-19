@@ -66,7 +66,7 @@ try {
         $boards = [];
 
     // Academic Years
-    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name ASC');
+    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name DESC');
     if ($academic_years === false)
         $academic_years = [];
 

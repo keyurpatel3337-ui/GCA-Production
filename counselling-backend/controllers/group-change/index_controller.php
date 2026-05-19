@@ -59,7 +59,7 @@ try {
         LEFT JOIN tbl_gm_std_registration s ON gcr.student_id = s.id
         LEFT JOIN tbl_group cg ON gcr.current_group_id = cg.id
         LEFT JOIN tbl_group rg ON gcr.requested_group_id = rg.id
-        ORDER BY gcr.request_date ASC
+        ORDER BY gcr.request_date DESC
         LIMIT 10"
     );
 } catch (PDOException $e) {

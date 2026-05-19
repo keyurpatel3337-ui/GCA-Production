@@ -5,240 +5,286 @@ require_once DB_CONNECT_FILE;
 require_once PORTAL_PATH . 'session_config.php';
 require_once PORTAL_GLOBALVARIABLE;
 
+// Include PHPWord via composer autoload
+require_once PORTAL_PATH . 'vendor/autoload.php';
+
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Shared\Converter;
+use PhpOffice\PhpWord\Style\Table as TableStyle;
+
+// Access Control
 if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])) {
     die("Unauthorized Access");
 }
 
 $exam_id = isset($_GET['exam_id']) ? (int) $_GET['exam_id'] : 0;
-if (!$exam_id)
-    die("Invalid Exam ID");
+if (!$exam_id) die("Invalid Exam ID");
 
 try {
     $stmt = $conn->prepare("SELECT e.*, s.stdtext FROM tbl_oes_exams e LEFT JOIN standard s ON e.standard_id = s.stdid WHERE e.id = ?");
     $stmt->execute([$exam_id]);
     $exam = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$exam)
-        die("Exam not found.");
+    if (!$exam) die("Exam not found.");
 
-    $stmt_q = $conn->prepare("SELECT eq.order_no, q.*, sub.subject_name FROM tbl_oes_exam_questions eq JOIN tbl_oes_questions q ON eq.question_id = q.id LEFT JOIN tbl_subjects sub ON q.subject_id = sub.id WHERE eq.exam_id = ? ORDER BY eq.order_no ASC");
+    $stmt_q = $conn->prepare("SELECT eq.order_no, q.*, sub.subject_name FROM tbl_oes_exam_questions eq JOIN tbl_oes_questions q ON eq.question_id = q.id LEFT JOIN tbl_subjects sub ON q.subject_id = sub.id WHERE eq.exam_id = ? ORDER BY sub.subject_name, eq.order_no ASC");
     $stmt_q->execute([$exam_id]);
     $questions = $stmt_q->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     die("Database Error: " . $e->getMessage());
 }
 
-// Get settings from URL
-$show_header = isset($_GET['header']) && $_GET['header'] === 'hide' ? false : true;
-$font_size = isset($_GET['font_size']) ? $_GET['font_size'] : '14pt';
-if ($font_size == '10.5pt' || $font_size == '10.5px') $font_size = '14pt';
+// --- Parameters ---
+$paper_size = isset($_GET['size']) ? strtoupper($_GET['size']) : 'A4'; // A4, LEGAL, LETTER
+$orientation = isset($_GET['orientation']) && $_GET['orientation'] === 'L' ? 'landscape' : 'portrait';
+$num_cols = isset($_GET['cols']) ? (int)$_GET['cols'] : 1;
+$margin_type = isset($_GET['margins']) ? $_GET['margins'] : 'normal';
+$font_fam = isset($_GET['font_family']) ? ($_GET['font_family'] === 'sans' ? 'Arial' : 'Times New Roman') : 'Times New Roman';
+$font_size = isset($_GET['font_size']) ? (int)str_replace('px', '', $_GET['font_size']) : 12;
+$math_scale = isset($_GET['math_scale']) ? (int)$_GET['math_scale'] : 32;
+$img_scale = isset($_GET['img_scale']) ? (int)$_GET['img_scale'] : 150;
+$img_pos = isset($_GET['img_pos']) ? $_GET['img_pos'] : 'below';
 $opt_style = isset($_GET['opt_style']) ? $_GET['opt_style'] : 'grid';
-$spacing_type = isset($_GET['spacing']) ? $_GET['spacing'] : 'normal';
-$show_footer = isset($_GET['footer']) && $_GET['footer'] === 'show' ? true : false;
 $show_marks = isset($_GET['marks']) && $_GET['marks'] === 'hide' ? false : true;
 
-$q_padding = '10pt';
-$rough_space = '0pt';
-if ($spacing_type === 'compact') {
-    $q_padding = '4pt';
-} elseif ($spacing_type === 'wide') {
-    $q_padding = '15pt';
-    $rough_space = '40pt'; 
+// --- Initialize PHPWord ---
+$phpWord = new PhpWord();
+
+// Set Document Settings
+$sectionSettings = [
+    'paperSize' => $paper_size,
+    'orientation' => $orientation,
+    'marginLeft' => Converter::cmToTwip($margin_type === 'narrow' ? 1.0 : ($margin_type === 'wide' ? 2.5 : 1.5)),
+    'marginRight' => Converter::cmToTwip($margin_type === 'narrow' ? 1.0 : ($margin_type === 'wide' ? 2.5 : 1.5)),
+    'marginTop' => Converter::cmToTwip($margin_type === 'narrow' ? 1.0 : ($margin_type === 'wide' ? 2.5 : 1.5)),
+    'marginBottom' => Converter::cmToTwip($margin_type === 'narrow' ? 1.0 : ($margin_type === 'wide' ? 2.5 : 1.5)),
+];
+$section = $phpWord->addSection($sectionSettings);
+
+// --- Styles ---
+$phpWord->addTitleStyle(1, ['name' => $font_fam, 'size' => 18, 'bold' => true, 'color' => '000000'], ['alignment' => 'center', 'spaceAfter' => 120]);
+$phpWord->addFontStyle('BaseFont', ['name' => $font_fam, 'size' => $font_size]);
+$phpWord->addFontStyle('BoldFont', ['name' => $font_fam, 'size' => $font_size, 'bold' => true]);
+$phpWord->addFontStyle('MarksFont', ['name' => $font_fam, 'size' => $font_size - 2, 'italic' => true]);
+$phpWord->addParagraphStyle('P_Centered', ['alignment' => 'center', 'spaceAfter' => 60]);
+$phpWord->addParagraphStyle('P_Right', ['alignment' => 'right']);
+$phpWord->addParagraphStyle('Q_Block', ['spaceBefore' => 120, 'spaceAfter' => 60, 'keepNext' => true]);
+
+// --- Header ---
+$section->addText(strtoupper($exam['title']), ['name' => $font_fam, 'size' => 20, 'bold' => true], 'P_Centered');
+$section->addText($exam['stdtext'] . ' - Exam Paper', ['name' => $font_fam, 'size' => 14, 'bold' => true], 'P_Centered');
+$section->addLine(['weight' => 1, 'width' => 450, 'height' => 0, 'color' => '000000']);
+
+// Meta Info Table
+$table = $section->addTable(['width' => 100 * 50, 'unit' => 'pct']);
+$table->addRow();
+$e_date = isset($exam['exam_date']) ? date('d-m-Y', strtotime($exam['exam_date'])) : (isset($exam['start_time']) ? date('d-m-Y', strtotime($exam['start_time'])) : (isset($exam['created_at']) ? date('d-m-Y', strtotime($exam['created_at'])) : 'N/A'));
+$table->addCell()->addText("Date: " . $e_date, 'BaseFont');
+$e_duration = isset($exam['duration_mins']) ? $exam['duration_mins'] : (isset($exam['exam_duration']) ? $exam['exam_duration'] : (isset($exam['duration']) ? $exam['duration'] : 'N/A'));
+$table->addCell()->addText("Time: " . $e_duration . " Mins", 'BaseFont', 'P_Right');
+$table->addRow();
+$table->addCell()->addText("Total Marks: " . $exam['total_marks'], 'BaseFont');
+$table->addCell()->addText("Roll No: __________", 'BaseFont', 'P_Right');
+$section->addLine(['weight' => 0.5, 'width' => 450, 'height' => 0, 'color' => '000000']);
+
+/**
+ * LaTeX Renderer for Word (Converts to Image and returns path)
+ */
+function latexToImage($latex, $img_h = 24) {
+    $latex = trim(strip_tags(html_entity_decode($latex, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+    if (empty($latex)) return null;
+
+    $final_h = $img_h * 0.6; // Proportional scaling for Word
+    if ($final_h < 14) $final_h = 14; 
+
+    $cache_key = md5($latex);
+    $cache_file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'latex_word_' . $cache_key . '.png';
+
+    if (!file_exists($cache_file)) {
+        // Use cURL as file_get_contents might be disabled (allow_url_fopen=0)
+        $url = "https://latex.codecogs.com/png.latex?\\dpi{300}\\bg_white " . rawurlencode($latex);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $img_data = curl_exec($ch);
+        curl_close($ch);
+        if ($img_data) file_put_contents($cache_file, $img_data);
+    }
+    
+    if (file_exists($cache_file)) {
+        list($width, $height) = getimagesize($cache_file);
+        $w_px = $final_h;
+        if ($height > 0) $w_px = $final_h * ($width / $height);
+        return ['path' => $cache_file, 'height' => $final_h, 'width' => $w_px];
+    }
+    return null;
 }
 
-$filename = str_replace(' ', '_', $exam['title']) . "_Paper.doc";
-
-header("Content-type: application/vnd.ms-word");
-header("Content-Disposition: attachment;Filename=" . $filename);
-header("Pragma: no-cache");
-header("Expires: 0");
-
-?>
-<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'
-    xmlns='http://www.w3.org/TR/REC-html40'>
-
-<head>
-    <meta charset="UTF-8">
-    <style>
-        @page {
-            margin: 0.8in;
-        }
-        body {
-            font-family: 'Times New Roman', serif;
-            font-size: <?= $font_size ?>;
-            line-height: 1.4;
-        }
-        .header { text-align: center; margin-bottom: 15pt; border-bottom: 1pt solid #000; padding-bottom: 10pt; }
-        .header h1 { font-size: 18pt; margin: 0; }
-        .header h2 { font-size: 14pt; margin: 5pt 0; }
-        .meta-info { width: 100%; margin-bottom: 15pt; border-bottom: 1pt solid #000; padding-bottom: 5pt; border-collapse: collapse; }
-        .meta-info td { padding: 4pt 0; }
-        .instructions { margin-bottom: 15pt; border: 1pt solid #ccc; padding: 10pt; }
-        .question-block { padding-bottom: <?= $q_padding ?>; margin-bottom: 5pt; }
-        .q-num { font-weight: bold; }
-        .q-text-body { font-weight: normal; }
-        .q-marks { font-weight: normal; font-size: 0.9em; color: #444; font-style: italic; }
-        .options-table { width: 100%; margin-left: 10pt; border-collapse: collapse; }
-        .option-cell { padding: 5pt 0; vertical-align: middle; }
-        .opt-label { font-weight: bold; padding-right: 8pt; vertical-align: middle; }
-        .opt-text { vertical-align: middle; display: inline-block; }
+/**
+ * Custom HTML Parser to add content to Section
+ */
+function addHtmlContent($container, $html, $fontStyle, $mathScale) {
+    // Basic parser for mixed text and LaTeX/Images
+    $html = preg_replace('/(\.\.\/)+uploads\//', BASE_URL . '/uploads/', $html);
+    $pattern = '/(?:\$|&#36;){1,2}(.*?)(?:\$|&#36;){1,2}|(\\\\begin\{[a-z\*]+\}.*?\\\\end\{[a-z\*]+\})/s';
+    
+    $parts = preg_split($pattern, $html, -1, PREG_SPLIT_DELIM_CAPTURE);
+    
+    $className = is_object($container) ? get_class($container) : '';
+    if ($container instanceof \PhpOffice\PhpWord\Element\TextRun || strpos($className, 'TextRun') !== false) {
+        $textRun = $container;
+    } else {
+        $textRun = $container->addTextRun();
+    }
+    
+    foreach ($parts as $index => $part) {
+        if (empty($part)) continue;
         
-        .nested-table { border-collapse: collapse; width: 100%; margin: 10pt 0; }
-        .nested-table td, .nested-table th { border: 1pt solid #ccc; padding: 5pt; }
-
-        .signature-table { width: 100%; margin-top: 50pt; border-top: 1pt solid #eee; padding-top: 20pt; }
-        .sig-box { text-align: center; width: 33%; }
-        .sig-line { border-top: 1pt solid #000; margin: 0 20pt 5pt 20pt; }
-        
-        .rough-area { height: <?= $rough_space ?>; width: 100%; }
-        img.latex-img { vertical-align: middle; margin: 2px 0; }
-    </style>
-</head>
-
-<body>
-    <?php if ($show_header): ?>
-    <div class="header">
-        <h1>GYANMANJARI CAREER ACADEMY</h1>
-        <h2><?= htmlspecialchars((string)$exam['title']) ?></h2>
-    </div>
-    <?php endif; ?>
-
-    <table class="meta-info">
-        <tr>
-            <td style="text-align:left; width: 33%;"><b>Standard:</b> <?= htmlspecialchars((string)$exam['stdtext'] ?: 'N/A') ?></td>
-            <td style="text-align:center; width: 33%;"><b>Date:</b> <?= date('d-m-Y', strtotime($exam['start_time'])) ?></td>
-            <td style="text-align:right; width: 33%;"><b>Max Marks:</b> <?= (float)$exam['total_marks'] ?></td>
-        </tr>
-        <tr>
-            <td style="text-align:left;"><b>Time:</b> <?= date('h:i A', strtotime($exam['start_time'])) ?> - <?= date('h:i A', strtotime($exam['end_time'])) ?></td>
-            <td style="text-align:center;"><b>Duration:</b> <?= (int)$exam['duration_mins'] ?> Mins</td>
-            <td style="text-align:right;">&nbsp;</td>
-        </tr>
-    </table>
-
-    <div class="questions">
-        <?php
-        function renderLatexToImg($text, $img_h = 24)
-        {
-            if (empty($text)) return '';
-            
-            $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-            $pattern = '/(?:\$|&#36;){1,2}(.*?)(?:\$|&#36;){1,2}/s';
-            
-            return preg_replace_callback($pattern, function ($matches) use ($img_h) {
-                $latex = trim(strip_tags($matches[1]));
-                if (empty($latex)) return '';
-                
-                $cache_key = md5($latex);
-                $cache_file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'latex_word_' . $cache_key . '.svg';
-
-                if (file_exists($cache_file) && (time() - filemtime($cache_file) < 86400)) {
-                    $svgData = file_get_contents($cache_file);
-                } else {
-                    $url = "https://latex.codecogs.com/svg.image?" . rawurlencode("\\textstyle " . $latex);
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, $url);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
-                    $svgData = curl_exec($ch);
-                    curl_close($ch);
-
-                    if (!empty($svgData) && strpos($svgData, '<svg') !== false) {
-                        file_put_contents($cache_file, $svgData);
-                    } else {
-                        return '$' . $latex . '$';
-                    }
-                }
-
-                // Calculate width to maintain aspect ratio
-                $w_pt = $img_h; 
-                if (preg_match('/width=[\'"]([0-9.]+)pt[\'"]/', $svgData, $m_w) && 
-                    preg_match('/height=[\'"]([0-9.]+)pt[\'"]/', $svgData, $m_h)) {
-                    $orig_w = (float)$m_w[1];
-                    $orig_h = (float)$m_h[1];
-                    if ($orig_h > 0) {
-                        $w_pt = $img_h * ($orig_w / $orig_h);
-                    }
-                }
-
-                // For Word HTML export, we can use a high-DPI PNG or SVG. 
-                // SVG is supported in Word 2016+ via HTML.
-                $base64 = base64_encode($svgData);
-                return '<img src="data:image/svg+xml;base64,' . $base64 . '" style="height:' . $img_h . 'pt; width:' . $w_pt . 'pt; vertical-align:middle; margin:2pt;" />';
-            }, $text);
-        }
-
-        function renderQuestionList($list, $show_marks, $opt_style, $rough_space) {
-            $current_subject = '';
-            foreach ($list as $q) {
-                if ($q['subject_name'] !== $current_subject) {
-                    echo "<h3 style='text-align:center; text-decoration:underline; margin-top:25pt; margin-bottom:12pt;'>" . strtoupper(htmlspecialchars((string)$q['subject_name'])) . "</h3>";
-                    $current_subject = $q['subject_name'];
-                }
-
-                $q_text = renderLatexToImg($q['question_text']);
-                $opts = [
-                    'A' => renderLatexToImg($q['option_a']),
-                    'B' => renderLatexToImg($q['option_b']),
-                    'C' => renderLatexToImg($q['option_c']),
-                    'D' => renderLatexToImg($q['option_d'])
-                ];
-                ?>
-                <div class="question-block">
-                    <div class="q-text">
-                        <span class="q-num">Q.<?= $q['order_no'] ?>:</span> 
-                        <span class="q-text-body"><?= str_replace('<table', '<table class="nested-table"', $q_text) ?></span>
-                        <?php if ($show_marks): ?>
-                            <span class="q-marks">(<?= $q['marks'] ?> Marks)</span>
-                        <?php endif; ?>
-                    </div>
-                    <table class="options-table">
-                        <?php if ($opt_style === 'list'): ?>
-                            <?php foreach ($opts as $l => $t): ?>
-                                <tr><td class="option-cell"><span class="opt-label">(<?= $l ?>)</span><span class="opt-text"><?= $t ?></span></td></tr>
-                            <?php endforeach; ?>
-                        <?php elseif ($opt_style === 'inline'): ?>
-                            <tr>
-                                <?php foreach ($opts as $l => $t): ?>
-                                    <td class="option-cell" style="width:25%"><span class="opt-label">(<?= $l ?>)</span><span class="opt-text"><?= $t ?></span></td>
-                                <?php endforeach; ?>
-                            </tr>
-                        <?php else: // grid (2x2) ?>
-                            <tr>
-                                <td class="option-cell" style="width:50%"><span class="opt-label">(A)</span><span class="opt-text"><?= $opts['A'] ?></span></td>
-                                <td class="option-cell" style="width:50%"><span class="opt-label">(B)</span><span class="opt-text"><?= $opts['B'] ?></span></td>
-                            </tr>
-                            <tr>
-                                <td class="option-cell"><span class="opt-label">(C)</span><span class="opt-text"><?= $opts['C'] ?></span></td>
-                                <td class="option-cell"><span class="opt-label">(D)</span><span class="opt-text"><?= $opts['D'] ?></span></td>
-                            </tr>
-                        <?php endif; ?>
-                    </table>
-                    <?php if ((float)$rough_space > 0): ?>
-                        <div class="rough-area"></div>
-                    <?php endif; ?>
-                </div>
-                <?php
+        // If it was captured by regex (every 2nd or 3rd part depending on split)
+        // But since we have multiple capture groups, let's just check if it looks like LaTeX
+        if (strpos($part, '\\') !== false || (isset($parts[$index-1]) && strpos($html, $parts[$index-1].$part) === false)) {
+            $img = latexToImage($part, $mathScale);
+            if ($img) {
+                $textRun->addImage($img['path'], ['height' => $img['height'], 'width' => $img['width'], 'wrappingStyle' => 'inline']);
+                continue;
             }
         }
+        
+        // Handle normal text and <img> tags inside part
+        if (preg_match_all('/<img[^>]+src="([^">]+)"/i', $part, $imgs)) {
+            $textParts = preg_split('/<img[^>]+>/i', $part);
+            foreach ($textParts as $ti => $tp) {
+                $textRun->addText(strip_tags($tp), $fontStyle);
+                if (isset($imgs[1][$ti])) {
+                    $src = $imgs[1][$ti];
+                    // Convert URL back to local path if it belongs to our domain
+                    $localPath = str_replace(BASE_URL . '/uploads/', UPLOADS_PATH . '/', $src);
+                    if (file_exists($localPath)) {
+                        $textRun->addImage($localPath, ['height' => 50, 'wrappingStyle' => 'inline']);
+                    }
+                }
+            }
+        } else {
+            $textRun->addText(strip_tags($part), $fontStyle);
+        }
+    }
+}
 
-        renderQuestionList($questions, $show_marks, $opt_style, $rough_space);
-        ?>
-    </div>
+// --- Questions ---
+$q_sectionSettings = $sectionSettings;
+if ($num_cols > 1) {
+    $q_sectionSettings['colsNum'] = $num_cols;
+    $q_sectionSettings['colsSpace'] = Converter::cmToTwip(0.8);
+    $q_sectionSettings['breakType'] = 'continuous';
+    $q_section = $phpWord->addSection($q_sectionSettings);
+} else {
+    $q_section = $section;
+}
 
-    <?php if ($show_footer): ?>
-    <table class="signature-table">
-        <tr>
-            <td class="sig-box"><div class="sig-line"></div>Student Signature</td>
-            <td class="sig-box"><div class="sig-line"></div>Supervisor Signature</td>
-            <td class="sig-box"><div class="sig-line"></div>Principal Signature</td>
-        </tr>
-    </table>
-    <?php endif; ?>
+$current_subject = '';
+foreach ($questions as $q) {
+    if ($q['subject_name'] !== $current_subject) {
+        $q_section->addText(strtoupper($q['subject_name']), ['name' => $font_fam, 'size' => 14, 'bold' => true, 'underline' => 'single'], 'P_Centered');
+        $current_subject = $q['subject_name'];
+    }
 
-    <div style="text-align:center; margin-top:40px; font-weight:bold; border-top:1pt solid #000; padding-top:10pt;">
-        *** END OF PAPER ***
-    </div>
-</body>
-</html>
+    // Use Table for Right positioning or standard Flow for Below positioning
+    if (!empty($q['solution_image']) && $img_pos === 'right') {
+        $img_path = UPLOADS_PATH . '/oes/' . $q['solution_image'];
+        if (file_exists($img_path)) {
+            $table = $q_section->addTable(['width' => 100 * 50, 'unit' => 'pct']);
+            $table->addRow();
+            $q_cell = $table->addCell(Converter::cmToTwip(14.0)); // Approx 80% width
+            $q_run = $q_cell->addTextRun();
+            $q_run->addText($q['order_no'] . ". ", 'BoldFont');
+            addHtmlContent($q_cell, $q['question_text'], 'BaseFont', $math_scale);
+            if ($show_marks) {
+                $q_cell->addText(" (" . number_format((float)$q['marks'], 2) . " Marks)", 'MarksFont');
+            }
+            
+            $img_cell = $table->addCell();
+            $img_cell->addImage($img_path, ['height' => $img_scale, 'alignment' => 'right']);
+        } else {
+            // No image found
+            $q_block = $q_section->addTextRun('Q_Block');
+            $q_block->addText($q['order_no'] . ". ", 'BoldFont');
+            addHtmlContent($q_section, $q['question_text'], 'BaseFont', $math_scale);
+            if ($show_marks) { $q_section->addText(" (" . number_format((float)$q['marks'], 2) . " Marks)", 'MarksFont'); }
+        }
+    } else {
+        // Standard Below or No Image logic
+        $q_block = $q_section->addTextRun('Q_Block');
+        $q_block->addText($q['order_no'] . ". ", 'BoldFont');
+        addHtmlContent($q_section, $q['question_text'], 'BaseFont', $math_scale);
+        if ($show_marks) {
+            $q_section->addText(" (" . number_format((float)$q['marks'], 2) . " Marks)", 'MarksFont');
+        }
+
+        if (!empty($q['solution_image']) && $img_pos === 'below') {
+            $img_path = UPLOADS_PATH . '/oes/' . $q['solution_image'];
+            if (file_exists($img_path)) {
+                $q_section->addImage($img_path, ['height' => $img_scale, 'alignment' => 'center']);
+            }
+        }
+    }
+
+    // Options
+    $opts = ['A' => $q['option_a'], 'B' => $q['option_b'], 'C' => $q['option_c'], 'D' => $q['option_d']];
+    
+    if ($opt_style === 'list') {
+        foreach ($opts as $lbl => $val) {
+            $optRun = $q_section->addTextRun(['marginLeft' => 400]);
+            $optRun->addText("($lbl) ", 'BoldFont');
+            addHtmlContent($optRun, $val, 'BaseFont', $math_scale * 0.8);
+        }
+    } else {
+        $table = $q_section->addTable(['width' => 100 * 50, 'unit' => 'pct']);
+        if ($opt_style === 'inline') {
+            $table->addRow();
+            foreach ($opts as $lbl => $val) {
+                $cell = $table->addCell();
+                $optRun = $cell->addTextRun();
+                $optRun->addText("($lbl) ", 'BoldFont');
+                addHtmlContent($optRun, $val, 'BaseFont', $math_scale * 0.8);
+            }
+        } else { // grid
+            $table->addRow();
+            $cells = ['A', 'B'];
+            foreach ($cells as $lbl) {
+                $cell = $table->addCell();
+                $optRun = $cell->addTextRun();
+                $optRun->addText("($lbl) ", 'BoldFont');
+                addHtmlContent($optRun, $opts[$lbl], 'BaseFont', $math_scale * 0.8);
+            }
+            $table->addRow();
+            $cells = ['C', 'D'];
+            foreach ($cells as $lbl) {
+                $cell = $table->addCell();
+                $optRun = $cell->addTextRun();
+                $optRun->addText("($lbl) ", 'BoldFont');
+                addHtmlContent($optRun, $opts[$lbl], 'BaseFont', $math_scale * 0.8);
+            }
+        }
+    }
+}
+
+$q_section->addTextBreak(2);
+$q_section->addText("*** END OF PAPER ***", 'BoldFont', 'P_Centered');
+
+// --- Output ---
+$filename = str_replace(' ', '_', $exam['title']) . "_Paper.docx";
+
+header("Content-Description: File Transfer");
+header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+header('Content-Disposition: attachment; filename="' . $filename . '"');
+header('Content-Transfer-Encoding: binary');
+header('Expires: 0');
+header('Cache-Control: must-revalidate');
+header('Pragma: public');
+
+$objWriter = IOFactory::createWriter($phpWord, 'Word2007');
+$objWriter->save('php://output');
+exit();

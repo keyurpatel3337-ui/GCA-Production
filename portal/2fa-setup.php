@@ -89,8 +89,6 @@ include __DIR__ . '/include/navbar.php';
 include __DIR__ . '/include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/2fa-setup.css">
-
 <div class="container-fluid py-4">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-xl-6">
@@ -152,14 +150,14 @@ include __DIR__ . '/include/sidebar.php';
                                             <i class="fas fa-copy"></i>
                                         </button>
                                     </div>
-                                    <div id="syncCopyMsg" class="text-success small mt-1 two-fa-setup-custom-1">✓ Copied!</div>
+                                    <div id="syncCopyMsg" class="text-success small mt-1" style="display:none;">✓ Copied!</div>
                                     <div class="mt-3">
                                         <a href="2fa-setup.php" class="btn btn-sm btn-outline-secondary rounded-3">
                                             <i class="fas fa-times me-1"></i> Done / Close
                                         </a>
                                     </div>
                                 </div>
-                                <script src="<?php echo BASE_URL; ?>/assets/vendor/qrcode/qrcode.min.js"></script>
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
                                 <script>
                                     var syncUri = <?php echo json_encode($qr_url); ?>;
                                     if (syncUri && document.getElementById('syncQrCode')) {
@@ -223,7 +221,7 @@ include __DIR__ . '/include/sidebar.php';
                                         <h5 class="fw-bold mb-0">Scan QR Code</h5>
                                     </div>
                                     <p class="text-secondary small mb-4 ms-5">Open your Authenticator app and scan this code to link your account.</p>
-                                    <div class="text-center ms-md-5 p-4 bg-white rounded-4 border shadow-sm d-inline-block two-fa-setup-custom-2">
+                                    <div class="text-center ms-md-5 p-4 bg-white rounded-4 border shadow-sm d-inline-block" style="min-width:220px;">
                                         <!-- QR code rendered locally by qrcode.js — no external API needed -->
                                         <div id="qrcode" class="d-flex justify-content-center mb-3"></div>
                                         <p class="small text-muted mb-1">Can't scan? Enter the key manually:</p>
@@ -234,7 +232,7 @@ include __DIR__ . '/include/sidebar.php';
                                                 <i class="fas fa-copy"></i>
                                             </button>
                                         </div>
-                                        <div id="copyMsg" class="text-success small mt-1 two-fa-setup-custom-1">✓ Copied!</div>
+                                        <div id="copyMsg" class="text-success small mt-1" style="display:none;">✓ Copied!</div>
                                     </div>
                                 </div>
 
@@ -268,7 +266,7 @@ include __DIR__ . '/include/sidebar.php';
                             </div>
 
                             <!-- qrcode.js loaded from CDN - renders QR locally, no external image API -->
-                            <script src="<?php echo BASE_URL; ?>/assets/vendor/qrcode/qrcode.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
                             <script>
                                 var otpauthUri = <?php echo json_encode($qr_url); ?>;
                                 if (otpauthUri && document.getElementById('qrcode')) {
@@ -349,5 +347,39 @@ include __DIR__ . '/include/sidebar.php';
         </div>
     </div>
 </div>
+
+<style>
+    .letter-spacing-lg { letter-spacing: 0.5rem; }
+    .step-number {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+    .status-icon-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+    .pulse-ring {
+        content: '';
+        width: 100px;
+        height: 100px;
+        background: rgba(40, 167, 69, 0.2);
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse-ring 2s infinite;
+    }
+    @keyframes pulse-ring {
+        0% { transform: translate(-50%, -50%) scale(0.33); opacity: 0; }
+        50% { opacity: 0.5; }
+        100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+    }
+</style>
 
 <?php include __DIR__ . '/include/footer.php'; ?>

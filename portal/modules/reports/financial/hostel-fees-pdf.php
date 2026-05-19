@@ -22,6 +22,8 @@ try {
     $from_date = $_GET['from_date'] ?? date('Y-m-01');
     $to_date = $_GET['to_date'] ?? date('Y-m-d');
     $fee_type = $_GET['fee_type'] ?? '';
+    $gender = $_GET['gender'] ?? '';
+    $course_filter = $_GET['course_id'] ?? '';
     $search = $_GET['search'] ?? '';
 
     $whereConditions = ["p.status = 'paid'"];
@@ -51,9 +53,21 @@ try {
         $whereConditions[] = "(CONCAT(r.surname, ' ', r.student_name, ' ', IFNULL(r.fathers_name, '')) LIKE ? OR r.mob LIKE ? OR r.id LIKE ? OR c.course_name LIKE ? OR p.receipt_no LIKE ? OR p.payment_mode LIKE ?)";
         $params = array_merge($params, [$searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm]);
     }
+    
+    // Course/Standard Filter (map friendly names to course_id conditions)
+    if (!empty($course_filter)) {
+        if ($course_filter === '11th') {
+            $whereConditions[] = "r.course_id IN (1,2)";
+        } elseif ($course_filter === '12th') {
+            $whereConditions[] = "r.course_id IN (4,5)";
+        } elseif ($course_filter === 'Reneet') {
+            $whereConditions[] = "r.course_id = 6";
+        }
+    }
+    
     $whereClause = "WHERE " . implode(' AND ', $whereConditions);
 
-    $sql = "SELECT p.*, r.surname, r.student_name, IFNULL(r.fathers_name, '') as fathers_name, r.gender, c.course_name as current_class
+    $sql = "SELECT p.*, r.surname, r.student_name, IFNULL(r.fathers_name, '') as fathers_name, r.gender, r.mob, c.course_name as current_class
             FROM tbl_payments p
             JOIN tbl_gm_std_registration r ON p.student_id = r.id
             LEFT JOIN tbl_enrolled_students es ON es.registration_id = r.id AND es.is_active = 1
@@ -101,7 +115,7 @@ try {
     <table cellpadding="4" style="width:100%; border:0.5px solid #ddd; background-color:#f8f9fa;">
         <tr>
             <td width="30%">Transactions: <b>' . count($payments) . '</b></td>
-            <td width="40%" style="text-align:center;">Gender: <b>' . ($gender ?: 'All') . '</b></td>
+            <td width="40%" style="text-align:center;">Gender: <b>' . ($gender ?: 'All') . '</b> | Standard: <b>' . ($course_filter ?: 'All') . '</b></td>
             <td width="30%" style="text-align:right;">Total Collected: <b>' . formatIndianCurrency($totalCollected) . '</b></td>
         </tr>
     </table>';
@@ -113,21 +127,22 @@ try {
         <thead>
             <tr style="background-color:#eee; font-weight:bold;">
                 <th width="4%" style="text-align:center;">#</th>
-                <th width="9%">Date</th>
-                <th width="9%">Receipt No</th>
-                <th width="20%">Student Name</th>
-                <th width="7%">Gender</th>
-                <th width="10%">Class</th>
+                <th width="8%">Date</th>
+                <th width="8%">Receipt No</th>
+                <th width="17%">Student Name</th>
+                <th width="10%">Mobile</th>
+                <th width="6%">Gender</th>
+                <th width="9%">Class</th>
                 <th width="11%">Fee Type</th>
-                <th width="10%" style="text-align:right;">Amount</th>
+                <th width="9%" style="text-align:right;">Amount</th>
                 <th width="8%">Mode</th>
-                <th width="12%">Remarks</th>
+                <th width="10%">Remarks</th>
             </tr>
         </thead>
         <tbody>';
 
     if (empty($payments)) {
-        $html .= '<tr><td colspan="9" style="text-align:center;">No records found</td></tr>';
+        $html .= '<tr><td colspan="11" style="text-align:center;">No records found</td></tr>';
     } else {
         $i = 1;
         foreach ($payments as $row) {
@@ -136,15 +151,16 @@ try {
             $html .= '
             <tr nobr="true">
                 <td width="4%" style="text-align:center;">' . $i++ . '</td>
-                <td width="9%">' . date('d-m-Y', strtotime($row['payment_date'])) . '</td>
-                <td width="9%">' . htmlspecialchars($row['receipt_no'] ?? '') . '</td>
-                <td width="20%"><b>' . htmlspecialchars($fullName ?? '') . '</b></td>
-                <td width="7%">' . htmlspecialchars($row['gender'] ?? '') . '</td>
-                <td width="10%">' . htmlspecialchars($row['current_class'] ?: '-' ?? '') . '</td>
+                <td width="8%">' . date('d-m-Y', strtotime($row['payment_date'])) . '</td>
+                <td width="8%">' . htmlspecialchars($row['receipt_no'] ?? '') . '</td>
+                <td width="17%"><b>' . htmlspecialchars($fullName ?? '') . '</b></td>
+                <td width="10%">' . htmlspecialchars($row['mob'] ?? '-') . '</td>
+                <td width="6%">' . htmlspecialchars($row['gender'] ?? '') . '</td>
+                <td width="9%">' . htmlspecialchars($row['current_class'] ?: '-' ?? '') . '</td>
                 <td width="11%">' . $feeType . '</td>
-                <td width="10%" style="text-align:right; font-weight:bold; color:#28a745;">' . formatIndianCurrency($row['amount']) . '</td>
+                <td width="9%" style="text-align:right; font-weight:bold; color:#28a745;">' . formatIndianCurrency($row['amount']) . '</td>
                 <td width="8%">' . strtoupper($row['payment_mode']) . '</td>
-                <td width="12%"><small>' . htmlspecialchars($row['remarks'] ?: '-' ?? '') . '</small></td>
+                <td width="10%"><small>' . htmlspecialchars($row['remarks'] ?: '-' ?? '') . '</small></td>
             </tr>';
         }
     }

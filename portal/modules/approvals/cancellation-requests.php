@@ -24,6 +24,11 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $perPage = 15;
 $offset = ($page - 1) * $perPage;
 
+$totalPages = 0;
+$totalRecords = 0;
+$baseUrl = '';
+$requests = [];
+
 try {
     if (!isset($conn)) {
         require_once DB_CONNECT_FILE;
@@ -109,7 +114,7 @@ try {
                          CONCAT(s.surname, ' ', s.student_name, ' ', s.fathers_name) as full_name,
                          u.name as initiator_name 
                          " . $base_sql . " 
-                         ORDER BY c.created_at DESC 
+                         ORDER BY c.created_at ASC 
                          LIMIT ? OFFSET ?");
     
     $params[] = (int)$perPage;
@@ -133,7 +138,6 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/approvals/cancellation-requests.css">
 
 <div class="container-fluid py-4 pb-5">
     <div class="mb-4 mt-2 d-flex justify-content-between align-items-center">
@@ -143,8 +147,8 @@ include '../../include/sidebar.php';
         </div>
         <div>
             <form method="GET" class="d-flex gap-2">
-                <input type="text" name="search" class="form-control form-control-sm cancellation-requests-custom-1" placeholder="Student Name/ID..." value="<?php echo htmlspecialchars($search_filter ?? ''); ?>">
-                <select name="status" class="form-select form-select-sm cancellation-requests-custom-2">
+                <input type="text" name="search" class="form-control form-control-sm" placeholder="Student Name/ID..." value="<?php echo htmlspecialchars($search_filter ?? ''); ?>" style="width: 200px;">
+                <select name="status" class="form-select form-select-sm" style="width: 150px;">
                     <option value="">All Statuses</option>
                     <option value="pending" <?php echo $status_filter === 'pending' ? 'selected' : ''; ?>>Pending</option>
                     <option value="cancelled" <?php echo $status_filter === 'cancelled' ? 'selected' : ''; ?>>Finalized</option>
@@ -158,7 +162,7 @@ include '../../include/sidebar.php';
         </div>
     </div>
 
-    <div class="cancellation-requests-glass-card p-4">
+    <div class="glass-card p-4">
         <h5 class="fw-bold mb-4">All Cancellation Requests</h5>
         <div class="table-responsive">
             <table class="table table-hover align-middle">
@@ -201,7 +205,7 @@ include '../../include/sidebar.php';
                                     <div class="d-flex flex-column gap-2">
                                         <!-- Account Review -->
                                         <div class="review-item">
-                                            <div class="badge cancellation-requests-badge <?php echo $req['account_status'] === 'approved' ? 'bg-success' : ($req['account_status'] === 'rejected' ? 'bg-danger' : 'bg-secondary'); ?> w-100 text-start">
+                                            <div class="badge <?php echo $req['account_status'] === 'approved' ? 'bg-success' : ($req['account_status'] === 'rejected' ? 'bg-danger' : 'bg-secondary'); ?> w-100 text-start">
                                                 <i class="fas fa-wallet me-2"></i> Account: <?php echo ucfirst($req['account_status']); ?>
                                             </div>
                                             <?php if (!empty($req['account_comment'])): ?>
@@ -211,7 +215,7 @@ include '../../include/sidebar.php';
 
                                         <!-- Reception Review -->
                                         <div class="review-item">
-                                            <div class="badge cancellation-requests-badge <?php echo $req['reception_status'] === 'approved' ? 'bg-success' : ($req['reception_status'] === 'rejected' ? 'bg-danger' : 'bg-secondary'); ?> w-100 text-start">
+                                            <div class="badge <?php echo $req['reception_status'] === 'approved' ? 'bg-success' : ($req['reception_status'] === 'rejected' ? 'bg-danger' : 'bg-secondary'); ?> w-100 text-start">
                                                 <i class="fas fa-concierge-bell me-2"></i> Reception: <?php echo ucfirst($req['reception_status']); ?>
                                             </div>
                                             <?php if (!empty($req['reception_comment'])): ?>
@@ -221,7 +225,7 @@ include '../../include/sidebar.php';
 
                                         <!-- Principal Review -->
                                         <div class="review-item">
-                                            <div class="badge cancellation-requests-badge <?php echo $req['principal_status'] === 'approved' ? 'bg-success' : ($req['principal_status'] === 'rejected' ? 'bg-danger' : 'bg-secondary'); ?> w-100 text-start">
+                                            <div class="badge <?php echo $req['principal_status'] === 'approved' ? 'bg-success' : ($req['principal_status'] === 'rejected' ? 'bg-danger' : 'bg-secondary'); ?> w-100 text-start">
                                                 <i class="fas fa-user-shield me-2"></i> Principal: <?php echo ucfirst($req['principal_status']); ?>
                                             </div>
                                             <?php if (!empty($req['principal_comment'])): ?>
@@ -233,9 +237,9 @@ include '../../include/sidebar.php';
                                 <td class="text-end">
                                     <div class="d-flex flex-column align-items-end gap-2">
                                         <?php if ($req['final_status'] === 'cancelled'): ?>
-                                            <span class="badge cancellation-requests-badge bg-success py-2 px-3"><i class="fas fa-check-circle me-1"></i> FINALIZED: CANCELLED</span>
+                                            <span class="badge bg-success py-2 px-3"><i class="fas fa-check-circle me-1"></i> FINALIZED: CANCELLED</span>
                                         <?php elseif ($req['final_status'] === 'rejected'): ?>
-                                            <span class="badge cancellation-requests-badge bg-danger py-2 px-3"><i class="fas fa-times-circle me-1"></i> FINAL REJECTED</span>
+                                            <span class="badge bg-danger py-2 px-3"><i class="fas fa-times-circle me-1"></i> FINAL REJECTED</span>
                                         <?php else: ?>
                                             <?php
                                             $can_approve = false;
@@ -250,7 +254,7 @@ include '../../include/sidebar.php';
                                                     Review Request
                                                 </button>
                                             <?php else: ?>
-                                                <span class="badge cancellation-requests-badge bg-info-subtle text-info py-2 px-3"><i class="fas fa-hourglass-half me-1"></i> PENDING OTHERS</span>
+                                                <span class="badge bg-info-subtle text-info py-2 px-3"><i class="fas fa-hourglass-half me-1"></i> PENDING OTHERS</span>
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
@@ -273,7 +277,7 @@ include '../../include/sidebar.php';
 <!-- Approval Modal -->
 <div class="modal fade" id="approvalModal" tabindex="-1">
     <div class="modal-dialog">
-        <div class="modal-content cancellation-requests-glass-card border-0">
+        <div class="modal-content glass-card border-0">
             <div class="modal-header border-0 pb-0">
                 <h5 class="modal-title fw-bold">Review Cancellation</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -305,6 +309,29 @@ include '../../include/sidebar.php';
             modal.show();
         }
     </script>
+
+    <style>
+        .welcome-banner {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+            border-radius: 20px;
+            color: white;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+        }
+
+        .badge {
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-weight: 500;
+        }
+    </style>
 
     <?php include '../../include/footer.php'; ?>
 

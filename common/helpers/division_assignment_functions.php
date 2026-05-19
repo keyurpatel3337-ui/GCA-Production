@@ -293,7 +293,7 @@ function getDivisionClassList($conn, $course_division_id)
                                AND e.group_id = ?
                                AND e.is_active = 1
                                AND e.enrollment_status = 'active'
-                               ORDER BY e.roll_no ASC");
+                               ORDER BY e.roll_no DESC");
         $stmt->execute([$courseDivision['division_id'], $courseDivision['course_id'], $courseDivision['group_id']]);
         
         return [

@@ -207,7 +207,7 @@ if (hasRole(ROLE_RECEPTION) || hasRole(ROLE_SUPER_ADMIN)) {
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <td colspan="8" class="text-center">No appointments found</td>
+                                        <td colspan="<?php echo (hasRole(ROLE_RECEPTION) || hasRole(ROLE_SUPER_ADMIN) || hasRole(ROLE_PRINCIPLE)) ? 9 : 8; ?>" class="text-center">No appointments found</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>

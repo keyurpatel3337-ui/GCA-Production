@@ -31,8 +31,7 @@ $target_student_name = '';
 $target_student_mob  = '';
 
 if ($target_student_id) {
-    $db   = getConnection();
-    $stmt = $db->prepare("SELECT surname, student_name, mob FROM tbl_gm_std_registration WHERE id = ?");
+    $stmt = $conn->prepare("SELECT surname, student_name, mob FROM tbl_gm_std_registration WHERE id = ?");
     $stmt->execute([$target_student_id]);
     $student = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($student) {
@@ -435,11 +434,23 @@ $(document).ready(function () {
     });
 
     $('#whatsappForm').on('submit', function (e) {
+        e.preventDefault();
+        const form = this;
         const tplKey = getSelectedTemplate();
         const name   = studentNameInput.val().trim() || 'selected student';
         const mob    = mobDisplay.find('strong').text() || '';
         const label  = tplKey === 'parent_update_not' ? 'Specific Student Notice' : 'Common Notice (Gujarati)';
-        if (!confirm(`Send "${label}" WhatsApp to ${name}${mob ? ' (' + mob + ')' : ''}?`)) e.preventDefault();
+        showConfirm({
+            title: 'Send WhatsApp Message',
+            message: `Send <strong>"${label}"</strong> WhatsApp to <strong>${name}</strong>${mob ? ' (' + mob + ')' : ''}?`,
+            confirmText: 'Yes, Send',
+            confirmButtonClass: 'btn-success',
+            onConfirm: function () {
+                const btn = $('#sendBtn');
+                btn.prop('disabled', true).html('<i class="fab fa-whatsapp mr-2"></i> Sending...');
+                form.submit();
+            }
+        });
     });
 
     // Init
@@ -447,6 +458,54 @@ $(document).ready(function () {
 });
 </script>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>assets/css/modules/students/send-whatsapp-dynamic.css">
+<style>
+/* Template selection cards */
+.tpl-card {
+    cursor: pointer;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px 8px;
+    text-align: center;
+    transition: all .18s ease;
+    background: #fff;
+    user-select: none;
+}
+.tpl-card:hover {
+    border-color: #adb5bd;
+    background: #f8f9fa;
+}
+.tpl-card .tpl-icon { color: #6c757d; transition: color .18s; }
+.tpl-card .tpl-name { color: #adb5bd; font-size: 11px; }
+
+.tpl-card.tpl-active {
+    border-color: #007bff;
+    background: #eef5ff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,.12);
+}
+.tpl-card.tpl-active .tpl-icon { color: #007bff; }
+.tpl-card.tpl-active .tpl-name { color: #4a9eff; }
+.tpl-card.tpl-active strong    { color: #0056b3; }
+
+.tpl-card.tpl-active-green {
+    border-color: #28a745;
+    background: #edfff2;
+    box-shadow: 0 0 0 3px rgba(40,167,69,.12);
+}
+.tpl-card.tpl-active-green .tpl-icon { color: #28a745; }
+.tpl-card.tpl-active-green .tpl-name { color: #5cb85c; }
+.tpl-card.tpl-active-green strong    { color: #1e7e34; }
+
+/* WhatsApp bubble tail */
+.wa-bubble::after {
+    content: '';
+    position: absolute;
+    right: -9px;
+    top: 8px;
+    width: 0; height: 0;
+    border: 8px solid transparent;
+    border-left-color: #fff;
+    border-top: 0; border-right: 0;
+}
+</style>
 
 <?php include '../../include/footer.php'; ?>

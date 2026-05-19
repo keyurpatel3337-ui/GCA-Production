@@ -67,7 +67,7 @@ include '../../include/sidebar.php';
                     <tbody>
                         <?php if (empty($transport_settings)): ?>
                             <tr>
-                                <td colspan="6" class="text-center">No configurations found</td>
+                                <td colspan="9" class="text-center">No configurations found</td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($transport_settings as $config): ?>

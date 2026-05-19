@@ -13,9 +13,6 @@ if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_ESTABLISHMENT])) {
 $page_title = "Auto-Assign Class 12 Fees (Promotion)";
 
 include '../../include/header.php';
-?>
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/fees/auto-assign-class12.css">
-<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
@@ -135,7 +132,7 @@ include '../../include/sidebar.php';
                                 <span class="ms-3">Ready to Assign: <span id="toAssignCount">0</span></span>
                             </div>
 
-                            <div class="table-responsive auto-assign-class12-custom-1">
+                            <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark sticky-top">
                                         <tr>

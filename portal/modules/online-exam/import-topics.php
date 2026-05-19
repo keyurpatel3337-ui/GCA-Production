@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
     }
 
     $chapters_map = []; // key: subid_chaptername
-    $ch_res = $conn->query("SELECT chpid, subid, chapter FROM chapters");
+    $ch_res = $conn->query("SELECT chpid, subid, chapter FROM tbl_chapters");
     while($ch = $ch_res->fetch()) {
         $key = $ch['subid'] . '_' . strtolower(trim($ch['chapter']));
         $chapters_map[$key] = $ch['chpid'];

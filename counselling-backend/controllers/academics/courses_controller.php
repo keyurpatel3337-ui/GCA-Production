@@ -155,7 +155,7 @@ try {
          FROM tbl_courses c
          LEFT JOIN tbl_boards b ON c.board_id = b.id
          LEFT JOIN tbl_users u ON c.created_by = u.id
-         ORDER BY b.board_name ASC, c.display_order desc, c.course_name DESC"
+         ORDER BY b.board_name DESC, c.display_order desc, c.course_name DESC"
     );
     if ($courses === false)
         $courses = [];

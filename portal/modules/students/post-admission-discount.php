@@ -174,6 +174,7 @@ try {
     $totalPages = 1;
     $schools = [];
     $courses = [];
+    $groups = [];
 }
 
 include '../../include/header.php';
@@ -736,56 +737,44 @@ include '../../include/sidebar.php';
 
             // Validate form
             if (!$('#discount_type').val()) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'Please select discount type');
-                } else {
-                    alert('Please select discount type');
-                }
+                showToast('error', 'Error', 'Please select discount type');
                 return;
             }
 
             if (!$('#discount_value').val() || $('#discount_value').val() <= 0) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'Please enter a valid discount value');
-                } else {
-                    alert('Please enter a valid discount value');
-                }
+                showToast('error', 'Error', 'Please enter a valid discount value');
                 return;
             }
 
             if (!$('#discount_reason').val().trim()) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'Please enter reason for discount');
-                } else {
-                    alert('Please enter reason for discount');
-                }
+                showToast('error', 'Error', 'Please enter reason for discount');
                 return;
             }
 
             if (discountAmount <= 0) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'Invalid discount amount calculated');
-                } else {
-                    alert('Invalid discount amount calculated');
-                }
+                showToast('error', 'Error', 'Invalid discount amount calculated');
                 return;
             }
 
             // Show confirmation
-            if (confirm(`Are you sure you want to apply this discount?
-            
-Student: ${$('#detail_name').text()}
-Enrollment: ${$('#detail_enrollment').text()}
-Discount Amount: ₹${formatCurrency(discountAmount)}
-Current Pending: ₹${$('#current_pending').text()}
-New Pending: ₹${$('#new_pending').text()}
-
-This action cannot be undone!`)) {
-                const btn = $('#applyDiscountModalBtn');
-                const originalHtml = btn.html();
-                btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Applying...');
-                $('#discountForm').submit();
-            }
+            showConfirm({
+                title: 'Apply Post-Admission Discount',
+                message: `Apply this discount?<br><br>
+                    <strong>Student:</strong> ${$('#detail_name').text()}<br>
+                    <strong>Enrollment:</strong> ${$('#detail_enrollment').text()}<br>
+                    <strong>Discount Amount:</strong> ₹${formatCurrency(discountAmount)}<br>
+                    <strong>Current Pending:</strong> ₹${$('#current_pending').text()}<br>
+                    <strong>New Pending:</strong> ₹${$('#new_pending').text()}<br><br>
+                    <em class="text-danger">This action cannot be undone!</em>`,
+                confirmText: 'Yes, Apply Discount',
+                confirmButtonClass: 'btn-success',
+                onConfirm: function () {
+                    const btn = $('#applyDiscountModalBtn');
+                    const originalHtml = btn.html();
+                    btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Applying...');
+                    $('#discountForm').submit();
+                }
+            });
         });
     });
 </script>

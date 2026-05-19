@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
         $sub_id = isset($subjects_map[$key]) ? $subjects_map[$key] : 0;
         
         if ($sub_id > 0 && !empty($chapter_name)) {
-            $stmt = $conn->prepare("INSERT INTO chapters (subid, chapter) VALUES (?, ?)");
+            $stmt = $conn->prepare("INSERT INTO tbl_chapters (subid, chapter) VALUES (?, ?)");
             $stmt->execute([$sub_id, $chapter_name]);
             $count++;
         }

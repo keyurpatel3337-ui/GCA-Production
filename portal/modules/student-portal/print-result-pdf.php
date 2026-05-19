@@ -132,7 +132,28 @@ $pdf->SetFont('helvetica', '', 10);
 
 // --- Header Table ---
 $html = '
-<link rel="stylesheet" href="' . PORTAL_URL . 'assets/css/modules/student-portal/print-result-pdf.css">
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: helvetica;
+        font-size: 10pt;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 5px;
+        text-align: center;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .left {
+        text-align: left;
+    }
+    .no-border {
+        border: none;
+    }
+</style>
 
 <br><br><br><br><br><br><br><br>
 

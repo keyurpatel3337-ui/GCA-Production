@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         if ($_POST['action'] === 'delete') {
             $chpid = (int)$_POST['chpid'];
-            $stmt = $conn->prepare("DELETE FROM chapters WHERE chpid = ?");
+            $stmt = $conn->prepare("DELETE FROM tbl_chapters WHERE chpid = ?");
             $stmt->execute([$chpid]);
             $msg = "deleted";
         }
@@ -33,12 +33,12 @@ $perPage = 10;
 $currentPage = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $offset = ($currentPage - 1) * $perPage;
 
-$totalItems = $conn->query("SELECT COUNT(*) FROM chapters")->fetchColumn();
+$totalItems = $conn->query("SELECT COUNT(*) FROM tbl_chapters")->fetchColumn();
 $totalPages = ceil($totalItems / $perPage);
 
 // Fetch Chapters with Pagination
 $chapters = $conn->query("SELECT c.*, s.subject_name, std.stdtext 
-                         FROM chapters c 
+                         FROM tbl_chapters c 
                          LEFT JOIN tbl_subjects s ON c.subid = s.id 
                          LEFT JOIN standard std ON s.standard_id = std.stdid
                          ORDER BY std.stdid ASC, s.subject_name ASC, c.chapter ASC
@@ -78,6 +78,12 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             icon: icon,
                             title: title
                         });
+
+                        // Instantly clean msg parameter from URL address bar
+                        if (window.history.replaceState) {
+                            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search.replace(/[?&]msg=[^&]+/, '').replace(/^&/, '?');
+                            window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+                        }
                     });
                 </script>
             <?php endif; ?>

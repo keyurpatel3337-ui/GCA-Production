@@ -5,6 +5,10 @@ require_once dirname(dirname(dirname(__DIR__))) . '/common/constants.php';
 require_once PORTAL_GLOBALVARIABLE;
 require_once HELPERS_PATH . 'permission_helper.php';
 
+if (!isset($conn)) {
+    require_once DB_CONNECT_FILE;
+}
+
 // Access Check
 // if (!hasRole(ROLE_SUPER_ADMIN)) {
 //     header('Location: ' . PORTAL_URL . '/index.php?error=access_denied');
@@ -47,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch Roles (excluding Super Admin)
-$roles = $conn->query("SELECT * FROM tbl_roles WHERE id != " . ROLE_SUPER_ADMIN . " ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
+$roles = $conn->query("SELECT * FROM tbl_roles WHERE id != " . ROLE_SUPER_ADMIN . " ORDER BY id ASC")->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch Modules grouped
 $modules = $conn->query("SELECT * FROM tbl_modules ORDER BY group_name, module_name")->fetchAll(PDO::FETCH_ASSOC);

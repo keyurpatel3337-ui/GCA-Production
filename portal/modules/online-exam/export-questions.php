@@ -17,11 +17,11 @@ $sql = "SELECT q.id, q.marks, q.difficulty,
         FROM tbl_oes_questions q
         LEFT JOIN tbl_subjects s ON q.subject_id = s.id 
         LEFT JOIN tbl_oes_question_types qt ON q.question_type_id = qt.id
-        LEFT JOIN chapters c ON q.chapter_id = c.chpid
+        LEFT JOIN tbl_chapters c ON q.chapter_id = c.chpid
         LEFT JOIN tbl_topics t ON q.topic_id = t.id
         LEFT JOIN standard std ON q.standard_id = std.stdid
         WHERE q.status = 1
-        ORDER BY q.id DESC";
+        ORDER BY q.id ASC";
 
 $questions = $conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 

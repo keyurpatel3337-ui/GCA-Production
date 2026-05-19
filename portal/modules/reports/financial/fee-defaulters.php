@@ -180,7 +180,59 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/financial/fee-defaulters.php.css">
+<style>
+    .filter-card {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        border: none;
+        border-radius: 12px;
+    }
+    
+    .filter-card .form-label {
+        color: white;
+        font-weight: 500;
+    }
+    
+    .stat-box {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .stat-box h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+    
+    .stat-box p {
+        color: #6c757d;
+        margin: 0;
+    }
+    
+    .severity-critical {
+        background-color: #ffe6e6;
+    }
+    
+    .severity-high {
+        background-color: #fff3e6;
+    }
+    
+    .severity-medium {
+        background-color: #fffde6;
+    }
+    
+    .badge-days {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+    }
+    
+    .days-critical { background-color: #dc3545; }
+    .days-high { background-color: #fd7e14; }
+    .days-medium { background-color: #ffc107; color: #000; }
+    .days-low { background-color: #28a745; }
+</style>
 
 
 
@@ -309,10 +361,9 @@ include '../../../include/sidebar.php';
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php if (empty($defaulters)): ?>
+                        <tbody>                             <?php if (empty($defaulters)): ?>
                                 <tr>
-                                    <td colspan="8" class="text-center py-4">
+                                    <td colspan="7" class="text-center py-4">
                                         <i class="fas fa-check-circle text-success fa-3x mb-3"></i>
                                         <p class="mb-0">No defaulters found with current criteria</p>
                                     </td>
@@ -354,6 +405,10 @@ include '../../../include/sidebar.php';
                                                 }
                                                 ?>
                                             </div>
+                                        </td>
+                                        <td>
+                                            <div class="fw-bold text-dark"><?php echo htmlspecialchars($student['current_class'] ?? ''); ?></div>
+                                            <div class="text-muted small"><?php echo htmlspecialchars($student['group_name'] ?? ''); ?></div>
                                         </td>
                                         <td>
                                             <?php 
@@ -417,7 +472,7 @@ include '../../../include/sidebar.php';
 
 <?php include '../../../include/footer.php'; ?>
 
-<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
 function exportToExcel() {
     const table = document.getElementById('defaultersTable');

@@ -167,7 +167,13 @@ include '../../include/sidebar.php';
     </form>
 </div>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/students/direct-admission-review.css">
+<style>
+    .bg-light-danger { background-color: #fff5f5 !important; }
+    .bg-warning-light { background-color: #fff9db; border-radius: 4px; padding: 0 4px; }
+    .table-sm th { font-size: 0.7rem; letter-spacing: 0.5px; }
+    .form-check-input { width: 1.4em; height: 1.4em; cursor: pointer; }
+    .badge { font-size: 0.7rem; font-weight: 600; }
+</style>
 
 <script>
 function toggleAll(checked) {

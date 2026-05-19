@@ -55,7 +55,7 @@ include PORTAL_PATH . 'include/navbar.php';
 include PORTAL_PATH . 'include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/access_control/modules_list.css">
+
 
     <div class="container-fluid">
 
@@ -127,7 +127,7 @@ include PORTAL_PATH . 'include/sidebar.php';
                                     <th>Name</th>
                                     <th>Key</th>
                                     <th>Description</th>
-                                    <th class="modules_list-custom-1">Action</th>
+                                    <th style="width: 50px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

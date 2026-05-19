@@ -428,27 +428,15 @@ try {
                                     setTimeout(() => location.reload(), 2000);
                                 } else {
                                     autoAssignBtn.prop('disabled', false).html(originalHtml);
-                                    if (typeof showToast === 'function') {
-                                        showToast('error', 'Error', response.message || 'Failed to assign students');
-                                    } else {
-                                        alert(response.message || 'Failed to assign students');
-                                    }
+                                    showToast('error', 'Error', response.message || 'Failed to assign students');
                                 }
                             } catch (error) {
                                 autoAssignBtn.prop('disabled', false).html(originalHtml);
-                                if (typeof showToast === 'function') {
-                                    showToast('error', 'Error', 'An error occurred');
-                                } else {
-                                    alert('An error occurred');
-                                }
+                                showToast('error', 'Error', 'An error occurred');
                             }
                         }
                     });
-                } else {
-                    if (confirm(`This will assign up to ${studentsPerCounsellor} students per counsellor. Continue?`)) {
-                        // Fallback logic
-                    }
-                }
+}
             });
 
             // Bulk assign button
@@ -461,20 +449,12 @@ try {
                 });
 
                 if (!counsellorId) {
-                    if (typeof showToast === 'function') {
-                        showToast('error', 'Error', 'Please select a counsellor');
-                    } else {
-                        alert('Please select a counsellor');
-                    }
+                    showToast('error', 'Error', 'Please select a counsellor');
                     return;
                 }
 
                 if (studentIds.length === 0) {
-                    if (typeof showToast === 'function') {
-                        showToast('error', 'Error', 'Please select at least one student');
-                    } else {
-                        alert('Please select at least one student');
-                    }
+                    showToast('error', 'Error', 'Please select at least one student');
                     return;
                 }
 
@@ -497,27 +477,15 @@ try {
                                     }
                                     setTimeout(() => location.reload(), 2000);
                                 } else {
-                                    bulkAssignBtn.prop('disabled', false).html(originalHtml);
-                                    if (typeof showToast === 'function') {
-                                        showToast('error', 'Error', response.message || 'Failed to assign students');
-                                    } else {
-                                        alert(response.message || 'Failed to assign students');
-                                    }
+                                     bulkAssignBtn.prop('disabled', false).html(originalHtml);
+                                    showToast('error', 'Error', response.message || 'Failed to assign students');
                                 }
                             } catch (error) {
                                 bulkAssignBtn.prop('disabled', false).html(originalHtml);
-                                if (typeof showToast === 'function') {
-                                    showToast('error', 'Error', 'An error occurred');
-                                } else {
-                                    alert('An error occurred');
-                                }
+                                showToast('error', 'Error', 'An error occurred');
                             }
                         }
                     });
-                } else {
-                    if (confirm(`Assign ${studentIds.length} student(s) to selected counsellor?`)) {
-                        // Fallback logic
-                    }
                 }
             });
 
@@ -527,20 +495,12 @@ try {
                 const mobileNumbers = $('#mobileNumbers').val().trim();
 
                 if (!counsellorId) {
-                    if (typeof showToast === 'function') {
-                        showToast('error', 'Error', 'Please select a counsellor first');
-                    } else {
-                        alert('Please select a counsellor first');
-                    }
+                    showToast('error', 'Error', 'Please select a counsellor first');
                     return;
                 }
 
                 if (!mobileNumbers) {
-                    if (typeof showToast === 'function') {
-                        showToast('error', 'Error', 'Please enter mobile numbers');
-                    } else {
-                        alert('Please enter mobile numbers');
-                    }
+                    showToast('error', 'Error', 'Please enter mobile numbers');
                     return;
                 }
 
@@ -555,19 +515,11 @@ try {
                         matchedStudents = response.data.students;
                         displayPreview(response.data.students, response.data.not_found);
                     } else {
-                        if (typeof showToast === 'function') {
-                            showToast('error', 'Error', response.message || 'Failed to fetch students');
-                        } else {
-                            alert(response.message || 'Failed to fetch students');
-                        }
+                        showToast('error', 'Error', response.message || 'Failed to fetch students');
                     }
                 } catch (error) {
                     previewMobileBtn.prop('disabled', false).html(originalHtml);
-                    if (typeof showToast === 'function') {
-                        showToast('error', 'Error', 'An error occurred while fetching students');
-                    } else {
-                        alert('An error occurred while fetching students');
-                    }
+                    showToast('error', 'Error', 'An error occurred while fetching students');
                 }
             });
 
@@ -580,11 +532,7 @@ try {
             // Confirm assignment
             $('#confirmMobileAssign').on('click', async function () {
                 if (matchedStudents.length === 0) {
-                    if (typeof showToast === 'function') {
-                        showToast('error', 'Error', 'No students to assign');
-                    } else {
-                        alert('No students to assign');
-                    }
+                    showToast('error', 'Error', 'No students to assign');
                     return;
                 }
 
@@ -610,27 +558,15 @@ try {
                                     }
                                     setTimeout(() => location.reload(), 2000);
                                 } else {
-                                    confirmMobileAssign.prop('disabled', false).html(originalHtml);
-                                    if (typeof showToast === 'function') {
-                                        showToast('error', 'Error', response.message || 'Failed to assign students');
-                                    } else {
-                                        alert(response.message || 'Failed to assign students');
-                                    }
+                                     confirmMobileAssign.prop('disabled', false).html(originalHtml);
+                                    showToast('error', 'Error', response.message || 'Failed to assign students');
                                 }
                             } catch (error) {
                                 confirmMobileAssign.prop('disabled', false).html(originalHtml);
-                                if (typeof showToast === 'function') {
-                                    showToast('error', 'Error', 'An error occurred');
-                                } else {
-                                    alert('An error occurred');
-                                }
+                                showToast('error', 'Error', 'An error occurred');
                             }
                         }
                     });
-                } else {
-                    if (confirm(`Are you sure you want to assign ${matchedStudents.length} student(s) to this counsellor?`)) {
-                        // Fallback logic
-                    }
                 }
             });
         });
@@ -696,9 +632,15 @@ try {
 
         // Remove counsellor assignment
         function removeAssignment(studentId) {
-            if (confirm('Are you sure you want to remove this counsellor assignment?')) {
-                window.location.href = 'student-assignment-save.php?action=remove&student_id=' + studentId;
-            }
+            showConfirm({
+                title: 'Remove Assignment',
+                message: 'Are you sure you want to remove this counsellor assignment?',
+                confirmText: 'Yes, Remove',
+                confirmButtonClass: 'btn-danger',
+                onConfirm: function () {
+                    window.location.href = 'student-assignment-save.php?action=remove&student_id=' + studentId;
+                }
+            });
         }
 
         // Show auto assign info
@@ -725,8 +667,6 @@ try {
                     confirmButtonClass: 'btn-info',
                     onConfirm: function () { }
                 });
-            } else {
-                alert('Auto Assignment Info:\n- All active counsellors involved\n- Unassigned students randomly distributed\n- Balanced across counsellors');
-            }
+}
         }
     </script>

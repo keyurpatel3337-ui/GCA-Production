@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
     while($s = $sub_res->fetch()) { $subjects_map[$s['standard_id'].'_'.strtolower(trim($s['subject_name']))] = $s['id']; }
     
     $chapters_map = [];
-    $ch_res = $conn->query("SELECT chpid, subid, chapter FROM chapters WHERE activated = 1 AND is_deleted = 0");
+    $ch_res = $conn->query("SELECT chpid, subid, chapter FROM tbl_chapters WHERE activated = 1 AND is_deleted = 0");
     while($c = $ch_res->fetch()) { $chapters_map[$c['subid'].'_'.strtolower(trim($c['chapter']))] = $c['chpid']; }
     
     $topics_map = [];

@@ -21,11 +21,7 @@ $page_breadcrumb = [
 include '../../include/header.php';
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
-?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/certificates/issue.css">
-
-<?php
 $op = new Operation();
 
 // Get search query and student_id
@@ -83,6 +79,50 @@ if (!empty($student_id)) {
 
 ?>
 
+<style>
+    .ledger-search-box {
+        background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+    .search-results-dropdown {
+        position: absolute;
+        top: calc(100% - 1rem);
+        left: 2rem;
+        right: 2rem;
+        z-index: 1050;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border: none;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        border-radius: 0 0 12px 12px;
+    }
+
+    .search-result-pill:hover {
+        background: #f8fafc;
+        transform: translateX(5px);
+        transition: all 0.2s;
+    }
+
+    .card-enhanced {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .btn-select-student {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+    }
+</style>
+
 <div class="block-header">
     <div class="row">
         <div class="col-lg-7 col-md-6 col-sm-12">
@@ -118,9 +158,10 @@ if (!empty($student_id)) {
                                 <span class="input-group-text bg-white border-0">
                                     <i class="fa-solid fa-search text-primary"></i>
                                 </span>
-                                <input type="text" name="search" class="form-control border-0 shadow-none issue-custom-1"
+                                <input type="text" name="search" class="form-control border-0 shadow-none"
                                     placeholder="Enter Student ID, Name, Mobile or Email..."
-                                    value="<?php echo htmlspecialchars($search ?? ''); ?>" autocomplete="off">
+                                    value="<?php echo htmlspecialchars($search ?? ''); ?>" autocomplete="off"
+                                    style="font-size: 1.1rem;">
                                 <button type="submit" class="btn btn-dark px-4 fw-bold">SEARCH</button>
                             </div>
                         </div>
@@ -167,13 +208,15 @@ if (!empty($student_id)) {
                         <!-- Student Profile Card -->
                         <div class="card card-enhanced border-0 shadow-sm h-100">
                             <div class="card-body p-4 text-center">
-                                <div class="profile-avatar mx-auto mb-3 issue-custom-2">
+                                <div class="profile-avatar mx-auto mb-3"
+                                    style="width: 80px; height: 80px; border-radius: 20px; background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%); color: #4f46e5; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
                                     <?php echo strtoupper(substr($selectedStudent['student_name'], 0, 1)); ?>
                                 </div>
                                 <h5 class="mb-1 fw-bold text-dark">
                                     <?php echo $selectedStudent['surname'] . ' ' . $selectedStudent['student_name'] . ' ' . ($selectedStudent['fathers_name'] ?? ''); ?>
                                 </h5>
-                                <p class="badge bg-soft-success text-success rounded-pill px-3 py-1 mb-4 issue-custom-3">
+                                <p class="badge bg-soft-success text-success rounded-pill px-3 py-1 mb-4"
+                                    style="background: #ecfdf5; font-size: 0.75rem;">
                                     <i class="fas fa-check-circle me-1"></i> ACTIVE STUDENT
                                 </p>
 

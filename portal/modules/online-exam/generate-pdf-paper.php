@@ -5,14 +5,17 @@ require_once DB_CONNECT_FILE;
 require_once PORTAL_PATH . 'session_config.php';
 require_once PORTAL_GLOBALVARIABLE;
 
-// Include TCPDF
+// Include mPDF via composer autoload
 require_once PORTAL_PATH . 'vendor/autoload.php';
 
-// Proper HTTP 403 response for unauthorized access
+// Access Control
 if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])) {
     http_response_code(403);
     exit("403 Forbidden");
 }
+
+// Temporary cache clear for LaTeX images (Run once, then can be removed)
+// array_map('unlink', glob(sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'latex_*.svg'));
 
 $exam_id = isset($_GET['exam_id']) ? (int) $_GET['exam_id'] : 0;
 if (!$exam_id)
@@ -25,7 +28,7 @@ try {
     if (!$exam)
         die("Exam not found.");
 
-    // FIXED: Order by subject and order_no to ensure continuity
+    // Fetch Questions ordered by subject and order_no
     $stmt_q = $conn->prepare("SELECT eq.order_no, q.*, sub.subject_name FROM tbl_oes_exam_questions eq JOIN tbl_oes_questions q ON eq.question_id = q.id LEFT JOIN tbl_subjects sub ON q.subject_id = sub.id WHERE eq.exam_id = ? ORDER BY sub.subject_name, eq.order_no ASC");
     $stmt_q->execute([$exam_id]);
     $questions = $stmt_q->fetchAll(PDO::FETCH_ASSOC);
@@ -33,258 +36,374 @@ try {
     die("Database Error: " . $e->getMessage());
 }
 
-// Get Settings
-$show_header = isset($_GET['header']) && $_GET['header'] === 'hide' ? false : true;
-$font_size_val = isset($_GET['font_size']) ? $_GET['font_size'] : '12px';
-$opt_style = isset($_GET['opt_style']) ? $_GET['opt_style'] : 'grid';
-$spacing_type = isset($_GET['spacing']) ? $_GET['spacing'] : 'normal';
-$show_footer = isset($_GET['footer']) && $_GET['footer'] === 'show' ? true : false;
-$show_marks = isset($_GET['marks']) && $_GET['marks'] === 'hide' ? false : true;
+// --- Professional Standard Parameters (Optimized by AI) ---
+$paper_size = 'A4';
+$orientation = 'P';
+$num_cols = isset($_GET['cols']) ? (int) $_GET['cols'] : 1; // Default 1 column
+$margin_type = 'normal';   // 15mm margins
+$font_fam = 'serif';    // Academic serif font
+$font_size = '12pt';     // Standard exam font size
+$math_scale = 32;         // Base scale for smart math rendering
+$img_scale = 120;        // Balanced image scale
+$img_pos = 'below';    // Safe image positioning
+$opt_style = 'grid';     // Space-efficient ABCD grid
+$show_marks = true;       // Always show marks
 
-$base_font = (int) $font_size_val;
-
-// Define a custom class to handle margin resets on each page
-class ExamPDF extends TCPDF
-{
-    public function Header()
-    {
-        // Reset margins at the start of each new page as requested
-        $this->SetMargins(15, 15, 15);
-        $this->SetX(15);
-    }
-}
-
-// Create PDF with UTF-8 support using our custom class
-$pdf = new ExamPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-$pdf->SetCreator('GCA OES');
-$pdf->SetTitle($exam['title']);
-$pdf->setPrintHeader(true); // Enable header callback for margin reset
-$pdf->setHeaderMargin(0);   // No actual header content space
-$pdf->setPrintFooter(false);
-$pdf->SetMargins(15, 15, 15); // Standard 15mm margins
-$pdf->SetAutoPageBreak(TRUE, 15);
-// Bug 7: Tagged PDF support is version-dependent. Removed call to undefined method.
-if (method_exists($pdf, 'setTagged')) {
-    $pdf->setTagged(true);
-}
-$pdf->AddFont('freeserif', '', 'freeserif.php', true); // Bug 6: Ensure font is embedded
-$pdf->SetFont('freeserif', '', $base_font);
-$pdf->AddPage();
+// Margin logic (mm)
+$m_val = 15;
+if ($margin_type === 'narrow')
+    $m_val = 10;
+elseif ($margin_type === 'wide')
+    $m_val = 25;
 
 /**
- * LaTeX Processor
+ * LaTeX Renderer using CodeCogs (SVG)
  */
-function processLatex($text, $img_h = 24)
+function processLatex($text, $img_h = 32)
 {
-    if (empty($text))
-        return '';
-
-    // Bug 1: Use SVG for real vector rendering
     $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $pattern = '/(?:\$|&#36;){1,2}(.*?)(?:\$|&#36;){1,2}/s';
+    $pattern = '/\${2}(.*?)\${2}|\$([^$]+?)\$|(\\\\begin\{[a-zA-Z\*]+\}.*?\\\\end\{[a-zA-Z\*]+\})/s';
 
     return preg_replace_callback($pattern, function ($matches) use ($img_h) {
-        $latex = trim(strip_tags($matches[1])); // Strip tags to avoid breaking LaTeX
+        $latex = !empty($matches[1]) ? $matches[1]
+            : (!empty($matches[2]) ? $matches[2]
+                : (!empty($matches[3]) ? $matches[3] : ''));
+        $latex = trim(strip_tags($latex));
         if (empty($latex))
             return '';
+
+        // Smart height based on content type
+        if (strpos($latex, '\\begin') !== false) {
+            // Matrix — tallest
+            $final_h = $img_h * 0.9;
+            $prefix = "";
+        } elseif (strpos($latex, '\\frac') !== false) {
+            // Fraction — medium
+            $final_h = $img_h * 0.75;
+            $prefix = "\\textstyle ";
+        } else {
+            // Simple inline (angles, numbers) — small
+            $final_h = $img_h * 0.5;
+            if ($final_h < 10)
+                $final_h = 10;
+            $prefix = "\\textstyle ";
+        }
 
         $cache_key = md5($latex);
         $cache_file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'latex_' . $cache_key . '.svg';
 
-        if (file_exists($cache_file) && (time() - filemtime($cache_file) < 86400)) {
-            $svgData = file_get_contents($cache_file);
-        } else {
-            $url = "https://latex.codecogs.com/svg.image?" . rawurlencode("\\textstyle " . $latex);
-
-            // Fetch SVG via cURL for better reliability
+        if (!file_exists($cache_file)) {
+            $url = "https://latex.codecogs.com/svg.image?" . rawurlencode($prefix . $latex);
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 8);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            $svgData = curl_exec($ch);
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $svg_content = curl_exec($ch);
             curl_close($ch);
-
-            if ($httpCode == 200 && !empty($svgData) && strpos($svgData, '<svg') !== false) {
-                file_put_contents($cache_file, $svgData);
+            if (!empty($svg_content) && strpos($svg_content, '<svg') !== false) {
+                file_put_contents($cache_file, $svg_content);
             } else {
-                return '$' . $latex . '$'; // Fallback to raw LaTeX text if fetch fails
+                return '<span style="color:red">$' . $latex . '$</span>';
             }
         }
 
-        // Use the physical file path. TCPDF handles .svg files better than data URIs.
-        // Use forward slashes for better cross-platform/HTML compatibility
-        $normalized_path = str_replace('\\', '/', $cache_file);
-
-        // Manual Aspect Ratio Correction:
-        // TCPDF sometimes fails to detect SVG dimensions correctly, causing squashing.
-        // We parse the intrinsic width/height from the SVG file to calculate the correct width.
-        $w_pt = $img_h; // Default fallback
-        if (file_exists($cache_file)) {
-            $svg_content = file_get_contents($cache_file);
-            if (
-                preg_match('/width=[\'"]([0-9.]+)pt[\'"]/', $svg_content, $m_w) &&
-                preg_match('/height=[\'"]([0-9.]+)pt[\'"]/', $svg_content, $m_h)
-            ) {
-                $orig_w = (float) $m_w[1];
-                $orig_h = (float) $m_h[1];
-                if ($orig_h > 0) {
-                    $w_pt = $img_h * ($orig_w / $orig_h);
-                }
-            }
-        }
-        $w_pt = round($w_pt, 2);
-        $img_h = round($img_h, 2);
-
-        return '<img src="' . $normalized_path . '" width="' . $w_pt . 'pt" height="' . $img_h . 'pt" align="absmiddle" />';
+        return '<img src="' . $cache_file . '" style="height:' . round($final_h) . 'pt; vertical-align:middle; margin:0 1pt;">';
     }, $text);
 }
 
 /**
- * Helper to convert BASE_URL paths to local filesystem paths for TCPDF
+ * Handle relative paths for images
  */
-function urlToPath($html) {
-    if (defined('BASE_URL') && defined('UPLOADS_PATH')) {
-        $baseUrl = rtrim(BASE_URL, '/');
-        $uploadsPath = rtrim(UPLOADS_PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-        
-        // Convert URL-based uploads to local paths
-        $html = str_replace($baseUrl . '/uploads/', $uploadsPath, $html);
-    }
-    return $html;
-}
-
-/**
- * Question Renderer
- */
-function getQuestionsHtml($list, $show_marks, $opt_style, $spacing_type, $base_font)
+function fixImagePaths($html)
 {
-    $q_html = '';
-    $lh_q = ($spacing_type === 'compact') ? 1.2 : 1.4;
-    $lh_o = ($spacing_type === 'compact') ? 1.1 : 1.3;
-    $q_margin = ($spacing_type === 'compact') ? '4pt' : (($spacing_type === 'wide') ? '25pt' : '10pt');
+    $uploadsPath = rtrim(UPLOADS_PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+    return preg_replace('/(\.\.\/)+uploads\//', $uploadsPath, $html);
+}
 
-    foreach ($list as $q) {
-        $q_raw = (string) $q['question_text'];
-        $q_raw = preg_replace('/\(Copy\s*\d+\)/i', '', $q_raw);
-        // Process LaTeX first
-        $text = processLatex($q_raw, 32);
-        // Convert URLs to paths for images
-        $text = urlToPath($text);
-        $marks_text = $show_marks ? '<span style="font-weight:normal; font-size:0.85em; font-style:italic;"> (' . number_format((float) $q['marks'], 2) . ' Marks)</span>' : '';
-
-        // Question Stem
-        $q_html .= '<table width="100%" cellpadding="0" style="margin-bottom:2pt; border-collapse:collapse;">
-            <tr>
-                <td width="30pt" style="font-weight:bold; vertical-align:top; line-height:' . $lh_q . ';">Q.' . (int) $q['order_no'] . '</td>
-                <td width="510pt" style="vertical-align:top; line-height:' . $lh_q . ';">' . $text . ' ' . $marks_text . '</td>
-            </tr>
-        </table>';
-
-        // Bug 2: Fetch and render all options
-        $opts = [
-            'A' => urlToPath(processLatex($q['option_a'] ?? '', 24)),
-            'B' => urlToPath(processLatex($q['option_b'] ?? '', 24)),
-            'C' => urlToPath(processLatex($q['option_c'] ?? '', 24)),
-            'D' => urlToPath(processLatex($q['option_d'] ?? '', 24))
-        ];
-
-        // Options Layout - Use an empty spacer column for left indentation (30pt)
-        $q_html .= '<table width="100%" cellpadding="2">
-            <tr>
-                <td width="30pt">&nbsp;</td>
-                <td width="510pt">
-                    <table width="100%" cellpadding="1">';
-
-        if ($opt_style === 'list') {
-            foreach ($opts as $l => $t) {
-                $q_html .= '<tr><td width="25pt" style="font-weight:bold;">(' . $l . ')</td><td width="485pt" style="line-height:' . $lh_o . ';">' . $t . '</td></tr>';
-            }
-        } elseif ($opt_style === 'inline') {
-            $q_html .= '<tr>
-                <td width="25%" style="line-height:' . $lh_o . ';"><b>(A)</b> ' . $opts['A'] . '</td>
-                <td width="25%" style="line-height:' . $lh_o . ';"><b>(B)</b> ' . $opts['B'] . '</td>
-                <td width="25%" style="line-height:' . $lh_o . ';"><b>(C)</b> ' . $opts['C'] . '</td>
-                <td width="25%" style="line-height:' . $lh_o . ';"><b>(D)</b> ' . $opts['D'] . '</td>
-            </tr>';
-        } else { // Grid (2x2)
-            $q_html .= '<tr>
-                <td width="50%" style="line-height:' . $lh_o . ';"><b>(A)</b> ' . $opts['A'] . '</td>
-                <td width="50%" style="line-height:' . $lh_o . ';"><b>(B)</b> ' . $opts['B'] . '</td>
-            </tr>
-            <tr>
-                <td width="50%" style="line-height:' . $lh_o . ';"><b>(C)</b> ' . $opts['C'] . '</td>
-                <td width="50%" style="line-height:' . $lh_o . ';"><b>(D)</b> ' . $opts['D'] . '</td>
-            </tr>';
+// Build HTML content
+$html = '
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: ' . ($font_fam === 'sans' ? '"timesnewroman", "freesans", "shruti", sans-serif' : '"timesnewroman", "freeserif", "shruti", serif') . ';
+            font-size: ' . $font_size . ';
+            line-height: 1.5;
+            color: #000;
         }
-        $q_html .= '</table>
-                </td>
-            </tr>
-        </table>';
+        .header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px; }
+        .header h1 { margin: 0; font-size: 20pt; }
+        .header h2 { margin: 5px 0; font-size: 16pt; }
+        .meta-info { width: 100%; margin-bottom: 20px; border-bottom: 1px solid #000; padding-bottom: 5px; }
+        
+        .subject-title {
+            text-align: center;
+            text-decoration: underline;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 15pt 0 10pt 0;
+            background: #f0f0f0;
+            padding: 5pt;
+        }
+        
+        .question-block {
+            margin-bottom: 15px;
+        }
+        .q-num { font-weight: bold; margin-right: 5px; }
+        .q-text { display: inline; }
+        .q-marks { font-style: italic; font-size: 0.9em; }
+        
+        .q-row-table { width: 100%; border-collapse: collapse; margin-bottom: 2px; }
+        .q-row-table td { vertical-align: top; }
+        .q-num-cell { width: 30pt; font-weight: bold; }
+        .q-text-cell { padding-right: 5pt; }
+        .q-img-cell { width: 1%; white-space: nowrap; vertical-align: top; padding-left: 10pt; }
 
-        // Spacer between questions
-        $q_html .= '<div style="line-height:' . $q_margin . ';">&nbsp;</div>';
-    }
-    return $q_html;
-}
+        .options-container { margin-top: 5px; margin-left: 30pt; }
+        .option-item { margin-bottom: 5px; }
+        
+        .grid-options { width: 100%; border-collapse: collapse; margin-top: 5pt; page-break-inside: avoid; }
+        .grid-options td { width: 50%; padding: 4px 5px; vertical-align: middle; }
+        
+        .inline-options { width: 100%; border-collapse: collapse; margin-top: 5pt; page-break-inside: avoid; }
+        .inline-options td { width: 25%; padding: 10px 0; vertical-align: middle; }
 
-$html = '';
-
-// Header
-if ($show_header) {
-    $html .= '<div style="text-align:center;">
-        <h1 style="font-size:20pt; margin:0;">GYANMANJARI CAREER ACADEMY</h1>
-        <div style="font-size:14pt; font-weight:bold;">' . htmlspecialchars($exam['title']) . '</div>
-    </div><br>';
-}
-
-// FIXED: Centered Subject heading
-$subject_name = !empty($questions) ? $questions[0]['subject_name'] : 'N/A';
-$html .= '<div style="text-align:center; font-weight:bold; font-size:1.2em; margin-bottom:10pt;">Subject: ' . htmlspecialchars((string) $subject_name) . '</div>';
-
-// Meta
-// Meta Table
-$html .= '<table width="100%" style="border-bottom:1pt solid #000; padding-bottom:5pt;" cellpadding="2">
-    <tr>
-        <td width="30%"><b>Standard:</b> ' . htmlspecialchars((string) $exam['stdtext'] ?: 'N/A') . '</td>
-        <td width="40%" align="center">&nbsp;</td>
-        <td width="30%" align="right"><b>Max Marks:</b> ' . number_format((float) $exam['total_marks'], 2) . '</td> 
-    </tr>
-    <tr>
-        <td width="30%"><b>Date:</b> ' . htmlspecialchars(date('d-m-Y', strtotime($exam['start_time']))) . '</td>
-        <td width="40%" align="center"><b>Time:</b> ' . htmlspecialchars(date('h:i', strtotime($exam['start_time']))) . ' – ' . htmlspecialchars(date('h:i A', strtotime($exam['end_time']))) . '</td>
-        <td width="30%" align="right"><b>Duration:</b> ' . (int) $exam['duration_mins'] . ' Mins</td>
-    </tr>
-</table><br>';
-
-// Bug 8: Validation for placeholder instructions
-$instructions = trim((string) $exam['description']);
-if (empty($instructions)) {
-    die("<div style='color:red; font-family:sans-serif; padding:20px; border:1px solid red;'>
-        <b>Error:</b> General Instructions are missing. 
-        Please provide valid instructions before generating the PDF.
-    </div>");
-}
-
-$html .= '<div style="border:0.5pt solid #ccc; padding:10pt; background-color:#f9f9f9;">
-    <b>General Instructions:</b><br>' . nl2br(htmlspecialchars($instructions)) . '
-</div><br>';
-
-$html .= getQuestionsHtml($questions, $show_marks, $opt_style, $spacing_type, $base_font);
-
-if ($show_footer) {
-    $html .= '<br><br><table width="100%" cellpadding="5" style="border-top:1pt solid #eee;">
+        img.q-img { max-width: 100%; }
+        .img-right { float: right; margin-left: 10px; margin-bottom: 5px; }
+        .img-below { display: block; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>' . strtoupper($exam['title']) . '</h1>
+        <h2>' . $exam['stdtext'] . ' - Exam Paper</h2>
+    </div>
+    
+    <table class="meta-info">
         <tr>
-            <td align="center">____________________<br>Student Signature</td>
-            <td align="center">____________________<br>Supervisor Signature</td>
-            <td align="center">____________________<br>Principal Signature</td>
+            <td><strong>Date:</strong> ' . (isset($exam['exam_date']) ? date('d-m-Y', strtotime($exam['exam_date'])) : (isset($exam['start_time']) ? date('d-m-Y', strtotime($exam['start_time'])) : (isset($exam['created_at']) ? date('d-m-Y', strtotime($exam['created_at'])) : 'N/A'))) . '</td>
+            <td align="right"><strong>Time:</strong> ' . (isset($exam['duration_mins']) ? $exam['duration_mins'] : (isset($exam['exam_duration']) ? $exam['exam_duration'] : (isset($exam['duration']) ? $exam['duration'] : 'N/A'))) . ' Mins</td>
         </tr>
-    </table>';
+        <tr>
+            <td><strong>Total Marks:</strong> ' . $exam['total_marks'] . '</td>
+            <td align="right"><strong>Roll No:</strong> __________</td>
+        </tr>
+    </table>
+
+    ' . ($num_cols > 1 ? '<columns column-count="' . $num_cols . '" column-gap="10" />' : '') . '
+';
+
+$current_subject = '';
+foreach ($questions as $q) {
+    if ($q['subject_name'] !== $current_subject) {
+        if ($current_subject !== '') {
+            $html .= ($num_cols > 1 ? '</columns>' : '');
+        }
+        $html .= '<div class="subject-title">' . strtoupper($q['subject_name']) . '</div>';
+        if ($num_cols > 1) {
+            $html .= '<columns column-count="' . $num_cols . '" column-gap="10" />';
+        }
+        $current_subject = $q['subject_name'];
+    }
+
+    $q_text = processLatex($q['question_text'], $math_scale);
+    $q_text = fixImagePaths($q_text);
+    $marks = $show_marks ? '<span class="q-marks">(' . number_format((float) $q['marks'], 2) . ' Marks)</span>' : '';
+
+    $html .= '<div class="question-block">';
+
+    if (!empty($q['solution_image'])) {
+        $img_path = UPLOADS_PATH . '/oes/' . $q['solution_image'];
+        if (file_exists($img_path)) {
+            if ($img_pos === 'right') {
+                // Use a table to ensure side-by-side layout for float-right effect
+                $html .= '<table class="q-row-table">
+                            <tr>
+                                <td class="q-num-cell">' . $q['order_no'] . '.</td>
+                                <td class="q-text-cell">' . $q_text . ' ' . $marks . '</td>
+                                <td class="q-img-cell">
+                                    <img src="' . $img_path . '" style="height:' . $img_scale . 'pt; max-width: 250pt;">
+                                </td>
+                            </tr>
+                          </table>';
+            } else {
+                // Standard block layout
+                $html .= '<table class="q-row-table">
+                            <tr>
+                                <td class="q-num-cell">' . $q['order_no'] . '.</td>
+                                <td class="q-text-cell">' . $q_text . ' ' . $marks . '</td>
+                            </tr>
+                          </table>
+                          <div style="margin: 10pt 0 10pt 30pt;">
+                            <img src="' . $img_path . '" style="height:' . $img_scale . 'pt; max-width: 100%;">
+                          </div>';
+            }
+        } else {
+            // No image exists
+            $html .= '<table class="q-row-table">
+                        <tr>
+                            <td class="q-num-cell">' . $q['order_no'] . '.</td>
+                            <td class="q-text-cell">' . $q_text . ' ' . $marks . '</td>
+                        </tr>
+                      </table>';
+        }
+    } else {
+        // No image column value
+        $html .= '<table class="q-row-table">
+                    <tr>
+                        <td class="q-num-cell">' . $q['order_no'] . '.</td>
+                        <td class="q-text-cell">' . $q_text . ' ' . $marks . '</td>
+                    </tr>
+                  </table>';
+    }
+
+    // Options
+    // Detect content type across all options
+    $all_opts_text = $q['option_a'] . $q['option_b'] . $q['option_c'] . $q['option_d'];
+
+    if (strpos($all_opts_text, '\\begin') !== false) {
+        $opt_scale = $math_scale * 1.0;  // matrix
+    } elseif (strpos($all_opts_text, '\\frac') !== false) {
+        $opt_scale = $math_scale * 0.85; // fractions — readable size
+    } else {
+        $opt_scale = $math_scale * 0.5;  // simple angles/numbers
+    }
+
+    $opts = [
+        'A' => fixImagePaths(processLatex($q['option_a'], $opt_scale)),
+        'B' => fixImagePaths(processLatex($q['option_b'], $opt_scale)),
+        'C' => fixImagePaths(processLatex($q['option_c'], $opt_scale)),
+        'D' => fixImagePaths(processLatex($q['option_d'], $opt_scale))
+    ];
+
+    if ($opt_style === 'list') {
+        $html .= '<div class="options-container">';
+        foreach ($opts as $lbl => $val) {
+            if (strpos($val, '<img') !== false) {
+                $html .= '<div class="option-item" style="margin-bottom: 8pt; page-break-inside: avoid;"><strong>(' . $lbl . ')</strong><div style="margin-top: 4pt; margin-left: 15pt;">' . $val . '</div></div>';
+            } else {
+                $html .= '<div class="option-item" style="margin-bottom: 5px;"><strong>(' . $lbl . ')</strong> ' . $val . '</div>';
+            }
+        }
+        $html .= '</div>';
+    } elseif ($opt_style === 'inline') {
+        $html .= '<table class="inline-options"><tr>';
+        foreach ($opts as $lbl => $val) {
+            if (strpos($val, '<img') !== false) {
+                $html .= '<td style="vertical-align: top; padding-bottom: 8pt;"><strong>(' . $lbl . ')</strong><div style="margin-top: 4pt;">' . $val . '</div></td>';
+            } else {
+                $html .= '<td style="vertical-align: middle; padding-bottom: 4pt;"><strong>(' . $lbl . ')</strong> ' . $val . '</td>';
+            }
+        }
+        $html .= '</tr></table>';
+    } else { // grid
+        $html .= '<table class="grid-options">
+                    <tr>';
+        foreach (['A', 'B'] as $lbl) {
+            $val = $opts[$lbl];
+            if (strpos($val, '<img') !== false) {
+                $html .= '<td style="vertical-align: top; padding-bottom: 8pt; width: 50%;"><strong>(' . $lbl . ')</strong><div style="margin-top: 4pt; margin-left: 15pt;">' . $val . '</div></td>';
+            } else {
+                $html .= '<td style="vertical-align: middle; padding-bottom: 4pt; width: 50%;"><strong>(' . $lbl . ')</strong> ' . $val . '</td>';
+            }
+        }
+        $html .= '</tr>
+                    <tr>';
+        foreach (['C', 'D'] as $lbl) {
+            $val = $opts[$lbl];
+            if (strpos($val, '<img') !== false) {
+                $html .= '<td style="vertical-align: top; padding-bottom: 8pt; width: 50%;"><strong>(' . $lbl . ')</strong><div style="margin-top: 4pt; margin-left: 15pt;">' . $val . '</div></td>';
+            } else {
+                $html .= '<td style="vertical-align: middle; padding-bottom: 4pt; width: 50%;"><strong>(' . $lbl . ')</strong> ' . $val . '</td>';
+            }
+        }
+        $html .= '</tr>
+                  </table>';
+    }
+
+    $html .= '</div>';
 }
 
-$html .= '<br><div align="center" style="font-size:10pt;">*** END OF PAPER ***</div>';
+$html .= ($num_cols > 1 ? '</columns>' : '') . '
+    <div style="text-align:center; margin-top:30px; border-top:1px solid #000; padding-top:10px; font-weight:bold;">
+        *** END OF PAPER ***
+    </div>
+</body>
+</html>';
 
-$pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-$pdf->Output(str_replace(' ', '_', $exam['title']) . '_Paper.pdf', 'I');
+// --- Generate mPDF ---
+try {
+    // Retrieve default configurations
+    $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
+    $fontDirs = $defaultConfig['fontDir'];
+
+    $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
+    $fontData = $defaultFontConfig['fontdata'];
+
+    // Support both standard vendor directories and local assets directory
+    $customFontDir = PORTAL_PATH . 'assets/fonts';
+
+    // Map freeserif and freesans to use Shruti
+    $fontData['freeserif'] = [
+        'R' => 'shruti.ttf',
+        'useOTL' => 0xFF, // Full OTL (GPOS & GSUB) for correct glyph reordering
+        'useKashida' => 0xFF,
+    ];
+    $fontData['freesans'] = [
+        'R' => 'shruti.ttf',
+        'useOTL' => 0xFF,
+        'useKashida' => 0xFF,
+    ];
+    // Support shruti directly
+    $fontData['shruti'] = [
+        'R' => 'shruti.ttf',
+        'useOTL' => 0xFF,
+        'useKashida' => 0xFF,
+    ];
+    // Also support notoserifgujarati and notosansgujarati keys mapping to Shruti
+    $fontData['notoserifgujarati'] = [
+        'R' => 'shruti.ttf',
+        'useOTL' => 0xFF,
+        'useKashida' => 0xFF,
+    ];
+    $fontData['notosansgujarati'] = [
+        'R' => 'shruti.ttf',
+        'useOTL' => 0xFF,
+        'useKashida' => 0xFF,
+    ];
+
+    // Define Times New Roman mapping using local project files
+    $fontData['timesnewroman'] = [
+        'R' => 'times.ttf',
+        'B' => 'timesbd.ttf',
+        'I' => 'timesi.ttf',
+        'BI' => 'timesbi.ttf',
+    ];
+
+    $mpdf = new \Mpdf\Mpdf([
+        'mode' => 'utf-8',
+        'format' => $paper_size . ($orientation === 'L' ? '-L' : ''),
+        'margin_left' => $m_val,
+        'margin_right' => $m_val,
+        'margin_top' => $m_val,
+        'margin_bottom' => $m_val,
+        'default_font_size' => (int) $font_size,
+        'fontDir' => array_merge($fontDirs, [
+            $customFontDir,
+            PORTAL_PATH . 'vendor/mpdf/mpdf/ttfonts'
+        ]),
+        'fontdata' => $fontData,
+        'default_font' => 'timesnewroman',
+        'autoScriptToLang' => true,
+        'autoLangToFont' => true,
+    ]);
+
+    $mpdf->SetDisplayMode('fullpage');
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($exam['title'] . '_Paper.pdf', 'D');
+} catch (Exception $e) {
+    die("mPDF Error: " . $e->getMessage());
+}

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/../../session_config.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/common/constants.php';
 require_once DB_CONNECT_FILE;

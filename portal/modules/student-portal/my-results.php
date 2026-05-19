@@ -12,12 +12,32 @@ require_once PORTAL_GLOBALVARIABLE;
 require_once dirname(dirname(dirname(__DIR__))) . '/counselling-backend/controllers/student-portal/my-results_controller.php';
 
 include '../../include/header.php';
-?>
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/student-portal/my-results.css">
-<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
+
+<style>
+    .result-score {
+        font-weight: 600;
+        text-align: center;
+        padding: 0.5rem;
+    }
+
+    .glass-header {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .exam-card {
+        transition: transform 0.2s;
+        cursor: pointer;
+    }
+
+    .exam-card:hover {
+        transform: translateY(-2px);
+    }
+</style>
 
 <div class="content-wrapper">
     <section class="content py-4">

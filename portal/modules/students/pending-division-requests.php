@@ -291,34 +291,28 @@ try {
             var btn = $(this);
             var originalHtml = btn.html();
 
-            if (confirm('Are you sure you want to approve this division change request?')) {
-                btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Approving...');
-                $.api.post('students/division-request-approve', {
-                    id: requestId
-                })
-                    .then(response => {
-                        if (response.success) {
-                            if (typeof showToast === 'function') {
+            showConfirm({
+                title: 'Approve Division Change',
+                message: 'Are you sure you want to approve this division change request?',
+                confirmText: 'Yes, Approve',
+                confirmButtonClass: 'btn-success',
+                onConfirm: function () {
+                    btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Approving...');
+                    $.api.post('students/division-request-approve', { id: requestId })
+                        .then(response => {
+                            if (response.success) {
                                 showToast('success', 'Approved!', response.message);
-                            }
-                            setTimeout(() => location.reload(), 2000);
-                        } else {
-                            btn.prop('disabled', false).html(originalHtml);
-                            if (typeof showToast === 'function') {
-                                showToast('error', 'Error!', response.error || response.message);
+                                setTimeout(() => location.reload(), 2000);
                             } else {
-                                alert(response.error || response.message);
+                                btn.prop('disabled', false).html(originalHtml);
+                                showToast('error', 'Error!', response.error || response.message);
                             }
-                        }
-                    }).catch(error => {
-                        btn.prop('disabled', false).html(originalHtml);
-                        if (typeof showToast === 'function') {
+                        }).catch(error => {
+                            btn.prop('disabled', false).html(originalHtml);
                             showToast('error', 'Error!', error.message || 'Failed to approve request');
-                        } else {
-                            alert(error.message || 'Failed to approve request');
-                        }
-                    });
-            }
+                        });
+                }
+            });
         });
 
         // Reject request
@@ -327,37 +321,35 @@ try {
             var btn = $(this);
             var originalHtml = btn.html();
 
-            var reason = prompt('Are you sure you want to reject this division change request?\n\nEnter reason for rejection (optional):');
-
-            if (reason !== null) { // User didn't click Cancel
+            Swal.fire({
+                title: 'Reject Division Change Request',
+                input: 'textarea',
+                inputPlaceholder: 'Enter reason for rejection (optional)',
+                inputLabel: 'Reason for Rejection',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Reject',
+                confirmButtonColor: '#dc3545',
+                cancelButtonText: 'Cancel'
+            }).then(result => {
+                if (!result.isConfirmed) return;
                 btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Rejecting...');
                 $.api.post('students/division-request-reject', {
                     id: requestId,
-                    reason: reason || ''
+                    reason: result.value || ''
                 })
                     .then(response => {
                         if (response.success) {
-                            if (typeof showToast === 'function') {
-                                showToast('success', 'Rejected!', response.message);
-                            }
+                            showToast('success', 'Rejected!', response.message);
                             setTimeout(() => location.reload(), 2000);
                         } else {
                             btn.prop('disabled', false).html(originalHtml);
-                            if (typeof showToast === 'function') {
-                                showToast('error', 'Error!', response.error || response.message);
-                            } else {
-                                alert(response.error || response.message);
-                            }
+                            showToast('error', 'Error!', response.error || response.message);
                         }
                     }).catch(error => {
                         btn.prop('disabled', false).html(originalHtml);
-                        if (typeof showToast === 'function') {
-                            showToast('error', 'Error!', error.message || 'Failed to reject request');
-                        } else {
-                            alert(error.message || 'Failed to reject request');
-                        }
+                        showToast('error', 'Error!', error.message || 'Failed to reject request');
                     });
-            }
+            });
         });
     });
 </script>

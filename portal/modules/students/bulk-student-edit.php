@@ -265,10 +265,19 @@ include '../../include/sidebar.php';
 
 <script>
     document.getElementById('bulkEditForm')?.addEventListener('submit', function(e) {
-        if (!confirm('Are you sure you want to save all changes? This will update records for all students listed below.')) {
-            e.preventDefault();
-        }
+        e.preventDefault();
+        const form = this;
+        showConfirm({
+            title: 'Save All Changes',
+            message: 'Are you sure you want to save all changes? This will update records for all students listed below.',
+            confirmText: 'Yes, Save Changes',
+            confirmButtonClass: 'btn-warning',
+            onConfirm: function () {
+                form.submit();
+            }
+        });
     });
 </script>
 
 <?php include '../../include/footer.php'; ?>
+

@@ -160,7 +160,7 @@ $page_breadcrumb = "Receipts -";
                     <tbody>
                         <?php if (empty($receipts)): ?>
                             <tr>
-                                <td colspan="9" class="text-center">No receipts found</td>
+                                <td colspan="8" class="text-center">No receipts found</td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($receipts as $receipt): ?>

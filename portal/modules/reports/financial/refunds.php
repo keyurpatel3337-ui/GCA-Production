@@ -43,7 +43,18 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/financial/refunds.php.css">
+<style>
+    .filter-card {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        border: none;
+        border-radius: 12px;
+    }
+
+    .filter-card .form-label {
+        color: white;
+        font-weight: 500;
+    }
+</style>
 
 <div class="container-fluid">
     <div class="card filter-card mb-4">
@@ -154,7 +165,7 @@ include '../../../include/sidebar.php';
     </div>
 </div>
 
-<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
     function exportToExcel() {
         var table = document.querySelector('table');

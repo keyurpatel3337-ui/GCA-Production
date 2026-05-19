@@ -53,7 +53,7 @@ $query = "SELECT e.*, s.stdtext
           FROM tbl_oes_exams e 
           LEFT JOIN standard s ON e.standard_id = s.stdid 
           $where
-          ORDER BY e.created_at DESC";
+          ORDER BY e.created_at ASC";
 $stmt = $conn->prepare($query);
 $stmt->execute($params);
 $exams = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -72,6 +72,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             <div class="row align-items-center">
                 <div class="col-sm-6">
                     <h3 class="mb-0 text-dark font-weight-bold">Manage <span class="text-primary">Exams</span></h3>
+                    <div class="small text-muted font-weight-bold mt-1"><i class="fas fa-clock mr-1 text-primary"></i> Server Time: <?= date('d M Y, h:i A') ?> (<?= date_default_timezone_get() ?>)</div>
                 </div>
                 <div class="col-sm-6 text-end">
                     <a href="exam-setup.php" class="btn btn-primary shadow-sm px-4" style="border-radius: 12px; font-weight: 600;">
@@ -131,14 +132,26 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             </div>
             <?php endif; ?>
 
+            <?php if(isset($_GET['msg']) && $_GET['msg'] === 'exam_created'): ?>
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert" style="border-radius: 12px; background-color: #d1e7dd; color: #0f5132;">
+                <i class="fas fa-check-circle mr-2"></i> Exam created successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <?php endif; ?>
+
+            <?php if(isset($_GET['msg'])): ?>
+            <script>
+                // Instantly clean msg parameter from URL address bar
+                if (window.history.replaceState) {
+                    const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search.replace(/[?&]msg=[^&]+/, '').replace(/^&/, '?');
+                    window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+                }
+            </script>
+            <?php endif; ?>
+
             <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px;">
-                <div class="card-header bg-white border-0 py-4">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-file-alt mr-2 text-primary"></i> Generated Question Papers</h5>
-                        <a href="exam-setup.php" class="btn btn-primary shadow-sm px-4" style="border-radius: 12px; font-weight: 600;">
-                            <i class="fas fa-plus mr-2" style="font-size: 0.75rem;"></i> Create New Exam
-                        </a>
-                    </div>
+                <div class="card-header bg-white border-0 py-4 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-file-alt mr-2 text-primary"></i> Generated Question Papers</h5>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -191,6 +204,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                         </td>
                                         <td class="pe-4 text-end">
                                             <div class="btn-group shadow-sm" style="border-radius: 8px; overflow: hidden;">
+                                                <a href="view-student-attempts.php?exam_id=<?= $e['id'] ?>" class="btn btn-sm btn-white border-right text-info font-weight-bold" title="View Results">
+                                                    <i class="fas fa-poll"></i> Results
+                                                </a>
                                                 <a href="export-pdf-paper.php?exam_id=<?= $e['id'] ?>" target="_blank" class="btn btn-sm btn-white border-right" title="Print PDF">
                                                     <i class="fas fa-file-pdf text-danger"></i> PDF
                                                 </a>

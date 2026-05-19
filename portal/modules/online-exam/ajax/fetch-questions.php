@@ -16,7 +16,7 @@ if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HE
 $subject_id = isset($_GET['subject_id']) ? (int)$_GET['subject_id'] : 0;
 
 if ($subject_id > 0) {
-    $sql = "SELECT id, question_text, marks FROM tbl_oes_questions WHERE subject_id = ? AND status = 1 ORDER BY created_at DESC";
+    $sql = "SELECT id, question_text, marks FROM tbl_oes_questions WHERE subject_id = ? AND status = 1 ORDER BY created_at ASC";
     $stmt = $conn->prepare($sql);
     $stmt->execute([$subject_id]);
     $result = $stmt->fetchAll();

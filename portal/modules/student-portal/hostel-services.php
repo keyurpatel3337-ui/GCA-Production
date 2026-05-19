@@ -160,7 +160,10 @@ try {
         </div>
     </div>
 
-    <link rel="stylesheet" href="<?= PORTAL_URL ?>/assets/css/modules/student-portal/hostel-services.css">
+    <style>
+        .card-enhanced { transition: transform 0.2s; }
+        .card-enhanced:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important; }
+    </style>
 
     <div class="row">
         <!-- Current Allotment Info -->

@@ -8,13 +8,13 @@ require_once ENV_CONFIG_FILE; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrator - Gyanmanjari Vidyapith</title>
     <link rel="icon" type="image/x-icon" href="../assets/images/logogmn.png">
-    <!-- Tailwind CSS -->
-    <script src="<?php echo BASE_URL; ?>/assets/vendor/tailwind/tailwind.min.js"></script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/vendor/font-awesome/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- AOS Animation Library -->
-    <link href="<?php echo BASE_URL; ?>/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="../assets/css/gm-public.css">
     <style>
@@ -179,7 +179,7 @@ require_once ENV_CONFIG_FILE; ?>
     <?php include __DIR__ . '/../include/public-footer.php'; ?>
 
     <!-- AOS Animation Library -->
-    <script src="<?php echo BASE_URL; ?>/assets/vendor/aos/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Initialize AOS
         AOS.init({

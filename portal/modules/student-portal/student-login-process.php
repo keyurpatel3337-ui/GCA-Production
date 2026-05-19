@@ -102,13 +102,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Restriction: Do not allow login for standard 11 or course id 1, 2
-        if ($student['standard'] == 11 || $student['course_id'] == 1 || $student['course_id'] == 2) {
-            logError("Student login restricted - Disallowed standard/course | Student ID: {$student['id']} | Aadhaar: $aadhaar | Standard: {$student['standard']} | Course ID: {$student['course_id']} | IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
-            
-            set_flash_message('error', 'Login is currently restricted for your standard or course. Please contact the administration.');
-            header('Location: student-login.php');
-            exit;
-        }
+        // if ($student['standard'] == 11 || $student['course_id'] == 1 || $student['course_id'] == 2) {
+        //     logError("Student login restricted - Disallowed standard/course | Student ID: {$student['id']} | Aadhaar: $aadhaar | Standard: {$student['standard']} | Course ID: {$student['course_id']} | IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
+        //     
+        //     set_flash_message('error', 'Login is currently restricted for your standard or course. Please contact the administration.');
+        //     header('Location: student-login.php');
+        //     exit;
+        // }
 
         // Login successful - Set session variables
         $_SESSION['student_id'] = $student['id'];
@@ -121,13 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['login_time'] = time();
 
         // Log successful login
-        $logMessage = "Student login successful | Student ID: {$student['id']} | Name: {$_SESSION['student_name']} | IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown');
-        logError($logMessage);
-
-        // Additional logging to student-login.log as requested
-        $studentLogFile = LOGS_PATH . 'student-login.log';
-        $studentLogEntry = "[" . date('Y-m-d H:i:s') . "] SUCCESS: Student ID: {$student['id']} | Name: {$_SESSION['student_name']} | Aadhaar: {$student['aadhaar']} | IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown') . "\n";
-        @file_put_contents($studentLogFile, $studentLogEntry, FILE_APPEND);
+        logAuthSuccess($student['aadhaar'] . " | Student ID: {$student['id']} | Name: {$_SESSION['student_name']} | IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
 
         // Update last login time (if column exists)
         try {

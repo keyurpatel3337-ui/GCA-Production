@@ -60,7 +60,7 @@ try {
                       LEFT JOIN beds b ON c.bed_id = b.id 
                       LEFT JOIN rooms r ON b.room_id = r.id 
                       WHERE c.student_id = :student_id 
-                      ORDER BY c.created_at DESC";
+                      ORDER BY c.created_at ASC";
     $stmt = $hostel_conn->prepare($history_query);
     $stmt->execute(['student_id' => $student_id]);
     $complaints = $stmt->fetchAll();

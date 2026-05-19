@@ -214,17 +214,21 @@ $page_breadcrumb = "Key -";
         inputs.forEach((input, index) => {
             input.value = pattern[index % 4];
         });
-        alert('Sample answers filled with A, B, C, D pattern!');
+        showToast('success', 'Done', 'Sample answers filled with A, B, C, D pattern!');
     }
 
     function clearAllAnswers() {
-        if (confirm('Are you sure you want to clear all answers?')) {
-            const inputs = document.querySelectorAll('.answer-input');
-            inputs.forEach(input => {
-                input.value = '';
-            });
-            alert('All answers cleared!');
-        }
+        showConfirm({
+            title: 'Clear All Answers',
+            message: 'Are you sure you want to clear all answers?',
+            confirmText: 'Yes, Clear All',
+            confirmButtonClass: 'btn-danger',
+            onConfirm: function () {
+                const inputs = document.querySelectorAll('.answer-input');
+                inputs.forEach(input => { input.value = ''; });
+                showToast('info', 'Cleared', 'All answers cleared!');
+            }
+        });
     }
 
     // Form validation
@@ -239,10 +243,20 @@ $page_breadcrumb = "Key -";
         });
 
         if (emptyCount > 0) {
-            if (!confirm(`${emptyCount} question(s) have no answer. Do you want to continue?`)) {
-                e.preventDefault();
-                return false;
-            }
+            e.preventDefault();
+            Swal.fire({
+                title: 'Incomplete Answers',
+                text: `${emptyCount} question(s) have no answer. Do you want to continue?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Continue',
+                confirmButtonColor: '#f39c12',
+                cancelButtonText: 'Go Back'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    document.getElementById('editAnswerKeyForm').submit();
+                }
+            });
         }
     });
 </script>

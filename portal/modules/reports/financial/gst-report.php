@@ -293,7 +293,7 @@ include '../../../include/sidebar.php';
                     <tbody>
                         <?php if (empty($processedPayments)): ?>
                             <tr>
-                                <td colspan="11" class="text-center py-4">No records found for the selected period.</td>
+                                <td colspan="10" class="text-center py-4">No records found for the selected period.</td>
                             </tr>
                         <?php else: ?>
                             <?php $i = ($current_page - 1) * $records_per_page + 1;
@@ -341,7 +341,7 @@ include '../../../include/sidebar.php';
 
 <?php include '../../../include/footer.php'; ?>
 
-<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
     function exportToExcel() {
         window.location.href = 'gst-report-excel.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>&search=<?php echo urlencode($search); ?>';

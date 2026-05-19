@@ -35,8 +35,6 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/dashboard/wallet_manager_dashboard.css">
-
 <div class="container-fluid py-4 pb-5">
     <?php
     include '../../include/mfa_alert.php';
@@ -185,5 +183,34 @@ include '../../include/sidebar.php';
         </div>
     </div>
 </div>
+
+<style>
+    .bg-success-light {
+        background-color: rgba(46, 213, 115, 0.1);
+    }
+
+    .bg-primary-light {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .bg-danger-light {
+        background-color: rgba(255, 71, 87, 0.1);
+    }
+
+    .action-card {
+        transition: all 0.3s ease;
+        border: 1px solid transparent !important;
+    }
+
+    .action-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(0, 123, 255, 0.2) !important;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .tracking-wider {
+        letter-spacing: 0.1em;
+    }
+</style>
 
 <?php include '../../include/footer.php'; ?>

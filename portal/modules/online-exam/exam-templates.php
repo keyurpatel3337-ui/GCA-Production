@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 $query = "SELECT t.*, s.stdtext 
           FROM tbl_oes_exam_templates t 
           LEFT JOIN standard s ON t.standard_id = s.stdid 
-          ORDER BY t.created_at DESC";
+          ORDER BY t.created_at ASC";
 $templates = $conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
 include PORTAL_INCLUDE_PATH . 'header.php';

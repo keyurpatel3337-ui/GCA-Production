@@ -641,7 +641,40 @@ include '../../include/sidebar.php';
     </form>
 </div>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>assets/css/modules/students/move-to-enrolled.css">
+<style>
+    .custom-checkbox-card {
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .custom-checkbox-card:hover {
+        background-color: #f8f9fa;
+        border-color: #adb5bd;
+    }
+
+    .custom-checkbox-card.selected {
+        border-color: #198754;
+        background-color: #e8f5e9;
+    }
+
+    .custom-checkbox-card.disabled {
+        opacity: 0.6;
+        pointer-events: none;
+        background-color: #e9ecef;
+    }
+
+    .fee-type-name {
+        font-weight: 500;
+        display: block;
+    }
+
+    .fee-type-amount {
+        font-weight: bold;
+    }
+</style>
 
 <?php include '../../include/footer.php'; ?>
 

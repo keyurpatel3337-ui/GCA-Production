@@ -86,7 +86,7 @@ switch ($action) {
                     FROM tbl_email_templates et
                     LEFT JOIN tbl_users u ON et.created_by = u.id
                     WHERE $where_sql
-                    ORDER BY et.id ASC";
+                    ORDER BY et.id DESC";
 
             $templates = $dbOps->customSelect($sql, $params);
 
@@ -319,7 +319,7 @@ switch ($action) {
                                    FROM tbl_email_logs l
                                    LEFT JOIN tbl_email_templates t ON l.template_id = t.id
                                    WHERE $where_sql
-                                   ORDER BY l.id ASC
+                                   ORDER BY l.id DESC
                                    LIMIT 1000");
             $stmt->execute($params);
             $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);

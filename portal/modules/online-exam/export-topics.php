@@ -13,7 +13,7 @@ if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HE
 // Fetch all topics with full hierarchy info
 $topics = $conn->query("SELECT t.topic_name_english, c.chapter, s.subject_name, std.stdtext 
                       FROM tbl_topics t 
-                      LEFT JOIN chapters c ON t.chapter_id = c.chpid 
+                      LEFT JOIN tbl_chapters c ON t.chapter_id = c.chpid 
                       LEFT JOIN tbl_subjects s ON t.subject_id = s.id 
                       LEFT JOIN standard std ON s.standard_id = std.stdid
                       ORDER BY std.stdid ASC, s.subject_name ASC, c.chapter ASC, t.topic_name_english ASC")->fetchAll(PDO::FETCH_ASSOC);

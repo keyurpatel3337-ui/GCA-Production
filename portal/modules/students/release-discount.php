@@ -423,20 +423,21 @@ include '../../include/sidebar.php';
             // Ensure Smart Breakdown is correctly formatted
             const reason = $('#modification_reason').val().trim();
             if (!reason) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'Please provide a reason for this modification.');
-                } else {
-                    alert('Please provide a reason for this modification.');
-                }
+                showToast('error', 'Error', 'Please provide a reason for this modification.');
                 return;
             }
 
-            if (confirm("Are you sure you want to update these discount amounts? This will directly affect the student's pending fees.")) {
-                const btn = $('#saveBtn');
-                const originalHtml = btn.html();
-                btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Saving...');
-                this.submit();
-            }
+            showConfirm({
+                title: 'Save Discount Changes',
+                message: "Are you sure you want to update these discount amounts? This will directly affect the student's pending fees.",
+                confirmText: 'Yes, Save Changes',
+                confirmButtonClass: 'btn-primary',
+                onConfirm: function () {
+                    const btn = $('#saveBtn');
+                    btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Saving...');
+                    $('#modifyForm')[0].submit();
+                }
+            });
         });
 
         // Component Release Logic
@@ -446,58 +447,54 @@ include '../../include/sidebar.php';
             const compKey = row.data('key');
             const waived = parseFloat(row.data('waived')) || 0;
 
-            // Set default value to 'waived' so user can just click OK to release all
-            let rawInput = prompt(`How much discount do you want to RELEASE (reduce) for ${label}?\n(Current Discount: ₹${waived})`, waived);
-
-            if (rawInput === null) return;
-
-            // Clean up input: remove commas, currency symbols, and extra spaces
-            rawInput = rawInput.toString().replace(/,/g, '').replace(/₹/g, '').trim();
-
-            const amount = parseFloat(rawInput);
-            if (isNaN(amount) || amount < 0) {
-                alert("Please enter a valid number (0 or greater).");
-                return;
-            }
-
-            if (amount > waived) {
-                alert(`Release amount (₹${amount}) cannot exceed current discount (₹${waived}).`);
-                return;
-            }
-
             // Decide which field to subtract from (Post-admission favored)
             const postDiscField = $('#post_discount');
             const scholarField = $('#initial_scholarship');
 
-            let currentPost = parseFloat(postDiscField.val()) || 0;
-            let currentSch = parseFloat(scholarField.val()) || 0;
+            // Use Swal.fire for amount input instead of native prompt
+            Swal.fire({
+                title: `Release Discount for ${label}`,
+                html: `Current Discount: <strong>₹${waived}</strong><br>Enter release amount:`,
+                input: 'number',
+                inputValue: waived,
+                inputAttributes: { min: 0, max: waived, step: 'any' },
+                showCancelButton: true,
+                confirmButtonText: 'Release',
+                confirmButtonColor: '#dc3545',
+                preConfirm: (rawInput) => {
+                    const amount = parseFloat(rawInput);
+                    if (isNaN(amount) || amount < 0) {
+                        Swal.showValidationMessage('Please enter a valid number (0 or greater).');
+                    } else if (amount > waived) {
+                        Swal.showValidationMessage(`Release amount (₹${amount}) cannot exceed current discount (₹${waived}).`);
+                    } else {
+                        return amount;
+                    }
+                }
+            }).then(result => {
+                if (!result.isConfirmed) return;
+                const amount = result.value;
 
-            if (currentPost >= amount) {
-                postDiscField.val((currentPost - amount).toFixed(2));
-            } else {
-                // If post-discount isn't enough, take the rest from scholarship
-                const remaining = amount - currentPost;
-                postDiscField.val(0);
-                scholarField.val(Math.max(0, currentSch - remaining).toFixed(2));
-            }
+                let currentPost = parseFloat(postDiscField.val()) || 0;
+                let currentSch = parseFloat(scholarField.val()) || 0;
 
-            // Update Reason
-            let reason = $('#modification_reason').val().trim();
-            const breakdownHeader = "\n\nSmart Waiver Breakdown (Modifications):";
+                if (currentPost >= amount) {
+                    postDiscField.val((currentPost - amount).toFixed(2));
+                } else {
+                    const remaining = amount - currentPost;
+                    postDiscField.val(0);
+                    scholarField.val(Math.max(0, currentSch - remaining).toFixed(2));
+                }
 
-            if (!reason.includes(breakdownHeader)) {
-                reason += breakdownHeader;
-            }
+                let reason = $('#modification_reason').val().trim();
+                const breakdownHeader = "\n\nSmart Waiver Breakdown (Modifications):";
+                if (!reason.includes(breakdownHeader)) reason += breakdownHeader;
+                reason += `\n- Released ₹${amount} from ${label}`;
+                $('#modification_reason').val(reason);
 
-            reason += `\n- Released ₹${amount} from ${label}`;
-            $('#modification_reason').val(reason);
-
-            // Trigger Recalculation
-            calculateImpact();
-
-            if (typeof showToast === 'function') {
+                calculateImpact();
                 showToast('success', 'Released', `₹${amount} released from ${label}. Pending fee updated.`);
-            }
+            });
         });
     });
 </script>

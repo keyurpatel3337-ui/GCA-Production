@@ -216,6 +216,41 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/consolidated_report.php.css">
+<style>
+    .glass-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 16px;
+    }
+
+    .bg-blue-subtle {
+        background-color: #ebf5ff;
+    }
+
+    .bg-green-subtle {
+        background-color: #f0fdf4;
+    }
+
+    .bg-orange-subtle {
+        background-color: #fffaf0;
+    }
+
+    .bg-indigo-subtle {
+        background-color: #eef2ff;
+    }
+
+    @media print {
+        .content-wrapper {
+            margin-left: 0 !important;
+        }
+
+        .sidebar,
+        .navbar,
+        .btn {
+            display: none !important;
+        }
+    }
+</style>
 
 <?php include '../../include/footer.php'; ?>

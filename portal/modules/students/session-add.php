@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/../../session_config.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/common/constants.php';
 require_once DB_CONNECT_FILE;
@@ -294,11 +294,7 @@ try {
 
                                                             const studentId = $('#student_id').val();
                                                             if (!studentId) {
-                                                                if (typeof showToast === 'function') {
-                                                                    showToast('error', 'Error', 'Please select a student');
-                                                                } else {
-                                                                    alert('Please select a student');
-                                                                }
+                                                                showToast('error', 'Error', 'Please select a student');
                                                                 $('#student_search').focus();
                                                                 return false;
                                                             }
@@ -314,19 +310,11 @@ try {
                                                                 if (response.success) {
                                                                     if (typeof showToast === "function") { showToast("success", "Success", response.message || "Session saved successfully."); } setTimeout(() => { window.location.href = "sessions.php"; }, 2000);
                                                                 } else {
-                                                                    if (typeof showToast === 'function') {
-                                                                        showToast('error', 'Error', response.error || response.message || 'Failed to save session.');
-                                                                    } else {
-                                                                        alert(response.error || response.message || 'Failed to save session.');
-                                                                    }
+                                                                    showToast('error', 'Error', response.error || response.message || 'Failed to save session.');
                                                                 }
                                                             }).catch(error => {
                                                                 console.error('API Error:', error);
-                                                                if (typeof showToast === 'function') {
-                                                                    showToast('error', 'Error', error.message || 'An unexpected error occurred.');
-                                                                } else {
-                                                                    alert(error.message || 'An unexpected error occurred.');
-                                                                }
+                                                                showToast('error', 'Error', error.message || 'An unexpected error occurred.');
                                                             });
                                                         });
                                                     });
@@ -479,11 +467,7 @@ try {
 
                                             const studentId = $('#student_id').val();
                                             if (!studentId) {
-                                                if (typeof showToast === 'function') {
-                                                    showToast('error', 'Error', 'Please select a student');
-                                                } else {
-                                                    alert('Please select a student');
-                                                }
+                                                showToast('error', 'Error', 'Please select a student');
                                                 $('#student_search').focus();
                                                 return false;
                                             }
@@ -499,19 +483,11 @@ try {
                                                 if (response.success) {
                                                     if (typeof showToast === "function") { showToast("success", "Success", response.message || "Session saved successfully."); } setTimeout(() => { window.location.href = "sessions.php"; }, 2000);
                                                 } else {
-                                                    if (typeof showToast === 'function') {
-                                                        showToast('error', 'Error', response.error || response.message || 'Failed to save session.');
-                                                    } else {
-                                                        alert(response.error || response.message || 'Failed to save session.');
-                                                    }
+                                                    showToast('error', 'Error', response.error || response.message || 'Failed to save session.');
                                                 }
                                             }).catch(error => {
                                                 console.error('API Error:', error);
-                                                if (typeof showToast === 'function') {
-                                                    showToast('error', 'Error', error.message || 'An unexpected error occurred.');
-                                                } else {
-                                                    alert(error.message || 'An unexpected error occurred.');
-                                                }
+                                                showToast('error', 'Error', error.message || 'An unexpected error occurred.');
                                             });
                                         });
                                     });
@@ -654,11 +630,7 @@ try {
 
                             const studentId = $('#student_id').val();
                             if (!studentId) {
-                                if (typeof showToast === 'function') {
-                                    showToast('error', 'Error', 'Please select a student');
-                                } else {
-                                    alert('Please select a student');
-                                }
+                                showToast('error', 'Error', 'Please select a student');
                                 $('#student_search').focus();
                                 return false;
                             }
@@ -674,19 +646,11 @@ try {
                                 if (response.success) {
                                     if (typeof showToast === "function") { showToast("success", "Success", response.message || "Session saved successfully."); } setTimeout(() => { window.location.href = "sessions.php"; }, 2000);
                                 } else {
-                                    if (typeof showToast === 'function') {
-                                        showToast('error', 'Error', response.error || response.message || 'Failed to save session.');
-                                    } else {
-                                        alert(response.error || response.message || 'Failed to save session.');
-                                    }
+                                    showToast('error', 'Error', response.error || response.message || 'Failed to save session.');
                                 }
                             }).catch(error => {
                                 console.error('API Error:', error);
-                                if (typeof showToast === 'function') {
-                                    showToast('error', 'Error', error.message || 'An unexpected error occurred.');
-                                } else {
-                                    alert(error.message || 'An unexpected error occurred.');
-                                }
+                                showToast('error', 'Error', error.message || 'An unexpected error occurred.');
                             });
                         });
                     });
@@ -826,11 +790,7 @@ try {
 
             const studentId = $('#student_id').val();
             if (!studentId) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'Please select a student');
-                } else {
-                    alert('Please select a student');
-                }
+                showToast('error', 'Error', 'Please select a student');
                 $('#student_search').focus();
                 return false;
             }
@@ -851,19 +811,11 @@ try {
                         window.location.href = 'sessions.php';
                     }, 2000);
                 } else {
-                    if (typeof showToast === 'function') {
-                        showToast('error', 'Error', response.error || response.message || 'Failed to save session.');
-                    } else {
-                        alert(response.error || response.message || 'Failed to save session.');
-                    }
+                    showToast('error', 'Error', response.error || response.message || 'Failed to save session.');
                 }
             }).catch(error => {
                 console.error('API Error:', error);
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', error.message || 'An unexpected error occurred.');
-                } else {
-                    alert(error.message || 'An unexpected error occurred.');
-                }
+                showToast('error', 'Error', error.message || 'An unexpected error occurred.');
             });
         });
     });

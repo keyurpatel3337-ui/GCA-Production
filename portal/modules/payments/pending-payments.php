@@ -245,7 +245,7 @@ include '../../common/pagination.php';
                         <?php
                         if (empty($pending_fees)): ?>
                             <tr>
-                                <td colspan="10" class="text-center">No pending payments found</td>
+                                <td colspan="9" class="text-center">No pending payments found</td>
                             </tr>
                             <?php
                         else: ?>

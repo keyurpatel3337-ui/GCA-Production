@@ -138,7 +138,17 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/financial/day-book.php.css">
+<style>
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+
+        .card {
+            border: 1px solid #ddd !important;
+        }
+    }
+</style>
 
 
 
@@ -378,7 +388,7 @@ include '../../../include/sidebar.php';
                         <tbody>
                             <?php if (empty($transactions)): ?>
                                 <tr>
-                                    <td colspan="8" class="text-center py-5">
+                                    <td colspan="9" class="text-center py-5">
                                         <i class="fas fa-calendar-times text-muted fa-3x mb-3"></i>
                                         <p class="mb-0">No transactions recorded on this date</p>
                                         <a href="?date=<?php echo date('Y-m-d'); ?>" class="btn btn-primary mt-3">
@@ -615,7 +625,7 @@ include '../../../include/sidebar.php';
 include '../../../include/footer.php';
 ?>
 
-<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
     function exportToExcel() {
         const table = document.getElementById('dayBookExportTable');

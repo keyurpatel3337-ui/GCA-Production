@@ -364,9 +364,7 @@ function ensureFeeAllocation($conn, $student_id, $term_id = 1)
         $transport_cfg = $stmt_tc->fetch(PDO::FETCH_ASSOC);
 
         // Map registration ID to the format expected by buildFeeAllocationPayload (it might need more fields)
-        $stmt_student = $conn->prepare("SELECT * FROM tbl_gm_std_registration WHERE id = ?");
-        $stmt_student->execute([$student_id]);
-        $full_student = array_merge($student, $stmt_student->fetch(PDO::FETCH_ASSOC));
+        $full_student = array_merge($student, $conn->query("SELECT * FROM tbl_gm_std_registration WHERE id = " . $student_id)->fetch(PDO::FETCH_ASSOC));
 
         $allocations_breakdown = buildFeeAllocationPayload($full_student, $fc, $hostel_cfg, $transport_cfg);
         

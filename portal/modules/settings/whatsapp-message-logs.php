@@ -320,9 +320,6 @@ $date_to = date('Y-m-d');
 
             let html = `
             <div class="d-flex flex-wrap justify-content-between align-items-center w-100 gap-3">
-                <div class="text-muted small">
-                    Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total_records.toLocaleString()}</strong> entries
-                </div>
                 <nav aria-label="Page navigation">
                     <ul class="pagination pagination-sm mb-0">
         `;
@@ -367,6 +364,9 @@ $date_to = date('Y-m-d');
             html += `
                     </ul>
                 </nav>
+                <div class="text-muted small">
+                    Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total_records.toLocaleString()}</strong> entries
+                </div>
             </div>
         `;
 
@@ -482,4 +482,29 @@ $date_to = date('Y-m-d');
         });
     </script>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/settings/whatsapp-message-logs.php.css">
+    <style>
+        .tiny {
+            font-size: 0.75rem;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .col-md-5th {
+            flex: 0 0 auto;
+            width: 20%;
+        }
+
+        @media (max-width: 991.98px) {
+            .col-md-5th {
+                width: 33.333%;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .col-md-5th {
+                width: 50%;
+            }
+        }
+    </style>

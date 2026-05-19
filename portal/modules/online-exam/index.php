@@ -27,6 +27,11 @@ if ($id > 0) {
         WHERE id = ?");
     $stmt->execute([$id]);
     $qData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    // Log the fetched question data for debugging
+    $log_dir = __DIR__ . '/scratch';
+    if (!is_dir($log_dir)) { mkdir($log_dir, 0777, true); }
+    file_put_contents($log_dir . '/edit_save_log.txt', "[" . date('Y-m-d H:i:s') . "] INDEX LOADED FOR ID: " . $id . "\nData: " . print_r($qData, true) . "\n\n", FILE_APPEND);
 }
 
 $page_title = ($qData ? "Edit Question" : "Create Question") . " | OES";
@@ -239,10 +244,10 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                         <label class="small font-weight-bold">Question Type</label>
                                         <select id="question_type_select" class="form-control" required>
                                             <option value="">Select Type</option>
-                                            <option value="1" data-marks="1" data-neg="0" data-type="mcq">MCQ</option>
-                                            <option value="descriptive" data-type="descriptive">Descriptive</option>
+                                            <option value="1" data-marks="1" data-neg="0" data-type="mcq" <?php echo ($qData && $qData['question_type_id'] == 1) ? 'selected' : ''; ?>>MCQ</option>
+                                            <option value="descriptive" data-type="descriptive" <?php echo ($qData && $qData['question_type_id'] != 1) ? 'selected' : ''; ?>>Descriptive</option>
                                         </select>
-                                        <input type="hidden" name="question_type_id" id="real_question_type_id">
+                                        <input type="hidden" name="question_type_id" id="real_question_type_id" value="<?php echo $qData ? htmlspecialchars($qData['question_type_id']) : ''; ?>">
                                     </div>
                                 </div>
 
@@ -427,7 +432,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
     </div>
 </div>
 
-<script src="../../assets/js/oes-editor.js"></script>
+<script src="../../assets/js/oes-editor.js?v=<?php echo time(); ?>"></script>
 
 <?php if ($qData): ?>
     <script>
@@ -462,13 +467,14 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
         
         // Final sync for edit mode
         if (window.oesInitialData) {
+            // Immediate sync to ensure correct question type state right away
+            const typeSelect = document.getElementById('question_type_select');
+            if (typeSelect) {
+                typeSelect.value = (window.oesInitialData.question_type_id == '1') ? '1' : 'descriptive';
+                updateQuestionTypeUI();
+            }
+
             setTimeout(() => {
-                const typeSelect = document.getElementById('question_type_select');
-                if (typeSelect) {
-                    typeSelect.value = (window.oesInitialData.question_type_id == '1') ? '1' : 'descriptive';
-                    updateQuestionTypeUI();
-                }
-                
                 // Cascade selects
                 const stdSelect = document.getElementById('standard_id_select');
                 if (stdSelect && window.oesInitialData.standard_id) {

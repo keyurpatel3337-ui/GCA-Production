@@ -275,7 +275,7 @@ include '../../../include/sidebar.php';
                             <tbody>
                                 <?php if (empty($payments)): ?>
                                     <tr>
-                                        <td colspan="8" class="text-center py-5">
+                                        <td colspan="9" class="text-center py-5">
                                             <i class="fas fa-info-circle fa-2x text-muted mb-3 d-block"></i>
                                             <p class="text-muted">No transactions found for the selected period.</p>
                                         </td>
@@ -347,7 +347,7 @@ echo renderPagination($current_page, $total_pages, $baseUrl, 2, $total_records, 
 
 <?php include '../../../include/footer.php'; ?>
 
-<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
     function exportToExcel() {
         var table = document.getElementById('reportTable');

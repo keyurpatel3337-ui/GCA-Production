@@ -68,7 +68,7 @@ if (isset($_GET['get_terms'])) {
 
 // Fetch dropdown data
 try {
-    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name ASC');
+    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name DESC');
 
     $schools = $dbOps->select('tbl_schools', ['id', 'school_name'], ['is_active' => 1], 'school_name ASC');
 
@@ -76,7 +76,7 @@ try {
         FROM tbl_courses c 
         LEFT JOIN tbl_boards b ON c.board_id = b.id 
         WHERE c.is_active = 1 
-        ORDER BY c.course_name ASC";
+        ORDER BY c.course_name DESC";
     $courses = $dbOps->customSelect($sql_courses);
 
     $mediums = $dbOps->select('tbl_medium', ['id', 'medium_name'], ['is_active' => 1], 'medium_name ASC');
@@ -87,7 +87,7 @@ try {
         FROM tbl_term t 
         JOIN tbl_academic_years ay ON t.academic_year_id = ay.id
         WHERE t.is_active = 1 
-        ORDER BY ay.year_name ASC, t.term_number desc";
+        ORDER BY ay.year_name DESC, t.term_number desc";
     $terms = $dbOps->customSelect($sql_terms);
 
     // Fixed split labels: GCA, GHSS, MST, SGM
@@ -158,7 +158,7 @@ try {
         LEFT JOIN tbl_group g ON fc.group_id = g.id 
         LEFT JOIN tbl_schools s ON fc.school_id = s.id
         $whereClause
-        ORDER BY fc.id ASC
+        ORDER BY fc.id DESC
         LIMIT $perPage OFFSET $offset";
 
     $fee_configs = $dbOps->customSelect($sql_configs, $params);

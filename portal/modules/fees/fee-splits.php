@@ -31,7 +31,6 @@ include '../../include/header.php';
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/fees/fee-splits.css">
 
 <main class="app-main">
 
@@ -67,7 +66,7 @@ include '../../include/sidebar.php';
                                 <i class="fas fa-check-circle text-success"></i>
                             <?php else: ?>
                                 <i class="fas fa-exclamation-triangle text-warning"></i>
-                                <span class="text-muted fee-splits-custom-1">
+                                <span class="text-muted" style="font-size: 16px;">
                                     (Should total 100%)
                                 </span>
                             <?php endif; ?>

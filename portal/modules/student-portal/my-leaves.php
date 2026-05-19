@@ -21,7 +21,7 @@ try {
     // Fetch all leave requests for this student
     $stmt = $conn->prepare("SELECT * FROM tbl_student_leaves 
                             WHERE student_id = ? 
-                            ORDER BY applied_at DESC");
+                            ORDER BY applied_at ASC");
     $stmt->execute([$student_id]);
     $leaves = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {

@@ -44,6 +44,7 @@ $fee_allocations = [];
 $hostel_allocations = [];
 $transport_allocations = [];
 $summary = null;
+$post_admission_discounts_list = [];
 
 if (!empty($student_id)) {
     // Fetch combined history and summary data via API
@@ -129,6 +130,21 @@ if (!empty($student_id)) {
             $studentData['group_name'] = $extraInfo[0]['group_name'];
             $studentData['school_name'] = $extraInfo[0]['school_name'];
         }
+
+        // Fetch post-admission discounts list for this student
+        $post_admission_discounts_list = $dbOps->customSelect(
+            "SELECT d.*, u.name as created_by_name, app.name as approved_by_name
+             FROM tbl_post_admission_discounts d
+             INNER JOIN tbl_enrolled_students e ON d.enrollment_id = e.enrollment_id
+             LEFT JOIN tbl_users u ON d.created_by = u.id
+             LEFT JOIN tbl_users app ON d.approved_by = app.id
+             WHERE e.registration_id = ?
+             ORDER BY d.created_at DESC",
+            [$student_id]
+        );
+        if ($post_admission_discounts_list === false) {
+            $post_admission_discounts_list = [];
+        }
     } else {
         set_flash_message('error', $response['error'] ?? 'Failed to load student ledger!');
     }
@@ -163,7 +179,162 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/financial/student-ledger.php.css">
+<style>
+    /* Premium Design System - Student Ledger */
+    :root {
+        --glass-bg: rgba(255, 255, 255, 0.95);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --ledger-primary: #2563eb;
+        --ledger-secondary: #7c3aed;
+        --ledger-accent: #f59e0b;
+        --ledger-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    }
+
+    .ledger-search-box {
+        background: var(--ledger-gradient);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ledger-search-box::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .stat-card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.75rem;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-icon i {
+        font-size: 1rem;
+        color: white;
+        margin: 0;
+    }
+
+    /* Timeline Styles */
+    .ledger-timeline {
+        position: relative;
+        padding-left: 45px;
+    }
+
+    .ledger-timeline::before {
+        content: '';
+        position: absolute;
+        left: 15px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #f1f5f9;
+        border-radius: 2px;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+    }
+
+    .timeline-dot {
+        position: absolute;
+        left: -38px;
+        top: 0;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        border: 3px solid var(--ledger-primary);
+        z-index: 2;
+        box-shadow: 0 0 0 4px #fff;
+    }
+
+    .timeline-content {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f1f5f9;
+    }
+
+    /* Tabs & Tables */
+    .nav-tabs-custom {
+        border-bottom: 2px solid #f1f5f9;
+    }
+
+    .nav-tabs-custom .nav-link {
+        border: none;
+        padding: 1rem 1.25rem;
+        font-weight: 600;
+        color: #64748b;
+        position: relative;
+    }
+
+    .nav-tabs-custom .nav-link.active {
+        color: var(--ledger-primary);
+        background: transparent;
+    }
+
+    .nav-tabs-custom .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--ledger-primary);
+        border-radius: 2px;
+    }
+
+    .table-ledger th {
+        background: #f8fafc;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        border: none;
+        padding: 0.75rem 1rem;
+    }
+
+    .table-ledger tr td {
+        padding: 1rem;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .search-result-pill {
+        cursor: pointer;
+        border-radius: 8px;
+        margin-bottom: 0.25rem;
+    }
+
+    /* Profile Avatar */
+    .profile-avatar-ledger {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border: 2px solid #fff;
+    }
+</style>
 
 <div class="content-wrapper">
     <div class="content-header pb-0">
@@ -367,6 +538,11 @@ include '../../../include/sidebar.php';
                                             <i class="fas fa-list-check me-2"></i> Allocation Summary
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#scholarship-tab" role="tab">
+                                            <i class="fas fa-gift me-2"></i> Scholarship & Discounts
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="card-body p-4">
@@ -520,6 +696,249 @@ include '../../../include/sidebar.php';
                                                     </div>
                                                 </div>
                                             <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <!-- Scholarship & Discounts Tab -->
+                                    <div class="tab-pane fade" id="scholarship-tab" role="tabcontent">
+                                        <?php if (empty($ledger)): ?>
+                                            <div class="text-center py-5">
+                                                <i class="fas fa-gift fa-3x text-muted opacity-20 mb-3"></i>
+                                                <p class="text-muted">No scholarship or waiver details available for this student.</p>
+                                            </div>
+                                        <?php else:
+                                            $total_main_scholarship = 0;
+                                            $total_additional_scholarship = 0;
+                                            $total_post_discount = 0;
+                                            $total_waiver_all = 0;
+
+                                            foreach ($ledger as $term_data) {
+                                                $term_summary = $term_data['summary'];
+                                                $total_main_scholarship += floatval($term_summary['scholarship'] ?? 0);
+                                                $total_additional_scholarship += floatval($term_summary['additional_scholarship'] ?? 0);
+                                                $total_post_discount += floatval($term_summary['post_admission_discount'] ?? 0);
+                                                $total_waiver_all += floatval($term_summary['total_waiver'] ?? 0);
+                                            }
+                                        ?>
+                                            <!-- Stats Dashboard -->
+                                            <div class="row g-3 mb-4">
+                                                <!-- Main Scholarship Card -->
+                                                <div class="col-sm-6 col-xl-3">
+                                                    <div class="card border-0 rounded-3 shadow-sm h-100" style="background: #f5f3ff; border-left: 4px solid #7c3aed !important;">
+                                                        <div class="card-body p-3">
+                                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                <span class="text-muted small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Main Scholarship</span>
+                                                                <div class="bg-white p-2 rounded-3 shadow-sm">
+                                                                    <i class="fas fa-graduation-cap text-purple" style="color: #7c3aed;"></i>
+                                                                </div>
+                                                            </div>
+                                                            <h3 class="fw-bold mb-1" style="color: #4c1d95;">₹<?php echo formatIndianCurrency($total_main_scholarship); ?></h3>
+                                                            <p class="text-muted small mb-0">Base scholarship awarded at admission</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Additional Scholarship Card -->
+                                                <div class="col-sm-6 col-xl-3">
+                                                    <div class="card border-0 rounded-3 shadow-sm h-100" style="background: #ecfeff; border-left: 4px solid #0891b2 !important;">
+                                                        <div class="card-body p-3">
+                                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                <span class="text-muted small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Additional Scholarship</span>
+                                                                <div class="bg-white p-2 rounded-3 shadow-sm">
+                                                                    <i class="fas fa-plus-circle text-cyan" style="color: #0891b2;"></i>
+                                                                </div>
+                                                            </div>
+                                                            <h3 class="fw-bold mb-1" style="color: #164e63;">₹<?php echo formatIndianCurrency($total_additional_scholarship); ?></h3>
+                                                            <p class="text-muted small mb-0">Discretionary/additional counselor waiver</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Post-Admission Discount Card -->
+                                                <div class="col-sm-6 col-xl-3">
+                                                    <div class="card border-0 rounded-3 shadow-sm h-100" style="background: #fff7ed; border-left: 4px solid #ea580c !important;">
+                                                        <div class="card-body p-3">
+                                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                <span class="text-muted small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Post-Adm Discount</span>
+                                                                <div class="bg-white p-2 rounded-3 shadow-sm">
+                                                                    <i class="fas fa-percent text-orange" style="color: #ea580c;"></i>
+                                                                </div>
+                                                            </div>
+                                                            <h3 class="fw-bold mb-1" style="color: #7c2d12;">₹<?php echo formatIndianCurrency($total_post_discount); ?></h3>
+                                                            <p class="text-muted small mb-0">Waivers/discounts approved post-admission</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Grand Total Waiver Card -->
+                                                <div class="col-sm-6 col-xl-3">
+                                                    <div class="card border-0 rounded-3 shadow-sm h-100" style="background: #f0fdf4; border-left: 4px solid #16a34a !important;">
+                                                        <div class="card-body p-3">
+                                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                <span class="text-muted small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Grand Total Waiver</span>
+                                                                <div class="bg-white p-2 rounded-3 shadow-sm">
+                                                                    <i class="fas fa-hand-holding-usd text-success" style="color: #16a34a;"></i>
+                                                                </div>
+                                                            </div>
+                                                            <h3 class="fw-bold mb-1" style="color: #14532d;">₹<?php echo formatIndianCurrency($total_waiver_all); ?></h3>
+                                                            <p class="text-muted small mb-0">Total combined waivers across all terms</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Term-Wise Waiver Table -->
+                                            <div class="card border-0 shadow-sm rounded-3 overflow-hidden mb-4">
+                                                <div class="card-header bg-light py-3 border-0">
+                                                    <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-calendar-alt me-2 text-primary"></i>Term-wise Scholarship Breakdown</h6>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-ledger align-middle border-0 mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="border-0 ps-4">Term / Semester</th>
+                                                                <th class="text-center border-0">Academic Year</th>
+                                                                <th class="text-center border-0">Course/Class</th>
+                                                                <th class="text-center border-0">Main Scholarship</th>
+                                                                <th class="text-center border-0">Additional Scholarship</th>
+                                                                <th class="text-center border-0">Post-Adm Discount</th>
+                                                                <th class="text-center border-0 bg-light fw-bold text-primary">Total Waiver</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($ledger as $term_data):
+                                                                $term_summary = $term_data['summary'];
+                                                            ?>
+                                                                <tr>
+                                                                    <td class="ps-4">
+                                                                        <span class="fw-bold text-dark"><?php echo htmlspecialchars($term_data['term_name']); ?></span>
+                                                                    </td>
+                                                                    <td class="text-center text-muted">
+                                                                        <?php echo htmlspecialchars($term_data['academic_year']); ?>
+                                                                    </td>
+                                                                    <td class="text-center text-muted">
+                                                                        <?php echo htmlspecialchars($term_data['course_name']); ?>
+                                                                    </td>
+                                                                    <td class="text-center text-dark">
+                                                                        ₹<?php echo formatIndianCurrency($term_summary['scholarship'] ?? 0); ?>
+                                                                    </td>
+                                                                    <td class="text-center text-dark">
+                                                                        ₹<?php echo formatIndianCurrency($term_summary['additional_scholarship'] ?? 0); ?>
+                                                                    </td>
+                                                                    <td class="text-center text-dark">
+                                                                        ₹<?php echo formatIndianCurrency($term_summary['post_admission_discount'] ?? 0); ?>
+                                                                    </td>
+                                                                    <td class="text-center bg-light fw-bold text-success">
+                                                                        ₹<?php echo formatIndianCurrency($term_summary['total_waiver'] ?? 0); ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <!-- Post-Admission Discount History Logs -->
+                                            <div class="card border-0 shadow-sm rounded-3 overflow-hidden mb-4">
+                                                <div class="card-header bg-light py-3 border-0 d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-history me-2 text-primary"></i>Post-Admission Discount History</h6>
+                                                    <span class="badge bg-primary rounded-pill"><?php echo count($post_admission_discounts_list); ?> Request(s)</span>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-ledger align-middle border-0 mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="border-0 ps-4">Request Date</th>
+                                                                <th class="text-center border-0">Discount Type</th>
+                                                                <th class="text-center border-0">Requested Value</th>
+                                                                <th class="text-center border-0">Calculated Amount</th>
+                                                                <th class="text-center border-0">Created / Approved By</th>
+                                                                <th class="text-center border-0">Status</th>
+                                                                <th class="border-0 pe-4" style="width: 30%;">Remarks & Breakdown</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php if (empty($post_admission_discounts_list)): ?>
+                                                                <tr>
+                                                                    <td colspan="7" class="text-center py-4 text-muted">
+                                                                        <i class="fas fa-info-circle me-1"></i> No post-admission discount requests found for this student.
+                                                                    </td>
+                                                                </tr>
+                                                            <?php else: ?>
+                                                                <?php foreach ($post_admission_discounts_list as $discount):
+                                                                    $badge_style = 'bg-soft-secondary text-secondary';
+                                                                    if ($discount['status'] === 'approved') {
+                                                                        $badge_style = 'bg-soft-success text-success';
+                                                                    } elseif ($discount['status'] === 'pending') {
+                                                                        $badge_style = 'bg-soft-warning text-warning';
+                                                                    } elseif ($discount['status'] === 'rejected') {
+                                                                        $badge_style = 'bg-soft-danger text-danger';
+                                                                    }
+                                                                    
+                                                                    // Format remarks for beautiful listing
+                                                                    $remarks = htmlspecialchars($discount['remarks'] ?? '');
+                                                                    if (strpos($remarks, 'Smart Waiver Breakdown:') !== false) {
+                                                                        $parts = explode('Smart Waiver Breakdown:', $remarks);
+                                                                        $main_remarks = trim($parts[0]);
+                                                                        $breakdown = trim($parts[1]);
+                                                                        
+                                                                        $formatted_remarks = $main_remarks;
+                                                                        if (!empty($breakdown)) {
+                                                                            $lines = explode("\n", $breakdown);
+                                                                            $bullet_points = [];
+                                                                            foreach ($lines as $line) {
+                                                                                $line_trimmed = trim(str_replace('-', '', $line));
+                                                                                if (!empty($line_trimmed)) {
+                                                                                    $bullet_points[] = '<li class="py-0.5"><i class="fas fa-check-circle text-success me-1 opacity-75"></i>' . htmlspecialchars($line_trimmed) . '</li>';
+                                                                                }
+                                                                            }
+                                                                            if (!empty($bullet_points)) {
+                                                                                $formatted_remarks .= '<div class="mt-2 small bg-light p-2 rounded-2 border-start border-3 border-success"><span class="fw-bold d-block text-success mb-1 small text-uppercase" style="font-size:0.7rem;letter-spacing:0.5px;"><i class="fas fa-magic me-1"></i>Smart Waiver Breakdown:</span><ul class="list-unstyled mb-0 ps-1">' . implode('', $bullet_points) . '</ul></div>';
+                                                                            }
+                                                                        }
+                                                                    } else {
+                                                                        $formatted_remarks = $remarks;
+                                                                    }
+                                                                ?>
+                                                                    <tr>
+                                                                        <td class="ps-4">
+                                                                            <span class="text-dark fw-bold d-block"><?php echo date('d-M-Y', strtotime($discount['created_at'])); ?></span>
+                                                                            <small class="text-muted"><?php echo date('h:i A', strtotime($discount['created_at'])); ?></small>
+                                                                        </td>
+                                                                        <td class="text-center text-uppercase">
+                                                                            <span class="badge bg-soft-info text-info px-2 py-1 small"><?php echo htmlspecialchars($discount['discount_type']); ?></span>
+                                                                        </td>
+                                                                        <td class="text-center fw-semibold text-dark">
+                                                                            <?php if ($discount['discount_type'] === 'percentage'): ?>
+                                                                                <?php echo number_format($discount['discount_value'], 2); ?>%
+                                                                            <?php else: ?>
+                                                                                ₹<?php echo formatIndianCurrency($discount['discount_value']); ?>
+                                                                            <?php endif; ?>
+                                                                        </td>
+                                                                        <td class="text-center fw-bold text-dark">
+                                                                            ₹<?php echo formatIndianCurrency($discount['discount_amount']); ?>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <span class="small d-block text-dark">Req: <?php echo htmlspecialchars($discount['created_by_name'] ?? 'System'); ?></span>
+                                                                            <?php if ($discount['status'] === 'approved'): ?>
+                                                                                <small class="text-muted d-block mt-0.5">App: <?php echo htmlspecialchars($discount['approved_by_name'] ?? 'System'); ?></small>
+                                                                            <?php endif; ?>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <span class="badge px-2 py-1 rounded-pill <?php echo $badge_style; ?> font-weight-bold text-uppercase" style="font-size:0.75rem;">
+                                                                                <?php echo htmlspecialchars($discount['status']); ?>
+                                                                            </span>
+                                                                        </td>
+                                                                        <td class="pe-4 text-muted small" style="white-space: normal;">
+                                                                            <?php echo $formatted_remarks; ?>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endforeach; ?>
+                                                            <?php endif; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         <?php endif; ?>
                                     </div>
 

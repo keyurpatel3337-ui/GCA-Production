@@ -76,7 +76,7 @@ include '../../include/sidebar.php';
 ?>
 
 <!-- Include SheetJS for modern Excel exports -->
-<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="../../assets/js/table-utilities.js"></script>
 
 

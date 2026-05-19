@@ -160,7 +160,11 @@ include '../../include/sidebar.php';
     </form>
 </div>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/students/direct-admission-preview.css">
+<style>
+    .strike-through { text-decoration: line-through; opacity: 0.7; }
+    .table-danger { --bs-table-bg: #fff5f5; }
+    .update-check { width: 20px; height: 20px; cursor: pointer; }
+</style>
 
 <script>
 function selectAll(checked) {

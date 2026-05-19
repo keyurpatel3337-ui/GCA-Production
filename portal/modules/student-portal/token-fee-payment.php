@@ -45,6 +45,15 @@ if (!$student) {
     exit;
 }
 
+// Block payment for restricted students
+$std_val = isset($student['standard']) ? intval($student['standard']) : 0;
+$course_val = isset($student['course_id']) ? intval($student['course_id']) : 0;
+if ($std_val == 11 && ($course_val == 1 || $course_val == 2)) {
+    set_flash_message('error', 'Please pay your fee at Account Department.');
+    header('Location: ../dashboard/student_dashboard.php');
+    exit;
+}
+
 // Calculate actual token amount (Only Tuition Part 1 with 18% GST)
 $tuition_part1 = floatval($student['tuition_fee_part1']);
 $gst_part1 = $tuition_part1 * 0.18;

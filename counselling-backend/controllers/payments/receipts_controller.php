@@ -61,7 +61,7 @@ if (!empty($to_date)) {
     $params['to_date'] = $to_date;
 }
 
-$query .= " ORDER BY p.payment_date ASC, p.id ASC";
+$query .= " ORDER BY p.payment_date DESC, p.id DESC";
 
 try {
     $receipts = $dbOps->customSelect($query, $params);

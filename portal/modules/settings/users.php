@@ -13,14 +13,66 @@ if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE])) {
     exit;
 }
 
-$api = new APIClient();
-// Get roles for the filter dropdown
-$rolesResponse = $api->get('settings/users', ['per_page' => 1]); // Quick way to get roles list
-$roles = $rolesResponse['data']['roles'] ?? [];
+// Handle role filter from POST or session
+if (isset($_POST['role'])) {
+    $_SESSION['users_role_filter'] = $_POST['role'];
+} elseif (isset($_POST['clear_filter'])) {
+    unset($_SESSION['users_role_filter']);
+    unset($_SESSION['users_pagination']);
+}
 
-// Capture initial filters from Dashboard redirects (POST or GET)
-$initial_role = $_POST['role'] ?? $_GET['role'] ?? '';
-$initial_search = $_POST['search'] ?? $_GET['search'] ?? '';
+// Handle page and per_page from POST (pagination clicks)
+if (isset($_POST['page']) || isset($_POST['per_page'])) {
+    $_SESSION['users_pagination'] = [
+        'page' => isset($_POST['page']) ? (int) $_POST['page'] : ($_SESSION['users_pagination']['page'] ?? 1),
+        'per_page' => isset($_POST['per_page']) ? (int) $_POST['per_page'] : ($_SESSION['users_pagination']['per_page'] ?? 10)
+    ];
+}
+
+$api = new APIClient();
+
+// Build request params from session
+$requestParams = [];
+$paginationSession = $_SESSION['users_pagination'] ?? [];
+$requestParams['page'] = $paginationSession['page'] ?? 1;
+$requestParams['per_page'] = $paginationSession['per_page'] ?? 10;
+
+// Add search from POST or previous session
+if (isset($_POST['search'])) {
+    $requestParams['search'] = $_POST['search'];
+    $_SESSION['users_search'] = $_POST['search'];
+} elseif (isset($_SESSION['users_search'])) {
+    $requestParams['search'] = $_SESSION['users_search'];
+}
+
+// Add role from session if exists
+if (isset($_SESSION['users_role_filter'])) {
+    $requestParams['role'] = $_SESSION['users_role_filter'];
+}
+
+$response = $api->get('settings/users', $requestParams);
+
+if ($response && isset($response['success']) && $response['success']) {
+    $users = $response['data']['users'] ?? [];
+    $roles = $response['data']['roles'] ?? [];
+    $pagination = $response['data']['pagination'] ?? [];
+    $page = $pagination['current_page'] ?? 1;
+    $perPage = $pagination['per_page'] ?? 10;
+    $totalRecords = $pagination['total_records'] ?? 0;
+    $totalPages = $pagination['total_pages'] ?? 1;
+    $search = $response['data']['applied_filters']['search'] ?? '';
+    $activeRoleFilter = $response['data']['applied_filters']['role'] ?? ($_SESSION['users_role_filter'] ?? '');
+} else {
+    $users = [];
+    $roles = [];
+    $page = 1;
+    $perPage = 10;
+    $totalRecords = 0;
+    $totalPages = 1;
+    $search = $_POST['search'] ?? '';
+    $activeRoleFilter = $_SESSION['users_role_filter'] ?? '';
+    set_flash_message('error', $response['error'] ?? 'Failed to load users');
+}
 
 $page_title = "Manage Users";
 
@@ -30,8 +82,10 @@ include '../../include/sidebar.php';
 ?>
 
 <!-- Include SheetJS for modern Excel exports -->
-<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="../../assets/js/table-utilities.js"></script>
+
+
 
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -43,60 +97,50 @@ include '../../include/sidebar.php';
         </button>
     </div>
 
+
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> <?php echo htmlspecialchars($_SESSION['success'] ?? '');
+            ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> <?php echo htmlspecialchars($_SESSION['error'] ?? '');
+            ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
+
     <!-- Search and Filter -->
     <div class="card mb-3">
         <div class="card-body">
-            <form id="filterForm" class="row g-3 align-items-end">
-                <div class="col-md-3">
-                    <label class="form-label small fw-bold">Search</label>
-                    <input type="text" name="search" id="searchInput" class="form-control" placeholder="Search by name, email...">
+            <form method="POST" class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" name="search" class="form-control" placeholder="Search by name, email..."
+                        value="<?php echo htmlspecialchars($search ?? ''); ?>">
                 </div>
-                <div class="col-md-3">
-                    <label class="form-label small fw-bold">Role Filter</label>
-                    <select name="role" id="roleFilter" class="form-select">
-                        <option value="">All Roles</option>
-                        <?php foreach ($roles as $role): ?>
-                            <option value="<?php echo htmlspecialchars($role['role_slug'] ?? ''); ?>">
-                                <?php echo htmlspecialchars($role['role_name'] ?? ''); ?>
-                            </option>
-                        <?php endforeach; ?>
+                <div class="col-md-2">
+                    <select name="per_page" class="form-control">
+                        <option value="10" <?php echo $perPage == 10 ? 'selected' : ''; ?>>10 per page</option>
+                        <option value="25" <?php echo $perPage == 25 ? 'selected' : ''; ?>>25 per page</option>
+                        <option value="50" <?php echo $perPage == 50 ? 'selected' : ''; ?>>50 per page</option>
+                        <option value="100" <?php echo $perPage == 100 ? 'selected' : ''; ?>>100 per page</option>
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <label class="form-label small fw-bold">Per Page</label>
-                    <select name="per_page" id="perPageFilter" class="form-select">
-                        <option value="10">10 per page</option>
-                        <option value="25">25 per page</option>
-                        <option value="50">50 per page</option>
-                        <option value="100">100 per page</option>
-                    </select>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
                 </div>
-                <div class="col-md-4">
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary flex-grow-1">
-                            <i class="fas fa-search me-1"></i> Search
-                        </button>
-                        <button type="button" id="resetBtn" class="btn btn-outline-secondary">
-                            <i class="fas fa-undo"></i> Reset
+                <?php if (!empty($activeRoleFilter)): ?>
+                    <div class="col-md-2">
+                        <button type="submit" name="clear_filter" value="1" class="btn btn-outline-secondary">
+                            <i class="fas fa-times"></i> Clear Filter
                         </button>
                     </div>
-                </div>
+                <?php endif; ?>
             </form>
-        </div>
-    </div>
-
-    <!-- Action Buttons -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <div class="d-flex gap-2">
-            <button type="button" id="deleteSelectedBtn" class="btn btn-danger-custom" style="display: none;" onclick="deleteSelected()">
-                <i class="fas fa-trash-alt me-1"></i> Delete Selected
-            </button>
-            <button type="button" class="btn btn-success-custom" onclick="exportToExcel()">
-                <i class="fas fa-file-excel me-1"></i> Export to Excel
-            </button>
-        </div>
-        <div class="text-muted small">
-            Total Users: <span id="totalRecordsCount" class="fw-bold">0</span>
         </div>
     </div>
 
@@ -116,20 +160,50 @@ include '../../include/sidebar.php';
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody id="usersTableBody">
-                <!-- Data loaded via AJAX -->
-                <tr>
-                    <td colspan="8" class="text-center py-5">
-                        <div class="spinner-border text-primary" role="status"></div>
-                        <p class="mt-2 mb-0 text-muted">Loading users...</p>
-                    </td>
-                </tr>
+            <tbody>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="row-checkbox form-check-input" value="<?php echo $user['id']; ?>">
+                        </td>
+                        <td><?php echo $user['id']; ?></td>
+                        <td><?php echo htmlspecialchars($user['name'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($user['email'] ?? ''); ?></td>
+                        <td><span class="badge bg-info"><?php echo htmlspecialchars($user['role_name'] ?? 'N/A'); ?></span>
+                        </td>
+                        <td>
+                            <?php if ($user['is_active'] ?? true): ?>
+                                <span class="badge bg-success">Active</span>
+                            <?php else: ?>
+                                <span class="badge bg-danger">Inactive</span>
+                            <?php endif; ?>
+                        </td>
+                        <td><?php echo isset($user['created_at']) ? date('d M Y', strtotime($user['created_at'])) : 'N/A'; ?>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-info"
+                                onclick="editUser(<?php echo htmlspecialchars(json_encode($user) ?? ''); ?>)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteUser(<?php echo $user['id']; ?>)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 
     <!-- Pagination -->
-    <div id="paginationContainer" class="mt-3"></div>
+    <?php if ($totalRecords > 0): ?>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <?php echo renderPaginationPost($page, $totalPages, 2, $perPage); ?>
+            <div class="text-muted">
+                <?php echo getPaginationInfo($page, $perPage, $totalRecords); ?>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>
 
 <!-- Add User Modal -->
@@ -143,25 +217,20 @@ include '../../include/sidebar.php';
             <form id="addUserForm">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Name <span class="text-danger">*</span></label>
+                        <label>Name <span class="text-danger">*</span></label>
                         <input type="text" name="name" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email <span class="text-danger">*</span></label>
+                        <label>Email <span class="text-danger">*</span></label>
                         <input type="email" name="email" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <input type="password" name="password" id="add_password" class="form-control" required>
-                            <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('add_password', this)">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
+                        <label>Password <span class="text-danger">*</span></label>
+                        <input type="password" name="password" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Role <span class="text-danger">*</span></label>
-                        <select name="role_id" class="form-select" required>
+                        <label>Role <span class="text-danger">*</span></label>
+                        <select name="role_id" class="form-control" required>
                             <option value="">Select Role</option>
                             <?php foreach ($roles as $role): ?>
                                 <option value="<?php echo $role['id']; ?>">
@@ -192,25 +261,20 @@ include '../../include/sidebar.php';
                 <input type="hidden" name="user_id" id="edit_user_id">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Name <span class="text-danger">*</span></label>
+                        <label>Name <span class="text-danger">*</span></label>
                         <input type="text" name="name" id="edit_name" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email <span class="text-danger">*</span></label>
+                        <label>Email <span class="text-danger">*</span></label>
                         <input type="email" name="email" id="edit_email" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password (leave blank to keep current)</label>
-                        <div class="input-group">
-                            <input type="password" name="password" id="edit_password" class="form-control">
-                            <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('edit_password', this)">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
+                        <label>Password (leave blank to keep current)</label>
+                        <input type="password" name="password" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Role <span class="text-danger">*</span></label>
-                        <select name="role_id" id="edit_role_id" class="form-select" required>
+                        <label>Role <span class="text-danger">*</span></label>
+                        <select name="role_id" id="edit_role_id" class="form-control" required>
                             <?php foreach ($roles as $role): ?>
                                 <option value="<?php echo $role['id']; ?>">
                                     <?php echo htmlspecialchars($role['role_name'] ?? ''); ?>
@@ -226,264 +290,108 @@ include '../../include/sidebar.php';
             </form>
         </div>
     </div>
-</div>
 
-<script>
-    let currentPage = 1;
 
-    document.addEventListener('DOMContentLoaded', function () {
-        // Set initial filters if passed from dashboard
-        const initialRole = "<?php echo $initial_role; ?>";
-        const initialSearch = "<?php echo $initial_search; ?>";
-        
-        if (initialRole) {
-            $('#roleFilter').val(initialRole);
-        }
-        if (initialSearch) {
-            $('#searchInput').val(initialSearch);
-        }
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#selectAll').on('change', function () {
+                $('.row-checkbox').prop('checked', $(this).prop('checked'));
+                toggleDeleteButton();
+            });
+            $('.row-checkbox').on('change', toggleDeleteButton);
 
-        loadUsers();
+            $('#addUserForm').on('submit', function (e) {
+                e.preventDefault();
+                $.api.post('settings/user-save', $(this).serialize()).then(response => {
+                    if (response.success) {
+                        showToast('success', 'Success', response.message);
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        showToast('error', 'Error', response.error || response.message);
+                    }
+                }).catch(() => showToast('error', 'Error', 'Failed to add user'));
+            });
 
-        $('#filterForm').on('submit', function (e) {
-            e.preventDefault();
-            currentPage = 1;
-            loadUsers();
-        });
-
-        $('#resetBtn').on('click', function () {
-            $('#filterForm')[0].reset();
-            currentPage = 1;
-            loadUsers();
-        });
-
-        $('#selectAll').on('change', function () {
-            $('.row-checkbox').prop('checked', $(this).prop('checked'));
-            toggleDeleteButton();
-        });
-
-        $(document).on('change', '.row-checkbox', toggleDeleteButton);
-
-        // Add/Edit Form submissions
-        $('#addUserForm').on('submit', function (e) {
-            e.preventDefault();
-            const btn = $(this).find('button[type="submit"]');
-            const originalText = btn.html();
-            btn.html('<i class="fas fa-spinner fa-spin me-1"></i> Processing...').prop('disabled', true);
-
-            $.api.post('settings/user-save', $(this).serialize()).then(response => {
-                if (response.success) {
-                    showToast('success', 'Success', response.message);
-                    $('#addUserModal').modal('hide');
-                    $(this)[0].reset();
-                    loadUsers();
-                } else {
-                    showToast('error', 'Error', response.error || response.message);
+            $('#editUserForm').on('submit', function (e) {
+                e.preventDefault();
+                const userId = $('#edit_user_id').val();
+                if (!userId) {
+                    showToast('error', 'Error', 'User ID is missing');
+                    return;
                 }
-                btn.html(originalText).prop('disabled', false);
-            }).catch(() => {
-                showToast('error', 'Error', 'Failed to add user');
-                btn.html(originalText).prop('disabled', false);
+                $.api.post('settings/user-update', $(this).serialize()).then(response => {
+                    if (response.success) {
+                        showToast('success', 'Success', response.message);
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        showToast('error', 'Error', response.error || response.message);
+                    }
+                }).catch(() => showToast('error', 'Error', 'Failed to update user'));
             });
         });
 
-        $('#editUserForm').on('submit', function (e) {
-            e.preventDefault();
-            const btn = $(this).find('button[type="submit"]');
-            const originalText = btn.html();
-            btn.html('<i class="fas fa-spinner fa-spin me-1"></i> Processing...').prop('disabled', true);
+        function toggleDeleteButton() {
+            $('#deleteSelectedBtn').toggle($('.row-checkbox:checked').length > 0);
+        }
 
-            $.api.post('settings/user-update', $(this).serialize()).then(response => {
-                if (response.success) {
-                    showToast('success', 'Success', response.message);
-                    $('#editUserModal').modal('hide');
-                    loadUsers();
-                } else {
-                    showToast('error', 'Error', response.error || response.message);
+        function exportToExcel() {
+            TableUtils.exportToExcel('usersTable', 'users_export');
+        }
+
+        function deleteSelected() {
+            const selected = $('.row-checkbox:checked').map(function () {
+                return this.value;
+            }).get();
+            if (selected.length === 0) return showToast('warning', 'Warning', 'Please select users to delete');
+
+            showConfirm({
+                title: 'Delete ' + selected.length + ' user(s)?',
+                message: 'Are you sure you want to delete the selected users? This action cannot be undone.',
+                confirmText: 'Yes, delete!',
+                confirmButtonClass: 'btn-danger',
+                onConfirm: function () {
+                    $.api.post('settings/users-delete-multiple', {
+                        ids: selected
+                    }).then(response => {
+                        if (response.success) {
+                            showToast('success', 'Deleted!', response.message);
+                            setTimeout(() => location.reload(), 1500);
+                        } else {
+                            showToast('error', 'Error', response.message);
+                        }
+                    }).catch(() => showToast('error', 'Error', 'Failed to delete users'));
                 }
-                btn.html(originalText).prop('disabled', false);
-            }).catch(() => {
-                showToast('error', 'Error', 'Failed to update user');
-                btn.html(originalText).prop('disabled', false);
             });
-        });
-    });
-
-    function loadUsers(page = 1) {
-        currentPage = page;
-        const filters = {
-            search: $('#searchInput').val(),
-            role: $('#roleFilter').val(),
-            per_page: $('#perPageFilter').val(),
-            page: page
-        };
-
-        $('#usersTableBody').html(`
-            <tr>
-                <td colspan="8" class="text-center py-5">
-                    <div class="spinner-border text-primary" role="status"></div>
-                    <p class="mt-2 mb-0 text-muted">Loading users...</p>
-                </td>
-            </tr>
-        `);
-
-        $.api.get('settings/users', filters).then(response => {
-            if (response.success) {
-                renderTable(response.data.users);
-                renderPagination(response.data.pagination);
-                $('#totalRecordsCount').text(response.data.pagination.total_records);
-            } else {
-                showToast('error', 'Error', response.message);
-            }
-        }).catch(() => {
-            $('#usersTableBody').html('<tr><td colspan="8" class="text-center text-danger">Failed to load users</td></tr>');
-        });
-    }
-
-    function renderTable(users) {
-        const tbody = $('#usersTableBody');
-        tbody.empty();
-
-        if (users.length === 0) {
-            tbody.html('<tr><td colspan="8" class="text-center py-4">No users found matching your criteria</td></tr>');
-            return;
         }
 
-        users.forEach(user => {
-            const statusBadge = user.is_active ? 
-                '<span class="badge bg-success">Active</span>' : 
-                '<span class="badge bg-danger">Inactive</span>';
-            
-            const createdAt = user.created_at ? new Date(user.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'N/A';
-
-            const row = `
-                <tr>
-                    <td><input type="checkbox" class="row-checkbox form-check-input" value="${user.id}"></td>
-                    <td>${user.id}</td>
-                    <td class="fw-bold">${user.name}</td>
-                    <td>${user.email}</td>
-                    <td><span class="badge bg-info">${user.role_name}</span></td>
-                    <td>${statusBadge}</td>
-                    <td>${createdAt}</td>
-                    <td>
-                        <button class="btn btn-sm btn-info me-1" onclick='editUser(${JSON.stringify(user)})'>
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteUser(${user.id})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-            tbody.append(row);
-        });
-        
-        $('#selectAll').prop('checked', false);
-        toggleDeleteButton();
-    }
-
-    function renderPagination(p) {
-        const container = $('#paginationContainer');
-        container.empty();
-
-        if (p.total_pages <= 1) return;
-
-        let html = '<div class="d-flex justify-content-between align-items-center">';
-        html += '<ul class="pagination mb-0">';
-        
-        // Previous
-        html += `<li class="page-item ${p.current_page == 1 ? 'disabled' : ''}">
-            <a class="page-link" href="javascript:void(0)" onclick="loadUsers(${p.current_page - 1})">Previous</a>
-        </li>`;
-
-        for (let i = 1; i <= p.total_pages; i++) {
-            if (i == 1 || i == p.total_pages || (i >= p.current_page - 2 && i <= p.current_page + 2)) {
-                html += `<li class="page-item ${p.current_page == i ? 'active' : ''}">
-                    <a class="page-link" href="javascript:void(0)" onclick="loadUsers(${i})">${i}</a>
-                </li>`;
-            } else if (i == p.current_page - 3 || i == p.current_page + 3) {
-                html += '<li class="page-item disabled"><span class="page-link">...</span></li>';
-            }
+        function editUser(user) {
+            $('#edit_user_id').val(user.id);
+            $('#edit_name').val(user.name);
+            $('#edit_email').val(user.email);
+            $('#edit_role_id').val(user.role_id);
+            $('#editUserModal').modal('show');
         }
 
-        // Next
-        html += `<li class="page-item ${p.current_page == p.total_pages ? 'disabled' : ''}">
-            <a class="page-link" href="javascript:void(0)" onclick="loadUsers(${p.current_page + 1})">Next</a>
-        </li>`;
-        
-        html += '</ul>';
-        html += `<div class="text-muted small">Showing ${(p.current_page - 1) * p.per_page + 1} to ${Math.min(p.current_page * p.per_page, p.total_records)} of ${p.total_records} entries</div>`;
-        html += '</div>';
-
-        container.html(html);
-    }
-
-    function togglePasswordVisibility(inputId, btn) {
-        const input = document.getElementById(inputId);
-        const icon = btn.querySelector('i');
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.classList.replace('fa-eye', 'fa-eye-slash');
-        } else {
-            input.type = 'password';
-            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        function deleteUser(id) {
+            showConfirm({
+                title: 'Delete this user?',
+                message: 'Are you sure you want to delete this user? This action cannot be undone.',
+                confirmText: 'Yes, delete!',
+                confirmButtonClass: 'btn-danger',
+                onConfirm: function () {
+                    $.api.post('settings/user-delete', {
+                        id: id
+                    }).then(response => {
+                        if (response.success) {
+                            showToast('success', 'Deleted!', response.message);
+                            setTimeout(() => location.reload(), 1500);
+                        } else {
+                            showToast('error', 'Error', response.message);
+                        }
+                    }).catch(() => showToast('error', 'Error', 'Failed to delete user'));
+                }
+            });
         }
-    }
+    </script>
 
-    function toggleDeleteButton() {
-        $('#deleteSelectedBtn').toggle($('.row-checkbox:checked').length > 0);
-    }
-
-    function exportToExcel() {
-        TableUtils.exportToExcel('usersTable', 'users_export');
-    }
-
-    function deleteSelected() {
-        const selected = $('.row-checkbox:checked').map(function () { return this.value; }).get();
-        showConfirm({
-            title: `Delete ${selected.length} user(s)?`,
-            message: 'Are you sure you want to delete selected users?',
-            confirmText: 'Yes, delete!',
-            confirmButtonClass: 'btn-danger',
-            onConfirm: function () {
-                $.api.post('settings/users-delete-multiple', { ids: selected }).then(response => {
-                    if (response.success) {
-                        showToast('success', 'Deleted!', response.message);
-                        loadUsers(currentPage);
-                    } else {
-                        showToast('error', 'Error', response.message);
-                    }
-                });
-            }
-        });
-    }
-
-    function editUser(user) {
-        $('#edit_user_id').val(user.id);
-        $('#edit_name').val(user.name);
-        $('#edit_email').val(user.email);
-        $('#edit_role_id').val(user.role_id);
-        $('#editUserModal').modal('show');
-    }
-
-    function deleteUser(id) {
-        showConfirm({
-            title: 'Delete user?',
-            message: 'Are you sure you want to delete this user?',
-            confirmText: 'Yes, delete!',
-            confirmButtonClass: 'btn-danger',
-            onConfirm: function () {
-                $.api.post('settings/user-delete', { id: id }).then(response => {
-                    if (response.success) {
-                        showToast('success', 'Deleted!', response.message);
-                        loadUsers(currentPage);
-                    } else {
-                        showToast('error', 'Error', response.message);
-                    }
-                });
-            }
-        });
-    }
-</script>
-
-<?php include '../../include/footer.php'; ?>
+    <?php include '../../include/footer.php'; ?>

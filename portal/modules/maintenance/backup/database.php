@@ -188,7 +188,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/maintenance/backup/database.css">
+
 
 <div class="container-fluid py-4">
     <!-- Message handling with refined alerts -->
@@ -207,7 +207,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
     <div class="row g-4 mb-4">
         <div class="col-md-4">
             <div class="glass-card p-4 d-flex align-items-center h-100">
-                <div class="stat-icon bg-info-subtle text-info me-3 database-custom-1">
+                <div class="stat-icon bg-info-subtle text-info me-3"
+                    style="width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
                     <i class="fas fa-calendar-day"></i>
                 </div>
                 <div>
@@ -218,7 +219,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
         </div>
         <div class="col-md-4">
             <div class="glass-card p-4 d-flex align-items-center h-100">
-                <div class="stat-icon bg-success-subtle text-success me-3 database-custom-1">
+                <div class="stat-icon bg-success-subtle text-success me-3"
+                    style="width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
                 <div>
@@ -229,7 +231,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
         </div>
         <div class="col-md-4">
             <div class="glass-card p-4 d-flex align-items-center h-100">
-                <div class="stat-icon bg-warning-subtle text-warning me-3 database-custom-1">
+                <div class="stat-icon bg-warning-subtle text-warning me-3"
+                    style="width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
                     <i class="fas fa-history"></i>
                 </div>
                 <div>
@@ -283,21 +286,24 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
         <div class="card-header bg-white py-0 border-bottom">
             <ul class="nav nav-tabs border-0" id="backupTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active px-4 py-3 border-0 fw-bold database-custom-2" data-bs-toggle="tab" href="#daily">
+                    <a class="nav-link active px-4 py-3 border-0 fw-bold" data-bs-toggle="tab" href="#daily"
+                        style="border-radius: 0;">
                         <i class="fas fa-calendar-day me-2 text-info"></i> Daily
                         <span
                             class="badge bg-info-subtle text-info ms-2 rounded-pill"><?php echo count($backups['daily']); ?></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-4 py-3 border-0 fw-bold database-custom-2" data-bs-toggle="tab" href="#monthly">
+                    <a class="nav-link px-4 py-3 border-0 fw-bold" data-bs-toggle="tab" href="#monthly"
+                        style="border-radius: 0;">
                         <i class="fas fa-calendar-alt me-2 text-success"></i> Monthly
                         <span
                             class="badge bg-success-subtle text-success ms-2 rounded-pill"><?php echo count($backups['monthly']); ?></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-4 py-3 border-0 fw-bold database-custom-2" data-bs-toggle="tab" href="#yearly">
+                    <a class="nav-link px-4 py-3 border-0 fw-bold" data-bs-toggle="tab" href="#yearly"
+                        style="border-radius: 0;">
                         <i class="fas fa-history me-2 text-warning"></i> Yearly
                         <span
                             class="badge bg-warning-subtle text-warning ms-2 rounded-pill"><?php echo count($backups['yearly']); ?></span>
@@ -334,7 +340,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
                                             <tr>
                                                 <td class="ps-4">
                                                     <div class="d-flex align-items-center">
-                                                        <div class="icon-box bg-primary-subtle text-primary me-3 rounded p-2 database-custom-3">
+                                                        <div class="icon-box bg-primary-subtle text-primary me-3 rounded p-2"
+                                                            style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
                                                             <i class="fas fa-file-code"></i>
                                                         </div>
                                                         <div>
@@ -387,5 +394,31 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
     </div>
 </div>
 </div>
+
+<style>
+    #backupTabs .nav-link {
+        color: #64748b;
+        transition: all 0.2s ease;
+    }
+
+    #backupTabs .nav-link.active {
+        color: var(--primary-color);
+        background: transparent !important;
+        border-bottom: 3px solid var(--primary-color) !important;
+    }
+
+    #backupTabs .nav-link:hover:not(.active) {
+        background: #f8fafc;
+        color: #1e293b;
+    }
+
+    .icon-box {
+        transition: transform 0.2s ease;
+    }
+
+    tr:hover .icon-box {
+        transform: scale(1.1);
+    }
+</style>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/footer.php'; ?>

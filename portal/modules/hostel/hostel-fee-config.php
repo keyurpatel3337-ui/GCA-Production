@@ -68,7 +68,7 @@ include '../../include/sidebar.php';
                     <tbody>
                         <?php if (empty($hostel_settings)): ?>
                             <tr>
-                                <td colspan="8" class="text-center">No configurations found</td>
+                                <td colspan="11" class="text-center">No configurations found</td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($hostel_settings as $config): ?>

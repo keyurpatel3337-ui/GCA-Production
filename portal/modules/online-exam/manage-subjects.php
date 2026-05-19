@@ -77,6 +77,12 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             icon: icon,
                             title: title
                         });
+
+                        // Instantly clean msg parameter from URL address bar
+                        if (window.history.replaceState) {
+                            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search.replace(/[?&]msg=[^&]+/, '').replace(/^&/, '?');
+                            window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+                        }
                     });
                 </script>
             <?php endif; ?>

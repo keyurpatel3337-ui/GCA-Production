@@ -211,7 +211,6 @@ if ($routeAction === 'user-get') {
     $page = max(1, (int) ($_GET['page'] ?? 1));
     $perPage = max(1, (int) ($_GET['per_page'] ?? 50));
     $search = $_GET['search'] ?? '';
-    $role_filter = $_GET['role'] ?? '';
 
     try {
         // Exclude Student and Website Admin roles from the dropdown
@@ -239,11 +238,6 @@ if ($routeAction === 'user-get') {
             $params = array_merge($params, ["%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
         }
 
-        if (!empty($role_filter)) {
-            $where_clauses[] = "r.role_slug = ?";
-            $params[] = $role_filter;
-        }
-
         $where = !empty($where_clauses) ? "WHERE " . implode(' AND ', $where_clauses) : "";
 
         $countQuery = "SELECT COUNT(*) FROM tbl_users u LEFT JOIN tbl_roles r ON u.role_id = r.id LEFT JOIN tbl_staff s ON u.id = s.user_id $where";
@@ -258,7 +252,7 @@ if ($routeAction === 'user-get') {
                               LEFT JOIN tbl_roles r ON u.role_id = r.id 
                               LEFT JOIN tbl_staff s ON u.id = s.user_id
                               $where
-                              ORDER BY u.id ASC
+                              ORDER BY u.id DESC
                               LIMIT $perPage OFFSET $offset");
         $stmt->execute($params);
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -281,10 +275,7 @@ if ($routeAction === 'user-get') {
                     'total_records' => $totalRecords,
                     'total_pages' => $totalPages
                 ],
-                'applied_filters' => [
-                    'search' => $search,
-                    'role' => $role_filter
-                ]
+                'applied_filters' => ['search' => $search]
             ]);
         }
     } catch (PDOException $e) {

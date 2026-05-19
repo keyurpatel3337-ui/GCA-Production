@@ -7,7 +7,7 @@ $subject_id = isset($_GET['subject_id']) ? (int)$_GET['subject_id'] : 0;
 $chapters = [];
 
 if($subject_id > 0) {
-    $stmt = $conn->prepare("SELECT chpid, chapter FROM chapters WHERE subid = ? AND activated = 1 AND is_deleted = 0 ORDER BY chapter ASC");
+    $stmt = $conn->prepare("SELECT chpid, chapter FROM tbl_chapters WHERE subid = ? AND activated = 1 AND is_deleted = 0 ORDER BY chapter ASC");
     $stmt->execute([$subject_id]);
     $chapters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

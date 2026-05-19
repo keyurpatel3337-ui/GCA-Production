@@ -12,7 +12,7 @@ if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HE
 
 // Fetch all chapters with standard and subject info
 $chapters = $conn->query("SELECT c.chapter, s.subject_name, std.stdtext 
-                         FROM chapters c 
+                         FROM tbl_chapters c 
                          LEFT JOIN tbl_subjects s ON c.subid = s.id 
                          LEFT JOIN standard std ON s.standard_id = std.stdid
                          ORDER BY std.stdid ASC, s.subject_name ASC, c.chapter ASC")->fetchAll(PDO::FETCH_ASSOC);

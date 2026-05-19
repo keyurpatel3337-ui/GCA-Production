@@ -21,7 +21,7 @@ try {
     $has_table = $check->rowCount() > 0;
 
     if ($has_table) {
-        $queue_items = $conn->query("SELECT * FROM tbl_notification_queue ORDER BY created_at DESC LIMIT 100")->fetchAll(PDO::FETCH_ASSOC);
+        $queue_items = $conn->query("SELECT * FROM tbl_notification_queue ORDER BY created_at ASC LIMIT 100")->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (Exception $e) {
 }

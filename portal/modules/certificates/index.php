@@ -20,11 +20,7 @@ $page_breadcrumb = [
 include '../../include/header.php';
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
-?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/certificates/index.css">
-
-<?php
 $op = new Operation();
 
 // Fetch issued certificates with student details
@@ -35,7 +31,7 @@ $query = "SELECT ic.*,
           FROM tbl_issued_certificates ic
           LEFT JOIN tbl_gm_std_registration s ON ic.student_id = s.id
           LEFT JOIN tbl_users u ON ic.issued_by = u.id
-          ORDER BY ic.created_at DESC";
+          ORDER BY ic.created_at ASC";
 $issuedCertificates = $op->customSelect($query);
 
 ?>
@@ -102,7 +98,8 @@ $issuedCertificates = $op->customSelect($query);
                                             </td>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="avatar avatar-sm bg-blue-100 text-blue-600 rounded-circle me-3 d-flex align-items-center justify-content-center certificates-index-custom-1">
+                                                    <div class="avatar avatar-sm bg-blue-100 text-blue-600 rounded-circle me-3 d-flex align-items-center justify-content-center"
+                                                        style="width: 35px; height: 35px; background: #e0f2fe; color: #0284c7;">
                                                         <?php echo strtoupper(substr($cert['student_full_name'], 0, 1)); ?>
                                                     </div>
                                                     <div class="d-flex flex-column">

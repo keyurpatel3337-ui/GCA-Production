@@ -14,8 +14,6 @@ $page_title = "Bulk Word Import";
 $page_breadcrumb = "Bulk Word Import";
 include PORTAL_INCLUDE_PATH . 'header.php';
 ?>
-<!-- OES Custom CSS -->
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/online-exam.css">
 <!-- KaTeX for math rendering -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
@@ -87,7 +85,7 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid AS
 
                         <div class="form-group mt-4">
                             <label class="form-label font-weight-bold text-primary">2. Select Word File</label>
-                            <div class="upload-box p-4 rounded text-center bg-light" id="drop-zone">
+                            <div class="upload-box p-4 border-dashed rounded text-center bg-light" id="drop-zone" style="border: 2px dashed #007bff; cursor: pointer;">
                                 <i class="fas fa-file-word fa-3x text-primary mb-3"></i>
                                 <p class="mb-0 text-dark font-weight-bold">Click to Upload .docx</p>
                                 <span class="text-muted small">Max file size: 10MB</span>
@@ -138,6 +136,15 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid AS
     </div>
 </main>
 
+<style>
+    .upload-box:hover { background-color: #e9ecef!important; }
+    .preview-row { border-bottom: 1px solid #eee; padding: 15px; transition: background 0.2s; }
+    .preview-row:hover { background-color: #f8f9fa; }
+    .preview-row img { max-width: 250px; border-radius: 5px; margin: 10px 0; border: 1px solid #ddd; }
+    .option-box { font-size: 0.9rem; color: #555; background: #fff; border: 1px solid #eee; border-radius: 5px; padding: 5px 10px; margin-bottom: 5px; }
+    .border-dashed { border-style: dashed !important; }
+</style>
+
 <script>
 // Data from server (constants.php would provide this if needed, but we fetch via AJAX)
 const allSubjects = <?php 
@@ -145,7 +152,7 @@ const allSubjects = <?php
     echo json_encode($sub_all); 
 ?>;
 const allChapters = <?php 
-    $ch_all = $conn->query("SELECT chpid, subid, chapter FROM chapters WHERE activated = 1 AND is_deleted = 0 ORDER BY chapter ASC")->fetchAll(PDO::FETCH_ASSOC);
+    $ch_all = $conn->query("SELECT chpid, subid, chapter FROM tbl_chapters WHERE activated = 1 AND is_deleted = 0 ORDER BY chapter ASC")->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($ch_all); 
 ?>;
 const allTopics = <?php 

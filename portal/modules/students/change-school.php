@@ -403,25 +403,28 @@ try {
             const newSchoolId = $(this).val();
 
             if (currentSchoolId && currentSchoolId == newSchoolId) {
-                if (typeof showToast === 'function') {
-                    showToast('warning', 'Warning', 'The student is already in this school. Please select a different school.');
-                } else {
-                    alert('The student is already in this school. Please select a different school.');
-                }
+                showToast('warning', 'Warning', 'The student is already in this school. Please select a different school.');
                 $(this).val('').trigger('change');
             }
         });
 
         $('#singleChangeForm').on('submit', function (e) {
             e.preventDefault();
+            const form = this;
             const studentName = $('#single_student_id option:selected').text();
             const newSchool = $('#single_new_school option:selected').text();
 
-            if (confirm(`Are you sure you want to change school for:\n${studentName}\nto\n${newSchool}?`)) {
-                const submitBtn = $(this).find('button[type="submit"]');
-                submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Changing...');
-                this.submit();
-            }
+            showConfirm({
+                title: 'Confirm School Change',
+                message: `Change school for:<br><strong>${studentName}</strong><br>to<br><strong>${newSchool}</strong>?`,
+                confirmText: 'Yes, Change School',
+                confirmButtonClass: 'btn-primary',
+                onConfirm: function () {
+                    const submitBtn = $(form).find('button[type="submit"]');
+                    submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Changing...');
+                    form.submit();
+                }
+            });
         });
 
         // ========== Mobile Numbers Section ==========
@@ -430,20 +433,12 @@ try {
             const newSchoolId = $('#mobile_new_school').val();
 
             if (!mobileNumbers) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'Please enter mobile numbers');
-                } else {
-                    alert('Please enter mobile numbers');
-                }
+                showToast('error', 'Error', 'Please enter mobile numbers');
                 return;
             }
 
             if (!newSchoolId) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'Please select a school first');
-                } else {
-                    alert('Please select a school first');
-                }
+                showToast('error', 'Error', 'Please select a school first');
                 return;
             }
 
@@ -451,11 +446,7 @@ try {
             const mobiles = mobileNumbers.split(/[,\n]/).map(m => m.trim()).filter(m => m.length > 0);
 
             if (mobiles.length === 0) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'No valid mobile numbers found');
-                } else {
-                    alert('No valid mobile numbers found');
-                }
+                showToast('error', 'Error', 'No valid mobile numbers found');
                 return;
             }
 
@@ -511,11 +502,7 @@ try {
 
         $('#confirmMobileBtn').on('click', function () {
             if (mobileMatchedStudents.length === 0) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'No students to update');
-                } else {
-                    alert('No students to update');
-                }
+                showToast('error', 'Error', 'No students to update');
                 return;
             }
 
@@ -523,24 +510,26 @@ try {
             const newSchoolName = $('#mobile_new_school option:selected').text();
             const reason = $('#mobile_reason').val();
 
-            if (confirm(`Are you sure you want to change school for ${mobileMatchedStudents.length} student(s) to ${newSchoolName}?`)) {
-                // Create form and submit
-                const confirmBtn = $(this);
-                confirmBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Changing...');
+            showConfirm({
+                title: 'Confirm School Change',
+                message: `Are you sure you want to change school for <strong>${mobileMatchedStudents.length}</strong> student(s) to <strong>${newSchoolName}</strong>?`,
+                confirmText: 'Yes, Change School',
+                confirmButtonClass: 'btn-success',
+                onConfirm: function () {
+                    const confirmBtn = $('#confirmMobileBtn');
+                    confirmBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Changing...');
 
-                const form = $('<form>', {
-                    method: 'POST',
-                    action: 'change-school-process'
-                });
-                form.append($('<input>', { type: 'hidden', name: 'change_type', value: 'mobile_bulk' }));
-                form.append($('<input>', { type: 'hidden', name: 'new_school_id', value: newSchoolId }));
-                form.append($('<input>', { type: 'hidden', name: 'reason', value: reason }));
-                mobileMatchedStudents.forEach(s => {
-                    form.append($('<input>', { type: 'hidden', name: 'enrollment_ids[]', value: s.enrollment_id }));
-                });
-                $('body').append(form);
-                form.submit();
-            }
+                    const form = $('<form>', { method: 'POST', action: 'change-school-process' });
+                    form.append($('<input>', { type: 'hidden', name: 'change_type', value: 'mobile_bulk' }));
+                    form.append($('<input>', { type: 'hidden', name: 'new_school_id', value: newSchoolId }));
+                    form.append($('<input>', { type: 'hidden', name: 'reason', value: reason }));
+                    mobileMatchedStudents.forEach(s => {
+                        form.append($('<input>', { type: 'hidden', name: 'enrollment_ids[]', value: s.enrollment_id }));
+                    });
+                    $('body').append(form);
+                    form.submit();
+                }
+            });
         });
 
         // ========== Checkbox Selection Section ==========
@@ -577,45 +566,39 @@ try {
             });
 
             if (selectedIds.length === 0) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'Please select at least one student');
-                } else {
-                    alert('Please select at least one student');
-                }
+                showToast('error', 'Error', 'Please select at least one student');
                 return;
             }
 
             const newSchoolId = $('#checkbox_new_school').val();
             if (!newSchoolId) {
-                if (typeof showToast === 'function') {
-                    showToast('error', 'Error', 'Please select a school first');
-                } else {
-                    alert('Please select a school first');
-                }
+                showToast('error', 'Error', 'Please select a school first');
                 return;
             }
 
             const newSchoolName = $('#checkbox_new_school option:selected').text();
             const reason = $('#checkbox_reason').val();
 
-            if (confirm(`Are you sure you want to change school for ${selectedIds.length} student(s) to ${newSchoolName}?`)) {
-                // Create form and submit
-                const bulkBtn = $(this);
-                bulkBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Changing...');
+            showConfirm({
+                title: 'Confirm School Change',
+                message: `Are you sure you want to change school for <strong>${selectedIds.length}</strong> student(s) to <strong>${newSchoolName}</strong>?`,
+                confirmText: 'Yes, Change School',
+                confirmButtonClass: 'btn-success',
+                onConfirm: function () {
+                    const bulkBtn = $('#bulkChangeBtn');
+                    bulkBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Changing...');
 
-                const form = $('<form>', {
-                    method: 'POST',
-                    action: 'change-school-process'
-                });
-                form.append($('<input>', { type: 'hidden', name: 'change_type', value: 'checkbox_bulk' }));
-                form.append($('<input>', { type: 'hidden', name: 'new_school_id', value: newSchoolId }));
-                form.append($('<input>', { type: 'hidden', name: 'reason', value: reason }));
-                selectedIds.forEach(id => {
-                    form.append($('<input>', { type: 'hidden', name: 'enrollment_ids[]', value: id }));
-                });
-                $('body').append(form);
-                form.submit();
-            }
+                    const form = $('<form>', { method: 'POST', action: 'change-school-process' });
+                    form.append($('<input>', { type: 'hidden', name: 'change_type', value: 'checkbox_bulk' }));
+                    form.append($('<input>', { type: 'hidden', name: 'new_school_id', value: newSchoolId }));
+                    form.append($('<input>', { type: 'hidden', name: 'reason', value: reason }));
+                    selectedIds.forEach(id => {
+                        form.append($('<input>', { type: 'hidden', name: 'enrollment_ids[]', value: id }));
+                    });
+                    $('body').append(form);
+                    form.submit();
+                }
+            });
         });
     });
 

@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
     $duration_mins = (int)$_POST['duration_mins'];
+    $exam_mode = $_POST['exam_mode'] ?? 'Practice';
     $shuffle_questions = isset($_POST['shuffle_questions']) ? 1 : 0;
     $display_result_immediately = isset($_POST['display_result_immediately']) ? 1 : 0;
     $question_ids = $_POST['question_ids'] ?? [];
@@ -39,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $total_marks = (float)$row['total'];
         }
 
-        // 1. Update Exam Details (Included standard_id)
+        // 1. Update Exam Details (Included standard_id and exam_mode)
         $stmt = $conn->prepare("UPDATE tbl_oes_exams SET 
                                 title = ?, 
                                 description = ?, 
@@ -48,10 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 end_time = ?, 
                                 duration_mins = ?, 
                                 total_marks = ?, 
+                                exam_mode = ?,
                                 shuffle_questions = ?, 
                                 display_result_immediately = ? 
                                 WHERE id = ?");
-        $stmt->execute([$title, $description, $standard_id, $start_time, $end_time, $duration_mins, $total_marks, $shuffle_questions, $display_result_immediately, $exam_id]);
+        $stmt->execute([$title, $description, $standard_id, $start_time, $end_time, $duration_mins, $total_marks, $exam_mode, $shuffle_questions, $display_result_immediately, $exam_id]);
 
         // 2. Resync Exam Questions
         $conn->prepare("DELETE FROM tbl_oes_exam_questions WHERE exam_id = ?")->execute([$exam_id]);

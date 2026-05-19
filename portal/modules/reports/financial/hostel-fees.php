@@ -82,7 +82,7 @@ $whereClause = "WHERE " . implode(' AND ', $whereConditions);
 
 // --- 2. Base Query ---
 $baseQuery = "SELECT p.*, 
-                     r.surname, r.student_name, IFNULL(r.fathers_name, '') as fathers_name, r.gender, 
+                     r.surname, r.student_name, IFNULL(r.fathers_name, '') as fathers_name, r.gender, r.mob, 
                      c.course_name as current_class
               FROM tbl_payments p
               JOIN tbl_gm_std_registration r ON p.student_id = r.id
@@ -100,7 +100,7 @@ if (isset($_GET['export']) && $_GET['export'] == 'excel') {
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle('Hostel Fees');
 
-    $headers = ['Date', 'Receipt No', 'Student Name', 'Gender', 'Class', 'Fee Type', 'Payment Mode', 'Amount', 'Status'];
+    $headers = ['Date', 'Receipt No', 'Student Name', 'Mobile', 'Gender', 'Class', 'Fee Type', 'Payment Mode', 'Amount', 'Status'];
     $col = 'A';
     foreach ($headers as $h) {
         $sheet->setCellValue($col . '1', $h);
@@ -115,17 +115,18 @@ if (isset($_GET['export']) && $_GET['export'] == 'excel') {
             $sheet->setCellValue('A' . $rowNum, date('d-m-Y', strtotime($row['payment_date'])));
             $sheet->setCellValue('B' . $rowNum, $row['receipt_no']);
             $sheet->setCellValue('C' . $rowNum, $fullName);
-            $sheet->setCellValue('D' . $rowNum, $row['gender']);
-            $sheet->setCellValue('E' . $rowNum, $row['current_class']);
-            $sheet->setCellValue('F' . $rowNum, ($row['fee_component'] == 'hostel_security' ? 'Security Deposit' : 'Hostel Fee'));
-            $sheet->setCellValue('G' . $rowNum, strtoupper($row['payment_mode']));
-            $sheet->setCellValue('H' . $rowNum, round($row['amount']));
-            $sheet->setCellValue('I' . $rowNum, strtoupper($row['status']));
+            $sheet->setCellValue('D' . $rowNum, $row['mob'] ?? '-');
+            $sheet->setCellValue('E' . $rowNum, $row['gender']);
+            $sheet->setCellValue('F' . $rowNum, $row['current_class']);
+            $sheet->setCellValue('G' . $rowNum, ($row['fee_component'] == 'hostel_security' ? 'Security Deposit' : 'Hostel Fee'));
+            $sheet->setCellValue('H' . $rowNum, strtoupper($row['payment_mode']));
+            $sheet->setCellValue('I' . $rowNum, round($row['amount']));
+            $sheet->setCellValue('J' . $rowNum, strtoupper($row['status']));
             $rowNum++;
         }
     }
 
-    foreach (range('A', 'I') as $col) {
+    foreach (range('A', 'J') as $col) {
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
@@ -283,6 +284,7 @@ include '../../../include/sidebar.php';
                             <th>Date</th>
                             <th>Receipt No</th>
                             <th>Student Name</th>
+                            <th>Mobile</th>
                             <th>Gender</th>
                             <th>Class</th>
                             <th>Fee Type</th>
@@ -293,7 +295,7 @@ include '../../../include/sidebar.php';
                     <tbody>
                         <?php if (empty($payments)): ?>
                             <tr>
-                                <td colspan="8" class="text-center py-5">No hostel fee payments found</td>
+                                <td colspan="10" class="text-center py-5">No hostel fee payments found</td>
                             </tr>
                         <?php else: ?>
                             <?php $sno = $offset + 1;
@@ -302,8 +304,8 @@ include '../../../include/sidebar.php';
                                     <td><?php echo $sno++; ?></td>
                                     <td><?php echo date('d-m-Y', strtotime($p['payment_date'])); ?></td>
                                     <td><?php echo htmlspecialchars($p['receipt_no'] ?? ''); ?></td>
-                                    <td><?php echo htmlspecialchars(trim(($p['surname'] ?? '') . ' ' . ($p['student_name'] ?? '') . ' ' . ($p['fathers_name'] ?? ''))); ?>
-                                    </td>
+                                    <td><?php echo htmlspecialchars(trim(($p['surname'] ?? '') . ' ' . ($p['student_name'] ?? '') . ' ' . ($p['fathers_name'] ?? ''))); ?></td>
+                                    <td><?php echo htmlspecialchars($p['mob'] ?? '-'); ?></td>
                                     <td><?php echo htmlspecialchars($p['gender'] ?? ''); ?></td>
                                     <td><?php echo htmlspecialchars($p['current_class'] ?? '-'); ?></td>
                                     <td>

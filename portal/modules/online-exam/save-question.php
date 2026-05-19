@@ -11,6 +11,13 @@ if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HE
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    file_put_contents(__DIR__ . '/scratch/last_post_log.txt', print_r($_POST, true));
+    
+    // Log the post parameters for debugging
+    $log_dir = __DIR__ . '/scratch';
+    if (!is_dir($log_dir)) { mkdir($log_dir, 0777, true); }
+    file_put_contents($log_dir . '/edit_save_log.txt', "[" . date('Y-m-d H:i:s') . "] SAVE POST DATA FOR ID: " . (isset($_POST['question_id']) ? $_POST['question_id'] : 0) . "\nPost Params: " . print_r($_POST, true) . "\n\n", FILE_APPEND);
+    
     $question_id = isset($_POST['question_id']) ? (int)$_POST['question_id'] : 0;
     $question_text = $_POST['question_text'];
     $option_a = $_POST['option_a'];
@@ -112,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Error saving question: " . $e->getMessage());
     }
 
-    header("Location: question-bank.php?msg=" . $msg);
+    header("Location: question-bank.php");
 }
 $conn = null;
 ?>

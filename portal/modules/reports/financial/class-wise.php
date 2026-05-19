@@ -96,7 +96,59 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/financial/class-wise.php.css">
+<style>
+    .filter-card {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        border: none;
+        border-radius: 12px;
+    }
+
+    .filter-card .form-label {
+        color: white;
+        font-weight: 500;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 350px;
+    }
+
+    .summary-row {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    .summary-item {
+        text-align: center;
+    }
+
+    .summary-item h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .summary-item p {
+        margin: 0;
+        opacity: 0.9;
+    }
+
+    .progress-bar-custom {
+        height: 8px;
+        border-radius: 4px;
+        background: #e9ecef;
+        overflow: hidden;
+    }
+
+    .progress-bar-custom .fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.5s ease;
+    }
+</style>
 
 
 
@@ -233,7 +285,7 @@ include '../../../include/sidebar.php';
                     <tbody>
                         <?php if (empty($classData)): ?>
                             <tr>
-                                <td colspan="8" class="text-center py-4">
+                                <td colspan="9" class="text-center py-4">
                                     <i class="fas fa-folder-open text-muted fa-3x mb-3"></i>
                                     <p class="mb-0">No data found for selected period</p>
                                 </td>
@@ -331,7 +383,7 @@ include '../../../include/sidebar.php';
 <?php include '../../../include/footer.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
     // Chart colors
     const colors = [

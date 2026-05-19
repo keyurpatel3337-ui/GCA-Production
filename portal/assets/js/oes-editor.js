@@ -44,7 +44,354 @@ function cycleLang() {
     console.log('[OES] Language switched to:', currentLang, cfg);
 }
 
-// ---- Quill 2.x Configuration ----
+// ---- Custom Image Resize Module for Quill 2.x (Zero-Dependency) ----
+class CustomImageResize {
+    constructor(quill, options = {}) {
+        this.quill = quill;
+        this.options = options;
+        this.img = null;
+        this.overlay = null;
+        this.handle = null;
+        this.isUpdatingSize = false;
+        
+        // Listen for clicks on images
+        this.quill.root.addEventListener('click', this.handleClick.bind(this), false);
+        
+        // Hide overlay on click outside or text change
+        document.addEventListener('mousedown', this.handleDocMouseDown.bind(this), false);
+        this.quill.on('text-change', () => {
+            if (this.isUpdatingSize) return;
+            this.hide();
+        });
+    }
+
+    handleClick(evt) {
+        if (evt.target && evt.target.tagName === 'IMG') {
+            this.show(evt.target);
+        } else {
+            this.hide();
+        }
+    }
+
+    handleDocMouseDown(evt) {
+        if (!this.overlay) return;
+        if (evt.target === this.img || evt.target === this.handle || this.overlay.contains(evt.target)) {
+            return;
+        }
+        this.hide();
+    }
+
+    show(img) {
+        if (this.img === img) return;
+        this.hide();
+        this.img = img;
+        this.createOverlay();
+    }
+
+    hide() {
+        if (this.overlay) {
+            if (this.overlay.parentNode) {
+                this.overlay.parentNode.removeChild(this.overlay);
+            }
+            this.overlay = null;
+        }
+        this.img = null;
+        this.handle = null;
+    }
+
+    createOverlay() {
+        const rect = this.img.getBoundingClientRect();
+        const scrollX = window.scrollX || window.pageXOffset;
+        const scrollY = window.scrollY || window.pageYOffset;
+
+        this.overlay = document.createElement('div');
+        this.overlay.className = 'ql-image-resizer-overlay';
+        Object.assign(this.overlay.style, {
+            position: 'absolute',
+            top: `${rect.top + scrollY}px`,
+            left: `${rect.left + scrollX}px`,
+            width: `${rect.width}px`,
+            height: `${rect.height}px`,
+            border: '1px solid #0d6efd',
+            pointerEvents: 'none',
+            zIndex: '10000',
+            boxSizing: 'border-box'
+        });
+
+        // Add resize handles (bottom-right only for simplicity, or 4 corners)
+        this.handle = document.createElement('div');
+        Object.assign(this.handle.style, {
+            position: 'absolute',
+            right: '-5px',
+            bottom: '-5px',
+            width: '10px',
+            height: '10px',
+            backgroundColor: '#0d6efd',
+            cursor: 'nwse-resize',
+            pointerEvents: 'auto',
+            zIndex: '10001'
+        });
+        
+        this.handle.addEventListener('mousedown', this.startResize.bind(this), false);
+        this.overlay.appendChild(this.handle);
+
+        // Add Toolbar (Align/Delete/Manual Adjustment)
+        const toolbar = document.createElement('div');
+        Object.assign(toolbar.style, {
+            position: 'absolute',
+            top: '-38px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            backgroundColor: '#fff',
+            padding: '4px 8px',
+            borderRadius: '6px',
+            border: '1px solid #ced4da',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            pointerEvents: 'auto',
+            zIndex: '10002'
+        });
+
+        // Manual Width Adjustment
+        const wLabel = document.createElement('span');
+        wLabel.innerText = 'W:';
+        wLabel.style.fontSize = '12px';
+        wLabel.style.fontWeight = 'bold';
+        wLabel.style.color = '#495057';
+        toolbar.appendChild(wLabel);
+
+        const wInput = document.createElement('input');
+        wInput.type = 'number';
+        wInput.value = Math.round(rect.width || this.img.clientWidth || 100);
+        Object.assign(wInput.style, {
+            width: '55px',
+            height: '22px',
+            border: '1px solid #ced4da',
+            borderRadius: '4px',
+            fontSize: '11px',
+            textAlign: 'center',
+            padding: '2px'
+        });
+        toolbar.appendChild(wInput);
+
+        // Manual Height Adjustment
+        const hLabel = document.createElement('span');
+        hLabel.innerText = 'H:';
+        hLabel.style.fontSize = '12px';
+        hLabel.style.fontWeight = 'bold';
+        hLabel.style.color = '#495057';
+        toolbar.appendChild(hLabel);
+
+        const hInput = document.createElement('input');
+        hInput.type = 'number';
+        hInput.value = Math.round(rect.height || this.img.clientHeight || 100);
+        Object.assign(hInput.style, {
+            width: '55px',
+            height: '22px',
+            border: '1px solid #ced4da',
+            borderRadius: '4px',
+            fontSize: '11px',
+            textAlign: 'center',
+            padding: '2px'
+        });
+        toolbar.appendChild(hInput);
+
+        // Aspect ratio lock logic
+        const initialWidth = parseFloat(wInput.value) || 100;
+        const initialHeight = parseFloat(hInput.value) || 100;
+        const ratio = initialWidth / initialHeight;
+
+        const updateImageSize = (newWidth, newHeight) => {
+            if (!this.img || !this.overlay) return;
+            
+            this.isUpdatingSize = true;
+            try {
+                // 1. Update DOM styles directly
+                this.img.style.width = `${newWidth}px`;
+                this.img.style.height = `${newHeight}px`;
+                this.img.setAttribute('width', `${newWidth}`);
+                this.img.setAttribute('height', `${newHeight}`);
+                this.img.setAttribute('style', `width: ${newWidth}px; height: ${newHeight}px;`);
+                
+                // 2. Format Blot
+                const blot = Quill.find(this.img);
+                if (blot && typeof blot.format === 'function') {
+                    try {
+                        blot.format('width', `${newWidth}px`);
+                        blot.format('height', `${newHeight}px`);
+                        blot.format('style', `width: ${newWidth}px; height: ${newHeight}px;`);
+                    } catch (e) {
+                        console.warn('[OES Resizer] Format error:', e);
+                    }
+                }
+                this.quill.update();
+
+                // 3. Update overlay dimensions in real-time
+                if (this.img) {
+                    const newRect = this.img.getBoundingClientRect();
+                    Object.assign(this.overlay.style, {
+                        width: `${newRect.width}px`,
+                        height: `${newRect.height}px`
+                    });
+                }
+            } finally {
+                this.isUpdatingSize = false;
+            }
+        };
+
+        wInput.addEventListener('input', (e) => {
+            e.stopPropagation();
+            const newWidth = Math.max(10, parseInt(wInput.value) || 0);
+            const newHeight = Math.round(newWidth / ratio);
+            hInput.value = newHeight;
+            updateImageSize(newWidth, newHeight);
+        });
+
+        hInput.addEventListener('input', (e) => {
+            e.stopPropagation();
+            const newHeight = Math.max(10, parseInt(hInput.value) || 0);
+            const newWidth = Math.round(newHeight * ratio);
+            wInput.value = newWidth;
+            updateImageSize(newWidth, newHeight);
+        });
+
+        // Vertical divider
+        const divider = document.createElement('div');
+        Object.assign(divider.style, {
+            width: '1px',
+            height: '16px',
+            backgroundColor: '#dee2e6',
+            margin: '0 4px'
+        });
+        toolbar.appendChild(divider);
+
+        const actions = [
+            { icon: '<i class="fas fa-align-left"></i>', click: () => this.align('left') },
+            { icon: '<i class="fas fa-align-center"></i>', click: () => this.align('center') },
+            { icon: '<i class="fas fa-align-right"></i>', click: () => this.align('right') },
+            { icon: '<i class="fas fa-trash text-danger"></i>', click: () => this.deleteImg() }
+        ];
+
+        actions.forEach(a => {
+            const btn = document.createElement('button');
+            btn.innerHTML = a.icon;
+            btn.type = 'button';
+            Object.assign(btn.style, {
+                border: 'none',
+                background: 'none',
+                padding: '2px 4px',
+                cursor: 'pointer',
+                fontSize: '12px'
+            });
+            btn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); a.click(); };
+            toolbar.appendChild(btn);
+        });
+
+        this.overlay.appendChild(toolbar);
+        document.body.appendChild(this.overlay);
+    }
+
+    startResize(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        
+        const getX = (e) => {
+            if (e.clientX !== undefined) return e.clientX;
+            if (e.touches && e.touches.length > 0) return e.touches[0].clientX;
+            return 0;
+        };
+        
+        const startX = getX(evt);
+        const rect = this.img.getBoundingClientRect();
+        const startWidth = rect.width || this.img.clientWidth || 100;
+        const startHeight = rect.height || this.img.clientHeight || 100;
+        
+        let ratio = startWidth / startHeight;
+        if (isNaN(ratio) || !isFinite(ratio) || ratio <= 0) {
+            ratio = 1.0;
+        }
+        
+        const blot = Quill.find(this.img);
+        let finalWidth = startWidth;
+        let finalHeight = startHeight;
+
+        const onMouseMove = (moveEvt) => {
+            if (!this.img || !this.overlay) return;
+            const currentX = getX(moveEvt);
+            const deltaX = currentX - startX;
+            finalWidth = Math.max(30, startWidth + deltaX);
+            finalHeight = finalWidth / ratio;
+            
+            // 1. Only modify the DOM directly during drag to avoid triggering Quill text-change events
+            this.img.style.width = `${finalWidth}px`;
+            this.img.style.height = `${finalHeight}px`;
+            this.img.setAttribute('width', `${finalWidth}`);
+            this.img.setAttribute('height', `${finalHeight}`);
+            this.img.setAttribute('style', `width: ${finalWidth}px; height: ${finalHeight}px;`);
+            
+            // 2. Update overlay positioning in real-time
+            const newRect = this.img.getBoundingClientRect();
+            const scrollX = window.scrollX || window.pageXOffset;
+            const scrollY = window.scrollY || window.pageYOffset;
+            Object.assign(this.overlay.style, {
+                top: `${newRect.top + scrollY}px`,
+                left: `${newRect.left + scrollX}px`,
+                width: `${newRect.width}px`,
+                height: `${newRect.height}px`
+            });
+        };
+
+        const onMouseUp = () => {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+            
+            this.isUpdatingSize = true;
+            try {
+                // 3. Persist the final dimensions back into Quill's parchment blot ONCE on mouse up
+                if (this.img && blot) {
+                    try {
+                        if (typeof blot.format === 'function') {
+                            blot.format('width', `${finalWidth}px`);
+                            blot.format('height', `${finalHeight}px`);
+                            blot.format('style', `width: ${finalWidth}px; height: ${finalHeight}px;`);
+                        }
+                    } catch (err) {
+                        console.warn('[OES Resizer] Final formatting failed:', err);
+                    }
+                }
+                this.quill.update(); // Sync quill content
+            } finally {
+                this.isUpdatingSize = false;
+            }
+        };
+
+        document.addEventListener('mousemove', onMouseMove, false);
+        document.addEventListener('mouseup', onMouseUp, false);
+    }
+
+    align(type) {
+        if (!this.img) return;
+        const parent = this.img.parentNode;
+        if (type === 'left') parent.style.textAlign = 'left';
+        else if (type === 'center') parent.style.textAlign = 'center';
+        else if (type === 'right') parent.style.textAlign = 'right';
+        this.quill.update();
+        this.show(this.img); // Refresh overlay position
+    }
+
+    deleteImg() {
+        if (!this.img) return;
+        const blot = Quill.find(this.img);
+        if (blot) blot.deleteAt(0);
+        this.hide();
+    }
+}
+
+// Register Module
+Quill.register('modules/imageResize', CustomImageResize);
+
 function configureQuill() {
     const FontClass = Quill.import('attributors/class/font');
     FontClass.whitelist = ['serif', 'monospace', 'outfit', 'roboto', 'inter'];
@@ -53,6 +400,69 @@ function configureQuill() {
     const Size = Quill.import('attributors/style/size');
     Size.whitelist = ['8px', '10px', '12px', '14px', '16px', '18px', '20px', '24px', '30px', '36px', '48px', '60px', '72px'];
     Quill.register(Size, true);
+
+    // Custom Image blot to support inline width, height, and style attributes from resizing
+    const ImageBlot = Quill.import('formats/image');
+    
+    // Direct base class override as a foolproof fallback
+    if (ImageBlot) {
+        ImageBlot.sanitize = function(url) {
+            if (!url) return 'about:blank';
+            const trimUrl = url.trim();
+            if (trimUrl.toLowerCase().startsWith('javascript:')) {
+                return 'about:blank';
+            }
+            return trimUrl;
+        };
+    }
+
+    class CustomImageBlot extends ImageBlot {
+        static blotName = 'image';
+        static tagName = 'IMG';
+
+        static sanitize(url) {
+            if (!url) return 'about:blank';
+            const trimUrl = url.trim();
+            if (trimUrl.toLowerCase().startsWith('javascript:')) {
+                return 'about:blank';
+            }
+            return trimUrl;
+        }
+
+        static create(value) {
+            const node = super.create(value);
+            if (typeof value === 'string') {
+                node.setAttribute('src', typeof this.sanitize === 'function' ? this.sanitize(value) : value);
+            } else if (typeof value === 'object') {
+                if (value.src) node.setAttribute('src', typeof this.sanitize === 'function' ? this.sanitize(value.src) : value.src);
+                if (value.width) node.setAttribute('width', value.width);
+                if (value.height) node.setAttribute('height', value.height);
+                if (value.style) node.setAttribute('style', value.style);
+            }
+            return node;
+        }
+        static formats(node) {
+            const formats = {};
+            if (node.hasAttribute('src')) formats.src = node.getAttribute('src');
+            if (node.hasAttribute('width')) formats.width = node.getAttribute('width');
+            if (node.hasAttribute('height')) formats.height = node.getAttribute('height');
+            if (node.hasAttribute('style')) formats.style = node.getAttribute('style');
+            return formats;
+        }
+        format(name, value) {
+            if (['width', 'height', 'style'].indexOf(name) > -1) {
+                if (value) {
+                    this.domNode.setAttribute(name, value);
+                } else {
+                    this.domNode.removeAttribute(name);
+                }
+            } else {
+                super.format(name, value);
+            }
+        }
+    }
+    Quill.register('formats/image', CustomImageBlot, true);
+    Quill.register(CustomImageBlot, true);
 }
 
 // ---- Icon Helpers ----
@@ -221,8 +631,11 @@ function initModalHandlers() {
     const confirmMathBtn = document.getElementById('confirm-math-btn');
     if (confirmMathBtn) {
         confirmMathBtn.addEventListener('click', () => {
-            const latex = mathField.value;
+            let latex = mathField.value;
             if (latex && activeEditor && currentRange) {
+                // Clean degree characters (e.g., ° or ^° or other lookalikes) to standard LaTeX ^\circ for KaTeX compatibility
+                latex = latex.replace(/\^?[°º˚◦]/g, '^\\circ');
+                
                 activeEditor.insertEmbed(currentRange.index, 'formula', latex);
                 activeEditor.setSelection(currentRange.index + 1);
                 closeModal('mathModal');
@@ -592,111 +1005,264 @@ function preprocessForOCR(src) {
 
 // ---- Main Initialization Function ----
 function initOesEditor(initialData = null) {
-    configureQuill();
+    console.log('[OES] Initializing Editor...');
     
-    const editorIds = [
-        'main', 'a', 'b', 'c', 'd', 'explanation',
-        'desc-q1', 'desc-s1', 'desc-q2', 'desc-s2',
-        'desc-q3', 'desc-s3', 'desc-q4', 'desc-s4',
-        'desc-q5', 'desc-s5'
-    ];
-    
-    const toolbarOptions = [
-        [{ 'font': ['', 'serif', 'monospace', 'outfit', 'roboto', 'inter'] }],
-        [{ 'size': ['8px', '10px', '12px', '14px', '16px', '18px', '20px', '24px', '30px', '36px', '48px', '60px', '72px'] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ 'script': 'sub' }, { 'script': 'super' }],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-        ['link', 'image', 'formula'],
-        ['math', 'chem', 'draw', 'ocr', 'import'],
-        ['table', 'table-insert-row', 'table-insert-column', 'table-delete-row', 'table-delete-column'],
-        ['clean']
-    ];
-
-    editorIds.forEach(id => {
-        editors[id] = new Quill(`#editor-${id}`, {
-            theme: 'snow',
-            modules: {
-                table: true,
-                toolbar: {
-                    container: toolbarOptions,
-                    handlers: {
-                        'math': () => openModal('mathModal'),
-                        'chem': () => openModal('chemModal'),
-                        'draw': () => openModal('drawModal'),
-                        'ocr': () => triggerOCR(),
-                        'import': () => triggerDocImport(),
-                        'formula': () => openModal('mathModal'),
-                        'table': function () { this.quill.getModule('table').insertTable(2, 3); },
-                        'table-insert-row': function () { this.quill.getModule('table').insertRowBelow(); },
-                        'table-insert-column': function () { this.quill.getModule('table').insertColumnRight(); },
-                        'table-delete-row': function () { this.quill.getModule('table').deleteRow(); },
-                        'table-delete-column': function () { this.quill.getModule('table').deleteColumn(); }
-                    }
+    // 1. ATTACH SUBMIT HANDLER FIRST (CRITICAL FOR DATA PERSISTENCE)
+    const form = document.getElementById('question-form');
+    if (form) {
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault(); // Pause form submission for robust async diagnostic logging
+            console.log('[OES] Form submit triggered. Syncing editors...');
+            
+            // Fail-safe: Ensure correct question_type_id hidden input value based on select and visibility
+            const typeSelect = document.getElementById('question_type_select');
+            const realIdInput = document.getElementById('real_question_type_id');
+            const mcqSection = document.getElementById('mcq_section');
+            
+            if (realIdInput) {
+                if (typeSelect && typeSelect.value === '1') {
+                    realIdInput.value = '1';
+                } else if (mcqSection && window.getComputedStyle(mcqSection).display !== 'none') {
+                    realIdInput.value = '1';
+                } else if (typeSelect && typeSelect.value === 'descriptive') {
+                    realIdInput.value = 'descriptive';
                 }
-            },
-            placeholder: `Type ${id === 'main' ? 'question' : id} here...`
-        });
-
-        // Pre-fill if data provided
-        if (initialData && initialData[id]) {
-            editors[id].root.innerHTML = initialData[id];
-        }
-
-        editors[id].on('selection-change', (range) => {
-            if (range) {
-                activeEditor = editors[id];
-                currentRange = range;
+                console.log('[OES Submit] Determined question_type_id hidden value:', realIdInput.value);
             }
+
+            // Sync editors one-by-one with individual try-catch blocks to prevent cascading failures
+            const syncEditor = (eid, targetInputId) => {
+                try {
+                    const targetInput = document.getElementById(targetInputId);
+                    if (editors[eid] && targetInput) {
+                        targetInput.value = editors[eid].root.innerHTML;
+                        console.log(`[OES Submit] Synced ${eid} -> ${targetInputId}`);
+                    }
+                } catch (err) {
+                    console.error(`[OES Submit] Failed to sync editor '${eid}':`, err);
+                }
+            };
+
+            syncEditor('main', 'question_text');
+            syncEditor('a', 'option_a');
+            syncEditor('b', 'option_b');
+            syncEditor('c', 'option_c');
+            syncEditor('d', 'option_d');
+            syncEditor('explanation', 'explanation');
+
+            for (let i = 1; i <= 5; i++) {
+                syncEditor(`desc-q${i}`, `desc_question_${i}`);
+                syncEditor(`desc-s${i}`, `desc_solution_${i}`);
+            }
+
+            // Debug: Log client-side HTML state immediately on submit and wait for network completion
+            try {
+                const submitDebugData = {};
+                const textareaValues = {};
+                const idsToLog = [
+                    'main', 'a', 'b', 'c', 'd', 'explanation',
+                    'desc-q1', 'desc-s1', 'desc-q2', 'desc-s2',
+                    'desc-q3', 'desc-s3', 'desc-q4', 'desc-s4',
+                    'desc-q5', 'desc-s5'
+                ];
+                
+                idsToLog.forEach(eid => {
+                    if (editors[eid]) {
+                        submitDebugData[eid] = editors[eid].root.innerHTML;
+                        const targetId = eid === 'main' ? 'question_text' :
+                                         eid === 'explanation' ? 'explanation' :
+                                         eid.startsWith('desc-q') ? `desc_question_${eid.substring(6)}` :
+                                         eid.startsWith('desc-s') ? `desc_solution_${eid.substring(6)}` :
+                                         `option_${eid}`;
+                        const inputEl = document.getElementById(targetId);
+                        if (inputEl) {
+                            textareaValues[targetId] = inputEl.value;
+                        }
+                    }
+                });
+
+                await fetch('ajax/log-editor-debug.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        event: 'FORM_SUBMIT_SYNC', 
+                        data: {
+                            editors: submitDebugData,
+                            textareas: textareaValues
+                        }
+                    })
+                });
+            } catch (err) {
+                console.error('Debug logging error:', err);
+            }
+
+            console.log('[OES] Sync completed successfully. Submitting form...');
+            form.submit(); // Resume form submission programmatically
         });
-    });
-
-    activeEditor = editors.main;
-    
-    injectIcons();
-    initModalHandlers();
-    initFileHandlers();
-
-    // Move OES modals to body for better responsiveness/z-index
-    document.querySelectorAll('.oes-modal').forEach(m => document.body.appendChild(m));
-    
-    // Global Event Listeners
-    document.getElementById('question_type_select').addEventListener('change', updateQuestionTypeUI);
-    document.getElementById('standard_id_select').addEventListener('change', updateSubjects);
-    document.getElementById('subject_id_select').addEventListener('change', updateChapters);
-    document.getElementById('chapter_id_select').addEventListener('change', updateTopics);
-    
-    // Fill basic metadata if provided
-    if (initialData) {
-        const diffSelect = document.getElementsByName('difficulty')[0];
-        if (diffSelect && initialData.difficulty) diffSelect.value = initialData.difficulty;
-
-        const marksInput = document.getElementById('marks_input');
-        if (marksInput && initialData.marks) marksInput.value = initialData.marks;
-
-        const negInput = document.getElementById('negative_marks_input');
-        if (negInput && initialData.negative_marks) negInput.value = initialData.negative_marks;
-
-        const videoInput = document.getElementsByName('video_solution_url')[0];
-        if (videoInput && initialData.video_solution_url) videoInput.value = initialData.video_solution_url;
-        
-        const correctSel = document.getElementsByName('correct_option')[0];
-        if (correctSel && initialData.correct_option) correctSel.value = initialData.correct_option;
     }
 
-    // Sync hidden textareas on submit
-    document.getElementById('question-form').onsubmit = function () {
-        if (editors.main) document.getElementById('question_text').value = editors.main.root.innerHTML;
-        if (editors.a) document.getElementById('option_a').value = editors.a.root.innerHTML;
-        if (editors.b) document.getElementById('option_b').value = editors.b.root.innerHTML;
-        if (editors.c) document.getElementById('option_c').value = editors.c.root.innerHTML;
-        if (editors.d) document.getElementById('option_d').value = editors.d.root.innerHTML;
-        if (editors.explanation) document.getElementById('explanation').value = editors.explanation.root.innerHTML;
+    // 2. PROCEED WITH UI INITIALIZATION
+    try {
+        configureQuill();
+        
+        const editorIds = [
+            'main', 'a', 'b', 'c', 'd', 'explanation',
+            'desc-q1', 'desc-s1', 'desc-q2', 'desc-s2',
+            'desc-q3', 'desc-s3', 'desc-q4', 'desc-s4',
+            'desc-q5', 'desc-s5'
+        ];
+        
+        const toolbarOptions = [
+            [{ 'font': ['', 'serif', 'monospace', 'outfit', 'roboto', 'inter'] }],
+            [{ 'size': ['8px', '10px', '12px', '14px', '16px', '18px', '20px', '24px', '30px', '36px', '48px', '60px', '72px'] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'script': 'sub' }, { 'script': 'super' }],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['link', 'image', 'formula'],
+            ['math', 'chem', 'draw', 'ocr', 'import'],
+            ['table', 'table-insert-row', 'table-insert-column', 'table-delete-row', 'table-delete-column'],
+            ['clean']
+        ];
 
-        for (let i = 1; i <= 5; i++) {
-            if (editors[`desc-q${i}`]) document.getElementById(`desc_question_${i}`).value = editors[`desc-q${i}`].root.innerHTML;
-            if (editors[`desc-s${i}`]) document.getElementById(`desc_solution_${i}`).value = editors[`desc-s${i}`].root.innerHTML;
+        editorIds.forEach(id => {
+            const el = document.querySelector(`#editor-${id}`);
+            if (!el) return;
+
+            editors[id] = new Quill(`#editor-${id}`, {
+                theme: 'snow',
+                modules: {
+                    table: true,
+                    imageResize: {},
+                    toolbar: {
+                        container: toolbarOptions,
+                        handlers: {
+                            'math': () => openModal('mathModal'),
+                            'chem': () => openModal('chemModal'),
+                            'draw': () => openModal('drawModal'),
+                            'ocr': () => triggerOCR(),
+                            'import': () => triggerDocImport(),
+                            'formula': () => openModal('mathModal'),
+                            'table': function () { this.quill.getModule('table').insertTable(2, 3); },
+                            'table-insert-row': function () { this.quill.getModule('table').insertRowBelow(); },
+                            'table-insert-column': function () { this.quill.getModule('table').insertColumnRight(); },
+                            'table-delete-row': function () { this.quill.getModule('table').deleteRow(); },
+                            'table-delete-column': function () { this.quill.getModule('table').deleteColumn(); }
+                        }
+                    }
+                },
+                placeholder: `Type ${id === 'main' ? 'question' : id} here...`
+            });
+
+            // Custom image matcher to prevent Quill from stripping local relative/absolute image paths
+            const customImageMatcher = (node, delta) => {
+                const src = node.getAttribute('src');
+                if (src) {
+                    const cleanSrc = src.trim();
+                    if (!cleanSrc.toLowerCase().startsWith('javascript:')) {
+                        const Delta = Quill.import('delta') || Quill.import('core/delta');
+                        const attributes = {};
+                        if (node.getAttribute('width')) attributes.width = node.getAttribute('width');
+                        if (node.getAttribute('height')) attributes.height = node.getAttribute('height');
+                        if (node.getAttribute('style')) attributes.style = node.getAttribute('style');
+                        
+                        return new Delta().insert({ image: cleanSrc }, attributes);
+                    }
+                }
+                return delta;
+            };
+            editors[id].clipboard.addMatcher('IMG', customImageMatcher);
+            editors[id].clipboard.addMatcher('img', customImageMatcher);
+
+            // Function to sync this specific editor to its hidden input/textarea
+            const syncEditorToInput = () => {
+                const targetId = id === 'main' ? 'question_text' :
+                                 id === 'explanation' ? 'explanation' :
+                                 id.startsWith('desc-q') ? `desc_question_${id.substring(6)}` :
+                                 id.startsWith('desc-s') ? `desc_solution_${id.substring(6)}` :
+                                 `option_${id}`;
+                const targetInput = document.getElementById(targetId);
+                if (targetInput && editors[id]) {
+                    targetInput.value = editors[id].root.innerHTML;
+                }
+            };
+
+            // Pre-fill if data provided
+            if (initialData && initialData[id]) {
+                editors[id].clipboard.dangerouslyPasteHTML(initialData[id]);
+            }
+            
+            // Sync immediately on load so the hidden textareas have values
+            syncEditorToInput();
+
+            // Real-time synchronization on every keystroke/change (Foolproof!)
+            editors[id].on('text-change', syncEditorToInput);
+
+            editors[id].on('selection-change', (range) => {
+                if (range) {
+                    activeEditor = editors[id];
+                    currentRange = range;
+                }
+            });
+        });
+
+        activeEditor = editors.main;
+        
+        injectIcons();
+        initModalHandlers();
+        initFileHandlers();
+
+        // Move OES modals to body for better responsiveness/z-index
+        document.querySelectorAll('.oes-modal').forEach(m => document.body.appendChild(m));
+        
+        // Global Event Listeners
+        const qTypeSelect = document.getElementById('question_type_select');
+        if (qTypeSelect) qTypeSelect.addEventListener('change', updateQuestionTypeUI);
+        
+        const stdSelect = document.getElementById('standard_id_select');
+        if (stdSelect) stdSelect.addEventListener('change', updateSubjects);
+        
+        const subSelect = document.getElementById('subject_id_select');
+        if (subSelect) subSelect.addEventListener('change', updateChapters);
+        
+        const chSelect = document.getElementById('chapter_id_select');
+        if (chSelect) chSelect.addEventListener('change', updateTopics);
+        
+        // Fill basic metadata if provided
+        if (initialData) {
+            const diffSelect = document.getElementsByName('difficulty')[0];
+            if (diffSelect && initialData.difficulty) diffSelect.value = initialData.difficulty;
+
+            const marksInput = document.getElementById('marks_input');
+            if (marksInput && initialData.marks) marksInput.value = initialData.marks;
+
+            const negInput = document.getElementById('negative_marks_input');
+            if (negInput && initialData.negative_marks) negInput.value = initialData.negative_marks;
+
+            const videoInput = document.getElementsByName('video_solution_url')[0];
+            if (videoInput && initialData.video_solution_url) videoInput.value = initialData.video_solution_url;
+            
+            const correctSel = document.getElementsByName('correct_option')[0];
+            if (correctSel && initialData.correct_option) correctSel.value = initialData.correct_option;
         }
-    };
+        
+        // Debug: Log client-side HTML state immediately on load
+        try {
+            const loadDebugData = {};
+            editorIds.forEach(eid => {
+                if (editors[eid]) loadDebugData[eid] = editors[eid].root.innerHTML;
+            });
+            fetch('ajax/log-editor-debug.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ event: 'INITIAL_LOAD_COMPLETE', data: loadDebugData })
+            });
+        } catch (e) {
+            console.error('Debug logging error:', e);
+        }
+        
+        console.log('[OES] Editor ready.');
+    } catch (err) {
+        console.error('[OES] Initialization Error:', err);
+    }
 }

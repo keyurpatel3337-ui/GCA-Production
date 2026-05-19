@@ -77,7 +77,7 @@ try {
         $params[] = $date_to . ' 23:59:59';
     }
 
-    $sql .= " ORDER BY gcr.request_date DESC";
+    $sql .= " ORDER BY gcr.request_date ASC";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute($params);

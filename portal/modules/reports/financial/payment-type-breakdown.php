@@ -129,7 +129,128 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/financial/payment-type-breakdown.php.css">
+<style>
+    /* Common styling matching Receipt Register */
+    .filter-card {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        border: none;
+        border-radius: 12px;
+    }
+
+    .filter-card .form-label {
+        color: white;
+        font-weight: 500;
+    }
+
+    /* Stat Box Styling */
+    .stat-box {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid;
+    }
+
+    .stat-box.info {
+        border-color: #17a2b8;
+    }
+
+    .stat-box.success {
+        border-color: #28a745;
+    }
+
+    .stat-box.warning {
+        border-color: #ffc107;
+    }
+
+    .stat-box.danger {
+        border-color: #dc3545;
+    }
+
+    .stat-box h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        /* Monospace for numbers alignment */
+    }
+
+    /* Breakdown Card Styling */
+    .card-outline {
+        border-top: 3px solid #007bff;
+        border-radius: 8px;
+        box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    }
+
+    .card-header {
+        background-color: transparent;
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
+        padding: .75rem 1.25rem;
+    }
+
+    .mode-item {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .mode-item:last-child {
+        border-bottom: none;
+    }
+
+    .mode-badge {
+        font-size: 0.85rem;
+        padding: 4px 8px;
+    }
+
+    .progress-bar-container {
+        width: 100px;
+        height: 6px;
+        background-color: #e9ecef;
+        border-radius: 3px;
+        margin-left: 10px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        border-radius: 3px;
+    }
+
+    .amount-text {
+        letter-spacing: -0.5px;
+    }
+
+    .no-data {
+        text-align: center;
+        padding: 60px 20px;
+        color: #6c757d;
+    }
+
+    .no-data i {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        opacity: 0.3;
+    }
+
+    @media print {
+
+        .filter-card,
+        .btn,
+        .breadcrumb,
+        .no-print {
+            display: none !important;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            box-shadow: none;
+        }
+    }
+</style>
 
 
 
@@ -354,7 +475,7 @@ include '../../../include/sidebar.php';
 
 <?php include '../../../include/footer.php'; ?>
 
-<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
     function exportToExcel() {
         const wb = XLSX.utils.book_new();

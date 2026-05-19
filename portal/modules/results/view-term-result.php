@@ -32,7 +32,67 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/results/view-term-result.php.css">
+<style>
+    .report-card {
+        max-width: 900px;
+        margin: 20px auto;
+        background: #fff;
+        padding: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .report-header {
+        text-align: center;
+        border-bottom: 2px solid #333;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+    }
+
+    .student-meta {
+        margin-bottom: 30px;
+    }
+
+    .mark-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .mark-table th,
+    .mark-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+
+    .mark-table th {
+        background: #f8f9fa;
+    }
+
+    .subject-name {
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .total-row {
+        background: #eee;
+        font-weight: bold;
+    }
+
+    @media print {
+        .no-print {
+            display: none;
+        }
+
+        .report-card {
+            box-shadow: none;
+            margin: 0;
+            width: 100%;
+            border-radius: 0;
+        }
+    }
+</style>
 
 <div class="content-wrapper">
     <div class="container-fluid">

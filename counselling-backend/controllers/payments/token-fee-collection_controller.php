@@ -78,7 +78,7 @@ if (!empty($search)) {
     $params['search7'] = $searchTerm;
 }
 
-$query .= " ORDER BY s.admission_confirmed_date ASC";
+$query .= " ORDER BY s.admission_confirmed_date DESC";
 
 try {
     $students = $dbOps->customSelect($query, $params);

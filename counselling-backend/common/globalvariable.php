@@ -178,8 +178,10 @@ if (isset($_SESSION['is_student_login']) && $_SESSION['is_student_login'] === tr
 // Current Page - get from URL
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
 
-// Base URL variable for backward compatibility (using centralized BASE_URL)
-$base_url = BASE_URL . '/';
+// Base URL Configuration
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$base_url = $protocol . '://' . $host . dirname($_SERVER['PHP_SELF'] ?? '/') . '/';
 
 // External Database Connection for Student Data
 try {

@@ -421,12 +421,12 @@ try {
                                     </td>
                                     <td><?php echo date('d M Y', strtotime($student['enrollment_date'])); ?></td>
                                     <td>
-                                        <a onclick="document.getElementById('form_division-assignment-single_student['enrollment_id']').submit()"
-                                            style="cursor:pointer" class="btn btn-sm btn-info" title="Assign/Edit">
+                                        <a href="division-assignment-single.php?enrollment_id=<?php echo $student['enrollment_id']; ?>"
+                                            class="btn btn-sm btn-info" title="Assign/Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a onclick="document.getElementById('form_details_student['registration_id']').submit()"
-                                            style="cursor:pointer" class="btn btn-sm btn-primary" title="View Details">
+                                        <a href="details.php?id=<?php echo $student['registration_id']; ?>"
+                                            class="btn btn-sm btn-primary" title="View Details">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>
@@ -541,58 +541,46 @@ try {
             var selectedCount = $('.student-checkbox:checked').length;
 
             if (selectedCount === 0) {
-                if (typeof showToast === 'function') {
-                    showToast('warning', 'Warning', 'Please select at least one student.');
-                } else {
-                    alert('Please select at least one student.');
-                }
+                showToast('warning', 'Warning', 'Please select at least one student.');
                 return false;
             }
 
-            if (confirm('Are you sure you want to assign ' + selectedCount + ' student(s) to the selected division?')) {
-                const btn = $('#bulkAssignForm button[type="submit"]');
-                const originalHtml = btn.html();
-                btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Assigning...');
+            showConfirm({
+                title: 'Confirm Division Assignment',
+                message: `Are you sure you want to assign <strong>${selectedCount}</strong> student(s) to the selected division?`,
+                confirmText: 'Yes, Assign',
+                confirmButtonClass: 'btn-success',
+                onConfirm: function () {
+                    const btn = $('#bulkAssignForm button[type="submit"]');
+                    const originalHtml = btn.html();
+                    btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Assigning...');
 
-                // Get course_division_id from select dropdown
-                var courseDivisionId = $('select[name="course_division_id"]').val();
-
-                // Collect checked student IDs
-                var studentIds = [];
-                $('.student-checkbox:checked').each(function () {
-                    studentIds.push($(this).val());
-                });
-
-                // Build form data
-                var formData = 'course_division_id=' + encodeURIComponent(courseDivisionId);
-                $.each(studentIds, function (index, value) {
-                    formData += '&student_ids[]=' + encodeURIComponent(value);
-                });
-
-                $.api.post('students/division-assignment-bulk-save', formData)
-                    .then(response => {
-                        if (response.success) {
-                            if (typeof showToast === 'function') {
-                                showToast('success', 'Success!', response.message);
-                            }
-                            setTimeout(() => location.reload(), 2000);
-                        } else {
-                            btn.prop('disabled', false).html(originalHtml);
-                            if (typeof showToast === 'function') {
-                                showToast('error', 'Error!', response.error || response.message);
-                            } else {
-                                alert(response.error || response.message);
-                            }
-                        }
-                    }).catch(error => {
-                        btn.prop('disabled', false).html(originalHtml);
-                        if (typeof showToast === 'function') {
-                            showToast('error', 'Error!', error.message || 'Failed to assign students');
-                        } else {
-                            alert(error.message || 'Failed to assign students');
-                        }
+                    var courseDivisionId = $('select[name="course_division_id"]').val();
+                    var studentIds = [];
+                    $('.student-checkbox:checked').each(function () {
+                        studentIds.push($(this).val());
                     });
-            }
+
+                    var formData = 'course_division_id=' + encodeURIComponent(courseDivisionId);
+                    $.each(studentIds, function (index, value) {
+                        formData += '&student_ids[]=' + encodeURIComponent(value);
+                    });
+
+                    $.api.post('students/division-assignment-bulk-save', formData)
+                        .then(response => {
+                            if (response.success) {
+                                showToast('success', 'Success!', response.message);
+                                setTimeout(() => location.reload(), 2000);
+                            } else {
+                                btn.prop('disabled', false).html(originalHtml);
+                                showToast('error', 'Error!', response.error || response.message);
+                            }
+                        }).catch(error => {
+                            btn.prop('disabled', false).html(originalHtml);
+                            showToast('error', 'Error!', error.message || 'Failed to assign students');
+                        });
+                }
+            });
         });
     });
 </script>

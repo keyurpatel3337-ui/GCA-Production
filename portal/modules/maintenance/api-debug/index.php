@@ -21,7 +21,7 @@ try {
     $has_table = $check->rowCount() > 0;
 
     if ($has_table) {
-        $stmt = $conn->query("SELECT * FROM tbl_api_logs ORDER BY created_at DESC LIMIT 100");
+        $stmt = $conn->query("SELECT * FROM tbl_api_logs ORDER BY created_at ASC LIMIT 100");
         $api_logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (Exception $e) {

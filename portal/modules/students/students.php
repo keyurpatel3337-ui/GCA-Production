@@ -143,14 +143,43 @@ else {
 }
 
 include '../../include/header.php';
-?>
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/students/students.css">
-<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
 <?php // Excel exports handled via export.php (server-side) ?>
+
+<style>
+    .view-switcher .btn {
+        border-radius: 20px;
+        padding: 5px 20px;
+        font-weight: 600;
+        margin-right: 5px;
+    }
+
+    .view-switcher .btn.active {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 0.35em 0.65em;
+    }
+
+    .table-students th {
+        background: #f8f9fa;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        color: #6c757d;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    /* Select2 Placeholder fix */
+    .select2-container--bootstrap4 .select2-selection--single .select2-selection__placeholder {
+        color: #6c757d !important;
+        opacity: 0.8;
+    }
+</style>
 
 <div class="content-wrapper">
     <section class="content">
@@ -479,7 +508,7 @@ endif; ?>
                             <tbody>
                                 <?php if (empty($students)): ?>
                                     <tr>
-                                        <td colspan="8" class="text-center py-5">
+                                        <td colspan="<?php echo ($currentView === 'enrolled') ? 8 : 7; ?>" class="text-center py-5">
                                             <i class="fas fa-users-slash text-muted fa-3x mb-3"></i>
                                             <p class="text-muted">No students found matching current filters.</p>
                                         </td>
@@ -657,9 +686,15 @@ endif; ?>
     // exportToExcel function removed as export is now server-side
 
     function deleteStudent(id) {
-        if (confirm("Are you sure you want to delete this student record? This action cannot be undone.")) {
-            window.location.href = 'appointment-delete.php?id=' + id + '&redirect=students.php';
-        }
+        showConfirm({
+            title: 'Delete Student Record',
+            message: 'Are you sure you want to delete this student record? This action cannot be undone.',
+            confirmText: 'Yes, Delete',
+            confirmButtonClass: 'btn-danger',
+            onConfirm: function () {
+                window.location.href = 'appointment-delete.php?id=' + id + '&redirect=students.php';
+            }
+        });
     }
 
     function clearIndividualFilter(key) {

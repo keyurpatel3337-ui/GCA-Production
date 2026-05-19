@@ -20,7 +20,62 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext ASC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<link rel="stylesheet" href="<?= PORTAL_URL ?>/assets/css/modules/online-exam/exam-setup.css">
+<style>
+    .question-pool-item, .selected-question-item {
+        cursor: pointer;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+    .question-pool-item:hover { border-color: #4e73df !important; background: #f0f4ff; }
+    .selected-question-item:hover { border-color: #dc3545 !important; background: #fff5f5; }
+    .selected-question-item { border-left: 4px solid #28a745 !important; }
+
+    .split-panel { display: flex; gap: 20px; }
+    .panel-left, .panel-right { flex: 1; min-width: 0; }
+
+    .q-pool-box, .q-selected-box {
+        height: 480px;
+        overflow-y: auto;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 10px;
+        background: #f8f9fa;
+    }
+    .q-selected-box { background: #f0fff4; border-color: #c3e6cb; }
+
+    .panel-header {
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    .panel-header.available { background: #e8f0fe; color: #3c4fb5; }
+    .panel-header.selected-h { background: #d4edda; color: #155724; }
+
+    .q-item-card {
+        background: #fff;
+        border: 1px solid #e3e6f0;
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+    }
+    .q-item-card .q-meta { font-size: 0.75rem; color: #888; margin-top: 4px; }
+    .q-item-card .add-btn, .q-item-card .remove-btn {
+        font-size: 0.75rem;
+        padding: 2px 8px;
+        border-radius: 20px;
+        float: right;
+        margin-left: 8px;
+    }
+    .empty-state { text-align: center; color: #aaa; padding: 40px 20px; font-size: 0.9rem; }
+    .filter-bar { display: flex; gap: 8px; margin-bottom: 12px; }
+    .filter-bar select { flex: 1; font-size: 0.85rem; }
+    .filter-bar button { white-space: nowrap; font-size: 0.85rem; }
+</style>
 
 <main class="app-main">
     <div class="app-content-header">
@@ -130,8 +185,9 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext 
 
                 <!-- ── Row 3: Scheduling ── -->
                 <div class="card shadow-sm mb-4">
-                    <div class="card-header py-3 bg-success text-white">
+                    <div class="card-header py-3 bg-success text-white d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold">Scheduling &amp; Rules</h6>
+                        <span class="badge bg-white text-success font-weight-bold px-3 py-2"><i class="fas fa-clock mr-1"></i> Server Time: <?= date('d M Y, h:i A') ?> (<?= date_default_timezone_get() ?>)</span>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -153,7 +209,16 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext 
                                     <input type="number" name="duration_mins" value="60" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-4 d-flex align-items-center">
+                            <div class="col-md-2">
+                                <div class="form-group mb-3">
+                                    <label class="small font-weight-bold">Exam Type</label>
+                                    <select name="exam_mode" class="form-control" required>
+                                        <option value="Practice" selected>Practice Test</option>
+                                        <option value="Final">Final Exam</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-center">
                                 <div>
                                     <div class="custom-control custom-switch mb-2">
                                         <input type="checkbox" class="custom-control-input" id="shuffle_questions" name="shuffle_questions" value="1" checked>

@@ -54,6 +54,66 @@ $fileName = $_FILES['word_file']['name'];
                 $xpath->registerNamespace('w', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main');
                 $xpath->registerNamespace('m', 'http://schemas.openxmlformats.org/officeDocument/2006/math');
 
+                // === CHEMDRAW / OLE IMAGE EXTRACTION ===
+                // Must run BEFORE math processing which removes w:object nodes
+                $oleImageMap = [];
+                $relsXml = $zip->getFromName('word/_rels/document.xml.rels');
+                if ($relsXml) {
+                    $domRels = new DOMDocument();
+                    @$domRels->loadXML($relsXml);
+                    $relMap = [];
+                    foreach ($domRels->getElementsByTagName('Relationship') as $rel) {
+                        $relMap[$rel->getAttribute('Id')] = $rel->getAttribute('Target');
+                    }
+                    $tblNodes = $xpath->query('//w:tbl');
+                    $tblIdx = 0;
+                    foreach ($tblNodes as $tblNode) {
+                        $trNodes = $xpath->query('w:tr', $tblNode);
+                        $rIdx = 0;
+                        foreach ($trNodes as $trNode) {
+                            $tcNodes = $xpath->query('w:tc', $trNode);
+                            $cIdx = 0;
+                            foreach ($tcNodes as $tcNode) {
+                                $objFound = $xpath->query('.//*[local-name()="object"]', $tcNode);
+                                if ($objFound->length > 0) {
+                                    $imgNodes = $xpath->query('.//*[local-name()="imagedata"]', $tcNode);
+                                    foreach ($imgNodes as $imgNode) {
+                                        $rId = '';
+                                        foreach ($imgNode->attributes as $attr) {
+                                            if (strtolower($attr->localName) === 'id') {
+                                                $rId = $attr->value;
+                                                break;
+                                            }
+                                        }
+                                        if ($rId && isset($relMap[$rId])) {
+                                            $target = $relMap[$rId];
+                                            $mapKey = 't' . $tblIdx . '_r' . $rIdx . '_c' . $cIdx;
+                                            // Skip if we already captured an image for this cell
+                                            if (isset($oleImageMap[$mapKey])) {
+                                                break;
+                                            }
+                                            $emfBytes = $zip->getFromName('word/' . $target);
+                                            if ($emfBytes !== false && strlen($emfBytes) > 100) {
+                                                $emfFile = $tempDir . 'ole_t' . $tblIdx . '_r' . $rIdx . '_c' . $cIdx . '_' . uniqid() . '.emf';
+                                                $pngFile = $tempDir . 'qimg_ole_' . uniqid() . '_' . time() . '.png';
+                                                file_put_contents($emfFile, $emfBytes);
+                                                $oleImageMap[$mapKey] = [
+                                                    'emf' => $emfFile,
+                                                    'png' => $pngFile,
+                                                    'url' => UPLOADS_URL . '/oes/' . basename($pngFile),
+                                                ];
+                                            }
+                                        }
+                                    }
+                                }
+                                $cIdx++;
+                            }
+                            $rIdx++;
+                        }
+                        $tblIdx++;
+                    }
+                }
+
                 // Using local-name() to be namespace-agnostic and more aggressive
                 $mathNodes = $xpath->query("//*[local-name()='oMathPara'] | //*[local-name()='oMath'] | //*[local-name()='object']");
                 if ($mathNodes->length > 0) {
@@ -104,6 +164,78 @@ $fileName = $_FILES['word_file']['name'];
             $fileToLoad = $file;
         }
 
+        // === EMF → PNG CONVERSION via PowerShell + .NET System.Drawing ===
+        // Uses System.Drawing.Imaging.Metafile — reliable from Apache service context,
+        // no desktop/screen session required, built into all Windows Server versions.
+        if (!empty($oleImageMap)) {
+            $psJobs = [];
+            foreach ($oleImageMap as $job) {
+                // PowerShell-safe single-quote escaped paths
+                $e = str_replace("'", "''", $job['emf']);
+                $p = str_replace("'", "''", $job['png']);
+                $psJobs[] = "Convert-Emf '" . $e . "' '" . $p . "'";
+            }
+
+            $psScript = implode("\r\n", array_merge([
+                'Add-Type -AssemblyName System.Drawing',
+                'function Convert-Emf($emfPath, $pngPath) {',
+                '    try {',
+                '        $mf = New-Object System.Drawing.Imaging.Metafile($emfPath)',
+                '        $w  = [Math]::Max($mf.Width,  80) * 2',
+                '        $h  = [Math]::Max($mf.Height, 80) * 2',
+                '        $bm = New-Object System.Drawing.Bitmap($w, $h)',
+                '        $gr = [System.Drawing.Graphics]::FromImage($bm)',
+                '        $gr.SmoothingMode   = [System.Drawing.Drawing2D.SmoothingMode]::HighQuality',
+                '        $gr.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic',
+                '        $gr.Clear([System.Drawing.Color]::White)',
+                '        $gr.DrawImage($mf, 0, 0, $w, $h)',
+                '        $gr.Flush()',
+                '        $bm.Save($pngPath, [System.Drawing.Imaging.ImageFormat]::Png)',
+                '        $gr.Dispose(); $bm.Dispose(); $mf.Dispose()',
+                '        Write-Host "OK:$pngPath"',
+                '    } catch {',
+                '        Write-Host "ERR:$($_.Exception.Message) | $emfPath"',
+                '    }',
+                '}',
+            ], $psJobs));
+
+            $psFile = $tempDir . 'ole_cvt_' . uniqid() . '.ps1';
+            file_put_contents($psFile, $psScript);
+            // -NonInteractive -NoProfile: faster startup, no profile dependencies
+            // -ExecutionPolicy Bypass: run unsigned scripts from Apache
+            shell_exec('powershell.exe -NonInteractive -NoProfile -ExecutionPolicy Bypass -File ' . escapeshellarg($psFile) . ' 2>&1');
+            @unlink($psFile);
+
+            // Cleanup EMF temp files
+            foreach ($oleImageMap as $job) {
+                if (file_exists($job['emf'])) @unlink($job['emf']);
+            }
+            // Build img_html for each successfully converted image
+            foreach ($oleImageMap as $key => &$job) {
+                if (file_exists($job['png'])) {
+                    $w = null;
+                    $h = null;
+                    $size = @getimagesize($job['png']);
+                    if ($size) {
+                        $w = round($size[0] / 2);
+                        $h = round($size[1] / 2);
+                    }
+                    
+                    $style_str = 'max-width:100%; margin:5px 0;';
+                    if ($w && $h) {
+                        $style_str .= " width:{$w}px; height:{$h}px;";
+                    } else {
+                        $style_str .= ' max-width:300px; height:auto;';
+                    }
+                    
+                    $job['img_html'] = '<img src="' . htmlspecialchars($job['url']) . '" style="' . $style_str . '" />';
+                } else {
+                    $job['img_html'] = '';
+                }
+            }
+            unset($job);
+        }
+
         $phpWord = IOFactory::load($fileToLoad);
 
         // Map of template columns (Strict Positional based on download-word-template.php)
@@ -126,13 +258,33 @@ $fileName = $_FILES['word_file']['name'];
                         }
                     }
 
+                    $oleRichFields = ['question_text','option_a','option_b','option_c','option_d','explanation'];
                     for ($i = $startIndex; $i < count($rows); $i++) {
                         $cells = $rows[$i]->getCells();
                         if (empty($cells)) continue;
                         $q = [];
                         foreach ($WORD_COLS as $index => $key) {
                             if (isset($cells[$index])) {
-                                $q[$key] = trim(getCellText($cells[$index], !in_array($key, ['question_text','option_a','option_b','option_c','option_d','explanation'])));
+                                $isPlain = !in_array($key, $oleRichFields);
+                                $cellContent = trim(getCellText($cells[$index], $isPlain));
+                                // === OLE/ChemDraw Image Injection ===
+                                if (!empty($oleImageMap)) {
+                                    $mapKey = 't0_r' . $i . '_c' . $index;
+                                    if (isset($oleImageMap[$mapKey]['img_html']) && $oleImageMap[$mapKey]['img_html'] !== '') {
+                                        $imgHtml = $oleImageMap[$mapKey]['img_html'];
+                                        if (empty(trim(strip_tags($cellContent))) || trim($cellContent) === '[Equation/Object]') {
+                                            // Case 1: Cell is purely an image (empty text or exact placeholder)
+                                            $cellContent = $imgHtml;
+                                        } elseif (strpos($cellContent, '[Equation/Object]') !== false) {
+                                            // Case 2: Cell has text + image - replace placeholder inline
+                                            $cellContent = str_replace('[Equation/Object]', $imgHtml, $cellContent);
+                                        } else {
+                                            // Case 3: OLE was detected in XML but text exists - append image
+                                            $cellContent = $cellContent . ' ' . $imgHtml;
+                                        }
+                                    }
+                                }
+                                $q[$key] = $cellContent;
                             }
                         }
                         if (!empty($q['question_text'])) {
@@ -164,6 +316,20 @@ $fileName = $_FILES['word_file']['name'];
             if (is_string($val)) {
                 $val = preg_replace('/(?:<|&lt;)\s*Object\s*:[^>;&]+(?:>|&gt;)/i', '', $val);
                 if (trim($val) === '[Equation/Object]') $val = ''; 
+                
+                // Clean degree characters inside LaTeX formulas ($$...$$) for KaTeX compatibility
+                $val = preg_replace_callback('/\$\$(.*?)\$\$/s', function($matches) {
+                    $latex = $matches[1];
+                    $latex = preg_replace('/\^\{\s*[°º˚◦]\s*\}/u', '^{\\circ}', $latex);
+                    $latex = preg_replace('/\^[°º˚◦]/u', '^\\circ', $latex);
+                    $latex = preg_replace('/(?<!\^)(?<!\^\{)[°º˚◦]/u', '^\\circ', $latex);
+                    
+                    // Collapse any identical adjacent duplicated mathematical formulas in the same cell
+                    $latex = preg_replace('/^(.+?)\s*\1$/u', '$1', trim($latex));
+                    
+                    return '$$' . $latex . '$$';
+                }, $val);
+
                 $val = trim($val);
             }
         }
@@ -246,7 +412,6 @@ function ommlToLatex($node) {
             $latex .= $deg ? "\\sqrt[{$deg}]{{{$e}}}" : "\\sqrt{{$e}}";
             break;
         case 'sSup': // Superscript
-        case 'sup':
             $e = ''; $sup = '';
             foreach ($node->childNodes as $child) {
                 $n = localName($child);
@@ -256,7 +421,6 @@ function ommlToLatex($node) {
             $latex .= "{$e}^{{{$sup}}}";
             break;
         case 'sSub': // Subscript
-        case 'sub':
             $e = ''; $sub = '';
             foreach ($node->childNodes as $child) {
                 $n = localName($child);
@@ -276,11 +440,55 @@ function ommlToLatex($node) {
             $latex .= "{$e}_{{{$sub}}}^{{{$sup}}}";
             break;
         case 'd': // Delimiter
+            $beg = '(';
+            $end = ')';
+            foreach ($node->childNodes as $child) {
+                if (localName($child) === 'dPr') {
+                    foreach ($child->childNodes as $prop) {
+                        $pName = localName($prop);
+                        if ($pName === 'beg') {
+                            $val = $prop->getAttribute('m:val') ?: $prop->getAttribute('val');
+                            if ($val !== null && $val !== '') $beg = $val;
+                        }
+                        if ($pName === 'end') {
+                            $val = $prop->getAttribute('m:val') ?: $prop->getAttribute('val');
+                            if ($val !== null && $val !== '') $end = $val;
+                        }
+                    }
+                }
+            }
+            
             $e = '';
             foreach ($node->childNodes as $child) {
-                if (localName($child) === 'e') $e = ommlToLatex($child);
+                if (localName($child) === 'e') {
+                    $e = ommlToLatex($child);
+                }
             }
-            $latex .= "\\left( {$e} \\right)";
+            
+            $leftCmd = '\\left' . ($beg === '{' ? '\\{' : ($beg === '' ? '.' : $beg));
+            $rightCmd = '\\right' . ($end === '}' ? '\\}' : ($end === '' ? '.' : $end));
+            
+            $latex .= "{$leftCmd} {$e} {$rightCmd}";
+            break;
+            
+        case 'm': // Matrix
+            $rows = [];
+            foreach ($node->childNodes as $child) {
+                if (localName($child) === 'mr') {
+                    $rows[] = ommlToLatex($child);
+                }
+            }
+            $latex .= '\\begin{matrix} ' . implode(' \\\\ ', $rows) . ' \\end{matrix}';
+            break;
+            
+        case 'mr': // Matrix Row
+            $elements = [];
+            foreach ($node->childNodes as $child) {
+                if (localName($child) === 'e') {
+                    $elements[] = ommlToLatex($child);
+                }
+            }
+            $latex .= implode(' & ', $elements);
             break;
         default:
             if ($node->hasChildNodes()) {
@@ -308,11 +516,11 @@ function localName($node) {
 function getCellText($cell, $plainText = false) {
     $text = '';
     if ($cell instanceof \PhpOffice\PhpWord\Element\Table) {
-        if (!$plainText) $text .= '<table class="table table-bordered table-sm oes-import-table">';
+        if (!$plainText) $text .= '<table class="table table-bordered table-sm" style="width:auto; margin:10px 0;">';
         foreach ($cell->getRows() as $row) {
             if (!$plainText) $text .= '<tr>';
             foreach ($row->getCells() as $cellObj) {
-                if (!$plainText) $text .= '<td>';
+                if (!$plainText) $text .= '<td style="padding:5px; border:1px solid #ddd;">';
                 $text .= getCellText($cellObj, $plainText);
                 if (!$plainText) $text .= '</td>';
             }
@@ -350,6 +558,26 @@ function getElementContent($element, $plainText) {
                     }
                 }
                 
+                $img_style_str = 'max-width:100%; margin:5px 0;';
+                if ($element instanceof \PhpOffice\PhpWord\Element\Image) {
+                    $style = $element->getStyle();
+                    if ($style) {
+                        $w = method_exists($style, 'getWidth') ? $style->getWidth() : null;
+                        $h = method_exists($style, 'getHeight') ? $style->getHeight() : null;
+                        if ($w !== null) {
+                            $w_str = is_numeric($w) ? $w . 'px' : $w;
+                            $img_style_str .= ' width:' . $w_str . ';';
+                        }
+                        if ($h !== null) {
+                            $h_str = is_numeric($h) ? $h . 'px' : $h;
+                            $img_style_str .= ' height:' . $h_str . ';';
+                        }
+                    }
+                }
+                if (strpos($img_style_str, 'width:') === false) {
+                    $img_style_str .= ' max-width:300px; height:auto;';
+                }
+
                 if ($imageData) {
                     $binaryData = base64_decode($imageData);
                     $filename = 'qimg_' . uniqid() . '_' . time() . '.png';
@@ -360,10 +588,10 @@ function getElementContent($element, $plainText) {
                     $filePath = $uploadDir . $filename;
                     if (file_put_contents($filePath, $binaryData)) {
                         $imgUrl = BASE_URL . '/uploads/oes/' . $filename;
-                        $content .= '<img src="' . $imgUrl . '" class="oes-import-img" />';
+                        $content .= '<img src="' . $imgUrl . '" style="' . $img_style_str . '" />';
                     } else {
                         // Fallback to base64 if saving fails
-                        $content .= '<img src="data:image/png;base64,' . $imageData . '" class="oes-import-img" />';
+                        $content .= '<img src="data:image/png;base64,' . $imageData . '" style="' . $img_style_str . '" />';
                     }
                 } else {
                     $content .= ' [Image] ';

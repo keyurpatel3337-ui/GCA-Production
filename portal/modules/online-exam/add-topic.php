@@ -53,23 +53,21 @@ include PORTAL_INCLUDE_PATH . 'navbar.php';
 include PORTAL_INCLUDE_PATH . 'sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/online-exam/add-topic.css">
-
 <main class="app-main">
     <div class="app-content pt-4">
         <div class="container-fluid">
-            <div class="card shadow-sm mb-4 border-0 add-topic-custom-1">
+            <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px; max-width: 600px; margin: 0 auto;">
                 <div class="card-header bg-white border-0 py-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-tag mr-2 text-primary"></i> <?php echo $id > 0 ? 'Edit' : 'Add'; ?> Topic</h5>
-                        <a href="manage-topics.php" class="btn btn-sm btn-light shadow-sm add-topic-custom-2"><i class="fas fa-arrow-left mr-1"></i> Back</a>
+                        <a href="manage-topics.php" class="btn btn-sm btn-light shadow-sm" style="border-radius: 10px;"><i class="fas fa-arrow-left mr-1"></i> Back</a>
                     </div>
                 </div>
                 <div class="card-body p-4">
                     <form method="POST">
                         <div class="form-group mb-4">
                             <label class="small font-weight-bold text-muted mb-2">Select Standard <span class="text-danger">*</span></label>
-                            <select id="modal_standard_id" class="form-control border-0 shadow-sm add-topic-custom-3" onchange="loadSubjects(this.value)">
+                            <select id="modal_standard_id" class="form-control border-0 shadow-sm" style="background: #f8f9fa; border-radius: 10px; height: 45px;" onchange="loadSubjects(this.value)">
                                 <option value="">Select Standard</option>
                                 <?php
                                 $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid ASC");
@@ -82,24 +80,24 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         </div>
                         <div class="form-group mb-4">
                             <label class="small font-weight-bold text-muted mb-2">Select Subject <span class="text-danger">*</span></label>
-                            <select name="subject_id" id="modal_subject_id" class="form-control border-0 shadow-sm add-topic-custom-3" required onchange="loadChapters(this.value)">
+                            <select name="subject_id" id="modal_subject_id" class="form-control border-0 shadow-sm" style="background: #f8f9fa; border-radius: 10px; height: 45px;" required onchange="loadChapters(this.value)">
                                 <option value="">Select Subject</option>
                             </select>
                         </div>
                         <div class="form-group mb-4">
                             <label class="small font-weight-bold text-muted mb-2">Select Chapter <span class="text-danger">*</span></label>
-                            <select name="chapter_id" id="modal_chapter_id" class="form-control border-0 shadow-sm add-topic-custom-3" required>
+                            <select name="chapter_id" id="modal_chapter_id" class="form-control border-0 shadow-sm" style="background: #f8f9fa; border-radius: 10px; height: 45px;" required>
                                 <option value="">Select Chapter</option>
                             </select>
                         </div>
                         <div class="form-group mb-5">
                             <label class="small font-weight-bold text-muted mb-2">Topic Name <span class="text-danger">*</span></label>
-                            <input type="text" name="topic_name" class="form-control border-0 shadow-sm add-topic-custom-3" value="<?php echo htmlspecialchars($topic['topic_name_english']); ?>" required>
+                            <input type="text" name="topic_name" class="form-control border-0 shadow-sm" style="background: #f8f9fa; border-radius: 10px; height: 45px;" value="<?php echo htmlspecialchars($topic['topic_name_english']); ?>" required>
                         </div>
                         
                         <div class="d-flex justify-content-end gap-2">
-                            <a href="manage-topics.php" class="btn btn-light shadow-sm px-4 add-topic-custom-4">Cancel</a>
-                            <button type="submit" class="btn btn-primary shadow-sm px-4 add-topic-custom-5">Save Topic</button>
+                            <a href="manage-topics.php" class="btn btn-light shadow-sm px-4" style="border-radius: 12px; height: 45px; line-height: 33px; font-weight: 600;">Cancel</a>
+                            <button type="submit" class="btn btn-primary shadow-sm px-4" style="border-radius: 12px; height: 45px; font-weight: 600;">Save Topic</button>
                         </div>
                     </form>
                 </div>
@@ -114,7 +112,7 @@ const allSubjects = <?php
     echo json_encode($sub_all); 
 ?>;
 const allChapters = <?php 
-    $ch_all = $conn->query("SELECT chpid, subid, chapter FROM chapters ORDER BY chapter ASC")->fetchAll(PDO::FETCH_ASSOC);
+    $ch_all = $conn->query("SELECT chpid, subid, chapter FROM tbl_chapters ORDER BY chapter ASC")->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($ch_all); 
 ?>;
 

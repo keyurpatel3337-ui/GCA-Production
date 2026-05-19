@@ -83,7 +83,7 @@ try {
             LEFT JOIN tbl_courses c ON s.course_id = c.id
             LEFT JOIN tbl_group g ON s.group_id = g.id
             $whereClause
-            ORDER BY l.applied_at DESC
+            ORDER BY l.applied_at ASC
             LIMIT ? OFFSET ?";
 
     $allParams = array_merge($params, [$perPage, $offset]);

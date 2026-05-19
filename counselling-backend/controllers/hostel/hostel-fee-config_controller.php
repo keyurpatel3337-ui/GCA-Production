@@ -35,7 +35,7 @@ try {
             FROM tbl_hostel_fee_settings hfs 
             LEFT JOIN tbl_users u ON hfs.created_by = u.id 
             LEFT JOIN tbl_academic_years ay ON hfs.academic_year_id = ay.id 
-            ORDER BY ay.year_name ASC";
+            ORDER BY ay.year_name DESC";
     $hostel_settings = $dbOps->customSelect($sql);
 } catch (PDOException $e) {
     if (!$is_api_call && function_exists('logDatabaseError')) {
@@ -51,7 +51,7 @@ try {
 // Fetch academic years for dropdown
 $academic_years = [];
 try {
-    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name ASC');
+    $academic_years = $dbOps->select('tbl_academic_years', ['id', 'year_name'], ['is_active' => 1], 'year_name DESC');
 } catch (PDOException $e) {
     if (!$is_api_call && function_exists('logDatabaseError')) {
         logDatabaseError($e, "Fetch Academic Years");

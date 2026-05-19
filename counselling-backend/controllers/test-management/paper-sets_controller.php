@@ -31,7 +31,7 @@ try {
     $sql = "SELECT ps.*, u.name as creator_name 
             FROM tbl_paper_sets ps 
             LEFT JOIN tbl_users u ON ps.created_by = u.id 
-            ORDER BY ps.id ASC";
+            ORDER BY ps.id DESC";
     $paper_sets = $dbOps->customSelect($sql);
 } catch (PDOException $e) {
     logDatabaseError($e, "Fetch Paper Sets for Admin");

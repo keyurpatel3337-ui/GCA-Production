@@ -19,7 +19,7 @@ try {
                         JOIN beds b ON a.bed_id = b.id
                         JOIN rooms r ON b.room_id = r.id
                         WHERE a.student_id = :student_id
-                        ORDER BY a.date DESC";
+                        ORDER BY a.date ASC";
                         
     $stmt = $hostel_conn->prepare($attendance_query);
     $stmt->execute(['student_id' => $student_id]);

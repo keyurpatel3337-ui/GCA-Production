@@ -185,9 +185,15 @@ include '../../include/sidebar.php';
 
             if (action === 'approve') {
                 const amount = btn.closest('tr').find('.approval-amount').val();
-                if (confirm(`Are you sure you want to approve this discount with amount ₹${amount}?`)) {
-                    processRequest(id, 'approve', amount);
-                }
+                showConfirm({
+                    title: 'Approve Discount',
+                    message: `Are you sure you want to approve this discount with amount <strong>₹${amount}</strong>?`,
+                    confirmText: 'Yes, Approve',
+                    confirmButtonClass: 'btn-success',
+                    onConfirm: function () {
+                        processRequest(id, 'approve', amount);
+                    }
+                });
             } else {
                 $('#reject_id').val(id);
                 $('#reject_reason').val('');
@@ -200,7 +206,7 @@ include '../../include/sidebar.php';
             const reason = $('#reject_reason').val().trim();
 
             if (!reason) {
-                alert('Please provide a reason for rejection.');
+                showToast('error', 'Error', 'Please provide a reason for rejection.');
                 return;
             }
 
@@ -220,22 +226,14 @@ include '../../include/sidebar.php';
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
-                        if (typeof showToast === 'function') {
-                            showToast('success', 'Success', response.message);
-                        } else {
-                            alert(response.message);
-                        }
+                        showToast('success', 'Success', response.message);
                         setTimeout(() => location.reload(), 1000);
                     } else {
-                        if (typeof showToast === 'function') {
-                            showToast('error', 'Error', response.message);
-                        } else {
-                            alert(response.message);
-                        }
+                        showToast('error', 'Error', response.message);
                     }
                 },
                 error: function () {
-                    alert('An error occurred during processing.');
+                    showToast('error', 'Error', 'An error occurred during processing.');
                 }
             });
         }

@@ -1,0 +1,35 @@
+Array
+(
+    [question_id] => 2
+    [question_text] => <p>નીચેની પ્રક્રિયામાં મળતી નીપજનું બંધારણ આપો. <img src="../../../uploads/oes/qimg_ole_6a0bf58fd116e_1779168655.png" style="max-width:100%; margin:5px 0; width:238px; height:80px;"></p>
+    [correct_option] => A
+    [option_a] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1424_1779168655.png" style="width: 100px; height: 49px;" width="100px" height="49px"></p>
+    [option_b] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd171f_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+    [option_c] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd19b3_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+    [option_d] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1c78_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+    [desc_question_1] => <p><br></p>
+    [desc_solution_1] => <p><br></p>
+    [desc_video_1] => 
+    [desc_question_2] => <p><br></p>
+    [desc_solution_2] => <p><br></p>
+    [desc_video_2] => 
+    [desc_question_3] => <p><br></p>
+    [desc_solution_3] => <p><br></p>
+    [desc_video_3] => 
+    [desc_question_4] => <p><br></p>
+    [desc_solution_4] => <p><br></p>
+    [desc_video_4] => 
+    [desc_question_5] => <p><br></p>
+    [desc_solution_5] => <p><br></p>
+    [desc_video_5] => 
+    [explanation] => <p>Explanation/Solution for this MCQ question.</p>
+    [video_solution_url] => 
+    [question_type_id] => 1
+    [difficulty] => Level A
+    [standard_id] => 2
+    [subject_id] => 4
+    [chapter_id] => 
+    [topic_id] => 
+    [marks] => 1
+    [negative_marks] => 0
+)

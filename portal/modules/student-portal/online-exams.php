@@ -14,24 +14,32 @@ if (!isset($_SESSION['student_id'])) {
 $student_id = $_SESSION['student_id'];
 $page_title = "My Online Exams";
 
-// Fetch student details to get standard and division
-$std_stmt = $conn->prepare("SELECT standard_id, class_id FROM students WHERE id = ?");
+// Fetch student standard and division using registration ID
+$std_stmt = $conn->prepare("
+    SELECT r.course_id, r.standard as reg_standard, e.division_id 
+    FROM tbl_gm_std_registration r
+    LEFT JOIN tbl_enrolled_students e ON r.id = e.registration_id AND e.is_active = 1
+    WHERE r.id = ?
+");
 $std_stmt->execute([$student_id]);
 $student = $std_stmt->fetch();
-$standard_id = $student['standard_id'];
-$division_id = $student['class_id'];
+
+$course_id = $student ? ($student['course_id'] ?? 0) : 0;
+$standard_id = $student ? ($student['reg_standard'] ?? 0) : 0;
+$division_id = $student ? ($student['division_id'] ?? null) : null;
 
 // Fetch available exams
 $sql = "SELECT e.*, 
         (SELECT status FROM tbl_oes_student_exams WHERE exam_id = e.id AND student_id = ?) as attempt_status
         FROM tbl_oes_exams e 
-        WHERE (e.standard_id = ? OR e.standard_id IS NULL) 
+        WHERE (e.standard_id = ? OR (e.standard_id IN (SELECT stdid FROM standard WHERE stdnumber = ?) AND e.standard_id IS NOT NULL) OR e.standard_id IS NULL) 
         AND (e.division_id = ? OR e.division_id IS NULL)
+        AND e.exam_mode = 'Practice'
         AND e.status IN ('Scheduled', 'Live')
         AND e.end_time >= NOW()
         ORDER BY e.start_time ASC";
 $stmt = $conn->prepare($sql);
-$stmt->execute([$student_id, $standard_id, $division_id]);
+$stmt->execute([$student_id, $course_id, $standard_id, $division_id]);
 $exams = $stmt->fetchAll();
 
 include PORTAL_INCLUDE_PATH . 'header.php';
@@ -62,9 +70,15 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 <?php if (count($exams) > 0): ?>
                     <?php foreach ($exams as $e): ?>
                         <?php 
+                        $is_submitted = ($e['attempt_status'] === 'Submitted');
                         $is_live = (strtotime($e['start_time']) <= time() && strtotime($e['end_time']) >= time());
-                        $status_label = $is_live ? 'Live Now' : 'Upcoming';
-                        $status_class = $is_live ? 'bg-success' : 'bg-warning';
+                        if ($is_submitted) {
+                            $status_label = 'Submitted';
+                            $status_class = 'bg-secondary';
+                        } else {
+                            $status_label = $is_live ? 'Live Now' : 'Upcoming';
+                            $status_class = $is_live ? 'bg-success' : 'bg-warning';
+                        }
                         ?>
                         <div class="col-xl-4 col-md-6 mb-4">
                             <div class="card shadow h-100 border-0 rounded-lg overflow-hidden">
@@ -123,6 +137,8 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
     </div>
 </main>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>assets/css/modules/student-portal/online-exams.css">
+<style>
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+</style>
 
 <?php include PORTAL_INCLUDE_PATH . 'footer.php'; ?>

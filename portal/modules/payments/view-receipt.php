@@ -259,7 +259,230 @@ $full_name = trim(($receipts[0]['surname'] ?? '') . ' ' . ($receipts[0]['student
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Receipt - <?php echo htmlspecialchars($receipts[0]['receipt_no'] ?? ''); ?></title>
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/payments/view-receipt.php.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #000;
+            background: #f0f2f5;
+            padding: 20px 0;
+        }
+
+        .receipt-container {
+            width: 210mm;
+            min-height: 148mm;
+            margin: 0 auto;
+            padding: 8mm;
+            border: 1px solid #000;
+            background: #fff;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+            margin-bottom: 20px;
+        }
+
+        .receipt-header {
+            border-bottom: 1px solid #000;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            flex: 0 0 80px;
+        }
+
+        .logo-section img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .header-info {
+            flex: 1;
+            text-align: left;
+            padding: 0 15px;
+        }
+
+        .org-name {
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .org-address {
+            font-size: 13px;
+            margin-bottom: 2px;
+            max-width: 500px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .org-details {
+            flex: 0 0 160px;
+            font-size: 12px;
+            text-align: right;
+            padding-top: 15px;
+        }
+
+        .student-info-box {
+            border: 1px solid #000;
+            padding: 4px 10px;
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .student-info-box .label {
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .receipt-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 4px 15px;
+            margin: 8px 0;
+        }
+
+        .meta-item {
+            display: flex;
+            font-size: 10.5px;
+        }
+
+        .meta-item .label {
+            font-weight: bold;
+            flex: 0 0 75px;
+        }
+
+        .meta-item .colon {
+            flex: 0 0 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+        }
+
+        .fee-table th,
+        .fee-table td {
+            border: 1px solid #000;
+            padding: 4px 8px;
+            text-align: left;
+        }
+
+        .fee-table th {
+            font-weight: bold;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .fee-table td {
+            font-size: 13px;
+        }
+
+        .fee-table .amount {
+            text-align: right;
+            width: 100px;
+        }
+
+        .amount-words-box {
+            border: 1px solid #000;
+            padding: 4px 10px;
+            margin: 8px 0;
+            display: flex;
+            font-size: 10.5px;
+        }
+
+        .amount-words-box .label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .payment-notes {
+            flex: 1;
+            font-size: 10px;
+        }
+
+        .payment-notes p {
+            margin-bottom: 2px;
+        }
+
+        .signature-section {
+            flex: 0 0 180px;
+            text-align: center;
+        }
+
+        .signature-box {
+            border: 1px solid #000;
+            height: 70px;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .signature-box img {
+            max-width: 160px;
+            max-height: 60px;
+        }
+
+        .auth-label {
+            font-weight: bold;
+            font-size: 10.5px;
+        }
+
+        .jurisdiction {
+            margin-top: 8px;
+            font-size: 9px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .system-generated {
+            font-size: 8px;
+            font-style: italic;
+            color: #444;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .receipt-container {
+                box-shadow: none;
+                margin: 0 auto;
+                border: 1px solid #000;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body>

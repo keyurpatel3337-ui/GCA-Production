@@ -72,9 +72,11 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
     <div class="sidebar-brand bg-white border-bottom">
         <a href="<?php echo $dashboard_link; ?>"
             class="brand-link text-decoration-none d-flex align-items-center w-100">
-            <img src="<?php echo BASE_URL; ?>/assets/images/logo-icon.png" alt="Logo" class="brand-image me-2 sidebar-custom-1">
+            <img src="<?php echo BASE_URL; ?>/assets/images/logo-icon.png" alt="Logo" class="brand-image me-2"
+                style="width: 32px; height: 32px;">
             <div class="brand-info flex-grow-1">
-                <span class="brand-text fw-bold text-dark d-block sidebar-custom-2"><?php echo defined('SYSTEM_SHORT_NAME') ? SYSTEM_SHORT_NAME : 'GCA'; ?></span>
+                <span class="brand-text fw-bold text-dark d-block"
+                    style="font-size: 1rem; line-height: 1.2;"><?php echo defined('SYSTEM_SHORT_NAME') ? SYSTEM_SHORT_NAME : 'GCA'; ?></span>
                 <span class="brand-subtitle text-muted small d-block">Portal v2.0</span>
             </div>
         </a>
@@ -82,7 +84,7 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
 
     <!-- Sidebar Wrapper -->
     <div class="sidebar-wrapper px-2">
-        <nav>
+        <nav class="mt-2">
             <ul class="nav nav-pills sidebar-menu flex-column" data-lte-toggle="treeview" role="menu"
                 data-accordion="true">
 
@@ -95,7 +97,7 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                 </li>
                 <?php if (hasRole(ROLE_COMPUTER_OPERATOR)): ?>
                     <!-- ===== COMPUTER OPERATOR MENU ===== -->
-                    <li class="nav-header text-uppercase opacity-75 small fw-bold">Data Management</li>
+                    <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Data Management</li>
                     <!-- Student Management -->
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -969,6 +971,22 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                 <?php if (isset($_SESSION['is_student_login']) && $_SESSION['is_student_login'] === true): ?>
                     <!-- ===== STUDENT MENU ===== -->
 
+                    <!-- Online Exams -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-laptop-code text-primary"></i>
+                            <p>Online Exams<i class="nav-arrow fas fa-angle-right"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?php echo $student_portal_prefix; ?>online-exams.php" class="nav-link">
+                                    <i class="fas fa-edit nav-icon"></i>
+                                    <p>Practice Tests</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <!-- Appointments -->
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -1083,7 +1101,7 @@ endif; ?>
                         </a>
                     </li>
 
-                    <li class="nav-header text-uppercase opacity-75 small fw-bold">Active Child: <?php
+                    <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Active Child: <?php
     $active_child_name = 'Student';
     foreach ($_SESSION['children'] as $child) {
         if ($child['id'] == $_SESSION['active_student_id']) {
@@ -1114,7 +1132,7 @@ endif; ?>
                         </ul>
                     </li>
 
-                    <li class="nav-header text-uppercase opacity-75 small fw-bold">Academic & Fees</li>
+                    <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Academic & Fees</li>
 
                     <li class="nav-item">
                         <a href="<?php echo $student_portal_prefix; ?>my-fees.php" class="nav-link">
@@ -1371,7 +1389,7 @@ endif; ?>
                 </li>
 
                 <!-- Logout -->
-                <li class="nav-item border-top">
+                <li class="nav-item mt-3 border-top pt-2">
                     <a href="<?php echo $logout_path; ?>" class="nav-link text-danger">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>Logout</p>

@@ -38,6 +38,7 @@ if (!$student_id) {
 }
 
 $tokens = $dbOps->customSelect("SELECT 
+                       r.standard, r.course_id,
                        CASE WHEN p.id IS NOT NULL OR r.token_fees_paid = 1 THEN 1 ELSE 0 END as token_fees_paid,
                        p.payment_date as token_payment_date,
                        p.transaction_id as token_transaction_id,
@@ -62,6 +63,15 @@ $tokens = $dbOps->customSelect("SELECT
                        WHERE r.id = ?", [$student_id]);
 $token_info = !empty($tokens) ? $tokens[0] : null;
 $current_term_id = intval($token_info['current_term_id'] ?? 1);
+
+$is_restricted_payment = false;
+if ($token_info) {
+    $std_val = isset($token_info['standard']) ? intval($token_info['standard']) : 0;
+    $course_val = isset($token_info['course_id']) ? intval($token_info['course_id']) : 0;
+    if ($std_val == 11 && ($course_val == 1 || $course_val == 2)) {
+        $is_restricted_payment = true;
+    }
+}
 
 // Check if student record existed
 if (!$token_info) {
@@ -179,7 +189,26 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?= PORTAL_URL ?>/assets/css/modules/student-portal/my-fees.css">
+<style>
+    .installment-card {
+        margin-bottom: 10px;
+    }
+
+    .installment-paid {
+        background-color: #d4edda;
+        border-left: 4px solid #28a745;
+    }
+
+    .installment-pending {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+    }
+
+    .installment-partial {
+        background-color: #cce5ff;
+        border-left: 4px solid #0066cc;
+    }
+</style>
 </head>
 
 <body>
@@ -219,9 +248,11 @@ include '../../include/sidebar.php';
                                     </td>
                                     <td><span class="badge bg-warning">Pending</span></td>
                                     <td>
-                                        <a href="token-fee-payment.php" class="btn btn-warning btn-sm">
-                                            <i class="fas fa-credit-card"></i> Pay Now
-                                        </a>
+                                        <?php if (!$is_restricted_payment): ?>
+                                            <a href="token-fee-payment.php" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-credit-card"></i> Pay Now
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             </tbody>
@@ -327,9 +358,11 @@ include '../../include/sidebar.php';
                                 <span class="ms-3">Total Pending:
                                     <strong>₹<?php echo formatIndianCurrency($total_pending_amount); ?></strong></span>
                             </div>
-                            <button type="button" onclick="payAllPendingFees()" class="btn btn-success btn-lg">
-                                <i class="fas fa-credit-card"></i> Pay All Pending Fees
-                            </button>
+                             <?php if (!$is_restricted_payment): ?>
+                                 <button type="button" onclick="payAllPendingFees()" class="btn btn-success btn-lg">
+                                     <i class="fas fa-credit-card"></i> Pay All Pending Fees
+                                 </button>
+                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
 
@@ -377,9 +410,11 @@ include '../../include/sidebar.php';
                                                     <i class="fas fa-download"></i> Receipt
                                                 </button>
                                             <?php else: ?>
-                                                <button type="button" onclick="payFee('school_fee')" class="btn btn-warning btn-sm">
-                                                    <i class="fas fa-credit-card"></i> Pay Now
-                                                </button>
+                                                <?php if (!$is_restricted_payment): ?>
+                                                    <button type="button" onclick="payFee('school_fee')" class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-credit-card"></i> Pay Now
+                                                    </button>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
@@ -410,10 +445,12 @@ include '../../include/sidebar.php';
                                                     <i class="fas fa-download"></i> Receipt
                                                 </button>
                                             <?php else: ?>
-                                                <button type="button" onclick="payFee('trust_facilities_fee')"
-                                                    class="btn btn-warning btn-sm">
-                                                    <i class="fas fa-credit-card"></i> Pay Now
-                                                </button>
+                                                <?php if (!$is_restricted_payment): ?>
+                                                    <button type="button" onclick="payFee('trust_facilities_fee')"
+                                                        class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-credit-card"></i> Pay Now
+                                                    </button>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
@@ -475,9 +512,11 @@ include '../../include/sidebar.php';
                                                     <i class="fas fa-download"></i> Receipt
                                                 </button>
                                             <?php else: ?>
-                                                <button type="button" onclick="payFee('hostel_security')" class="btn btn-warning btn-sm">
-                                                    <i class="fas fa-credit-card"></i> Pay Now
-                                                </button>
+                                                <?php if (!$is_restricted_payment): ?>
+                                                    <button type="button" onclick="payFee('hostel_security')" class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-credit-card"></i> Pay Now
+                                                    </button>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
@@ -512,10 +551,12 @@ include '../../include/sidebar.php';
                                                     <i class="fas fa-download"></i> Receipt
                                                 </button>
                                             <?php else: ?>
-                                                <button type="button" onclick="payFee('transport_fee')"
-                                                    class="btn btn-warning btn-sm">
-                                                    <i class="fas fa-credit-card"></i> Pay Now
-                                                </button>
+                                                <?php if (!$is_restricted_payment): ?>
+                                                    <button type="button" onclick="payFee('transport_fee')"
+                                                        class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-credit-card"></i> Pay Now
+                                                    </button>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
@@ -586,12 +627,14 @@ include '../../include/sidebar.php';
                                                                     <i class="fas fa-download"></i> Receipt
                                                                 </button>
                                                             <?php else: ?>
-                                                                <button type="button"
-                                                                    onclick="payFee('tuition_fee_part2', <?php echo $inst['id']; ?>)"
-                                                                    class="btn btn-warning btn-sm">
-                                                                    <i class="fas fa-credit-card"></i> Pay
-                                                                    ₹<?php echo formatIndianCurrency($inst['due_amount']); ?>
-                                                                </button>
+                                                <?php if (!$is_restricted_payment): ?>
+                                                    <button type="button"
+                                                        onclick="payFee('tuition_fee_part2', <?php echo $inst['id']; ?>)"
+                                                        class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-credit-card"></i> Pay
+                                                        ₹<?php echo formatIndianCurrency($inst['due_amount']); ?>
+                                                    </button>
+                                                <?php endif; ?>
                                                             <?php endif; ?>
                                                         </td>
                                                     </tr>
@@ -651,17 +694,19 @@ include '../../include/sidebar.php';
                                                     <i class="fas fa-download"></i> Receipt
                                                 </button>
                                             <?php else: ?>
-                                                <button type="button" onclick="payFee('tuition_fee_part2')"
-                                                    class="btn btn-warning btn-sm">
-                                                    <i class="fas fa-credit-card"></i> Pay Now
-                                                </button>
-                                                <br><small>
-                                                    <a href="#"
-                                                        onclick="openInstallmentRequest('tuition_fee_part2', <?php echo $tuition_part2_after_discount; ?>); return false;"
-                                                        class="text-primary">
-                                                        <i class="fas fa-calendar-alt"></i> Request Installment
-                                                    </a>
-                                                </small>
+                                                <?php if (!$is_restricted_payment): ?>
+                                                    <button type="button" onclick="payFee('tuition_fee_part2')"
+                                                        class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-credit-card"></i> Pay Now
+                                                    </button>
+                                                    <br><small>
+                                                        <a href="#"
+                                                            onclick="openInstallmentRequest('tuition_fee_part2', <?php echo $tuition_part2_after_discount; ?>); return false;"
+                                                            class="text-primary">
+                                                            <i class="fas fa-calendar-alt"></i> Request Installment
+                                                        </a>
+                                                    </small>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         </td>
                                     </tr>

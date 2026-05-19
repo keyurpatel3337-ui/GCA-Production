@@ -134,7 +134,7 @@ try {
                            LEFT JOIN tbl_answer_keys ak ON tr.answer_key_id = ak.id
                            LEFT JOIN tbl_omr_sheets omr ON tr.omr_sheet_id = omr.id
                            WHERE tr.student_id = ?
-                           ORDER BY tr.created_at ASC");
+                           ORDER BY tr.created_at DESC");
     $stmt->execute([$student_id]);
     $test_results = $stmt->fetchAll();
 } catch (PDOException $e) {

@@ -179,7 +179,55 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/financial/index.php.css">
+<style>
+    /* Page specific overrides if any, but most should come from global-theme.css */
+    .report-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .report-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .bg-purple {
+        background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
+    }
+
+    .bg-indigo {
+        background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+    }
+
+    .report-item-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px;
+        color: var(--text-dark);
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .report-item-link:hover {
+        background: rgba(37, 99, 235, 0.05);
+        color: var(--primary-color);
+        transform: translateX(5px);
+    }
+
+    .report-item-link i {
+        width: 20px;
+        text-align: center;
+        color: var(--text-light);
+    }
+
+    .report-item-link:hover i {
+        color: var(--primary-color);
+    }
+</style>
 
 
 <div class="container-fluid py-4 pb-5">

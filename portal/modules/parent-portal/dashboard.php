@@ -52,9 +52,6 @@ $user_id = $active_student_id;
 $user_name = $_SESSION['parent_mobile']; // Or parent name if available
 
 include '../../include/header.php';
-?>
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/parent-portal/dashboard.css">
-<?php
 include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
@@ -238,5 +235,39 @@ include '../../include/sidebar.php';
         </div>
     </div>
 </div>
+
+<style>
+    .bg-gradient-info {
+        background: linear-gradient(135deg, #0dcaf0 0%, #0aa2c0 100%);
+    }
+
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+    }
+
+    .transition-hover {
+        transition: all 0.3s ease;
+    }
+
+    .transition-hover:hover {
+        transform: translateY(-5px);
+        background: #fff !important;
+    }
+
+    .shadow-hover:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .btn-white {
+        background: white;
+        color: #4f46e5;
+        border: none;
+    }
+
+    .btn-white:hover {
+        background: #f8fafc;
+        color: #3730a3;
+    }
+</style>
 
 <?php include '../../include/footer.php'; ?>

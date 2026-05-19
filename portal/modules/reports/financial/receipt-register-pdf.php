@@ -246,7 +246,7 @@ try {
     $totalAmount = 0;
 
     if (empty($receipts)) {
-        $html .= '<tr><td colspan="11" style="text-align:center;">No records found for selected period</td></tr>';
+        $html .= '<tr><td colspan="12" style="text-align:center;">No records found for selected period</td></tr>';
     } else {
         foreach ($receipts as $receipt) {
             $totalAmount += $receipt['amount'];

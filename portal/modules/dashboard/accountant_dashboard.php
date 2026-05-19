@@ -51,7 +51,6 @@ if ($response && isset($response['success']) && $response['success']) {
 <?php
 $page_title = "Account Dashboard";
 include '../../include/header.php'; ?>
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/dashboard/accountant_dashboard.css">
 <?php
 include '../../include/navbar.php'; ?>
 <?php
@@ -196,7 +195,7 @@ include '../../include/sidebar.php'; ?>
         <div class="col-lg-3 col-md-6">
             <a href="../payments/payments.php" class="text-decoration-none text-dark">
                 <div class="glass-card p-3 d-flex align-items-center shadow-hover">
-                    <div class="stat-icon bg-icon-danger me-3 accountant_dashboard-custom-1">
+                    <div class="stat-icon bg-icon-danger me-3" style="width: 50px; height: 50px;">
                         <i class="fas fa-receipt"></i>
                     </div>
                     <div>
@@ -376,7 +375,8 @@ include '../../include/sidebar.php'; ?>
     <div class="row g-3 mb-5">
         <div class="col-xl-3 col-lg-3 col-md-6 col-6">
             <a href="../payments/add-payment.php" class="quick-action-btn">
-                <div class="quick-icon bg-soft-primary text-primary bg-opacity-10 accountant_dashboard-custom-2">
+                <div class="quick-icon bg-soft-primary text-primary bg-opacity-10"
+                    style="background-color: rgba(59, 130, 246, 0.1);">
                     <i class="fas fa-plus"></i>
                 </div>
                 <div class="quick-info">
@@ -388,7 +388,8 @@ include '../../include/sidebar.php'; ?>
 
         <div class="col-xl-3 col-lg-3 col-md-6 col-6">
             <a href="../payments/financial-reports.php" class="quick-action-btn">
-                <div class="quick-icon bg-soft-warning text-warning bg-opacity-10 accountant_dashboard-custom-3">
+                <div class="quick-icon bg-soft-warning text-warning bg-opacity-10"
+                    style="background-color: rgba(245, 158, 11, 0.1);">
                     <i class="fas fa-chart-line"></i>
                 </div>
                 <div class="quick-info">
@@ -400,7 +401,8 @@ include '../../include/sidebar.php'; ?>
 
         <div class="col-xl-3 col-lg-3 col-md-6 col-6">
             <a href="../students/students.php?view=enrolled" class="quick-action-btn">
-                <div class="quick-icon bg-soft-danger text-danger bg-opacity-10 accountant_dashboard-custom-4">
+                <div class="quick-icon bg-soft-danger text-danger bg-opacity-10"
+                    style="background-color: rgba(239, 68, 68, 0.1);">
                     <i class="fas fa-users"></i>
                 </div>
                 <div class="quick-info">
@@ -412,7 +414,8 @@ include '../../include/sidebar.php'; ?>
         
         <div class="col-xl-3 col-lg-3 col-md-6 col-6">
             <a href="../reports/financial/student-ledger.php" class="quick-action-btn">
-                <div class="quick-icon bg-soft-success text-success bg-opacity-10 accountant_dashboard-custom-5">
+                <div class="quick-icon bg-soft-success text-success bg-opacity-10"
+                    style="background-color: rgba(16, 185, 129, 0.1);">
                     <i class="fas fa-book"></i>
                 </div>
                 <div class="quick-info">

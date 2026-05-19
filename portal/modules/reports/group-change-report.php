@@ -160,7 +160,28 @@ try {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/reports/group-change-report.php.css">
+    <style>
+        .stat-card {
+            border-start: 4px solid;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>

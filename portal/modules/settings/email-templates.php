@@ -285,7 +285,7 @@ if (file_exists($jsonFile)) {
 </div>
 
 <!-- Include SheetJS for modern Excel exports -->
-<script src="<?php echo BASE_URL; ?>/assets/vendor/xlsx/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="../../assets/js/table-utilities.js"></script>
 <?php require_once '../../include/footer.php'; ?>
 
@@ -651,4 +651,12 @@ if (file_exists($jsonFile)) {
     });
 </script>
 
-<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/settings/email-templates.php.css">
+<style>
+    .tiny {
+        font-size: 0.7rem;
+    }
+
+    .uppercase {
+        text-transform: uppercase;
+    }
+</style>

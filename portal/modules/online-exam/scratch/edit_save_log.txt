@@ -1,0 +1,180 @@
+[2026-05-19 11:01:22] INDEX LOADED FOR ID: 2
+Data: Array
+(
+    [id] => 2
+    [subject_id] => 4
+    [standard_id] => 2
+    [question_type_id] => 1
+    [chapter_id] => 
+    [topic_id] => 
+    [group_id] => 1
+    [question_text] => <p>નીચેની પ્રક્રિયામાં મળતી નીપજનું બંધારણ આપો. <img src="../../../uploads/oes/qimg_ole_6a0bf58fd116e_1779168655.png" style="max-width:100%; margin:5px 0; width:238px; height:80px;"></p>
+    [option_a] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1424_1779168655.png" style="max-width:100%; margin:5px 0; width:164px; height:80px;"></p>
+    [option_b] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd171f_1779168655.png" style="max-width:100%; margin:5px 0; width:158px; height:80px;"></p>
+    [option_c] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd19b3_1779168655.png" style="max-width:100%; margin:5px 0; width:158px; height:80px;"></p>
+    [option_d] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1c78_1779168655.png" style="max-width:100%; margin:5px 0; width:158px; height:80px;"></p>
+    [correct_option] => A
+    [explanation] => <p>Explanation/Solution for this MCQ question.</p>
+    [video_solution_url] => 
+    [solution_image] => 
+    [question_type] => MCQ
+    [difficulty] => Level A
+    [marks] => 1.00
+    [negative_marks] => 0.00
+    [status] => 1
+    [created_by] => 1
+    [created_at] => 2026-05-19 11:00:58
+    [updated_at] => 2026-05-19 11:01:13
+)
+
+
+[2026-05-19 11:01:23] JS EVENT: INITIAL_LOAD_COMPLETE
+Data: Array
+(
+    [main] => <p>નીચેની પ્રક્રિયામાં મળતી નીપજનું બંધારણ આપો. <img src="../../../uploads/oes/qimg_ole_6a0bf58fd116e_1779168655.png" style="max-width:100%; margin:5px 0; width:238px; height:80px;"></p>
+    [a] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1424_1779168655.png" style="max-width:100%; margin:5px 0; width:164px; height:80px;"></p>
+    [b] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd171f_1779168655.png" style="max-width:100%; margin:5px 0; width:158px; height:80px;"></p>
+    [c] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd19b3_1779168655.png" style="max-width:100%; margin:5px 0; width:158px; height:80px;"></p>
+    [d] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1c78_1779168655.png" style="max-width:100%; margin:5px 0; width:158px; height:80px;"></p>
+    [explanation] => <p>Explanation/Solution for this MCQ question.</p>
+    [desc-q1] => <p><br></p>
+    [desc-s1] => <p><br></p>
+    [desc-q2] => <p><br></p>
+    [desc-s2] => <p><br></p>
+    [desc-q3] => <p><br></p>
+    [desc-s3] => <p><br></p>
+    [desc-q4] => <p><br></p>
+    [desc-s4] => <p><br></p>
+    [desc-q5] => <p><br></p>
+    [desc-s5] => <p><br></p>
+)
+
+
+[2026-05-19 11:01:40] JS EVENT: FORM_SUBMIT_SYNC
+Data: Array
+(
+    [editors] => Array
+        (
+            [main] => <p>નીચેની પ્રક્રિયામાં મળતી નીપજનું બંધારણ આપો. <img src="../../../uploads/oes/qimg_ole_6a0bf58fd116e_1779168655.png" style="max-width:100%; margin:5px 0; width:238px; height:80px;"></p>
+            [a] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1424_1779168655.png" style="width: 100px; height: 49px;" width="100px" height="49px"></p>
+            [b] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd171f_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+            [c] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd19b3_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+            [d] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1c78_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+            [explanation] => <p>Explanation/Solution for this MCQ question.</p>
+            [desc-q1] => <p><br></p>
+            [desc-s1] => <p><br></p>
+            [desc-q2] => <p><br></p>
+            [desc-s2] => <p><br></p>
+            [desc-q3] => <p><br></p>
+            [desc-s3] => <p><br></p>
+            [desc-q4] => <p><br></p>
+            [desc-s4] => <p><br></p>
+            [desc-q5] => <p><br></p>
+            [desc-s5] => <p><br></p>
+        )
+
+    [textareas] => Array
+        (
+            [question_text] => <p>નીચેની પ્રક્રિયામાં મળતી નીપજનું બંધારણ આપો. <img src="../../../uploads/oes/qimg_ole_6a0bf58fd116e_1779168655.png" style="max-width:100%; margin:5px 0; width:238px; height:80px;"></p>
+            [option_a] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1424_1779168655.png" style="width: 100px; height: 49px;" width="100px" height="49px"></p>
+            [option_b] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd171f_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+            [option_c] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd19b3_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+            [option_d] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1c78_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+            [explanation] => <p>Explanation/Solution for this MCQ question.</p>
+            [desc_question_1] => <p><br></p>
+            [desc_solution_1] => <p><br></p>
+            [desc_question_2] => <p><br></p>
+            [desc_solution_2] => <p><br></p>
+            [desc_question_3] => <p><br></p>
+            [desc_solution_3] => <p><br></p>
+            [desc_question_4] => <p><br></p>
+            [desc_solution_4] => <p><br></p>
+            [desc_question_5] => <p><br></p>
+            [desc_solution_5] => <p><br></p>
+        )
+
+)
+
+
+[2026-05-19 11:01:40] SAVE POST DATA FOR ID: 2
+Post Params: Array
+(
+    [question_id] => 2
+    [question_text] => <p>નીચેની પ્રક્રિયામાં મળતી નીપજનું બંધારણ આપો. <img src="../../../uploads/oes/qimg_ole_6a0bf58fd116e_1779168655.png" style="max-width:100%; margin:5px 0; width:238px; height:80px;"></p>
+    [correct_option] => A
+    [option_a] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1424_1779168655.png" style="width: 100px; height: 49px;" width="100px" height="49px"></p>
+    [option_b] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd171f_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+    [option_c] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd19b3_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+    [option_d] => <p><img src="../../../uploads/oes/qimg_ole_6a0bf58fd1c78_1779168655.png" style="width: 100px; height: 51px;" width="100px" height="51px"></p>
+    [desc_question_1] => <p><br></p>
+    [desc_solution_1] => <p><br></p>
+    [desc_video_1] => 
+    [desc_question_2] => <p><br></p>
+    [desc_solution_2] => <p><br></p>
+    [desc_video_2] => 
+    [desc_question_3] => <p><br></p>
+    [desc_solution_3] => <p><br></p>
+    [desc_video_3] => 
+    [desc_question_4] => <p><br></p>
+    [desc_solution_4] => <p><br></p>
+    [desc_video_4] => 
+    [desc_question_5] => <p><br></p>
+    [desc_solution_5] => <p><br></p>
+    [desc_video_5] => 
+    [explanation] => <p>Explanation/Solution for this MCQ question.</p>
+    [video_solution_url] => 
+    [question_type_id] => 1
+    [difficulty] => Level A
+    [standard_id] => 2
+    [subject_id] => 4
+    [chapter_id] => 
+    [topic_id] => 
+    [marks] => 1
+    [negative_marks] => 0
+)
+
+
+[2026-05-19 19:13:43] JS EVENT: INITIAL_LOAD_COMPLETE
+Data: Array
+(
+    [main] => <p><br></p>
+    [a] => <p><br></p>
+    [b] => <p><br></p>
+    [c] => <p><br></p>
+    [d] => <p><br></p>
+    [explanation] => <p><br></p>
+    [desc-q1] => <p><br></p>
+    [desc-s1] => <p><br></p>
+    [desc-q2] => <p><br></p>
+    [desc-s2] => <p><br></p>
+    [desc-q3] => <p><br></p>
+    [desc-s3] => <p><br></p>
+    [desc-q4] => <p><br></p>
+    [desc-s4] => <p><br></p>
+    [desc-q5] => <p><br></p>
+    [desc-s5] => <p><br></p>
+)
+
+
+[2026-05-19 19:18:45] JS EVENT: INITIAL_LOAD_COMPLETE
+Data: Array
+(
+    [main] => <p><br></p>
+    [a] => <p><br></p>
+    [b] => <p><br></p>
+    [c] => <p><br></p>
+    [d] => <p><br></p>
+    [explanation] => <p><br></p>
+    [desc-q1] => <p><br></p>
+    [desc-s1] => <p><br></p>
+    [desc-q2] => <p><br></p>
+    [desc-s2] => <p><br></p>
+    [desc-q3] => <p><br></p>
+    [desc-s3] => <p><br></p>
+    [desc-q4] => <p><br></p>
+    [desc-s4] => <p><br></p>
+    [desc-q5] => <p><br></p>
+    [desc-s5] => <p><br></p>
+)
+
+

@@ -94,7 +94,7 @@ $select_query = "SELECT p.*,
           s.fathers_name, 
           s.aadhaar, 
           u.name as created_by_name
-          " . $base_query . " ORDER BY p.payment_date ASC, p.id DESC LIMIT $per_page OFFSET $offset";
+          " . $base_query . " ORDER BY p.payment_date DESC, p.id DESC LIMIT $per_page OFFSET $offset";
 
 // Count query for pagination
 $count_query = "SELECT COUNT(*) as total " . $base_query;

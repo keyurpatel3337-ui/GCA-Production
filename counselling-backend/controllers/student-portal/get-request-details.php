@@ -100,7 +100,7 @@ try {
                             FROM tbl_group_change_history h
                             LEFT JOIN tbl_users u ON h.action_by = u.id
                             WHERE h.request_id = ?
-                            ORDER BY h.created_at ASC");
+                            ORDER BY h.created_at DESC");
     $stmt->execute([$request_id]);
     $history = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
