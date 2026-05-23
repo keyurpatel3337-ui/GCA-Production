@@ -1,5 +1,6 @@
 # Environment variables (sensitive credentials)
 .env
+env.config.php
 
 # Editor & Tool directories
 .vscode/
