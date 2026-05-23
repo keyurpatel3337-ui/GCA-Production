@@ -8,7 +8,7 @@
     Options -MultiViews
     Options +FollowSymLinks
     RewriteEngine On
-    RewriteBase /
+    RewriteBase /GCA-Production/
     
     # Allow Let's Encrypt / Certify The Web validation
     RewriteRule ^\.well-known/acme-challenge/ - [L]
@@ -46,7 +46,7 @@
     RewriteRule ^(.*)$ $1.php [L,QSA]
     
     # Redirect favicon requests to the actual logo file
-    RewriteRule ^favicon\.ico$ /assets/images/logogm.png [L]
+    RewriteRule ^favicon\.ico$ assets/images/logogm.png [L]
 </IfModule>
 
 # Enable compression

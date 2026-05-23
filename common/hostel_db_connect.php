@@ -11,7 +11,7 @@
 $hostel_host = "localhost";
 $hostel_dbname = "hostel";
 $hostel_username = "root";
-$hostel_password = "GCA_Secure_#2026_Portal";
+$hostel_password = "";
 
 try {
     $hostel_conn = new PDO("mysql:host=$hostel_host;dbname=$hostel_dbname;charset=utf8mb4", $hostel_username, $hostel_password);
