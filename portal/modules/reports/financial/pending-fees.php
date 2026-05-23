@@ -130,11 +130,11 @@ if (!empty($filter_group)) {
 
 if (!empty($filter_course)) {
     if ($filter_course === '11th') {
-        $where_conditions[] = "r.course_id IN (1, 2)";
+        $where_conditions[] = "r.course_id = 1";
     } elseif ($filter_course === '12th') {
-        $where_conditions[] = "r.course_id IN (4, 5)";
+        $where_conditions[] = "r.course_id = 2";
     } elseif ($filter_course === 'Reneet') {
-        $where_conditions[] = "r.course_id = 6";
+        $where_conditions[] = "r.course_id = 3";
     } else {
         $where_conditions[] = "r.course_id = ?";
         $params[] = $filter_course;
@@ -190,6 +190,7 @@ $sql = "SELECT
             MAX(r.email) as email,
             MAX(g.group_name) as group_name,
             MAX(c.course_name) as course_name,
+            MAX(m.medium_name) as medium_name,
             MAX($calc_base_academic_sql) as course_fee_base,
             MAX($calc_base_hostel_sql) as hostel_fee_base,
             MAX($calc_base_transport_sql) as transport_fee_base,
@@ -210,6 +211,7 @@ $sql = "SELECT
         JOIN tbl_enrolled_students es ON r.id = es.registration_id
         LEFT JOIN tbl_group g ON r.group_id = g.id
         LEFT JOIN tbl_courses c ON r.course_id = c.id
+        LEFT JOIN tbl_medium m ON r.medium_id = m.id
         LEFT JOIN (SELECT student_id, MAX(due_date) as due_date FROM tbl_student_fee_allocation GROUP BY student_id) sfa ON r.id = sfa.student_id
         LEFT JOIN tbl_fee_config fc ON r.course_id = fc.course_id AND r.medium_id = fc.medium_id AND r.group_id = fc.group_id AND r.school_id = fc.school_id AND fc.is_active = 1
         WHERE $where_sql
@@ -444,7 +446,15 @@ include '../../../include/sidebar.php';
                                         <small
                                             class="text-muted hide-on-laptop"><?php echo htmlspecialchars($student['email'] ?? ''); ?></small>
                                     </td>
-                                    <td><?php echo htmlspecialchars($student['course_name'] ?? '-'); ?></td>
+                                    <td>
+                                        <?php 
+                                        $display_std = $student['course_name'] ?? '-';
+                                        if (!empty($student['medium_name'])) {
+                                            $display_std .= ' - ' . $student['medium_name'];
+                                        }
+                                        echo htmlspecialchars($display_std);
+                                        ?>
+                                    </td>
                                     <td><?php echo htmlspecialchars($student['group_name'] ?? '-'); ?></td>
                                     <td class="hide-on-laptop">
                                         <?php echo htmlspecialchars($student['mobile'] ?? '-'); ?>
@@ -522,7 +532,7 @@ include '../../../include/sidebar.php';
                 <td><?php echo $ex_sno++; ?></td>
                 <td><?php echo htmlspecialchars($pf['enrollment_id'] ?? ''); ?></td>
                 <td><?php echo htmlspecialchars($pf['student_name'] ?? ''); ?></td>
-                <td><?php echo htmlspecialchars($pf['course_name'] ?? '-'); ?></td>
+                <td><?php echo htmlspecialchars(($pf['course_name'] ?? '-') . (!empty($pf['medium_name']) ? ' - ' . $pf['medium_name'] : '')); ?></td>
                 <td><?php echo htmlspecialchars($pf['group_name'] ?? '-'); ?></td>
                 <td><?php echo htmlspecialchars($pf['mobile'] ?? '-'); ?></td>
 

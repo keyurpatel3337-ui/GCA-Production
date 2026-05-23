@@ -3,7 +3,7 @@
   /* Reduced from 350px for better space on laptops */
   --lte-sidebar-collapsed-width: 72px;
   --lte-header-height: 64px;
-  --lte-footer-height: 52px;
+  --lte-footer-height: 0px;
   --lte-shell-bg: #f4f6fb;
   --lte-border-color: #e5e7eb;
 }
@@ -193,9 +193,9 @@ body.sidebar-collapsed .app-sidebar:hover {
 }
 
 .app-footer {
+  display: none !important;
   border-top: 1px solid var(--lte-border-color);
   background-color: #ffffff;
-  display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1.5rem;

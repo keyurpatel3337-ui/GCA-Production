@@ -19,9 +19,10 @@ $tempDocx = $tempDir . uniqid('ftest_') . '.docx';
 copy($file, $tempDocx);
 
 $WORD_COLS = [
-    'standard','group_name','question_type','difficulty','subject',
-    'chapter','topic','question_text','option_a','option_b','option_c',
-    'option_d','correct_option','explanation','video_solution_url','solution_image'
+    'standard', 'group_name', 'subject', 'chapter', 'topic', 'question_type', 'difficulty',
+    'question_text', 'option_a', 'option_b', 'option_c',
+    'option_d', 'correct_option', 'explanation', 'video_solution_url', 'solution_image',
+    'question_text_guj', 'option_a_guj', 'option_b_guj', 'option_c_guj', 'option_d_guj', 'explanation_guj'
 ];
 
 // ── Step 1: Open ZIP, extract OLE map & pre-process math ──────────────────

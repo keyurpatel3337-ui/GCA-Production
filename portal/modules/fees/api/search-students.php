@@ -27,12 +27,12 @@ if (!isset($conn)) {
 }
 try {
     $searchTerm = "%$query%";
-    // Searching students in tbl_gm_std_registration
-    // Removing admission_confirmed = 1 to broaden search if needed, or keeping it but ensuring it exists
+    // Searching enrolled students by joining tbl_enrolled_students and tbl_gm_std_registration
     $stmt = $conn->prepare("
-        SELECT id, student_name, surname, fathers_name, mob as phone 
-        FROM tbl_gm_std_registration 
-        WHERE (student_name LIKE :q1 OR id LIKE :q2 OR mob LIKE :q3 OR surname LIKE :q4) 
+        SELECT e.enrollment_no, r.student_name, r.surname, r.fathers_name, r.mob as phone 
+        FROM tbl_enrolled_students e
+        JOIN tbl_gm_std_registration r ON e.registration_id = r.id
+        WHERE (r.student_name LIKE :q1 OR e.enrollment_no LIKE :q2 OR r.mob LIKE :q3 OR r.surname LIKE :q4) 
         LIMIT 10
     ");
     $stmt->execute([
@@ -49,7 +49,7 @@ try {
         $initials = strtoupper(substr($student['surname'] ?? $student['student_name'], 0, 1) . substr($student['student_name'], 0, 1));
 
         $results[] = [
-            'id' => $student['id'],
+            'id' => $student['enrollment_no'],
             'name' => $fullName,
             'class' => 'Student', // Could fetch from enrollment if needed, but 'Student' is fine for now
             'initials' => $initials

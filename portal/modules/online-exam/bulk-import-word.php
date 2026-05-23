@@ -1,4 +1,4 @@
-c:\Users\Administrator\AppData\Local\Packages\MicrosoftWindows.Client.Core_cw5n1h2txyewy\TempState\ScreenClip\{3C5F12A7-BE77-49C6-AE12-5854EB3FFC56}.png<?php
+<?php
 require_once dirname(dirname(dirname(__DIR__))) . '/common/constants.php';
 require_once ENV_CONFIG_FILE;
 require_once DB_CONNECT_FILE;
@@ -6,7 +6,7 @@ require_once PORTAL_PATH . 'session_config.php';
 require_once PORTAL_GLOBALVARIABLE;
 
 // Check access
-if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])) {
+if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER, ROLE_TEACHER, ROLE_COMPUTER_OPERATOR, ROLE_OES_DATA_ENTRY_OPERATOR])) {
     die("Unauthorized access.");
 }
 
@@ -24,8 +24,6 @@ include PORTAL_INCLUDE_PATH . 'header.php';
 include PORTAL_INCLUDE_PATH . 'navbar.php';
 include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
-// Fetch lists for global dropdowns
-$standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid ASC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <main class="app-main">
@@ -40,89 +38,98 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid AS
             </div>
         </div>
 
-        <!-- Import Configuration Card -->
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px;">
+        <!-- Stacked Layout (No Dual Panel) -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                
+                <!-- Card 1: Import Configuration & Upload -->
+                <div class="card shadow-lg border-0 mb-4" style="border-radius: 15px;">
                     <div class="card-header bg-primary text-white py-3" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                        <h5 class="card-title mb-0 text-white">1. Configure Metadata</h5>
+                        <h5 class="card-title mb-0 text-white"><i class="fas fa-file-import mr-2"></i> Configure Metadata & Select Word File</h5>
                     </div>
-                    <div class="card-body">
-                        <p class="text-muted small mb-4">Set global values for all questions in this file.</p>
+                    <div class="card-body p-4">
+                        <p class="text-muted small mb-4">Set standard/subject details, then upload your `.docx` file to preview and import questions.</p>
                         
-                        <div class="form-group mb-3">
-                            <label class="form-label font-weight-bold">Standard</label>
-                            <select id="bulk_std" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
-                                <option value="">Select Standard</option>
-                                <?php foreach ($standards as $s): ?>
-                                    <option value="<?php echo $s['stdid']; ?>"><?php echo $s['stdtext']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                        <!-- Metadata Fields Grid -->
+                        <div class="row">
+                            <div class="col-md-4 form-group mb-3">
+                                <label class="form-label font-weight-bold">Standard</label>
+                                <select id="bulk_std" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
+                                    <option value="">Select Standard</option>
+                                    <option value="11">11th</option>
+                                    <option value="12">12th</option>
+                                    <option value="13">Reneet</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 form-group mb-3">
+                                <label class="form-label font-weight-bold">Group</label>
+                                <select id="bulk_grp" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
+                                    <option value="">Select Group</option>
+                                    <?php
+                                    $groups = $conn->query("SELECT id, group_name FROM tbl_group WHERE is_active = 1 ORDER BY group_name ASC")->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($groups as $g): ?>
+                                        <option value="<?php echo $g['id']; ?>"><?php echo $g['group_name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 form-group mb-3">
+                                <label class="form-label font-weight-bold">Subject</label>
+                                <select id="bulk_sub" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
+                                    <option value="">Select Subject</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="form-label font-weight-bold">Chapter (Optional)</label>
+                                <select id="bulk_ch" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
+                                    <option value="">Select Chapter</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="form-label font-weight-bold">Topic (Optional)</label>
+                                <select id="bulk_tp" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
+                                    <option value="">Select Topic</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label class="form-label font-weight-bold">Subject</label>
-                            <select id="bulk_sub" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
-                                <option value="">Select Subject</option>
-                            </select>
-                        </div>
+                        <hr class="my-4">
 
-                        <div class="form-group mb-3">
-                            <label class="form-label font-weight-bold">Chapter (Optional)</label>
-                            <select id="bulk_ch" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
-                                <option value="">Select Chapter</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label class="form-label font-weight-bold">Topic (Optional)</label>
-                            <select id="bulk_tp" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
-                                <option value="">Select Topic</option>
-                            </select>
-                        </div>
-
-                        <hr>
-
-                        <div class="form-group mt-4">
-                            <label class="form-label font-weight-bold text-primary">2. Select Word File</label>
-                            <div class="upload-box p-4 border-dashed rounded text-center bg-light" id="drop-zone" style="border: 2px dashed #007bff; cursor: pointer;">
-                                <i class="fas fa-file-word fa-3x text-primary mb-3"></i>
-                                <p class="mb-0 text-dark font-weight-bold">Click to Upload .docx</p>
+                        <!-- Upload Zone -->
+                        <div class="form-group mb-0">
+                            <label class="form-label font-weight-bold text-primary">Upload Word File</label>
+                            <div class="upload-box p-5 border-dashed rounded text-center bg-light" id="drop-zone" style="border: 2px dashed #007bff; cursor: pointer; border-radius: 12px !important;">
+                                <i class="fas fa-file-word fa-4x text-primary mb-3"></i>
+                                <h5 class="mb-1 text-dark font-weight-bold">Drag and drop or click to upload `.docx`</h5>
                                 <span class="text-muted small">Max file size: 10MB</span>
                                 <input type="file" id="word-upload-input" accept=".docx" class="d-none">
                             </div>
                         </div>
 
+                        <!-- Progress Section -->
                         <div id="bulk-progress-wrap" class="mt-4" style="display:none;">
-                            <div class="progress mb-2" style="height: 10px; border-radius: 5px;">
-                                <div id="bulk-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                            <div class="progress mb-2" style="height: 12px; border-radius: 6px;">
+                                <div id="bulk-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%"></div>
                             </div>
-                            <p id="bulk-progress-text" class="small text-center text-muted mb-0">Processing...</p>
+                            <p id="bulk-progress-text" class="small text-center text-muted font-weight-bold mb-0">Processing...</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-8">
-                <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px;">
+                <!-- Card 2: Spacious Full-Width Preview Panel (Flowing below) -->
+                <div class="card shadow-lg border-0 mb-4" id="preview-card" style="border-radius: 15px; display: none;">
                     <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                        <h5 class="card-title mb-0 text-white">Preview & Import</h5>
-                        <button id="bulk-import-btn" class="btn btn-success btn-sm px-4" disabled onclick="submitBulkImport()">
+                        <h5 class="card-title mb-0 text-white"><i class="fas fa-eye mr-2"></i> Preview & Review Questions</h5>
+                        <button id="bulk-import-btn" class="btn btn-success px-4 font-weight-bold shadow-sm" disabled onclick="submitBulkImport()" style="border-radius: 8px;">
                             <i class="fas fa-upload mr-2"></i> Import to Question Bank
                         </button>
                     </div>
                     <div class="card-body p-0">
-                        <div id="preview-container" style="min-height: 500px; max-height: 700px; overflow-y: auto;">
-                            <div class="text-center py-5 text-muted">
-                                <i class="fas fa-search fa-3x mb-3 opacity-25"></i>
-                                <h5>Upload a file to see preview</h5>
-                                <p class="small px-5">The system will parse the document and show you exactly what will be imported.</p>
-                                <div class="mt-4 p-3 border rounded d-inline-block bg-white shadow-sm">
-                                    <p class="small text-primary fw-bold">Path Verification Check:</p>
-                                    <img src="../../../uploads/oes/test_path_marker.png" alt="Test Image" onerror="this.parentElement.style.display='none'" style="width: 50px;">
-                                    <p class="x-small text-muted mt-2">If you see an icon above, paths are working.</p>
-                                </div>
-                            </div>
+                        <div id="preview-container" style="max-height: 800px; overflow-y: auto;">
+                            <!-- Dynamically loaded preview list -->
                         </div>
                     </div>
                 </div>
@@ -146,20 +153,6 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid AS
 </style>
 
 <script>
-// Data from server (constants.php would provide this if needed, but we fetch via AJAX)
-const allSubjects = <?php 
-    $sub_all = $conn->query("SELECT id, standard_id, subject_name FROM tbl_subjects WHERE activated = 1 AND is_deleted = 0 ORDER BY subject_name ASC")->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($sub_all); 
-?>;
-const allChapters = <?php 
-    $ch_all = $conn->query("SELECT chpid, subid, chapter FROM tbl_chapters WHERE activated = 1 AND is_deleted = 0 ORDER BY chapter ASC")->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($ch_all); 
-?>;
-const allTopics = <?php 
-    $tp_all = $conn->query("SELECT id, subject_id, chapter_id, topic_name_english FROM tbl_topics WHERE activated = 1 AND is_deleted = 0 ORDER BY topic_name_english ASC")->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($tp_all); 
-?>;
-
 let parsedQuestions = [];
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -170,43 +163,60 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('word-upload-input');
 
-    // --- Dynamic Dropdowns ---
-    stdSel.addEventListener('change', function() {
+    // --- Dynamic Dropdowns via AJAX ---
+    stdSel.addEventListener('change', async function() {
         const val = this.value;
         subSel.innerHTML = '<option value="">Select Subject</option>';
         if (val) {
-            allSubjects.filter(s => s.standard_id == val).forEach(s => {
-                const opt = document.createElement('option');
-                opt.value = s.id; opt.innerText = s.subject_name;
-                subSel.appendChild(opt);
-            });
+            try {
+                const resp = await fetch('ajax/get-subjects.php?standard_id=' + val);
+                const subjects = await resp.json();
+                subjects.forEach(s => {
+                    const opt = document.createElement('option');
+                    opt.value = s.id; opt.innerText = s.subject_name;
+                    subSel.appendChild(opt);
+                });
+            } catch (e) {
+                console.error('Error fetching subjects:', e);
+            }
         }
         subSel.dispatchEvent(new Event('change'));
     });
 
-    subSel.addEventListener('change', function() {
+    subSel.addEventListener('change', async function() {
         const val = this.value;
         chSel.innerHTML = '<option value="">Select Chapter</option>';
         if (val) {
-            allChapters.filter(c => c.subid == val).forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = c.chpid; opt.innerText = c.chapter;
-                chSel.appendChild(opt);
-            });
+            try {
+                const resp = await fetch('ajax/get-chapters.php?subject_id=' + val);
+                const chapters = await resp.json();
+                chapters.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.chpid; opt.innerText = c.chapter;
+                    chSel.appendChild(opt);
+                });
+            } catch (e) {
+                console.error('Error fetching chapters:', e);
+            }
         }
         chSel.dispatchEvent(new Event('change'));
     });
 
-    chSel.addEventListener('change', function() {
+    chSel.addEventListener('change', async function() {
         const val = this.value;
-        const subId = subSel.value;
         tpSel.innerHTML = '<option value="">Select Topic</option>';
         if (val) {
-            allTopics.filter(t => t.chapter_id == val || (t.subject_id == subId && !t.chapter_id)).forEach(t => {
-                const opt = document.createElement('option');
-                opt.value = t.id; opt.innerText = t.topic_name_english;
-                tpSel.appendChild(opt);
-            });
+            try {
+                const resp = await fetch('ajax/get-topics.php?chapter_id=' + val);
+                const topics = await resp.json();
+                topics.forEach(t => {
+                    const opt = document.createElement('option');
+                    opt.value = t.id; opt.innerText = t.topic_name;
+                    tpSel.appendChild(opt);
+                });
+            } catch (e) {
+                console.error('Error fetching topics:', e);
+            }
         }
     });
 
@@ -321,13 +331,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const progressWrap = document.getElementById('bulk-progress-wrap');
         const progressBar  = document.getElementById('bulk-progress-bar');
         const progressText = document.getElementById('bulk-progress-text');
+        const previewCard  = document.getElementById('preview-card');
         const previewCont  = document.getElementById('preview-container');
         const importBtn    = document.getElementById('bulk-import-btn');
 
         progressWrap.style.display = 'block';
         progressBar.style.width = '20%';
         progressText.textContent = 'Uploading and Parsing Word file...';
-        previewCont.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Reading document structure...</p></div>';
+        
+        if (previewCard) previewCard.style.display = 'none';
+        if (previewCont) previewCont.innerHTML = '';
         importBtn.disabled = true;
 
         fetch('ajax/import-word-server.php', {
@@ -342,7 +355,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.success) {
                 autoFillMetadata(data.questions);
                 parsedQuestions = data.questions;
+                
+                // Show preview card and populate it
+                if (previewCard) previewCard.style.display = 'block';
                 renderPreview(data.questions);
+                
                 importBtn.disabled = false;
             } else {
                 alert('Word parse error: ' + data.message);
@@ -358,24 +375,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderPreview(questions) {
         const previewCont = document.getElementById('preview-container');
+        if (!previewCont) return;
         if (!questions.length) {
             previewCont.innerHTML = '<div class="p-5 text-center">No questions found in file.</div>';
             return;
         }
 
-        let html = '<div class="p-3 bg-light border-bottom font-weight-bold">Found ' + questions.length + ' questions:</div>';
+        let html = '<div class="p-3 bg-light border-bottom font-weight-bold"><i class="fas fa-list text-primary mr-2"></i>Found ' + questions.length + ' questions:</div>';
         questions.forEach((q, i) => {
             html += `
-            <div class="preview-row">
+            <div class="preview-row p-3 mb-3 border-bottom">
                 <div class="d-flex justify-content-between align-items-start">
-                    <span class="badge badge-primary mr-2">Q${i+1}</span>
+                    <span class="badge bg-primary text-white mr-3 px-2 py-1">Q${i+1}</span>
                     <div class="flex-grow-1">
-                        <div class="question-text mb-3 ql-editor p-0" style="min-height: auto;">${q.question_text}</div>
+                        <div class="question-text mb-3 ql-editor p-0" style="min-height: auto; font-size: 1.05rem;">
+                            <div class="mb-2"><span class="badge bg-primary text-white mr-1">EN</span> ${q.question_text}</div>
+                            ${q.question_text_guj ? `<div class="text-secondary"><span class="badge bg-warning text-dark mr-1">GU</span> ${q.question_text_guj}</div>` : ''}
+                        </div>
                         <div class="row">
-                            <div class="col-md-6"><div class="option-box ql-editor p-1" style="min-height: auto;"><strong>A:</strong> ${q.option_a || '---'}</div></div>
-                            <div class="col-md-6"><div class="option-box ql-editor p-1" style="min-height: auto;"><strong>B:</strong> ${q.option_b || '---'}</div></div>
-                            <div class="col-md-6"><div class="option-box ql-editor p-1" style="min-height: auto;"><strong>C:</strong> ${q.option_c || '---'}</div></div>
-                            <div class="col-md-6"><div class="option-box ql-editor p-1" style="min-height: auto;"><strong>D:</strong> ${q.option_d || '---'}</div></div>
+                            <div class="col-md-6 mb-2">
+                                <div class="option-box ql-editor p-2 border rounded" style="min-height: auto; background: #fafafa;">
+                                    <div><strong class="text-primary">A (EN):</strong> ${q.option_a || '---'}</div>
+                                    ${q.option_a_guj ? `<div class="mt-1 text-muted"><strong class="text-warning">A (GU):</strong> ${q.option_a_guj}</div>` : ''}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="option-box ql-editor p-2 border rounded" style="min-height: auto; background: #fafafa;">
+                                    <div><strong class="text-primary">B (EN):</strong> ${q.option_b || '---'}</div>
+                                    ${q.option_b_guj ? `<div class="mt-1 text-muted"><strong class="text-warning">B (GU):</strong> ${q.option_b_guj}</div>` : ''}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="option-box ql-editor p-2 border rounded" style="min-height: auto; background: #fafafa;">
+                                    <div><strong class="text-primary">C (EN):</strong> ${q.option_c || '---'}</div>
+                                    ${q.option_c_guj ? `<div class="mt-1 text-muted"><strong class="text-warning">C (GU):</strong> ${q.option_c_guj}</div>` : ''}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="option-box ql-editor p-2 border rounded" style="min-height: auto; background: #fafafa;">
+                                    <div><strong class="text-primary">D (EN):</strong> ${q.option_d || '---'}</div>
+                                    ${q.option_d_guj ? `<div class="mt-1 text-muted"><strong class="text-warning">D (GU):</strong> ${q.option_d_guj}</div>` : ''}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -395,55 +436,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function renderTableView(questions) {
-        const tableCard = document.getElementById('table-view-card');
-        const tableBody = document.getElementById('table-view-body');
-        
-        if (!questions.length) {
-            tableCard.style.display = 'none';
-            return;
-        }
-
-        tableCard.style.display = 'block';
-        let html = '';
-        questions.forEach((q, i) => {
-            html += `
-            <tr>
-                <td class="text-center font-weight-bold">${i+1}</td>
-                <td>${q.standard || '---'}</td>
-                <td>${q.group_name || '---'}</td>
-                <td>${q.subject || '---'}</td>
-                <td>${q.chapter || '---'}</td>
-                <td>${q.topic || '---'}</td>
-                <td style="min-width: 300px; max-width: 500px; white-space: normal;">${q.question_text}</td>
-                <td style="max-width: 200px; white-space: normal;">${q.option_a || '---'}</td>
-                <td style="max-width: 200px; white-space: normal;">${q.option_b || '---'}</td>
-                <td style="max-width: 200px; white-space: normal;">${q.option_c || '---'}</td>
-                <td style="max-width: 200px; white-space: normal;">${q.option_d || '---'}</td>
-                <td class="text-center font-weight-bold text-success">${q.correct_option || '---'}</td>
-                <td class="text-center">${q.question_type || 'MCQ'}</td>
-                <td class="text-center">${q.marks || '1'}</td>
-                <td class="text-center">${q.order_no || (i+1)}</td>
-            </tr>`;
-        });
-        tableBody.innerHTML = html;
-        
-        // Render Math in Table too
-        if (typeof renderMathInElement === 'function') {
-            renderMathInElement(tableBody, {
-                delimiters: [
-                    {left: '$$', right: '$$', display: true},
-                    {left: '$', right: '$', display: false}
-                ],
-                throwOnError: false
-            });
-        }
-    }
-
     function resetPreview() {
-        document.getElementById('preview-container').innerHTML = '';
-        document.getElementById('table-view-card').style.display = 'none';
-        document.getElementById('bulk-progress-wrap').style.display = 'none';
+        const previewCard = document.getElementById('preview-card');
+        if (previewCard) previewCard.style.display = 'none';
+        const previewCont = document.getElementById('preview-container');
+        if (previewCont) previewCont.innerHTML = '';
+        const progressWrap = document.getElementById('bulk-progress-wrap');
+        if (progressWrap) progressWrap.style.display = 'none';
+        const importBtn = document.getElementById('bulk-import-btn');
+        if (importBtn) importBtn.disabled = true;
     }
 
     window.submitBulkImport = async function() {
@@ -470,6 +471,7 @@ document.addEventListener('DOMContentLoaded', function() {
             questions: parsedQuestions,
             global_metadata: {
                 standard_id: std,
+                group_id: document.getElementById('bulk_grp').value,
                 subject_id: sub,
                 chapter_id: document.getElementById('bulk_ch').value,
                 topic_id: document.getElementById('bulk_tp').value
@@ -500,6 +502,8 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.disabled = false;
         }
     };
+
+
 });
 </script>
 

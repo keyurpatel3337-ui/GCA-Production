@@ -133,11 +133,11 @@ if ($status_filter === 'unassigned') {
 
 if ($course_filter) {
     if ($course_filter === '11th') {
-        $where_conditions[] = "s.course_id IN (1, 2)";
+        $where_conditions[] = "s.course_id = 1";
     } elseif ($course_filter === '12th') {
-        $where_conditions[] = "s.course_id IN (4, 5)";
+        $where_conditions[] = "s.course_id = 2";
     } elseif ($course_filter === 'Reneet') {
-        $where_conditions[] = "s.course_id = 6";
+        $where_conditions[] = "s.course_id = 3";
     } else {
         $where_conditions[] = "s.course_id = ?";
         $params[] = $course_filter;

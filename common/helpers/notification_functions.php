@@ -602,7 +602,7 @@ function sendNotification($conn, $notification_type, $recipient, $variables = []
         $stmt_c = $conn->prepare("SELECT course_id FROM tbl_gm_std_registration WHERE id = ?");
         $stmt_c->execute([$options['student_id']]);
         $course_info = $stmt_c->fetch(PDO::FETCH_ASSOC);
-        if ($course_info && in_array($course_info['course_id'], [1, 2])) {
+        if ($course_info && in_array($course_info['course_id'], [1])) {
             $course_restricted = true;
         }
     }

@@ -218,11 +218,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $payment_ids = [];
             $receipt_payment_ids = [];
 
-            // 11th std students (course_id 1 or 2) - receipt numbers not generated
+            // Only 11th std students (course_id = 1) skip receipt generation
             $stmt_course = $conn->prepare("SELECT course_id FROM tbl_gm_std_registration WHERE id = ?");
             $stmt_course->execute([$student_id]);
             $student_course_data = $stmt_course->fetch(PDO::FETCH_ASSOC);
-            $skip_receipt_generation = in_array($student_course_data['course_id'] ?? 0, [1, 2]);
+            $skip_receipt_generation = ($student_course_data['course_id'] ?? 0) == 1;
 
             foreach ($components_to_save as $comp_data) {
                 $comp_name = $comp_data['fee_component'];
@@ -240,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $receipt_no = null;
                 $receipt_config_id = null;
 
-                // hostel_cash_fee is a cash collection — never generates receipt regardless of student type
+                // hostel_cash_fee is a cash collection — never generates receipt
                 $is_cash_fee_component = ($comp_name === 'hostel_cash_fee');
                 if (!$is_without_gst && $payment_mode !== 'deduction' && !$skip_receipt_generation && !$is_cash_fee_component) {
                     // Determine receipt_config_id
@@ -263,13 +263,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $receipt_no = $seq_result['receipt_no'];
                     $receipt_numbers[] = $receipt_no;
                 } elseif ($payment_mode === 'deduction') {
-                    // User requested '0' for deduction receipt_no
                     $receipt_no = '0';
                 } elseif ($is_without_gst) {
-                    // User requested '0' for without-GST receipt_no as well
                     $receipt_no = '0';
                 } elseif ($skip_receipt_generation) {
-                    // Force receipt_no to '0' for course_id 1 or 2 (11th Std)
+                    // 11th std (course_id = 1) — no receipt number generated
                     $receipt_no = '0';
                 }
 

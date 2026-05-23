@@ -270,7 +270,7 @@ include '../../include/sidebar.php';
                         alert("Redirecting to online payment gateway...");
                         window.location.href = data.payment_url;
                     } else {
-                        alert(data.message || 'Payment initiation failed');
+                        alert((data && data.message) || 'Payment initiation failed');
                         btn.disabled = false;
                         btn.innerHTML = 'Confirm Manual Deposit <i class="fas fa-check-circle ms-2"></i>';
                     }
@@ -301,7 +301,7 @@ include '../../include/sidebar.php';
                         alert("Cash Deposit Successful!\nReceipt No: " + rno);
                         location.reload();
                     } else {
-                        alert(data.message || 'Deposit failed');
+                        alert((data && data.message) || 'Deposit failed');
                         btn.disabled = false;
                         btn.innerHTML = 'Confirm Manual Deposit <i class="fas fa-check-circle ms-2"></i>';
                     }

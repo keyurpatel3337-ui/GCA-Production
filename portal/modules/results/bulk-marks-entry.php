@@ -133,11 +133,11 @@ if ($selected_year && $selected_course && $selected_subject && $selected_exam) {
 
         if ($selected_course) {
             if ($selected_course === '11th') {
-                $where_clauses[] = "es.course_id IN (1, 2)";
+                $where_clauses[] = "es.course_id = 1";
             } elseif ($selected_course === '12th') {
-                $where_clauses[] = "es.course_id IN (4, 5)";
+                $where_clauses[] = "es.course_id = 2";
             } elseif ($selected_course === 'Reneet') {
-                $where_clauses[] = "es.course_id = 6";
+                $where_clauses[] = "es.course_id = 3";
             } else {
                 $where_clauses[] = "es.course_id = ?";
                 $params[] = $selected_course;

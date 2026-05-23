@@ -26,29 +26,35 @@ try {
 
     $baseQuery = "SELECT * FROM (
         SELECT d.created_at as discount_date, d.discount_amount as amount, d.discount_type, 'approved' as status, d.remarks,
-               CONCAT(r.surname, ' ', r.student_name,' ',r.fathers_name) as student_name, c.course_name as current_class,
+               CONCAT(r.surname, ' ', r.student_name,' ',r.fathers_name) as student_name, 
+               CONCAT(c.course_name, IF(m.medium_name IS NOT NULL AND m.medium_name != '', CONCAT(' - ', m.medium_name), '')) as current_class,
                r.mob, r.id as student_id
         FROM tbl_post_admission_discounts d
         JOIN tbl_gm_std_registration r ON d.student_id = r.id
         LEFT JOIN tbl_enrolled_students es ON es.registration_id = r.id AND es.is_active = 1
         LEFT JOIN tbl_courses c ON r.course_id = c.id
+        LEFT JOIN tbl_medium m ON r.medium_id = m.id
         UNION ALL
         SELECT COALESCE(r.admission_confirmed_date, r.created_at) as discount_date, r.additional_scholarship_amount as amount,
                COALESCE(r.additional_scholarship_type, 'Additional Scholarship') as discount_type, 'approved' as status, r.additional_scholarship_remarks as remarks,
-               CONCAT(r.surname, ' ', r.student_name,' ',r.fathers_name) as student_name, c.course_name as current_class,
+               CONCAT(r.surname, ' ', r.student_name,' ',r.fathers_name) as student_name, 
+               CONCAT(c.course_name, IF(m.medium_name IS NOT NULL AND m.medium_name != '', CONCAT(' - ', m.medium_name), '')) as current_class,
                r.mob, r.id as student_id
         FROM tbl_gm_std_registration r
         LEFT JOIN tbl_enrolled_students es ON es.registration_id = r.id AND es.is_active = 1
-        LEFT JOIN tbl_courses c ON (r.course_id = c.id OR r.course_id = c.id)
+        LEFT JOIN tbl_courses c ON (r.course_id = c.id)
+        LEFT JOIN tbl_medium m ON r.medium_id = m.id
         WHERE r.additional_scholarship_amount > 0
         UNION ALL
         SELECT es.updated_at as discount_date, es.post_admission_discount_amount as amount,
                'Payment Discount' as discount_type, 'approved' as status, es.post_admission_discount_remarks as remarks,
-               CONCAT(r.surname, ' ', r.student_name,' ',r.fathers_name) as student_name, c.course_name as current_class,
+               CONCAT(r.surname, ' ', r.student_name,' ',r.fathers_name) as student_name, 
+               CONCAT(c.course_name, IF(m.medium_name IS NOT NULL AND m.medium_name != '', CONCAT(' - ', m.medium_name), '')) as current_class,
                r.mob, r.id as student_id
         FROM tbl_enrolled_students es
         JOIN tbl_gm_std_registration r ON es.registration_id = r.id
         LEFT JOIN tbl_courses c ON r.course_id = c.id
+        LEFT JOIN tbl_medium m ON r.medium_id = m.id
         WHERE es.is_active = 1 AND es.post_admission_discount_amount > 0 AND es.post_admission_discount_remarks LIKE '%| Discount:%'
     ) AS report";
 

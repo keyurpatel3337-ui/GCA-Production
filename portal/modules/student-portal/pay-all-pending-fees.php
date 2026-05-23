@@ -82,6 +82,9 @@ $pending_fees = [];
 $total_amount = 0;
 
 foreach ($allocations as $component => $data) {
+    if (strpos(strtolower($component), 'hostel') !== false) {
+        continue;
+    }
     $pending = floatval($data['pending_amount'] ?? 0);
     
     // Special handling for hostel: match the label used in pending-fee-payment.php

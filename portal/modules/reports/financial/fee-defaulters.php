@@ -52,7 +52,7 @@ $sql = "SELECT
             r.mob as mobile,
             r.parent_mob as father_mobile,
             r.email,
-            c.course_name as current_class,
+            CONCAT(c.course_name, IF(m.medium_name IS NOT NULL AND m.medium_name != '', CONCAT(' - ', m.medium_name), '')) as current_class,
             g.group_name,
             COALESCE(sfa.allocated_amount, 0) as total_fee,
             COALESCE(sfa.paid_amount, 0) as total_paid,
@@ -64,6 +64,7 @@ $sql = "SELECT
         JOIN tbl_gm_std_registration r ON es.registration_id = r.id
         LEFT JOIN tbl_group g ON r.group_id = g.id
         LEFT JOIN tbl_courses c ON r.course_id = c.id
+        LEFT JOIN tbl_medium m ON r.medium_id = m.id
         LEFT JOIN tbl_student_fee_allocation sfa ON es.registration_id = sfa.student_id
         LEFT JOIN (
             SELECT student_id, MAX(payment_date) as last_payment_date
@@ -79,11 +80,11 @@ $params = [$threshold_days];
 
 if (!empty($course_filter)) {
     if ($course_filter === '11th') {
-        $sql .= " AND r.course_id IN (1, 2)";
+        $sql .= " AND r.course_id = 1";
     } elseif ($course_filter === '12th') {
-        $sql .= " AND r.course_id IN (4, 5)";
+        $sql .= " AND r.course_id = 2";
     } elseif ($course_filter === 'Reneet') {
-        $sql .= " AND r.course_id = 6";
+        $sql .= " AND r.course_id = 3";
     } else {
         $sql .= " AND r.course_id = ?";
         $params[] = $course_filter;
@@ -162,6 +163,7 @@ $countSql = "SELECT COUNT(*) as total_count, SUM(sub.pending_amount) as total_ou
 $summary = $dbOps->customSelectOne($countSql, $params);
 $totalDefaulters = $summary['total_count'] ?? 0;
 $totalOutstanding = $summary['total_outstanding'] ?? 0;
+$totalPages = ceil($totalDefaulters / $per_page);
 
 // 2. Get Paginated Data using the ordered display query
 $paginatedSql = $displaySql . " LIMIT $per_page OFFSET $offset";
@@ -246,7 +248,7 @@ include '../../../include/sidebar.php';
                         <select name="threshold" class="form-select">
                             <option value="15" <?php echo $threshold_days == 15 ? 'selected' : ''; ?>>15+ Days</option>
                             <option value="30" <?php echo $threshold_days == 30 ? 'selected' : ''; ?>>30+ Days</option>
-                            <option value="60" <?php echo $threshold_days == 60 ? 'selected' : ''; ?>>60+ Days</option>
+                            <option value="60" <?php echo $threshold_days == 30 ? 'selected' : ''; ?>>60+ Days</option>
                             <option value="90" <?php echo $threshold_days == 90 ? 'selected' : ''; ?>>90+ Days</option>
                         </select>
                     </div>

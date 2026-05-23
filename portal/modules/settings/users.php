@@ -13,40 +13,82 @@ if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE])) {
     exit;
 }
 
-// Handle role filter from POST or session
-if (isset($_POST['role'])) {
-    $_SESSION['users_role_filter'] = $_POST['role'];
-} elseif (isset($_POST['clear_filter'])) {
-    unset($_SESSION['users_role_filter']);
-    unset($_SESSION['users_pagination']);
+// Check if role or search parameters are passed in GET (e.g. from dashboard or sidebar redirection)
+if (isset($_GET['role'])) {
+    $roleParam = trim($_GET['role']);
+    if ($roleParam !== '') {
+        $_SESSION['users_role_filter'] = $roleParam;
+    } else {
+        unset($_SESSION['users_role_filter']);
+    }
+    $_SESSION['users_pagination']['page'] = 1;
 }
 
-// Handle page and per_page from POST (pagination clicks)
-if (isset($_POST['page']) || isset($_POST['per_page'])) {
-    $_SESSION['users_pagination'] = [
-        'page' => isset($_POST['page']) ? (int) $_POST['page'] : ($_SESSION['users_pagination']['page'] ?? 1),
-        'per_page' => isset($_POST['per_page']) ? (int) $_POST['per_page'] : ($_SESSION['users_pagination']['per_page'] ?? 10)
-    ];
+if (isset($_GET['search'])) {
+    $_SESSION['users_search'] = trim($_GET['search']);
+    $_SESSION['users_pagination']['page'] = 1;
 }
+
+// Initialize session variables if not set
+if (!isset($_SESSION['users_pagination'])) {
+    $_SESSION['users_pagination'] = ['page' => 1, 'per_page' => 10];
+} else {
+    $_SESSION['users_pagination']['per_page'] = 10;
+}
+
+// Check for clearing filters
+if (isset($_POST['clear_filter'])) {
+    unset($_SESSION['users_role_filter']);
+    unset($_SESSION['users_search']);
+    $_SESSION['users_pagination']['page'] = 1;
+    $_SESSION['users_pagination']['per_page'] = 10;
+    // Redirect to prevent form resubmission
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
+}
+
+// Handle new search/filter submissions
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['page'])) {
+    // If a search or filter is submitted (and it's not just a pagination click),
+    // we reset the page to 1 so the user doesn't get stuck on a page that doesn't exist for the new filtered subset.
+    $_SESSION['users_pagination']['page'] = 1;
+    
+    // Process search query
+    if (isset($_POST['search'])) {
+        $_SESSION['users_search'] = trim($_POST['search']);
+    }
+    
+    // Process role filter
+    if (isset($_POST['role'])) {
+        if ($_POST['role'] === '') {
+            unset($_SESSION['users_role_filter']);
+        } else {
+            $_SESSION['users_role_filter'] = $_POST['role'];
+        }
+    }
+}
+
+// Handle page clicks explicitly (which are also POSTed via pagination forms)
+if (isset($_POST['page'])) {
+    $_SESSION['users_pagination']['page'] = max(1, (int)$_POST['page']);
+}
+
+// Ensure perPage is always locked to 10
+$_SESSION['users_pagination']['per_page'] = 10;
 
 $api = new APIClient();
 
-// Build request params from session
-$requestParams = [];
-$paginationSession = $_SESSION['users_pagination'] ?? [];
-$requestParams['page'] = $paginationSession['page'] ?? 1;
-$requestParams['per_page'] = $paginationSession['per_page'] ?? 10;
+// Build API request params
+$requestParams = [
+    'page' => $_SESSION['users_pagination']['page'] ?? 1,
+    'per_page' => 10
+];
 
-// Add search from POST or previous session
-if (isset($_POST['search'])) {
-    $requestParams['search'] = $_POST['search'];
-    $_SESSION['users_search'] = $_POST['search'];
-} elseif (isset($_SESSION['users_search'])) {
+if (isset($_SESSION['users_search']) && $_SESSION['users_search'] !== '') {
     $requestParams['search'] = $_SESSION['users_search'];
 }
 
-// Add role from session if exists
-if (isset($_SESSION['users_role_filter'])) {
+if (isset($_SESSION['users_role_filter']) && $_SESSION['users_role_filter'] !== '') {
     $requestParams['role'] = $_SESSION['users_role_filter'];
 }
 
@@ -62,6 +104,9 @@ if ($response && isset($response['success']) && $response['success']) {
     $totalPages = $pagination['total_pages'] ?? 1;
     $search = $response['data']['applied_filters']['search'] ?? '';
     $activeRoleFilter = $response['data']['applied_filters']['role'] ?? ($_SESSION['users_role_filter'] ?? '');
+    if ($activeRoleFilter !== '') {
+        $_SESSION['users_role_filter'] = $activeRoleFilter;
+    }
 } else {
     $users = [];
     $roles = [];
@@ -69,7 +114,7 @@ if ($response && isset($response['success']) && $response['success']) {
     $perPage = 10;
     $totalRecords = 0;
     $totalPages = 1;
-    $search = $_POST['search'] ?? '';
+    $search = $_SESSION['users_search'] ?? '';
     $activeRoleFilter = $_SESSION['users_role_filter'] ?? '';
     set_flash_message('error', $response['error'] ?? 'Failed to load users');
 }
@@ -115,31 +160,40 @@ include '../../include/sidebar.php';
     <?php endif; ?>
 
     <!-- Search and Filter -->
-    <div class="card mb-3">
-        <div class="card-body">
-            <form method="POST" class="row g-3">
-                <div class="col-md-4">
-                    <input type="text" name="search" class="form-control" placeholder="Search by name, email..."
-                        value="<?php echo htmlspecialchars($search ?? ''); ?>">
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body bg-light rounded">
+            <form method="POST" class="row g-3 align-items-center">
+                <div class="col-md-5">
+                    <label class="form-label small fw-bold text-muted mb-1">Search User</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                        <input type="text" name="search" class="form-control border-start-0 ps-0" placeholder="Search by name, email..."
+                            value="<?php echo htmlspecialchars($search ?? ''); ?>">
+                    </div>
                 </div>
-                <div class="col-md-2">
-                    <select name="per_page" class="form-control">
-                        <option value="10" <?php echo $perPage == 10 ? 'selected' : ''; ?>>10 per page</option>
-                        <option value="25" <?php echo $perPage == 25 ? 'selected' : ''; ?>>25 per page</option>
-                        <option value="50" <?php echo $perPage == 50 ? 'selected' : ''; ?>>50 per page</option>
-                        <option value="100" <?php echo $perPage == 100 ? 'selected' : ''; ?>>100 per page</option>
+                
+                <div class="col-md-4">
+                    <label class="form-label small fw-bold text-muted mb-1">Filter by Role</label>
+                    <select name="role" class="form-select border-start-0" onchange="this.form.submit()">
+                        <option value="">All Roles</option>
+                        <?php foreach ($roles as $role): ?>
+                            <option value="<?php echo $role['id']; ?>" <?php echo $activeRoleFilter == $role['id'] ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($role['role_name'] ?? ''); ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
-                </div>
-                <?php if (!empty($activeRoleFilter)): ?>
-                    <div class="col-md-2">
-                        <button type="submit" name="clear_filter" value="1" class="btn btn-outline-secondary">
-                            <i class="fas fa-times"></i> Clear Filter
+
+                <div class="col-md-3 d-flex align-items-end gap-2 pt-3">
+                    <button type="submit" class="btn btn-primary flex-grow-1">
+                        <i class="fas fa-filter me-1"></i> Apply Filters
+                    </button>
+                    <?php if (!empty($search) || !empty($activeRoleFilter)): ?>
+                        <button type="submit" name="clear_filter" value="1" class="btn btn-outline-danger">
+                            <i class="fas fa-undo-alt me-1"></i> Clear
                         </button>
-                    </div>
-                <?php endif; ?>
+                    <?php endif; ?>
+                </div>
             </form>
         </div>
     </div>
@@ -197,10 +251,18 @@ include '../../include/sidebar.php';
 
     <!-- Pagination -->
     <?php if ($totalRecords > 0): ?>
-        <div class="d-flex justify-content-between align-items-center mt-3">
-            <?php echo renderPaginationPost($page, $totalPages, 2, $perPage); ?>
-            <div class="text-muted">
-                <?php echo getPaginationInfo($page, $perPage, $totalRecords); ?>
+        <div class="row mt-2">
+            <div class="col-12">
+                <?php 
+                $extraParams = [];
+                if (!empty($search)) {
+                    $extraParams['search'] = $search;
+                }
+                if (!empty($activeRoleFilter)) {
+                    $extraParams['role'] = $activeRoleFilter;
+                }
+                echo renderPaginationPost($page, $totalPages, 2, $perPage, $extraParams, $totalRecords, 'users'); 
+                ?>
             </div>
         </div>
     <?php endif; ?>

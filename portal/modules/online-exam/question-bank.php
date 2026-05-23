@@ -6,18 +6,20 @@ require_once PORTAL_PATH . 'session_config.php';
 require_once PORTAL_GLOBALVARIABLE;
 
 // Check access
-if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])) {
+if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER, ROLE_TEACHER, ROLE_COMPUTER_OPERATOR, ROLE_OES_DATA_ENTRY_OPERATOR])) {
     header("Location: " . PORTAL_URL . "/login.php");
     exit();
 }
 
 // Filters
 $standard_filter = isset($_GET['standard_id']) ? (int)$_GET['standard_id'] : '';
+$group_filter = isset($_GET['group_id']) ? (int)$_GET['group_id'] : '';
 $subject_filter = isset($_GET['subject_id']) ? (int)$_GET['subject_id'] : '';
 $chapter_filter = isset($_GET['chapter_id']) ? (int)$_GET['chapter_id'] : '';
 $topic_filter = isset($_GET['topic_id']) ? (int)$_GET['topic_id'] : '';
 $type_filter = isset($_GET['question_type_id']) ? (int)$_GET['question_type_id'] : '';
 $difficulty_filter = isset($_GET['difficulty']) ? $_GET['difficulty'] : '';
+$exam_type_filter = isset($_GET['exam_type']) ? $_GET['exam_type'] : '';
 $search_query = isset($_GET['search']) ? $_GET['search'] : '';
 
 $where_clauses = ["1=1"];
@@ -26,6 +28,10 @@ $params = [];
 if ($standard_filter) {
     $where_clauses[] = "q.standard_id = :standard_id";
     $params[':standard_id'] = $standard_filter;
+}
+if ($group_filter) {
+    $where_clauses[] = "q.group_id = :group_id";
+    $params[':group_id'] = $group_filter;
 }
 if ($subject_filter) {
     $where_clauses[] = "q.subject_id = :subject_id";
@@ -47,6 +53,10 @@ if ($difficulty_filter) {
     $where_clauses[] = "q.difficulty = :difficulty";
     $params[':difficulty'] = $difficulty_filter;
 }
+if ($exam_type_filter) {
+    $where_clauses[] = "q.exam_type = :exam_type";
+    $params[':exam_type'] = $exam_type_filter;
+}
 if ($search_query) {
     $where_clauses[] = "q.question_text LIKE :search";
     $params[':search'] = "%$search_query%";
@@ -57,14 +67,23 @@ $where_clauses[] = "q.status = 1";
 
 $where_sql = implode(" AND ", $where_clauses);
 
-$sql = "SELECT q.id, q.marks, q.difficulty,
-               q.question_text, q.option_a, q.option_b, q.option_c, q.option_d, q.correct_option,
-               s.subject_name as subname, qt.type_name, c.chapter as chapter_name, t.topic_name_english as topic_name 
+$sql = "SELECT q.id, q.marks, q.difficulty, q.group_id, q.exam_type,
+               q.question_text, q.question_text_guj,
+               q.option_a, q.option_a_guj,
+               q.option_b, q.option_b_guj,
+               q.option_c, q.option_c_guj,
+               q.option_d, q.option_d_guj,
+               q.correct_option,
+               s.subject_name as subname, qt.type_name, c.chapter as chapter_name, t.topic_name_english as topic_name,
+               g.group_name,
+               (SELECT COUNT(*) FROM tbl_oes_exam_questions WHERE question_id = q.id) as exam_count,
+               (SELECT GROUP_CONCAT(CONCAT(e.title, ' (', DATE_FORMAT(e.start_time, '%d-%m-%Y'), ')') SEPARATOR '||') FROM tbl_oes_exam_questions eq JOIN tbl_oes_exams e ON eq.exam_id = e.id WHERE eq.question_id = q.id) as exams_list
         FROM tbl_oes_questions q
         LEFT JOIN tbl_subjects s ON q.subject_id = s.id 
         LEFT JOIN tbl_oes_question_types qt ON q.question_type_id = qt.id
         LEFT JOIN tbl_chapters c ON q.chapter_id = c.chpid
         LEFT JOIN tbl_topics t ON q.topic_id = t.id
+        LEFT JOIN tbl_group g ON q.group_id = g.id
         WHERE $where_sql 
         ORDER BY q.id ASC";
 
@@ -118,9 +137,39 @@ include PORTAL_INCLUDE_PATH . 'header.php';
         display: inline-block !important;
         margin: 0 4px !important;
     }
-    /* Ensure paragraph tags inside question text and options don't break lines */
-    .question-content p, .option-card p, .question-card p, .p-2.border p, .p-2.border div {
+    /* Ensure paragraph tags inside question text and options don't break lines, but protect tables! */
+    .question-content p, .option-card p, .question-card p, .p-2.border p:not(table p), .p-2.border div:not(table div) {
         display: inline !important;
+        margin: 0 !important;
+    }
+    /* Premium Option Table Styling */
+    .p-2.border table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        margin: 10px 0 !important;
+        display: table !important;
+        background: #ffffff !important;
+        border-radius: 6px !important;
+        overflow: hidden !important;
+        border: 1px solid #dee2e6 !important;
+    }
+    .p-2.border tr {
+        display: table-row !important;
+    }
+    .p-2.border td, .p-2.border th {
+        border: 1px solid #dee2e6 !important;
+        padding: 8px 12px !important;
+        display: table-cell !important;
+        text-align: left !important;
+        vertical-align: middle !important;
+        color: #212529 !important;
+    }
+    .p-2.border th {
+        background-color: #f8f9fa !important;
+        font-weight: 700 !important;
+    }
+    .p-2.border table p, .p-2.border table div {
+        display: block !important;
         margin: 0 !important;
     }
 </style>
@@ -145,17 +194,26 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                     <!-- Hidden file inputs for bulk import -->
                     <input type="file" id="bulk-csv-input" accept=".csv" style="display:none;">
                     <input type="file" id="bulk-word-input" accept=".docx" style="display:none;">
+                    <!-- Hiding Bulk CSV as requested -->
+                    <!--
                     <button onclick="document.getElementById('bulk-csv-input').click()" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Bulk Import via CSV">
                         <i class="fas fa-file-csv text-success mr-2"></i> Bulk CSV
                     </button>
+                    -->
                     <a href="bulk-import-word.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Bulk Import via Word (.docx)">
                         <i class="fas fa-file-word text-primary mr-2"></i> Bulk Word
                     </a>
+                    <!-- Hiding CSV Template as requested -->
+                    <!--
                     <a href="sample_questions_template.csv" download class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Download CSV Template">
                         <i class="fas fa-table text-warning mr-2"></i> CSV Template
                     </a>
-                    <a href="download-word-template.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Download Word Template (.docx)">
-                        <i class="fas fa-file-word text-info mr-2"></i> Word Template
+                    -->
+                    <a href="download-word-template.php?type=simple" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Download Simplified Word Template (11 Columns)">
+                        <i class="fas fa-file-word text-success mr-2"></i> Word Template (Simple)
+                    </a>
+                    <a href="download-word-template.php?type=full" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Download Full Word Template (22 Columns)">
+                        <i class="fas fa-file-word text-info mr-2"></i> Word Template (Full)
                     </a>
                     <a href="index.php" class="btn btn-primary shadow-sm d-flex align-items-center justify-content-center px-4" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;">
                         <i class="fas fa-plus mr-2" style="font-size: 0.75rem;"></i> Create New Question
@@ -201,15 +259,26 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 <div class="card-body p-4">
                     <form method="GET" id="filter-form" class="row g-3 align-items-end">
                         <!-- Step 1: Standard -->
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <label class="small font-weight-bold text-uppercase text-muted mb-2"><i class="fas fa-graduation-cap mr-1"></i> 1. Standard</label>
                             <select name="standard_id" id="filter_standard" class="form-control border-0 shadow-sm" style="border-radius: 10px;">
                                 <option value="">Select Standard</option>
+                                <option value="11" <?php echo ($standard_filter == 11) ? 'selected' : ''; ?>>11th</option>
+                                <option value="12" <?php echo ($standard_filter == 12) ? 'selected' : ''; ?>>12th</option>
+                                <option value="13" <?php echo ($standard_filter == 13) ? 'selected' : ''; ?>>Reneet</option>
+                            </select>
+                        </div>
+
+                        <!-- Step 1b: Group -->
+                        <div class="col-md-2">
+                            <label class="small font-weight-bold text-uppercase text-muted mb-2"><i class="fas fa-users mr-1"></i> Group</label>
+                            <select name="group_id" id="filter_group" class="form-control border-0 shadow-sm" style="border-radius: 10px;">
+                                <option value="">Select Group</option>
                                 <?php
-                                $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid ASC");
-                                while ($std = $standards->fetch()) {
-                                    $selected = ($standard_filter == $std['stdid']) ? 'selected' : '';
-                                    echo "<option value='{$std['stdid']}' $selected>{$std['stdtext']}</option>";
+                                $groups = $conn->query("SELECT id, group_name FROM tbl_group WHERE is_active = 1 ORDER BY group_name ASC");
+                                while ($g = $groups->fetch()) {
+                                    $selected = ($group_filter == $g['id']) ? 'selected' : '';
+                                    echo "<option value='{$g['id']}' $selected>{$g['group_name']}</option>";
                                 }
                                 ?>
                             </select>
@@ -301,6 +370,17 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             </select>
                         </div>
 
+                        <!-- Step 7: Exam Type -->
+                        <div class="col-md-2">
+                            <label class="small font-weight-bold text-uppercase text-muted mb-2"><i class="fas fa-clipboard-list mr-1"></i> Exam Type</label>
+                            <select name="exam_type" id="filter_exam_type" class="form-control border-0 shadow-sm" style="border-radius: 10px;">
+                                <option value="">All Exam Types</option>
+                                <option value="both" <?php echo $exam_type_filter == 'both' ? 'selected' : ''; ?>>Practice & Final</option>
+                                <option value="practice" <?php echo $exam_type_filter == 'practice' ? 'selected' : ''; ?>>Practice Test Only</option>
+                                <option value="final" <?php echo $exam_type_filter == 'final' ? 'selected' : ''; ?>>Final Exam Only</option>
+                            </select>
+                        </div>
+
                         <div class="col-md-2">
                             <button type="submit" class="btn btn-primary w-100 shadow-sm" style="border-radius: 10px; height: 45px;">
                                 <i class="fas fa-search mr-1"></i> Search
@@ -319,31 +399,96 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                <span class="badge badge-dark mr-1">ID: <?php echo $q['id']; ?></span>
-                                                <span class="badge badge-primary mr-1"><?php echo htmlspecialchars($q['subname'] ?? 'General'); ?></span>
-                                                <span class="badge badge-success mr-1"><?php echo htmlspecialchars($q['chapter_name'] ?? 'General'); ?></span>
-                                                <span class="badge badge-secondary mr-1"><?php echo htmlspecialchars($q['topic_name'] ?? 'General Topic'); ?></span>
-                                                <span class="badge badge-info mr-1"><?php echo htmlspecialchars($q['type_name'] ?? 'N/A'); ?></span>
-                                                <span class="badge badge-warning text-dark mr-1"><?php echo htmlspecialchars($q['difficulty'] ?? 'N/A'); ?></span>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 d-flex align-items-center flex-wrap gap-1">
+                                                <span class="badge badge-dark">ID: <?php echo $q['id']; ?></span>
+                                                <span class="badge badge-primary"><?php echo htmlspecialchars($q['subname'] ?? 'General'); ?></span>
+                                                <?php if (!empty($q['group_name'])): ?>
+                                                    <span class="badge badge-danger"><i class="fas fa-users mr-1"></i><?php echo htmlspecialchars($q['group_name']); ?></span>
+                                                <?php endif; ?>
+                                                <span class="badge badge-success"><?php echo htmlspecialchars($q['chapter_name'] ?? 'General'); ?></span>
+                                                <span class="badge badge-secondary"><?php echo htmlspecialchars($q['topic_name'] ?? 'General Topic'); ?></span>
+                                                <span class="badge badge-info"><?php echo htmlspecialchars($q['type_name'] ?? 'N/A'); ?></span>
+                                                <span class="badge badge-warning text-dark"><?php echo htmlspecialchars($q['difficulty'] ?? 'N/A'); ?></span>
+                                                <?php 
+                                                $exam_type_label = match($q['exam_type'] ?? 'both') {
+                                                    'practice' => 'Practice Test',
+                                                    'final' => 'Final Exam',
+                                                    default => 'Practice & Final'
+                                                };
+                                                $exam_type_class = match($q['exam_type'] ?? 'both') {
+                                                    'practice' => 'border-success text-success bg-white',
+                                                    'final' => 'border-danger text-danger bg-white',
+                                                    default => 'border-secondary text-secondary bg-white'
+                                                };
+                                                ?>
+                                                <span class="badge badge-pill border <?php echo $exam_type_class; ?>"><i class="fas fa-clipboard-list mr-1"></i><?php echo htmlspecialchars($exam_type_label); ?></span>
+                                                <span class="badge badge-light text-dark border"><i class="fas fa-chart-bar text-info mr-1"></i> Asked: <strong><?php echo $q['exam_count']; ?></strong> time<?php echo $q['exam_count'] == 1 ? '' : 's'; ?></span>
                                                 <span class="text-muted ml-2"><?php echo $q['marks']; ?> Marks</span>
                                             </div>
-                                            <div class="h5 mb-3 font-weight-bold text-gray-800 question-content" style="line-height: 1.5;">
-                                                <?php echo $q['question_text']; ?>
-                                            </div>
-                                            
-                                            <?php if (($q['type_name'] ?? '') === 'MCQ'): ?>
-                                            <div class="row">
-                                                <?php foreach (['a', 'b', 'c', 'd'] as $opt): ?>
-                                                    <?php $is_correct = (strtoupper($opt) == $q['correct_option']); ?>
-                                                    <div class="col-md-6 mb-2">
-                                                        <div class="p-2 border rounded <?php echo $is_correct ? 'bg-success text-white border-success' : 'bg-light'; ?>">
-                                                            <strong><?php echo strtoupper($opt); ?>:</strong> <?php echo $q['option_'.$opt]; ?>
-                                                        </div>
-                                                    </div>
-                                                <?php endforeach; ?>
-                                            </div>
+                                            <?php if ($q['exam_count'] > 0): ?>
+                                                <div class="mt-1 mb-2 text-xs text-muted" style="font-size: 0.78rem;">
+                                                    <i class="fas fa-calendar-alt text-info mr-1"></i> Asked in: 
+                                                    <?php 
+                                                    $ex_arr = explode('||', $q['exams_list']);
+                                                    foreach ($ex_arr as $e_idx => $ex_item) {
+                                                        echo ($e_idx > 0 ? ', ' : '') . '<span class="badge badge-pill bg-light text-dark font-weight-bold border">' . htmlspecialchars($ex_item) . '</span>';
+                                                    }
+                                                    ?>
+                                                </div>
                                             <?php endif; ?>
+                                            <!-- Language Selector Switch for Bilingual Questions -->
+                                            <div class="mb-3 d-flex justify-content-end">
+                                                <ul class="nav nav-pills" id="langTab-<?php echo $q['id']; ?>" role="tablist" style="font-size: 0.75rem; background: #f1f5f9; padding: 3px; border-radius: 20px;">
+                                                    <li class="nav-item" role="presentation">
+                                                        <a class="nav-link active py-1 px-3 border-0" id="en-tab-<?php echo $q['id']; ?>" data-toggle="pill" data-bs-toggle="pill" data-bs-target="#en-content-<?php echo $q['id']; ?>" href="#en-content-<?php echo $q['id']; ?>" role="tab" style="border-radius: 18px; font-weight: 600;">English</a>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <a class="nav-link py-1 px-3 border-0" id="guj-tab-<?php echo $q['id']; ?>" data-toggle="pill" data-bs-toggle="pill" data-bs-target="#guj-content-<?php echo $q['id']; ?>" href="#guj-content-<?php echo $q['id']; ?>" role="tab" style="border-radius: 18px; font-weight: 600;">ગુજરાતી</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="tab-content" id="langTabContent-<?php echo $q['id']; ?>">
+                                                <!-- English Version Content -->
+                                                <div class="tab-pane fade show active" id="en-content-<?php echo $q['id']; ?>" role="tabpanel">
+                                                    <div class="h5 mb-3 font-weight-bold text-gray-800 question-content" style="line-height: 1.5;">
+                                                        <?php echo $q['question_text']; ?>
+                                                    </div>
+                                                    
+                                                    <?php if (($q['type_name'] ?? '') === 'MCQ'): ?>
+                                                    <div class="row">
+                                                        <?php foreach (['a', 'b', 'c', 'd'] as $opt): ?>
+                                                            <?php $is_correct = (strtoupper($opt) == $q['correct_option']); ?>
+                                                            <div class="col-md-6 mb-2">
+                                                                <div class="p-2 border rounded <?php echo $is_correct ? 'bg-success text-white border-success' : 'bg-light'; ?>">
+                                                                    <strong><?php echo strtoupper($opt); ?>:</strong> <?php echo $q['option_'.$opt]; ?>
+                                                                </div>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                    <?php endif; ?>
+                                                </div>
+
+                                                <!-- Gujarati Version Content -->
+                                                <div class="tab-pane fade" id="guj-content-<?php echo $q['id']; ?>" role="tabpanel">
+                                                    <div class="h5 mb-3 font-weight-bold text-gray-800 question-content" style="line-height: 1.5;">
+                                                        <?php echo !empty($q['question_text_guj']) ? $q['question_text_guj'] : '<span class="text-muted italic small">No Gujarati text provided.</span>'; ?>
+                                                    </div>
+                                                    
+                                                    <?php if (($q['type_name'] ?? '') === 'MCQ'): ?>
+                                                    <div class="row">
+                                                        <?php foreach (['a', 'b', 'c', 'd'] as $opt): ?>
+                                                            <?php $is_correct = (strtoupper($opt) == $q['correct_option']); ?>
+                                                            <div class="col-md-6 mb-2">
+                                                                <div class="p-2 border rounded <?php echo $is_correct ? 'bg-success text-white border-success' : 'bg-light'; ?>">
+                                                                    <strong><?php echo strtoupper($opt); ?>:</strong> <?php echo !empty($q['option_'.$opt.'_guj']) ? $q['option_'.$opt.'_guj'] : '<span class="text-muted italic small">No Gujarati text</span>'; ?>
+                                                                </div>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <div class="d-flex gap-2">
@@ -417,15 +562,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const stepType = document.getElementById('step_type');
     const stepDifficulty = document.getElementById('step_difficulty');
 
+    const stdMap = {
+        11: [1, 2],
+        12: [4, 5],
+        13: [6]
+    };
+
     filterStandard.addEventListener('change', function() {
         if (this.value) {
             const selectedStd = this.value;
+            const allowedStds = stdMap[selectedStd] || [parseInt(selectedStd)];
             filterSubject.innerHTML = '<option value="">Select Subject</option>';
-            allSubjects.filter(s => s.standard_id == selectedStd).forEach(s => {
-                const opt = document.createElement('option');
-                opt.value = s.id;
-                opt.innerText = s.subject_name;
-                filterSubject.appendChild(opt);
+            
+            const addedNames = new Set();
+            allSubjects.filter(s => allowedStds.includes(parseInt(s.standard_id))).forEach(s => {
+                if (!addedNames.has(s.subject_name)) {
+                    addedNames.add(s.subject_name);
+                    const opt = document.createElement('option');
+                    opt.value = s.id;
+                    opt.innerText = s.subject_name;
+                    filterSubject.appendChild(opt);
+                }
             });
             $(stepSubject).fadeIn();
         } else {
@@ -596,7 +753,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <select id="bulk_std" class="form-control form-control-sm" style="border-radius:8px; font-size:0.8rem; height:35px; border-color:#dce0e4;">
                     <option value="">Select Standard</option>
                     <?php
-                    $stds = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext ASC");
+                    $stds = $conn->query("SELECT stdid, stdtext FROM standard WHERE stdtext NOT LIKE '%Merged%' ORDER BY stdtext ASC");
                     while($s = $stds->fetch()) echo "<option value='{$s['stdid']}'>{$s['stdtext']}</option>";
                     ?>
                 </select>
@@ -700,9 +857,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ---- Word table column order (Strict Positional) ----
   const WORD_COLS = [
-    'standard','group_name','question_type','difficulty','subject',
-    'chapter','topic','question_text','option_a','option_b','option_c',
-    'option_d','correct_option','explanation','video_solution_url','solution_image'
+    'standard', 'group_name', 'subject', 'chapter', 'topic', 'question_type', 'difficulty',
+    'question_text', 'option_a', 'option_b', 'option_c',
+    'option_d', 'correct_option', 'explanation', 'video_solution_url', 'solution_image',
+    'question_text_guj', 'option_a_guj', 'option_b_guj', 'option_c_guj', 'option_d_guj', 'explanation_guj'
   ];
 
   let parsedQuestions = []; // Stores only valid questions for final submit

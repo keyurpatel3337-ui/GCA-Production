@@ -100,21 +100,6 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 </style>
 
 <main class="app-main">
-    <div class="app-content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="mb-0 text-dark font-weight-bold">Edit <span class="text-primary">Exam</span></h3>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a href="manage-exams.php" class="btn btn-outline-secondary btn-sm" style="border-radius: 10px;">
-                        <i class="fas fa-arrow-left mr-2"></i> Back to List
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="app-content pt-3">
         <div class="container-fluid">
             <form id="exam-form" method="POST" action="update-exam.php">
@@ -122,26 +107,42 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
                 <!-- ── Row 1: Basic Info ── -->
                 <div class="card shadow-sm mb-4 border-left-primary">
-                    <div class="card-header py-3 bg-white">
+                    <div class="card-header py-3 bg-white d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-info-circle mr-2"></i>Basic Information</h6>
+                        <a href="manage-exams.php" class="btn btn-outline-secondary btn-sm" style="border-radius: 10px;">
+                            <i class="fas fa-arrow-left mr-2"></i> Back to List
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="form-group mb-3">
                                     <label class="small font-weight-bold text-muted">Exam Title</label>
                                     <input type="text" name="title" value="<?= htmlspecialchars($exam['title']) ?>" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group mb-3">
                                     <label class="small font-weight-bold text-muted">Standard</label>
                                     <select name="standard_id" id="main-standard" class="form-control" required onchange="onStandardChange(this.value)">
-                                        <?php foreach ($standards as $std): ?>
-                                            <option value="<?= $std['stdid'] ?>" <?= ($std['stdid'] == $exam['standard_id']) ? 'selected' : '' ?>>
-                                                <?= htmlspecialchars($std['stdtext']) ?>
-                                            </option>
-                                        <?php endforeach; ?>
+                                        <option value="11" <?= ($exam['standard_id'] == 11) ? 'selected' : '' ?>>11th</option>
+                                        <option value="12" <?= ($exam['standard_id'] == 12) ? 'selected' : '' ?>>12th</option>
+                                        <option value="13" <?= ($exam['standard_id'] == 13) ? 'selected' : '' ?>>Reneet</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-3">
+                                    <label class="small font-weight-bold text-muted">Target Group</label>
+                                    <select name="group_id" id="group-id" class="form-control">
+                                        <option value="">All Groups</option>
+                                        <?php
+                                        $groups = $conn->query("SELECT id, group_name FROM tbl_group WHERE is_active = 1 ORDER BY group_name ASC");
+                                        while ($g = $groups->fetch()) {
+                                            $selected = ($g['id'] == $exam['group_id']) ? 'selected' : '';
+                                            echo "<option value='{$g['id']}' $selected>{$g['group_name']}</option>";
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>

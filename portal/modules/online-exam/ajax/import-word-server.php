@@ -16,7 +16,7 @@ use PhpOffice\PhpWord\Element\Image;
 
 header('Content-Type: application/json');
 
-if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])) {
+if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER, ROLE_TEACHER, ROLE_COMPUTER_OPERATOR, ROLE_OES_DATA_ENTRY_OPERATOR])) {
     echo json_encode(['success' => false, 'message' => 'Unauthorized Access']);
     exit;
 }
@@ -240,9 +240,16 @@ $fileName = $_FILES['word_file']['name'];
 
         // Map of template columns (Strict Positional based on download-word-template.php)
         $WORD_COLS = [
-            'standard', 'group_name', 'question_type', 'difficulty', 'subject',
-            'chapter', 'topic', 'question_text', 'option_a', 'option_b', 'option_c',
-            'option_d', 'correct_option', 'explanation', 'video_solution_url', 'solution_image'
+            'standard', 'group_name', 'subject', 'chapter', 'topic', 'question_type', 'difficulty',
+            'question_text', 'option_a', 'option_b', 'option_c',
+            'option_d', 'correct_option', 'explanation', 'video_solution_url', 'solution_image',
+            'question_text_guj', 'option_a_guj', 'option_b_guj', 'option_c_guj', 'option_d_guj', 'explanation_guj'
+        ];
+
+        $WORD_COLS_SIMPLE = [
+            'question_text', 'option_a', 'option_b', 'option_c',
+            'option_d', 'correct_option', 'question_text_guj',
+            'option_a_guj', 'option_b_guj', 'option_c_guj', 'option_d_guj'
         ];
 
         foreach ($phpWord->getSections() as $section) {
@@ -253,17 +260,24 @@ $fileName = $_FILES['word_file']['name'];
                     $startIndex = 0;
                     if (count($rows) > 0) {
                         $firstCellText = getCellText($rows[0]->getCells()[0]);
-                        if (stripos($firstCellText, 'standard') !== false || stripos($firstCellText, 'subject') !== false) {
+                        if (stripos($firstCellText, 'standard') !== false || stripos($firstCellText, 'subject') !== false || stripos($firstCellText, 'question') !== false) {
                             $startIndex = 1;
                         }
                     }
 
-                    $oleRichFields = ['question_text','option_a','option_b','option_c','option_d','explanation'];
+                    $oleRichFields = [
+                        'question_text','option_a','option_b','option_c','option_d','explanation',
+                        'question_text_guj','option_a_guj','option_b_guj','option_c_guj','option_d_guj','explanation_guj'
+                    ];
                     for ($i = $startIndex; $i < count($rows); $i++) {
                         $cells = $rows[$i]->getCells();
                         if (empty($cells)) continue;
                         $q = [];
-                        foreach ($WORD_COLS as $index => $key) {
+                        
+                        // Dynamically choose column mapping based on uploaded table size
+                        $active_cols = (count($cells) < 15) ? $WORD_COLS_SIMPLE : $WORD_COLS;
+                        
+                        foreach ($active_cols as $index => $key) {
                             if (isset($cells[$index])) {
                                 $isPlain = !in_array($key, $oleRichFields);
                                 $cellContent = trim(getCellText($cells[$index], $isPlain));

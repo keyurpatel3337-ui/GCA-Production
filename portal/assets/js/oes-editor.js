@@ -504,42 +504,193 @@ function injectIcons() {
 }
 
 // ---- Question Type & Marks Logic ----
+let descriptiveEditorsInited = false;
+
+function initDescriptiveEditors() {
+    if (descriptiveEditorsInited) return;
+    descriptiveEditorsInited = true;
+
+    const descIds = [];
+    for (let i = 1; i <= 5; i++) {
+        descIds.push(`desc-q${i}`, `desc-q${i}-guj`, `desc-s${i}`, `desc-s${i}-guj`);
+    }
+
+    const toolbarOptions = [
+        [{ 'font': ['', 'serif', 'monospace', 'outfit', 'roboto', 'inter'] }],
+        [{ 'size': ['8px', '10px', '12px', '14px', '16px', '18px', '20px', '24px', '30px', '36px', '48px', '60px', '72px'] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        ['link', 'image', 'formula'],
+        ['math', 'chem', 'draw', 'ocr'],
+        ['clean']
+    ];
+
+    descIds.forEach(id => {
+        const el = document.querySelector(`#editor-${id}`);
+        if (!el || editors[id]) return;
+        editors[id] = new Quill(`#editor-${id}`, {
+            theme: 'snow',
+            modules: {
+                toolbar: {
+                    container: toolbarOptions,
+                    handlers: {
+                        'math': () => openModal('mathModal'),
+                        'chem': () => openModal('chemModal'),
+                        'draw': () => openModal('drawModal'),
+                        'ocr': () => triggerOCR(),
+                        'formula': () => openModal('mathModal'),
+                    }
+                }
+            },
+            placeholder: `Type here...`
+        });
+        editors[id].on('text-change', () => {
+            let targetId = '';
+            if (id.startsWith('desc-q')) {
+                const suffix = id.substring(6); // e.g. '1' or '1-guj'
+                targetId = `desc_question_${suffix.replace('-guj', '_guj')}`;
+            } else if (id.startsWith('desc-s')) {
+                const suffix = id.substring(6);
+                targetId = `desc_solution_${suffix.replace('-guj', '_guj')}`;
+            }
+            const input = document.getElementById(targetId);
+            if (input) input.value = editors[id].root.innerHTML;
+        });
+    });
+    injectIcons();
+    console.log('[OES] Descriptive editors initialized.');
+}
+
+function getTextareaId(editorId) {
+    // Single MCQ / fallback mode:
+    if (editorId === 'main') return 'question_text';
+    if (editorId === 'main-guj') return 'question_text_guj';
+    if (editorId === 'explanation') return 'explanation';
+    if (editorId === 'explanation-guj') return 'explanation_guj';
+    if (editorId === 'a' || editorId === 'b' || editorId === 'c' || editorId === 'd') return `option_${editorId}`;
+    if (editorId === 'a-guj' || editorId === 'b-guj' || editorId === 'c-guj' || editorId === 'd-guj') return `option_${editorId.substring(0,1)}_guj`;
+
+    // Bulk MCQ mode (contains dynamic index at the end, e.g. main-1, main-guj-1, a-1, a-1-guj, explanation-1, explanation-guj-1)
+    const mcqMatch = editorId.match(/^([a-d]|main|explanation)(-guj)?-(\d+)$/);
+    if (mcqMatch) {
+        const base = mcqMatch[1]; // e.g. 'a', 'main', 'explanation'
+        const isGuj = !!mcqMatch[2];
+        const idx = mcqMatch[3];
+
+        if (base === 'main') {
+            return isGuj ? `question_text_guj_${idx}` : `question_text_${idx}`;
+        } else if (base === 'explanation') {
+            return isGuj ? `explanation_guj_${idx}` : `explanation_${idx}`;
+        } else {
+            // option
+            return isGuj ? `option_${base}_guj_${idx}` : `option_${base}_${idx}`;
+        }
+    }
+
+    // Descriptive mode (both bulk and single / fallback)
+    // Bulk: desc-q{m}-{idx}, desc-q{m}-{idx}-guj, desc-s{m}-{idx}, desc-s{m}-{idx}-guj
+    // Single: desc-q{m}, desc-q{m}-guj, desc-s{m}, desc-s{m}-guj
+    const descMatch = editorId.match(/^desc-(q|s)(\d+)(?:-(\d+))?(-guj)?$/);
+    if (descMatch) {
+        const type = descMatch[1]; // 'q' or 's'
+        const mark = descMatch[2]; // e.g. '1', '2'
+        const idx = descMatch[3]; // e.g. '1' or undefined
+        const isGuj = !!descMatch[4];
+
+        const prefix = (type === 'q') ? 'desc_question' : 'desc_solution';
+        if (idx) {
+            // Bulk
+            return isGuj ? `${prefix}_${mark}_${idx}_guj` : `${prefix}_${mark}_${idx}`;
+        } else {
+            // Single fallback
+            return isGuj ? `${prefix}_${mark}_guj` : `${prefix}_${mark}`;
+        }
+    }
+
+    return editorId;
+}
+
 function updateQuestionTypeUI() {
     const select = document.getElementById('question_type_select');
     const bulkSection = document.getElementById('descriptive_bulk_section');
     const realIdInput = document.getElementById('real_question_type_id');
-    const selectedOption = select.options[select.selectedIndex];
 
-    if (!selectedOption || selectedOption.value === '') {
-        document.getElementById('mcq_section').style.display = 'none';
-        bulkSection.style.display = 'none';
-        document.getElementById('main-editor-card').style.display = 'block';
-        document.getElementById('solution-card').style.display = 'block';
-        document.getElementById('question-body-label').textContent = 'Question Body';
-        realIdInput.value = '';
-        return;
+    let typeName = '';
+    
+    // If the Configuration Sidebar select element exists
+    if (select) {
+        const selectedOption = select.options[select.selectedIndex];
+        if (!selectedOption || selectedOption.value === '') {
+            const mcqSec = document.getElementById('mcq_section');
+            if (mcqSec) mcqSec.style.display = 'none';
+            if (bulkSection) bulkSection.style.display = 'none';
+            
+            const mainCard = document.getElementById('main-editor-card');
+            if (mainCard) mainCard.style.display = 'block';
+            
+            const solCard = document.getElementById('solution-card');
+            if (solCard) solCard.style.display = 'block';
+            
+            const label = document.getElementById('question-body-label');
+            if (label) label.textContent = 'Question Body';
+            
+            if (realIdInput) realIdInput.value = '';
+            return;
+        }
+        typeName = (selectedOption.getAttribute('data-type') || selectedOption.text.trim()).toLowerCase();
+    } else {
+        // Fallback: If Setup is Locked (Configuration Panel is Hidden)
+        const lockedTypeInput = document.getElementsByName('question_type_id')[0];
+        const lockedTypeVal = lockedTypeInput ? lockedTypeInput.value : (window.oesInitialData ? window.oesInitialData.question_type_id : '');
+        typeName = (lockedTypeVal === '1' || lockedTypeVal === 'mcq') ? 'mcq' : 'descriptive';
     }
 
-    const typeName = (selectedOption.getAttribute('data-type') || selectedOption.text.trim()).toLowerCase();
-
     if (typeName === 'mcq') {
-        document.getElementById('mcq_section').style.setProperty('display', 'block', 'important');
-        bulkSection.style.display = 'none';
-        document.getElementById('main-editor-card').style.display = 'block';
-        document.getElementById('solution-card').style.display = 'block';
-        document.getElementById('question-body-label').textContent = 'Question Body';
-        realIdInput.value = '1'; 
-        const marks = selectedOption.getAttribute('data-marks');
-        const neg = selectedOption.getAttribute('data-neg');
-        if (marks !== null) document.getElementById('marks_input').value = marks;
-        if (neg !== null) document.getElementById('negative_marks_input').value = neg;
+        const mcqSec = document.getElementById('mcq_section');
+        if (mcqSec) mcqSec.style.setProperty('display', 'block', 'important');
+        if (bulkSection) bulkSection.style.display = 'none';
+        
+        const mainCard = document.getElementById('main-editor-card');
+        if (mainCard) mainCard.style.display = 'block';
+        
+        const solCard = document.getElementById('solution-card');
+        if (solCard) solCard.style.display = 'block';
+        
+        const label = document.getElementById('question-body-label');
+        if (label) label.textContent = 'Question Body';
+        
+        if (realIdInput) realIdInput.value = '1';
+        
+        if (select) {
+            const selectedOption = select.options[select.selectedIndex];
+            const marks = selectedOption.getAttribute('data-marks');
+            const neg = selectedOption.getAttribute('data-neg');
+            
+            const marksInput = document.getElementById('marks_input');
+            if (marksInput && marks !== null) marksInput.value = marks;
+            
+            const negInput = document.getElementById('negative_marks_input');
+            if (negInput && neg !== null) negInput.value = neg;
+        }
     } else if (typeName === 'descriptive') {
-        document.getElementById('mcq_section').style.display = 'none';
-        bulkSection.style.display = 'block';
-        document.getElementById('main-editor-card').style.display = 'none';
-        document.getElementById('solution-card').style.display = 'none';
-        document.getElementById('question-body-label').textContent = 'Question (Descriptive Mode)';
-        realIdInput.value = 'descriptive';
+        const mcqSec = document.getElementById('mcq_section');
+        if (mcqSec) mcqSec.style.display = 'none';
+        if (bulkSection) bulkSection.style.display = 'block'; // Make visible FIRST
+        
+        const mainCard = document.getElementById('main-editor-card');
+        if (mainCard) mainCard.style.display = 'none';
+        
+        const solCard = document.getElementById('solution-card');
+        if (solCard) solCard.style.display = 'none';
+        
+        const label = document.getElementById('question-body-label');
+        if (label) label.textContent = 'Question (Descriptive Mode)';
+        
+        if (realIdInput) realIdInput.value = 'descriptive';
+        // Init descriptive editors AFTER section is visible
+        setTimeout(initDescriptiveEditors, 50);
     }
 }
 
@@ -553,7 +704,7 @@ async function updateSubjects() {
     try {
         const response = await fetch(`ajax/get-subjects.php?standard_id=${standardId}`);
         const data = await response.json();
-        subjectSelect.innerHTML = '<option value="">Select Subject</option>';
+        subjectSelect.innerHTML = '<option value="">Select Standard First</option>';
         data.forEach(sub => {
             const option = document.createElement('option');
             option.value = sub.id;
@@ -1030,7 +1181,7 @@ function initOesEditor(initialData = null) {
                 console.log('[OES Submit] Determined question_type_id hidden value:', realIdInput.value);
             }
 
-            // Sync editors one-by-one with individual try-catch blocks to prevent cascading failures
+            // Sync editors dynamically with individual try-catch blocks to prevent cascading failures
             const syncEditor = (eid, targetInputId) => {
                 try {
                     const targetInput = document.getElementById(targetInputId);
@@ -1043,37 +1194,22 @@ function initOesEditor(initialData = null) {
                 }
             };
 
-            syncEditor('main', 'question_text');
-            syncEditor('a', 'option_a');
-            syncEditor('b', 'option_b');
-            syncEditor('c', 'option_c');
-            syncEditor('d', 'option_d');
-            syncEditor('explanation', 'explanation');
-
-            for (let i = 1; i <= 5; i++) {
-                syncEditor(`desc-q${i}`, `desc_question_${i}`);
-                syncEditor(`desc-s${i}`, `desc_solution_${i}`);
-            }
+            // Loop dynamically through all active editor IDs
+            const activeIds = window.oesEditorIds || Object.keys(editors);
+            activeIds.forEach(eid => {
+                const targetInputId = getTextareaId(eid);
+                syncEditor(eid, targetInputId);
+            });
 
             // Debug: Log client-side HTML state immediately on submit and wait for network completion
             try {
                 const submitDebugData = {};
                 const textareaValues = {};
-                const idsToLog = [
-                    'main', 'a', 'b', 'c', 'd', 'explanation',
-                    'desc-q1', 'desc-s1', 'desc-q2', 'desc-s2',
-                    'desc-q3', 'desc-s3', 'desc-q4', 'desc-s4',
-                    'desc-q5', 'desc-s5'
-                ];
                 
-                idsToLog.forEach(eid => {
+                activeIds.forEach(eid => {
                     if (editors[eid]) {
                         submitDebugData[eid] = editors[eid].root.innerHTML;
-                        const targetId = eid === 'main' ? 'question_text' :
-                                         eid === 'explanation' ? 'explanation' :
-                                         eid.startsWith('desc-q') ? `desc_question_${eid.substring(6)}` :
-                                         eid.startsWith('desc-s') ? `desc_solution_${eid.substring(6)}` :
-                                         `option_${eid}`;
+                        const targetId = getTextareaId(eid);
                         const inputEl = document.getElementById(targetId);
                         if (inputEl) {
                             textareaValues[targetId] = inputEl.value;
@@ -1105,11 +1241,9 @@ function initOesEditor(initialData = null) {
     try {
         configureQuill();
         
-        const editorIds = [
-            'main', 'a', 'b', 'c', 'd', 'explanation',
-            'desc-q1', 'desc-s1', 'desc-q2', 'desc-s2',
-            'desc-q3', 'desc-s3', 'desc-q4', 'desc-s4',
-            'desc-q5', 'desc-s5'
+        const editorIds = window.oesEditorIds || [
+            'main', 'main-guj', 'a', 'a-guj', 'b', 'b-guj', 'c', 'c-guj', 'd', 'd-guj', 'explanation', 'explanation-guj'
+            // Descriptive editors are initialized lazily in initDescriptiveEditors()
         ];
         
         const toolbarOptions = [
@@ -1151,7 +1285,7 @@ function initOesEditor(initialData = null) {
                         }
                     }
                 },
-                placeholder: `Type ${id === 'main' ? 'question' : id} here...`
+                placeholder: `Type ${id === 'main' ? 'question' : id === 'main-guj' ? 'gujarati question' : id} here...`
             });
 
             // Custom image matcher to prevent Quill from stripping local relative/absolute image paths
@@ -1176,11 +1310,7 @@ function initOesEditor(initialData = null) {
 
             // Function to sync this specific editor to its hidden input/textarea
             const syncEditorToInput = () => {
-                const targetId = id === 'main' ? 'question_text' :
-                                 id === 'explanation' ? 'explanation' :
-                                 id.startsWith('desc-q') ? `desc_question_${id.substring(6)}` :
-                                 id.startsWith('desc-s') ? `desc_solution_${id.substring(6)}` :
-                                 `option_${id}`;
+                const targetId = getTextareaId(id);
                 const targetInput = document.getElementById(targetId);
                 if (targetInput && editors[id]) {
                     targetInput.value = editors[id].root.innerHTML;

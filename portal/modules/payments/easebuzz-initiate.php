@@ -49,9 +49,10 @@ try {
     $payment_params['udf4'] = $payment_type; // Fee component
     $payment_params['udf5'] = $payment_params['productinfo'];
     $payment_params['udf6'] = isset($installment_id) ? (string) $installment_id : '';
-
-    // udf7 was removed as it contained JSON which may cause validation issues.
-    // Breakdown is already stored in tbl_payment_orders split_amounts.
+    $payment_params['udf7'] = !empty($_SESSION['payment_redirect_url']) ? 'ledger' : '';
+    $payment_params['udf8'] = '';
+    $payment_params['udf9'] = '';
+    $payment_params['udf10'] = '';
 
     // Add Split Payment Param if applicable
     if (!empty($split_amounts)) {

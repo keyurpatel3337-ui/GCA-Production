@@ -23,8 +23,8 @@ ob_start();
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="<?php echo BASE_URL; ?>/assets/images/logogmn.png">
 
-    <!-- Google Font: Inter -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <!-- Google Font: Inter & Noto Serif Gujarati -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Gujarati:wght@400;500;600;700&display=swap">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- jQuery (Moved here to support inline scripts in modules) -->
@@ -124,9 +124,18 @@ ob_start();
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Noto Serif Gujarati', sans-serif;
             margin: 0 !important;
             padding: 0 !important;
+        }
+
+        /* Explicit Gujarati text styling for all Gujarati modules, tabs, and editors */
+        .gujarati-text,
+        [class*="-guj"],
+        [name*="_guj"],
+        [id*="-guj"],
+        [id*="guj-content"] {
+            font-family: 'Noto Serif Gujarati', 'Inter', serif !important;
         }
 
         .app-wrapper {
@@ -256,6 +265,81 @@ ob_start();
             overflow: visible !important;
             text-overflow: clip !important;
             white-space: normal !important;
+        }
+
+        /* ========================================== */
+        /* MODERN MULTI-COLORED SIDEBAR ICONS SYSTEM  */
+        /* ========================================== */
+        .sidebar-menu .nav-icon {
+            font-size: 1.1rem;
+            margin-right: 0.5rem;
+            width: 1.6rem;
+            text-align: center;
+            display: inline-block;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+        }
+
+        /* Hover effect on menu item scales the icon */
+        .sidebar-menu .nav-link:hover .nav-icon {
+            transform: scale(1.25) rotate(3deg);
+        }
+
+        /* Assign premium tailormade colors to specific icon groups */
+        .sidebar-menu .nav-icon.fa-home { color: #3b82f6 !important; } /* Dashboard - Vibrant blue */
+        .sidebar-menu .nav-icon.fa-users-cog { color: #8b5cf6 !important; } /* Users settings - Violet */
+        .sidebar-menu .nav-icon.fa-database { color: #f59e0b !important; } /* Master data - Warm amber */
+        .sidebar-menu .nav-icon.fa-user-graduate { color: #10b981 !important; } /* Students - Emerald */
+        .sidebar-menu .nav-icon.fa-users { color: #14b8a6 !important; } /* Teal users */
+        .sidebar-menu .nav-icon.fa-user-plus { color: #06b6d4 !important; } /* Admission - Cyan */
+        .sidebar-menu .nav-icon.fa-user-check { color: #22c55e !important; } /* Active students */
+        .sidebar-menu .nav-icon.fa-sitemap { color: #0ea5e9 !important; } /* Division - Sky blue */
+        .sidebar-menu .nav-icon.fa-laptop-code { color: #6366f1 !important; } /* Online exam - Indigo */
+        .sidebar-menu .nav-icon.fa-clipboard-list { color: #a855f7 !important; } /* Test marks - Purple */
+        .sidebar-menu .nav-icon.fa-whatsapp { color: #25d366 !important; } /* WhatsApp green */
+        .sidebar-menu .nav-icon.fa-money-bill-wave { color: #f59e0b !important; } /* Golden Amber */
+        .sidebar-menu .nav-icon.fa-rupee-sign { color: #eab308 !important; } /* Gold */
+        .sidebar-menu .nav-icon.fa-wallet { color: #10b981 !important; } /* Wallet emerald */
+        .sidebar-menu .nav-icon.fa-graduation-cap { color: #ec4899 !important; } /* Scholarship pink */
+        .sidebar-menu .nav-icon.fa-chart-line { color: #f43f5e !important; } /* Finance reports - Coral */
+        .sidebar-menu .nav-icon.fa-chart-bar { color: #f97316 !important; } /* Analytics orange */
+        .sidebar-menu .nav-icon.fa-file-alt { color: #0ea5e9 !important; } /* Report details */
+        .sidebar-menu .nav-icon.fa-envelope { color: #ef4444 !important; } /* Email - Crimson red */
+        .sidebar-menu .nav-icon.fa-cog { color: #64748b !important; } /* Settings slate */
+        .sidebar-menu .nav-icon.fa-power-off { color: #f43f5e !important; } /* Logout red */
+        .sidebar-menu .nav-icon.fa-plus-circle, .sidebar-menu .nav-icon.fa-plus { color: #06b6d4 !important; }
+        .sidebar-menu .nav-icon.fa-university { color: #4f46e5 !important; }
+        .sidebar-menu .nav-icon.fa-book-open, .sidebar-menu .nav-icon.fa-book { color: #2563eb !important; }
+        .sidebar-menu .nav-icon.fa-bell { color: #eab308 !important; }
+        .sidebar-menu .nav-icon.fa-phone, .sidebar-menu .nav-icon.fa-phone-volume { color: #22c55e !important; }
+        .sidebar-menu .nav-icon.fa-certificate { color: #d97706 !important; }
+        .sidebar-menu .nav-icon.fa-file-import { color: #2563eb !important; }
+
+        /* ========================================== */
+        /* ELIMINATE SIDEBAR HOVER BULLETS / DOTS     */
+        /* ========================================== */
+        .sidebar-menu, 
+        .sidebar-menu ul, 
+        .sidebar-menu li, 
+        .sidebar-menu .nav-item, 
+        .sidebar-menu .nav-link,
+        .nav-sidebar,
+        .nav-sidebar ul,
+        .nav-sidebar li,
+        .nav-sidebar .nav-item,
+        .nav-sidebar .nav-link {
+            list-style: none !important;
+            list-style-type: none !important;
+        }
+
+        .sidebar-menu li::before,
+        .sidebar-menu .nav-item::before,
+        .sidebar-menu .nav-link::before,
+        .nav-sidebar li::before,
+        .nav-sidebar .nav-item::before,
+        .nav-sidebar .nav-link::before {
+            display: none !important;
+            content: none !important;
         }
     </style>
 

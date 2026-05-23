@@ -148,11 +148,11 @@ try {
 
     if ($filter_course) {
         if ($filter_course === '11th') {
-            $where_conditions[] = "r.course_id IN (1, 2)";
+            $where_conditions[] = "r.course_id = 1";
         } elseif ($filter_course === '12th') {
-            $where_conditions[] = "r.course_id IN (4, 5)";
+            $where_conditions[] = "r.course_id = 2";
         } elseif ($filter_course === 'Reneet') {
-            $where_conditions[] = "r.course_id = 6";
+            $where_conditions[] = "r.course_id = 3";
         } else {
             $where_conditions[] = "r.course_id = ?";
             $params[] = $filter_course;

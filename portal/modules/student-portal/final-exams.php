@@ -16,30 +16,38 @@ $student_name = $_SESSION['final_student_name'];
 
 // Fetch student standard and division using registration ID
 $std_stmt = $conn->prepare("
-    SELECT r.course_id, r.standard as reg_standard, e.division_id 
+    SELECT r.course_id, r.standard as reg_standard_num, r.medium_id, r.group_id, e.division_id, s.stdid, s.stdnumber 
     FROM tbl_gm_std_registration r
     LEFT JOIN tbl_enrolled_students e ON r.id = e.registration_id AND e.is_active = 1
+    LEFT JOIN standard s ON s.stdnumber = r.standard AND (
+        (r.standard = 13)
+        OR (r.medium_id = 1 AND s.stdtext LIKE '%Gujarati%')
+        OR (r.medium_id = 2 AND s.stdtext LIKE '%English%')
+    )
     WHERE r.id = ?
 ");
 $std_stmt->execute([$student_id]);
 $student = $std_stmt->fetch();
 
 $course_id = $student ? ($student['course_id'] ?? 0) : 0;
-$standard_id = $student ? ($student['reg_standard'] ?? 0) : 0;
+$standard_id = $student ? ($student['stdid'] ?? 0) : 0;
+$std_number = $student ? ($student['stdnumber'] ?? 0) : 0;
+$group_id = $student ? ($student['group_id'] ?? null) : null;
 $division_id = $student ? ($student['division_id'] ?? null) : null;
 
 // Fetch available Final exams
 $sql = "SELECT e.*, 
         (SELECT status FROM tbl_oes_student_exams WHERE exam_id = e.id AND student_id = ?) as attempt_status
         FROM tbl_oes_exams e 
-        WHERE (e.standard_id = ? OR (e.standard_id IN (SELECT stdid FROM standard WHERE stdnumber = ?) AND e.standard_id IS NOT NULL) OR e.standard_id IS NULL) 
+        WHERE (e.standard_id = ? OR e.standard_id IS NULL) 
+        AND (e.group_id = ? OR e.group_id IS NULL)
         AND (e.division_id = ? OR e.division_id IS NULL)
         AND e.exam_mode = 'Final'
         AND e.status IN ('Scheduled', 'Live')
         AND e.end_time >= NOW()
         ORDER BY e.start_time ASC";
 $stmt = $conn->prepare($sql);
-$stmt->execute([$student_id, $course_id, $standard_id, $division_id]);
+$stmt->execute([$student_id, $standard_id, $group_id, $division_id]);
 $exams = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Handle terminal logout

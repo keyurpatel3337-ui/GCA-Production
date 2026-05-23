@@ -109,6 +109,7 @@ try {
                 MAX(CONCAT(r.surname, ' ', r.student_name, ' ', COALESCE(r.fathers_name, ''))) as student_name,
                 MAX(r.mob) as mobile,
                 MAX(c.course_name) as current_class,
+                MAX(m.medium_name) as medium_name,
                 MAX(g.group_name) as group_name,
                 MAX($calc_base_academic_sql) as course_fee_base,
                 MAX($calc_base_hostel_sql) as hostel_fee_base,
@@ -130,6 +131,7 @@ try {
             JOIN tbl_enrolled_students es ON r.id = es.registration_id
             LEFT JOIN tbl_group g ON r.group_id = g.id
             LEFT JOIN tbl_courses c ON r.course_id = c.id
+            LEFT JOIN tbl_medium m ON r.medium_id = m.id
             LEFT JOIN (SELECT student_id, MAX(due_date) as due_date FROM tbl_student_fee_allocation GROUP BY student_id) sfa ON r.id = sfa.student_id
             LEFT JOIN tbl_fee_config fc ON r.course_id = fc.course_id AND r.medium_id = fc.medium_id AND r.group_id = fc.group_id AND r.school_id = fc.school_id AND fc.is_active = 1
             WHERE $where_sql
@@ -211,11 +213,15 @@ try {
     else {
         $i = 1;
         foreach ($results as $row) {
+            $displayClass = $row['current_class'] ?: '-';
+            if (!empty($row['medium_name'])) {
+                $displayClass .= ' - ' . $row['medium_name'];
+            }
             $html .= '
             <tr nobr="true">
                 <td align="center" width="5%">' . $i++ . '</td>
                 <td width="22%"><b>' . htmlspecialchars($row['student_name'] ?? '') . '</b></td>
-                <td width="15%">' . htmlspecialchars($row['current_class'] ?: '-' ?? '') . ' / ' . htmlspecialchars($row['group_name'] ?: '-' ?? '') . '</td>
+                <td width="15%">' . htmlspecialchars($displayClass ?? '') . ' / ' . htmlspecialchars($row['group_name'] ?: '-' ?? '') . '</td>
                 <td width="12%">' . htmlspecialchars($row['mobile'] ?: '-' ?? '') . '</td>
                 <td align="right" width="12%"><b>' . formatIndianCurrency($row['total_fee']) . '</b></td>
                 <td align="right" width="12%" style="color:green;"><b>' . formatIndianCurrency($row['total_paid']) . '</b></td>

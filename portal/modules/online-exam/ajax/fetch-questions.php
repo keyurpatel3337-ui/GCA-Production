@@ -8,7 +8,7 @@ require_once PORTAL_GLOBALVARIABLE;
 header('Content-Type: application/json');
 
 // Use standard hasAnyRole check
-if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])) {
+if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER, ROLE_TEACHER, ROLE_COMPUTER_OPERATOR, ROLE_OES_DATA_ENTRY_OPERATOR])) {
     echo json_encode(['error' => 'Unauthorized']);
     exit();
 }

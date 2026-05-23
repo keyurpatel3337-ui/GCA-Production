@@ -7,6 +7,9 @@
  */
 
 header('Content-Type: text/html; charset=utf-8');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    ini_set('session.use_cookies', 0);
+}
 require_once __DIR__ . '/../../session_config.php';
 require_once dirname(dirname(dirname(__DIR__))) . '/common/constants.php';
 require_once DB_CONNECT_FILE;
@@ -39,11 +42,26 @@ $student_id = $response['udf1'] ?? '';
 $payment_type = $response['udf2'] ?? ''; // token_fee, multiple_pending_fees, school_fee, etc.
 $transaction_id = $response['udf3'] ?? '';
 $fee_component = $response['udf4'] ?? '';
+
+$redirect_url = '';
+if (!empty($response['udf7']) && $response['udf7'] === 'ledger' && !empty($student_id)) {
+    $redirect_url = PORTAL_URL . '/modules/reports/financial/student-ledger.php?student_id=' . urlencode($student_id);
+} elseif (!empty($_SESSION['payment_redirect_url'])) {
+    $redirect_url = $_SESSION['payment_redirect_url'];
+}
+unset($_SESSION['payment_redirect_url']);
 $fee_label = $response['udf5'] ?? 'Fee Payment';
 $installment_id = !empty($response['udf6']) ? intval($response['udf6']) : null;
 $addedon = $response['addedon'] ?? date('Y-m-d H:i:s');
-$payment_date_db = date('Y-m-d H:i:s', strtotime($addedon));
-$payment_date_formatted = date('d-M-Y', strtotime($addedon));
+// Convert Easebuzz UTC timestamp to the system's local timezone (Asia/Kolkata)
+if (!empty($addedon) && strpos($addedon, 'Z') === false && strpos($addedon, '+') === false && stripos($addedon, 'UTC') === false && stripos($addedon, 'GMT') === false) {
+    $addedon_parsed = $addedon . ' UTC';
+} else {
+    $addedon_parsed = $addedon;
+}
+$payment_date_db = date('Y-m-d H:i:s', strtotime($addedon_parsed));
+$payment_date_formatted = date('d-M-Y', strtotime($addedon_parsed));
+
 
 try {
     $ebService = new EaseBuzzService();
@@ -72,8 +90,11 @@ try {
     // Guard Clause: If order is already completed, skip processing
     if ($order['status'] === 'completed') {
         logGatewayActivity("EaseBuzz Callback - Order already processed | TxnID: $transaction_id", 'INFO');
-        set_flash_message('success', "Payment already processed. Redirecting to dashboard.");
-        header('Location: ' . PORTAL_URL . '/modules/dashboard/student_dashboard.php');
+        set_flash_message('success', "Payment already processed.");
+        if (!empty($redirect_url)) {
+            $redirect_url .= (strpos($redirect_url, '?') !== false ? '&' : '?') . 'payment_status=success';
+        }
+        header('Location: ' . (!empty($redirect_url) ? $redirect_url : (PORTAL_URL . '/modules/dashboard/student_dashboard.php')));
         exit;
     }
 
@@ -86,8 +107,11 @@ try {
         // Ensure order is also marked completed if it wasn't
         $conn->prepare("UPDATE tbl_payment_orders SET status = 'completed', completed_at = NOW() WHERE transaction_id = ? AND status != 'completed'")->execute([$transaction_id]);
         
-        set_flash_message('success', "Payment already recorded. Redirecting to dashboard.");
-        header('Location: ' . PORTAL_URL . '/modules/dashboard/student_dashboard.php');
+        set_flash_message('success', "Payment already recorded.");
+        if (!empty($redirect_url)) {
+            $redirect_url .= (strpos($redirect_url, '?') !== false ? '&' : '?') . 'payment_status=success';
+        }
+        header('Location: ' . (!empty($redirect_url) ? $redirect_url : (PORTAL_URL . '/modules/dashboard/student_dashboard.php')));
         exit;
     }
 
@@ -208,8 +232,15 @@ try {
                         break;
                     case 'MST':
                         // If udf4 is transport or hostel and label is MST, honor udf4
-                        if (in_array($response['udf4'] ?? '', ['transport_fee', 'hostel_fee', 'hostel_security'])) {
-                            $fee_component = $response['udf4'];
+                        $udf4_lower = strtolower($response['udf4'] ?? '');
+                        if (strpos($udf4_lower, 'transport') !== false) {
+                            $fee_component = 'transport_fee';
+                        } elseif (strpos($udf4_lower, 'hostel') !== false) {
+                            if (strpos($udf4_lower, 'security') !== false) {
+                                $fee_component = 'hostel_security';
+                            } else {
+                                $fee_component = 'hostel_fee';
+                            }
                         } else {
                             $fee_component = 'trust_facilities_fee';
                         }
@@ -358,7 +389,9 @@ try {
 
     $conn->commit();
     syncStudentFeeAllocation($conn, $student_id);
-    restoreStudentSession($conn, $student_id);
+    if (empty($redirect_url)) {
+        restoreStudentSession($conn, $student_id);
+    }
 
     // --- Save Receipt to Backup Folder ---
     $notif_options = ['student_id' => $student_id, 'attachments' => []];
@@ -402,7 +435,27 @@ try {
 
     // Notifications
     try {
-        $recipient = ['name' => $_SESSION['student_name'] ?? 'Student', 'email' => $_SESSION['student_email'] ?? '', 'mobile' => $_SESSION['student_mob'] ?? ''];
+        $s_first_name = 'Student';
+        $s_email = $_SESSION['student_email'] ?? '';
+        $s_mob = $_SESSION['student_mob'] ?? '';
+
+        if (!empty($student_id)) {
+            $stmt_s = $conn->prepare("SELECT student_name, email, mob FROM tbl_gm_std_registration WHERE id = ?");
+            $stmt_s->execute([$student_id]);
+            $s_info = $stmt_s->fetch(PDO::FETCH_ASSOC);
+            if ($s_info) {
+                $s_first_name = !empty($s_info['student_name']) ? trim($s_info['student_name']) : 'Student';
+                if (!empty($s_info['email'])) $s_email = $s_info['email'];
+                if (!empty($s_info['mob'])) $s_mob = $s_info['mob'];
+            }
+        }
+
+        if ($s_first_name === 'Student' && !empty($_SESSION['student_name'])) {
+            $parts = explode(' ', trim($_SESSION['student_name']));
+            $s_first_name = !empty($parts[0]) ? $parts[0] : 'Student';
+        }
+
+        $recipient = ['name' => $s_first_name, 'email' => $s_email, 'mobile' => $s_mob];
 
         if ($payment_type === 'token_fee') {
             // Template: tokenfeesuconline_21 (Name, Amount, Receipt, TxnID)
@@ -435,7 +488,13 @@ try {
     }
 
     set_flash_message('success', "Payment successful! Receipt No: " . implode(', ', $receipt_numbers));
-    header('Location: ' . PORTAL_URL . '/modules/dashboard/student_dashboard.php');
+    if (!empty($redirect_url)) {
+        $redirect_url .= (strpos($redirect_url, '?') !== false ? '&' : '?') . 'payment_status=success';
+        if (!empty($receipt_numbers)) {
+            $redirect_url .= '&receipt_no=' . urlencode(implode(', ', $receipt_numbers));
+        }
+    }
+    header('Location: ' . (!empty($redirect_url) ? $redirect_url : (PORTAL_URL . '/modules/dashboard/student_dashboard.php')));
     exit;
 
 } catch (Exception $e) {
@@ -445,9 +504,12 @@ try {
     logGatewayActivity("EaseBuzz Callback Error: " . $e->getMessage(), 'FAILED', $response);
     error_log("EaseBuzz Callback Error: " . $e->getMessage());
 
-    if ($student_id)
+    if ($student_id && empty($redirect_url))
         restoreStudentSession($conn, $student_id);
     set_flash_message('error', "Payment Error: " . $e->getMessage());
-    header('Location: ' . PORTAL_URL . '/modules/dashboard/student_dashboard.php');
+    if (!empty($redirect_url)) {
+        $redirect_url .= (strpos($redirect_url, '?') !== false ? '&' : '?') . 'payment_status=error&payment_msg=' . urlencode($e->getMessage());
+    }
+    header('Location: ' . (!empty($redirect_url) ? $redirect_url : (PORTAL_URL . '/modules/dashboard/student_dashboard.php')));
     exit;
 }

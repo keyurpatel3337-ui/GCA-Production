@@ -78,46 +78,48 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext 
 </style>
 
 <main class="app-main">
-    <div class="app-content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="mb-0 text-dark font-weight-bold">Exam <span class="text-primary">Setup</span></h3>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a href="exam-templates.php" class="btn btn-outline-primary btn-sm" style="border-radius: 10px;">
-                        <i class="fas fa-magic mr-2"></i> Auto-Generate via Template
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="app-content pt-3">
         <div class="container-fluid">
             <form id="exam-form" method="POST" action="save-exam.php">
 
                 <!-- ── Row 1: Basic Info ── -->
                 <div class="card shadow-sm mb-4">
-                    <div class="card-header py-3">
+                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-info-circle mr-2"></i>Basic Information</h6>
+                        <a href="exam-templates.php" class="btn btn-outline-primary btn-sm" style="border-radius: 10px;">
+                            <i class="fas fa-magic mr-2"></i> Auto-Generate via Template
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="form-group mb-3">
                                     <label class="small font-weight-bold">Exam Title <span class="text-danger">*</span></label>
                                     <input type="text" name="title" placeholder="e.g. Weekly Assessment – Physics" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group mb-3">
                                     <label class="small font-weight-bold">Target Standard <span class="text-danger">*</span></label>
                                     <select name="standard_id" id="main-standard" class="form-control" required onchange="onStandardChange(this.value)">
                                         <option value="">Select Standard</option>
-                                        <?php foreach ($standards as $std): ?>
-                                            <option value="<?= $std['stdid'] ?>"><?= htmlspecialchars($std['stdtext']) ?></option>
-                                        <?php endforeach; ?>
+                                        <option value="11">11th</option>
+                                        <option value="12">12th</option>
+                                        <option value="13">Reneet</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-3">
+                                    <label class="small font-weight-bold">Target Group</label>
+                                    <select name="group_id" id="group-id" class="form-control">
+                                        <option value="">All Groups</option>
+                                        <?php
+                                        $groups = $conn->query("SELECT id, group_name FROM tbl_group WHERE is_active = 1 ORDER BY group_name ASC");
+                                        while ($g = $groups->fetch()) {
+                                            echo "<option value='{$g['id']}'>{$g['group_name']}</option>";
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>

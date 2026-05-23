@@ -84,6 +84,7 @@ $sql = "SELECT
             CONCAT(r.surname, ' ', r.student_name, ' ', IFNULL(r.fathers_name, '')) as student_full_name,
             c.course_name as current_class,
             g.group_name,
+            m.medium_name,
             t.term_name,
             u.name as collected_by
         FROM tbl_payments p
@@ -91,6 +92,7 @@ $sql = "SELECT
         LEFT JOIN tbl_enrolled_students es ON es.registration_id = r.id AND es.is_active = 1
         LEFT JOIN tbl_courses c ON r.course_id = c.id
         LEFT JOIN tbl_group g ON r.group_id = g.id
+        LEFT JOIN tbl_medium m ON r.medium_id = m.id
         LEFT JOIN tbl_term t ON p.term_id = t.id
         LEFT JOIN tbl_receipt_configuration rc ON p.receipt_config_id = rc.id
         LEFT JOIN tbl_users u ON p.created_by = u.id
@@ -134,11 +136,11 @@ if (!empty($group_filter)) {
 
 if (!empty($course_filter)) {
     if ($course_filter === '11th') {
-        $sql .= " AND r.course_id IN (1, 2)";
+        $sql .= " AND r.course_id = 1";
     } elseif ($course_filter === '12th') {
-        $sql .= " AND r.course_id IN (4, 5)";
+        $sql .= " AND r.course_id = 2";
     } elseif ($course_filter === 'Reneet') {
-        $sql .= " AND r.course_id = 6";
+        $sql .= " AND r.course_id = 3";
     } else {
         $sql .= " AND r.course_id = ?";
         $params[] = $course_filter;
@@ -503,6 +505,7 @@ include '../../../include/sidebar.php';
                             <th class="border-0">Student</th>
                             <th class="border-0">Class</th>
                             <th class="border-0">Group</th>
+                            <th class="border-0">Medium</th>
                             <th class="border-0">Term</th>
                             <th class="border-0">Type</th>
                             <th class="border-0">Head</th>
@@ -517,7 +520,7 @@ include '../../../include/sidebar.php';
                     <tbody>
                         <?php if (empty($receipts)): ?>
                             <tr>
-                                <td colspan="15" class="text-center py-4">
+                                <td colspan="16" class="text-center py-4">
                                     <i class="fas fa-folder-open text-muted fa-3x mb-3"></i>
                                     <p class="mb-0">No receipts found for selected period</p>
                                 </td>
@@ -550,6 +553,9 @@ include '../../../include/sidebar.php';
                                     </td>
                                     <td>
                                         <?php echo htmlspecialchars($receipt['group_name'] ?? '-'); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($receipt['medium_name'] ?? '-'); ?>
                                     </td>
                                     <td>
                                         <span class="badge bg-secondary">
@@ -633,7 +639,7 @@ include '../../../include/sidebar.php';
                     </tbody>
                     <tfoot class="table-secondary">
                         <tr>
-                            <th colspan="11" class="text-end">Total:</th>
+                            <th colspan="12" class="text-end">Total:</th>
                             <th class="text-success">₹
                                 <?php echo formatIndianCurrency($totalAmount); ?>
                             </th>
@@ -655,6 +661,7 @@ include '../../../include/sidebar.php';
                 <th>Student Name</th>
                 <th>Class</th>
                 <th>Group</th>
+                <th>Medium</th>
                 <th>Term</th>
                 <th>Type</th>
                 <th>Mode</th>
@@ -677,6 +684,7 @@ include '../../../include/sidebar.php';
                     <td><?php echo htmlspecialchars($re['student_full_name'] ?? ''); ?></td>
                     <td><?php echo htmlspecialchars($re['current_class'] ?? '-'); ?></td>
                     <td><?php echo htmlspecialchars($re['group_name'] ?? '-'); ?></td>
+                    <td><?php echo htmlspecialchars($re['medium_name'] ?? '-'); ?></td>
                     <td><?php echo htmlspecialchars($re['term_name'] ?? '-'); ?></td>
                     <td><?php echo htmlspecialchars($re['payment_type'] ?? ''); ?></td>
                     <td><?php echo strtoupper($re['payment_mode']); ?></td>
@@ -692,7 +700,7 @@ include '../../../include/sidebar.php';
         </tbody>
         <tfoot>
             <tr style="font-weight: bold; background-color: #f2f2f2;">
-                <th colspan="12" style="text-align: right;">Total Amount:</th>
+                <th colspan="13" style="text-align: right;">Total Amount:</th>
                 <th><?php echo round($totalAmount); ?></th>
                 <th colspan="2"></th>
             </tr>

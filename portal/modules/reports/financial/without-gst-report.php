@@ -64,11 +64,11 @@ if (!empty($search)) {
 
 if (!empty($course_filter)) {
     if ($course_filter === '11th') {
-        $whereConditions[] = "r.course_id IN (1, 2)";
+        $whereConditions[] = "r.course_id = 1";
     } elseif ($course_filter === '12th') {
-        $whereConditions[] = "r.course_id IN (4, 5)";
+        $whereConditions[] = "r.course_id = 2";
     } elseif ($course_filter === 'Reneet') {
-        $whereConditions[] = "r.course_id = 6";
+        $whereConditions[] = "r.course_id = 3";
     } else {
         $whereConditions[] = "r.course_id = ?";
         $params[] = $course_filter;

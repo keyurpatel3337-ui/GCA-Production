@@ -62,22 +62,6 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 ?>
 
 <main class="app-main">
-    <div class="app-content-header">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-sm-6">
-                    <h3 class="mb-0 text-dark font-weight-bold">Exam <span class="text-primary">Results</span></h3>
-                    <p class="text-muted small mb-0"><?= htmlspecialchars($exam['title']) ?> (<?= htmlspecialchars($exam['stdtext'] ?: 'All Standards') ?>)</p>
-                </div>
-                <div class="col-sm-6 text-end">
-                    <a href="manage-exams.php" class="btn btn-outline-secondary px-4" style="border-radius: 12px; font-weight: 600;">
-                        <i class="fas fa-arrow-left mr-2"></i> Back to Exams
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="app-content pt-4">
         <div class="container-fluid">
             
@@ -113,15 +97,20 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             <div class="card shadow-sm border-0" style="border-radius: 15px;">
                 <div class="card-header bg-white border-0 py-4 d-flex justify-content-between align-items-center flex-wrap" style="gap: 15px;">
                     <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-user-graduate mr-2 text-primary"></i> Participant Attempts</h5>
-                    <form method="GET" class="d-flex align-items-center" style="max-width: 400px; width: 100%;">
-                        <input type="hidden" name="exam_id" value="<?= $exam_id ?>">
-                        <div class="input-group" style="width: 100%;">
-                            <input type="text" name="search" class="form-control" placeholder="Search by name or roll number..." value="<?= htmlspecialchars($search_query) ?>" style="border-radius: 10px 0 0 10px;">
-                            <button class="btn btn-primary px-3" type="submit" style="border-radius: 0 10px 10px 0;">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
+                    <div class="d-flex align-items-center gap-2 flex-wrap" style="max-width: 600px; width: 100%; justify-content: flex-end;">
+                        <form method="GET" class="d-flex align-items-center" style="max-width: 300px; width: 100%;">
+                            <input type="hidden" name="exam_id" value="<?= $exam_id ?>">
+                            <div class="input-group" style="width: 100%;">
+                                <input type="text" name="search" class="form-control" placeholder="Search by name or roll number..." value="<?= htmlspecialchars($search_query) ?>" style="border-radius: 10px 0 0 10px;">
+                                <button class="btn btn-primary px-3" type="submit" style="border-radius: 0 10px 10px 0;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <a href="manage-exams.php" class="btn btn-outline-secondary px-3" style="border-radius: 10px; font-weight: 600; white-space: nowrap;">
+                            <i class="fas fa-arrow-left mr-1"></i> Back to Exams
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">

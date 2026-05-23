@@ -53,9 +53,9 @@ try {
     // 1. Standard-wise detailed metrics
     $standard_details = [];
     $std_categories = [
-        '11th' => 'course_id IN (1, 2)',
-        '12th' => 'course_id IN (4, 5)',
-        'Reneet' => 'course_id = 6'
+        '11th' => 'course_id = 1',
+        '12th' => 'course_id = 2',
+        'Reneet' => 'course_id = 3'
     ];
 
     foreach ($std_categories as $name => $condition) {

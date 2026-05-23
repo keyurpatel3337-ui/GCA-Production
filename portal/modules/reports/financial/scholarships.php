@@ -67,11 +67,11 @@ if (!empty($scholarship_type_id)) {
 
 if (!empty($course_id)) {
     if ($course_id === '11th') {
-        $where_conditions[] = "r.course_id IN (1, 2)";
+        $where_conditions[] = "r.course_id = 1";
     } elseif ($course_id === '12th') {
-        $where_conditions[] = "r.course_id IN (4, 5)";
+        $where_conditions[] = "r.course_id = 2";
     } elseif ($course_id === 'Reneet') {
-        $where_conditions[] = "r.course_id = 6";
+        $where_conditions[] = "r.course_id = 3";
     } else {
         $where_conditions[] = "r.course_id = ?";
         $params[] = $course_id;
@@ -107,12 +107,14 @@ $sql = "SELECT r.id, r.surname, r.student_name, r.fathers_name, r.mob,
                  r.scholarship_amount, r.scholarship_percentage,
                  st.type_name as scholarship_type,
                  c.course_name as current_class,
+                 m.medium_name,
                  es.enrollment_no
           FROM tbl_gm_std_registration r
           LEFT JOIN tbl_scholarship_rules sr ON r.scholarship_rule_id = sr.id
           LEFT JOIN tbl_scholarship_types st ON sr.scholarship_type_id = st.id
           LEFT JOIN tbl_enrolled_students es ON es.enrollment_id = r.enrollment_id AND es.is_active = 1
           LEFT JOIN tbl_courses c ON r.course_id = c.id
+          LEFT JOIN tbl_medium m ON r.medium_id = m.id
           WHERE $where_sql";
 
 // 3. Get Paginated Data for UI
@@ -230,9 +232,17 @@ include '../../../include/sidebar.php';
                         <?php else: ?>
                             <?php $sno = $offset + 1; foreach ($students as $s): ?>
                                 <tr>
-                                    <td><?php echo $sno++; ?></td>
+                                    <td><?php echo htmlspecialchars($sno++); ?></td>
                                     <td><strong><?php echo htmlspecialchars(trim(($s['surname'] ?? '') . ' ' . ($s['student_name'] ?? '') . ' ' . ($s['fathers_name'] ?? ''))); ?></strong><br><small class="text-muted"><?php echo htmlspecialchars($s['mob'] ?? '-'); ?></small></td>
-                                    <td><?php echo htmlspecialchars($s['current_class'] ?? 'N/A'); ?></td>
+                                    <td>
+                                        <?php 
+                                        $display_std = $s['current_class'] ?? 'N/A';
+                                        if (!empty($s['medium_name'])) {
+                                            $display_std .= ' - ' . $s['medium_name'];
+                                        }
+                                        echo htmlspecialchars($display_std);
+                                        ?>
+                                    </td>
                                     <td><span class="badge bg-info"><?php echo htmlspecialchars($s['scholarship_type'] ?? '-'); ?></span></td>
                                     <td class="text-center"><?php echo ($s['scholarship_percentage'] > 0) ? ($s['scholarship_percentage'] . '%') : '-'; ?></td>
                                     <td class="text-end fw-bold text-success">₹<?php echo formatIndianCurrency($s['scholarship_amount'] ?? 0); ?></td>
@@ -253,7 +263,7 @@ include '../../../include/sidebar.php';
 <!-- Hidden Table for Export -->
 <table class="d-none" id="scholarshipExportTable">
     <thead><tr><th>#</th><th>Surname</th><th>Student Name</th><th>Fathers Name</th><th>Mobile</th><th>Class</th><th>Scholarship Type</th><th>Benefit (%)</th><th>Amount</th><th>Enrollment No.</th></tr></thead>
-    <tbody><?php $ex_sno = 1; foreach ($all_students as $as): ?><tr><td><?php echo $ex_sno++; ?></td><td><?php echo htmlspecialchars($as['surname'] ?? ''); ?></td><td><?php echo htmlspecialchars($as['student_name'] ?? ''); ?></td><td><?php echo htmlspecialchars($as['fathers_name'] ?? ''); ?></td><td><?php echo htmlspecialchars($as['mob'] ?? ''); ?></td><td><?php echo htmlspecialchars($as['current_class'] ?? '-'); ?></td><td><?php echo htmlspecialchars($as['scholarship_type'] ?? '-'); ?></td><td><?php echo ($as['scholarship_percentage'] > 0) ? ($as['scholarship_percentage'] . '%') : '-'; ?></td><td><?php echo round($as['scholarship_amount'] ?? 0); ?></td><td><?php echo htmlspecialchars($as['enrollment_no'] ?? '-'); ?></td></tr><?php endforeach; ?></tbody>
+    <tbody><?php $ex_sno = 1; foreach ($all_students as $as): ?><tr><td><?php echo $ex_sno++; ?></td><td><?php echo htmlspecialchars($as['surname'] ?? ''); ?></td><td><?php echo htmlspecialchars($as['student_name'] ?? ''); ?></td><td><?php echo htmlspecialchars($as['fathers_name'] ?? ''); ?></td><td><?php echo htmlspecialchars($as['mob'] ?? ''); ?></td><td><?php echo htmlspecialchars(($as['current_class'] ?? '-') . (!empty($as['medium_name']) ? ' - ' . $as['medium_name'] : '')); ?></td><td><?php echo htmlspecialchars($as['scholarship_type'] ?? '-'); ?></td><td><?php echo ($as['scholarship_percentage'] > 0) ? ($as['scholarship_percentage'] . '%') : '-'; ?></td><td><?php echo round($as['scholarship_amount'] ?? 0); ?></td><td><?php echo htmlspecialchars($as['enrollment_no'] ?? '-'); ?></td></tr><?php endforeach; ?></tbody>
 </table>
 
 <?php include '../../../include/footer.php'; ?>

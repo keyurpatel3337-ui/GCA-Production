@@ -62,6 +62,14 @@ elseif ($margin_type === 'wide')
 function processLatex($text, $img_h = 32)
 {
     $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    
+    // Twin-layer degree normalization: Clean ring operator U+2218 to standard degree symbol U+00B0 in plain text
+    $text = str_replace(
+        ["\xe2\x88\x98", "\xc2\xba", '∘', 'º'],
+        '°',
+        $text
+    );
+
     $pattern = '/\${2}(.*?)\${2}|\$([^$]+?)\$|(\\\\begin\{[a-zA-Z\*]+\}.*?\\\\end\{[a-zA-Z\*]+\})/s';
 
     return preg_replace_callback($pattern, function ($matches) use ($img_h) {
@@ -69,6 +77,14 @@ function processLatex($text, $img_h = 32)
             : (!empty($matches[2]) ? $matches[2]
                 : (!empty($matches[3]) ? $matches[3] : ''));
         $latex = trim(strip_tags($latex));
+        
+        // LaTeX layer normalization: Convert degree circle characters inside math mode to standard LaTeX \circ command
+        $latex = str_replace(
+            ['°', '∘', 'º', '\\xe2\\x88\\x98', '\\xc2\\xba'],
+            '\\circ',
+            $latex
+        );
+
         if (empty($latex))
             return '';
 
@@ -160,6 +176,10 @@ $html = '
         .q-row-table td { vertical-align: top; }
         .q-num-cell { width: 30pt; font-weight: bold; }
         .q-text-cell { padding-right: 5pt; }
+        .q-text-cell img {
+            vertical-align: middle !important;
+            margin: 2px 5px !important;
+        }
         .q-img-cell { width: 1%; white-space: nowrap; vertical-align: top; padding-left: 10pt; }
 
         .options-container { margin-top: 5px; margin-left: 30pt; }
@@ -174,6 +194,27 @@ $html = '
         img.q-img { max-width: 100%; }
         .img-right { float: right; margin-left: 10px; margin-bottom: 5px; }
         .img-below { display: block; margin: 10px 0; }
+
+        /* Force all paragraphs, divs, and block tags inside options to stay completely inline next to labels (A), (B), (C), (D) */
+        .option-item p,
+        .grid-options td p,
+        .inline-options td p,
+        .option-item div,
+        .grid-options td div,
+        .inline-options td div {
+            display: inline !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        /* Align option images (chemistry diagrams, SVG LaTeX equations) neatly next to the option labels */
+        .option-item img,
+        .grid-options td img,
+        .inline-options td img {
+            vertical-align: middle;
+            display: inline-block !important;
+            margin: 2px 0 2px 4px !important;
+        }
     </style>
 </head>
 <body>
@@ -282,21 +323,27 @@ foreach ($questions as $q) {
     if ($opt_style === 'list') {
         $html .= '<div class="options-container">';
         foreach ($opts as $lbl => $val) {
-            if (strpos($val, '<img') !== false) {
-                $html .= '<div class="option-item" style="margin-bottom: 8pt; page-break-inside: avoid;"><strong>(' . $lbl . ')</strong><div style="margin-top: 4pt; margin-left: 15pt;">' . $val . '</div></div>';
-            } else {
-                $html .= '<div class="option-item" style="margin-bottom: 5px;"><strong>(' . $lbl . ')</strong> ' . $val . '</div>';
-            }
+            $html .= '<div class="option-item" style="margin-bottom: 5px; page-break-inside: avoid;">
+                        <table style="width: 100%; border-collapse: collapse; border: none; margin: 0; padding: 0;">
+                            <tr>
+                                <td style="width: 25pt; vertical-align: middle; font-weight: bold; border: none; padding: 0; margin: 0;">(' . $lbl . ')</td>
+                                <td style="vertical-align: middle; border: none; padding: 0; margin: 0;">' . $val . '</td>
+                            </tr>
+                        </table>
+                      </div>';
         }
         $html .= '</div>';
     } elseif ($opt_style === 'inline') {
         $html .= '<table class="inline-options"><tr>';
         foreach ($opts as $lbl => $val) {
-            if (strpos($val, '<img') !== false) {
-                $html .= '<td style="vertical-align: top; padding-bottom: 8pt;"><strong>(' . $lbl . ')</strong><div style="margin-top: 4pt;">' . $val . '</div></td>';
-            } else {
-                $html .= '<td style="vertical-align: middle; padding-bottom: 4pt;"><strong>(' . $lbl . ')</strong> ' . $val . '</td>';
-            }
+            $html .= '<td style="vertical-align: middle; padding-bottom: 4pt; width: 25%;">
+                        <table style="width: 100%; border-collapse: collapse; border: none; margin: 0; padding: 0;">
+                            <tr>
+                                <td style="width: 25pt; vertical-align: middle; font-weight: bold; border: none; padding: 0; margin: 0;">(' . $lbl . ')</td>
+                                <td style="vertical-align: middle; border: none; padding: 0; margin: 0;">' . $val . '</td>
+                            </tr>
+                        </table>
+                      </td>';
         }
         $html .= '</tr></table>';
     } else { // grid
@@ -304,21 +351,27 @@ foreach ($questions as $q) {
                     <tr>';
         foreach (['A', 'B'] as $lbl) {
             $val = $opts[$lbl];
-            if (strpos($val, '<img') !== false) {
-                $html .= '<td style="vertical-align: top; padding-bottom: 8pt; width: 50%;"><strong>(' . $lbl . ')</strong><div style="margin-top: 4pt; margin-left: 15pt;">' . $val . '</div></td>';
-            } else {
-                $html .= '<td style="vertical-align: middle; padding-bottom: 4pt; width: 50%;"><strong>(' . $lbl . ')</strong> ' . $val . '</td>';
-            }
+            $html .= '<td style="vertical-align: middle; padding-bottom: 4pt; width: 50%;">
+                        <table style="width: 100%; border-collapse: collapse; border: none; margin: 0; padding: 0;">
+                            <tr>
+                                <td style="width: 25pt; vertical-align: middle; font-weight: bold; border: none; padding: 0; margin: 0;">(' . $lbl . ')</td>
+                                <td style="vertical-align: middle; border: none; padding: 0; margin: 0;">' . $val . '</td>
+                            </tr>
+                        </table>
+                      </td>';
         }
         $html .= '</tr>
                     <tr>';
         foreach (['C', 'D'] as $lbl) {
             $val = $opts[$lbl];
-            if (strpos($val, '<img') !== false) {
-                $html .= '<td style="vertical-align: top; padding-bottom: 8pt; width: 50%;"><strong>(' . $lbl . ')</strong><div style="margin-top: 4pt; margin-left: 15pt;">' . $val . '</div></td>';
-            } else {
-                $html .= '<td style="vertical-align: middle; padding-bottom: 4pt; width: 50%;"><strong>(' . $lbl . ')</strong> ' . $val . '</td>';
-            }
+            $html .= '<td style="vertical-align: middle; padding-bottom: 4pt; width: 50%;">
+                        <table style="width: 100%; border-collapse: collapse; border: none; margin: 0; padding: 0;">
+                            <tr>
+                                <td style="width: 25pt; vertical-align: middle; font-weight: bold; border: none; padding: 0; margin: 0;">(' . $lbl . ')</td>
+                                <td style="vertical-align: middle; border: none; padding: 0; margin: 0;">' . $val . '</td>
+                            </tr>
+                        </table>
+                      </td>';
         }
         $html .= '</tr>
                   </table>';

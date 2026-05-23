@@ -35,11 +35,13 @@ $sql = "SELECT
             CONCAT(r.surname, ' ', r.student_name, ' ', IFNULL(r.fathers_name, '')) as student_full_name,
             r.standard,
             c.course_name,
+            m.medium_name,
             u.name as issued_by_name
         FROM tbl_payments p
         LEFT JOIN tbl_gm_std_registration r ON p.student_id = r.id
         LEFT JOIN tbl_enrolled_students es ON es.registration_id = r.id AND es.is_active = 1
         LEFT JOIN tbl_courses c ON r.course_id = c.id
+        LEFT JOIN tbl_medium m ON r.medium_id = m.id
         LEFT JOIN tbl_users u ON p.created_by = u.id
         WHERE p.status IN ('cancelled', 'failed', 'refunded')
         AND p.payment_date BETWEEN ? AND ?";
@@ -54,11 +56,11 @@ if (!empty($search_query)) {
 
 if (!empty($course_filter)) {
     if ($course_filter === '11th') {
-        $sql .= " AND r.course_id IN (1, 2)";
+        $sql .= " AND r.course_id = 1";
     } elseif ($course_filter === '12th') {
-        $sql .= " AND r.course_id IN (4, 5)";
+        $sql .= " AND r.course_id = 2";
     } elseif ($course_filter === 'Reneet') {
-        $sql .= " AND r.course_id = 6";
+        $sql .= " AND r.course_id = 3";
     } else {
         $sql .= " AND r.course_id = ?";
         $params[] = $course_filter;
@@ -162,7 +164,15 @@ include '../../../include/sidebar.php';
                                     <td class="fw-bold text-primary"><?php echo htmlspecialchars($p['student_full_name'] ?? ''); ?>
                                     </td>
                                     <td><?php echo htmlspecialchars($p['receipt_no'] ?? '-'); ?></td>
-                                    <td><?php echo htmlspecialchars($p['course_name'] ?? $p['standard'] ?? '-'); ?></td>
+                                    <td>
+                                        <?php 
+                                        $display_std = $p['course_name'] ?? $p['standard'] ?? '-';
+                                        if (!empty($p['medium_name'])) {
+                                            $display_std .= ' - ' . $p['medium_name'];
+                                        }
+                                        echo htmlspecialchars($display_std);
+                                        ?>
+                                    </td>
                                     <td class="fw-bold">₹<?php echo formatIndianCurrency($p['amount']); ?></td>
                                     <td><small
                                             class="text-muted"><?php echo htmlspecialchars($p['transaction_id'] ?? '-'); ?></small>

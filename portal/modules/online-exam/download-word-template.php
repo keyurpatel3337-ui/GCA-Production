@@ -14,42 +14,68 @@ require_once PORTAL_PATH . 'session_config.php';
 require_once PORTAL_GLOBALVARIABLE;
 require_once DB_CONNECT_FILE;
 
-if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])) {
+if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER, ROLE_TEACHER, ROLE_COMPUTER_OPERATOR, ROLE_OES_DATA_ENTRY_OPERATOR])) {
     http_response_code(403);
     exit('Access denied.');
 }
+
+// Get template type
+$template_type = isset($_GET['type']) ? $_GET['type'] : 'full';
 
 // ---- Build table rows XML ----
 
 // Header row style
 $thStyle = 'w:fill="1F497D" w:color="auto"'; // dark blue header bg
 
-// Column headers (16 columns)
-$headers = [
-    'Standard',
-    'Group',
-    'Question Type',
-    'Difficulty Level',
-    'Subject',
-    'Chapter',
-    'Topic',
-    'Question Text',
-    'Option A',
-    'Option B',
-    'Option C',
-    'Option D',
-    'Correct Answer',
-    'Solution Text',
-    'Solution Video Link',
-    'Solution Image',
-];
+if ($template_type === 'simple') {
+    // Column headers (11 columns)
+    $headers = [
+        'Question Text',
+        'Option A',
+        'Option B',
+        'Option C',
+        'Option D',
+        'Correct Answer',
+        'Question Text (Gujarati)',
+        'Option A (Gujarati)',
+        'Option B (Gujarati)',
+        'Option C (Gujarati)',
+        'Option D (Gujarati)',
+    ];
+} else {
+    // Column headers (22 columns)
+    $headers = [
+        'Standard',
+        'Group',
+        'Subject',
+        'Chapter',
+        'Topic',
+        'Question Type',
+        'Difficulty Level',
+        'Question Text',
+        'Option A',
+        'Option B',
+        'Option C',
+        'Option D',
+        'Correct Answer',
+        'Solution Text',
+        'Solution Video Link',
+        'Solution Image',
+        'Question Text (Gujarati)',
+        'Option A (Gujarati)',
+        'Option B (Gujarati)',
+        'Option C (Gujarati)',
+        'Option D (Gujarati)',
+        'Solution Text (Gujarati)',
+    ];
+}
 
 // ---- Fetch Actual Data for Samples ----
 $sampleRows = [];
 try {
     // Fetch some real subjects with their standards
     $stmt = $conn->query("
-        SELECT s.stdtext, sub.subject_name 
+        SELECT s.stdnumber, s.stdtext, sub.subject_name 
         FROM tbl_subjects sub
         JOIN standard s ON sub.standard_id = s.stdid
         WHERE sub.activated = 1 AND sub.is_deleted = 0
@@ -68,30 +94,81 @@ try {
 
     foreach ($actual_data as $idx => $data) {
         $q_type = $actual_types[$idx % count($actual_types)];
-        $sampleRows[] = [
-            $data['stdtext'],
-            $sample_grp,
-            $q_type,
-            'Level A',
-            $data['subject_name'],
-            'Chapter 1',
-            'General Topic',
-            'Example question for ' . $data['subject_name'] . ' (' . $q_type . ')...',
-            $q_type === 'MCQ' ? 'Option A' : '',
-            $q_type === 'MCQ' ? 'Option B' : '',
-            $q_type === 'MCQ' ? 'Option C' : '',
-            $q_type === 'MCQ' ? 'Option D' : '',
-            $q_type === 'MCQ' ? 'A' : '',
-            'Explanation/Solution for this ' . $q_type . ' question.',
-            '',
-            '',
-        ];
+        
+        // Map standard text to 11th, 12th, Re-neet
+        $std_name = '11th';
+        $std_num = (int)$data['stdnumber'];
+        if ($std_num === 11) {
+            $std_name = '11th';
+        } elseif ($std_num === 12) {
+            $std_name = '12th';
+        } elseif ($std_num === 13) {
+            $std_name = 'Re-neet';
+        } else {
+            $txt = strtolower($data['stdtext']);
+            if (strpos($txt, '11') !== false) {
+                $std_name = '11th';
+            } elseif (strpos($txt, '12') !== false) {
+                $std_name = '12th';
+            } elseif (strpos($txt, 'reneet') !== false || strpos($txt, 're-neet') !== false) {
+                $std_name = 'Re-neet';
+            } else {
+                $std_name = '11th';
+            }
+        }
+
+        if ($template_type === 'simple') {
+            $sampleRows[] = [
+                'Example question for ' . $data['subject_name'] . ' (' . $q_type . ')...',
+                $q_type === 'MCQ' ? 'Option A' : '',
+                $q_type === 'MCQ' ? 'Option B' : '',
+                $q_type === 'MCQ' ? 'Option C' : '',
+                $q_type === 'MCQ' ? 'Option D' : '',
+                $q_type === 'MCQ' ? 'A' : '',
+                'દરેક પ્રશ્ન માટે અહીં ગુજરાતી લખાણ આવશે (' . $q_type . ')...',
+                $q_type === 'MCQ' ? 'વિકલ્પ A' : '',
+                $q_type === 'MCQ' ? 'વિકલ્પ B' : '',
+                $q_type === 'MCQ' ? 'વિકલ્પ C' : '',
+                $q_type === 'MCQ' ? 'વિકલ્પ D' : '',
+            ];
+        } else {
+            $sampleRows[] = [
+                $std_name,
+                $sample_grp,
+                $data['subject_name'],
+                'Chapter 1',
+                'General Topic',
+                $q_type,
+                'Level A',
+                'Example question for ' . $data['subject_name'] . ' (' . $q_type . ')...',
+                $q_type === 'MCQ' ? 'Option A' : '',
+                $q_type === 'MCQ' ? 'Option B' : '',
+                $q_type === 'MCQ' ? 'Option C' : '',
+                $q_type === 'MCQ' ? 'Option D' : '',
+                $q_type === 'MCQ' ? 'A' : '',
+                'Explanation/Solution for this ' . $q_type . ' question.',
+                '',
+                '',
+                'દરેક પ્રશ્ન માટે અહીં ગુજરાતી લખાણ આવશે (' . $q_type . ')...',
+                $q_type === 'MCQ' ? 'વિકલ્પ A' : '',
+                $q_type === 'MCQ' ? 'વિકલ્પ B' : '',
+                $q_type === 'MCQ' ? 'વિકલ્પ C' : '',
+                $q_type === 'MCQ' ? 'વિકલ્પ D' : '',
+                'આ પ્રશ્નનો ઉકેલ / સમજૂતી અહીં આવશે.',
+            ];
+        }
     }
 } catch (Exception $e) {
     // Fallback to static sample if database query fails
-    $sampleRows = [
-        ['12th Science', 'A Group', 'MCQ', 'Level A', 'Physics', 'Ch-1', 'Motion', 'Sample Question?', 'A', 'B', 'C', 'D', 'A', 'Exp', '', '']
-    ];
+    if ($template_type === 'simple') {
+        $sampleRows = [
+            ['Sample Question?', 'A', 'B', 'C', 'D', 'A', 'નમૂનારૂપ પ્રશ્ન?', 'વિકલ્પ A', 'વિકલ્પ B', 'વિકલ્પ C', 'વિકલ્પ D']
+        ];
+    } else {
+        $sampleRows = [
+            ['12th', 'A Group', 'Physics', 'Ch-1', 'Motion', 'MCQ', 'Level A', 'Sample Question?', 'A', 'B', 'C', 'D', 'A', 'Exp', '', '', 'નમૂનારૂપ પ્રશ્ન?', 'વિકલ્પ A', 'વિકલ્પ B', 'વિકલ્પ C', 'વિકલ્પ D', 'સમજૂતી']
+        ];
+    }
 }
 
 // ---- XML Helpers ----
@@ -135,7 +212,11 @@ function makeCell(string $text, bool $isHeader = false, int $width = 1400): stri
 }
 
 // Column widths (narrow for short cols, wide for content cols)
-$colWidths = [1100, 1000, 900, 800, 900, 900, 900, 2200, 1300, 1300, 1300, 1300, 900, 1800, 1500, 900];
+if ($template_type === 'simple') {
+    $colWidths = [3000, 1500, 1500, 1500, 1500, 1200, 3000, 1500, 1500, 1500, 1500];
+} else {
+    $colWidths = [1100, 1000, 900, 900, 900, 900, 800, 2200, 1300, 1300, 1300, 1300, 900, 1800, 1500, 900, 2200, 1300, 1300, 1300, 1300, 1800];
+}
 
 function makeRow(array $cells, bool $isHeader, array $widths): string
 {
@@ -157,7 +238,7 @@ $tableXml = '<w:tbl>
     <w:tblPr>
         <w:tblStyle w:val="TableGrid"/>
         <w:tblW w:w="0" w:type="auto"/>
-        <w:tblLayout w:type="fixed"/>
+        <w:tblLayout w:type="auto"/>
         <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
     </w:tblPr>
     <w:tblGrid>';
@@ -222,10 +303,12 @@ $documentXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' . makePara('6. Nested tables inside cells are now supported (Recommended for complex data).', false, '228B22', 22) . '
 ' . makePara('7. Subject must match a name already configured in the system.', false, '444444', 22) . '
 ' . makePara('8. For Math/Chemistry formulas, use LaTeX format (e.g., $E=mc^2$) for best results.', false, '00008B', 22) . '
+' . makePara('9. The last 6 columns support side-by-side Gujarati translations for bilingual questions.', false, 'B8860B', 22) . '
 ' . makePara('') . '
 ' . makePara('COLUMN REFERENCE:', true, '333333', 24) . '
-' . makePara('Col 1: Std | Col 2: Group | Col 3: Type | Col 4: Diff | Col 5: Sub | Col 6: Chp | Col 7: Topic | Col 8: Body', false, '555555', 20) . '
+' . makePara('Col 1: Std | Col 2: Group | Col 3: Sub | Col 4: Chp | Col 5: Topic | Col 6: Type | Col 7: Diff | Col 8: Body', false, '555555', 20) . '
 ' . makePara('Col 9-12: Opt A-D | Col 13: Correct Ans | Col 14: Solution | Col 15: Video | Col 16: Image', false, '555555', 20) . '
+' . makePara('Col 17: Gujarati Body | Col 18-21: Gujarati Opt A-D | Col 22: Gujarati Solution', false, '555555', 20) . '
 ' . makePara('') . '
 
 ' . $tableXml . '

@@ -29,11 +29,11 @@ $params = [];
 if (!empty($_GET['course_id'])) {
     $course_id = $_GET['course_id'];
     if ($course_id === '11th') {
-        $filterConditions[] = "r.course_id IN (1, 2)";
+        $filterConditions[] = "r.course_id = 1";
     } elseif ($course_id === '12th') {
-        $filterConditions[] = "r.course_id IN (4, 5)";
+        $filterConditions[] = "r.course_id = 2";
     } elseif ($course_id === 'Reneet') {
-        $filterConditions[] = "r.course_id = 6";
+        $filterConditions[] = "r.course_id = 3";
     } else {
         $filterConditions[] = "r.course_id = ?";
         $params[] = $course_id;

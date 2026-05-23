@@ -58,12 +58,13 @@ try {
                 p.id, p.receipt_no, p.amount, p.payment_date, p.payment_mode, p.payment_type,
                 p.transaction_id, p.created_at, p.remarks,
                 CONCAT(r.surname, ' ', r.student_name, ' ', IFNULL(r.fathers_name, '')) as student_name,
-                c.course_name as current_class,
+                CONCAT(c.course_name, IF(m.medium_name IS NOT NULL AND m.medium_name != '', CONCAT(' - ', m.medium_name), '')) as current_class,
                 u.name as collected_by
             FROM tbl_payments p
             JOIN tbl_gm_std_registration r ON p.student_id = r.id
             LEFT JOIN tbl_enrolled_students es ON es.registration_id = r.id AND es.is_active = 1
             LEFT JOIN tbl_courses c ON r.course_id = c.id
+            LEFT JOIN tbl_medium m ON r.medium_id = m.id
             LEFT JOIN tbl_users u ON p.created_by = u.id
             WHERE p.status = 'paid' AND DATE(p.payment_date) = ?
             ORDER BY p.created_at ASC";

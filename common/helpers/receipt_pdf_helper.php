@@ -159,7 +159,7 @@ function generateAndSaveReceiptPDF($conn, $receipt_id, $save_path)
         $pdf->SetFont('helvetica', '', 9);
         $pdf->Cell(55, 5, $receipt['standard'] ?? 'N/A', 0, 0, 'L');
         $pdf->SetFont('helvetica', 'B', 9);
-        if (($receipt['course_id'] ?? 0) != 6) {
+        if (($receipt['course_id'] ?? 0) != 3) {
             $pdf->Cell(16, 5, 'Term', 0, 0, 'L');
             $pdf->Cell(4, 5, ':', 0, 0, 'C');
             $pdf->SetFont('helvetica', '', 9);
@@ -309,7 +309,7 @@ function generateAndSaveReceiptPDF($conn, $receipt_id, $save_path)
         $pdf->Cell(47, 5, 'Authorised Signatory', 0, 1, 'C');
 
         // Add refund/rules policy blocks to saved PDFs (same behavior as receipt-print-pdf.php)
-        if (($receipt['standard'] == '11' || $receipt['standard'] == 11) && in_array(($receipt['course_id'] ?? null), [1, 2, '1', '2'])) {
+        if (in_array(($receipt['course_id'] ?? null), [1, '1'])) {
             $pdf->SetY(150);
 
             // Title
@@ -378,7 +378,7 @@ function generateAndSaveReceiptPDF($conn, $receipt_id, $save_path)
             $pdf->SetX(20);
             $pdf->Cell(30, 5, 'After 90 Days', 0, 0, 'L');
             $pdf->Cell(0, 5, ':  Fees will be Non-Refundable.', 0, 1, 'L');
-        } elseif (($receipt['course_id'] ?? null) == '6' || ($receipt['course_id'] ?? null) == 6) {
+        } elseif (($receipt['course_id'] ?? null) == 3) {
             $pdf->SetY(145);
 
             // Rules and fees policy title
@@ -471,12 +471,21 @@ function generateAndSaveReceiptPDF($conn, $receipt_id, $save_path)
 
 /**
  * Helper to convert number to words (Identical to receipt-print-pdf.php)
+ * 
+ * @param float|int|string $number
+ * @return string
  */
 function helperNumberToWords($number)
 {
     return helperConvertToWords($number) . ' Only';
 }
 
+/**
+ * Recursive helper to convert number to words
+ * 
+ * @param float|int|string $number
+ * @return string
+ */
 function helperConvertToWords($number)
 {
     $number = round((float) $number);
@@ -502,15 +511,15 @@ function helperConvertToWords($number)
         $rupees %= 1000;
     }
     if ($rupees >= 100) {
-        $words .= $ones[floor($rupees / 100)] . ' Hundred ';
+        $words .= $ones[(int)floor($rupees / 100)] . ' Hundred ';
         $rupees %= 100;
     }
     if ($rupees >= 20) {
-        $words .= $tens[floor($rupees / 10)] . ' ';
+        $words .= $tens[(int)floor($rupees / 10)] . ' ';
         $rupees %= 10;
     }
     if ($rupees > 0 && $rupees < 20) {
-        $words .= $ones[$rupees] . ' ';
+        $words .= $ones[(int)$rupees] . ' ';
     }
 
     return trim($words);

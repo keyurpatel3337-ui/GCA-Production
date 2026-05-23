@@ -57,21 +57,23 @@ try {
     // Course/Standard Filter (map friendly names to course_id conditions)
     if (!empty($course_filter)) {
         if ($course_filter === '11th') {
-            $whereConditions[] = "r.course_id IN (1,2)";
+            $whereConditions[] = "r.course_id IN (1)";
         } elseif ($course_filter === '12th') {
-            $whereConditions[] = "r.course_id IN (4,5)";
+            $whereConditions[] = "r.course_id IN (2)";
         } elseif ($course_filter === 'Reneet') {
-            $whereConditions[] = "r.course_id = 6";
+            $whereConditions[] = "r.course_id = 3";
         }
     }
     
     $whereClause = "WHERE " . implode(' AND ', $whereConditions);
 
-    $sql = "SELECT p.*, r.surname, r.student_name, IFNULL(r.fathers_name, '') as fathers_name, r.gender, r.mob, c.course_name as current_class
+    $sql = "SELECT p.*, r.surname, r.student_name, IFNULL(r.fathers_name, '') as fathers_name, r.gender, r.mob, 
+                   CONCAT(c.course_name, IF(m.medium_name IS NOT NULL AND m.medium_name != '', CONCAT(' - ', m.medium_name), '')) as current_class
             FROM tbl_payments p
             JOIN tbl_gm_std_registration r ON p.student_id = r.id
             LEFT JOIN tbl_enrolled_students es ON es.registration_id = r.id AND es.is_active = 1
             LEFT JOIN tbl_courses c ON r.course_id = c.id
+            LEFT JOIN tbl_medium m ON r.medium_id = m.id
             $whereClause ORDER BY p.payment_date ASC";
     $payments = $dbOps->customSelect($sql, $params);
     $totalCollected = array_sum(array_column($payments, 'amount'));

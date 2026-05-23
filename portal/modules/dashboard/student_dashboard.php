@@ -30,7 +30,28 @@ if ($response && isset($response['success']) && $response['success']) {
     $wallet_api_url = defined('WALLET_API_URL') ? WALLET_API_URL : null;
     $wallet_balance = 0;
     if ($wallet_api_url) {
-        $ch = curl_init($wallet_api_url . '/balance/check.php?student_id=' . $user_id);
+        $wallet_student_id = $user_id;
+        if (!empty($enrollment_info['enrollment_no'])) {
+            $wallet_student_id = $enrollment_info['enrollment_no'];
+        } else {
+            try {
+                if (!isset($conn)) {
+                    require_once DB_CONNECT_FILE;
+                }
+                if (isset($conn)) {
+                    $stmt = $conn->prepare("SELECT enrollment_no FROM tbl_enrolled_students WHERE registration_id = ?");
+                    $stmt->execute([$user_id]);
+                    $en_no = $stmt->fetchColumn();
+                    if (!empty($en_no)) {
+                        $wallet_student_id = $en_no;
+                    }
+                }
+            } catch (Exception $e) {
+                // Fallback to $user_id
+            }
+        }
+
+        $ch = curl_init($wallet_api_url . '/balance/check.php?student_id=' . $wallet_student_id);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -343,6 +364,38 @@ include '../../include/sidebar.php'; ?>
             $fee_summary = $data['fee_summary'] ?? null;
 
             if ($fee_summary):
+                // Filter out Hostel Fees completely from student view and calculations
+                if (isset($fee_summary['allocations'])) {
+                    $filtered_allocations = [];
+                    $hostel_allocated = 0;
+                    $hostel_paid = 0;
+                    $hostel_waiver = 0;
+                    $hostel_pending = 0;
+                    
+                    foreach ($fee_summary['allocations'] as $key => $alloc) {
+                        $is_hostel = (
+                            strpos(strtolower($key), 'hostel') !== false || 
+                            strpos(strtolower($alloc['label'] ?? ''), 'hostel') !== false ||
+                            strpos(strtolower($alloc['category'] ?? ''), 'hostel') !== false
+                        );
+                        
+                        if ($is_hostel) {
+                            $hostel_allocated += floatval($alloc['gross_amount'] ?? 0);
+                            $hostel_paid += floatval($alloc['paid_amount'] ?? 0);
+                            $hostel_waiver += floatval($alloc['waived_amount'] ?? 0);
+                            $hostel_pending += floatval($alloc['pending_amount'] ?? 0);
+                        } else {
+                            $filtered_allocations[$key] = $alloc;
+                        }
+                    }
+                    
+                    $fee_summary['allocations'] = $filtered_allocations;
+                    $fee_summary['total_allocated'] = floatval($fee_summary['total_allocated']) - $hostel_allocated;
+                    $fee_summary['total_paid'] = floatval($fee_summary['total_paid']) - $hostel_paid;
+                    $fee_summary['total_waiver'] = floatval($fee_summary['total_waiver']) - $hostel_waiver;
+                    $fee_summary['total_pending'] = floatval($fee_summary['total_pending']) - $hostel_pending;
+                }
+
                 $total_pending = $fee_summary['total_pending'];
                 $detailed_allocations = $fee_summary['allocations'];
                 ?>

@@ -146,20 +146,20 @@ include '../../include/sidebar.php';
             </a>
         </div>
 
-        <!-- <div class="col-xl-3 col-lg-4 col-md-6">
-            <a href="<?php echo PORTAL_URL; ?>/modules/fees/refund-management.php"
+        <div class="col-xl-3 col-lg-4 col-md-6">
+            <a href="<?php echo PORTAL_URL; ?>/modules/fees/manage-wallet-accounts.php"
                 class="card border-0 shadow-sm rounded-4 text-decoration-none h-100 action-card">
                 <div class="card-body p-4 d-flex align-items-center">
-                    <div class="icon-box bg-danger-light text-danger rounded-circle p-3 me-3">
-                        <i class="fas fa-undo fs-3"></i>
+                    <div class="icon-box bg-danger-light text-danger rounded-circle p-3 me-3" style="background-color: rgba(255, 71, 87, 0.1); color: #ff4757;">
+                        <i class="fas fa-users-cog fs-3"></i>
                     </div>
                     <div>
-                        <h6 class="fw-bold text-dark mb-1">Refunds</h6>
-                        <p class="text-muted small mb-0">Manage wallet refunds</p>
+                        <h6 class="fw-bold text-dark mb-1">Manage Wallets</h6>
+                        <p class="text-muted small mb-0">Set limits & block accounts</p>
                     </div>
                 </div>
             </a>
-        </div> -->
+        </div>
     </div>
 
     <!-- Recent Activity Placeholder -->

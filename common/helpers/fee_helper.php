@@ -373,9 +373,9 @@ if (!function_exists('calculateStudentFeeSummary')) {
 
             // Override months based on course if timeline is NOT Monthly
             if ($transport_timeline !== 'Monthly') {
-                if (in_array($cid, [1, 2])) {
+                if ($cid === 1) {
                     $transport_cfg['annual_months'] = $is_s2 ? $t2_m : $t1_m;
-                } elseif (in_array($cid, [4, 5])) {
+                } elseif (in_array($cid, [2, 3])) {
                     $transport_cfg['annual_months'] = $an_m;
                 }
             }
@@ -555,6 +555,7 @@ if (!function_exists('calculateStudentFeeSummary')) {
             }
 
             $detailed_allocations[$key] = $alloc;
+            $detailed_allocations[$key]['fee_component'] = $key;
             $detailed_allocations[$key]['paid_amount'] = $paid;
 
             $detailed_allocations[$key]['waived_amount'] = $waived;
@@ -634,6 +635,7 @@ if (!function_exists('calculateStudentFeeSummary')) {
 
                 $detailed_allocations[$key] = [
                     'label' => ucwords(str_replace('_', ' ', $key)),
+                    'fee_component' => $key,
                     'base_amount' => 0,
                     'gross_amount' => 0, // Orphan payments have no auto-allocation
                     'paid_amount' => $paid,
@@ -897,9 +899,9 @@ if (!function_exists('calculateTermSummary')) {
 
             // Override months based on course if timeline is NOT Monthly
             if ($transport_timeline !== 'Monthly') {
-                if (in_array($cid, [1, 2])) {
+                if ($cid === 1) {
                     $transport_cfg['annual_months'] = $is_s2 ? $t2_m : $t1_m;
-                } elseif (in_array($cid, [4, 5])) {
+                } elseif (in_array($cid, [2, 3])) {
                     $transport_cfg['annual_months'] = $an_m;
                 }
             }
@@ -944,6 +946,7 @@ if (!function_exists('calculateTermSummary')) {
         $application_order = ['tuition_fee_part2', 'tuition_fee_part1', 'trust_facilities_fee', 'school_fee'];
 
         foreach ($allocations as $key => &$alloc) {
+            $alloc['fee_component'] = $key;
             $alloc['paid_amount'] = $paid_by_component[$key] ?? 0;
             $alloc['waived_amount'] = 0; // Initialize
             $alloc['receipt_no'] = $receipt_nos[$key] ?? null;

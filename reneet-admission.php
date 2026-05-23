@@ -88,10 +88,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Hardcoded values for Re-NEET
-        $course_id = 6; // Re-Neet
+        $course_id = 3; // Re-Neet
         $school_id = 1;
         $campus_id = 1;
-        $standard = 13;
+        $standard = 3;
         $academic_year_id = 2; // 2026-2027
         $board_id = 1; // GSEB
         $group_id = 2; // B Group/NEET

@@ -26,7 +26,8 @@ if (!$attempt) {
     die("<div style='font-family: sans-serif; text-align: center; margin-top: 100px;'><h1 style='color: #ef4444;'>Attempt Not Found</h1><p>The specified student attempt does not exist.</p><a href='manage-exams.php' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #3b82f6; color: white; text-decoration: none; border-radius: 6px;'>Back to Manage Exams</a></div>");
 }
 
-$page_title = "Response Sheet - " . htmlspecialchars($attempt['first_name'] . ' ' . $attempt['last_name']) . " | OES";
+$student_name = trim(($attempt['surname'] ?? '') . ' ' . ($attempt['student_name'] ?? '') . ' ' . ($attempt['fathers_name'] ?? ''));
+$page_title = "Response Sheet - " . htmlspecialchars($student_name) . " | OES";
 
 // Fetch Questions
 $q_stmt = $conn->prepare("SELECT q.*, eq.order_no 
@@ -59,27 +60,20 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
 
 <main class="app-main">
-    <div class="app-content-header">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-sm-8">
-                    <h3 class="mb-0 text-dark font-weight-bold">Detailed <span class="text-primary">Response Sheet</span></h3>
-                    <p class="text-muted small mb-0">Student: <b><?= htmlspecialchars($attempt['surname'] . ' ' . $attempt['student_name'] . ' ' . $attempt['fathers_name']) ?></b> (Reg No: <?= htmlspecialchars($attempt['gr_no'] ?: 'N/A') ?>)</p>
-                </div>
-                <div class="col-sm-4 text-end">
-                    <a href="view-student-attempts.php?exam_id=<?= $attempt['exam_id'] ?>" class="btn btn-outline-secondary px-4" style="border-radius: 12px; font-weight: 600;">
-                        <i class="fas fa-arrow-left mr-2"></i> Back to Attempt List
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="app-content pt-4">
         <div class="container-fluid">
             
             <!-- Result Overview Card -->
             <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px;">
+                <div class="card-header bg-white border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center flex-wrap" style="gap: 15px;">
+                    <div>
+                        <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-file-invoice mr-2 text-primary"></i> Detailed Response Sheet</h5>
+                        <p class="text-muted small mb-0 mt-1">Student: <b><?= htmlspecialchars($attempt['surname'] . ' ' . $attempt['student_name'] . ' ' . $attempt['fathers_name']) ?></b> (Reg No: <?= htmlspecialchars($attempt['gr_no'] ?: 'N/A') ?>)</p>
+                    </div>
+                    <a href="view-student-attempts.php?exam_id=<?= $attempt['exam_id'] ?>" class="btn btn-outline-secondary btn-sm px-3" style="border-radius: 10px; font-weight: 600;">
+                        <i class="fas fa-arrow-left mr-1"></i> Back to Attempt List
+                    </a>
+                </div>
                 <div class="card-body p-4">
                     <div class="row text-center align-items-center">
                         <div class="col-md-3 border-right">

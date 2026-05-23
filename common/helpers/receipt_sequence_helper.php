@@ -47,11 +47,11 @@ function getNextReceiptNumber($conn, $fee_type, $school_id = null, $academic_yea
             $school_id_key = null;
         }
 
-        // OVERRIDE: If student is in Re-Neet (Course 6), use the Trust Facilities fee sequence only
+        // OVERRIDE: If student is in Re-Neet (Course 3), use the Trust Facilities fee sequence only
         // for trust facilities charges. Hostel security must still use the hostel_fee sequence.
         if ($student_id !== null) {
             $course_id = getStudentCourseId($conn, $student_id);
-            if ($course_id == 6 && $fee_type_key === 'trust_facilities_fee') {
+            if ($course_id == 3 && $fee_type_key === 'trust_facilities_fee') {
                 $fee_type_key = 'trust_facilities_fee';
                 $school_id_key = null;
             }

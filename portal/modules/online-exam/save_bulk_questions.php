@@ -14,7 +14,7 @@ require_once PORTAL_GLOBALVARIABLE;
 header('Content-Type: application/json');
 
 // Access control
-if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])) {
+if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER, ROLE_TEACHER, ROLE_COMPUTER_OPERATOR, ROLE_OES_DATA_ENTRY_OPERATOR])) {
     http_response_code(403);
     echo json_encode(['success' => false, 'message' => 'Unauthorized']);
     exit();
@@ -39,6 +39,7 @@ $created_by = (int) ($_SESSION['user_id'] ?? 1);
 
 // Global overrides from dropdowns
 $global_std_id = !empty($global_meta['standard_id']) ? (int) $global_meta['standard_id'] : null;
+$global_grp_id = !empty($global_meta['group_id']) ? (int) $global_meta['group_id'] : null;
 $global_sub_id = !empty($global_meta['subject_id']) ? (int) $global_meta['subject_id'] : null;
 $global_ch_id = !empty($global_meta['chapter_id']) ? (int) $global_meta['chapter_id'] : null;
 $global_tp_id = !empty($global_meta['topic_id']) ? (int) $global_meta['topic_id'] : null;
@@ -150,8 +151,9 @@ $stmt = $conn->prepare("
     (standard_id, subject_id, chapter_id, topic_id, group_id, question_type_id, 
      difficulty, marks, negative_marks, question_text, option_a, option_b, 
      option_c, option_d, correct_option, explanation, video_solution_url, 
-     created_by, status) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+     question_text_guj, option_a_guj, option_b_guj, option_c_guj, option_d_guj, explanation_guj,
+     solution_image, created_by, status) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
 ");
 
 $success_count = 0;
@@ -239,7 +241,7 @@ try {
 
         // --- Lookup Group ---
         $group_text = strtolower(trim($q['group_name'] ?? ''));
-        $group_id = $groups_map[$group_text] ?? null;
+        $group_id = $groups_map[$group_text] ?? $global_grp_id;
 
         // --- Question Type (Normalize underscores to hyphens for things like 1_mark -> 1-mark) ---
         $type_text = strtolower(trim($q['question_type'] ?? 'mcq'));
@@ -269,6 +271,14 @@ try {
         $option_c = $is_mcq ? process_inline_images(sanitize_html(trim($q['option_c'] ?? ''))) : '';
         $option_d = $is_mcq ? process_inline_images(sanitize_html(trim($q['option_d'] ?? ''))) : '';
 
+        // --- Gujarati Inputs (Process Images) ---
+        $question_text_guj = process_inline_images(sanitize_html(trim($q['question_text_guj'] ?? '')));
+        $option_a_guj = $is_mcq ? process_inline_images(sanitize_html(trim($q['option_a_guj'] ?? ''))) : '';
+        $option_b_guj = $is_mcq ? process_inline_images(sanitize_html(trim($q['option_b_guj'] ?? ''))) : '';
+        $option_c_guj = $is_mcq ? process_inline_images(sanitize_html(trim($q['option_c_guj'] ?? ''))) : '';
+        $option_d_guj = $is_mcq ? process_inline_images(sanitize_html(trim($q['option_d_guj'] ?? ''))) : '';
+        $explanation_guj = process_inline_images(sanitize_html(trim($q['explanation_guj'] ?? '')));
+
         // --- Correct Option ---
         $correct_option = $is_mcq ? strtoupper(trim($q['correct_option'] ?? '')) : null;
         if (empty($correct_option))
@@ -283,6 +293,7 @@ try {
         // --- Explanation & Video ---
         $explanation = process_inline_images(sanitize_html(trim($q['explanation'] ?? '')));
         $video_url = filter_var(trim($q['video_solution_url'] ?? ''), FILTER_SANITIZE_URL) ?: null;
+        $solution_image = trim($q['solution_image'] ?? '') ?: null;
 
         // --- Insert ---
         $stmt->execute([
@@ -303,6 +314,13 @@ try {
             $correct_option,
             $explanation,
             $video_url,
+            $question_text_guj,
+            $option_a_guj,
+            $option_b_guj,
+            $option_c_guj,
+            $option_d_guj,
+            $explanation_guj,
+            $solution_image,
             $created_by
         ]);
         $success_count++;

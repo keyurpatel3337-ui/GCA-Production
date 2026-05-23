@@ -53,13 +53,13 @@ if ($filters['course_id'] && $filters['division_id']) {
         $params = [$filters['date'], $filters['course_id'], $filters['division_id'], $filters['group_id'], $filters['group_id']];
 
         if ($filters['course_id'] === '11th') {
-            $course_condition = "s.course_id IN (1, 2)";
+            $course_condition = "s.course_id = 1";
             $params = [$filters['date'], $filters['division_id'], $filters['group_id'], $filters['group_id']];
         } elseif ($filters['course_id'] === '12th') {
-            $course_condition = "s.course_id IN (4, 5)";
+            $course_condition = "s.course_id = 2";
             $params = [$filters['date'], $filters['division_id'], $filters['group_id'], $filters['group_id']];
         } elseif ($filters['course_id'] === 'Reneet') {
-            $course_condition = "s.course_id = 6";
+            $course_condition = "s.course_id = 3";
             $params = [$filters['date'], $filters['division_id'], $filters['group_id'], $filters['group_id']];
         }
 

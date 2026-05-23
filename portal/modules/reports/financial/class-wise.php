@@ -50,11 +50,11 @@ $params = [$from_date, $to_date];
 
 if (!empty($course_filter)) {
     if ($course_filter === '11th') {
-        $sql .= " AND r.course_id IN (1, 2) ";
+        $sql .= " AND r.course_id = 1 ";
     } elseif ($course_filter === '12th') {
-        $sql .= " AND r.course_id IN (4, 5) ";
+        $sql .= " AND r.course_id = 2 ";
     } elseif ($course_filter === 'Reneet') {
-        $sql .= " AND r.course_id = 6 ";
+        $sql .= " AND r.course_id = 3 ";
     } else {
         $sql .= " AND r.course_id = ? ";
         $params[] = $course_filter;

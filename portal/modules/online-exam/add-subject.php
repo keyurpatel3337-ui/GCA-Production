@@ -68,7 +68,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             <select name="standard_id" class="form-control border-0 shadow-sm" style="background: #f8f9fa; border-radius: 10px; height: 45px;">
                                 <option value="0">General / All Standards</option>
                                 <?php
-                                $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid ASC");
+                                $standards = $conn->query("SELECT stdid, stdtext FROM standard WHERE stdtext NOT LIKE '%Merged%' ORDER BY stdid ASC");
                                 while ($std = $standards->fetch()) {
                                     $selected = ($subject['standard_id'] == $std['stdid']) ? 'selected' : '';
                                     echo "<option value='{$std['stdid']}' $selected>{$std['stdtext']}</option>";

@@ -67,22 +67,6 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 ?>
 
 <main class="app-main">
-    <div class="app-content-header">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-sm-6">
-                    <h3 class="mb-0 text-dark font-weight-bold">Manage <span class="text-primary">Exams</span></h3>
-                    <div class="small text-muted font-weight-bold mt-1"><i class="fas fa-clock mr-1 text-primary"></i> Server Time: <?= date('d M Y, h:i A') ?> (<?= date_default_timezone_get() ?>)</div>
-                </div>
-                <div class="col-sm-6 text-end">
-                    <a href="exam-setup.php" class="btn btn-primary shadow-sm px-4" style="border-radius: 12px; font-weight: 600;">
-                        <i class="fas fa-plus mr-2" style="font-size: 0.75rem;"></i> Create New Exam
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="app-content pt-4">
         <div class="container-fluid">
             
@@ -152,6 +136,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px;">
                 <div class="card-header bg-white border-0 py-4 d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-file-alt mr-2 text-primary"></i> Generated Question Papers</h5>
+                    <a href="exam-setup.php" class="btn btn-primary shadow-sm px-4" style="border-radius: 12px; font-weight: 600;">
+                        <i class="fas fa-plus mr-2" style="font-size: 0.75rem;"></i> Create New Exam
+                    </a>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">

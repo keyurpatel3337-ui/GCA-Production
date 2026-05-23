@@ -19,9 +19,13 @@ $sql = "SELECT e.*,
         (SELECT id FROM tbl_oes_student_exams WHERE exam_id = e.id AND student_id = ?) as attempt_id,
         (SELECT status FROM tbl_oes_student_exams WHERE exam_id = e.id AND student_id = ?) as attempt_status
         FROM tbl_oes_exams e 
-        WHERE e.id = ? AND e.status IN ('Scheduled', 'Live') AND e.start_time <= NOW() AND e.end_time >= NOW()";
+        WHERE e.id = ? 
+        AND e.status IN ('Scheduled', 'Live') 
+        AND e.start_time <= NOW() 
+        AND e.end_time >= NOW()
+        AND (e.student_id IS NULL OR e.student_id = ?)";
 $stmt = $conn->prepare($sql);
-$stmt->execute([$student_id, $student_id, $exam_id]);
+$stmt->execute([$student_id, $student_id, $exam_id, $student_id]);
 $exam = $stmt->fetch();
 
 if (!$exam) {
@@ -156,9 +160,23 @@ $page_title = "Exam: " . $exam['title'];
         <div class="col-md-9 question-panel">
             <div class="max-w-4xl mx-auto" id="question-container">
                 <div class="question-card">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <span id="question-number" class="question-badge">Question 1</span>
-                        <span id="question-marks" class="marks-badge">1.0 Marks</span>
+                    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap" style="gap: 15px;">
+                        <div>
+                            <span id="question-number" class="question-badge mr-2">Question 1</span>
+                            <span id="question-marks" class="marks-badge">1.0 Marks</span>
+                        </div>
+                        
+                        <!-- Language Toggle -->
+                        <div class="d-flex align-items-center" style="gap: 8px;">
+                            <div class="btn-group btn-group-toggle shadow-sm" data-toggle="buttons" style="background: #f1f5f9; padding: 3px; border-radius: 20px;">
+                                <label class="btn btn-sm btn-light active" id="lbl-lang-en" style="border-radius: 18px; font-weight: 600; padding: 4px 15px; font-size: 0.8rem; border: none; cursor: pointer;">
+                                    <input type="radio" name="exam_lang" id="lang-en" autocomplete="off" checked onclick="toggleExamLanguage('en')"> English
+                                </label>
+                                <label class="btn btn-sm btn-light" id="lbl-lang-gu" style="border-radius: 18px; font-weight: 600; padding: 4px 15px; font-size: 0.8rem; border: none; cursor: pointer;">
+                                    <input type="radio" name="exam_lang" id="lang-gu" autocomplete="off" onclick="toggleExamLanguage('gu')"> ગુજરાતી
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     
                     <div id="question-body" class="question-body">
@@ -452,24 +470,40 @@ $page_title = "Exam: " . $exam['title'];
             }
         }
 
+        let currentLang = 'en';
+
+        function toggleExamLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('lbl-lang-en').classList.remove('active');
+            document.getElementById('lbl-lang-gu').classList.remove('active');
+            document.getElementById(`lbl-lang-${lang}`).classList.add('active');
+            loadQuestion(currentIdx);
+        }
+
         function loadQuestion(idx) {
             currentIdx = idx;
             const q = questions[idx];
             
             document.getElementById('question-number').textContent = `Question ${idx + 1}`;
             document.getElementById('question-marks').textContent = `${q.marks} Marks`;
-            document.getElementById('question-body').innerHTML = q.question_text;
+            
+            let qText = (currentLang === 'gu' && q.question_text_guj) ? q.question_text_guj : q.question_text;
+            document.getElementById('question-body').innerHTML = qText;
             
             const options = ['A', 'B', 'C', 'D'];
             const container = document.getElementById('options-container');
-            container.innerHTML = `<div class="row">` + options.map(opt => `
+            container.innerHTML = `<div class="row">` + options.map(opt => {
+                const optKey = 'option_' + opt.toLowerCase();
+                const optKeyGuj = 'option_' + opt.toLowerCase() + '_guj';
+                const oText = (currentLang === 'gu' && q[optKeyGuj]) ? q[optKeyGuj] : q[optKey];
+                return `
                 <div class="col-md-6 mb-3">
                     <div onclick="selectOption('${opt}')" id="opt-${opt}" class="option-item ${responses[q.id]?.selected == opt ? 'selected' : ''}" style="cursor: pointer; margin-bottom: 0;">
                         <div class="option-letter">${opt}</div>
-                        <div class="option-text">${q['option_' + opt.toLowerCase()]}</div>
+                        <div class="option-text">${oText}</div>
                     </div>
                 </div>
-            `).join('') + `</div>`;
+            `}).join('') + `</div>`;
 
             updatePalette();
             

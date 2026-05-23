@@ -42,11 +42,13 @@ try {
     }
     $whereClause = "WHERE " . implode(' AND ', $whereConditions);
 
-    $sql = "SELECT p.*, r.surname, r.student_name, IFNULL(r.fathers_name, '') as fathers_name, r.gender, c.course_name as current_class
+    $sql = "SELECT p.*, r.surname, r.student_name, IFNULL(r.fathers_name, '') as fathers_name, r.gender, 
+                   CONCAT(c.course_name, IF(m.medium_name IS NOT NULL AND m.medium_name != '', CONCAT(' - ', m.medium_name), '')) as current_class
             FROM tbl_payments p
             JOIN tbl_gm_std_registration r ON p.student_id = r.id
             LEFT JOIN tbl_enrolled_students es ON es.registration_id = r.id AND es.is_active = 1
             LEFT JOIN tbl_courses c ON r.course_id = c.id
+            LEFT JOIN tbl_medium m ON r.medium_id = m.id
             $whereClause ORDER BY p.payment_date ASC";
     $payments = $dbOps->customSelect($sql, $params);
     $totalCollected = array_sum(array_column($payments, 'amount'));

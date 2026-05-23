@@ -41,11 +41,11 @@ try {
 
     if (!empty($course_filter)) {
         if ($course_filter === '11th') {
-            $whereConditions[] = "r.course_id IN (1, 2)";
+            $whereConditions[] = "r.course_id = 1";
         } elseif ($course_filter === '12th') {
-            $whereConditions[] = "r.course_id IN (4, 5)";
+            $whereConditions[] = "r.course_id = 2";
         } elseif ($course_filter === 'Reneet') {
-            $whereConditions[] = "r.course_id = 6";
+            $whereConditions[] = "r.course_id = 3";
         } else {
             $whereConditions[] = "r.course_id = ?";
             $params[] = $course_filter;
@@ -66,11 +66,14 @@ try {
     $sql = "SELECT 
                 p.payment_date, p.amount, p.payment_mode, p.transaction_id, p.fee_component,
                 CONCAT(r.surname, ' ', r.student_name, ' ', IFNULL(r.fathers_name, '')) as student_full_name,
-                c.course_name
+                c.course_name,
+                m.medium_name,
+                CONCAT(c.course_name, ' - ', m.medium_name) as standard_display
             FROM tbl_payments p
             JOIN tbl_gm_std_registration r ON p.student_id = r.id
             LEFT JOIN tbl_enrolled_students es ON es.registration_id = r.id AND es.is_active = 1
             LEFT JOIN tbl_courses c ON r.course_id = c.id
+            LEFT JOIN tbl_medium m ON r.medium_id = m.id
             WHERE p.receipt_no = '0' AND $whereSql
             ORDER BY p.payment_date DESC, p.id DESC";
 
@@ -141,7 +144,7 @@ try {
                 <td width="5%" style="text-align:center;">' . $i++ . '</td>
                 <td width="10%">' . date('d-m-Y', strtotime($row['payment_date'])) . '</td>
                 <td width="25%">' . htmlspecialchars($row['student_full_name'] ?? '') . '</td>
-                <td width="15%">' . htmlspecialchars($row['course_name'] ?? '') . '</td>
+                <td width="15%">' . htmlspecialchars($row['standard_display'] ?? $row['course_name'] ?? '') . '</td>
                 <td width="15%">' . formatFeeKey($row['fee_component']) . '</td>
                 <td width="15%">' . strtoupper($row['payment_mode']) . '</td>
                 <td width="15%" style="text-align:right; font-weight:bold; color:#dc3545;">&#8377;' . formatIndianCurrency($row['amount']) . '</td>

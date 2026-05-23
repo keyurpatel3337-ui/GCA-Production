@@ -33,7 +33,28 @@ if ($response && isset($response['success']) && $response['success']) {
     $wallet_api_url = defined('WALLET_API_URL') ? WALLET_API_URL : null;
     $wallet_balance = 0;
     if ($wallet_api_url) {
-        $ch = curl_init($wallet_api_url . '/balance/check.php?student_id=' . $active_student_id);
+        $wallet_student_id = $active_student_id;
+        if (!empty($enrollment_info['enrollment_no'])) {
+            $wallet_student_id = $enrollment_info['enrollment_no'];
+        } else {
+            try {
+                if (!isset($conn)) {
+                    require_once DB_CONNECT_FILE;
+                }
+                if (isset($conn)) {
+                    $stmt = $conn->prepare("SELECT enrollment_no FROM tbl_enrolled_students WHERE registration_id = ?");
+                    $stmt->execute([$active_student_id]);
+                    $en_no = $stmt->fetchColumn();
+                    if (!empty($en_no)) {
+                        $wallet_student_id = $en_no;
+                    }
+                }
+            } catch (Exception $e) {
+                // Fallback to active_student_id
+            }
+        }
+
+        $ch = curl_init($wallet_api_url . '/balance/check.php?student_id=' . $wallet_student_id);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['X-API-KEY: ' . (defined('GCA_PORTAL_KEY') ? GCA_PORTAL_KEY : '')]);

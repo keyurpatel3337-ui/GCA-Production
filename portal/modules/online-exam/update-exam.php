@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $description = $_POST['description'];
     $standard_id = (int)$_POST['standard_id']; // Added
+    $group_id = !empty($_POST['group_id']) ? (int)$_POST['group_id'] : null;
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
     $duration_mins = (int)$_POST['duration_mins'];
@@ -45,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 title = ?, 
                                 description = ?, 
                                 standard_id = ?, 
+                                group_id = ?,
                                 start_time = ?, 
                                 end_time = ?, 
                                 duration_mins = ?, 
@@ -53,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 shuffle_questions = ?, 
                                 display_result_immediately = ? 
                                 WHERE id = ?");
-        $stmt->execute([$title, $description, $standard_id, $start_time, $end_time, $duration_mins, $total_marks, $exam_mode, $shuffle_questions, $display_result_immediately, $exam_id]);
+        $stmt->execute([$title, $description, $standard_id, $group_id, $start_time, $end_time, $duration_mins, $total_marks, $exam_mode, $shuffle_questions, $display_result_immediately, $exam_id]);
 
         // 2. Resync Exam Questions
         $conn->prepare("DELETE FROM tbl_oes_exam_questions WHERE exam_id = ?")->execute([$exam_id]);

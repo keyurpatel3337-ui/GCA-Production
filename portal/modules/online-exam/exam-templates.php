@@ -34,16 +34,6 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 ?>
 
 <main class="app-main">
-    <div class="app-content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="mb-0 text-dark font-weight-bold">Exam <span class="text-primary">Templates</span></h3>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="app-content pt-4">
         <div class="container-fluid">
             

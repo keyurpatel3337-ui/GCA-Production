@@ -58,7 +58,6 @@
     border-radius: 0 0 var(--oes-radius) var(--oes-radius);
     font-family: 'Inter', sans-serif;
     font-size: 16px;
-    min-height: inherit;
 }
 
 .ql-snow .ql-picker.ql-expanded {

@@ -580,8 +580,8 @@ $full_name = trim(($receipts[0]['surname'] ?? '') . ' ' . ($receipts[0]['student
                     <span class="label">Standard</span>
                     <span class="colon">:</span>
                     <span><?php
-                    $display_std = $receipt['standard'] ?? $receipt['course_name'] ?? 'N/A';
-                    if ((isset($receipt['course_id']) && $receipt['course_id'] == 6) || strtolower(trim((string) $display_std)) === '13' || strtolower(trim((string) $display_std)) === 're-neet') {
+                    $display_std = $receipt['course_name'] ?? $receipt['standard'] ?? 'N/A';
+                    if (($receipt['course_id'] ?? 0) == 3 || strtolower(trim((string) $display_std)) === 're-neet') {
                         $display_std = 'Re-Neet';
                     }
                     echo htmlspecialchars($display_std);
@@ -619,7 +619,7 @@ $full_name = trim(($receipts[0]['surname'] ?? '') . ' ' . ($receipts[0]['student
                     <span class="colon">:</span>
                     <span><?php echo htmlspecialchars($receipt['academic_year'] ?? 'N/A'); ?></span>
                 </div>
-                <?php if (($receipt['course_id'] ?? 0) != 6): ?>
+                <?php if (($receipt['course_id'] ?? 0) != 3): ?>
                     <div class="meta-item">
                         <span class="label">Term</span>
                         <span class="colon">:</span>
@@ -737,7 +737,7 @@ $full_name = trim(($receipts[0]['surname'] ?? '') . ' ' . ($receipts[0]['student
                 </div>
             </div>
 
-            <?php if (($receipt['standard'] == '11' || $receipt['standard'] == 11) && in_array(($receipt['course_id'] ?? null), [1, 2, '1', '2'])): ?>
+            <?php if (in_array(($receipt['course_id'] ?? null), [1, '1'])): ?>
                 <div style="margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 10px;">
                     <h4
                         style="background: #000; color: #fff; padding: 2px 5px; display: inline-block; margin-bottom: 10px; font-size: 13px;">
@@ -766,7 +766,7 @@ $full_name = trim(($receipts[0]['surname'] ?? '') . ' ' . ($receipts[0]['student
                         </ul>
                     </div>
                 </div>
-            <?php elseif (($receipt['course_id'] ?? null) == 6 || ($receipt['course_id'] ?? null) == '6'): ?>
+            <?php elseif (($receipt['course_id'] ?? null) == 3): ?>
                 <div style="margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 10px;">
                     <h4 style="text-decoration: underline; margin-bottom: 8px; font-size: 13px;">Rules and fees policy are as
                         under :</h4>

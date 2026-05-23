@@ -126,21 +126,6 @@ include PORTAL_INCLUDE_PATH . 'header.php';
 <?php include PORTAL_INCLUDE_PATH . 'sidebar.php'; ?>
 
 <main class="app-main">
-    <div class="app-content-header">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-sm-6">
-                    <h3 class="mb-0 font-weight-bold">Paper <span class="text-primary">Preview</span> Studio</h3>
-                </div>
-                <div class="col-sm-6 text-end">
-                    <a href="manage-exams.php" class="btn btn-outline-secondary btn-sm" style="border-radius: 8px;">
-                        <i class="fas fa-arrow-left mr-1"></i> Back to Exams
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="app-content pt-3">
         <div class="container-fluid preview-container">
             
@@ -150,7 +135,6 @@ include PORTAL_INCLUDE_PATH . 'header.php';
                     <div class="d-flex align-items-center gap-3">
                         <span class="small text-muted"><i class="fas fa-graduation-cap mr-1"></i> <?= htmlspecialchars($exam['stdtext'] ?: 'N/A') ?></span>
                         <span class="small text-muted"><i class="fas fa-star mr-1"></i> <?= $exam['total_marks'] ?> Marks</span>
-                        <span class="status-badge"><i class="fas fa-magic mr-1"></i> AI Optimized Layout</span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
@@ -167,6 +151,9 @@ include PORTAL_INCLUDE_PATH . 'header.php';
                     </a>
                     <a href="#" id="final-print-btn" target="_blank" class="btn btn-print shadow-sm">
                         <i class="fas fa-print mr-2"></i> Print Paper
+                    </a>
+                    <a href="manage-exams.php" class="btn btn-outline-secondary shadow-sm" style="border-radius: 10px; font-weight: 600;">
+                        <i class="fas fa-arrow-left mr-1"></i> Back to Exams
                     </a>
                 </div>
             </div>

@@ -29,7 +29,7 @@ try {
                 CONCAT(r.surname, ' ', r.student_name) as student_name,
                 r.mob as mobile,
                 r.fathers_name as father_name,
-                c.course_name as current_class,
+                CONCAT(c.course_name, IF(m.medium_name IS NOT NULL AND m.medium_name != '', CONCAT(' - ', m.medium_name), '')) as current_class,
                 g.group_name,
                 COALESCE(sfa.pending_amount, 0) as pending_amount,
                 sfa.due_date,
@@ -38,6 +38,7 @@ try {
             JOIN tbl_gm_std_registration r ON es.registration_id = r.id
             LEFT JOIN tbl_group g ON r.group_id = g.id
             LEFT JOIN tbl_courses c ON r.course_id = c.id
+            LEFT JOIN tbl_medium m ON r.medium_id = m.id
             LEFT JOIN tbl_student_fee_allocation sfa ON es.registration_id = sfa.student_id
             WHERE es.is_active = 1
             AND COALESCE(sfa.pending_amount, 0) > 0

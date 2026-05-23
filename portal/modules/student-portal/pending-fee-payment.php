@@ -19,7 +19,7 @@ $fee_component = $_REQUEST['component'] ?? '';
 $installment_id = isset($_REQUEST['installment_id']) ? intval($_REQUEST['installment_id']) : null;
 
 // Validate fee component
-if (!in_array($fee_component, ['school_fee', 'trust_facilities_fee', 'tuition_fee_part2', 'hostel_security', 'transport_fee'])) {
+if (!in_array($fee_component, ['school_fee', 'trust_facilities_fee', 'tuition_fee_part2', 'transport_fee'])) {
     set_flash_message('error', "Invalid fee component");
     header('Location: ../dashboard/student_dashboard.php');
     exit;

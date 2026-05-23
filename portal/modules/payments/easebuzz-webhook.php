@@ -52,8 +52,15 @@ $payment_type = $webhook_data['udf2'] ?? '';
 $transaction_id = $webhook_data['udf3'] ?? '';
 $installment_id = $webhook_data['udf4'] ?? ''; // Installment ID if present
 $addedon = $webhook_data['addedon'] ?? date('Y-m-d H:i:s');
-$payment_date_db = date('Y-m-d H:i:s', strtotime($addedon));
-$payment_date_formatted = date('d-M-Y', strtotime($addedon));
+// Convert Easebuzz UTC timestamp to the system's local timezone (Asia/Kolkata)
+if (!empty($addedon) && strpos($addedon, 'Z') === false && strpos($addedon, '+') === false && stripos($addedon, 'UTC') === false && stripos($addedon, 'GMT') === false) {
+    $addedon_parsed = $addedon . ' UTC';
+} else {
+    $addedon_parsed = $addedon;
+}
+$payment_date_db = date('Y-m-d H:i:s', strtotime($addedon_parsed));
+$payment_date_formatted = date('d-M-Y', strtotime($addedon_parsed));
+
 
 logWebhookData("EaseBuzz Webhook Incoming | TxnID: $txnid | Status: $status | AddedOn: $addedon", $webhook_data);
 
@@ -123,13 +130,17 @@ try {
     $stmt_check = $conn->prepare("SELECT id FROM tbl_payments WHERE transaction_id = ? LIMIT 1");
     $stmt_check->execute([$transaction_id ?: $txnid]);
     if ($stmt_check->fetch()) {
-        $conn->rollBack();
-        logWebhookData("Webhook Skip - Transaction already processed into tbl_payments", null, 'INFO');
-        
+        // Mark webhook as received in tbl_payments
+        $conn->prepare("UPDATE tbl_payments SET webhook_received = 1, webhook_received_at = NOW() WHERE transaction_id = ?")
+             ->execute([$transaction_id ?: $txnid]);
+             
         // Fix Order status if it was stuck
         $conn->prepare("UPDATE tbl_payment_orders SET status = 'completed', completed_at = NOW() WHERE (transaction_id = ? OR gateway_order_id = ?) AND status != 'completed'")
              ->execute([$transaction_id ?: $txnid, $txnid]);
              
+        $conn->commit();
+        logWebhookData("Webhook Skip - Transaction already processed into tbl_payments. Marked webhook received.", null, 'INFO');
+        
         echo json_encode(['status' => 'success', 'message' => 'Already processed']);
         exit;
     }
@@ -224,9 +235,18 @@ try {
                             $payment_type_label = 'School Fee';
                             break;
                         case 'MST':
-                            if (in_array($webhook_data['udf4'] ?? '', ['transport_fee', 'hostel_fee', 'hostel_security'])) {
-                                $fee_component = $webhook_data['udf4'];
-                                $payment_type_label = ucwords(str_replace('_', ' ', $fee_component));
+                            $udf4_lower = strtolower($webhook_data['udf4'] ?? '');
+                            if (strpos($udf4_lower, 'transport') !== false) {
+                                $fee_component = 'transport_fee';
+                                $payment_type_label = 'Transport Fee';
+                            } elseif (strpos($udf4_lower, 'hostel') !== false) {
+                                if (strpos($udf4_lower, 'security') !== false) {
+                                    $fee_component = 'hostel_security';
+                                    $payment_type_label = 'Hostel Security';
+                                } else {
+                                    $fee_component = 'hostel_fee';
+                                    $payment_type_label = 'Hostel Fee';
+                                }
                             } else {
                                 $fee_component = 'trust_facilities_fee';
                                 $payment_type_label = 'Trust Facilities Fee';

@@ -124,13 +124,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['is_student_login'] = true;
 
                 // Send notifications
-                $student_data = $dbOps->selectOne('tbl_gm_std_registration', ['CONCAT(surname, " ", student_name) as name', 'mob', 'email'], ['id' => $student_id]);
+                $student_data = $dbOps->selectOne('tbl_gm_std_registration', ['student_name as name', 'mob', 'email'], ['id' => $student_id]);
 
                 if ($student_data) {
+                    $s_first_name = !empty($student_data['name']) ? trim($student_data['name']) : 'Student';
                     // Send payment confirmation notifications
                     try {
                         $notification_data = [
-                            'student_name' => $student_data['name'],
+                            'student_name' => $s_first_name,
                             'fee_type' => $fee_label,
                             'amount' => '₹' . formatIndianCurrency($paid_amount),
                             'receipt_no' => $receipt_no,
@@ -141,14 +142,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         // Use the combined notification helper which now handles WhatsApp-to-Email fallback
                         if (function_exists('sendNotification')) {
                             sendNotification($conn, 'fee_payment_success', [
-                                'name' => $student_data['name'],
+                                'name' => $s_first_name,
                                 'mobile' => $student_data['mob'],
                                 'email' => $student_data['email']
                             ], $notification_data);
                         } else {
                             // Fallback to direct email if sendNotification is not available
                             if (function_exists('sendEmailTemplate') && !empty($student_data['email'])) {
-                                sendEmailTemplate($conn, 'email_token_fee_success', $student_data['email'], $student_data['name'], $notification_data);
+                                sendEmailTemplate($conn, 'email_token_fee_success', $student_data['email'], $s_first_name, $notification_data);
                             }
                         }
                     } catch (Exception $notif_error) {

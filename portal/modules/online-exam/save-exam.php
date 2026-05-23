@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $description = $_POST['description'];
     $standard_id = (int)$_POST['standard_id']; // Added
+    $group_id = !empty($_POST['group_id']) ? (int)$_POST['group_id'] : null;
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
     $duration_mins = (int)$_POST['duration_mins'];
@@ -41,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // 1. Insert Exam (Included standard_id and exam_mode)
-        $stmt = $conn->prepare("INSERT INTO tbl_oes_exams (title, description, standard_id, start_time, end_time, duration_mins, total_marks, exam_mode, shuffle_questions, display_result_immediately, status, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Scheduled', ?)");
-        $stmt->execute([$title, $description, $standard_id, $start_time, $end_time, $duration_mins, $total_marks, $exam_mode, $shuffle_questions, $display_result_immediately, $created_by]);
+        $stmt = $conn->prepare("INSERT INTO tbl_oes_exams (title, description, standard_id, group_id, start_time, end_time, duration_mins, total_marks, exam_mode, shuffle_questions, display_result_immediately, status, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Scheduled', ?)");
+        $stmt->execute([$title, $description, $standard_id, $group_id, $start_time, $end_time, $duration_mins, $total_marks, $exam_mode, $shuffle_questions, $display_result_immediately, $created_by]);
         $exam_id = $conn->lastInsertId();
 
         // 2. Insert Exam Questions

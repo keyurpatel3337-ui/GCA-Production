@@ -20,7 +20,21 @@ if (!isset($_SESSION['is_student_login']) || $_SESSION['is_student_login'] !== t
 $user_id = $_SESSION['user_id'] ?? $_SESSION['student_id'] ?? '';
 $action = $_GET['action'] ?? '';
 
-error_log("Wallet Action Triggered: Action=$action, UserID=$user_id");
+// Fetch student's enrollment number from registration ID ($user_id)
+$enrollment_no = '';
+try {
+    require_once DB_CONNECT_FILE;
+    if (isset($conn)) {
+        $stmt = $conn->prepare("SELECT enrollment_no FROM tbl_enrolled_students WHERE registration_id = ?");
+        $stmt->execute([$user_id]);
+        $enrollment_no = $stmt->fetchColumn();
+    }
+} catch (Exception $e) {
+    error_log("Failed to fetch enrollment number in wallet-actions: " . $e->getMessage());
+}
+$wallet_student_id = !empty($enrollment_no) ? $enrollment_no : $user_id;
+
+error_log("Wallet Action Triggered: Action=$action, UserID=$user_id, EnrollmentNo=$wallet_student_id");
 
 header('Content-Type: application/json');
 
@@ -41,6 +55,7 @@ function callWalletAPI($endpoint, $method = 'GET', $data = [])
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
     if ($method === 'POST') {
         curl_setopt($ch, CURLOPT_POST, true);
@@ -95,7 +110,7 @@ if ($action === 'topup') {
     }
 
     $response = callWalletAPI('/topup/initiate.php', 'POST', [
-        'student_id' => $user_id,
+        'student_id' => $wallet_student_id,
         'amount' => $amount
     ]);
 
@@ -110,7 +125,7 @@ if ($action === 'topup') {
     }
 
     $response = callWalletAPI('/wallet/update-pin.php', 'POST', [
-        'student_id' => $user_id,
+        'student_id' => $wallet_student_id,
         'pin' => $pin
     ]);
 

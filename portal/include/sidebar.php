@@ -42,20 +42,32 @@ elseif (hasRole(ROLE_WEBSITE_ADMIN)) {
     $dashboard_link = $dashboard_prefix . 'website_admin_dashboard.php';
 }
 elseif (hasRole(ROLE_MAINTENANCE)) {
-    $dashboard_link = $modules_prefix . 'dashboard/maintenance_dashboard.php';
+    $dashboard_link = $dashboard_prefix . 'maintenance_dashboard.php';
 }
 elseif (hasRole(ROLE_RECEPTION)) {
-    $dashboard_link = $modules_prefix . 'dashboard/reception_dashboard.php';
+    $dashboard_link = $dashboard_prefix . 'reception_dashboard.php';
 }
 elseif (hasRole(ROLE_ESTABLISHMENT)) {
-    $dashboard_link = $modules_prefix . 'dashboard/establishment_dashboard.php';
+    $dashboard_link = $dashboard_prefix . 'establishment_dashboard.php';
 }
 
 elseif (hasRole(ROLE_WALLET_MANAGER)) {
-    $dashboard_link = $modules_prefix . 'dashboard/wallet_manager_dashboard.php';
+    $dashboard_link = $dashboard_prefix . 'wallet_manager_dashboard.php';
 }
 elseif (hasRole(ROLE_COMPUTER_OPERATOR)) {
-    $dashboard_link = $modules_prefix . 'dashboard/computer_operator_dashboard.php';
+    $dashboard_link = $dashboard_prefix . 'computer_operator_dashboard.php';
+}
+elseif (hasRole(ROLE_DEPT_HEAD)) {
+    $dashboard_link = $dashboard_prefix . 'dept_head_dashboard.php';
+}
+elseif (hasRole(ROLE_ASSISTANT_TEACHER)) {
+    $dashboard_link = $dashboard_prefix . 'assistant_teacher_dashboard.php';
+}
+elseif (hasRole(ROLE_TEACHER)) {
+    $dashboard_link = $dashboard_prefix . 'teacher_dashboard.php';
+}
+elseif (hasRole(ROLE_OES_DATA_ENTRY_OPERATOR)) {
+    $dashboard_link = $dashboard_prefix . 'oes_data_entry_dashboard.php';
 }
 elseif (isset($_SESSION['is_parent_login']) && $_SESSION['is_parent_login'] === true) {
     $dashboard_link = $modules_prefix . 'parent-portal/dashboard.php';
@@ -121,12 +133,40 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                             <li class="nav-item"><a href="<?php echo $students_prefix; ?>direct-admission-upload.php" class="nav-link"><i class="fas fa-user-check"></i><p>Direct Admission (12th)</p></a></li>
                         </ul>
                     </li>
+                    <!-- Online Exam -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-laptop-code"></i>
+                            <p>Online Exam<i class="nav-arrow fas fa-angle-right"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"><a href="<?php echo $portal_root; ?>modules/online-exam/index.php" class="nav-link"><i class="fas fa-plus-circle"></i><p>Create Question</p></a></li>
+                            <li class="nav-item"><a href="<?php echo $portal_root; ?>modules/online-exam/question-bank.php" class="nav-link"><i class="fas fa-university"></i><p>Question Bank</p></a></li>
+                        </ul>
+                    </li>
                     <!-- Dynamic WhatsApp -->
                     <li class="nav-item">
                         <a href="<?php echo $students_prefix; ?>send-whatsapp-dynamic.php" class="nav-link">
                             <i class="nav-icon fab fa-whatsapp"></i>
                             <p>Send WhatsApp</p>
                         </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (hasRole(ROLE_OES_DATA_ENTRY_OPERATOR)): ?>
+                    <!-- ===== OES DATA ENTRY OPERATOR MENU ===== -->
+                    <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Exam Management</li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-laptop-code"></i>
+                            <p>Online Exam<i class="nav-arrow fas fa-angle-right"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"><a href="<?php echo $portal_root; ?>modules/online-exam/index.php" class="nav-link"><i class="fas fa-plus-circle"></i><p>Create Question</p></a></li>
+                            <li class="nav-item"><a href="<?php echo $portal_root; ?>modules/online-exam/question-bank.php" class="nav-link"><i class="fas fa-university"></i><p>Question Bank</p></a></li>
+                            <li class="nav-item"><a href="<?php echo $portal_root; ?>modules/online-exam/manage-chapters.php" class="nav-link"><i class="fas fa-bookmark"></i><p>Manage Chapters</p></a></li>
+                            <li class="nav-item"><a href="<?php echo $portal_root; ?>modules/online-exam/manage-topics.php" class="nav-link"><i class="fas fa-tag"></i><p>Manage Topics</p></a></li>
+                        </ul>
                     </li>
                 <?php endif; ?>
 
@@ -406,6 +446,14 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                                     class="nav-link"><i class="fas fa-wallet text-success"></i>
                                     <p>Wallet Deposit</p>
                                 </a></li>
+                            <?php if (hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_WALLET_MANAGER])): ?>
+                            <li class="nav-item">
+                                <a href="<?php echo $fees_prefix; ?>manage-wallet-accounts.php" class="nav-link">
+                                    <i class="fas fa-users-cog text-danger"></i>
+                                    <p>Manage Wallets</p>
+                                </a>
+                            </li>
+                            <?php endif; ?>
                             <li class="nav-item">
                                 <a href="<?php echo $payments_prefix; ?>gateway-logs.php" class="nav-link">
                                     <i class="fas fa-terminal text-primary"></i>
@@ -600,28 +648,6 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                         </a>
                     </li>
 
-                    <!-- Online Exam System -->
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-laptop-code text-primary"></i>
-                            <p>Online Exam<i class="nav-arrow fas fa-angle-right"></i></p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?php echo $modules_prefix; ?>online-exam/index.php" class="nav-link">
-                                    <i class="fas fa-plus"></i>
-                                    <p>Create Question</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo $modules_prefix; ?>online-exam/question-bank.php" class="nav-link">
-                                    <i class="fas fa-book"></i>
-                                    <p>Question Bank</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
                     <!-- Fee Management -->
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -720,7 +746,7 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                     </li>
 
                     <!-- Online Exam -->
-                    <?php if (hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])): ?>
+                    <?php if (hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER, ROLE_TEACHER])): ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-laptop-code"></i>
@@ -834,6 +860,40 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                                     class="nav-link"><i class="fas fa-user-times"></i>
                                     <p>Fee Defaulters</p>
                                 </a></li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (hasAnyRole([ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER, ROLE_TEACHER])): ?>
+                    <!-- ===== TEACHING STAFF MENU ===== -->
+                    <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Academic & Exam Management</li>
+
+                    <!-- Online Exam -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-laptop-code"></i>
+                            <p>Online Exam<i class="nav-arrow fas fa-angle-right"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"><a href="<?php echo $portal_root; ?>modules/online-exam/index.php" class="nav-link"><i class="fas fa-plus-circle"></i><p>Create Question</p></a></li>
+                            <li class="nav-item"><a href="<?php echo $portal_root; ?>modules/online-exam/question-bank.php" class="nav-link"><i class="fas fa-university"></i><p>Question Bank</p></a></li>
+                            <?php if (hasAnyRole([ROLE_DEPT_HEAD, ROLE_TEACHER])): ?>
+                                <li class="nav-item"><a href="<?php echo $portal_root; ?>modules/online-exam/exam-setup.php" class="nav-link"><i class="fas fa-cog"></i><p>Exam Setup</p></a></li>
+                                <li class="nav-item"><a href="<?php echo $portal_root; ?>modules/online-exam/exam-templates.php" class="nav-link"><i class="fas fa-layer-group"></i><p>Exam Templates</p></a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
+
+                    <!-- Test Marks -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-clipboard-list"></i>
+                            <p>Test Marks<i class="nav-arrow fas fa-angle-right"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"><a href="<?php echo $test_marks_prefix; ?>index.php" class="nav-link"><i class="fas fa-list"></i><p>All Test Marks</p></a></li>
+                            <li class="nav-item"><a href="<?php echo $test_marks_prefix; ?>add.php" class="nav-link"><i class="fas fa-plus-circle"></i><p>Add Single</p></a></li>
+                            <li class="nav-item"><a href="<?php echo $test_marks_prefix; ?>bulk-upload.php" class="nav-link"><i class="fas fa-cloud-upload-alt"></i><p>Bulk Upload</p></a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -964,6 +1024,12 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                         <a href="<?php echo $reports_prefix; ?>financial/wallet-reports.php" class="nav-link">
                             <i class="nav-icon fas fa-file-invoice text-secondary"></i>
                             <p>Wallet Reports</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo $fees_prefix; ?>manage-wallet-accounts.php" class="nav-link">
+                            <i class="nav-icon fas fa-users-cog text-danger"></i>
+                            <p>Manage Wallets</p>
                         </a>
                     </li>
                 <?php endif; ?>

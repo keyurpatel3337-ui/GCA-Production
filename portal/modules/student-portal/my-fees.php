@@ -91,8 +91,8 @@ $tuition_part1_with_gst = $detailed_allocations['tuition_fee_part1']['gross_amou
 
 // For display, we show amount after scholarships/discounts (waived)
 $tuition_part2_after_discount = ($detailed_allocations['tuition_fee_part2']['gross_amount'] ?? 0) - ($detailed_allocations['tuition_fee_part2']['waived_amount'] ?? 0);
-$hostel_fee = $detailed_allocations['hostel_security']['gross_amount'] ?? 0;
-$hostel_required = isset($token_info['hostel_required']) && strtolower($token_info['hostel_required']) === 'yes';
+$hostel_fee = 0;
+$hostel_required = false;
 
 // Re-add variables needed for installment logic below
 $enrollment_datas = $dbOps->customSelect("SELECT enrollment_id FROM tbl_gm_std_registration WHERE id = ?", [$student_id]);
@@ -123,7 +123,7 @@ $school_fee_payment = mapToPaymentInfo($detailed_allocations['school_fee'] ?? nu
 $trust_fee_payment = mapToPaymentInfo($detailed_allocations['trust_facilities_fee'] ?? null);
 $tuition_part1_payment = mapToPaymentInfo($detailed_allocations['tuition_fee_part1'] ?? null);
 $tuition_part2_payment = mapToPaymentInfo($detailed_allocations['tuition_fee_part2'] ?? null);
-$hostel_fee_payment = mapToPaymentInfo($detailed_allocations['hostel_security'] ?? null);
+$hostel_fee_payment = null;
 // ------------------------------------------------------------------
 
 // Check for approved installment requests (Installments still need manual handling as helper doesn't detail them yet)

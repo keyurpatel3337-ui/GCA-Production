@@ -292,11 +292,11 @@ try {
                 // Course-based override MUST take priority over collection_timeline
                 $timeline = $transport_settings['collection_timeline'] ?? 'Term-wise';
 
-                if (in_array($course_id, [1, 2])) {
+                if (in_array($course_id, [1])) {
                     // Standard 11: always term-wise — Sem 1 = 7 months, Sem 2 = 6 months
                     $months = $is_sem2 ? $t2_m : $t1_m;
-                } elseif (in_array($course_id, [4, 5])) {
-                    // Standard 12: always 12 months annual
+                } elseif (in_array($course_id, [2, 3])) {
+                    // Standard 12 and Re-Neet: always 12 months annual
                     $months = $an_m;
                 } elseif ($timeline === 'Monthly') {
                     $months = 1; // Always 1 month for initial Monthly collection view

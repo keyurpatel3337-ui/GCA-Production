@@ -55,6 +55,7 @@ try {
                 CONCAT(r.surname, ' ', r.student_name, ' ', IFNULL(r.fathers_name, '')) as student_full_name,
                 c.course_name as current_class,
                 g.group_name,
+                m.medium_name,
                 t.term_name,
                 u.name as collected_by
             FROM tbl_payments p
@@ -62,6 +63,7 @@ try {
             LEFT JOIN tbl_enrolled_students es ON es.registration_id = r.id AND es.is_active = 1
             LEFT JOIN tbl_courses c ON r.course_id = c.id
             LEFT JOIN tbl_group g ON r.group_id = g.id
+            LEFT JOIN tbl_medium m ON r.medium_id = m.id
             LEFT JOIN tbl_term t ON p.term_id = t.id
             LEFT JOIN tbl_receipt_configuration rc ON p.receipt_config_id = rc.id
             LEFT JOIN tbl_users u ON p.created_by = u.id
@@ -226,18 +228,20 @@ try {
     <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
         <thead>
             <tr style="background-color:#333; color:#fff; font-weight:bold;">
-                <th width="5%" style="text-align:center;">S.No</th>
-                <th width="8%" style="text-align:center;">Receipt No</th>
-                <th width="8%" style="text-align:center;">Date</th>
-                <th width="15%">Student Name</th>
-                <th width="10%">Class/Group</th>
-                <th width="8%">Term</th>
+                <th width="4%" style="text-align:center;">S.No</th>
+                <th width="7%" style="text-align:center;">Receipt No</th>
+                <th width="7%" style="text-align:center;">Date</th>
+                <th width="13%">Student Name</th>
+                <th width="7%">Class</th>
+                <th width="7%">Group</th>
+                <th width="6%">Medium</th>
+                <th width="7%">Term</th>
                 <th width="8%">Payment Type</th>
-                <th width="7%" style="text-align:center;">Mode</th>
-                <th width="10%">Bank/Trans</th>
+                <th width="6%" style="text-align:center;">Mode</th>
+                <th width="9%">Bank/Trans</th>
                 <th width="7%" style="text-align:right;">Amount</th>
-                <th width="8%">Collected By</th>
-                <th width="7%">Remark</th>
+                <th width="6%">Collected By</th>
+                <th width="6%">Remark</th>
             </tr>
         </thead>
         <tbody>';
@@ -246,7 +250,7 @@ try {
     $totalAmount = 0;
 
     if (empty($receipts)) {
-        $html .= '<tr><td colspan="12" style="text-align:center;">No records found for selected period</td></tr>';
+        $html .= '<tr><td colspan="14" style="text-align:center;">No records found for selected period</td></tr>';
     } else {
         foreach ($receipts as $receipt) {
             $totalAmount += $receipt['amount'];
@@ -264,25 +268,27 @@ try {
 
             $html .= '
             <tr nobr="true">
-                <td width="5%" style="text-align:center;">' . $sno++ . '</td>
-                <td width="8%" style="text-align:center;">' . htmlspecialchars(($receipt['receipt_prefix'] ?? '') . $receipt['receipt_no']) . '</td>
-                <td width="8%" style="text-align:center;">' . date('d-m-Y', strtotime($receipt['payment_date'])) . '</td>
-                <td width="15%"><b>' . htmlspecialchars($receipt['student_full_name'] ?? '') . '</b></td>
-                <td width="10%">' . htmlspecialchars($receipt['current_class'] ?: '-' ?? '') . ' / ' . htmlspecialchars($receipt['group_name'] ?: '-' ?? '') . '</td>
-                <td width="8%">' . htmlspecialchars($receipt['term_name'] ?: '-' ?? '') . '</td>
+                <td width="4%" style="text-align:center;">' . $sno++ . '</td>
+                <td width="7%" style="text-align:center;">' . htmlspecialchars(($receipt['receipt_prefix'] ?? '') . $receipt['receipt_no']) . '</td>
+                <td width="7%" style="text-align:center;">' . date('d-m-Y', strtotime($receipt['payment_date'])) . '</td>
+                <td width="13%"><b>' . htmlspecialchars($receipt['student_full_name'] ?? '') . '</b></td>
+                <td width="7%">' . htmlspecialchars($receipt['current_class'] ?: '-' ?? '') . '</td>
+                <td width="7%">' . htmlspecialchars($receipt['group_name'] ?: '-' ?? '') . '</td>
+                <td width="6%">' . htmlspecialchars($receipt['medium_name'] ?: '-' ?? '') . '</td>
+                <td width="7%">' . htmlspecialchars($receipt['term_name'] ?: '-' ?? '') . '</td>
                 <td width="8%">' . htmlspecialchars($receipt['payment_type'] ?? '') . '</td>
-                <td width="7%" style="text-align:center;">' . strtoupper($receipt['payment_mode']) . '</td>
-                <td width="10%">' . $bankDetails . '</td>
+                <td width="6%" style="text-align:center;">' . strtoupper($receipt['payment_mode']) . '</td>
+                <td width="9%">' . $bankDetails . '</td>
                 <td width="7%" style="text-align:right; font-weight:bold;">' . formatIndianCurrency($receipt['amount']) . '</td>
-                <td width="8%">' . htmlspecialchars($receipt['collected_by'] ?: 'System' ?? '') . '</td>
-                <td width="7%"><small>' . htmlspecialchars($receipt['remarks'] ?: '-' ?? '') . '</small></td>
+                <td width="6%">' . htmlspecialchars($receipt['collected_by'] ?: 'System' ?? '') . '</td>
+                <td width="6%"><small>' . htmlspecialchars($receipt['remarks'] ?: '-' ?? '') . '</small></td>
             </tr>';
         }
     }
 
     $html .= '
             <tr style="background-color:#f0f0f0; font-weight:bold;">
-                <td colspan="9" style="text-align:right;">GRAND TOTAL</td>
+                <td colspan="11" style="text-align:right;">GRAND TOTAL</td>
                 <td style="text-align:right;">' . formatIndianCurrency($totalAmount) . '</td>
                 <td colspan="2"></td>
             </tr>

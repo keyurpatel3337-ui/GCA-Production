@@ -33,14 +33,18 @@ $perPage = 10;
 $currentPage = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $offset = ($currentPage - 1) * $perPage;
 
-$totalItems = $conn->query("SELECT COUNT(*) FROM tbl_subjects")->fetchColumn();
+$totalItems = $conn->query("SELECT COUNT(*) FROM tbl_subjects WHERE activated = 1 AND is_deleted = 0")->fetchColumn();
 $totalPages = ceil($totalItems / $perPage);
 
 // Fetch Subjects with Standard Info and Pagination
-$subjects = $conn->query("SELECT s.*, std.stdtext 
+$subjects = $conn->query("SELECT s.*, co.course_name AS general_standard,
+                         (SELECT COUNT(*) FROM tbl_oes_questions q WHERE q.subject_id = s.id AND q.standard_id = 1 AND q.status = 1) AS q_11th,
+                         (SELECT COUNT(*) FROM tbl_oes_questions q WHERE q.subject_id = s.id AND q.standard_id = 2 AND q.status = 1) AS q_12th,
+                         (SELECT COUNT(*) FROM tbl_oes_questions q WHERE q.subject_id = s.id AND q.standard_id = 3 AND q.status = 1) AS q_reneet
                          FROM tbl_subjects s 
-                         LEFT JOIN standard std ON s.standard_id = std.stdid 
-                         ORDER BY std.stdid ASC, s.subject_name ASC
+                         LEFT JOIN tbl_courses co ON s.standard_id = co.id 
+                         WHERE s.activated = 1 AND s.is_deleted = 0
+                         ORDER BY co.course_name ASC, s.subject_name ASC
                          LIMIT $perPage OFFSET $offset")->fetchAll();
 
 require_once PORTAL_PATH . 'common/pagination.php';
@@ -103,9 +107,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             <select id="filterStandard" class="form-select form-select-sm border-0 bg-light" style="width: 180px; border-radius: 10px; font-size: 0.85rem; height: 38px;">
                                 <option value="">All Standards</option>
                                 <?php
-                                $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid ASC");
-                                while ($std = $standards->fetch()) {
-                                    echo "<option value='".htmlspecialchars($std['stdtext'])."'>".htmlspecialchars($std['stdtext'])."</option>";
+                                $stds = $conn->query("SELECT id, course_name FROM tbl_courses WHERE is_active = 1 ORDER BY id ASC");
+                                while ($std = $stds->fetch()) {
+                                    echo "<option value='".htmlspecialchars($std['course_name'])."'>".htmlspecialchars($std['course_name'])."</option>";
                                 }
                                 ?>
                             </select>
@@ -130,6 +134,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                 <tr>
                                     <th class="px-4 py-3">Standard</th>
                                     <th class="py-3">Subject Name</th>
+                                    <th class="py-3 text-center">11th Qs</th>
+                                    <th class="py-3 text-center">12th Qs</th>
+                                    <th class="py-3 text-center">Re-Neet Qs</th>
                                     <th class="py-3">Status</th>
                                     <th class="text-end px-4 py-3">Actions</th>
                                 </tr>
@@ -138,9 +145,27 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                 <?php foreach ($subjects as $s): ?>
                                     <tr>
                                         <td class="px-4 align-middle">
-                                            <span class="badge badge-info"><?php echo htmlspecialchars($s['stdtext'] ?? 'General / All'); ?></span>
+                                            <span class="badge badge-info"><?php echo htmlspecialchars($s['general_standard'] ?? 'N/A'); ?></span>
                                         </td>
                                         <td class="align-middle font-weight-bold"><?php echo htmlspecialchars($s['subject_name']); ?></td>
+                                        <td class="align-middle text-center">
+                                            <?php $qc = (int)($s['q_11th'] ?? 0); ?>
+                                            <a href="question-bank.php?subject_id=<?php echo $s['id']; ?>&standard_id=1" class="text-decoration-none">
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(59,130,246,0.12);color:#2563eb' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:42px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
+                                            </a>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <?php $qc = (int)($s['q_12th'] ?? 0); ?>
+                                            <a href="question-bank.php?subject_id=<?php echo $s['id']; ?>&standard_id=2" class="text-decoration-none">
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(16,185,129,0.12);color:#059669' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:42px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
+                                            </a>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <?php $qc = (int)($s['q_reneet'] ?? 0); ?>
+                                            <a href="question-bank.php?subject_id=<?php echo $s['id']; ?>&standard_id=3" class="text-decoration-none">
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(139,92,246,0.12);color:#7c3aed' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:42px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
+                                            </a>
+                                        </td>
                                         <td class="align-middle">
                                             <?php if ($s['activated'] == 1): ?>
                                                 <span class="badge bg-success">Active</span>

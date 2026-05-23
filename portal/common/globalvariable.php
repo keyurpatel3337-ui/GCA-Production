@@ -133,7 +133,7 @@ if (!defined('ROLE_GROCERY_MANAGER')) {
 }
 
 if (!defined('ROLE_WALLET_MANAGER')) {
-    define('ROLE_WALLET_MANAGER', 17);
+    define('ROLE_WALLET_MANAGER', 25);
 }
 
 if (!defined('ROLE_COMPUTER_OPERATOR')) {
@@ -146,6 +146,14 @@ if (!defined('ROLE_DEPT_HEAD')) {
 
 if (!defined('ROLE_ASSISTANT_TEACHER')) {
     define('ROLE_ASSISTANT_TEACHER', 27);
+}
+
+if (!defined('ROLE_TEACHER')) {
+    define('ROLE_TEACHER', 29);
+}
+
+if (!defined('ROLE_OES_DATA_ENTRY_OPERATOR')) {
+    define('ROLE_OES_DATA_ENTRY_OPERATOR', 30);
 }
 
 // User Status

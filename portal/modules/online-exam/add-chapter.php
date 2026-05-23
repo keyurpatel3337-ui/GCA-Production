@@ -6,7 +6,7 @@ require_once PORTAL_PATH . 'session_config.php';
 require_once PORTAL_GLOBALVARIABLE;
 
 // Check access
-if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])) {
+if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER, ROLE_TEACHER, ROLE_COMPUTER_OPERATOR, ROLE_OES_DATA_ENTRY_OPERATOR])) {
     header("Location: " . PORTAL_URL . "/login.php");
     exit();
 }
@@ -18,12 +18,16 @@ $chapter = ['subid' => 0, 'chapter' => ''];
 $standard_id = 0;
 
 if ($id > 0) {
-    $stmt = $conn->prepare("SELECT c.*, s.standard_id FROM tbl_chapters c LEFT JOIN tbl_subjects s ON c.subid = s.id WHERE c.chpid = ?");
+    $stmt = $conn->prepare("SELECT c.*, s.standard_id, co.standard AS general_standard 
+                            FROM tbl_chapters c 
+                            LEFT JOIN tbl_subjects s ON c.subid = s.id 
+                            LEFT JOIN tbl_courses co ON s.standard_id = co.id
+                            WHERE c.chpid = ?");
     $stmt->execute([$id]);
     $chapter_data = $stmt->fetch();
     if ($chapter_data) {
         $chapter = $chapter_data;
-        $standard_id = $chapter['standard_id'];
+        $standard_id = $chapter['general_standard'];
     } else {
         header("Location: manage-chapters.php?msg=error");
         exit();
@@ -35,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $chapter_name = $_POST['chapter_name'];
 
     if ($id > 0) {
-        $stmt = $conn->prepare("UPDATE chapters SET subid = ?, chapter = ? WHERE chpid = ?");
+        $stmt = $conn->prepare("UPDATE tbl_chapters SET subid = ?, chapter = ? WHERE chpid = ?");
         $stmt->execute([$subid, $chapter_name, $id]);
         $msg = "updated";
     } else {
@@ -68,19 +72,15 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             <label class="small font-weight-bold text-muted mb-2">Select Standard <span class="text-danger">*</span></label>
                             <select id="modal_standard_id" class="form-control border-0 shadow-sm" style="background: #f8f9fa; border-radius: 10px; height: 45px;" onchange="loadSubjects(this.value)">
                                 <option value="">Select Standard</option>
-                                <?php
-                                $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid ASC");
-                                while ($std = $standards->fetch()) {
-                                    $selected = ($standard_id == $std['stdid']) ? 'selected' : '';
-                                    echo "<option value='{$std['stdid']}' $selected>{$std['stdtext']}</option>";
-                                }
-                                ?>
+                                <option value="11" <?php echo ($standard_id == 11) ? 'selected' : ''; ?>>11th</option>
+                                <option value="12" <?php echo ($standard_id == 12) ? 'selected' : ''; ?>>12th</option>
+                                <option value="13" <?php echo ($standard_id == 13) ? 'selected' : ''; ?>>Reneet</option>
                             </select>
                         </div>
                         <div class="form-group mb-4">
                             <label class="small font-weight-bold text-muted mb-2">Select Subject <span class="text-danger">*</span></label>
                             <select name="subject_id" id="modal_subject_id" class="form-control border-0 shadow-sm" style="background: #f8f9fa; border-radius: 10px; height: 45px;" required>
-                                <option value="">Select Subject</option>
+                                <option value="">Select Standard First</option>
                             </select>
                         </div>
                         <div class="form-group mb-5">
@@ -100,31 +100,37 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 </main>
 
 <script>
-const allSubjects = <?php 
-    $sub_all = $conn->query("SELECT id, standard_id, subject_name FROM tbl_subjects WHERE activated = 1 AND is_deleted = 0 ORDER BY subject_name ASC")->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($sub_all); 
-?>;
-
-function loadSubjects(stdid, selectedSubId = null) {
+async function loadSubjects(stdid, selectedSubId = null) {
     const subSelect = document.getElementById('modal_subject_id');
-    subSelect.innerHTML = '<option value="">Select Subject</option>';
+    subSelect.innerHTML = '<option value="">Loading Subjects...</option>';
     
-    if (!stdid) return;
+    if (!stdid) {
+        subSelect.innerHTML = '<option value="">Select Standard First</option>';
+        return;
+    }
 
-    allSubjects.filter(s => s.standard_id == stdid).forEach(s => {
-        const opt = document.createElement('option');
-        opt.value = s.id;
-        opt.innerText = s.subject_name;
-        if (selectedSubId && s.id == selectedSubId) opt.selected = true;
-        subSelect.appendChild(opt);
-    });
+    try {
+        const response = await fetch(`ajax/get-subjects.php?standard_id=${stdid}`);
+        const data = await response.json();
+        subSelect.innerHTML = '<option value="">Select Subject</option>';
+        data.forEach(s => {
+            const opt = document.createElement('option');
+            opt.value = s.id;
+            opt.innerText = s.subject_name;
+            if (selectedSubId && s.id == selectedSubId) opt.selected = true;
+            subSelect.appendChild(opt);
+        });
+    } catch (err) {
+        console.error('Error fetching subjects:', err);
+        subSelect.innerHTML = '<option value="">Error loading subjects</option>';
+    }
 }
 
-<?php if ($id > 0): ?>
 document.addEventListener('DOMContentLoaded', function() {
-    loadSubjects(<?php echo $standard_id; ?>, <?php echo $chapter['subid']; ?>);
+    <?php if ($id > 0 && $standard_id > 0): ?>
+        loadSubjects(<?php echo $standard_id; ?>, <?php echo $chapter['subid']; ?>);
+    <?php endif; ?>
 });
-<?php endif; ?>
 </script>
 
 <?php include PORTAL_INCLUDE_PATH . 'footer.php'; ?>

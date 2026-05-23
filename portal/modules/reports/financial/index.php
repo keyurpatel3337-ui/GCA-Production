@@ -169,6 +169,19 @@ $reportCategories = [
             ['name' => 'Term-wise Report', 'link' => 'term-wise.php', 'icon' => 'fas fa-calendar'],
         ]
     ],
+    [
+        'title' => 'Wallet System Reports',
+        'icon' => 'fas fa-wallet',
+        'color' => 'bg-wallet-grad',
+        'description' => 'Daily Day Books, Merchant Settlements, Deposit Summaries, and Low Balances',
+        'reports' => [
+            ['name' => 'Wallet Ledger History', 'link' => 'wallet-reports.php?report_type=transaction_history', 'icon' => 'fas fa-history'],
+            ['name' => 'Daily Day Book (Reconciliation)', 'link' => 'wallet-reports.php?report_type=day_book', 'icon' => 'fas fa-book'],
+            ['name' => 'Merchant Settlement', 'link' => 'wallet-reports.php?report_type=merchant_settlement', 'icon' => 'fas fa-store'],
+            ['name' => 'Low Balance List', 'link' => 'wallet-reports.php?report_type=low_balance', 'icon' => 'fas fa-exclamation-circle'],
+            ['name' => 'Wallet Refund logs', 'link' => 'wallet-reports.php?report_type=refunds', 'icon' => 'fas fa-undo-alt'],
+        ]
+    ],
 ];
 
 
@@ -199,6 +212,10 @@ include '../../../include/sidebar.php';
 
     .bg-indigo {
         background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+    }
+
+    .bg-wallet-grad {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
     }
 
     .report-item-link {
@@ -397,6 +414,12 @@ include '../../../include/sidebar.php';
     </h4>
     <div class="report-grid">
         <?php foreach ($reportCategories as $category): ?>
+            <?php
+            // Only show Wallet System Reports to Super Admin and Principal
+            if ($category['color'] === 'bg-wallet-grad' && !hasRole(ROLE_SUPER_ADMIN) && !hasRole(ROLE_PRINCIPLE)) {
+                continue;
+            }
+            ?>
             <div class="glass-card">
                 <div
                     class="card-header <?php echo $category['color']; ?> text-white border-0 py-3 shadow-sm d-flex align-items-center justify-content-between">

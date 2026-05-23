@@ -211,6 +211,7 @@ if ($routeAction === 'user-get') {
     $page = max(1, (int) ($_GET['page'] ?? 1));
     $perPage = max(1, (int) ($_GET['per_page'] ?? 50));
     $search = $_GET['search'] ?? '';
+    $roleFilter = $_GET['role'] ?? '';
 
     try {
         // Exclude Student and Website Admin roles from the dropdown
@@ -231,6 +232,30 @@ if ($routeAction === 'user-get') {
 
         if ($is_principal) {
             $where_clauses[] = "u.role_id IN (" . implode(',', $principal_allowed_roles) . ")";
+        }
+
+        if ($roleFilter !== '') {
+            if (!is_numeric($roleFilter)) {
+                try {
+                    // Fetch matching role ID from tbl_roles dynamically using normalized name comparison
+                    $normalized = strtolower(str_replace([' ', '-'], '', $roleFilter));
+                    if ($normalized === 'principal' || $normalized === 'principle') {
+                        $lookup_stmt = $conn->prepare("SELECT id FROM tbl_roles WHERE LOWER(REPLACE(REPLACE(role_name, ' ', ''), '-', '')) IN ('principal', 'principle') LIMIT 1");
+                        $lookup_stmt->execute([]);
+                    } else {
+                        $lookup_stmt = $conn->prepare("SELECT id FROM tbl_roles WHERE LOWER(REPLACE(REPLACE(role_name, ' ', ''), '-', '')) = ? LIMIT 1");
+                        $lookup_stmt->execute([$normalized]);
+                    }
+                    $roleId = $lookup_stmt->fetchColumn();
+                    if ($roleId) {
+                        $roleFilter = $roleId;
+                    }
+                } catch (PDOException $e) {
+                    // Fall back to original value if database lookup fails
+                }
+            }
+            $where_clauses[] = "u.role_id = ?";
+            $params[] = $roleFilter;
         }
 
         if ($search) {
@@ -275,7 +300,10 @@ if ($routeAction === 'user-get') {
                     'total_records' => $totalRecords,
                     'total_pages' => $totalPages
                 ],
-                'applied_filters' => ['search' => $search]
+                'applied_filters' => [
+                    'search' => $search,
+                    'role' => $roleFilter
+                ]
             ]);
         }
     } catch (PDOException $e) {

@@ -6,7 +6,7 @@ require_once PORTAL_PATH . 'session_config.php';
 require_once PORTAL_GLOBALVARIABLE;
 
 // Check access
-if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER])) {
+if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HEAD, ROLE_ASSISTANT_TEACHER, ROLE_TEACHER, ROLE_COMPUTER_OPERATOR, ROLE_OES_DATA_ENTRY_OPERATOR])) {
     header("Location: " . PORTAL_URL . "/login.php");
     exit();
 }
@@ -33,16 +33,20 @@ $perPage = 10;
 $currentPage = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $offset = ($currentPage - 1) * $perPage;
 
-$totalItems = $conn->query("SELECT COUNT(*) FROM tbl_topics")->fetchColumn();
+$totalItems = $conn->query("SELECT COUNT(*) FROM tbl_topics WHERE activated = 1 AND is_deleted = 0")->fetchColumn();
 $totalPages = ceil($totalItems / $perPage);
 
 // Fetch Topics with Subject, Chapter, and Standard Info with Pagination
-$topics = $conn->query("SELECT t.*, s.subject_name, c.chapter as chapter_name, std.stdtext 
+$topics = $conn->query("SELECT t.*, s.subject_name, c.chapter as chapter_name, co.course_name AS general_standard,
+                      (SELECT COUNT(*) FROM tbl_oes_questions q WHERE q.topic_id = t.id AND q.standard_id = 1 AND q.status = 1) AS q_11th,
+                      (SELECT COUNT(*) FROM tbl_oes_questions q WHERE q.topic_id = t.id AND q.standard_id = 2 AND q.status = 1) AS q_12th,
+                      (SELECT COUNT(*) FROM tbl_oes_questions q WHERE q.topic_id = t.id AND q.standard_id = 3 AND q.status = 1) AS q_reneet
                       FROM tbl_topics t 
                       LEFT JOIN tbl_subjects s ON t.subject_id = s.id 
                       LEFT JOIN tbl_chapters c ON t.chapter_id = c.chpid 
-                      LEFT JOIN standard std ON t.standard_id = std.stdid
-                      ORDER BY std.stdid ASC, s.subject_name ASC, c.chapter ASC, t.topic_name_english ASC
+                      LEFT JOIN tbl_courses co ON s.standard_id = co.id
+                      WHERE t.activated = 1 AND t.is_deleted = 0
+                      ORDER BY co.course_name ASC, s.subject_name ASC, c.chapter ASC, t.topic_name_english ASC
                       LIMIT $perPage OFFSET $offset")->fetchAll();
 
 require_once PORTAL_PATH . 'common/pagination.php';
@@ -104,12 +108,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             </div>
                             <select id="filterStandard" class="form-select form-select-sm border-0 bg-light" style="width: 140px; border-radius: 10px; font-size: 0.85rem; height: 38px;" onchange="updateSubjectFilter(this.value)">
                                 <option value="">All Standards</option>
-                                <?php
-                                $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdid ASC");
-                                while ($std = $standards->fetch()) {
-                                    echo "<option value='".htmlspecialchars($std['stdtext'])."'>".htmlspecialchars($std['stdtext'])."</option>";
-                                }
-                                ?>
+                                <option value="11th">11th</option>
+                                <option value="12th">12th</option>
+                                <option value="Reneet">Reneet</option>
                             </select>
                             <select id="filterSubject" class="form-select form-select-sm border-0 bg-light" style="width: 140px; border-radius: 10px; font-size: 0.85rem; height: 38px;" onchange="updateChapterFilter(this.value)">
                                 <option value="">All Subjects</option>
@@ -140,6 +141,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                     <th class="py-3">Subject</th>
                                     <th class="py-3">Chapter</th>
                                     <th class="py-3">Topic Name</th>
+                                    <th class="py-3 text-center">11th Qs</th>
+                                    <th class="py-3 text-center">12th Qs</th>
+                                    <th class="py-3 text-center">Re-Neet Qs</th>
                                     <th class="text-end px-4 py-3">Actions</th>
                                 </tr>
                             </thead>
@@ -147,7 +151,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                 <?php foreach ($topics as $tp): ?>
                                     <tr>
                                         <td class="px-4 align-middle">
-                                            <span class="badge badge-info"><?php echo htmlspecialchars($tp['stdtext'] ?? 'N/A'); ?></span>
+                                            <span class="badge badge-info">
+                                                <?php echo htmlspecialchars($tp['general_standard'] ?? 'N/A'); ?>
+                                            </span>
                                         </td>
                                         <td class="align-middle">
                                             <span class="badge badge-primary"><?php echo htmlspecialchars($tp['subject_name'] ?? 'N/A'); ?></span>
@@ -156,6 +162,24 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                             <span class="badge badge-success"><?php echo htmlspecialchars($tp['chapter_name'] ?? 'General'); ?></span>
                                         </td>
                                         <td class="align-middle font-weight-bold"><?php echo htmlspecialchars($tp['topic_name_english']); ?></td>
+                                        <td class="align-middle text-center">
+                                            <?php $qc = (int)($tp['q_11th'] ?? 0); ?>
+                                            <a href="question-bank.php?topic_id=<?php echo $tp['id']; ?>&standard_id=1" class="text-decoration-none">
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(59,130,246,0.12);color:#2563eb' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:38px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
+                                            </a>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <?php $qc = (int)($tp['q_12th'] ?? 0); ?>
+                                            <a href="question-bank.php?topic_id=<?php echo $tp['id']; ?>&standard_id=2" class="text-decoration-none">
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(16,185,129,0.12);color:#059669' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:38px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
+                                            </a>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <?php $qc = (int)($tp['q_reneet'] ?? 0); ?>
+                                            <a href="question-bank.php?topic_id=<?php echo $tp['id']; ?>&standard_id=3" class="text-decoration-none">
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(139,92,246,0.12);color:#7c3aed' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:38px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
+                                            </a>
+                                        </td>
                                         <td class="text-end px-4 align-middle">
                                             <a href="add-topic.php?id=<?php echo $tp['id']; ?>" class="btn btn-sm btn-outline-info mr-2">
                                                 <i class="fas fa-edit"></i>
@@ -205,12 +229,21 @@ function updateSubjectFilter(stdtext) {
     document.getElementById('filterChapter').innerHTML = '<option value="">All Chapters</option>';
     
     if (stdtext) {
-        const stdId = <?php 
-            $std_mapping = $conn->query("SELECT stdid, stdtext FROM standard")->fetchAll(PDO::FETCH_KEY_PAIR);
-            echo json_encode(array_flip($std_mapping));
-        ?>[stdtext];
+        const stdId = {
+            '11th': 11,
+            '12th': 12,
+            'Reneet': 13
+        }[stdtext];
 
-        allSubjects.filter(s => s.standard_id == stdId).forEach(s => {
+        const courseToStd = {
+            1: 11,
+            2: 11,
+            4: 12,
+            5: 12,
+            6: 13
+        };
+
+        allSubjects.filter(s => courseToStd[s.standard_id] == stdId).forEach(s => {
             const opt = document.createElement('option');
             opt.value = s.subject_name;
             opt.innerText = s.subject_name;

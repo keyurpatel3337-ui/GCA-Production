@@ -131,9 +131,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Column may not exist, ignore error
         }
 
-        // Check token payment status - CRITICAL WORKFLOW
-        // Bypass token fee check for Re-NEET students (course_id = 6)
-        if (!$student['token_fees_paid'] && $student['course_id'] != 6) {
+        // Bypass token fee check for Re-NEET students (course_id = 3)
+        if (!$student['token_fees_paid'] && $student['course_id'] != 3) {
             if ($student['token_payment_mode'] === 'online') {
                 // Online payment - redirect to payment page
                 $_SESSION['info_msg'] = 'Please complete your token fee payment to activate your account.';
@@ -156,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Grant access for Re-NEET or students who paid token fees
-        $_SESSION['token_payment_verified'] = ($student['course_id'] == 6) ? true : $student['token_fees_paid'];
+        $_SESSION['token_payment_verified'] = ($student['course_id'] == 3) ? true : $student['token_fees_paid'];
         header('Location: ../dashboard/student_dashboard.php');
         exit;
     } catch (PDOException $e) {

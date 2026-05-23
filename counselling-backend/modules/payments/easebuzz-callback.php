@@ -286,7 +286,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 try {
                     // Fetch student details for notification
                     $stmt = $conn->prepare("SELECT r.*, 
-                                           CONCAT(r.surname, ' ', r.student_name, ' ', r.fathers_name) as full_name,
+                                           r.student_name as first_name,
                                            c.course_name 
                                            FROM tbl_gm_std_registration r
                                            LEFT JOIN tbl_courses c ON r.course_id = c.id
@@ -295,8 +295,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $student = $stmt->fetch();
 
                     if ($student) {
+                        $s_first_name = !empty($student['first_name']) ? trim($student['first_name']) : 'Student';
                         $recipient = [
-                            'name' => $student['full_name'],
+                            'name' => $s_first_name,
                             'email' => $student['email'] ?? 'noemail@example.com',
                             'mobile' => $student['mob'] ?? ''
                         ];
@@ -305,7 +306,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if ($payment_type === 'token_fee') {
                             $notification_template = 'token_fee_success';
                             $variables = [
-                                'student_name' => $student['full_name'],
+                                'student_name' => $s_first_name,
                                 'amount' => formatIndianCurrency($amount),
                                 'receipt_no' => implode(', ', $receipt_numbers ?? ['N/A']),
                                 'transaction_id' => $transaction_id
@@ -313,7 +314,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         } else {
                             $notification_template = 'fee_payment_success';
                             $variables = [
-                                'student_name' => $student['full_name'],
+                                'student_name' => $s_first_name,
                                 'amount' => formatIndianCurrency($amount),
                                 'payment_mode' => 'Online',
                                 'receipt_no' => implode(', ', $receipt_numbers ?? ['N/A']),

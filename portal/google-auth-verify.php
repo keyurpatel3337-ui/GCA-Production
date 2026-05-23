@@ -70,7 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'establishment' => 'modules/dashboard/establishment_dashboard.php',
                 'grocery_manager' => 'modules/grocery/index.php',
                 'wallet_manager' => 'modules/dashboard/wallet_manager_dashboard.php',
-                'computer_operator' => 'modules/dashboard/computer_operator_dashboard.php'
+                'computer_operator' => 'modules/dashboard/computer_operator_dashboard.php',
+                'dept_head' => 'modules/dashboard/dept_head_dashboard.php',
+                'assistant_teacher' => 'modules/dashboard/assistant_teacher_dashboard.php',
+                'teacher' => 'modules/dashboard/teacher_dashboard.php',
+                'oes_data_entry_operator' => 'modules/dashboard/oes_data_entry_dashboard.php'
             ];
 
             $location = $role_redirects[$user['role_slug']] ?? 'modules/dashboard/admin_dashboard.php';

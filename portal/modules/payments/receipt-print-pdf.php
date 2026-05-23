@@ -454,6 +454,15 @@ try {
             }
         }
 
+        // Resolve course_name for all receipts using tbl_courses
+        $courses_map = [];
+        $courses_rows = $conn->query("SELECT id, course_name FROM tbl_courses")->fetchAll(PDO::FETCH_KEY_PAIR);
+        foreach ($receipts as &$r) {
+            $cid = $r['course_id'] ?? null;
+            $r['course_name'] = ($cid && isset($courses_rows[$cid])) ? $courses_rows[$cid] : null;
+        }
+        unset($r);
+
         // Get receipt configurations for each fee component
         $receipt_configs = [];
         if (isset($receipts[0]['fee_component'])) {
@@ -486,13 +495,24 @@ try {
         exit;
     }
 
-    // Convert amount to words
+    /**
+     * Convert amount to words
+     * 
+     * @param float|int|string $number
+     * @return string
+     */
     function numberToWords($number)
     {
         $words = convertToWords($number);
         return $words . ' Only';
     }
 
+    /**
+     * Convert number to words recursive helper
+     * 
+     * @param float|int|string $number
+     * @return string
+     */
     function convertToWords($number)
     {
         $number = round((float) $number);
@@ -529,19 +549,19 @@ try {
         // Hundred
         if ($rupees >= 100) {
             $hundred = floor($rupees / 100);
-            $words .= $ones[$hundred] . ' Hundred ';
+            $words .= $ones[(int)$hundred] . ' Hundred ';
             $rupees %= 100;
         }
 
         // Tens and Ones
         if ($rupees >= 20) {
             $ten = floor($rupees / 10);
-            $words .= $tens[$ten] . ' ';
+            $words .= $tens[(int)$ten] . ' ';
             $rupees %= 10;
         }
 
         if ($rupees > 0 && $rupees < 20) {
-            $words .= $ones[$rupees] . ' ';
+            $words .= $ones[(int)$rupees] . ' ';
         }
 
         return trim($words);
@@ -682,8 +702,8 @@ try {
         $pdf->Cell(21, 5, 'Standard', 0, 0, 'L');
         $pdf->Cell(4, 5, ':', 0, 0, 'C');
         $pdf->SetFont('helvetica', '', 9);
-        $display_std = $receipt['standard'] ?? $receipt['course_name'] ?? 'N/A';
-        if ((isset($receipt['course_id']) && $receipt['course_id'] == 6) || strtolower(trim((string) $display_std)) === '13' || strtolower(trim((string) $display_std)) === 're-neet') {
+        $display_std = $receipt['course_name'] ?? 'N/A';
+        if (strtolower(trim((string)$display_std)) === 're-neet' || ($receipt['course_id'] ?? 0) == 3) {
             $display_std = 'Re-Neet';
         }
         $pdf->Cell(55, 5, $display_std, 0, 0, 'L');
@@ -762,7 +782,7 @@ try {
         // Display specific fee component name for token fee
         $particulars_text = $receipt['payment_for'];
         if (isset($receipt['fee_component'])) {
-            $std = $receipt['standard'] ?? $receipt['course_name'] ?? '';
+            $std = $receipt['course_name'] ?? $receipt['standard'] ?? '';
             $particulars_text = formatFeeKey($receipt['fee_component'], $std);
         }
 
@@ -847,8 +867,8 @@ try {
         $pdf->SetXY(153, 133);
         $pdf->Cell(47, 5, 'Authorised Signatory', 0, 1, 'C');
 
-        // --- Add Refund Policy Section (Only for Std 11 & Course ID 1 or 2) ---
-        if (($receipt['standard'] == '11' || $receipt['standard'] == 11) && (in_array(($receipt['course_id'] ?? null), [1, 2, '1', '2']))) {
+        // --- Add Refund Policy Section (Only for Std 11 - course_id = 1) ---
+        if (in_array(($receipt['course_id'] ?? null), [1, '1'])) {
             $pdf->SetY(150);
 
             // Title
@@ -917,7 +937,7 @@ try {
             $pdf->SetX(20);
             $pdf->Cell(30, 5, 'After 90 Days', 0, 0, 'L');
             $pdf->Cell(0, 5, ':  Fees will be Non-Refundable.', 0, 1, 'L');
-        } elseif ($receipt['course_id'] == '6' || $receipt['course_id'] == 6) {
+        } elseif ($receipt['course_id'] == 3) {
             $pdf->SetY(145);
 
             // Rules and fees policy Title

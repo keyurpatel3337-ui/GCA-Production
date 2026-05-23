@@ -152,11 +152,11 @@ if ($filter_group) {
 }
 if ($filter_course) {
     if ($filter_course === '11th') {
-        $filterWhere .= " AND r.course_id IN (1, 2)";
+        $filterWhere .= " AND r.course_id = 1";
     } elseif ($filter_course === '12th') {
-        $filterWhere .= " AND r.course_id IN (4, 5)";
+        $filterWhere .= " AND r.course_id = 2";
     } elseif ($filter_course === 'Reneet') {
-        $filterWhere .= " AND r.course_id = 6";
+        $filterWhere .= " AND r.course_id = 3";
     } else {
         $filterWhere .= " AND r.course_id = ?";
         $filterParams[] = $filter_course;
