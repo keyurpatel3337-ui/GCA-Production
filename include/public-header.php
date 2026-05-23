@@ -325,6 +325,17 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
         transform: translateY(-2px);
     }
 
+    .nav-cta-parent {
+        background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+    }
+
+    .nav-cta-parent:hover {
+        box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+        transform: translateY(-2px);
+    }
+
     /* NEW Badge Animation */
     .new-badge {
         display: inline-flex;
@@ -735,6 +746,13 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
                     class="nav-cta-btn nav-cta-student w-full lg:w-auto">
                     <i class="fas fa-user-graduate mr-2"></i>
                     Student Portal
+                </a>
+            </li>
+            <li class="w-full lg:w-auto mt-2 lg:mt-0">
+                <a href="<?php echo BASE_URL; ?>/portal/parent-login.php"
+                    class="nav-cta-btn nav-cta-parent w-full lg:w-auto">
+                    <i class="fas fa-user-friends mr-2"></i>
+                    Parent Portal
                 </a>
             </li>
             <li class="w-full lg:w-auto mt-2 lg:mt-0">

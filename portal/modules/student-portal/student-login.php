@@ -408,6 +408,26 @@ foreach ($flash_msgs as $msg) {
             box-shadow: 0 4px 12px rgba(30, 58, 95, 0.3);
         }
 
+        .btn-parent-login {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-parent-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
         .back-home {
             text-align: center;
             margin-top: 1.5rem;
@@ -653,6 +673,10 @@ foreach ($flash_msgs as $msg) {
             </div>
 
             <div class="alt-login">
+                <p>Are you a Parent looking for Fee & Wallet management?</p>
+                <a href="<?php echo BASE_URL; ?>/portal/parent-login.php" class="btn-parent-login" style="margin-bottom: 1.25rem;">
+                    <i class="fas fa-user-friends"></i> Parent Login Portal
+                </a>
                 <p>Are you an Admin, Principal, or Counsellor?</p>
                 <a href="<?php echo PORTAL_URL; ?>/login.php" class="btn-admin-login">
                     <i class="fas fa-user-shield"></i> Admin Login Portal

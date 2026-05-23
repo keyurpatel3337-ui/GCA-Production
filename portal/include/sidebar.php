@@ -1100,17 +1100,9 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                                     class="nav-link"><i class="fas fa-chart-bar"></i>
                                     <p>My Results</p>
                                 </a></li>
-                            <li class="nav-item"><a href="<?php echo $student_portal_prefix; ?>my-fees.php"
-                                    class="nav-link"><i class="fas fa-dollar-sign"></i>
-                                    <p>My Fees</p>
-                                </a></li>
                             <li class="nav-item"><a href="<?php echo $student_portal_prefix; ?>records.php"
                                     class="nav-link"><i class="fas fa-folder-open"></i>
                                     <p>Records</p>
-                                </a></li>
-                            <li class="nav-item"><a href="<?php echo $student_portal_prefix; ?>my-wallet.php"
-                                    class="nav-link"><i class="fas fa-wallet text-primary"></i>
-                                    <p>Digital Wallet</p>
                                 </a></li>
                         </ul>
                     </li>
@@ -1151,33 +1143,8 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                     </li>
                 <?php
 endif; ?>
-
-
-
-
-
-
-
                 <?php if (isset($_SESSION['is_parent_login']) && $_SESSION['is_parent_login'] === true): ?>
                     <!-- ===== PARENT MENU ===== -->
-                    <li class="nav-item">
-                        <a href="<?php echo $modules_prefix; ?>parent-portal/dashboard.php" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>Parent Dashboard</p>
-                        </a>
-                    </li>
-
-                    <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Active Child: <?php
-    $active_child_name = 'Student';
-    foreach ($_SESSION['children'] as $child) {
-        if ($child['id'] == $_SESSION['active_student_id']) {
-            $active_child_name = $child['student_name'];
-            break;
-        }
-    }
-    echo htmlspecialchars($active_child_name ?? '');
-?></li>
-
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-exchange-alt"></i>
@@ -1198,13 +1165,33 @@ endif; ?>
                         </ul>
                     </li>
 
-                    <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Academic & Fees</li>
-
                     <li class="nav-item">
                         <a href="<?php echo $student_portal_prefix; ?>my-fees.php" class="nav-link">
                             <i class="nav-icon fas fa-file-invoice-dollar"></i>
                             <p>Fees & Payments</p>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo $student_portal_prefix; ?>my-wallet.php" class="nav-link">
+                            <i class="nav-icon fas fa-wallet text-primary"></i>
+                            <p>Digital Wallet</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-alt"></i>
+                            <p>Appointments<i class="nav-arrow fas fa-angle-right"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"><a href="<?php echo $student_portal_prefix; ?>appointments.php"
+                                    class="nav-link"><i class="fas fa-calendar-plus"></i>
+                                    <p>Book Appointment</p>
+                                </a></li>
+                            <li class="nav-item"><a href="<?php echo $student_portal_prefix; ?>my-appointments.php"
+                                    class="nav-link"><i class="fas fa-calendar-check"></i>
+                                    <p>My Appointments</p>
+                                </a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="<?php echo $student_portal_prefix; ?>my-results.php" class="nav-link">

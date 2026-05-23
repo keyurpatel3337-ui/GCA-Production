@@ -304,6 +304,37 @@ $success_msg = isset($messages['success']) ? $messages['success'][0]['message'] 
             font-size: 0.8rem;
         }
 
+        .alt-login {
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .alt-login p {
+            color: #64748b;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-student-login {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-student-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
         .back-home {
             text-align: center;
             margin-top: 1.5rem;
@@ -426,7 +457,18 @@ $success_msg = isset($messages['success']) ? $messages['success'][0]['message'] 
                 <span>OR</span>
             </div>
 
-            <div class="back-home">
+            <div class="alt-login">
+                <p>Are you a Student looking for the Student Portal?</p>
+                <a href="<?php echo BASE_URL; ?>/portal/modules/student-portal/student-login.php" class="btn-student-login">
+                    <i class="fas fa-user-graduate"></i> Student Login Portal
+                </a>
+            </div>
+
+            <div class="divider" style="margin: 1rem 0 1.5rem 0;">
+                <span>OR</span>
+            </div>
+
+            <div class="back-home" style="margin-top: 0.5rem;">
                 <a href="<?php echo BASE_URL; ?>/index.php"><i class="fas fa-arrow-left"></i> Back to Home</a>
             </div>
         </div>

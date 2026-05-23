@@ -8,13 +8,28 @@ require_once PORTAL_GLOBALVARIABLE;
 require_once HELPER_ERROR_LOGGER;
 require_once dirname(dirname(dirname(__DIR__))) . '/common/helpers/format_helper.php';
 
-// Check if student is logged in
-if (!isset($_SESSION['student_id']) || $_SESSION['user_role'] !== 'student') {
-    header('Location: student-login.php');
+// Tighten access: Only parents are allowed to request refunds (fees/wallet-related)
+$is_student = isset($_SESSION['is_student_login']) && $_SESSION['is_student_login'] === true;
+$is_parent = isset($_SESSION['is_parent_login']) && $_SESSION['is_parent_login'] === true;
+
+if ($is_student) {
+    $_SESSION['error'] = 'Access Denied: Fees and Wallet are managed exclusively by Parents.';
+    header('Location: ../dashboard/student_dashboard.php');
     exit;
 }
 
-$student_id = $_SESSION['student_id'];
+if (!$is_parent) {
+    header('Location: ../../parent-login.php');
+    exit;
+}
+
+$student_id = $is_parent ? ($_SESSION['active_student_id'] ?? null) : ($_SESSION['student_id'] ?? null);
+
+if (!$student_id) {
+    $_SESSION['error'] = "Invalid session. Please login again.";
+    header('Location: ' . ($is_parent ? '../parent-portal/dashboard.php' : 'student-login.php'));
+    exit;
+}
 
 // Error message handling
 $error_msg = $_SESSION['error_msg'] ?? '';

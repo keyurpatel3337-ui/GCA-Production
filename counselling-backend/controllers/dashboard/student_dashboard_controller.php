@@ -45,6 +45,9 @@ $student_info = null;
 try {
     $stmt = $conn->prepare("SELECT 
                                 r.id,
+                                r.student_name,
+                                r.fathers_name,
+                                r.surname,
                                 CASE WHEN p.id IS NOT NULL OR r.token_fees_paid = 1 THEN 1 ELSE 0 END as token_fees_paid,
                                 p.payment_date as token_payment_date,
                                 p.transaction_id as token_transaction_id,

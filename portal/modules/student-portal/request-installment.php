@@ -8,8 +8,16 @@ require_once HELPER_ERROR_LOGGER;
 
 header('Content-Type: application/json');
 
-// Check if user is a student
-if (!isset($_SESSION['is_student_login']) || $_SESSION['is_student_login'] !== true) {
+// Tighten access: Only parents are allowed to request installments
+$is_student = isset($_SESSION['is_student_login']) && $_SESSION['is_student_login'] === true;
+$is_parent = isset($_SESSION['is_parent_login']) && $_SESSION['is_parent_login'] === true;
+
+if ($is_student) {
+    echo json_encode(['success' => false, 'message' => 'Access Denied: Fees and Wallet are managed exclusively by Parents.']);
+    exit;
+}
+
+if (!$is_parent) {
     echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
     exit;
 }
@@ -19,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$student_id = $_SESSION['student_id'];
+$student_id = $_SESSION['active_student_id'] ?? $_SESSION['student_id'];
 $fee_component = $_POST['fee_component'] ?? '';
 $amount = floatval($_POST['amount'] ?? 0);
 $requested_installments = intval($_POST['requested_installments'] ?? 0);

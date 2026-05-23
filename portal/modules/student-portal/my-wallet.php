@@ -6,14 +6,37 @@ require_once PORTAL_GLOBALVARIABLE;
 require_once __DIR__ . '/../../common/api_client.php';
 require_once __DIR__ . '/../../../common/helpers/format_helper.php';
 
-// Check if student is logged in
-if (!isset($_SESSION['is_student_login']) || $_SESSION['is_student_login'] !== true) {
-    header('Location: ../../login.php');
+// Tighten access: Only parents are allowed to manage wallet
+$is_student = isset($_SESSION['is_student_login']) && $_SESSION['is_student_login'] === true;
+$is_parent = isset($_SESSION['is_parent_login']) && $_SESSION['is_parent_login'] === true;
+
+if ($is_student) {
+    $_SESSION['error'] = 'Access Denied: Fees and Wallet are managed exclusively by Parents.';
+    header('Location: ../dashboard/student_dashboard.php');
     exit;
 }
 
-$student_name = $_SESSION['student_name'] ?? 'Student';
-$user_id = $_SESSION['user_id'] ?? $_SESSION['student_id'] ?? '';
+if (!$is_parent) {
+    header('Location: ../../parent-login.php');
+    exit;
+}
+
+$user_id = $_SESSION['active_student_id'] ?? $_SESSION['student_id'] ?? '';
+
+// Fetch active child full name from database
+$student_name = 'Student';
+try {
+    if (!isset($conn)) {
+        require_once dirname(dirname(dirname(__DIR__))) . '/common/db_connect.php';
+    }
+    if (isset($conn)) {
+        $stmt = $conn->prepare("SELECT CONCAT(student_name, ' ', surname) as full_name FROM tbl_gm_std_registration WHERE id = ?");
+        $stmt->execute([$user_id]);
+        $student_name = $stmt->fetchColumn() ?: 'Student';
+    }
+} catch (Exception $e) {
+    // Fallback
+}
 
 // Function to call Wallet API
 function callWalletAPI($endpoint, $method = 'GET', $data = [])

@@ -26,42 +26,7 @@ if ($response && isset($response['success']) && $response['success']) {
     $total_tests = $stats['total_tests'] ?? 0;
     $avg_score = $stats['avg_score'] ?? 0;
 
-    // Fetch Wallet Balance
-    $wallet_api_url = defined('WALLET_API_URL') ? WALLET_API_URL : null;
-    $wallet_balance = 0;
-    if ($wallet_api_url) {
-        $wallet_student_id = $user_id;
-        if (!empty($enrollment_info['enrollment_no'])) {
-            $wallet_student_id = $enrollment_info['enrollment_no'];
-        } else {
-            try {
-                if (!isset($conn)) {
-                    require_once DB_CONNECT_FILE;
-                }
-                if (isset($conn)) {
-                    $stmt = $conn->prepare("SELECT enrollment_no FROM tbl_enrolled_students WHERE registration_id = ?");
-                    $stmt->execute([$user_id]);
-                    $en_no = $stmt->fetchColumn();
-                    if (!empty($en_no)) {
-                        $wallet_student_id = $en_no;
-                    }
-                }
-            } catch (Exception $e) {
-                // Fallback to $user_id
-            }
-        }
 
-        $ch = curl_init($wallet_api_url . '/balance/check.php?student_id=' . $wallet_student_id);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'X-API-KEY: ' . (defined('GCA_PORTAL_KEY') ? GCA_PORTAL_KEY : '')
-        ]);
-        $wallet_res = json_decode(curl_exec($ch), true);
-        if ($wallet_res && isset($wallet_res['status']) && $wallet_res['status'] === 'success') {
-            $wallet_balance = $wallet_res['data']['balance'];
-        }
-    }
 } else {
     // Fallback to default values if API fails
     $student_info = ['token_fees_paid' => 0];
@@ -364,7 +329,7 @@ include '../../include/sidebar.php'; ?>
 
     <!-- Stats Cards -->
     <div class="row g-4 mb-5">
-        <div class="col-xl-3 col-lg-6 col-md-6">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-12">
             <div class="glass-card h-100">
                 <div class="stat-card">
                     <div class="stat-top">
@@ -384,7 +349,7 @@ include '../../include/sidebar.php'; ?>
             </div>
         </div>
 
-        <div class="col-xl-3 col-lg-6 col-md-6">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-12">
             <div class="glass-card h-100">
                 <div class="stat-card">
                     <div class="stat-top">
@@ -404,7 +369,7 @@ include '../../include/sidebar.php'; ?>
             </div>
         </div>
 
-        <div class="col-xl-3 col-lg-6 col-md-6">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-12">
             <div class="glass-card h-100">
                 <div class="stat-card">
                     <div class="stat-top">
@@ -423,34 +388,13 @@ include '../../include/sidebar.php'; ?>
                 </div>
             </div>
         </div>
-
-        <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="glass-card h-100">
-                <div class="stat-card">
-                    <div class="stat-top">
-                        <div>
-                            <div class="stat-value" id="wallet-balance-display">
-                                ₹<?php echo formatIndianCurrency($wallet_balance); ?></div>
-                            <div class="stat-label">Digital Wallet</div>
-                        </div>
-                        <div class="stat-icon bg-icon-primary">
-                            <i class="fas fa-wallet"></i>
-                        </div>
-                    </div>
-                    <a href="<?php echo PORTAL_URL; ?>/modules/student-portal/my-wallet.php"
-                        class="stat-link text-primary">
-                        Manage Wallet <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
     </div>
 
 
     <div class="row g-4">
-        <!-- LEFT: Official Scheduled Exams -->
-        <div class="col-xl-6 col-lg-6 col-12">
-            <div class="card card-enhanced h-100">
+        <!-- Official Scheduled Exams -->
+        <div class="col-12">
+            <div class="card card-enhanced">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h3 class="card-title mb-0">
                         <i class="fas fa-calendar-alt me-2" style="color: #ffffff !important;"></i> Official Scheduled Exams
@@ -520,176 +464,7 @@ include '../../include/sidebar.php'; ?>
                 </div>
             </div>
         </div>
-
-        <!-- RIGHT: Fee Structure & Payment Details -->
-        <div class="col-xl-6 col-lg-6 col-12">
-            <?php
-            $fee_summary = $data['fee_summary'] ?? null;
-
-            if ($fee_summary):
-                // Filter out Hostel Fees completely from student view and calculations
-                if (isset($fee_summary['allocations'])) {
-                    $filtered_allocations = [];
-                    $hostel_allocated = 0;
-                    $hostel_paid = 0;
-                    $hostel_waiver = 0;
-                    $hostel_pending = 0;
-                    
-                    foreach ($fee_summary['allocations'] as $key => $alloc) {
-                        $is_hostel = (
-                            strpos(strtolower($key), 'hostel') !== false || 
-                            strpos(strtolower($alloc['label'] ?? ''), 'hostel') !== false ||
-                            strpos(strtolower($alloc['category'] ?? ''), 'hostel') !== false
-                        );
-                        
-                        if ($is_hostel) {
-                            $hostel_allocated += floatval($alloc['gross_amount'] ?? 0);
-                            $hostel_paid += floatval($alloc['paid_amount'] ?? 0);
-                            $hostel_waiver += floatval($alloc['waived_amount'] ?? 0);
-                            $hostel_pending += floatval($alloc['pending_amount'] ?? 0);
-                        } else {
-                            $filtered_allocations[$key] = $alloc;
-                        }
-                    }
-                    
-                    $fee_summary['allocations'] = $filtered_allocations;
-                    $fee_summary['total_allocated'] = floatval($fee_summary['total_allocated']) - $hostel_allocated;
-                    $fee_summary['total_paid'] = floatval($fee_summary['total_paid']) - $hostel_paid;
-                    $fee_summary['total_waiver'] = floatval($fee_summary['total_waiver']) - $hostel_waiver;
-                    $fee_summary['total_pending'] = floatval($fee_summary['total_pending']) - $hostel_pending;
-                }
-
-                $total_pending = $fee_summary['total_pending'];
-                $detailed_allocations = $fee_summary['allocations'];
-                ?>
-
-                <div class="card card-enhanced h-100">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-0"><i class="fas fa-list-alt"></i> Fee Structure & Payments</h3>
-                        <div class="header-stats">
-                            <span class="badge bg-light text-dark fs-6 me-2">Total:
-                                ₹<?php echo formatIndianCurrency($fee_summary['total_allocated']); ?></span>
-                            <span
-                                class="badge <?php echo $total_pending > 0 ? 'bg-warning text-dark' : 'bg-success'; ?> fs-6">
-                                <?php echo $fee_summary['status']; ?>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="card-body p-4" style="max-height: 520px; overflow-y: auto;">
-                        <?php if ($total_pending > 0): ?>
-                            <div
-                                class="alert alert-warning p-3 mb-3 d-flex align-items-center justify-content-between shadow-sm border-start border-4 border-warning small">
-                                <div>
-                                    <i class="fas fa-exclamation-circle fa-lg me-2"></i>
-                                    <strong>₹<?php echo formatIndianCurrency($total_pending); ?> Outstanding</strong>
-                                </div>
-                                 <?php if (!$is_restricted_payment): ?>
-                                     <button type="button" onclick="payAllPendingFees()" class="btn btn-success btn-sm shadow-sm font-weight-bold">
-                                         Pay All Outstanding
-                                     </button>
-                                 <?php endif; ?>
-                            </div>
-                            <?php
-                        else: ?>
-                            <div
-                                class="alert alert-success p-3 mb-3 d-flex align-items-center shadow-sm border-start border-4 border-success small">
-                                <i class="fas fa-check-circle fa-lg me-2"></i>
-                                <div>
-                                    All fees paid. Thank you!
-                                </div>
-                            </div>
-                            <?php
-                        endif; ?>
-
-                        <div class="table-responsive">
-                            <table class="table table-sm table-bordered table-hover align-middle small mb-0">
-                                <thead class="table-primary">
-                                    <tr style="font-size: 0.78rem;">
-                                        <th width="35%">COMPONENT</th>
-                                        <th width="13%">GROSS</th>
-                                        <th width="13%">PAID</th>
-                                        <th width="12%">WAIVER</th>
-                                        <th width="12%">DUE</th>
-                                        <th width="15%">ACTION</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($detailed_allocations as $key => $alloc): ?>
-                                        <tr style="font-size: 0.82rem;">
-                                            <td>
-                                                <strong class="text-dark"><?php echo htmlspecialchars($alloc['label'] ?? ''); ?></strong>
-                                                <br><small class="text-muted"><?php echo $alloc['category']; ?></small>
-                                            </td>
-                                            <td>₹<?php echo formatIndianCurrency($alloc['gross_amount']); ?></td>
-                                            <td class="text-success">
-                                                ₹<?php echo formatIndianCurrency($alloc['paid_amount']); ?></td>
-                                            <td class="text-info">
-                                                <?php echo $alloc['waived_amount'] > 0 ? '₹' . formatIndianCurrency($alloc['waived_amount']) : '-'; ?>
-                                            </td>
-                                            <td>
-                                                <?php if ($alloc['pending_amount'] > 0): ?>
-                                                    <span
-                                                        class="text-danger fw-bold">₹<?php echo formatIndianCurrency($alloc['pending_amount']); ?></span>
-                                                    <?php
-                                                else: ?>
-                                                    <span class="badge bg-success small">PAID</span>
-                                                    <?php
-                                                endif; ?>
-                                            </td>
-                                            <td>
-                                                <?php if ($alloc['paid_amount'] > 0): ?>
-                                                    <button type="button"
-                                                        onclick="downloadReceipt('<?php echo $alloc['receipt_no']; ?>', '<?php echo $key; ?>')"
-                                                        class="btn btn-outline-info btn-xs py-0 px-1 font-weight-bold" style="font-size: 0.72rem; border-radius: 4px;">
-                                                        Receipt
-                                                    </button>
-                                                    <?php
-                                                elseif ($alloc['pending_amount'] > 0): ?>
-                                                     <?php if (!$is_restricted_payment): ?>
-                                                         <button type="button" onclick="payFee('<?php echo $key; ?>')"
-                                                             class="btn btn-warning btn-xs py-0 px-1 font-weight-bold text-dark" style="font-size: 0.72rem; border-radius: 4px;">
-                                                             Pay Now
-                                                         </button>
-                                                     <?php endif; ?>
-
-                                                    <?php
-                                                endif; ?>
-                                            </td>
-                                        </tr>
-                                        <?php
-                                    endforeach; ?>
-                                </tbody>
-                                <tfoot class="table-dark">
-                                    <tr style="font-size: 0.8rem;">
-                                        <td><strong>Total</strong></td>
-                                        <td><strong>₹<?php echo formatIndianCurrency($fee_summary['total_allocated']); ?></strong></td>
-                                        <td><strong>₹<?php echo formatIndianCurrency($fee_summary['total_paid']); ?></strong></td>
-                                        <td><strong>₹<?php echo formatIndianCurrency($fee_summary['total_waiver']); ?></strong></td>
-                                        <td><strong>₹<?php echo formatIndianCurrency($fee_summary['total_pending']); ?></strong></td>
-                                        <td>-</td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <div class="mt-3 text-end small">
-                            <a href="student-ledger.php" class="btn btn-link py-0 px-1">
-                                <i class="fas fa-book-open"></i> Detailed Transaction Ledger
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <?php
-            else: ?>
-                <div class="card glass-card text-center p-5">
-                    <i class="fas fa-receipt fa-4x text-muted mb-3"></i>
-                    <h4>No Fee Structure Found</h4>
-                    <p class="text-muted">Your fee structure has not been allocated yet. Please contact the admissions
-                        department.</p>
-                </div>
-                <?php
-            endif; ?>
-        </div>
-    </div>    </div>
+    </div>
     </div>
 </div>
 
@@ -726,48 +501,4 @@ include '../../include/footer.php'; ?>
         }
     });
 
-    // Fee payment functions (same as my-fees.php)
-    function downloadReceipt(receiptNo, feeComponent) {
-        if (typeof generateSecurePDF === 'function') {
-            generateSecurePDF('<?php echo PORTAL_URL; ?>/modules/payments/receipt-print-pdf.php', {
-                receipt_no: receiptNo,
-                fee_component: feeComponent,
-                student_id: user_id
-            });
-        } else {
-            // Fallback to the global utility if it's somehow available but generateSecurePDF isn't (unlikely)
-            window.location.href = '<?php echo PORTAL_URL; ?>/modules/payments/receipt-print-pdf.php?receipt_no=' + receiptNo + '&fee_component=' + feeComponent + '&student_id=' + user_id;
-        }
-    }
-
-    function payFee(component, installmentId = null) {
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = '<?php echo PORTAL_URL; ?>/modules/student-portal/pending-fee-payment.php';
-
-        const componentInput = document.createElement('input');
-        componentInput.type = 'hidden';
-        componentInput.name = 'component';
-        componentInput.value = component;
-        form.appendChild(componentInput);
-
-        if (installmentId) {
-            const installmentInput = document.createElement('input');
-            installmentInput.type = 'hidden';
-            installmentInput.name = 'installment_id';
-            installmentInput.value = installmentId;
-            form.appendChild(installmentInput);
-        }
-
-        document.body.appendChild(form);
-        form.submit();
-    }
-
-    function payAllPendingFees() {
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = '<?php echo PORTAL_URL; ?>/modules/student-portal/pay-all-pending-fees.php';
-        document.body.appendChild(form);
-        form.submit();
-    }
 </script>

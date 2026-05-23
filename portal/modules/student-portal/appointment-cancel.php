@@ -6,14 +6,16 @@ require_once OPERATION_FILE;
 require_once PORTAL_GLOBALVARIABLE;
 require_once HELPER_ERROR_LOGGER;
 
-// Check if user is Student
+// Check if user is Student or Parent
 $is_student_login = isset($_SESSION['is_student_login']) && $_SESSION['is_student_login'] === true;
-$student_id = $is_student_login ? $_SESSION['student_id'] : ($_SESSION['user_id'] ?? null);
+$is_parent_login = isset($_SESSION['is_parent_login']) && $_SESSION['is_parent_login'] === true;
 
-if (!$is_student_login && !hasRole(ROLE_STUDENT)) {
+if (!$is_student_login && !$is_parent_login && !hasRole(ROLE_STUDENT)) {
     header('Location: ' . BASE_URL . '/index.php');
     exit;
 }
+
+$student_id = $is_parent_login ? ($_SESSION['active_student_id'] ?? null) : ($is_student_login ? $_SESSION['student_id'] : ($_SESSION['user_id'] ?? null));
 
 $appointment_id = intval($_POST['id'] ?? 0);
 

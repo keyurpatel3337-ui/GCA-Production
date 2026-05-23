@@ -14,16 +14,18 @@ if (!isset($dbOps)) {
     $dbOps = new DatabaseOperations();
 }
 
-// Check if user is a student or parent
+// Tighten access: Only parents are allowed to manage fees
 $is_student = isset($_SESSION['is_student_login']) && $_SESSION['is_student_login'] === true;
 $is_parent = isset($_SESSION['is_parent_login']) && $_SESSION['is_parent_login'] === true;
 
-if (!$is_student && !$is_parent) {
-    if (isset($_SESSION['is_parent_login'])) {
-        header('Location: ../../parent-login.php');
-    } else {
-        header('Location: student-login.php');
-    }
+if ($is_student) {
+    $_SESSION['error'] = 'Access Denied: Fees and Wallet are managed exclusively by Parents.';
+    header('Location: ../dashboard/student_dashboard.php');
+    exit;
+}
+
+if (!$is_parent) {
+    header('Location: ../../parent-login.php');
     exit;
 }
 

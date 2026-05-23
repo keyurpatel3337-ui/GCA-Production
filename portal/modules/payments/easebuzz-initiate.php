@@ -95,7 +95,7 @@ try {
     if ($payment_type === 'token_fee') {
         header('Location: ../student-portal/token-fee-payment.php');
     } else {
-        header('Location: ../dashboard/student_dashboard.php');
+        header('Location: ../parent-portal/dashboard.php');
     }
     exit;
 }
