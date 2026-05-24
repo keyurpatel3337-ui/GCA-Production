@@ -176,3 +176,118 @@ body.preload-transitions i {
 .generic-confirm-modal {
     z-index: 10000;
 }
+
+/* ========================================== */
+/* SPECIFIC FIX FOR ADMINLTE WRAPPER         */
+/* ========================================== */
+.app-wrapper {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Ensure navbar sticks to top */
+.app-header {
+    margin-top: 0 !important;
+}
+
+/* ========================================== */
+/* GUJARATI TEXT FONT SUPPORT                */
+/* ========================================== */
+.gujarati-text,
+[class*="-guj"],
+[name*="_guj"],
+[id*="-guj"],
+[id*="guj-content"] {
+    font-family: 'Noto Serif Gujarati', 'Inter', serif !important;
+}
+
+/* ========================================== */
+/* QUILL EDITOR OVERRIDES                    */
+/* ========================================== */
+.ql-editor img {
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Ensure resize handles are on top */
+.image-resizer {
+    z-index: 1000 !important;
+}
+
+/* ========================================== */
+/* MODERN MULTI-COLORED SIDEBAR ICONS SYSTEM  */
+/* ========================================== */
+.sidebar-menu .nav-icon {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+    width: 1.6rem;
+    text-align: center;
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+}
+
+/* Hover effect on menu item scales the icon */
+.sidebar-menu .nav-link:hover .nav-icon {
+    transform: scale(1.25) rotate(3deg);
+}
+
+/* Assign premium tailormade colors to specific icon groups */
+.sidebar-menu .nav-icon.fa-home { color: #3b82f6 !important; }
+.sidebar-menu .nav-icon.fa-users-cog { color: #8b5cf6 !important; }
+.sidebar-menu .nav-icon.fa-database { color: #f59e0b !important; }
+.sidebar-menu .nav-icon.fa-user-graduate { color: #10b981 !important; }
+.sidebar-menu .nav-icon.fa-users { color: #14b8a6 !important; }
+.sidebar-menu .nav-icon.fa-user-plus { color: #06b6d4 !important; }
+.sidebar-menu .nav-icon.fa-user-check { color: #22c55e !important; }
+.sidebar-menu .nav-icon.fa-sitemap { color: #0ea5e9 !important; }
+.sidebar-menu .nav-icon.fa-laptop-code { color: #6366f1 !important; }
+.sidebar-menu .nav-icon.fa-clipboard-list { color: #a855f7 !important; }
+.sidebar-menu .nav-icon.fa-whatsapp { color: #25d366 !important; }
+.sidebar-menu .nav-icon.fa-money-bill-wave { color: #f59e0b !important; }
+.sidebar-menu .nav-icon.fa-rupee-sign { color: #eab308 !important; }
+.sidebar-menu .nav-icon.fa-wallet { color: #10b981 !important; }
+.sidebar-menu .nav-icon.fa-graduation-cap { color: #ec4899 !important; }
+.sidebar-menu .nav-icon.fa-chart-line { color: #f43f5e !important; }
+.sidebar-menu .nav-icon.fa-chart-bar { color: #f97316 !important; }
+.sidebar-menu .nav-icon.fa-file-alt { color: #0ea5e9 !important; }
+.sidebar-menu .nav-icon.fa-envelope { color: #ef4444 !important; }
+.sidebar-menu .nav-icon.fa-cog { color: #64748b !important; }
+.sidebar-menu .nav-icon.fa-power-off { color: #f43f5e !important; }
+.sidebar-menu .nav-icon.fa-plus-circle,
+.sidebar-menu .nav-icon.fa-plus { color: #06b6d4 !important; }
+.sidebar-menu .nav-icon.fa-university { color: #4f46e5 !important; }
+.sidebar-menu .nav-icon.fa-book-open,
+.sidebar-menu .nav-icon.fa-book { color: #2563eb !important; }
+.sidebar-menu .nav-icon.fa-bell { color: #eab308 !important; }
+.sidebar-menu .nav-icon.fa-phone,
+.sidebar-menu .nav-icon.fa-phone-volume { color: #22c55e !important; }
+.sidebar-menu .nav-icon.fa-certificate { color: #d97706 !important; }
+.sidebar-menu .nav-icon.fa-file-import { color: #2563eb !important; }
+
+/* ========================================== */
+/* ELIMINATE SIDEBAR HOVER BULLETS / DOTS     */
+/* ========================================== */
+.sidebar-menu,
+.sidebar-menu ul,
+.sidebar-menu li,
+.sidebar-menu .nav-item,
+.sidebar-menu .nav-link,
+.nav-sidebar,
+.nav-sidebar ul,
+.nav-sidebar li,
+.nav-sidebar .nav-item,
+.nav-sidebar .nav-link {
+    list-style: none !important;
+    list-style-type: none !important;
+}
+
+.sidebar-menu li::before,
+.sidebar-menu .nav-item::before,
+.sidebar-menu .nav-link::before,
+.nav-sidebar li::before,
+.nav-sidebar .nav-item::before,
+.nav-sidebar .nav-link::before {
+    display: none !important;
+    content: none !important;
+}

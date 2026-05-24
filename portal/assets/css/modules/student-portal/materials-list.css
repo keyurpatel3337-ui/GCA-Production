@@ -1,0 +1,141 @@
+/* ================================================
+   Materials Library - Student Portal
+   Extracted from: portal/modules/student-portal/materials-list.php
+   ================================================ */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(226, 232, 240, 0.8);
+    --pdf-color: #ef4444;
+    --ppt-color: #f59e0b;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+}
+
+.glass-header-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+}
+
+.search-filter-row {
+    background: #ffffff;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.material-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-column: column;
+}
+
+.material-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
+    border-color: #cbd5e1;
+}
+
+.material-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+}
+
+.card-type-pdf::before { background: var(--pdf-color); }
+.card-type-ppt::before { background: var(--ppt-color); }
+
+.file-icon-wrapper {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.icon-pdf {
+    background-color: rgba(239, 68, 68, 0.08);
+    color: var(--pdf-color);
+}
+
+.icon-ppt {
+    background-color: rgba(245, 158, 11, 0.08);
+    color: var(--ppt-color);
+}
+
+.material-card:hover .file-icon-wrapper {
+    transform: scale(1.08);
+}
+
+.kindle-stat-badge {
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+.badge-bookmark {
+    background-color: rgba(245, 158, 11, 0.06);
+    color: #d97706;
+    border-color: rgba(245, 158, 11, 0.15);
+}
+
+.badge-note {
+    background-color: rgba(59, 130, 246, 0.06);
+    color: #2563eb;
+    border-color: rgba(59, 130, 246, 0.15);
+}
+
+.badge-doubt-unresolved {
+    background-color: rgba(239, 68, 68, 0.06);
+    color: #dc2626;
+    border-color: rgba(239, 68, 68, 0.15);
+}
+
+.badge-doubt-resolved {
+    background-color: rgba(16, 185, 129, 0.06);
+    color: #059669;
+    border-color: rgba(16, 185, 129, 0.15);
+}
+
+.btn-kindle-open {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #ffffff;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-kindle-open:hover {
+    background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+}
+
+.empty-library-state {
+    min-height: 380px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+}

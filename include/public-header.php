@@ -214,7 +214,7 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
     }
 
     /* Desktop: absolute positioned dropdown */
-    @media (min-width: 1024px) {
+    @media (min-width: 1280px) {
         .dropdown-menu {
             position: absolute;
             top: 100%;
@@ -233,7 +233,7 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
     }
 
     /* Mobile: collapsible dropdown */
-    @media (max-width: 1023px) {
+    @media (max-width: 1279px) {
         .dropdown-menu {
             display: none;
             position: static;
@@ -448,7 +448,7 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
     }
 
     /* 1366px Optimization */
-    @media (min-width: 1024px) and (max-width: 1366px) {
+    @media (min-width: 1280px) and (max-width: 1366px) {
         .logo-desktop {
             display: none;
         }
@@ -458,7 +458,7 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
         }
     }
 
-    @media (max-width: 1023px) {
+    @media (max-width: 1279px) {
         .logo-desktop {
             display: none;
         }
@@ -483,18 +483,18 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
     }
 
     /* Force hide mobile menu button on desktop */
-    @media (min-width: 1024px) {
+    @media (min-width: 1280px) {
         .mobile-menu-btn {
             display: none !important;
         }
 
-        .lg\:hidden {
+        .xl\:hidden {
             display: none !important;
         }
     }
 
     /* 1366px Laptop & Small Screen Optimization */
-    @media (min-width: 1024px) and (max-width: 1440px) {
+    @media (min-width: 1280px) and (max-width: 1440px) {
         .nav-link-premium {
             padding: 0.5rem 0.65rem !important;
             font-size: 0.72rem !important;
@@ -548,17 +548,17 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
 
         <!-- Mobile Menu Button -->
         <button id="mobile-menu-button"
-            class="lg:hidden mobile-menu-btn focus:outline-none transition-colors duration-300">
+            class="xl:hidden mobile-menu-btn focus:outline-none transition-colors duration-300">
             <i class="fas fa-bars text-xl text-gray-700" id="menu-icon"></i>
         </button>
 
         <!-- Navigation Menu -->
         <ul id="main-nav"
-            class="hidden lg:flex flex-col lg:flex-row gap-0.5 lg:gap-0.5 xl:gap-1 items-start lg:items-center w-full lg:w-auto mt-3 lg:mt-0 lg:bg-transparent lg:backdrop-blur-none p-4 lg:p-0 rounded-2xl lg:rounded-none shadow-2xl lg:shadow-none border border-white/30 lg:border-none max-h-[80vh] overflow-y-auto lg:overflow-visible"
+            class="hidden xl:flex flex-col xl:flex-row gap-0.5 xl:gap-0.5 xl:gap-1 items-start xl:items-center w-full xl:w-auto mt-3 xl:mt-0 xl:bg-transparent xl:backdrop-blur-none p-4 xl:p-0 rounded-2xl xl:rounded-none shadow-2xl xl:shadow-none border border-white/30 xl:border-none max-h-[80vh] overflow-y-auto xl:overflow-visible"
             style="background: transparent;">
 
             <!-- 11th Admission 2026 -->
-            <li class="w-full lg:w-auto">
+            <li class="w-full xl:w-auto">
                 <a href="https://gyanmanjarividyapith.edu.in/11Reg.php"
                     class="nav-link-premium <?= ($currentPage == '11Reg.php') ? 'nav-link-active-premium' : '' ?> gap-2">
                     11th Admission 2026
@@ -567,7 +567,7 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
             </li>
 
             <!-- Re-Neet Inquiry -->
-            <li class="w-full lg:w-auto">
+            <li class="w-full xl:w-auto">
                 <a href="<?php echo BASE_URL; ?>/reneet-admission.php"
                     class="nav-link-premium <?= ($currentPage == 'reneet-admission.php') ? 'nav-link-active-premium' : '' ?> gap-2">
                     Re-Neet Inquiry
@@ -575,7 +575,7 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
             </li>
 
             <!-- Home -->
-            <li class="w-full lg:w-auto">
+            <li class="w-full xl:w-auto">
                 <a href="<?php echo BASE_URL; ?>/index.php"
                     class="nav-link-premium <?= ($currentPage == 'index.php' && $currentDir != 'about' && $currentDir != 'facilities') ? 'nav-link-active-premium' : '' ?>">
                     Home
@@ -583,9 +583,9 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
             </li>
 
             <!-- About Us Dropdown -->
-            <li class="relative nav-item-dropdown w-full lg:w-auto">
+            <li class="relative nav-item-dropdown w-full xl:w-auto">
                 <button type="button"
-                    class="nav-link-premium <?= $isAboutActive ? 'nav-link-active-premium' : '' ?> w-full justify-between lg:justify-start gap-1"
+                    class="nav-link-premium <?= $isAboutActive ? 'nav-link-active-premium' : '' ?> w-full justify-between xl:justify-start gap-1"
                     onclick="toggleDropdown(this)">
                     About Us
                     <svg class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
@@ -608,9 +608,9 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
             </li>
 
             <!-- Academics Dropdown -->
-            <li class="relative nav-item-dropdown w-full lg:w-auto">
+            <li class="relative nav-item-dropdown w-full xl:w-auto">
                 <button type="button"
-                    class="nav-link-premium <?= $isAcademicsActive ? 'nav-link-active-premium' : '' ?> w-full justify-between lg:justify-start gap-1"
+                    class="nav-link-premium <?= $isAcademicsActive ? 'nav-link-active-premium' : '' ?> w-full justify-between xl:justify-start gap-1"
                     onclick="toggleDropdown(this)">
                     Academics
                     <svg class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
@@ -633,9 +633,9 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
             </li>
 
             <!-- Facilities Dropdown -->
-            <li class="relative nav-item-dropdown w-full lg:w-auto">
+            <li class="relative nav-item-dropdown w-full xl:w-auto">
                 <button type="button"
-                    class="nav-link-premium <?= $isFacilitiesActive ? 'nav-link-active-premium' : '' ?> w-full justify-between lg:justify-start gap-1"
+                    class="nav-link-premium <?= $isFacilitiesActive ? 'nav-link-active-premium' : '' ?> w-full justify-between xl:justify-start gap-1"
                     onclick="toggleDropdown(this)">
                     Facilities
                     <svg class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
@@ -673,9 +673,9 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
             </li>
 
             <!-- DLP Dropdown -->
-            <li class="relative nav-item-dropdown w-full lg:w-auto">
+            <li class="relative nav-item-dropdown w-full xl:w-auto">
                 <button type="button"
-                    class="nav-link-premium <?= $isDlpActive ? 'nav-link-active-premium' : '' ?> w-full justify-between lg:justify-start gap-1"
+                    class="nav-link-premium <?= $isDlpActive ? 'nav-link-active-premium' : '' ?> w-full justify-between xl:justify-start gap-1"
                     onclick="toggleDropdown(this)">
                     DLP
                     <svg class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
@@ -692,9 +692,9 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
             </li>
 
             <!-- Others Dropdown -->
-            <li class="relative nav-item-dropdown w-full lg:w-auto">
+            <li class="relative nav-item-dropdown w-full xl:w-auto">
                 <button type="button"
-                    class="nav-link-premium <?= $isOtherAppActive ? 'nav-link-active-premium' : '' ?> w-full justify-between lg:justify-start gap-1"
+                    class="nav-link-premium <?= $isOtherAppActive ? 'nav-link-active-premium' : '' ?> w-full justify-between xl:justify-start gap-1"
                     onclick="toggleDropdown(this)">
                     Others
                     <svg class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
@@ -726,7 +726,7 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
             </li>
 
             <!-- Contact Us -->
-            <li class="w-full lg:w-auto">
+            <li class="w-full xl:w-auto">
                 <a href="<?php echo BASE_URL; ?>/portal/website/contact.php"
                     class="nav-link-premium <?= ($currentPage == 'contact.php') ? 'nav-link-active-premium' : '' ?>">
                     Contact Us
@@ -734,29 +734,29 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
             </li>
 
             <!-- Admission Fees -->
-            <li class="w-full lg:w-auto">
+            <li class="w-full xl:w-auto">
                 <a href="https://forms.eduqfix.com/mahtmast/add" class="nav-link-premium">
                     Admission Fees
                 </a>
             </li>
 
             <!-- CTA Buttons -->
-            <li class="w-full lg:w-auto mt-2 lg:mt-0">
+            <li class="w-full xl:w-auto mt-2 xl:mt-0">
                 <a href="<?php echo BASE_URL; ?>/portal/modules/student-portal/student-login.php"
-                    class="nav-cta-btn nav-cta-student w-full lg:w-auto">
+                    class="nav-cta-btn nav-cta-student w-full xl:w-auto">
                     <i class="fas fa-user-graduate mr-2"></i>
                     Student Portal
                 </a>
             </li>
-            <li class="w-full lg:w-auto mt-2 lg:mt-0">
+            <li class="w-full xl:w-auto mt-2 xl:mt-0">
                 <a href="<?php echo BASE_URL; ?>/portal/parent-login.php"
-                    class="nav-cta-btn nav-cta-parent w-full lg:w-auto">
+                    class="nav-cta-btn nav-cta-parent w-full xl:w-auto">
                     <i class="fas fa-user-friends mr-2"></i>
                     Parent Portal
                 </a>
             </li>
-            <li class="w-full lg:w-auto mt-2 lg:mt-0">
-                <a href="<?php echo PORTAL_URL; ?>/login.php" class="nav-cta-btn nav-cta-admin w-full lg:w-auto">
+            <li class="w-full xl:w-auto mt-2 xl:mt-0">
+                <a href="<?php echo PORTAL_URL; ?>/login.php" class="nav-cta-btn nav-cta-admin w-full xl:w-auto">
                     <i class="fas fa-sign-in-alt mr-2"></i>
                     Admin Portal
                 </a>
@@ -810,7 +810,7 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
 
     // Unified dropdown toggle (works for mobile only, desktop uses hover)
     function toggleDropdown(button) {
-        if (window.innerWidth >= 1024) return; // Desktop uses hover
+        if (window.innerWidth >= 1280) return; // Desktop uses hover
 
         const dropdown = button.nextElementSibling;
         const arrow = button.querySelector('.dropdown-arrow');
@@ -835,7 +835,7 @@ $isOtherAppActive = in_array($currentPage, $otherAppPages);
 
     // Close mobile menu on window resize
     window.addEventListener('resize', () => {
-        if (window.innerWidth >= 1024 && mainNav) {
+        if (window.innerWidth >= 1280 && mainNav) {
             mainNav.classList.remove('mobile-active');
             mainNav.classList.add('hidden');
             if (menuIcon) {

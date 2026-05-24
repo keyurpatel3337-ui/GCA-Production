@@ -118,64 +118,8 @@ include '../../include/sidebar.php';
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 </script>
 
-<style>
-    .kindle-container {
-        display: flex;
-        gap: 20px;
-        min-height: calc(100vh - 120px);
-    }
-    .kindle-viewer {
-        flex: 1;
-        background: #faf7f2; /* Kindle paperwhite sepia texture */
-        border: 1px solid #dee2e6;
-        border-radius: 12px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        min-width: 0;
-    }
-    .kindle-sidebar {
-        width: 320px;
-        flex-shrink: 0;
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    }
-    .pdf-canvas-wrapper {
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        background: #ffffff;
-        max-width: 100%;
-        margin-top: 15px;
-        position: relative;
-    }
-    .btn-reader {
-        transition: all 0.2s ease;
-        border-radius: 50px;
-    }
-    .btn-reader:hover {
-        transform: scale(1.05);
-    }
-    .kindle-tab-btn {
-        font-weight: 600;
-        border: none;
-        background: transparent;
-        padding: 10px;
-        border-bottom: 2px solid transparent;
-        color: #64748b;
-        flex: 1;
-        transition: all 0.2s ease;
-    }
-    .kindle-tab-btn.active {
-        color: #0d6efd;
-        border-bottom-color: #0d6efd;
-    }
-</style>
+<!-- E-Reader styles are in portal/assets/css/modules/student-portal/view-material.css -->
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/student-portal/view-material.css">
 
 <div class="container-fluid py-3">
     <!-- Header Back Navigation -->

@@ -16,51 +16,8 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<style>
-    .mobile-tab-btn {
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.85rem;
-        padding: 6px 16px;
-        transition: all 0.2s ease;
-    }
-    .mobile-tab-btn.active {
-        background-color: #0d6efd !important;
-        color: #ffffff !important;
-        border-color: #0d6efd !important;
-        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
-    }
-    .timeline-card {
-        background: #ffffff;
-        border-radius: 12px;
-        border-left: 5px solid #0d6efd;
-        transition: all 0.2s ease;
-    }
-    .timeline-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.06) !important;
-    }
-    .time-badge {
-        background: #eef2ff;
-        color: #3b82f6;
-        font-weight: 700;
-        padding: 5px 12px;
-        border-radius: 8px;
-    }
-    .day-column-student {
-        background: #f8f9fa;
-        border-radius: 16px;
-        border: 1px solid #eef0f2;
-    }
-    .empty-state {
-        min-height: 250px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: #8c98a5;
-    }
-</style>
+<!-- Timetable styles are in portal/assets/css/modules/student-portal/timetable.css -->
+<link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/modules/student-portal/timetable.css">
 
 <div class="container-fluid py-4">
     <!-- Header Summary Card -->
