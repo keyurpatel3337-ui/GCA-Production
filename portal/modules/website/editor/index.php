@@ -40,154 +40,7 @@ $page_title = "Editor: " . $page_data['page_name'];
     <title><?php echo $page_title; ?></title>
     <link rel="stylesheet" href="../../../assets/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --sidebar-width: 350px;
-            --top-height: 60px;
-        }
-
-        body,
-        html {
-            height: 100%;
-            overflow: hidden;
-            background: #f4f6f9;
-        }
-
-        /* Top Navigation */
-        .editor-top-nav {
-            height: var(--top-height);
-            background: white;
-            border-bottom: 1px solid #dee2e6;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-
-        /* Layout */
-        .editor-container {
-            display: flex;
-            height: calc(100% - var(--top-height));
-            margin-top: var(--top-height);
-        }
-
-        /* Sidebar */
-        .editor-sidebar {
-            width: var(--sidebar-width);
-            background: white;
-            border-right: 1px solid #dee2e6;
-            overflow-y: auto;
-            flex-shrink: 0;
-            padding: 20px;
-        }
-
-        /* Preview Area */
-        .editor-preview {
-            flex-grow: 1;
-            background: #e9ecef;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            position: relative;
-        }
-
-        .preview-window {
-            flex-grow: 1;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            border: none;
-            width: 100%;
-            transition: width 0.3s ease;
-        }
-
-        /* Controls */
-        .section-card {
-            border: 1px solid #edf2f7;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .section-header {
-            padding: 12px 15px;
-            background: #f8fafc;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-weight: 600;
-        }
-
-        .section-header:hover {
-            background: #f1f5f9;
-        }
-
-        .section-content {
-            padding: 15px;
-            display: none;
-            border-top: 1px solid #edf2f7;
-        }
-
-        .section-card.active .section-content {
-            display: block;
-        }
-
-        .section-card.active {
-            border-color: #3b82f6;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
-        }
-
-        .device-selector {
-            display: flex;
-            gap: 10px;
-            background: #f1f5f9;
-            padding: 5px;
-            border-radius: 100px;
-        }
-
-        .device-btn {
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            cursor: pointer;
-            color: #64748b;
-            transition: all 0.2s;
-        }
-
-        .device-btn.active {
-            background: white;
-            color: #3b82f6;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Save Button */
-        .save-bar {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 10px 30px;
-            border-radius: 100px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            border: 1px solid white;
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -262,7 +115,7 @@ $page_title = "Editor: " . $page_data['page_name'];
 
             <div class="save-bar">
                 <div class="text-muted small">
-                    <i class="fas fa-sync-alt fa-spin me-2" style="display:none;" id="syncIcon"></i>
+                    <i class="fas fa-sync-alt fa-spin me-2 css-index-93b8ea" id="syncIcon"></i>
                     <span id="syncText">Draft: All changes synced</span>
                 </div>
             </div>
@@ -330,7 +183,7 @@ $page_title = "Editor: " . $page_data['page_name'];
                         $btn.prop('disabled', false).html('<i class="fas fa-save me-2"></i> Save Changes');
                         $('#syncText').text('Draft: All changes saved');
                         // Show inline success toast (footer.php not loaded in this editor)
-                        const toast = $('<div style="position:fixed;bottom:80px;right:30px;background:#198754;color:#fff;padding:12px 24px;border-radius:8px;z-index:9999;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.2)"><i class=\'fas fa-check-circle me-2\'></i>Changes saved successfully!</div>');
+                        const toast = $('<div class="css-index-274d33"><i class=\'fas fa-check-circle me-2\'></i>Changes saved successfully!</div>');
                         $('body').append(toast);
                         setTimeout(() => toast.fadeOut(400, () => toast.remove()), 3000);
                     }

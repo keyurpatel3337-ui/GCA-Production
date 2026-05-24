@@ -63,7 +63,7 @@ try {
         <table class="table table-hover table-bordered">
             <thead class="table-light">
                 <tr>
-                    <th class="text-center" style="width: 50px;">#</th>
+                    <th class="text-center css-ajax-preview-data-ae1f13">#</th>
                     <?php foreach ($columns as $col): ?>
                         <th><?php echo ucwords(str_replace('_', ' ', $col)); ?></th>
                     <?php endforeach; ?>
@@ -105,7 +105,7 @@ try {
                                         echo '<span class="text-muted">(no icon)</span>';
                                     }
                                 } elseif (strlen($value) > 100) {
-                                    echo '<div class="text-truncate" style="max-width: 300px;" title="' . htmlspecialchars($value ?? '') . '">'
+                                    echo '<div class="text-truncate css-ajax-preview-data-c0dc2c" title="' . htmlspecialchars($value ?? '') . '">'
                                         . htmlspecialchars(substr($value, 0, 100) ?? '') . '...</div>';
                                 } else {
                                     echo htmlspecialchars($value ?: '(empty)' ?? '');

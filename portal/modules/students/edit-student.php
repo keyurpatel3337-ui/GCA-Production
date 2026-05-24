@@ -75,10 +75,10 @@ include '../../include/sidebar.php';
                         <a href="students.php?view=all" class="btn btn-secondary btn-sm">
                             <i class="fas fa-arrow-left"></i> Back to List
                         </a>
-                        <form id="form_details_student_id" action="details.php" method="POST" style="display:none;">
+                        <form id="form_details_student_id" action="details.php" method="POST" class="css-edit-student-93b8ea">
                             <input type="hidden" name="id" value="<?php echo $student_id; ?>">
                         </form>
-                        <a onclick="document.getElementById('form_details_student_id').submit()" style="cursor:pointer"
+                        <a onclick="document.getElementById('form_details_student_id').submit()" class="css-edit-student-b202c6"
                             class="btn btn-info btn-sm">
                             <i class="fas fa-eye"></i> View Details
                         </a>
@@ -477,7 +477,7 @@ include '../../include/sidebar.php';
                                             id="transportNo" value="No" <?php echo ($student['transport_required'] == 'No' || empty($student['transport_required'])) ? 'checked' : ''; ?> required>
                                         <label class="form-check-label" for="transportNo">No</label>
                                     </div>
-                                    <div id="transport_months_container" class="mt-2" style="<?php echo ($student['transport_required'] == 'Yes') ? '' : 'display: none;'; ?>">
+                                    <div id="transport_months_container" class="mt-2 css-edit-student-26f7be">
                                         <label class="small fw-bold mb-1">Duration (Months)</label>
                                         <input type="number" name="transport_months" id="transport_months" class="form-control form-control-sm" 
                                                value="<?php echo htmlspecialchars($student['transport_months'] ?? ''); ?>" min="1" max="12" placeholder="e.g. 1">

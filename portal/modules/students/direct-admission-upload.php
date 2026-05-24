@@ -158,7 +158,7 @@ include '../../include/sidebar.php';
                         <button type="submit" class="btn btn-success px-4" id="submitBtn">
                             <i class="fas fa-cloud-upload-alt me-2"></i>Process Admission
                         </button>
-                        <button type="button" class="btn btn-secondary px-4" id="loadingBtn" style="display:none;"
+                        <button type="button" class="btn btn-secondary px-4 css-direct-admission-upload-93b8ea" id="loadingBtn"
                             disabled>
                             <span class="spinner-border spinner-border-sm me-2"></span>Processing...
                         </button>
@@ -186,11 +186,7 @@ include '../../include/sidebar.php';
     </form>
 </div>
 
-<style>
-    .border-dashed {
-        border: 2px dashed #dee2e6 !important;
-    }
-</style>
+
 
 <script>
     document.getElementById('directAdmissionForm').addEventListener('submit', function () {

@@ -73,13 +73,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" style="width:100%;">
+    <table cellpadding="2" class="css-collector-wise-pdf-8588e4">
         <tr>
-            <td style="text-align:center;">
-                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span style="font-size:12pt; font-weight:bold; background-color:#f0f0f0;">COLLECTOR-WISE REPORT</span><br>
-                <span style="font-size:10pt;">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
+            <td class="css-collector-wise-pdf-539b04">
+                <span class="css-collector-wise-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span class="css-collector-wise-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span class="css-collector-wise-pdf-0c5bfa">COLLECTOR-WISE REPORT</span><br>
+                <span class="css-collector-wise-pdf-1b8847">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -87,50 +87,50 @@ try {
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
+    <table border="0.5" cellpadding="4" class="css-collector-wise-pdf-6eb086">
         <thead>
-            <tr style="background-color:#333; color:#fff; font-weight:bold;">
+            <tr class="css-collector-wise-pdf-de3663">
                 <th width="15%">Collector</th>
                 <th width="10%">Role</th>
-                <th width="10%" style="text-align:center;">Transactions</th>
-                <th width="10%" style="text-align:center;">Students</th>
-                <th width="12%" style="text-align:right;">Cash</th>
-                <th width="12%" style="text-align:right;">Online/UPI</th>
-                <th width="12%" style="text-align:right;">Cheque</th>
-                <th width="12%" style="text-align:right;">Total</th>
-                <th width="7%" style="text-align:center;">Period</th>
+                <th width="10%" class="css-collector-wise-pdf-539b04">Transactions</th>
+                <th width="10%" class="css-collector-wise-pdf-539b04">Students</th>
+                <th width="12%" class="css-collector-wise-pdf-08a0ed">Cash</th>
+                <th width="12%" class="css-collector-wise-pdf-08a0ed">Online/UPI</th>
+                <th width="12%" class="css-collector-wise-pdf-08a0ed">Cheque</th>
+                <th width="12%" class="css-collector-wise-pdf-08a0ed">Total</th>
+                <th width="7%" class="css-collector-wise-pdf-539b04">Period</th>
             </tr>
         </thead>
         <tbody>';
 
     if (empty($collectorData)) {
-        $html .= '<tr><td colspan="9" style="text-align:center;">No data found</td></tr>';
+        $html .= '<tr><td colspan="9" class="css-collector-wise-pdf-539b04">No data found</td></tr>';
     } else {
         foreach ($collectorData as $row) {
             $html .= '
             <tr nobr="true">
                 <td width="15%"><b>' . htmlspecialchars($row['collector_name'] ?? '') . '</b></td>
                 <td width="10%">' . htmlspecialchars($row['collector_role'] ?? 'Staff') . '</td>
-                <td width="10%" style="text-align:center;">' . $row['transaction_count'] . '</td>
-                <td width="10%" style="text-align:center;">' . $row['students_served'] . '</td>
-                <td width="12%" style="text-align:right;">' . formatIndianCurrency($row['cash_amount']) . '</td>
-                <td width="12%" style="text-align:right;">' . formatIndianCurrency($row['online_amount']) . '</td>
-                <td width="12%" style="text-align:right;">' . formatIndianCurrency($row['cheque_amount']) . '</td>
-                <td width="12%" style="text-align:right; font-weight:bold;">' . formatIndianCurrency($row['total_collected']) . '</td>
-                <td width="7%" style="text-align:center;"><small>' . date('d M', strtotime($row['first_collection_date'])) . '-' . date('d M', strtotime($row['last_collection_date'])) . '</small></td>
+                <td width="10%" class="css-collector-wise-pdf-539b04">' . $row['transaction_count'] . '</td>
+                <td width="10%" class="css-collector-wise-pdf-539b04">' . $row['students_served'] . '</td>
+                <td width="12%" class="css-collector-wise-pdf-08a0ed">' . formatIndianCurrency($row['cash_amount']) . '</td>
+                <td width="12%" class="css-collector-wise-pdf-08a0ed">' . formatIndianCurrency($row['online_amount']) . '</td>
+                <td width="12%" class="css-collector-wise-pdf-08a0ed">' . formatIndianCurrency($row['cheque_amount']) . '</td>
+                <td width="12%" class="css-collector-wise-pdf-714e9d">' . formatIndianCurrency($row['total_collected']) . '</td>
+                <td width="7%" class="css-collector-wise-pdf-539b04"><small>' . date('d M', strtotime($row['first_collection_date'])) . '-' . date('d M', strtotime($row['last_collection_date'])) . '</small></td>
             </tr>';
         }
     }
 
     $html .= '
-            <tr style="background-color:#f0f0f0; font-weight:bold;">
+            <tr class="css-collector-wise-pdf-bf35f5">
                 <td width="25%" colspan="2">GRAND TOTAL</td>
-                <td width="10%" style="text-align:center;">' . $grandTotal['transactions'] . '</td>
-                <td width="10%" style="text-align:center;">' . $grandTotal['students'] . '</td>
-                <td width="12%" style="text-align:right;">' . formatIndianCurrency($grandTotal['cash']) . '</td>
-                <td width="12%" style="text-align:right;">' . formatIndianCurrency($grandTotal['online']) . '</td>
-                <td width="12%" style="text-align:right;">' . formatIndianCurrency($grandTotal['cheque']) . '</td>
-                <td width="12%" style="text-align:right;">' . formatIndianCurrency($grandTotal['collected']) . '</td>
+                <td width="10%" class="css-collector-wise-pdf-539b04">' . $grandTotal['transactions'] . '</td>
+                <td width="10%" class="css-collector-wise-pdf-539b04">' . $grandTotal['students'] . '</td>
+                <td width="12%" class="css-collector-wise-pdf-08a0ed">' . formatIndianCurrency($grandTotal['cash']) . '</td>
+                <td width="12%" class="css-collector-wise-pdf-08a0ed">' . formatIndianCurrency($grandTotal['online']) . '</td>
+                <td width="12%" class="css-collector-wise-pdf-08a0ed">' . formatIndianCurrency($grandTotal['cheque']) . '</td>
+                <td width="12%" class="css-collector-wise-pdf-08a0ed">' . formatIndianCurrency($grandTotal['collected']) . '</td>
                 <td width="7%"></td>
             </tr>
         </tbody>

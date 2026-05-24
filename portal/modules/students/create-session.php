@@ -286,7 +286,7 @@ try {
                                 </div>
                             </div>
 
-                            <div class="form-group" id="follow_up_date_group" style="display: none;">
+                            <div class="form-group css-create-session-224b51" id="follow_up_date_group">
                                 <label for="follow_up_date">Follow-up Date</label>
                                 <input type="date" class="form-control" id="follow_up_date" name="follow_up_date"
                                     min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>">

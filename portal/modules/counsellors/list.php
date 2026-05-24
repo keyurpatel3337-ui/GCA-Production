@@ -159,8 +159,7 @@ try {
                                     <td class="ps-4 text-muted small fw-bold">#<?php echo $counsellor['id']; ?></td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-initial rounded-circle bg-primary-subtle text-primary fw-bold me-3 d-flex align-items-center justify-content-center"
-                                                style="width: 40px; height: 40px; font-size: 1.2rem;">
+                                            <div class="avatar-initial rounded-circle bg-primary-subtle text-primary fw-bold me-3 d-flex align-items-center justify-content-center css-list-e88205">
                                                 <?php echo strtoupper(substr($counsellor['name'], 0, 1)); ?>
                                             </div>
                                             <div>

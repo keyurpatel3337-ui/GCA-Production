@@ -147,7 +147,7 @@ if (file_exists($jsonFile)) {
                     <table class="table table-hover align-middle mb-0" id="templatesTable">
                         <thead class="bg-light">
                             <tr>
-                                <th style="width: 40px;" class="ps-3">
+                                <th class="css-email-templates-479236" class="ps-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="selectAll">
                                     </div>
@@ -207,8 +207,8 @@ if (file_exists($jsonFile)) {
 
                     <div id="uploadProgress" class="d-none">
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-                                role="progressbar" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning css-email-templates-be70d9"
+                                role="progressbar"></div>
                         </div>
                         <p class="text-center mt-2">Processing... Please wait</p>
                     </div>
@@ -236,7 +236,7 @@ if (file_exists($jsonFile)) {
                 <h5 class="modal-title">Template Preview</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body p-0" style="height: 600px;">
+            <div class="modal-body p-0 css-email-templates-ff89c5">
                 <iframe id="quickPreviewFrame" class="w-100 h-100 border-0"></iframe>
             </div>
             <div class="modal-footer bg-light">
@@ -329,7 +329,7 @@ if (file_exists($jsonFile)) {
                             <td><span class="badge bg-primary tiny">${t.recipient_type}</span></td>
                             <td><span class="badge bg-light text-dark tiny">${t.template_category}</span></td>
                             <td>
-                                <div class="small text-truncate" style="max-width: 200px;" title="${t.subject}">
+                                <div class="small text-truncate css-email-templates-1a5c8d" title="${t.subject}">
                                     ${t.subject}
                                 </div>
                             </td>
@@ -446,7 +446,7 @@ if (file_exists($jsonFile)) {
             const iframe = document.getElementById('quickPreviewFrame');
             const doc = iframe.contentDocument || iframe.contentWindow.document;
             doc.open();
-            doc.write('<div style="text-align:center;padding:50px;"><i class="fas fa-spinner fa-spin fa-2x"></i><br>Generating preview...</div>');
+            doc.write('<div class="css-email-templates-467b3a"><i class="fas fa-spinner fa-spin fa-2x"></i><br>Generating preview...</div>');
             doc.close();
 
             try {
@@ -493,7 +493,7 @@ if (file_exists($jsonFile)) {
                 doc.close();
             } catch (error) {
                 doc.open();
-                doc.write('<div class="text-danger" style="text-align:center;padding:50px;">Failed to load preview.</div>');
+                doc.write('<div class="text-danger css-email-templates-467b3a">Failed to load preview.</div>');
                 doc.close();
             }
         });
@@ -615,7 +615,7 @@ if (file_exists($jsonFile)) {
                             html += `
                                 <div class="alert alert-warning">
                                     <h6><i class="fas fa-exclamation-triangle"></i> Errors Found:</h6>
-                                    <ul class="mb-0" style="max-height: 200px; overflow-y: auto;">
+                                    <ul class="mb-0 css-email-templates-d98fad">
                             `;
                             response.data.errors.forEach(function (error) {
                                 html += `<li>Row ${error.row}: ${error.message}</li>`;
@@ -651,12 +651,3 @@ if (file_exists($jsonFile)) {
     });
 </script>
 
-<style>
-    .tiny {
-        font-size: 0.7rem;
-    }
-
-    .uppercase {
-        text-transform: uppercase;
-    }
-</style>

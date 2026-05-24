@@ -24,8 +24,7 @@ require_once ENV_CONFIG_FILE; ?>
         <div
             class="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float">
         </div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float"
-            style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float css-contact-bd845f"></div>
 
         <div class="container mx-auto px-4 relative z-10">
             <!-- Header -->

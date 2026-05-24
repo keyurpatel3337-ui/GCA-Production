@@ -15,18 +15,7 @@ require_once ENV_CONFIG_FILE; ?>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="../assets/css/gm-public.css">
-    <style>
-        /* Remove default body margins */
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* Ensure header sticks to top without gaps */
-        header {
-            margin-top: 0 !important;
-        }
-    </style>
+    
 </head>
 
 <body class="text-gray-800">
@@ -36,9 +25,9 @@ require_once ENV_CONFIG_FILE; ?>
     <!-- Computer Lab Content Section -->
     <section class="relative py-12 md:py-24 overflow-hidden bg-gradient-to-b from-white via-cyan-50/30 to-white">
         <!-- Decorative background elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float" style="animation-delay: 0s;"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float" style="animation-delay: 1s;"></div>
-        <div class="absolute top-1/4 left-10 w-40 h-40 bg-indigo-100 rounded-full opacity-15 animate-float" style="animation-delay: 2s;"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float css-computer-lab-f165c4"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float css-computer-lab-bd845f"></div>
+        <div class="absolute top-1/4 left-10 w-40 h-40 bg-indigo-100 rounded-full opacity-15 animate-float css-computer-lab-cffe64"></div>
 
         <div class="container mx-auto px-4 relative z-10">
             <!-- Page Header -->

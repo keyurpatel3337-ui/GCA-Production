@@ -360,9 +360,8 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
                                                 </div>
                                                 <div class="col-md-4 text-end">
                                                     <div class="form-check form-switch d-flex justify-content-end">
-                                                        <input class="form-check-input me-2" type="checkbox" role="switch"
-                                                            id="autoAssignToggle"
-                                                            style="width: 50px; height: 25px; cursor: pointer;">
+                                                        <input class="form-check-input me-2 css-settings-190359" type="checkbox" role="switch"
+                                                            id="autoAssignToggle">
                                                         <label class="form-check-label" for="autoAssignToggle"
                                                             id="toggleLabel">
                                                             <span class="badge bg-secondary">Loading...</span>

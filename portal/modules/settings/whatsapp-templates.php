@@ -63,7 +63,7 @@ if (!hasRole(ROLE_SUPER_ADMIN) && !hasRole(ROLE_PRINCIPLE)) {
                 <table class="table table-hover align-middle mb-0" id="templatesTable">
                     <thead class="bg-light">
                         <tr>
-                            <th style="width: 40px;" class="ps-3">
+                            <th class="css-whatsapp-templates-479236" class="ps-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="selectAll">
                                 </div>
@@ -203,8 +203,8 @@ if (!hasRole(ROLE_SUPER_ADMIN) && !hasRole(ROLE_PRINCIPLE)) {
 
                     <div id="uploadProgress" class="d-none">
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-                                role="progressbar" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning css-whatsapp-templates-be70d9"
+                                role="progressbar"></div>
                         </div>
                         <p class="text-center mt-2">Processing... Please wait</p>
                     </div>
@@ -332,7 +332,7 @@ if (!hasRole(ROLE_SUPER_ADMIN) && !hasRole(ROLE_PRINCIPLE)) {
                                 <span class="badge bg-light text-dark tiny">${t.template_category}</span>
                             </td>
                             <td>
-                                <div class="small text-muted text-truncate" style="max-width: 300px;" title="${t.body_text}">
+                                <div class="small text-muted text-truncate css-whatsapp-templates-c0dc2c" title="${t.body_text}">
                                     ${t.body_text}
                                 </div>
                             </td>
@@ -756,7 +756,7 @@ if (!hasRole(ROLE_SUPER_ADMIN) && !hasRole(ROLE_PRINCIPLE)) {
                             html += `
                                 <div class="alert alert-warning">
                                     <h6><i class="fas fa-exclamation-triangle"></i> Errors Found:</h6>
-                                    <ul class="mb-0" style="max-height: 200px; overflow-y: auto;">
+                                    <ul class="mb-0 css-whatsapp-templates-d98fad">
                             `;
                             response.data.errors.forEach(function (error) {
                                 html += `<li>Row ${error.row}: ${error.message}</li>`;

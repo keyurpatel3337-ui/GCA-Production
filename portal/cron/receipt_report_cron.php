@@ -168,7 +168,7 @@ try {
             $html = '<h1>Receipt Report (' . $start_date . ' to ' . $end_date . ')</h1>';
             $html .= '<table border="1" cellpadding="4">
                         <thead>
-                            <tr style="background-color:#f0f0f0; font-weight:bold;">
+                            <tr class="css-receipt_report_cron-bf35f5">
                                 <th>Date</th>
                                 <th>Receipt No</th>
                                 <th>Student Name</th>
@@ -188,7 +188,7 @@ try {
                           </tr>';
             }
 
-            $html .= '<tr style="font-weight:bold;">
+            $html .= '<tr class="css-receipt_report_cron-043cda">
                         <td colspan="3" align="right">TOTAL</td>
                         <td>' . formatIndianCurrency($total_amount) . '</td>
                         <td></td>

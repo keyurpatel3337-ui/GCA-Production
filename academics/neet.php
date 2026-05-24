@@ -24,16 +24,11 @@ require_once ENV_CONFIG_FILE; ?>
     <!-- NEET Preparation Content Section -->
     <section class="relative py-12 md:py-24 overflow-hidden bg-gradient-to-b from-white via-red-50/30 to-white">
         <!-- Decorative background elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-red-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float"
-            style="animation-delay: 0s;"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-orange-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float"
-            style="animation-delay: 1s;"></div>
-        <div class="absolute top-1/4 left-10 w-40 h-40 bg-pink-100 rounded-full opacity-15 animate-float"
-            style="animation-delay: 2s;"></div>
-        <div class="absolute top-1/3 right-20 w-32 h-32 bg-red-200 rounded-full opacity-10 animate-float"
-            style="animation-delay: 3s;"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-orange-100 rounded-full opacity-15 animate-float"
-            style="animation-delay: 1.5s;"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-red-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float css-neet-f165c4"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-orange-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float css-neet-bd845f"></div>
+        <div class="absolute top-1/4 left-10 w-40 h-40 bg-pink-100 rounded-full opacity-15 animate-float css-neet-cffe64"></div>
+        <div class="absolute top-1/3 right-20 w-32 h-32 bg-red-200 rounded-full opacity-10 animate-float css-neet-c84216"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-orange-100 rounded-full opacity-15 animate-float css-neet-6da30b"></div>
 
         <div class="container mx-auto px-4 relative z-10">
             <!-- Page Header -->

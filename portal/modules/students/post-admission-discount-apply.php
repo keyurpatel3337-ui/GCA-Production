@@ -334,7 +334,7 @@ include '../../include/sidebar.php';
                         </div>
 
                         <!-- Smart Discount Options (Hidden by default) -->
-                        <div class="row mt-2" id="smart_options_container" style="display: none;">
+                        <div class="row mt-2 css-post-admission-discount-apply-224b51" id="smart_options_container">
                             <div class="col-md-12">
                                 <div class="card bg-light border-warning">
                                     <div class="card-body py-2">
@@ -344,7 +344,7 @@ include '../../include/sidebar.php';
                                             <table class="table table-sm table-borderless mb-0">
                                                 <tbody>
                                                     <tr>
-                                                        <td style="width: 40%;">
+                                                        <td class="css-post-admission-discount-apply-5172a7">
                                                             <div class="form-check">
                                                                 <input class="form-check-input smart-fee-check"
                                                                     type="checkbox" id="smart_check_school"
@@ -358,16 +358,15 @@ include '../../include/sidebar.php';
                                                         <td>
                                                             <div class="d-flex gap-2 align-items-center">
                                                                 <select
-                                                                    class="form-select form-select-sm border-warning smart-fee-type"
-                                                                    data-target="school_fee"
-                                                                    style="width: auto; min-width: 145px;" disabled>
+                                                                    class="form-select form-select-sm border-warning smart-fee-type css-post-admission-discount-apply-bd8e43"
+                                                                    data-target="school_fee" disabled>
                                                                     <option value="percentage">Percentage (%)</option>
                                                                     <option value="amount">Amount (₹)</option>
                                                                 </select>
                                                                 <input type="number"
-                                                                    class="form-control form-control-sm smart-fee-value"
+                                                                    class="form-control form-control-sm smart-fee-value css-post-admission-discount-apply-7ecc66"
                                                                     data-target="school_fee" value="" min="0" step="any"
-                                                                    placeholder="Enter value" style="max-width: 150px;"
+                                                                    placeholder="Enter value"
                                                                     disabled>
                                                             </div>
                                                         </td>
@@ -387,17 +386,15 @@ include '../../include/sidebar.php';
                                                         <td>
                                                             <div class="d-flex gap-2 align-items-center">
                                                                 <select
-                                                                    class="form-select form-select-sm border-warning smart-fee-type"
-                                                                    data-target="trust_facilities_fee"
-                                                                    style="width: auto; min-width: 145px;" disabled>
+                                                                    class="form-select form-select-sm border-warning smart-fee-type css-post-admission-discount-apply-bd8e43"
+                                                                    data-target="trust_facilities_fee" disabled>
                                                                     <option value="percentage">Percentage (%)</option>
                                                                     <option value="amount">Amount (₹)</option>
                                                                 </select>
                                                                 <input type="number"
-                                                                    class="form-control form-control-sm smart-fee-value"
+                                                                    class="form-control form-control-sm smart-fee-value css-post-admission-discount-apply-7ecc66"
                                                                     data-target="trust_facilities_fee" value="" min="0"
-                                                                    step="any" placeholder="Enter value"
-                                                                    style="max-width: 150px;" disabled>
+                                                                    step="any" placeholder="Enter value" disabled>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -417,17 +414,15 @@ include '../../include/sidebar.php';
                                                         <td>
                                                             <div class="d-flex gap-2 align-items-center">
                                                                 <select
-                                                                    class="form-select form-select-sm border-warning smart-fee-type"
-                                                                    data-target="tuition_fee_part2"
-                                                                    style="width: auto; min-width: 145px;" disabled>
+                                                                    class="form-select form-select-sm border-warning smart-fee-type css-post-admission-discount-apply-bd8e43"
+                                                                    data-target="tuition_fee_part2" disabled>
                                                                     <option value="percentage">Percentage (%)</option>
                                                                     <option value="amount">Amount (₹)</option>
                                                                 </select>
                                                                 <input type="number"
-                                                                    class="form-control form-control-sm smart-fee-value"
+                                                                    class="form-control form-control-sm smart-fee-value css-post-admission-discount-apply-7ecc66"
                                                                     data-target="tuition_fee_part2" value="" min="0"
-                                                                    step="any" placeholder="Enter value"
-                                                                    style="max-width: 150px;" disabled>
+                                                                    step="any" placeholder="Enter value" disabled>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -447,7 +442,7 @@ include '../../include/sidebar.php';
                         </div>
 
                         <!-- Discount Preview -->
-                        <div class="alert alert-info alert-dismissible" id="discount-preview" style="display: none;">
+                        <div class="alert alert-info alert-dismissible css-post-admission-discount-apply-224b51" id="discount-preview">
                             <h5 class="alert-heading"><i class="icon fas fa-calculator"></i> Discount Preview:</h5>
                             <table class="table table-sm mb-0">
                                 <tbody>

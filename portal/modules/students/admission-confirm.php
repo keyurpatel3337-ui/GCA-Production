@@ -213,95 +213,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<style>
-    :root {
-        --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-        --glass-bg: rgba(255, 255, 255, 0.9);
-        --glass-border: rgba(255, 255, 255, 0.5);
-    }
 
-    .content-wrapper {
-        background: #f8fafc;
-        min-height: 100vh;
-    }
-
-    .confirm-header {
-        background: var(--primary-gradient);
-        padding: 3rem 2rem;
-        border-radius: 0 0 2rem 2rem;
-        margin-bottom: -4rem;
-        color: white;
-    }
-
-    .glass-card {
-        background: var(--glass-bg);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--glass-border);
-        border-radius: 1.25rem;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-        overflow: hidden;
-        transition: transform 0.3s ease;
-    }
-
-    .detail-item {
-        padding: 1rem;
-        border-bottom: 1px solid #f1f5f9;
-        display: flex;
-        align-items: center;
-    }
-
-    .detail-item:last-child {
-        border-bottom: none;
-    }
-
-    .detail-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 1rem;
-        background: #eff6ff;
-        color: #2563eb;
-    }
-
-    .fee-badge {
-        font-size: 0.75rem;
-        font-weight: 600;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-    }
-
-    .requirement-box {
-        padding: 1.5rem;
-        border-radius: 1rem;
-        background: white;
-        border: 1px solid #e2e8f0;
-        height: 100%;
-    }
-
-    .btn-check:checked+.btn-outline-success {
-        background: #22c55e;
-        color: white;
-        border-color: #22c55e;
-    }
-
-    .summary-card {
-        background: #0f172a;
-        color: white;
-        border-radius: 1.5rem;
-        padding: 2rem;
-    }
-
-    .payable-amount {
-        font-size: 2.5rem;
-        font-weight: 800;
-        background: linear-gradient(to right, #60a5fa, #3b82f6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-</style>
 
 <div class="content-wrapper">
     <div class="confirm-header animate__animated animate__fadeIn">
@@ -529,8 +441,7 @@ include '../../include/sidebar.php';
                             </div>
                         </div>
                     <?php elseif ($auto_scholarship > 0 || !empty($eligible_scholarships)): ?>
-                        <div class="alert alert-soft-success border-0 p-4 rounded-3 mb-4 shadow-sm"
-                            style="background: rgba(34, 197, 94, 0.08);">
+                        <div class="alert alert-soft-success border-0 p-4 rounded-3 mb-4 shadow-sm css-admission-confirm-87f6da">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="bg-success text-white rounded-circle p-2 me-3 shadow-sm">
                                     <i class="fas fa-trophy"></i>
@@ -588,8 +499,7 @@ include '../../include/sidebar.php';
                                     <div class="col-md-12">
                                         <label class="fw-bold mb-2 text-dark">Select Scholarship Type</label>
                                         <select name="scholarship_type_id" id="scholarship_type_id"
-                                            class="form-select form-select-lg rounded-3 shadow-sm border-primary border-opacity-25"
-                                            style="border-width: 2px;">
+                                            class="form-select form-select-lg rounded-3 shadow-sm border-primary border-opacity-25 css-admission-confirm-70fb8b">
                                             <option value="">-- No Scholarship --</option>
                                             <?php foreach ($scholarship_types as $type): ?>
                                                 <?php
@@ -622,8 +532,7 @@ include '../../include/sidebar.php';
                                     </div>
 
                                     <!-- Manual Marks Entry Section -->
-                                    <div class="col-md-12" id="manualMarksSection"
-                                        style="<?php echo $marks_found ? 'display:none;' : ''; ?>">
+                                    <div class="col-md-12 css-admission-confirm-24c749" id="manualMarksSection">
                                         <div
                                             class="p-4 rounded-3 bg-light border border-dashed border-primary border-opacity-25">
                                             <h6 class="fw-bold mb-3"><i class="fas fa-edit me-2"></i> Enter Marks for
@@ -631,16 +540,16 @@ include '../../include/sidebar.php';
                                             <div id="selectScholarshipFirst" class="small text-muted mb-3">
                                                 Please select a scholarship type above first.
                                             </div>
-                                            <div id="manualMarksForm" style="display:none;">
+                                            <div id="manualMarksForm" class="css-admission-confirm-93b8ea">
                                                 <div class="row g-3">
-                                                    <div class="col-md-4" id="gmsatMarksField" style="display:none;">
+                                                    <div class="col-md-4 css-admission-confirm-93b8ea" id="gmsatMarksField">
                                                         <label class="small fw-bold mb-1">GMSAT Marks</label>
                                                         <input type="number" name="manual_gmsat_marks_input"
                                                             id="manual_gmsat_marks" class="form-control" min="0" max="200"
                                                             step="0.01" value="<?php echo $gmsat_marks; ?>">
                                                         <div class="extra-small text-muted mt-1" id="gmsatRangeInfo"></div>
                                                     </div>
-                                                    <div class="col-md-4" id="boardPercentageField" style="display:none;">
+                                                    <div class="col-md-4 css-admission-confirm-93b8ea" id="boardPercentageField">
                                                         <label class="small fw-bold mb-1">Board %</label>
                                                         <input type="number" name="manual_board_percentage_input"
                                                             id="manual_board_percentage" class="form-control" min="0"
@@ -722,7 +631,7 @@ include '../../include/sidebar.php';
                                             <span>Original Token</span>
                                             <span>₹<?php echo formatIndianCurrency($token_fee_total); ?></span>
                                         </div>
-                                        <div id="summaryDiscountRow" class="text-success small" style="display:none;">
+                                        <div id="summaryDiscountRow" class="text-success small css-admission-confirm-93b8ea">
                                             <div class="d-flex justify-content-between mb-1">
                                                 <span>Total Savings</span>
                                                 <span>- ₹<span id="summaryDiscountAmount">0</span></span>

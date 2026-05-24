@@ -24,12 +24,12 @@ require_once ENV_CONFIG_FILE; ?>
     <!-- Founders Content Section -->
     <section class="relative py-12 md:py-24 overflow-hidden bg-gradient-to-b from-white via-blue-50/30 to-white">
         <!-- Decorative background elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float" style="animation-delay: 0s;"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float" style="animation-delay: 1s;"></div>
-        <div class="absolute top-1/4 left-10 w-40 h-40 bg-purple-100 rounded-full opacity-15 animate-float" style="animation-delay: 2s;"></div>
-        <div class="absolute top-1/3 right-20 w-32 h-32 bg-blue-200 rounded-full opacity-10 animate-float" style="animation-delay: 3s;"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-indigo-100 rounded-full opacity-15 animate-float" style="animation-delay: 1.5s;"></div>
-        <div class="absolute top-2/3 left-1/4 w-36 h-36 bg-purple-200 rounded-full opacity-10 animate-float" style="animation-delay: 2.5s;"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float css-founder-f165c4"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float css-founder-bd845f"></div>
+        <div class="absolute top-1/4 left-10 w-40 h-40 bg-purple-100 rounded-full opacity-15 animate-float css-founder-cffe64"></div>
+        <div class="absolute top-1/3 right-20 w-32 h-32 bg-blue-200 rounded-full opacity-10 animate-float css-founder-c84216"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-indigo-100 rounded-full opacity-15 animate-float css-founder-6da30b"></div>
+        <div class="absolute top-2/3 left-1/4 w-36 h-36 bg-purple-200 rounded-full opacity-10 animate-float css-founder-fb66aa"></div>
 
         <div class="container mx-auto px-4 relative z-10">
             <!-- Page Header -->
@@ -49,10 +49,10 @@ require_once ENV_CONFIG_FILE; ?>
                     <div class="flex flex-col lg:flex-row">
                         <!-- Image Side -->
                         <div class="lg:w-2/5 p-6 md:p-8 lg:p-12 bg-gradient-to-br from-blue-50 to-blue-100/50 flex flex-col items-center justify-center relative">
-                            <div class="absolute top-0 left-0 w-32 h-32 bg-blue-200 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-30 animate-float" style="animation-delay: 0s;"></div>
-                            <div class="absolute bottom-0 right-0 w-24 h-24 bg-indigo-200 rounded-full translate-x-1/2 translate-y-1/2 opacity-30 animate-float" style="animation-delay: 1.5s;"></div>
-                            <div class="absolute top-1/4 right-4 w-16 h-16 bg-blue-300 rounded-full opacity-20 animate-float" style="animation-delay: 2s;"></div>
-                            <div class="absolute bottom-1/4 left-4 w-20 h-20 bg-indigo-300 rounded-full opacity-25 animate-float" style="animation-delay: 3s;"></div>
+                            <div class="absolute top-0 left-0 w-32 h-32 bg-blue-200 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-30 animate-float css-founder-f165c4"></div>
+                            <div class="absolute bottom-0 right-0 w-24 h-24 bg-indigo-200 rounded-full translate-x-1/2 translate-y-1/2 opacity-30 animate-float css-founder-6da30b"></div>
+                            <div class="absolute top-1/4 right-4 w-16 h-16 bg-blue-300 rounded-full opacity-20 animate-float css-founder-cffe64"></div>
+                            <div class="absolute bottom-1/4 left-4 w-20 h-20 bg-indigo-300 rounded-full opacity-25 animate-float css-founder-c84216"></div>
 
                             <div class="relative group">
                                 <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full opacity-75 group-hover:opacity-100 blur transition duration-300"></div>
@@ -95,10 +95,10 @@ require_once ENV_CONFIG_FILE; ?>
                     <div class="flex flex-col lg:flex-row-reverse">
                         <!-- Image Side -->
                         <div class="lg:w-2/5 p-6 md:p-8 lg:p-12 bg-gradient-to-br from-purple-50 to-purple-100/50 flex flex-col items-center justify-center relative">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-purple-200 rounded-full translate-x-1/2 -translate-y-1/2 opacity-30 animate-float" style="animation-delay: 0.5s;"></div>
-                            <div class="absolute bottom-0 left-0 w-24 h-24 bg-indigo-200 rounded-full -translate-x-1/2 translate-y-1/2 opacity-30 animate-float" style="animation-delay: 2s;"></div>
-                            <div class="absolute top-1/4 left-4 w-16 h-16 bg-purple-300 rounded-full opacity-20 animate-float" style="animation-delay: 2.5s;"></div>
-                            <div class="absolute bottom-1/4 right-4 w-20 h-20 bg-indigo-300 rounded-full opacity-25 animate-float" style="animation-delay: 1s;"></div>
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-purple-200 rounded-full translate-x-1/2 -translate-y-1/2 opacity-30 animate-float css-founder-623c98"></div>
+                            <div class="absolute bottom-0 left-0 w-24 h-24 bg-indigo-200 rounded-full -translate-x-1/2 translate-y-1/2 opacity-30 animate-float css-founder-cffe64"></div>
+                            <div class="absolute top-1/4 left-4 w-16 h-16 bg-purple-300 rounded-full opacity-20 animate-float css-founder-fb66aa"></div>
+                            <div class="absolute bottom-1/4 right-4 w-20 h-20 bg-indigo-300 rounded-full opacity-25 animate-float css-founder-bd845f"></div>
 
                             <div class="relative group">
                                 <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full opacity-75 group-hover:opacity-100 blur transition duration-300"></div>
@@ -138,11 +138,11 @@ require_once ENV_CONFIG_FILE; ?>
             <!-- Vision Statement -->
             <div class="max-w-4xl mx-auto mt-12 md:mt-24 text-center">
                 <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-8 lg:p-12 shadow-2xl relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 animate-float" style="animation-delay: 0s;"></div>
-                    <div class="absolute bottom-0 right-0 w-48 h-48 bg-white/10 rounded-full translate-x-1/2 translate-y-1/2 animate-float" style="animation-delay: 1.5s;"></div>
-                    <div class="absolute top-1/2 left-10 w-32 h-32 bg-white/10 rounded-full animate-float" style="animation-delay: 3s;"></div>
-                    <div class="absolute top-1/3 right-10 w-40 h-40 bg-white/10 rounded-full animate-float" style="animation-delay: 2s;"></div>
-                    <div class="absolute bottom-1/4 left-1/3 w-24 h-24 bg-white/10 rounded-full animate-float" style="animation-delay: 2.5s;"></div>
+                    <div class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 animate-float css-founder-f165c4"></div>
+                    <div class="absolute bottom-0 right-0 w-48 h-48 bg-white/10 rounded-full translate-x-1/2 translate-y-1/2 animate-float css-founder-6da30b"></div>
+                    <div class="absolute top-1/2 left-10 w-32 h-32 bg-white/10 rounded-full animate-float css-founder-c84216"></div>
+                    <div class="absolute top-1/3 right-10 w-40 h-40 bg-white/10 rounded-full animate-float css-founder-cffe64"></div>
+                    <div class="absolute bottom-1/4 left-1/3 w-24 h-24 bg-white/10 rounded-full animate-float css-founder-fb66aa"></div>
 
                     <div class="relative z-10">
                         <div class="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">

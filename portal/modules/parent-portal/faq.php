@@ -161,21 +161,6 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
-<style>
-    .custom-accordion .accordion-button:not(.collapsed) {
-        background-color: transparent;
-        color: var(--bs-primary);
-        box-shadow: none;
-    }
 
-    .custom-accordion .accordion-button:focus {
-        box-shadow: none;
-        border-color: rgba(0, 0, 0, .125);
-    }
-
-    .custom-accordion .accordion-item {
-        background-color: transparent;
-    }
-</style>
 
 <?php include '../../include/footer.php'; ?>

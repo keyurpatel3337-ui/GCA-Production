@@ -38,7 +38,7 @@ include '../../include/sidebar.php';
                     data-bs-target="#addModal">
                     <i class="fas fa-plus me-1"></i> Add Standard
                 </button>
-                <div id="deleteSelectedBtn" style="display: none;">
+                <div id="deleteSelectedBtn" class="css-courses-224b51">
                     <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="deleteSelected()">
                         <i class="fas fa-trash-alt me-1"></i> Delete Selected
                     </button>

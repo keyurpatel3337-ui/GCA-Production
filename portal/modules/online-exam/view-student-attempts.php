@@ -68,25 +68,25 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             <!-- Exam Meta Cards -->
             <div class="row mb-4">
                 <div class="col-md-3">
-                    <div class="card border-0 shadow-sm rounded-lg p-3" style="background: linear-gradient(135deg, #eff6ff, #dbeafe);">
+                    <div class="card border-0 shadow-sm rounded-lg p-3 css-view-student-attempts-59b6c5">
                         <div class="text-muted small font-weight-bold">EXAM MODE</div>
                         <div class="h4 font-weight-bold text-primary mt-1"><?= $exam['exam_mode'] === 'Final' ? 'Proctored Final' : 'Practice Test' ?></div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card border-0 shadow-sm rounded-lg p-3" style="background: linear-gradient(135deg, #f0fdf4, #dcfce7);">
+                    <div class="card border-0 shadow-sm rounded-lg p-3 css-view-student-attempts-669529">
                         <div class="text-muted small font-weight-bold">TOTAL MARKS</div>
                         <div class="h4 font-weight-bold text-success mt-1"><?= $exam['total_marks'] ?> Marks</div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card border-0 shadow-sm rounded-lg p-3" style="background: linear-gradient(135deg, #faf5ff, #f3e8ff);">
+                    <div class="card border-0 shadow-sm rounded-lg p-3 css-view-student-attempts-49badc">
                         <div class="text-muted small font-weight-bold">DURATION</div>
                         <div class="h4 font-weight-bold text-purple mt-1"><?= $exam['duration_mins'] ?> Minutes</div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card border-0 shadow-sm rounded-lg p-3" style="background: linear-gradient(135deg, #fffbeb, #fef3c7);">
+                    <div class="card border-0 shadow-sm rounded-lg p-3 css-view-student-attempts-548f28">
                         <div class="text-muted small font-weight-bold">TOTAL PARTICIPANTS</div>
                         <div class="h4 font-weight-bold text-warning mt-1"><?= count($attempts) ?> Students</div>
                     </div>
@@ -94,20 +94,20 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             </div>
 
             <!-- Search and List -->
-            <div class="card shadow-sm border-0" style="border-radius: 15px;">
-                <div class="card-header bg-white border-0 py-4 d-flex justify-content-between align-items-center flex-wrap" style="gap: 15px;">
+            <div class="card shadow-sm border-0 css-view-student-attempts-dc9ce7">
+                <div class="card-header bg-white border-0 py-4 d-flex justify-content-between align-items-center flex-wrap css-view-student-attempts-651c59">
                     <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-user-graduate mr-2 text-primary"></i> Participant Attempts</h5>
-                    <div class="d-flex align-items-center gap-2 flex-wrap" style="max-width: 600px; width: 100%; justify-content: flex-end;">
-                        <form method="GET" class="d-flex align-items-center" style="max-width: 300px; width: 100%;">
+                    <div class="d-flex align-items-center gap-2 flex-wrap css-view-student-attempts-50f621">
+                        <form method="GET" class="d-flex align-items-center css-view-student-attempts-782155">
                             <input type="hidden" name="exam_id" value="<?= $exam_id ?>">
-                            <div class="input-group" style="width: 100%;">
+                            <div class="input-group css-view-student-attempts-199b6f">
                                 <input type="text" name="search" class="form-control" placeholder="Search by name or roll number..." value="<?= htmlspecialchars($search_query) ?>" style="border-radius: 10px 0 0 10px;">
-                                <button class="btn btn-primary px-3" type="submit" style="border-radius: 0 10px 10px 0;">
+                                <button class="btn btn-primary px-3 css-view-student-attempts-eb9e65" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
                         </form>
-                        <a href="manage-exams.php" class="btn btn-outline-secondary px-3" style="border-radius: 10px; font-weight: 600; white-space: nowrap;">
+                        <a href="manage-exams.php" class="btn btn-outline-secondary px-3 css-view-student-attempts-a06b38">
                             <i class="fas fa-arrow-left mr-1"></i> Back to Exams
                         </a>
                     </div>

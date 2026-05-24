@@ -108,13 +108,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" style="width:100%;">
+    <table cellpadding="2" class="css-gst-report-pdf-8588e4">
         <tr>
-            <td style="text-align:center;">
-                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span style="font-size:12pt; font-weight:bold; background-color:#f0f0f0;">GST DETAILED REPORT (DATE-WISE)</span><br>
-                <span style="font-size:10pt;">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
+            <td class="css-gst-report-pdf-539b04">
+                <span class="css-gst-report-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span class="css-gst-report-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span class="css-gst-report-pdf-0c5bfa">GST DETAILED REPORT (DATE-WISE)</span><br>
+                <span class="css-gst-report-pdf-1b8847">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -122,52 +122,52 @@ try {
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
+    <table border="0.5" cellpadding="4" class="css-gst-report-pdf-6eb086">
         <thead>
-            <tr style="background-color:#333; color:#fff; font-weight:bold;">
-                <th width="5%" style="text-align:center;">#</th>
+            <tr class="css-gst-report-pdf-de3663">
+                <th width="5%" class="css-gst-report-pdf-539b04">#</th>
                 <th width="10%">Date</th>
                 <th width="15%">Fee Type</th>
                 <th width="10%">Mode</th>
-                <th width="5%" style="text-align:center;">Count</th>
-                <th width="11%" style="text-align:right;">Total Amount</th>
-                <th width="11%" style="text-align:right;">Taxable Value</th>
-                <th width="11%" style="text-align:right;">CGST (9%)</th>
-                <th width="11%" style="text-align:right;">SGST (9%)</th>
-                <th width="11%" style="text-align:right;">Total GST</th>
+                <th width="5%" class="css-gst-report-pdf-539b04">Count</th>
+                <th width="11%" class="css-gst-report-pdf-08a0ed">Total Amount</th>
+                <th width="11%" class="css-gst-report-pdf-08a0ed">Taxable Value</th>
+                <th width="11%" class="css-gst-report-pdf-08a0ed">CGST (9%)</th>
+                <th width="11%" class="css-gst-report-pdf-08a0ed">SGST (9%)</th>
+                <th width="11%" class="css-gst-report-pdf-08a0ed">Total GST</th>
             </tr>
         </thead>
         <tbody>';
 
     if (empty($processedRecords)) {
-        $html .= '<tr><td colspan="10" style="text-align:center;">No records found</td></tr>';
+        $html .= '<tr><td colspan="10" class="css-gst-report-pdf-539b04">No records found</td></tr>';
     } else {
         $i = 1;
         foreach ($processedRecords as $row) {
             $html .= '
             <tr nobr="true">
-                <td width="5%" style="text-align:center;">' . $i++ . '</td>
+                <td width="5%" class="css-gst-report-pdf-539b04">' . $i++ . '</td>
                 <td width="10%">' . date('d-m-Y', strtotime($row['payment_date'])) . '</td>
                 <td width="15%">' . htmlspecialchars($row['display_type'] ?? '') . '</td>
                 <td width="10%">' . ucfirst($row['payment_mode'] ?? '') . '</td>
-                <td width="5%" style="text-align:center;">' . $row['txn_count'] . '</td>
-                <td width="11%" style="text-align:right;">' . formatIndianCurrency($row['amount']) . '</td>
-                <td width="11%" style="text-align:right;">' . formatIndianCurrency($row['taxable']) . '</td>
-                <td width="11%" style="text-align:right;">' . formatIndianCurrency($row['cgst']) . '</td>
-                <td width="11%" style="text-align:right;">' . formatIndianCurrency($row['sgst']) . '</td>
-                <td width="11%" style="text-align:right; font-weight:bold;">' . formatIndianCurrency($row['gst']) . '</td>
+                <td width="5%" class="css-gst-report-pdf-539b04">' . $row['txn_count'] . '</td>
+                <td width="11%" class="css-gst-report-pdf-08a0ed">' . formatIndianCurrency($row['amount']) . '</td>
+                <td width="11%" class="css-gst-report-pdf-08a0ed">' . formatIndianCurrency($row['taxable']) . '</td>
+                <td width="11%" class="css-gst-report-pdf-08a0ed">' . formatIndianCurrency($row['cgst']) . '</td>
+                <td width="11%" class="css-gst-report-pdf-08a0ed">' . formatIndianCurrency($row['sgst']) . '</td>
+                <td width="11%" class="css-gst-report-pdf-714e9d">' . formatIndianCurrency($row['gst']) . '</td>
             </tr>';
         }
     }
 
     $html .= '
-            <tr style="background-color:#f0f0f0; font-weight:bold;">
-                <td width="45%" colspan="5" style="text-align:right;">GRAND TOTAL</td>
-                <td width="11%" style="text-align:right;">' . formatIndianCurrency($totalCollection) . '</td>
-                <td width="11%" style="text-align:right;">' . formatIndianCurrency($totalTaxable) . '</td>
-                <td width="11%" style="text-align:right;">' . formatIndianCurrency($totalCGST) . '</td>
-                <td width="11%" style="text-align:right;">' . formatIndianCurrency($totalSGST) . '</td>
-                <td width="11%" style="text-align:right;">' . formatIndianCurrency($totalGST) . '</td>
+            <tr class="css-gst-report-pdf-bf35f5">
+                <td width="45%" colspan="5" class="css-gst-report-pdf-08a0ed">GRAND TOTAL</td>
+                <td width="11%" class="css-gst-report-pdf-08a0ed">' . formatIndianCurrency($totalCollection) . '</td>
+                <td width="11%" class="css-gst-report-pdf-08a0ed">' . formatIndianCurrency($totalTaxable) . '</td>
+                <td width="11%" class="css-gst-report-pdf-08a0ed">' . formatIndianCurrency($totalCGST) . '</td>
+                <td width="11%" class="css-gst-report-pdf-08a0ed">' . formatIndianCurrency($totalSGST) . '</td>
+                <td width="11%" class="css-gst-report-pdf-08a0ed">' . formatIndianCurrency($totalGST) . '</td>
             </tr>
         </tbody>
     </table>';

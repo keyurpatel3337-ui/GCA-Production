@@ -132,28 +132,7 @@ $pdf->SetFont('helvetica', '', 10);
 
 // --- Header Table ---
 $html = '
-<style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        font-family: helvetica;
-        font-size: 10pt;
-    }
-    th, td {
-        border: 1px solid black;
-        padding: 5px;
-        text-align: center;
-    }
-    .bold {
-        font-weight: bold;
-    }
-    .left {
-        text-align: left;
-    }
-    .no-border {
-        border: none;
-    }
-</style>
+
 
 <br><br><br><br><br><br><br><br>
 
@@ -187,9 +166,9 @@ $pdf->writeHTML($val = $html, $ln = true, $fill = false, $reseth = false, $cell 
 
 // --- Marks Table ---
 $html = '
-<table cellpadding="5" border="1" style="border-collapse:collapse;">
+<table cellpadding="5" border="1" class="css-print-result-pdf-01ce67">
     <thead>
-        <tr style="background-color:#f2f2f2;">
+        <tr class="css-print-result-pdf-5af5d2">
             <th width="5%" rowspan="2" align="center" valign="middle" class="bold">Sr.</th>
             <th width="28%" rowspan="2" align="left" valign="middle" class="bold">Subject</th>
             <th width="8%" align="center" valign="middle" class="bold">First<br>Exam</th>
@@ -201,7 +180,7 @@ $html = '
             <th width="8%" align="center" valign="middle" class="bold">Grace</th>
             <th width="9%" align="center" valign="middle" class="bold">Grade</th>
         </tr>
-        <tr style="background-color:#f2f2f2;">
+        <tr class="css-print-result-pdf-5af5d2">
             <th align="center" valign="middle">50</th>
             <th align="center" valign="middle">50</th>
             <th align="center" valign="middle">80</th>
@@ -264,7 +243,7 @@ if (!empty($marks_data)) {
             <tr>
                 <td width="5%" align="center" valign="middle">' . $sr++ . '</td>
                 <td width="28%" align="left" valign="middle">' . htmlspecialchars($data['subject_name'] ?? '') . ' Prac.</td>
-                <td width="40%" colspan="5" align="center" valign="middle" style="letter-spacing:1px;">Out of (50)</td>
+                <td width="40%" colspan="5" align="center" valign="middle" class="css-print-result-pdf-ad968c">Out of (50)</td>
                 <td width="9%" align="center" valign="middle"><b>' . formatIndianCurrency($practical_marks, false) . '</b></td>
                 <td width="8%" align="center" valign="middle">-</td>
                 <td width="9%" align="center" valign="middle">' . $grade . '</td>

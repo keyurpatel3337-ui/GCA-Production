@@ -222,8 +222,7 @@ include '../../include/sidebar.php'; ?>
     <div class="row g-3 mb-5">
         <div class="col-xl-3 col-lg-3 col-md-6 col-6">
             <a href="<?php echo PORTAL_URL; ?>/modules/students/appointments.php" class="quick-action-btn">
-                <div class="quick-icon bg-soft-primary text-primary bg-opacity-10"
-                    style="background-color: rgba(59, 130, 246, 0.1);">
+                <div class="quick-icon bg-soft-primary text-primary bg-opacity-10 css-counsellor_dashboard-a29ce1">
                     <i class="fas fa-calendar-check"></i>
                 </div>
                 <div class="quick-info">
@@ -235,8 +234,7 @@ include '../../include/sidebar.php'; ?>
 
         <div class="col-xl-3 col-lg-3 col-md-6 col-6">
             <a href="<?php echo PORTAL_URL; ?>/modules/students/students.php?view=all" class="quick-action-btn">
-                <div class="quick-icon bg-soft-success text-success bg-opacity-10"
-                    style="background-color: rgba(16, 185, 129, 0.1);">
+                <div class="quick-icon bg-soft-success text-success bg-opacity-10 css-counsellor_dashboard-a31f5e">
                     <i class="fas fa-user-graduate"></i>
                 </div>
                 <div class="quick-info">
@@ -248,8 +246,7 @@ include '../../include/sidebar.php'; ?>
 
         <div class="col-xl-3 col-lg-3 col-md-6 col-6">
             <a href="<?php echo PORTAL_URL; ?>/modules/students/sessions.php?action=add" class="quick-action-btn">
-                <div class="quick-icon bg-soft-info text-info bg-opacity-10"
-                    style="background-color: rgba(6, 182, 212, 0.1);">
+                <div class="quick-icon bg-soft-info text-info bg-opacity-10 css-counsellor_dashboard-cab35b">
                     <i class="fas fa-plus"></i>
                 </div>
                 <div class="quick-info">
@@ -261,8 +258,7 @@ include '../../include/sidebar.php'; ?>
 
         <div class="col-xl-3 col-lg-3 col-md-6 col-6">
             <a href="reports.php?action=create" class="quick-action-btn">
-                <div class="quick-icon bg-soft-warning text-warning bg-opacity-10"
-                    style="background-color: rgba(245, 158, 11, 0.1);">
+                <div class="quick-icon bg-soft-warning text-warning bg-opacity-10 css-counsellor_dashboard-8557c1">
                     <i class="fas fa-file-alt"></i>
                 </div>
                 <div class="quick-info">

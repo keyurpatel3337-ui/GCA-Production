@@ -69,13 +69,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" style="width:100%;">
+    <table cellpadding="2" class="css-scholarships-pdf-8588e4">
         <tr>
-            <td style="text-align:center;">
-                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span style="font-size:12pt; font-weight:bold; background-color:#ffc107; color:#000;">SCHOLARSHIP APPLIED REPORT</span><br>
-                <span style="font-size:10pt;">Generated on: ' . date('d M Y h:i A') . '</span>
+            <td class="css-scholarships-pdf-539b04">
+                <span class="css-scholarships-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span class="css-scholarships-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span class="css-scholarships-pdf-72668f">SCHOLARSHIP APPLIED REPORT</span><br>
+                <span class="css-scholarships-pdf-1b8847">Generated on: ' . date('d M Y h:i A') . '</span>
             </td>
         </tr>
     </table>';
@@ -83,34 +83,34 @@ try {
     $pdf->Ln(2);
 
     $summaryHtml = '
-    <table cellpadding="4" style="width:100%; border:0.5px solid #ddd; background-color:#f8f9fa;">
+    <table cellpadding="4" class="css-scholarships-pdf-f6238b">
         <tr>
             <td width="30%">Total Students: <b>' . count($students) . '</b></td>
-            <td width="40%" style="text-align:center;">Filter: <b>' . ($search ?: 'All') . '</b></td>
-            <td width="30%" style="text-align:right;">Total Scholarship: <b>' . formatIndianCurrency($totalAmount) . '</b></td>
+            <td width="40%" class="css-scholarships-pdf-539b04">Filter: <b>' . ($search ?: 'All') . '</b></td>
+            <td width="30%" class="css-scholarships-pdf-08a0ed">Total Scholarship: <b>' . formatIndianCurrency($totalAmount) . '</b></td>
         </tr>
     </table>';
     $pdf->writeHTML($summaryHtml, true, false, false, false, '');
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
+    <table border="0.5" cellpadding="4" class="css-scholarships-pdf-6eb086">
         <thead>
-            <tr style="background-color:#eee; font-weight:bold;">
-                <th width="4%" style="text-align:center;">#</th>
+            <tr class="css-scholarships-pdf-5f2273">
+                <th width="4%" class="css-scholarships-pdf-539b04">#</th>
                 <th width="20%">Student Name</th>
                 <th width="12%">Enrollment No</th>
                 <th width="12%">Class</th>
                 <th width="20%">Scholarship Type</th>
-                <th width="10%" style="text-align:center;">Benefit (%)</th>
-                <th width="12%" style="text-align:right;">Amount</th>
+                <th width="10%" class="css-scholarships-pdf-539b04">Benefit (%)</th>
+                <th width="12%" class="css-scholarships-pdf-08a0ed">Amount</th>
                 <th width="10%">Mobile</th>
             </tr>
         </thead>
         <tbody>';
 
     if (empty($students)) {
-        $html .= '<tr><td colspan="8" style="text-align:center;">No scholarship students found</td></tr>';
+        $html .= '<tr><td colspan="8" class="css-scholarships-pdf-539b04">No scholarship students found</td></tr>';
     } else {
         $i = 1;
         foreach ($students as $s) {
@@ -121,21 +121,21 @@ try {
             }
             $html .= '
             <tr nobr="true">
-                <td width="4%" style="text-align:center;">' . $i++ . '</td>
+                <td width="4%" class="css-scholarships-pdf-539b04">' . $i++ . '</td>
                 <td width="20%"><b>' . htmlspecialchars($fullName ?? '') . '</b></td>
                 <td width="12%">' . htmlspecialchars($s['enrollment_no'] ?: '-' ?? '') . '</td>
                 <td width="12%">' . htmlspecialchars($displayClass ?? '') . '</td>
                 <td width="20%">' . htmlspecialchars($s['scholarship_type'] ?: '-' ?? '') . '</td>
-                <td width="10%" style="text-align:center;">' . ($s['scholarship_percentage'] > 0 ? $s['scholarship_percentage'] . '%' : '-') . '</td>
-                <td width="12%" style="text-align:right; font-weight:bold; color:#28a745;">' . formatIndianCurrency($s['scholarship_amount']) . '</td>
+                <td width="10%" class="css-scholarships-pdf-539b04">' . ($s['scholarship_percentage'] > 0 ? $s['scholarship_percentage'] . '%' : '-') . '</td>
+                <td width="12%" class="css-scholarships-pdf-f3cba8">' . formatIndianCurrency($s['scholarship_amount']) . '</td>
                 <td width="10%">' . htmlspecialchars($s['mob'] ?? '') . '</td>
             </tr>';
         }
     }
     $html .= '
-        <tr style="background-color:#eee; font-weight:bold;">
-            <td colspan="6" style="text-align:right;">TOTAL SCHOLARSHIP AMOUNT</td>
-            <td style="text-align:right;">' . formatIndianCurrency($totalAmount) . '</td>
+        <tr class="css-scholarships-pdf-5f2273">
+            <td colspan="6" class="css-scholarships-pdf-08a0ed">TOTAL SCHOLARSHIP AMOUNT</td>
+            <td class="css-scholarships-pdf-08a0ed">' . formatIndianCurrency($totalAmount) . '</td>
             <td></td>
         </tr>
     </tbody></table>';

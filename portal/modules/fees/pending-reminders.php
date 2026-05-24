@@ -226,7 +226,7 @@ include '../../include/sidebar.php';
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th style="width: 40px"><input type="checkbox" id="selectAll"></th>
+                                <th class="css-pending-reminders-274c99"><input type="checkbox" id="selectAll"></th>
                                 <th>Student</th>
                                 <th>Standard</th>
                                 <th>Fee Type</th>

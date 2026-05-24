@@ -54,13 +54,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" style="width:100%;">
+    <table cellpadding="2" class="css-yoy-comparison-pdf-8588e4">
         <tr>
-            <td style="text-align:center;">
-                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span style="font-size:12pt; font-weight:bold; background-color:#1a1a2e; color:#fff;">YEAR-ON-YEAR COMPARISON (' . $previousYear . ' vs ' . $currentYear . ')</span><br>
-                <span style="font-size:10pt;">Generated on: ' . date('d M Y h:i A') . '</span>
+            <td class="css-yoy-comparison-pdf-539b04">
+                <span class="css-yoy-comparison-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span class="css-yoy-comparison-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span class="css-yoy-comparison-pdf-04c7a4">YEAR-ON-YEAR COMPARISON (' . $previousYear . ' vs ' . $currentYear . ')</span><br>
+                <span class="css-yoy-comparison-pdf-1b8847">Generated on: ' . date('d M Y h:i A') . '</span>
             </td>
         </tr>
     </table>';
@@ -68,24 +68,24 @@ try {
     $pdf->Ln(2);
 
     $summaryHtml = '
-    <table cellpadding="5" style="width:100%; border:0.5px solid #ddd;">
-        <tr style="background-color:#f8f9fa;">
-            <td width="33%" style="text-align:center;">Year ' . $previousYear . '<br><span style="font-size:12pt; font-weight:bold;">' . formatIndianCurrency($totalPrevious) . '</span></td>
-            <td width="34%" style="text-align:center;">YoY Change<br><span style="font-size:12pt; font-weight:bold; color:' . ($yoyChange >= 0 ? '#28a745' : '#dc3545') . ';">' . ($yoyChange >= 0 ? '+' : '') . round($yoyChange, 1) . '%</span></td>
-            <td width="33%" style="text-align:center;">Year ' . $currentYear . '<br><span style="font-size:12pt; font-weight:bold;">' . formatIndianCurrency($totalCurrent) . '</span></td>
+    <table cellpadding="5" class="css-yoy-comparison-pdf-14498d">
+        <tr class="css-yoy-comparison-pdf-6eb74d">
+            <td width="33%" class="css-yoy-comparison-pdf-539b04">Year ' . $previousYear . '<br><span class="css-yoy-comparison-pdf-e3ba8d">' . formatIndianCurrency($totalPrevious) . '</span></td>
+            <td width="34%" class="css-yoy-comparison-pdf-539b04">YoY Change<br><span class="css-yoy-comparison-pdf-41a211">' . ($yoyChange >= 0 ? '+' : '') . round($yoyChange, 1) . '%</span></td>
+            <td width="33%" class="css-yoy-comparison-pdf-539b04">Year ' . $currentYear . '<br><span class="css-yoy-comparison-pdf-e3ba8d">' . formatIndianCurrency($totalCurrent) . '</span></td>
         </tr>
     </table>';
     $pdf->writeHTML($summaryHtml, true, false, false, false, '');
     $pdf->Ln(5);
 
     $html = '
-    <table border="0.5" cellpadding="6" style="width:100%; font-size:10pt;">
+    <table border="0.5" cellpadding="6" class="css-yoy-comparison-pdf-0f0770">
         <thead>
-            <tr style="background-color:#eee; font-weight:bold;">
+            <tr class="css-yoy-comparison-pdf-5f2273">
                 <th width="25%">Month</th>
-                <th width="25%" style="text-align:right;">Year ' . $previousYear . '</th>
-                <th width="25%" style="text-align:right;">Year ' . $currentYear . '</th>
-                <th width="25%" style="text-align:right;">Change (%)</th>
+                <th width="25%" class="css-yoy-comparison-pdf-08a0ed">Year ' . $previousYear . '</th>
+                <th width="25%" class="css-yoy-comparison-pdf-08a0ed">Year ' . $currentYear . '</th>
+                <th width="25%" class="css-yoy-comparison-pdf-08a0ed">Change (%)</th>
             </tr>
         </thead>
         <tbody>';
@@ -97,18 +97,18 @@ try {
         $html .= '
         <tr nobr="true">
             <td width="25%"><b>' . $months[$i - 1] . '</b></td>
-            <td width="25%" style="text-align:right;">' . formatIndianCurrency($prev) . '</td>
-            <td width="25%" style="text-align:right;">' . formatIndianCurrency($curr) . '</td>
-            <td width="25%" style="text-align:right; font-weight:bold; color:' . ($chg >= 0 ? '#28a745' : '#dc3545') . ';">' . ($chg >= 0 ? '+' : '') . round($chg, 1) . '%</td>
+            <td width="25%" class="css-yoy-comparison-pdf-08a0ed">' . formatIndianCurrency($prev) . '</td>
+            <td width="25%" class="css-yoy-comparison-pdf-08a0ed">' . formatIndianCurrency($curr) . '</td>
+            <td width="25%" class="css-yoy-comparison-pdf-99aed5">' . ($chg >= 0 ? '+' : '') . round($chg, 1) . '%</td>
         </tr>';
     }
 
     $html .= '
-        <tr style="background-color:#eee; font-weight:bold;">
+        <tr class="css-yoy-comparison-pdf-5f2273">
             <td width="25%">GRAND TOTAL</td>
-            <td width="25%" style="text-align:right;">' . formatIndianCurrency($totalPrevious) . '</td>
-            <td width="25%" style="text-align:right;">' . formatIndianCurrency($totalCurrent) . '</td>
-            <td width="25%" style="text-align:right; color:' . ($yoyChange >= 0 ? '#28a745' : '#dc3545') . ';">' . ($yoyChange >= 0 ? '+' : '') . round($yoyChange, 1) . '%</td>
+            <td width="25%" class="css-yoy-comparison-pdf-08a0ed">' . formatIndianCurrency($totalPrevious) . '</td>
+            <td width="25%" class="css-yoy-comparison-pdf-08a0ed">' . formatIndianCurrency($totalCurrent) . '</td>
+            <td width="25%" class="css-yoy-comparison-pdf-66dc2d">' . ($yoyChange >= 0 ? '+' : '') . round($yoyChange, 1) . '%</td>
         </tr>
     </tbody></table>';
 

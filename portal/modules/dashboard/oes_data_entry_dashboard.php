@@ -62,107 +62,7 @@ include '../../include/sidebar.php';
 ?>
 
 <!-- Glassmorphic Styles -->
-<style>
-    :root {
-        --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-        --success-gradient: linear-gradient(135deg, #059669 0%, #10b981 100%);
-        --info-gradient: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-        --purple-gradient: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
-    }
 
-    body {
-        background-color: #f8fafc;
-    }
-
-    .glass-metric-card {
-        background: white;
-        border-radius: 16px;
-        border: 1px solid rgba(226, 232, 240, 0.8);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .glass-metric-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    }
-
-    .glass-metric-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-    }
-
-    .metric-blue::before { background: var(--primary-gradient); }
-    .metric-emerald::before { background: var(--success-gradient); }
-    .metric-cyan::before { background: var(--info-gradient); }
-    .metric-purple::before { background: var(--purple-gradient); }
-
-    .course-stat-card {
-        background: white;
-        border-radius: 16px;
-        border: 1px solid rgba(226, 232, 240, 0.8);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        transition: all 0.3s ease;
-        overflow: hidden;
-    }
-    .course-stat-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-    }
-    .course-stat-card .course-header {
-        padding: 1rem 1.25rem 0.75rem;
-        border-bottom: 1px solid rgba(226,232,240,0.6);
-    }
-    .course-stat-card .stat-pill {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.65rem 1rem;
-        border-radius: 10px;
-        font-size: 0.82rem;
-        font-weight: 600;
-    }
-
-    .quick-glow-btn {
-        background: white;
-        border: 1px solid rgba(226, 232, 240, 0.8);
-        border-radius: 12px;
-        transition: all 0.2s ease;
-        text-decoration: none;
-        display: block;
-        padding: 1.5rem;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-
-    .quick-glow-btn:hover {
-        transform: translateY(-2px);
-        border-color: #3b82f6;
-        box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -4px rgba(59, 130, 246, 0.1);
-    }
-
-    .quick-icon-wrapper {
-        width: 48px;
-        height: 48px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 1rem;
-        font-size: 1.25rem;
-        transition: all 0.2s ease;
-    }
-
-    .quick-glow-btn:hover .quick-icon-wrapper {
-        transform: scale(1.1);
-    }
-</style>
 
 <div class="container-fluid py-4">
     <?php include '../../include/mfa_alert.php'; ?>
@@ -173,7 +73,7 @@ include '../../include/sidebar.php';
             <h2 class="fw-bold text-slate-800">Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'OES Operator'); ?>!</h2>
             <p class="text-muted mb-0">Here is your digital question entry panel to build GCA's premium online exam database.</p>
         </div>
-        <span class="badge bg-primary px-3 py-2 rounded-pill shadow-sm" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);"><i class="fas fa-keyboard me-1"></i> OES Data Entry Operator</span>
+        <span class="badge bg-primary px-3 py-2 rounded-pill shadow-sm css-oes_data_entry_dashboard-132209"><i class="fas fa-keyboard me-1"></i> OES Data Entry Operator</span>
     </div>
 
     <!-- Stats Cards -->
@@ -186,7 +86,7 @@ include '../../include/sidebar.php';
                         <span class="text-muted small fw-bold text-uppercase d-block mb-1">My Typed Questions</span>
                         <h3 class="fw-bold mb-0 text-slate-900"><?php echo number_format($my_questions); ?></h3>
                     </div>
-                    <div class="p-3 bg-success bg-opacity-10 text-success rounded-3" style="color: #10b981;">
+                    <div class="p-3 bg-success bg-opacity-10 text-success rounded-3 css-oes_data_entry_dashboard-20bb59">
                         <i class="fas fa-keyboard fa-lg"></i>
                     </div>
                 </div>
@@ -204,7 +104,7 @@ include '../../include/sidebar.php';
                         <span class="text-muted small fw-bold text-uppercase d-block mb-1">Total Exam Bank</span>
                         <h3 class="fw-bold mb-0 text-slate-900"><?php echo number_format($total_questions); ?></h3>
                     </div>
-                    <div class="p-3 bg-primary bg-opacity-10 text-primary rounded-3" style="color: #3b82f6;">
+                    <div class="p-3 bg-primary bg-opacity-10 text-primary rounded-3 css-oes_data_entry_dashboard-b2d203">
                         <i class="fas fa-university fa-lg"></i>
                     </div>
                 </div>
@@ -222,7 +122,7 @@ include '../../include/sidebar.php';
                         <span class="text-muted small fw-bold text-uppercase d-block mb-1">Active Subjects</span>
                         <h3 class="fw-bold mb-0 text-slate-900"><?php echo number_format($total_subjects); ?></h3>
                     </div>
-                    <div class="p-3 bg-info bg-opacity-10 text-info rounded-3" style="color: #06b6d4;">
+                    <div class="p-3 bg-info bg-opacity-10 text-info rounded-3 css-oes_data_entry_dashboard-0c8f3e">
                         <i class="fas fa-book fa-lg"></i>
                     </div>
                 </div>
@@ -238,7 +138,7 @@ include '../../include/sidebar.php';
                         <span class="text-muted small fw-bold text-uppercase d-block mb-1">Total Chapters</span>
                         <h3 class="fw-bold mb-0 text-slate-900"><?php echo number_format($total_chapters); ?></h3>
                     </div>
-                    <div class="p-3 bg-purple bg-opacity-10 text-purple rounded-3" style="color: #7c3aed;">
+                    <div class="p-3 bg-purple bg-opacity-10 text-purple rounded-3 css-oes_data_entry_dashboard-e33b5b">
                         <i class="fas fa-bookmark fa-lg"></i>
                     </div>
                 </div>
@@ -258,7 +158,7 @@ include '../../include/sidebar.php';
     <div class="mb-4">
         <div class="d-flex align-items-center gap-2 mb-3">
             <h5 class="fw-bold mb-0 text-slate-800"><i class="fas fa-layer-group text-primary me-2"></i>Standard-wise Content Breakdown</h5>
-            <span class="badge rounded-pill" style="background:rgba(59,130,246,0.1);color:#3b82f6;font-size:0.75rem;">Live</span>
+            <span class="badge rounded-pill css-oes_data_entry_dashboard-c9fb21">Live</span>
         </div>
         <div class="row g-4">
             <?php foreach ($course_stats as $idx => $cs):
@@ -268,42 +168,42 @@ include '../../include/sidebar.php';
                 <div class="course-stat-card h-100">
                     <!-- Header -->
                     <div class="course-header d-flex align-items-center gap-3">
-                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:44px;height:44px;background:<?php echo $col['light']; ?>;">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center css-oes_data_entry_dashboard-f0f3df">
                             <i class="fas <?php echo $col['icon']; ?>" style="color:<?php echo $col['bg']; ?>;font-size:1.1rem;"></i>
                         </div>
                         <div>
-                            <h6 class="fw-bold mb-0" style="color:<?php echo $col['bg']; ?>"><?php echo htmlspecialchars($cs['course_name']); ?></h6>
-                            <span class="text-muted" style="font-size:0.78rem;">Standard / Course</span>
+                            <h6 class="fw-bold mb-0 css-oes_data_entry_dashboard-6e61d4"><?php echo htmlspecialchars($cs['course_name']); ?></h6>
+                            <span class="text-muted css-oes_data_entry_dashboard-c4ad98">Standard / Course</span>
                         </div>
-                        <span class="ms-auto badge rounded-pill" style="background:<?php echo $col['light']; ?>;color:<?php echo $col['bg']; ?>;font-size:0.8rem;"><?php echo number_format($cs['question_count']); ?> Qs</span>
+                        <span class="ms-auto badge rounded-pill css-oes_data_entry_dashboard-7f3b18"><?php echo number_format($cs['question_count']); ?> Qs</span>
                     </div>
                     <!-- Stats Grid -->
                     <div class="p-3">
                         <div class="row g-2">
                             <div class="col-4">
-                                <div class="stat-pill" style="background:rgba(16,185,129,0.07);">
-                                    <i class="fas fa-book" style="color:#059669;"></i>
+                                <div class="stat-pill css-oes_data_entry_dashboard-b166df">
+                                    <i class="fas fa-book css-oes_data_entry_dashboard-af633e"></i>
                                     <div>
-                                        <div class="fw-bold" style="font-size:1rem;line-height:1;color:#111827;"><?php echo $cs['subject_count']; ?></div>
-                                        <div style="font-size:0.72rem;color:#6b7280;font-weight:500;">Subjects</div>
+                                        <div class="fw-bold css-oes_data_entry_dashboard-c73bc1"><?php echo $cs['subject_count']; ?></div>
+                                        <div class="css-oes_data_entry_dashboard-efcf06">Subjects</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="stat-pill" style="background:rgba(59,130,246,0.07);">
-                                    <i class="fas fa-bookmark" style="color:#2563eb;"></i>
+                                <div class="stat-pill css-oes_data_entry_dashboard-84c7f7">
+                                    <i class="fas fa-bookmark css-oes_data_entry_dashboard-d8c2db"></i>
                                     <div>
-                                        <div class="fw-bold" style="font-size:1rem;line-height:1;color:#111827;"><?php echo $cs['chapter_count']; ?></div>
-                                        <div style="font-size:0.72rem;color:#6b7280;font-weight:500;">Chapters</div>
+                                        <div class="fw-bold css-oes_data_entry_dashboard-c73bc1"><?php echo $cs['chapter_count']; ?></div>
+                                        <div class="css-oes_data_entry_dashboard-efcf06">Chapters</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="stat-pill" style="background:rgba(139,92,246,0.07);">
-                                    <i class="fas fa-tag" style="color:#7c3aed;"></i>
+                                <div class="stat-pill css-oes_data_entry_dashboard-902fde">
+                                    <i class="fas fa-tag css-oes_data_entry_dashboard-fd8aea"></i>
                                     <div>
-                                        <div class="fw-bold" style="font-size:1rem;line-height:1;color:#111827;"><?php echo $cs['topic_count']; ?></div>
-                                        <div style="font-size:0.72rem;color:#6b7280;font-weight:500;">Topics</div>
+                                        <div class="fw-bold css-oes_data_entry_dashboard-c73bc1"><?php echo $cs['topic_count']; ?></div>
+                                        <div class="css-oes_data_entry_dashboard-efcf06">Topics</div>
                                     </div>
                                 </div>
                             </div>
@@ -314,12 +214,12 @@ include '../../include/sidebar.php';
                         $pct = $total_q > 0 ? round(($cs['question_count'] / $total_q) * 100) : 0;
                         ?>
                         <div class="mt-3 px-1">
-                            <div class="d-flex justify-content-between mb-1" style="font-size:0.75rem;">
+                            <div class="d-flex justify-content-between mb-1 css-oes_data_entry_dashboard-cfbb43">
                                 <span class="text-muted">Question share</span>
-                                <span class="fw-bold" style="color:<?php echo $col['bg']; ?>"><?php echo $pct; ?>%</span>
+                                <span class="fw-bold css-oes_data_entry_dashboard-6e61d4"><?php echo $pct; ?>%</span>
                             </div>
-                            <div style="height:6px;background:#f1f5f9;border-radius:99px;overflow:hidden;">
-                                <div style="width:<?php echo $pct; ?>%;height:100%;background:<?php echo $col['bg']; ?>;border-radius:99px;transition:width 0.6s ease;"></div>
+                            <div class="css-oes_data_entry_dashboard-53746d">
+                                <div class="css-oes_data_entry_dashboard-c09283"></div>
                             </div>
                         </div>
                         <div class="mt-3 d-flex gap-2">
@@ -347,7 +247,7 @@ include '../../include/sidebar.php';
                         <!-- Create Question -->
                         <div class="col-md-6 col-lg-4">
                             <a href="<?php echo PORTAL_URL; ?>/modules/online-exam/index.php" class="quick-glow-btn">
-                                <div class="quick-icon-wrapper bg-primary bg-opacity-10 text-primary" style="background-color: rgba(30, 58, 95, 0.1); color: #1e3a5f;">
+                                <div class="quick-icon-wrapper bg-primary bg-opacity-10 text-primary css-oes_data_entry_dashboard-06b74c">
                                     <i class="fas fa-plus-circle"></i>
                                 </div>
                                 <h6 class="fw-bold text-slate-800 mb-1">Create Question</h6>
@@ -357,7 +257,7 @@ include '../../include/sidebar.php';
                         <!-- Question Bank -->
                         <div class="col-md-6 col-lg-4">
                             <a href="<?php echo PORTAL_URL; ?>/modules/online-exam/question-bank.php" class="quick-glow-btn">
-                                <div class="quick-icon-wrapper bg-success bg-opacity-10 text-success" style="background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
+                                <div class="quick-icon-wrapper bg-success bg-opacity-10 text-success css-oes_data_entry_dashboard-1d5289">
                                     <i class="fas fa-university"></i>
                                 </div>
                                 <h6 class="fw-bold text-slate-800 mb-1">Question Bank</h6>
@@ -367,7 +267,7 @@ include '../../include/sidebar.php';
                         <!-- Word Document Upload -->
                         <div class="col-md-6 col-lg-4">
                             <a href="<?php echo PORTAL_URL; ?>/modules/online-exam/bulk-import-word.php" class="quick-glow-btn">
-                                <div class="quick-icon-wrapper bg-purple bg-opacity-10 text-purple" style="background-color: rgba(124, 92, 246, 0.1); color: #7c3aed;">
+                                <div class="quick-icon-wrapper bg-purple bg-opacity-10 text-purple css-oes_data_entry_dashboard-e18e39">
                                     <i class="fas fa-file-word"></i>
                                 </div>
                                 <h6 class="fw-bold text-slate-800 mb-1">Word Bulk Upload</h6>
@@ -377,7 +277,7 @@ include '../../include/sidebar.php';
                         <!-- Manage Chapters -->
                         <div class="col-md-6 col-lg-4">
                             <a href="<?php echo PORTAL_URL; ?>/modules/online-exam/manage-chapters.php" class="quick-glow-btn">
-                                <div class="quick-icon-wrapper bg-info bg-opacity-10 text-info" style="background-color: rgba(6, 182, 212, 0.1); color: #0891b2;">
+                                <div class="quick-icon-wrapper bg-info bg-opacity-10 text-info css-oes_data_entry_dashboard-74c77b">
                                     <i class="fas fa-bookmark"></i>
                                 </div>
                                 <h6 class="fw-bold text-slate-800 mb-1">Manage Chapters</h6>
@@ -387,7 +287,7 @@ include '../../include/sidebar.php';
                         <!-- Manage Topics -->
                         <div class="col-md-6 col-lg-4">
                             <a href="<?php echo PORTAL_URL; ?>/modules/online-exam/manage-topics.php" class="quick-glow-btn">
-                                <div class="quick-icon-wrapper bg-warning bg-opacity-10 text-warning" style="background-color: rgba(245, 158, 11, 0.1); color: #d97706;">
+                                <div class="quick-icon-wrapper bg-warning bg-opacity-10 text-warning css-oes_data_entry_dashboard-ae7153">
                                     <i class="fas fa-tag"></i>
                                 </div>
                                 <h6 class="fw-bold text-slate-800 mb-1">Manage Topics</h6>
@@ -401,35 +301,35 @@ include '../../include/sidebar.php';
 
         <!-- Instructions Panel -->
         <div class="col-xl-4">
-            <div class="card border-0 shadow-sm rounded-4 h-100" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white;">
+            <div class="card border-0 shadow-sm rounded-4 h-100 css-oes_data_entry_dashboard-5e277e">
                 <div class="card-body p-4">
-                    <h5 class="fw-bold mb-3 text-white"><i class="fas fa-info-circle text-info me-2" style="color: #38bdf8 !important;"></i>OES Entry Guidelines</h5>
+                    <h5 class="fw-bold mb-3 text-white"><i class="fas fa-info-circle text-info me-2 css-oes_data_entry_dashboard-9092a8"></i>OES Entry Guidelines</h5>
                     <ul class="list-unstyled mb-0">
                         <li class="d-flex gap-3 mb-3">
-                            <div class="p-2 bg-white bg-opacity-10 rounded-3 shadow-sm flex-shrink-0" style="width: 36px; height: 36px; display:flex; align-items:center; justify-content:center; color: #34d399;">
+                            <div class="p-2 bg-white bg-opacity-10 rounded-3 shadow-sm flex-shrink-0 css-oes_data_entry_dashboard-129b2f">
                                 <i class="fas fa-superscript"></i>
                             </div>
                             <div>
                                 <strong class="small d-block text-white mb-1">KaTeX Equations Formatting</strong>
-                                <span class="small" style="color: rgba(241, 245, 249, 0.85); line-height: 1.5; display: inline-block;">Use <code style="background: rgba(255, 255, 255, 0.15); color: #f472b6; padding: 2px 6px; border-radius: 4px; font-weight: 600;">$...$</code> for inline and <code style="background: rgba(255, 255, 255, 0.15); color: #f472b6; padding: 2px 6px; border-radius: 4px; font-weight: 600;">$$...$$</code> for centered math formulas (e.g. <code style="background: rgba(255, 255, 255, 0.15); color: #f472b6; padding: 2px 6px; border-radius: 4px; font-weight: 600;">$x^2 + y^2 = r^2$</code>).</span>
+                                <span class="small css-oes_data_entry_dashboard-4478db">Use <code class="css-oes_data_entry_dashboard-59ab28">$...$</code> for inline and <code class="css-oes_data_entry_dashboard-59ab28">$$...$$</code> for centered math formulas (e.g. <code class="css-oes_data_entry_dashboard-59ab28">$x^2 + y^2 = r^2$</code>).</span>
                             </div>
                         </li>
                         <li class="d-flex gap-3 mb-3">
-                            <div class="p-2 bg-white bg-opacity-10 rounded-3 shadow-sm flex-shrink-0" style="width: 36px; height: 36px; display:flex; align-items:center; justify-content:center; color: #60a5fa;">
+                            <div class="p-2 bg-white bg-opacity-10 rounded-3 shadow-sm flex-shrink-0 css-oes_data_entry_dashboard-51ab65">
                                 <i class="fas fa-language"></i>
                             </div>
                             <div>
                                 <strong class="small d-block text-white mb-1">Bilingual Entry (English & Gujarati)</strong>
-                                <span class="small" style="color: rgba(241, 245, 249, 0.85); line-height: 1.5; display: inline-block;">Always type/paste both translations so students can toggle exam language.</span>
+                                <span class="small css-oes_data_entry_dashboard-4478db">Always type/paste both translations so students can toggle exam language.</span>
                             </div>
                         </li>
                         <li class="d-flex gap-3">
-                            <div class="p-2 bg-white bg-opacity-10 rounded-3 shadow-sm flex-shrink-0" style="width: 36px; height: 36px; display:flex; align-items:center; justify-content:center; color: #fbbf24;">
+                            <div class="p-2 bg-white bg-opacity-10 rounded-3 shadow-sm flex-shrink-0 css-oes_data_entry_dashboard-04fd3c">
                                 <i class="fas fa-check-double"></i>
                             </div>
                             <div>
                                 <strong class="small d-block text-white mb-1">Double Check Options</strong>
-                                <span class="small" style="color: rgba(241, 245, 249, 0.85); line-height: 1.5; display: inline-block;">Ensure option details are completely filled and the correct option key is mapped accurately.</span>
+                                <span class="small css-oes_data_entry_dashboard-4478db">Ensure option details are completely filled and the correct option key is mapped accurately.</span>
                             </div>
                         </li>
                     </ul>

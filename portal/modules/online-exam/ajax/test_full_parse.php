@@ -158,7 +158,7 @@ if (!empty($oleImageMap)) {
 
     foreach ($oleImageMap as $key => &$job) {
         $job['img_html'] = file_exists($job['png'])
-            ? '<img src="'.$job['url'].'" style="max-width:300px;height:auto;" />'
+            ? '<img src="'.$job['url'].'" class="css-test_full_parse-890e83" />'
             : '';
     }
     unset($job);

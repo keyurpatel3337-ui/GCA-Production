@@ -16,14 +16,7 @@ require_once ENV_CONFIG_FILE; ?>
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="../assets/css/gm-public.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        .active-tab {
-            background: linear-gradient(135deg, #2563eb, #4f46e5);
-            color: white !important;
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
-            transform: translateY(-2px);
-        }
-    </style>
+    
 </head>
 
 <body class="text-gray-800">
@@ -33,8 +26,8 @@ require_once ENV_CONFIG_FILE; ?>
     <!-- Facilities Index Content -->
     <section class="relative py-12 md:py-24 overflow-hidden bg-gradient-to-b from-white via-blue-50/30 to-white">
         <!-- Decorative background elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float" style="animation-delay: 0s;"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float" style="animation-delay: 1s;"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float css-index-f165c4"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float css-index-bd845f"></div>
 
         <div class="container mx-auto px-4 relative z-10">
             <!-- Page Header -->

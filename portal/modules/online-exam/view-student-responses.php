@@ -64,8 +64,8 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
         <div class="container-fluid">
             
             <!-- Result Overview Card -->
-            <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px;">
-                <div class="card-header bg-white border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center flex-wrap" style="gap: 15px;">
+            <div class="card shadow-sm border-0 mb-4 css-view-student-responses-dc9ce7">
+                <div class="card-header bg-white border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center flex-wrap css-view-student-responses-651c59">
                     <div>
                         <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-file-invoice mr-2 text-primary"></i> Detailed Response Sheet</h5>
                         <p class="text-muted small mb-0 mt-1">Student: <b><?= htmlspecialchars($attempt['surname'] . ' ' . $attempt['student_name'] . ' ' . $attempt['fathers_name']) ?></b> (Reg No: <?= htmlspecialchars($attempt['gr_no'] ?: 'N/A') ?>)</p>
@@ -82,7 +82,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         </div>
                         <div class="col-md-3 border-right">
                             <div class="text-muted small font-weight-bold uppercase">OBTAINED SCORE</div>
-                            <div class="h3 font-weight-bold text-primary mt-1 mb-0"><?= $attempt['total_score'] ?> <span class="small text-muted" style="font-size: 1rem;">/ <?= $attempt['exam_total_marks'] ?></span></div>
+                            <div class="h3 font-weight-bold text-primary mt-1 mb-0"><?= $attempt['total_score'] ?> <span class="small text-muted css-view-student-responses-1f0261">/ <?= $attempt['exam_total_marks'] ?></span></div>
                         </div>
                         <div class="col-md-3 border-right">
                             <div class="text-muted small font-weight-bold uppercase">ACCURACY INDEX</div>
@@ -120,9 +120,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         $is_skipped = ($selected_option === null || $selected_option === '');
                         ?>
                         
-                        <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px;">
+                        <div class="card shadow-sm border-0 mb-4 css-view-student-responses-dc9ce7">
                             <div class="card-header bg-white border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
-                                <span class="badge bg-light text-dark border px-3 py-2 font-weight-bold" style="border-radius: 8px;">Question <?= $q_num++ ?></span>
+                                <span class="badge bg-light text-dark border px-3 py-2 font-weight-bold css-view-student-responses-cb968a">Question <?= $q_num++ ?></span>
                                 <div class="text-end">
                                     <?php if ($is_skipped): ?>
                                         <span class="badge bg-secondary py-2 px-3 rounded-pill"><i class="fas fa-exclamation-triangle mr-1"></i> Skipped / Not Answered</span>
@@ -135,7 +135,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             </div>
                             <div class="card-body px-4 pb-4 pt-3">
                                 <!-- Question Text -->
-                                <div class="h5 text-dark font-weight-bold mb-4" style="line-height: 1.6;">
+                                <div class="h5 text-dark font-weight-bold mb-4 css-view-student-responses-374aad">
                                     <?= $q['question_text'] ?>
                                 </div>
 

@@ -159,8 +159,7 @@ include '../../include/sidebar.php';
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <div class="avatar-sm bg-primary-subtle text-primary rounded-circle me-3 d-flex align-items-center justify-content-center"
-                                                    style="width:36px; height:36px;">
+                                                <div class="avatar-sm bg-primary-subtle text-primary rounded-circle me-3 d-flex align-items-center justify-content-center css-reception_dashboard-55885f">
                                                     <?php echo strtoupper(substr($std['student_name'], 0, 1)); ?>
                                                 </div>
                                                 <div>
@@ -237,92 +236,7 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
-<style>
-    /* Dashboard theme consistency */
-    .welcome-banner {
-        padding: 2.5rem;
-        background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-        border-radius: 20px;
-        color: white;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
 
-    .glass-card {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
-    }
-
-    .stat-card {
-        padding: 1.5rem;
-    }
-
-    .stat-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 0.5rem;
-    }
-
-    .stat-value {
-        font-size: 2rem;
-        font-weight: 700;
-    }
-
-    .stat-label {
-        color: #718096;
-        font-size: 0.875rem;
-        font-weight: 600;
-    }
-
-    .stat-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-    }
-
-    .quick-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-    }
-
-    .bg-purple-subtle {
-        background: rgba(139, 92, 246, 0.1);
-        color: #8b5cf6;
-    }
-
-    .bg-icon-primary {
-        background: rgba(0, 82, 204, 0.1);
-        color: #0052CC;
-    }
-
-    .bg-icon-warning {
-        background: rgba(255, 171, 0, 0.1);
-        color: #FFAB00;
-    }
-
-    .bg-icon-success {
-        background: rgba(54, 179, 126, 0.1);
-        color: #36B37E;
-    }
-
-    .stat-link {
-        font-size: 0.875rem;
-        font-weight: 600;
-        text-decoration: none;
-    }
-</style>
 
 <?php include '../../include/footer.php'; ?>
 

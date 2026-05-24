@@ -260,11 +260,11 @@ include '../../../include/sidebar.php';
                 <div class="row g-0 border-top border-light pt-2">
                     <div class="col-6 border-end">
                         <h5 class="mb-0"><?php echo $hostelFeeCount; ?></h5>
-                        <p class="mb-0" style="font-size: 0.7rem;">Hostel Fee</p>
+                        <p class="mb-0 css-hostel-fees-dcab71">Hostel Fee</p>
                     </div>
                     <div class="col-6">
                         <h5 class="mb-0"><?php echo $securityDepositCount; ?></h5>
-                        <p class="mb-0" style="font-size: 0.7rem;">Security Deposit</p>
+                        <p class="mb-0 css-hostel-fees-dcab71">Security Deposit</p>
                     </div>
                 </div>
             </div>

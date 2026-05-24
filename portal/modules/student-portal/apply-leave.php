@@ -109,9 +109,9 @@ include '../../include/sidebar.php';
                                 placeholder="Please provide details..."></textarea>
                         </div>
 
-                        <div class="form-group mb-3" id="document_upload_group" style="display: none;">
-                            <label class="form-label fw-bold" for="document">Supporting Document <span class="text-danger"
-                                    id="doc_required_asterisk" style="display:none;">*</span></label>
+                        <div class="form-group mb-3 css-apply-leave-224b51" id="document_upload_group">
+                            <label class="form-label fw-bold" for="document">Supporting Document <span class="text-danger css-apply-leave-93b8ea"
+                                    id="doc_required_asterisk">*</span></label>
                             <input type="file" name="document" id="document" class="form-control"
                                 accept=".jpg,.jpeg,.png,.pdf">
                             <small class="text-muted" id="doc_hint">Accepted formats: JPG, PNG, PDF (Max 2MB)</small>

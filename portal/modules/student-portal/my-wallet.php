@@ -164,7 +164,7 @@ include '../../include/sidebar.php';
                     <i class="fas fa-wallet fa-6x"></i>
                 </div>
                 <div class="position-relative">
-                    <span class="badge bg-white-translucent text-white rounded-pill px-3 py-1 mb-2 fw-semibold tracking-wider text-uppercase" style="font-size: 0.75rem;">Student Portal</span>
+                    <span class="badge bg-white-translucent text-white rounded-pill px-3 py-1 mb-2 fw-semibold tracking-wider text-uppercase css-my-wallet-af89d6">Student Portal</span>
                     <h2 class="fw-bold mb-1 font-outfit">My Digital Wallet</h2>
                     <p class="text-white-50 mb-0">Secure real-time wallet for transactions at the GCA Canteen, Bookstore, and Library.</p>
                 </div>
@@ -181,10 +181,10 @@ include '../../include/sidebar.php';
                 <div class="card-mesh-1"></div>
                 <div class="card-mesh-2"></div>
                 
-                <div class="position-relative d-flex flex-column justify-content-between h-100" style="min-height: 240px;">
+                <div class="position-relative d-flex flex-column justify-content-between h-100 css-my-wallet-a5c28a">
                     <!-- Card Top Header -->
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="fw-bold text-uppercase tracking-wider opacity-75 small" style="font-size: 0.75rem;">Digital Pass</span>
+                        <span class="fw-bold text-uppercase tracking-wider opacity-75 small css-my-wallet-af89d6">Digital Pass</span>
                         <i class="fas fa-wifi rotate-90 opacity-75 fa-lg"></i>
                     </div>
                     
@@ -198,7 +198,7 @@ include '../../include/sidebar.php';
                     
                     <!-- Balance Numerals -->
                     <div>
-                        <span class="text-white-50 small text-uppercase tracking-wider d-block mb-1" style="font-size: 0.65rem;">Available Balance</span>
+                        <span class="text-white-50 small text-uppercase tracking-wider d-block mb-1 css-my-wallet-12e5fe">Available Balance</span>
                         <h2 class="display-5 fw-bold font-outfit mb-0" id="wallet-balance-amount">
                             ₹<?php echo formatIndianCurrency($balance); ?>
                         </h2>
@@ -207,12 +207,12 @@ include '../../include/sidebar.php';
                     <!-- Card Footer Details -->
                     <div class="d-flex justify-content-between align-items-end mt-3">
                         <div>
-                            <span class="text-white-50 small text-uppercase tracking-wider d-block" style="font-size: 0.65rem;">Card Holder</span>
-                            <span class="fw-bold font-outfit text-truncate d-block" style="max-width: 220px; font-size: 0.95rem;"><?php echo htmlspecialchars($student_name ?? ''); ?></span>
+                            <span class="text-white-50 small text-uppercase tracking-wider d-block css-my-wallet-12e5fe">Card Holder</span>
+                            <span class="fw-bold font-outfit text-truncate d-block css-my-wallet-231c7e"><?php echo htmlspecialchars($student_name ?? ''); ?></span>
                         </div>
                         <div class="text-end">
-                            <span class="text-white-50 small text-uppercase tracking-wider d-block" style="font-size: 0.65rem;">Enrollment No</span>
-                            <span class="fw-semibold font-monospace" style="font-size: 0.9rem;"><?php echo htmlspecialchars($wallet_student_id ?? ''); ?></span>
+                            <span class="text-white-50 small text-uppercase tracking-wider d-block css-my-wallet-12e5fe">Enrollment No</span>
+                            <span class="fw-semibold font-monospace css-my-wallet-33dd45"><?php echo htmlspecialchars($wallet_student_id ?? ''); ?></span>
                         </div>
                     </div>
                 </div>
@@ -223,8 +223,7 @@ include '../../include/sidebar.php';
             $pin_set = true; // Default placeholder, check if setup is needed
             if (!$pin_set): ?>
                 <div class="alert alert-warning border-0 shadow-sm rounded-4 p-3 d-flex align-items-center mb-4 bg-warning-light animate-pulse">
-                    <div class="icon-box bg-warning text-white rounded-circle p-2 me-3 d-flex align-items-center justify-content-center"
-                        style="width: 40px; height: 40px;">
+                    <div class="icon-box bg-warning text-white rounded-circle p-2 me-3 d-flex align-items-center justify-content-center css-my-wallet-9a6a53">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <div class="flex-grow-1">
@@ -303,12 +302,12 @@ include '../../include/sidebar.php';
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
                 <div class="card-header bg-white border-0 p-4 d-flex justify-content-between align-items-center">
                     <h5 class="fw-bold mb-0 text-dark">Transaction Ledger</h5>
-                    <span class="badge bg-light text-muted border px-3 py-2 rounded-pill font-monospace" style="font-size: 0.75rem;">
+                    <span class="badge bg-light text-muted border px-3 py-2 rounded-pill font-monospace css-my-wallet-af89d6">
                         <?php echo count($transactions); ?> Records Found
                     </span>
                 </div>
                 <div class="card-body p-0">
-                    <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
+                    <div class="table-responsive css-my-wallet-b3575f">
                         <table class="table table-hover align-middle mb-0">
                             <thead class="bg-gray-50 text-muted small text-uppercase sticky-top top-0">
                                 <tr>
@@ -344,11 +343,11 @@ include '../../include/sidebar.php';
                                                          style="width: 40px; height: 40px; min-width: 40px;">
                                                         <i class="fas <?php echo $tx_type === 'CREDIT' ? 'fa-plus' : 'fa-shopping-bag'; ?>"></i>
                                                     </div>
-                                                    <div class="text-wrap" style="max-width: 320px; word-break: break-word;">
+                                                    <div class="text-wrap css-my-wallet-d5149b">
                                                         <h6 class="mb-0 fw-bold text-dark small text-wrap">
                                                             <?php echo htmlspecialchars($tx['description'] ?? 'Transaction'); ?>
                                                         </h6>
-                                                        <small class="text-muted text-uppercase tracking-tighter d-block mt-1" style="font-size: 0.7rem;">
+                                                        <small class="text-muted text-uppercase tracking-tighter d-block mt-1 css-my-wallet-dcab71">
                                                             Ref: <?php echo htmlspecialchars($tx['receipt_ref'] ?? $tx['reference_id'] ?? 'N/A'); ?>
                                                         </small>
                                                     </div>
@@ -356,7 +355,7 @@ include '../../include/sidebar.php';
                                             </td>
                                             <td class="py-3">
                                                 <div class="small fw-bold text-dark"><?php echo date('d M, Y', $tx_date); ?></div>
-                                                <div class="text-muted" style="font-size: 0.75rem;">
+                                                <div class="text-muted css-my-wallet-af89d6">
                                                     <?php echo date('h:i A', $tx_date); ?>
                                                 </div>
                                             </td>
@@ -454,8 +453,7 @@ include '../../include/sidebar.php';
                 <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4 text-center">
-                <div class="icon-box bg-primary-light text-primary rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center"
-                    style="width: 70px; height: 70px;">
+                <div class="icon-box bg-primary-light text-primary rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center css-my-wallet-be3c0e">
                     <i class="fas fa-lock fa-2x"></i>
                 </div>
                 <h6 class="fw-bold mb-2">Create Transaction PIN</h6>
@@ -463,14 +461,14 @@ include '../../include/sidebar.php';
 
                 <form id="pinForm">
                     <div class="d-flex justify-content-center gap-2 mb-4">
-                        <input type="password" class="form-control text-center bg-gray-100 border-0 rounded-4 fs-1 fw-bold font-monospace"
-                            maxlength="1" style="width: 65px; height: 75px;" pattern="[0-9]*" inputmode="numeric" required>
-                        <input type="password" class="form-control text-center bg-gray-100 border-0 rounded-4 fs-1 fw-bold font-monospace"
-                            maxlength="1" style="width: 65px; height: 75px;" pattern="[0-9]*" inputmode="numeric" required>
-                        <input type="password" class="form-control text-center bg-gray-100 border-0 rounded-4 fs-1 fw-bold font-monospace"
-                            maxlength="1" style="width: 65px; height: 75px;" pattern="[0-9]*" inputmode="numeric" required>
-                        <input type="password" class="form-control text-center bg-gray-100 border-0 rounded-4 fs-1 fw-bold font-monospace"
-                            maxlength="1" style="width: 65px; height: 75px;" pattern="[0-9]*" inputmode="numeric" required>
+                        <input type="password" class="form-control text-center bg-gray-100 border-0 rounded-4 fs-1 fw-bold font-monospace css-my-wallet-b1e14c"
+                            maxlength="1" pattern="[0-9]*" inputmode="numeric" required>
+                        <input type="password" class="form-control text-center bg-gray-100 border-0 rounded-4 fs-1 fw-bold font-monospace css-my-wallet-b1e14c"
+                            maxlength="1" pattern="[0-9]*" inputmode="numeric" required>
+                        <input type="password" class="form-control text-center bg-gray-100 border-0 rounded-4 fs-1 fw-bold font-monospace css-my-wallet-b1e14c"
+                            maxlength="1" pattern="[0-9]*" inputmode="numeric" required>
+                        <input type="password" class="form-control text-center bg-gray-100 border-0 rounded-4 fs-1 fw-bold font-monospace css-my-wallet-b1e14c"
+                            maxlength="1" pattern="[0-9]*" inputmode="numeric" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-xl w-100 rounded-pill fw-bold shadow-lg mt-2">
                         Update Secure PIN
@@ -494,14 +492,14 @@ include '../../include/sidebar.php';
                 <!-- Transaction Overview Summary -->
                 <div class="d-flex justify-content-between align-items-center mb-4 p-3 rounded-3 bg-light">
                     <div>
-                        <span class="text-muted small text-uppercase tracking-wider d-block" style="font-size: 0.65rem;">Transaction / Ref</span>
+                        <span class="text-muted small text-uppercase tracking-wider d-block css-my-wallet-12e5fe">Transaction / Ref</span>
                         <strong class="text-dark font-outfit" id="modalTxDesc">Purchase</strong>
-                        <span class="text-muted small d-block" id="modalTxRef" style="font-size: 0.75rem;">Ref: </span>
+                        <span class="text-muted small d-block css-my-wallet-af89d6" id="modalTxRef">Ref: </span>
                     </div>
                     <div class="text-end">
-                        <span class="text-muted small text-uppercase tracking-wider d-block" style="font-size: 0.65rem;">Total Amount</span>
+                        <span class="text-muted small text-uppercase tracking-wider d-block css-my-wallet-12e5fe">Total Amount</span>
                         <strong class="text-danger font-outfit fs-5 d-block" id="modalTxAmount">₹0.00</strong>
-                        <span class="text-muted small d-block" id="modalTxDate" style="font-size: 0.7rem;">Date</span>
+                        <span class="text-muted small d-block css-my-wallet-dcab71" id="modalTxDate">Date</span>
                     </div>
                 </div>
 
@@ -531,164 +529,7 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
 
-    .font-outfit {
-        font-family: 'Outfit', sans-serif !important;
-    }
-
-    .welcome-banner {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    /* Breathtaking Visa-style Pass Card styling */
-    .student-digital-card {
-        background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25) !important;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .student-digital-card:hover {
-        transform: translateY(-8px) scale(1.01);
-        box-shadow: 0 25px 45px rgba(0, 0, 0, 0.35) !important;
-        border-color: rgba(255, 255, 255, 0.25);
-    }
-
-    .card-mesh-1 {
-        position: absolute;
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(0, 123, 255, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
-        top: -60px;
-        right: -40px;
-        filter: blur(25px);
-        pointer-events: none;
-    }
-
-    .card-mesh-2 {
-        position: absolute;
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(46, 213, 115, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
-        bottom: -70px;
-        left: -50px;
-        filter: blur(25px);
-        pointer-events: none;
-    }
-
-    .card-chip {
-        width: 46px;
-        height: 34px;
-        background: linear-gradient(135deg, #f1c40f 0%, #d4ac0d 100%);
-        border-radius: 5px;
-        padding: 4px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.5);
-    }
-
-    .chip-line {
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        border-radius: 1px;
-    }
-
-    .rotate-90 {
-        transform: rotate(90deg);
-    }
-
-    .bg-white-translucent {
-        background-color: rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(4px);
-    }
-
-    .btn-action-card {
-        background-color: #f8f9fa;
-        transition: all 0.3s ease;
-        border: 1px solid transparent !important;
-    }
-
-    .btn-action-card:hover {
-        transform: translateY(-4px);
-        background-color: #ffffff;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
-        border-color: rgba(0, 123, 255, 0.25) !important;
-    }
-
-    .bg-success-light {
-        background-color: rgba(46, 213, 115, 0.1) !important;
-    }
-
-    .bg-danger-light {
-        background-color: rgba(255, 71, 87, 0.1) !important;
-    }
-
-    .bg-warning-light {
-        background-color: rgba(255, 159, 67, 0.1) !important;
-    }
-
-    .bg-primary-light {
-        background-color: rgba(0, 123, 255, 0.1) !important;
-    }
-
-    .bg-gray-100 {
-        background-color: #f8f9fa !important;
-    }
-
-    .bg-gray-50 {
-        background-color: #fdfdfd !important;
-    }
-
-    .tracking-wider {
-        letter-spacing: 0.08em;
-    }
-
-    .tracking-tighter {
-        letter-spacing: -0.01em;
-    }
-
-    .rounded-4 {
-        border-radius: 1.25rem !important;
-    }
-
-    .rounded-lg {
-        border-radius: 0.75rem !important;
-    }
-
-    .btn-xl {
-        padding: 0.85rem 1.5rem;
-        font-size: 1.05rem;
-    }
-
-    .no-spinner::-webkit-outer-spin-button,
-    .no-spinner::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    #pinForm input:focus {
-        background-color: #fff !important;
-        box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
-        border: 1px solid #007bff !important;
-    }
-
-    /* Animations */
-    @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: .7; }
-    }
-    .animate-pulse {
-        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-</style>
 
 <script>
     function setTopupAmount(amt) {
@@ -825,7 +666,7 @@ include '../../include/sidebar.php';
                         const tr = document.createElement('tr');
                         if (isRefund) {
                             tr.innerHTML = `
-                                <td class="ps-3 py-2 fw-semibold text-danger">${escapeHtml(name)} <span class="badge bg-danger-light text-danger ms-1" style="font-size: 0.65rem;">Refunded</span></td>
+                                <td class="ps-3 py-2 fw-semibold text-danger">${escapeHtml(name)} <span class="badge bg-danger-light text-danger ms-1 css-my-wallet-12e5fe">Refunded</span></td>
                                 <td class="py-2 text-center text-muted">${qty}</td>
                                 <td class="py-2 text-end text-muted">-</td>
                                 <td class="pe-3 py-2 text-end fw-bold text-danger">-</td>

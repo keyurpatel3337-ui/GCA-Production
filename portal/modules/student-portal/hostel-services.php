@@ -160,10 +160,7 @@ try {
         </div>
     </div>
 
-    <style>
-        .card-enhanced { transition: transform 0.2s; }
-        .card-enhanced:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important; }
-    </style>
+    
 
     <div class="row">
         <!-- Current Allotment Info -->
@@ -385,7 +382,7 @@ try {
                                         <tr>
                                             <td class="ps-4">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="avatar-sm bg-info bg-opacity-10 text-info rounded-circle d-flex align-items-center justify-content-center me-3" style="width:36px; height:36px;">
+                                                    <div class="avatar-sm bg-info bg-opacity-10 text-info rounded-circle d-flex align-items-center justify-content-center me-3 css-hostel-services-55885f">
                                                         <i class="fas fa-user-tie"></i>
                                                     </div>
                                                     <span class="fw-bold text-dark"><?= $staff['name']; ?></span>

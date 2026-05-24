@@ -217,36 +217,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
 
 </div>
 
-<style>
-    .small-box {
-        border-radius: 0.5rem;
-        box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
-        position: relative;
-        padding: 20px;
-        margin-bottom: 0;
-    }
 
-    .small-box .inner h3 {
-        font-size: 2rem;
-        font-weight: 700;
-        margin: 0;
-        color: #fff;
-    }
-
-    .small-box .inner p {
-        font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.8);
-        margin: 0;
-    }
-
-    .small-box .icon {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        font-size: 3rem;
-        color: rgba(255, 255, 255, 0.2);
-    }
-</style>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/footer.php'; ?>
 

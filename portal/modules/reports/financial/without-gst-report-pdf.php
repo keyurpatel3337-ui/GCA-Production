@@ -103,15 +103,15 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" style="width:100%;">
+    <table cellpadding="2" class="css-without-gst-report-pdf-8588e4">
         <tr>
-            <td style="text-align:center;">
-                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <div style="margin: 10px 0;">
-                    <span style="font-size:12pt; font-weight:bold; background-color:#dc3545; color:#ffffff; padding: 5px 15px;">Direct Collection Report</span>
+            <td class="css-without-gst-report-pdf-539b04">
+                <span class="css-without-gst-report-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span class="css-without-gst-report-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <div class="css-without-gst-report-pdf-383745">
+                    <span class="css-without-gst-report-pdf-17ae11">Direct Collection Report</span>
                 </div><br>
-                <span style="font-size:10pt;">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
+                <span class="css-without-gst-report-pdf-1b8847">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -119,43 +119,43 @@ try {
     $pdf->Ln(5);
 
     $html = '
-    <table border="0.5" cellpadding="6" style="width:100%; font-size:9pt;">
+    <table border="0.5" cellpadding="6" class="css-without-gst-report-pdf-c6ad08">
         <thead>
-            <tr style="background-color:#dc3545; color:#fff; font-weight:bold;">
-                <th width="5%" style="text-align:center;">#</th>
+            <tr class="css-without-gst-report-pdf-be335d">
+                <th width="5%" class="css-without-gst-report-pdf-539b04">#</th>
                 <th width="10%">Date</th>
                 <th width="25%">Student Name</th>
                 <th width="15%">Standard</th>
                 <th width="15%">Fee Component</th>
                 <th width="15%">Mode</th>
-                <th width="15%" style="text-align:right;">Amount</th>
+                <th width="15%" class="css-without-gst-report-pdf-08a0ed">Amount</th>
             </tr>
         </thead>
         <tbody>';
 
     if (empty($payments)) {
-        $html .= '<tr><td colspan="7" style="text-align:center; padding: 20px;">No records found for the selected period.</td></tr>';
+        $html .= '<tr><td colspan="7" class="css-without-gst-report-pdf-5713bc">No records found for the selected period.</td></tr>';
     }
     else {
         $i = 1;
         foreach ($payments as $row) {
             $html .= '
             <tr nobr="true">
-                <td width="5%" style="text-align:center;">' . $i++ . '</td>
+                <td width="5%" class="css-without-gst-report-pdf-539b04">' . $i++ . '</td>
                 <td width="10%">' . date('d-m-Y', strtotime($row['payment_date'])) . '</td>
                 <td width="25%">' . htmlspecialchars($row['student_full_name'] ?? '') . '</td>
                 <td width="15%">' . htmlspecialchars($row['standard_display'] ?? $row['course_name'] ?? '') . '</td>
                 <td width="15%">' . formatFeeKey($row['fee_component']) . '</td>
                 <td width="15%">' . strtoupper($row['payment_mode']) . '</td>
-                <td width="15%" style="text-align:right; font-weight:bold; color:#dc3545;">&#8377;' . formatIndianCurrency($row['amount']) . '</td>
+                <td width="15%" class="css-without-gst-report-pdf-d2e3c5">&#8377;' . formatIndianCurrency($row['amount']) . '</td>
             </tr>';
         }
     }
 
     $html .= '
-            <tr style="background-color:#f8f9fa; font-weight:bold;">
-                <td width="85%" colspan="6" style="text-align:right; font-size:10pt;">GRAND TOTAL</td>
-                <td width="15%" style="text-align:right; font-size:10pt; color:#dc3545;">&#8377;' . formatIndianCurrency($totalCollection) . '</td>
+            <tr class="css-without-gst-report-pdf-efb668">
+                <td width="85%" colspan="6" class="css-without-gst-report-pdf-021d04">GRAND TOTAL</td>
+                <td width="15%" class="css-without-gst-report-pdf-4091ae">&#8377;' . formatIndianCurrency($totalCollection) . '</td>
             </tr>
         </tbody>
     </table>';

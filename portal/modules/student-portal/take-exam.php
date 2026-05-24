@@ -115,22 +115,22 @@ $page_title = "Exam: " . $exam['title'];
 </head>
 <body class="exam-body-secure">
     <!-- Offline HUD warning -->
-    <div id="offline-toast" style="position: fixed; bottom: 20px; left: 20px; background: #ea580c; color: white; padding: 1rem 1.5rem; border-radius: 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); z-index: 99999; display: none; align-items: center; gap: 12px; font-weight: 600; font-family: 'Outfit', sans-serif;">
+    <div id="offline-toast" class="css-take-exam-31d13f">
         <i class="fas fa-wifi-slash fa-lg animate-pulse"></i>
         <span>Working Offline: Internet disconnected. Answers are saved locally.</span>
     </div>
 
     <!-- Proctoring Modal Overlay -->
-    <div id="proctor-modal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.95); z-index: 10000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px);">
-        <div style="background: white; padding: 3rem; border-radius: 20px; max-width: 500px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);">
-            <div style="width: 80px; height: 80px; background: rgba(13, 148, 136, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; color: #0d9488;">
+    <div id="proctor-modal" class="css-take-exam-8ef759">
+        <div class="css-take-exam-1c874c">
+            <div class="css-take-exam-f76446">
                 <i class="fas fa-shield-alt fa-3x"></i>
             </div>
-            <h2 style="font-weight: 800; color: #0f172a; font-size: 1.5rem; margin-bottom: 1rem;">Proctored Examination Mode</h2>
-            <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem;">
+            <h2 class="css-take-exam-13a6d4">Proctored Examination Mode</h2>
+            <p class="css-take-exam-02f5c1">
                 This test requires full screen mode. Window switching, copying, and tab switching are strictly blocked and monitored.
             </p>
-            <button onclick="enterProctoredMode()" style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-weight: 700; font-size: 1rem; width: 100%; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2); cursor: pointer; outline: none;">
+            <button onclick="enterProctoredMode()" class="css-take-exam-7f45b6">
                 Start Test in Fullscreen
             </button>
         </div>
@@ -140,7 +140,7 @@ $page_title = "Exam: " . $exam['title'];
     <header class="exam-header">
         <div class="d-flex align-items-center">
             <h1 class="h5 mb-0 font-weight-bold text-dark"><?php echo htmlspecialchars($exam['title']); ?></h1>
-            <span class="badge badge-primary ml-3 py-1 px-2" style="font-size: 0.75rem;">Practice Mode</span>
+            <span class="badge badge-primary ml-3 py-1 px-2 css-take-exam-af89d6">Practice Mode</span>
         </div>
         
         <div class="d-flex align-items-center">
@@ -148,7 +148,7 @@ $page_title = "Exam: " . $exam['title'];
                 <i class="far fa-clock"></i>
                 <span id="timer">00:00:00</span>
             </div>
-            <button onclick="confirmFinish()" class="btn btn-danger font-weight-bold px-4" style="border-radius: 8px; height: 42px;">
+            <button onclick="confirmFinish()" class="btn btn-danger font-weight-bold px-4 css-take-exam-97ff4c">
                 Finish Exam
             </button>
         </div>
@@ -160,19 +160,19 @@ $page_title = "Exam: " . $exam['title'];
         <div class="col-md-9 question-panel">
             <div class="max-w-4xl mx-auto" id="question-container">
                 <div class="question-card">
-                    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap" style="gap: 15px;">
+                    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap css-take-exam-651c59">
                         <div>
                             <span id="question-number" class="question-badge mr-2">Question 1</span>
                             <span id="question-marks" class="marks-badge">1.0 Marks</span>
                         </div>
                         
                         <!-- Language Toggle -->
-                        <div class="d-flex align-items-center" style="gap: 8px;">
-                            <div class="btn-group btn-group-toggle shadow-sm" data-toggle="buttons" style="background: #f1f5f9; padding: 3px; border-radius: 20px;">
-                                <label class="btn btn-sm btn-light active" id="lbl-lang-en" style="border-radius: 18px; font-weight: 600; padding: 4px 15px; font-size: 0.8rem; border: none; cursor: pointer;">
+                        <div class="d-flex align-items-center css-take-exam-1644f1">
+                            <div class="btn-group btn-group-toggle shadow-sm css-take-exam-2e0d88" data-toggle="buttons">
+                                <label class="btn btn-sm btn-light active css-take-exam-ef2115" id="lbl-lang-en">
                                     <input type="radio" name="exam_lang" id="lang-en" autocomplete="off" checked onclick="toggleExamLanguage('en')"> English
                                 </label>
-                                <label class="btn btn-sm btn-light" id="lbl-lang-gu" style="border-radius: 18px; font-weight: 600; padding: 4px 15px; font-size: 0.8rem; border: none; cursor: pointer;">
+                                <label class="btn btn-sm btn-light css-take-exam-ef2115" id="lbl-lang-gu">
                                     <input type="radio" name="exam_lang" id="lang-gu" autocomplete="off" onclick="toggleExamLanguage('gu')"> ગુજરાતી
                                 </label>
                             </div>
@@ -189,19 +189,19 @@ $page_title = "Exam: " . $exam['title'];
                 </div>
 
                 <!-- Navigation Controls -->
-                <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap" style="gap: 10px;">
-                    <button onclick="prevQuestion()" class="btn btn-outline-secondary px-4 py-2 font-weight-bold" style="border-radius: 10px;">
+                <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap css-take-exam-2a1170">
+                    <button onclick="prevQuestion()" class="btn btn-outline-secondary px-4 py-2 font-weight-bold css-take-exam-1033dd">
                         <i class="fas fa-chevron-left mr-2"></i> Previous
                     </button>
-                    <div class="d-flex align-items-center" style="gap: 8px;">
-                        <button onclick="clearResponse()" class="btn btn-outline-warning px-3 py-2 font-weight-bold" style="border-radius: 10px;">
+                    <div class="d-flex align-items-center css-take-exam-1644f1">
+                        <button onclick="clearResponse()" class="btn btn-outline-warning px-3 py-2 font-weight-bold css-take-exam-1033dd">
                             <i class="fas fa-eraser mr-1"></i> Clear Response
                         </button>
-                        <button onclick="markForReview()" class="btn btn-outline-primary px-3 py-2 font-weight-bold" style="border-radius: 10px; color: #8b5cf6; border-color: #8b5cf6;">
+                        <button onclick="markForReview()" class="btn btn-outline-primary px-3 py-2 font-weight-bold css-take-exam-fcb25e">
                             <i class="fas fa-bookmark mr-1"></i> Mark for Review
                         </button>
                     </div>
-                    <button onclick="saveAndNext()" class="btn btn-teal px-5 py-2 font-weight-bold text-white" style="border-radius: 10px; background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); border: none;">
+                    <button onclick="saveAndNext()" class="btn btn-teal px-5 py-2 font-weight-bold text-white css-take-exam-76ddd2">
                         Save & Next <i class="fas fa-chevron-right ml-2"></i>
                     </button>
                 </div>
@@ -222,21 +222,21 @@ $page_title = "Exam: " . $exam['title'];
                         <span>Answered</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #8b5cf6; border: 1px solid #7c3aed;"></div>
+                        <div class="legend-color css-take-exam-cbce63"></div>
                         <span>Marked for Review</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-color rgba-teal" style="background: rgba(13, 148, 136, 0.08); border: 1px solid #0d9488;"></div>
+                        <div class="legend-color rgba-teal css-take-exam-e99e9d"></div>
                         <span>Active</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #f8fafc; border: 1px solid #cbd5e1;"></div>
+                        <div class="legend-color css-take-exam-78b065"></div>
                         <span>Not Visited</span>
                     </div>
                 </div>
             </div>
             
-            <div class="text-center text-muted small mt-4 pt-3" style="border-top: 1px solid #e2e8f0;">
+            <div class="text-center text-muted small mt-4 pt-3 css-take-exam-0957f9">
                 <i class="fas fa-user-shield text-success mr-1"></i> Lockout Proctored Session
             </div>
         </div>
@@ -380,7 +380,7 @@ $page_title = "Exam: " . $exam['title'];
                 Swal.fire({
                     icon: 'warning',
                     title: 'Security Warning',
-                    html: `${message}<br><br><span style="color: #ef4444; font-weight: bold; font-size: 1.1rem;">Warnings remaining: ${remaining}</span>`,
+                    html: `${message}<br><br><span class="css-take-exam-3ea9df">Warnings remaining: ${remaining}</span>`,
                     confirmButtonColor: '#0d9488',
                     confirmButtonText: 'I Understand',
                     allowOutsideClick: false,
@@ -498,7 +498,7 @@ $page_title = "Exam: " . $exam['title'];
                 const oText = (currentLang === 'gu' && q[optKeyGuj]) ? q[optKeyGuj] : q[optKey];
                 return `
                 <div class="col-md-6 mb-3">
-                    <div onclick="selectOption('${opt}')" id="opt-${opt}" class="option-item ${responses[q.id]?.selected == opt ? 'selected' : ''}" style="cursor: pointer; margin-bottom: 0;">
+                    <div onclick="selectOption('${opt}')" id="opt-${opt}" class="option-item ${responses[q.id]?.selected == opt ? 'selected' : ''} css-take-exam-33ef3a">
                         <div class="option-letter">${opt}</div>
                         <div class="option-text">${oText}</div>
                     </div>

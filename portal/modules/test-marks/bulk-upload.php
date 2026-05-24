@@ -357,14 +357,14 @@ include '../../include/sidebar.php';
                         </p>
 
                         <div class="d-grid gap-2">
-                            <form method="POST" action="bulk-upload.php" style="margin:0;">
+                            <form method="POST" action="bulk-upload.php" class="css-bulk-upload-46dcee">
                                 <input type="hidden" name="action" value="download_template">
                                 <input type="hidden" name="type" value="omr_mcq">
                                 <button type="submit" class="btn btn-primary btn-lg w-100">
                                     <i class="fas fa-qrcode"></i> Download OMR MCQ Template
                                 </button>
                             </form>
-                            <form method="POST" action="bulk-upload.php" style="margin:0;">
+                            <form method="POST" action="bulk-upload.php" class="css-bulk-upload-46dcee">
                                 <input type="hidden" name="action" value="download_template">
                                 <input type="hidden" name="type" value="descriptive">
                                 <button type="submit" class="btn btn-success btn-lg w-100">

@@ -73,78 +73,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<style>
-    .mark-input {
-        width: 100px;
-        text-align: center;
-        border-radius: 8px;
-        border: 1px solid #e2e8f0;
-        padding: 0.4rem;
-        transition: all 0.2s ease;
-    }
 
-    .mark-input:focus {
-        border-color: var(--theme-blue);
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        outline: none;
-    }
-
-    .student-result-row:hover {
-        background-color: rgba(37, 99, 235, 0.02) !important;
-    }
-
-    .table thead th {
-        background: var(--theme-blue) !important;
-        color: white !important;
-        text-transform: uppercase;
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-        font-weight: 700;
-        border: none;
-    }
-
-    .glass-header {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .form-section-title {
-        font-size: 0.875rem;
-        color: var(--text-light);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .total-display {
-        background: rgba(37, 99, 235, 0.1);
-        color: var(--theme-blue);
-        padding: 0.25rem 0.75rem;
-        border-radius: 6px;
-        font-weight: 700;
-        min-width: 50px;
-        display: inline-block;
-    }
-
-    .search-result-pill {
-        cursor: pointer;
-        transition: all 0.2s;
-        border-radius: 8px !important;
-        margin-bottom: 0.25rem;
-        border: 1px solid #f1f5f9;
-    }
-
-    .search-result-pill:hover {
-        background: #f8fafc;
-        transform: translateX(5px);
-        border-color: var(--theme-blue);
-    }
-</style>
 
 <div class="content-wrapper">
     <section class="content py-4">
@@ -154,7 +83,7 @@ include '../../include/sidebar.php';
                 <div class="card-header glass-header py-3 border-0 d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0 fw-bold"><i class="fas fa-edit me-2 text-primary"></i>Result Entry
                         Terminal</h5>
-                    <div id="history_back_btn_container" style="display: none;">
+                    <div id="history_back_btn_container" class="css-entry-224b51">
                         <a href="#" id="back_to_history_link" class="btn btn-secondary btn-sm">
                             <i class="fas fa-arrow-left me-1"></i> Back to History
                         </a>
@@ -188,14 +117,14 @@ include '../../include/sidebar.php';
 
                             <!-- Search Results List -->
                             <?php if (!empty($searchResults)): ?>
-                                <div class="list-group mt-2" style="max-height: 300px; overflow-y: auto;">
+                                <div class="list-group mt-2 css-entry-3db978">
                                     <?php foreach ($searchResults as $row): ?>
                                         <a href="?student_id=<?php echo $row['id']; ?>&academic_year_id=<?php echo $academic_year_id; ?>&exam_type=<?php echo $exam_type; ?>"
                                             class="list-group-item list-group-item-action p-2 search-result-pill border-0 mb-1">
                                             <div class="d-flex w-100 justify-content-between align-items-center">
                                                 <div>
                                                     <h6 class="mb-0 fw-bold text-dark small"><?php echo $row['name']; ?></h6>
-                                                    <small class="text-muted" style="font-size: 0.7rem;">
+                                                    <small class="text-muted css-entry-dcab71">
                                                         <i class="fas fa-id-card me-1"></i>
                                                         <?php echo $row['roll_no'] ? $row['roll_no'] : '-'; ?> |
                                                         <span
@@ -248,7 +177,7 @@ include '../../include/sidebar.php';
             </div>
 
             <!-- Marks Entry Form Area -->
-            <div id="entry_form_container" style="display: none;">
+            <div id="entry_form_container" class="css-entry-224b51">
                 <div class="glass-card">
                     <div
                         class="card-header glass-header py-3 border-0 d-flex justify-content-between align-items-center">
@@ -267,12 +196,12 @@ include '../../include/sidebar.php';
                                 <table class="table table-hover align-middle mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="ps-4" style="width: 250px;">Academic Subject</th>
-                                            <th class="text-center" style="width: 120px;">Attendance</th>
+                                            <th class="ps-4 css-entry-fa3505">Academic Subject</th>
+                                            <th class="text-center css-entry-b15add">Attendance</th>
                                             <th class="text-center th-theory">Theory Score</th>
                                             <th class="text-center th-practical">Practical Score</th>
                                             <th class="text-center th-internal">Internal Score</th>
-                                            <th class="text-center th-aggregate pe-4" style="width: 100px;">Aggregate
+                                            <th class="text-center th-aggregate pe-4 css-entry-e3d221">Aggregate
                                             </th>
                                         </tr>
                                     </thead>
@@ -289,8 +218,7 @@ include '../../include/sidebar.php';
                                                     </div>
                                                 </td>
                                                 <td class="text-center td-theory">
-                                                    <div class="input-group input-group-sm justify-content-center"
-                                                        style="width: 130px; margin: 0 auto;">
+                                                    <div class="input-group input-group-sm justify-content-center css-entry-2db1b5">
                                                         <input type="number" step="0.5"
                                                             class="form-control mark-input theory-m text-center"
                                                             placeholder="0.0">
@@ -300,8 +228,7 @@ include '../../include/sidebar.php';
                                                     </div>
                                                 </td>
                                                 <td class="text-center td-practical">
-                                                    <div class="input-group input-group-sm justify-content-center"
-                                                        style="width: 130px; margin: 0 auto;">
+                                                    <div class="input-group input-group-sm justify-content-center css-entry-2db1b5">
                                                         <input type="number" step="0.5"
                                                             class="form-control mark-input practical-m text-center"
                                                             placeholder="0.0">
@@ -311,8 +238,7 @@ include '../../include/sidebar.php';
                                                     </div>
                                                 </td>
                                                 <td class="text-center td-internal">
-                                                    <div class="input-group input-group-sm justify-content-center"
-                                                        style="width: 130px; margin: 0 auto;">
+                                                    <div class="input-group input-group-sm justify-content-center css-entry-2db1b5">
                                                         <input type="number" step="0.5"
                                                             class="form-control mark-input internal-m text-center"
                                                             placeholder="0.0">
@@ -416,19 +342,19 @@ include '../../include/sidebar.php';
                             </div>
                         </td>
                         <td class="text-center td-theory">
-                            <div class="input-group input-group-sm justify-content-center" style="width: 130px; margin: 0 auto;">
+                            <div class="input-group input-group-sm justify-content-center css-entry-2db1b5">
                                 <input type="number" step="0.5" class="form-control mark-input theory-m text-center" placeholder="0.0">
                                 <span class="input-group-text bg-light text-muted small max-marks-text">/ 50</span>
                             </div>
                         </td>
                         <td class="text-center td-practical">
-                            <div class="input-group input-group-sm justify-content-center" style="width: 130px; margin: 0 auto;">
+                            <div class="input-group input-group-sm justify-content-center css-entry-2db1b5">
                                 <input type="number" step="0.5" class="form-control mark-input practical-m text-center" placeholder="0.0">
                                 <span class="input-group-text bg-light text-muted small max-marks-text">/ 50</span>
                             </div>
                         </td>
                         <td class="text-center td-internal">
-                            <div class="input-group input-group-sm justify-content-center" style="width: 130px; margin: 0 auto;">
+                            <div class="input-group input-group-sm justify-content-center css-entry-2db1b5">
                                 <input type="number" step="0.5" class="form-control mark-input internal-m text-center" placeholder="0.0">
                                 <span class="input-group-text bg-light text-muted small max-marks-text">/ 20</span>
                             </div>

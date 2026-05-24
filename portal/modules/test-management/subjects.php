@@ -64,23 +64,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<style>
-    .btn-success-custom {
-        background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        transition: all 0.2s ease;
-    }
 
-    .btn-success-custom:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 8px -1px rgba(16, 185, 129, 0.2);
-        color: white;
-        background: linear-gradient(135deg, #047857 0%, #059669 100%);
-    }
-</style>
 
 
 
@@ -104,7 +88,7 @@ include '../../include/sidebar.php';
         <div class="card-header d-flex justify-content-between align-items-center bg-white py-3">
             <h5 class="mb-0 fw-bold text-primary"><i class="fas fa-book me-2"></i>Subjects Management</h5>
             <div class="d-flex align-items-center">
-                <div class="me-3" style="width: 250px;">
+                <div class="me-3 css-subjects-fa3505">
                     <div class="input-group input-group-sm">
                         <span class="input-group-text bg-white border-end-0">
                             <i class="fas fa-search text-muted"></i>

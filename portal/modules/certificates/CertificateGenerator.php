@@ -167,9 +167,9 @@ class CertificateGenerator
         $religion_caste = ($student['religion'] ?? '') . ' ' . ($student['cast_name'] ?? '');
 
         $html = <<<EOD
-        <div style="text-align: justify; line-height: 1.6; font-family: times; font-size: 13pt;">
+        <div class="css-CertificateGenerator-c77641">
             <p>This is to certify that,</p>
-            <p style="text-indent: 40px;">
+            <p class="css-CertificateGenerator-999526">
                 Mr. / Ms. <u><b>$name</b></u> a bonafide student of this school. 
                 He / She is studying Std. <u><b>$course</b></u> Class with G.R.No./ Reg.No <u><b>G.R. No. $enrollment_no</b></u> 
                 in the Academic year <u><b>$academic_year</b></u> & Date of Birth is <u><b>$dob</b></u> 
@@ -211,12 +211,12 @@ EOD;
         $roll_no = $student['enrollment']['roll_no'] ?? 'N/A';
 
         $html = <<<EOD
-        <div style="text-align: right; font-family: times; font-size: 12pt;">
+        <div class="css-CertificateGenerator-e9db39">
             CLASS. <u><b>$course</b></u> ROLLNO. <u><b>$roll_no</b></u>
         </div>
         <br>
-        <div style="text-align: justify; line-height: 1.6; font-family: times; font-size: 13pt;">
-            <p style="text-indent: 40px;">
+        <div class="css-CertificateGenerator-c77641">
+            <p class="css-CertificateGenerator-999526">
                 This is to Certify that, Master/Miss. <u><b>$name</b></u> is a 
                 bonafide Student of <u><b>$course</b></u>. of this Institute. 
                 his / her general registration no is.<u><b>$enrollment_no</b></u> 
@@ -258,7 +258,7 @@ EOD;
         $mother = strtoupper($student['mothername'] ?? 'N/A');
 
         $html = <<<EOD
-        <table cellspacing="5" cellpadding="5" border="0" style="line-height: 1.5;">
+        <table cellspacing="5" cellpadding="5" border="0" class="css-CertificateGenerator-8172fa">
             <tr><td width="5%">1.</td><td width="40%">Name of Pupil</td><td width="55%">: <b>$name</b></td></tr>
             <tr><td>2.</td><td>Father's / Guardian's Name</td><td>: <b>$father</b></td></tr>
             <tr><td>3.</td><td>Mother's Name</td><td>: <b>$mother</b></td></tr>
@@ -323,9 +323,9 @@ EOD;
         $pdf->SetY(82);
         $pdf->SetFont('times', '', 12);
         $html = <<<EOD
-        <div style="text-align: justify; line-height: 1.3; font-family: times; font-size: 12pt;">
-            <p style="text-indent: 40px;">
-                This is to certify that, Master/Miss <span style="text-decoration: underline;"><b>$name</b></span> is 
+        <div class="css-CertificateGenerator-78bb21">
+            <p class="css-CertificateGenerator-999526">
+                This is to certify that, Master/Miss <span class="css-CertificateGenerator-f6bf23"><b>$name</b></span> is 
                 a bonafide student of this School. He/She appeared at the <b>$exam_session</b> 
                 Examination Of Gujarat Secondary & Higher Secondary Education Board and passed of 
                 <u><b>FIRST ATTEMPT</b></u>. To the best of my knowledge & belief He / She bears a good moral character.

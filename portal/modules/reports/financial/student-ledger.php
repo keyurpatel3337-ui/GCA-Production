@@ -196,162 +196,7 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<style>
-    /* Premium Design System - Student Ledger */
-    :root {
-        --glass-bg: rgba(255, 255, 255, 0.95);
-        --glass-border: rgba(255, 255, 255, 0.2);
-        --ledger-primary: #2563eb;
-        --ledger-secondary: #7c3aed;
-        --ledger-accent: #f59e0b;
-        --ledger-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-    }
 
-    .ledger-search-box {
-        background: var(--ledger-gradient);
-        border-radius: 12px;
-        padding: 2rem;
-        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .ledger-search-box::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        right: -10%;
-        width: 300px;
-        height: 300px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 50%;
-        pointer-events: none;
-    }
-
-    .stat-card {
-        border: none;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .stat-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 0.75rem;
-        background: rgba(255, 255, 255, 0.2);
-    }
-
-    .stat-icon i {
-        font-size: 1rem;
-        color: white;
-        margin: 0;
-    }
-
-    /* Timeline Styles */
-    .ledger-timeline {
-        position: relative;
-        padding-left: 45px;
-    }
-
-    .ledger-timeline::before {
-        content: '';
-        position: absolute;
-        left: 15px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: #f1f5f9;
-        border-radius: 2px;
-    }
-
-    .timeline-item {
-        position: relative;
-        margin-bottom: 2rem;
-    }
-
-    .timeline-dot {
-        position: absolute;
-        left: -38px;
-        top: 0;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: #fff;
-        border: 3px solid var(--ledger-primary);
-        z-index: 2;
-        box-shadow: 0 0 0 4px #fff;
-    }
-
-    .timeline-content {
-        background: #fff;
-        padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        border: 1px solid #f1f5f9;
-    }
-
-    /* Tabs & Tables */
-    .nav-tabs-custom {
-        border-bottom: 2px solid #f1f5f9;
-    }
-
-    .nav-tabs-custom .nav-link {
-        border: none;
-        padding: 1rem 1.25rem;
-        font-weight: 600;
-        color: #64748b;
-        position: relative;
-    }
-
-    .nav-tabs-custom .nav-link.active {
-        color: var(--ledger-primary);
-        background: transparent;
-    }
-
-    .nav-tabs-custom .nav-link.active::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--ledger-primary);
-        border-radius: 2px;
-    }
-
-    .table-ledger th {
-        background: #f8fafc;
-        text-transform: uppercase;
-        font-size: 0.7rem;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        color: #64748b;
-        border: none;
-        padding: 0.75rem 1rem;
-    }
-
-    .table-ledger tr td {
-        padding: 1rem;
-        border-bottom: 1px solid #f1f5f9;
-    }
-
-    .search-result-pill {
-        cursor: pointer;
-        border-radius: 8px;
-        margin-bottom: 0.25rem;
-    }
-
-    /* Profile Avatar */
-    .profile-avatar-ledger {
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        border: 2px solid #fff;
-    }
-</style>
 
 <div class="content-wrapper">
     <div class="content-header pb-0">
@@ -418,8 +263,7 @@ include '../../../include/sidebar.php';
                         </form>
 
                         <?php if (!empty($searchResults)): ?>
-                            <div class="card mt-3 shadow-lg border-0 bg-white bg-opacity-95"
-                                style="backdrop-filter: blur(10px);">
+                            <div class="card mt-3 shadow-lg border-0 bg-white bg-opacity-95 css-student-ledger-ca4979">
                                 <div class="list-group list-group-flush">
                                     <?php foreach ($searchResults as $row): ?>
                                         <a href="?student_id=<?php echo $row['id']; ?>"
@@ -455,8 +299,7 @@ include '../../../include/sidebar.php';
                         <div class="card stat-card shadow-sm border-0 bg-white">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center gap-4">
-                                    <div class="profile-avatar-ledger flex-shrink-0"
-                                        style="width: 60px; height: 60px; border-radius: 15px; background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%); color: #4f46e5; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; border: 3px solid #fff;">
+                                    <div class="profile-avatar-ledger flex-shrink-0 css-student-ledger-1037f9">
                                         <?php echo strtoupper(substr($studentData['student_name'], 0, 1)); ?>
                                     </div>
                                     <div class="flex-grow-1">
@@ -464,8 +307,7 @@ include '../../../include/sidebar.php';
                                             <h5 class="mb-0 fw-bold text-dark">
                                                 <?php echo $studentData['surname'] . ' ' . $studentData['student_name'] . ' ' . ($studentData['fathers_name'] ?? ''); ?>
                                             </h5>
-                                            <span class="badge rounded-pill px-3 py-1"
-                                                style="background:#ecfdf5;color:#059669;font-size:0.7rem;">
+                                            <span class="badge rounded-pill px-3 py-1 css-student-ledger-9acb06">
                                                 <i class="fas fa-check-circle me-1"></i> ENROLLED STUDENT
                                             </span>
                                         </div>
@@ -492,8 +334,7 @@ include '../../../include/sidebar.php';
                                     </div>
                                     <?php if (($summary['overpayment'] ?? 0) > 0): ?>
                                         <div class="flex-shrink-0">
-                                            <div class="alert alert-warning py-2 px-3 mb-0 small"
-                                                style="background:#fffbeb;border-color:#fde68a;">
+                                            <div class="alert alert-warning py-2 px-3 mb-0 small css-student-ledger-7f7487">
                                                 <i class="fas fa-info-circle me-1"></i>
                                                 Advance/Overpayment:
                                                 <strong>₹<?php echo formatIndianCurrency($summary['overpayment']); ?></strong>
@@ -634,8 +475,7 @@ include '../../../include/sidebar.php';
                                                                             <td class="ps-4">
                                                                                 <span
                                                                                     class="text-dark fw-bold"><?php echo $comp['label']; ?></span>
-                                                                                <small class="d-block text-muted"
-                                                                                    style="font-size: 0.7rem;">
+                                                                                <small class="d-block text-muted css-student-ledger-dcab71">
                                                                                     <?php echo ($comp['category'] ?? 'Academic'); ?>
                                                                                     component
                                                                                 </small>
@@ -675,7 +515,7 @@ include '../../../include/sidebar.php';
                                                                                 </td>
                                                                             <?php endif; ?>
                                                                             <!-- dummy -->
-                                                                            <td style="display:none;"><span style="display:none;">
+                                                                            <td class="css-student-ledger-93b8ea"><span class="css-student-ledger-93b8ea">
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
@@ -684,7 +524,7 @@ include '../../../include/sidebar.php';
 
                                                                 <?php if (false && (($term_summary['scholarship'] ?? 0) > 0 || ($term_summary['additional_scholarship'] ?? 0) > 0 || ($term_summary['post_admission_discount'] ?? 0) > 0)): ?>
                                                                     <!-- Scholarship Breakdown Row -->
-                                                                    <tr class="text-muted small" style="background: #f8fafc;">
+                                                                    <tr class="text-muted small css-student-ledger-a7cac5">
                                                                         <td class="ps-4 py-2" colspan="2">
                                                                             <div class="d-flex flex-column gap-1">
                                                                                 <span class="text-dark opacity-75 fw-bold"><i
@@ -719,7 +559,7 @@ include '../../../include/sidebar.php';
                                                                     </tr>
                                                                 <?php endif; ?>
 
-                                                                <tr class="fw-bold bg-soft-primary" style="background: #f1f5f9;">
+                                                                <tr class="fw-bold bg-soft-primary css-student-ledger-9899a2">
 
                                                                     <td class="ps-4 border-top border-primary border-opacity-10">
                                                                         <span class="text-primary">TERM FINANCIAL SUMMARY</span>
@@ -753,7 +593,7 @@ include '../../../include/sidebar.php';
                                                                         <td class="border-top border-primary border-opacity-10"></td>
                                                                     <?php endif; ?>
                                                                     <!-- dummy2 -->
-                                                                    <td style="display:none;"><span style="display:none;">
+                                                                    <td class="css-student-ledger-93b8ea"><span class="css-student-ledger-93b8ea">
                                                                         </span>
                                                                     </td>
                                                                 </tr>
@@ -791,18 +631,15 @@ include '../../../include/sidebar.php';
                                             <div class="row g-3 mb-4">
                                                 <!-- Main Scholarship Card -->
                                                 <div class="col-sm-6 col-xl-3">
-                                                    <div class="card border-0 rounded-3 shadow-sm h-100"
-                                                        style="background: #f5f3ff; border-left: 4px solid #7c3aed !important;">
+                                                    <div class="card border-0 rounded-3 shadow-sm h-100 css-student-ledger-6cc3db">
                                                         <div class="card-body p-3">
                                                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                                                <span class="text-muted small fw-bold text-uppercase"
-                                                                    style="letter-spacing: 0.5px;">Main Scholarship</span>
+                                                                <span class="text-muted small fw-bold text-uppercase css-student-ledger-488ab5">Main Scholarship</span>
                                                                 <div class="bg-white p-2 rounded-3 shadow-sm">
-                                                                    <i class="fas fa-graduation-cap text-purple"
-                                                                        style="color: #7c3aed;"></i>
+                                                                    <i class="fas fa-graduation-cap text-purple css-student-ledger-e33b5b"></i>
                                                                 </div>
                                                             </div>
-                                                            <h3 class="fw-bold mb-1" style="color: #4c1d95;">
+                                                            <h3 class="fw-bold mb-1 css-student-ledger-4a0c8a">
                                                                 ₹<?php echo formatIndianCurrency($total_main_scholarship); ?>
                                                             </h3>
                                                             <p class="text-muted small mb-0">Base scholarship awarded at
@@ -813,18 +650,15 @@ include '../../../include/sidebar.php';
 
                                                 <!-- Additional Scholarship Card -->
                                                 <div class="col-sm-6 col-xl-3">
-                                                    <div class="card border-0 rounded-3 shadow-sm h-100"
-                                                        style="background: #ecfeff; border-left: 4px solid #0891b2 !important;">
+                                                    <div class="card border-0 rounded-3 shadow-sm h-100 css-student-ledger-ca41bc">
                                                         <div class="card-body p-3">
                                                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                                                <span class="text-muted small fw-bold text-uppercase"
-                                                                    style="letter-spacing: 0.5px;">Additional Scholarship</span>
+                                                                <span class="text-muted small fw-bold text-uppercase css-student-ledger-488ab5">Additional Scholarship</span>
                                                                 <div class="bg-white p-2 rounded-3 shadow-sm">
-                                                                    <i class="fas fa-plus-circle text-cyan"
-                                                                        style="color: #0891b2;"></i>
+                                                                    <i class="fas fa-plus-circle text-cyan css-student-ledger-bccdd9"></i>
                                                                 </div>
                                                             </div>
-                                                            <h3 class="fw-bold mb-1" style="color: #164e63;">
+                                                            <h3 class="fw-bold mb-1 css-student-ledger-d380ba">
                                                                 ₹<?php echo formatIndianCurrency($total_additional_scholarship); ?>
                                                             </h3>
                                                             <p class="text-muted small mb-0">Discretionary/additional counselor
@@ -835,18 +669,15 @@ include '../../../include/sidebar.php';
 
                                                 <!-- Post-Admission Discount Card -->
                                                 <div class="col-sm-6 col-xl-3">
-                                                    <div class="card border-0 rounded-3 shadow-sm h-100"
-                                                        style="background: #fff7ed; border-left: 4px solid #ea580c !important;">
+                                                    <div class="card border-0 rounded-3 shadow-sm h-100 css-student-ledger-3b6445">
                                                         <div class="card-body p-3">
                                                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                                                <span class="text-muted small fw-bold text-uppercase"
-                                                                    style="letter-spacing: 0.5px;">Post-Adm Discount</span>
+                                                                <span class="text-muted small fw-bold text-uppercase css-student-ledger-488ab5">Post-Adm Discount</span>
                                                                 <div class="bg-white p-2 rounded-3 shadow-sm">
-                                                                    <i class="fas fa-percent text-orange"
-                                                                        style="color: #ea580c;"></i>
+                                                                    <i class="fas fa-percent text-orange css-student-ledger-c5d9c2"></i>
                                                                 </div>
                                                             </div>
-                                                            <h3 class="fw-bold mb-1" style="color: #7c2d12;">
+                                                            <h3 class="fw-bold mb-1 css-student-ledger-ea20dc">
                                                                 ₹<?php echo formatIndianCurrency($total_post_discount); ?></h3>
                                                             <p class="text-muted small mb-0">Waivers/discounts approved
                                                                 post-admission</p>
@@ -856,18 +687,15 @@ include '../../../include/sidebar.php';
 
                                                 <!-- Grand Total Waiver Card -->
                                                 <div class="col-sm-6 col-xl-3">
-                                                    <div class="card border-0 rounded-3 shadow-sm h-100"
-                                                        style="background: #f0fdf4; border-left: 4px solid #16a34a !important;">
+                                                    <div class="card border-0 rounded-3 shadow-sm h-100 css-student-ledger-198a7d">
                                                         <div class="card-body p-3">
                                                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                                                <span class="text-muted small fw-bold text-uppercase"
-                                                                    style="letter-spacing: 0.5px;">Grand Total Waiver</span>
+                                                                <span class="text-muted small fw-bold text-uppercase css-student-ledger-488ab5">Grand Total Waiver</span>
                                                                 <div class="bg-white p-2 rounded-3 shadow-sm">
-                                                                    <i class="fas fa-hand-holding-usd text-success"
-                                                                        style="color: #16a34a;"></i>
+                                                                    <i class="fas fa-hand-holding-usd text-success css-student-ledger-f89798"></i>
                                                                 </div>
                                                             </div>
-                                                            <h3 class="fw-bold mb-1" style="color: #14532d;">
+                                                            <h3 class="fw-bold mb-1 css-student-ledger-c3539f">
                                                                 ₹<?php echo formatIndianCurrency($total_waiver_all); ?></h3>
                                                             <p class="text-muted small mb-0">Total combined waivers across all
                                                                 terms</p>
@@ -952,7 +780,7 @@ include '../../../include/sidebar.php';
                                                                 <th class="text-center border-0">Calculated Amount</th>
                                                                 <th class="text-center border-0">Created / Approved By</th>
                                                                 <th class="text-center border-0">Status</th>
-                                                                <th class="border-0 pe-4" style="width: 30%;">Remarks &
+                                                                <th class="border-0 pe-4 css-student-ledger-fcb9f7">Remarks &
                                                                     Breakdown</th>
                                                             </tr>
                                                         </thead>
@@ -993,7 +821,7 @@ include '../../../include/sidebar.php';
                                                                                 }
                                                                             }
                                                                             if (!empty($bullet_points)) {
-                                                                                $formatted_remarks .= '<div class="mt-2 small bg-light p-2 rounded-2 border-start border-3 border-success"><span class="fw-bold d-block text-success mb-1 small text-uppercase" style="font-size:0.7rem;letter-spacing:0.5px;"><i class="fas fa-magic me-1"></i>Smart Waiver Breakdown:</span><ul class="list-unstyled mb-0 ps-1">' . implode('', $bullet_points) . '</ul></div>';
+                                                                                $formatted_remarks .= '<div class="mt-2 small bg-light p-2 rounded-2 border-start border-3 border-success"><span class="fw-bold d-block text-success mb-1 small text-uppercase css-student-ledger-76b785"><i class="fas fa-magic me-1"></i>Smart Waiver Breakdown:</span><ul class="list-unstyled mb-0 ps-1">' . implode('', $bullet_points) . '</ul></div>';
                                                                             }
                                                                         }
                                                                     } else {
@@ -1036,7 +864,7 @@ include '../../../include/sidebar.php';
                                                                                 <?php echo htmlspecialchars($discount['status']); ?>
                                                                             </span>
                                                                         </td>
-                                                                        <td class="pe-4 text-muted small" style="white-space: normal;">
+                                                                        <td class="pe-4 text-muted small css-student-ledger-c41d69">
                                                                             <?php echo $formatted_remarks; ?>
                                                                         </td>
                                                                     </tr>
@@ -1072,30 +900,23 @@ include '../../../include/sidebar.php';
                                             $gt_balance = 0;
                                             ?>
                                             <div class="table-responsive">
-                                                <table class="table align-middle mb-0" style="font-size:0.92rem;">
-                                                    <thead style="background:#f1f5f9;">
+                                                <table class="table align-middle mb-0 css-student-ledger-0d32d6">
+                                                    <thead class="css-student-ledger-8626f4">
                                                         <tr>
-                                                            <th class="ps-4 py-3 border-0 text-muted fw-bold"
-                                                                style="font-size:0.78rem;letter-spacing:.05em;text-transform:uppercase;">
+                                                            <th class="ps-4 py-3 border-0 text-muted fw-bold css-student-ledger-49c75a">
                                                                 Fee Category</th>
-                                                            <th class="text-center py-3 border-0 text-muted fw-bold"
-                                                                style="font-size:0.78rem;letter-spacing:.05em;text-transform:uppercase;">
+                                                            <th class="text-center py-3 border-0 text-muted fw-bold css-student-ledger-49c75a">
                                                                 Allocated</th>
-                                                            <th class="text-center py-3 border-0 text-muted fw-bold"
-                                                                style="font-size:0.78rem;letter-spacing:.05em;text-transform:uppercase;">
+                                                            <th class="text-center py-3 border-0 text-muted fw-bold css-student-ledger-49c75a">
                                                                 Scholarship / Waiver</th>
-                                                            <th class="text-center py-3 border-0 text-muted fw-bold"
-                                                                style="font-size:0.78rem;letter-spacing:.05em;text-transform:uppercase;">
+                                                            <th class="text-center py-3 border-0 text-muted fw-bold css-student-ledger-49c75a">
                                                                 Payable</th>
-                                                            <th class="text-center py-3 border-0 text-muted fw-bold"
-                                                                style="font-size:0.78rem;letter-spacing:.05em;text-transform:uppercase;">
+                                                            <th class="text-center py-3 border-0 text-muted fw-bold css-student-ledger-49c75a">
                                                                 Paid</th>
-                                                            <th class="pe-4 text-end py-3 border-0 text-muted fw-bold"
-                                                                style="font-size:0.78rem;letter-spacing:.05em;text-transform:uppercase;">
+                                                            <th class="pe-4 text-end py-3 border-0 text-muted fw-bold css-student-ledger-49c75a">
                                                                 Balance Due</th>
                                                             <?php if (hasAnyRole([ROLE_ACCOUNTANT, ROLE_SUPER_ADMIN, ROLE_PRINCIPLE])): ?>
-                                                                <th class="text-center py-3 border-0 text-muted fw-bold"
-                                                                    style="font-size:0.78rem;letter-spacing:.05em;text-transform:uppercase;">
+                                                                <th class="text-center py-3 border-0 text-muted fw-bold css-student-ledger-49c75a">
                                                                     Action</th>
                                                             <?php endif; ?>
                                                         </tr>
@@ -1116,12 +937,10 @@ include '../../../include/sidebar.php';
                                                             $gt_paid += $paid;
                                                             $gt_balance += $balance;
                                                             ?>
-                                                            <tr
-                                                                style="border-left: 3px solid <?php echo $cfg['border']; ?>; background: <?php echo $cfg['bg']; ?>;">
+                                                            <tr class="css-student-ledger-b43181">
                                                                 <td class="ps-4 py-3">
                                                                     <div class="d-flex align-items-center gap-3">
-                                                                        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
-                                                                            style="width:38px;height:38px;background:<?php echo $cfg['border']; ?>1a;">
+                                                                        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 css-student-ledger-b18348">
                                                                             <i
                                                                                 class="fas <?php echo $cfg['icon']; ?> text-<?php echo $cfg['color']; ?>"></i>
                                                                         </div>
@@ -1143,10 +962,9 @@ include '../../../include/sidebar.php';
                                                                 </td>
                                                                 <td class="text-center fw-semibold text-dark">
                                                                     ₹<?php echo formatIndianCurrency($allocated); ?></td>
-                                                                <td class="text-center fw-semibold" style="color:#d97706;">
+                                                                <td class="text-center fw-semibold css-student-ledger-061f41">
                                                                     <?php if ($waived > 0): ?>
-                                                                        <span class="badge px-2 py-1 rounded-pill"
-                                                                            style="background:#fef3c7;color:#d97706;font-size:0.82rem;">
+                                                                        <span class="badge px-2 py-1 rounded-pill css-student-ledger-218660">
                                                                             ₹<?php echo formatIndianCurrency($waived); ?>
                                                                         </span>
                                                                     <?php else: ?>
@@ -1158,8 +976,7 @@ include '../../../include/sidebar.php';
                                                                 <td class="text-center fw-bold text-success">
                                                                     ₹<?php echo formatIndianCurrency($paid); ?></td>
                                                                 <td class="pe-4 text-end">
-                                                                    <span class="badge px-3 py-2 rounded-pill fw-bold"
-                                                                        style="font-size:0.85rem;background:<?php echo $balance > 0 ? '#fee2e2' : '#d1fae5'; ?>;color:<?php echo $balance > 0 ? '#dc2626' : '#059669'; ?>;">
+                                                                    <span class="badge px-3 py-2 rounded-pill fw-bold css-student-ledger-5194c9">
                                                                         ₹<?php echo formatIndianCurrency($balance); ?>
                                                                     </span>
                                                                 </td>
@@ -1179,36 +996,33 @@ include '../../../include/sidebar.php';
                                                                     </td>
                                                                 <?php endif; ?>
                                                                 <!-- dummy3 -->
-                                                                <td style="display:none;"><span style="display:none;">
+                                                                <td class="css-student-ledger-93b8ea"><span class="css-student-ledger-93b8ea">
                                                                     </span>
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>
                                                     <tfoot>
-                                                        <tr style="background:#1e293b;">
+                                                        <tr class="css-student-ledger-f977ee">
                                                             <td class="ps-4 py-3">
                                                                 <div class="d-flex align-items-center gap-3">
-                                                                    <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
-                                                                        style="width:38px;height:38px;background:rgba(255,255,255,0.15);">
+                                                                    <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 css-student-ledger-8ae461">
                                                                         <i class="fas fa-sigma text-white"></i>
                                                                     </div>
-                                                                    <span class="fw-bold text-white"
-                                                                        style="font-size:0.95rem;letter-spacing:.03em;">GRAND
+                                                                    <span class="fw-bold text-white css-student-ledger-5c7262">GRAND
                                                                         TOTAL</span>
                                                                 </div>
                                                             </td>
                                                             <td class="text-center fw-bold text-white py-3">
                                                                 ₹<?php echo formatIndianCurrency($gt_allocated); ?></td>
-                                                            <td class="text-center fw-bold py-3" style="color:#fbbf24;">
+                                                            <td class="text-center fw-bold py-3 css-student-ledger-34ff6b">
                                                                 ₹<?php echo formatIndianCurrency($gt_waived); ?></td>
-                                                            <td class="text-center fw-bold py-3" style="color:#60a5fa;">
+                                                            <td class="text-center fw-bold py-3 css-student-ledger-83db2a">
                                                                 ₹<?php echo formatIndianCurrency($gt_payable); ?></td>
-                                                            <td class="text-center fw-bold py-3" style="color:#34d399;">
+                                                            <td class="text-center fw-bold py-3 css-student-ledger-dcb7e6">
                                                                 ₹<?php echo formatIndianCurrency($gt_paid); ?></td>
                                                             <td class="pe-4 text-end py-3">
-                                                                <span class="badge px-3 py-2 rounded-pill fw-bold shadow-sm"
-                                                                    style="font-size:0.9rem;background:<?php echo $gt_balance > 0 ? '#dc2626' : '#059669'; ?>;color:#fff;">
+                                                                <span class="badge px-3 py-2 rounded-pill fw-bold shadow-sm css-student-ledger-84652e">
                                                                     ₹<?php echo formatIndianCurrency($gt_balance); ?>
                                                                 </span>
                                                             </td>
@@ -1216,7 +1030,7 @@ include '../../../include/sidebar.php';
                                                                 <td></td>
                                                             <?php endif; ?>
                                                             <!-- dummy4 -->
-                                                            <td style="display:none;"><span style="display:none;">
+                                                            <td class="css-student-ledger-93b8ea"><span class="css-student-ledger-93b8ea">
                                                                 </span>
                                                             </td>
                                                         </tr>
@@ -1227,7 +1041,7 @@ include '../../../include/sidebar.php';
                                     </div>
 
                                     <!-- Legacy Summary (Hidden but preserved for structure) -->
-                                    <div class="tab-pane fade" id="summary-tab-disabled" style="display:none;">
+                                    <div class="tab-pane fade css-student-ledger-93b8ea" id="summary-tab-disabled">
                                         <div class="table-responsive">
                                             <table class="table table-ledger align-middle border-0">
                                                 <thead>
@@ -1241,7 +1055,7 @@ include '../../../include/sidebar.php';
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="bg-soft-primary" style="background: #f1f5f9;">
+                                                    <tr class="bg-soft-primary css-student-ledger-9899a2">
                                                         <td colspan="6" class="fw-bold text-primary py-2 px-3 small">
                                                             <i class="fas fa-graduation-cap me-2"></i> ACADEMIC & COURSE
                                                             FEES
@@ -1252,8 +1066,7 @@ include '../../../include/sidebar.php';
                                                             <td class="ps-4">
                                                                 <span
                                                                     class="fw-bold text-dark d-block"><?php echo formatFeeKey($alloc['fee_component'], $studentData['current_class'] ?? ''); ?></span>
-                                                                <small class="badge bg-soft-secondary text-muted"
-                                                                    style="background: #f1f5f9; font-size: 0.65rem;"><?php echo $alloc['category'] ?? 'Academic'; ?></small>
+                                                                <small class="badge bg-soft-secondary text-muted css-student-ledger-0301ea"><?php echo $alloc['category'] ?? 'Academic'; ?></small>
                                                             </td>
                                                             <td class="text-center fw-semibold text-dark">
                                                                 ₹<?php echo formatIndianCurrency($alloc['allocated_amount']); ?>
@@ -1279,7 +1092,7 @@ include '../../../include/sidebar.php';
                                                     endforeach; ?>
 
                                                     <?php if (!empty($hostel_allocations)): ?>
-                                                        <tr class="bg-soft-info" style="background: #f0f9ff;">
+                                                        <tr class="bg-soft-info css-student-ledger-d88b68">
                                                             <td colspan="6" class="fw-bold text-info py-2 px-3 small">
                                                                 <i class="fas fa-hotel me-2"></i> RESIDENTIAL / HOSTEL FEES
                                                             </td>
@@ -1289,8 +1102,7 @@ include '../../../include/sidebar.php';
                                                                 <td class="ps-4">
                                                                     <span
                                                                         class="fw-bold text-dark d-block"><?php echo formatFeeKey($alloc['fee_component'], $studentData['current_class'] ?? ''); ?></span>
-                                                                    <small class="badge bg-soft-info text-info"
-                                                                        style="background: #e0f2fe; font-size: 0.65rem;">Hostel</small>
+                                                                    <small class="badge bg-soft-info text-info css-student-ledger-ae751f">Hostel</small>
                                                                 </td>
                                                                 <td class="text-center fw-semibold text-dark">
                                                                     ₹<?php echo formatIndianCurrency($alloc['allocated_amount']); ?>
@@ -1318,7 +1130,7 @@ include '../../../include/sidebar.php';
                                                     endif; ?>
 
                                                     <?php if (!empty($transport_allocations)): ?>
-                                                        <tr class="bg-soft-warning" style="background: #fffbeb;">
+                                                        <tr class="bg-soft-warning css-student-ledger-dc0986">
                                                             <td colspan="6" class="fw-bold text-warning py-2 px-3 small">
                                                                 <i class="fas fa-bus me-2"></i> TRANSPORT FEES
                                                             </td>
@@ -1389,11 +1201,10 @@ include '../../../include/sidebar.php';
                                     <i class="fas fa-history me-2 text-primary"></i> Payment Timeline
                                 </h6>
                             </div>
-                            <div class="card-body p-3" style="max-height:580px;overflow-y:auto;">
+                            <div class="card-body p-3 css-student-ledger-ec5fc2">
                                 <?php if (empty($payments)): ?>
                                     <div class="text-center py-5">
-                                        <div class="bg-light d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
-                                            style="width: 80px; height: 80px;">
+                                        <div class="bg-light d-inline-flex align-items-center justify-content-center rounded-circle mb-3 css-student-ledger-732c60">
                                             <i class="fas fa-file-invoice fa-2x text-muted opacity-50"></i>
                                         </div>
                                         <h5 class="text-dark fw-bold">No Transactions Found</h5>
@@ -1409,7 +1220,7 @@ include '../../../include/sidebar.php';
                                                 $dotColor = '#f59e0b';
                                             ?>
                                             <div class="timeline-item">
-                                                <div class="timeline-dot" style="border-color: <?php echo $dotColor; ?>;"></div>
+                                                <div class="timeline-dot css-student-ledger-c2b46f"></div>
                                                 <div class="timeline-content">
                                                     <div class="d-flex justify-content-between align-items-start mb-3">
                                                         <div>
@@ -1484,8 +1295,7 @@ include '../../../include/sidebar.php';
                             </div>
                         </div>
 
-                        <div class="card shadow-sm border-0 bg-gradient-light"
-                            style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);">
+                        <div class="card shadow-sm border-0 bg-gradient-light css-student-ledger-69df44">
                             <div class="card-body p-4">
                                 <h6 class="fw-bold text-dark mb-3 d-flex align-items-center">
                                     <i class="fas fa-info-circle text-primary me-2"></i>Ledger Guidelines
@@ -1514,12 +1324,11 @@ include '../../../include/sidebar.php';
                 <?php
             elseif ($student_id): ?>
                 <div class="card border-0 shadow-sm bg-white p-5 text-center my-5">
-                    <div class="bg-soft-info d-inline-flex align-items-center justify-content-center rounded-circle mx-auto mb-4"
-                        style="width: 100px; height: 100px; background: #e0f2fe;">
+                    <div class="bg-soft-info d-inline-flex align-items-center justify-content-center rounded-circle mx-auto mb-4 css-student-ledger-9134ec">
                         <i class="fas fa-search fa-3x text-info"></i>
                     </div>
                     <h3 class="fw-bold text-dark">No Ledger Data Found</h3>
-                    <p class="text-muted mx-auto" style="max-width: 500px;">Student with ID
+                    <p class="text-muted mx-auto css-student-ledger-d99434">Student with ID
                         <strong><?php echo $student_id; ?></strong> was not found or has no financial transactions recorded
                         for the current session.
                     </p>
@@ -1531,25 +1340,22 @@ include '../../../include/sidebar.php';
                 <?php
             else: ?>
                 <div class="card border-0 shadow-sm bg-white p-5 text-center my-5">
-                    <div class="bg-soft-primary d-inline-flex align-items-center justify-content-center rounded-circle mx-auto mb-4"
-                        style="width: 120px; height: 120px; background: #eef2ff;">
-                        <i class="fas fa-user-graduate fa-4x text-primary" style="opacity: 0.8;"></i>
+                    <div class="bg-soft-primary d-inline-flex align-items-center justify-content-center rounded-circle mx-auto mb-4 css-student-ledger-64a153">
+                        <i class="fas fa-user-graduate fa-4x text-primary css-student-ledger-663dcb"></i>
                     </div>
                     <h2 class="fw-bold text-dark">Account Ledger Search</h2>
-                    <p class="text-muted mx-auto" style="max-width: 600px;">Enter a student ID, name, or phone number in the
+                    <p class="text-muted mx-auto css-student-ledger-4d1e5c">Enter a student ID, name, or phone number in the
                         search bar above to view their complete payment history, fee allocations, and current outstanding
                         balance.</p>
                     <div class="mt-4 d-flex justify-content-center gap-3">
-                        <div class="text-start bg-light p-3 rounded-3 d-flex align-items-center gap-3"
-                            style="min-width: 250px;">
+                        <div class="text-start bg-light p-3 rounded-3 d-flex align-items-center gap-3 css-student-ledger-dde204">
                             <i class="fas fa-receipt text-success fa-lg"></i>
                             <div>
                                 <small class="text-muted d-block">Quick Tip</small>
                                 <span class="fw-bold small">Direct PDF Downloads</span>
                             </div>
                         </div>
-                        <div class="text-start bg-light p-3 rounded-3 d-flex align-items-center gap-3"
-                            style="min-width: 250px;">
+                        <div class="text-start bg-light p-3 rounded-3 d-flex align-items-center gap-3 css-student-ledger-dde204">
                             <i class="fas fa-file-excel text-primary fa-lg"></i>
                             <div>
                                 <small class="text-muted d-block">Reporting</small>
@@ -1612,8 +1418,7 @@ include '../../../include/sidebar.php';
                                 $all_pending = array_merge($fee_allocations, $hostel_allocations, $transport_allocations);
                                 foreach ($all_pending as $alloc):
                                     if ($alloc['pending_amount'] > 0): ?>
-                                        <div class="form-check bg-white px-3 py-2 rounded-2 border shadow-xs d-flex align-items-center gap-2"
-                                            style="padding-left: 2.5rem;">
+                                        <div class="form-check bg-white px-3 py-2 rounded-2 border shadow-xs d-flex align-items-center gap-2 css-student-ledger-e71e18">
                                             <input class="form-check-input fee-check" type="checkbox"
                                                 value="<?php echo $alloc['pending_amount']; ?>"
                                                 id="chk_<?php echo $alloc['fee_component']; ?>"

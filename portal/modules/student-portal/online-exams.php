@@ -82,160 +82,13 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
 <div class="container-fluid py-4">
     <!-- Scoped Styling for Premium Web App Aesthetics -->
-    <style>
-        .self-practice-card {
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .self-practice-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .self-practice-header {
-            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%) !important;
-            padding: 1.5rem;
-            border: none;
-        }
-        .self-practice-header h4 {
-            font-weight: 800;
-            letter-spacing: -0.025em;
-        }
-        .form-select-custom, .form-input-custom {
-            height: 48px;
-            border-radius: 10px;
-            border: 1.5px solid #e2e8f0;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #334155;
-            padding: 0 1rem;
-            transition: all 0.2s ease;
-        }
-        .form-select-custom:focus, .form-input-custom:focus {
-            border-color: #0d9488;
-            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
-            outline: none;
-        }
-        .btn-generate-test {
-            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%) !important;
-            color: white !important;
-            height: 48px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 0.025em;
-            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
-            transition: all 0.2s ease;
-        }
-        .btn-generate-test:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(13, 148, 136, 0.35);
-        }
-        .btn-generate-test:active {
-            transform: translateY(0);
-        }
-        .history-card {
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            background: #ffffff;
-        }
-        .history-item {
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid #f1f5f9;
-            transition: background 0.2s ease;
-        }
-        .history-item:last-child {
-            border-bottom: none;
-        }
-        .history-item:hover {
-            background-color: #f8fafc;
-        }
-        .history-title {
-            font-weight: 700;
-            color: #1e293b;
-            font-size: 0.95rem;
-        }
-        .history-meta {
-            font-size: 0.8rem;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 4px;
-        }
-        .official-exam-card {
-            border: none;
-            border-radius: 16px;
-            background: #ffffff;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            margin-bottom: 1.5rem;
-            border-left: 5px solid #6366f1;
-        }
-        .official-exam-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.1);
-        }
-        .official-exam-card.live {
-            border-left-color: #10b981;
-        }
-        .official-exam-card.upcoming {
-            border-left-color: #f59e0b;
-        }
-        .exam-info-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background-color: #f1f5f9;
-            color: #475569;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 600;
-        }
-        .pulse-live {
-            width: 8px;
-            height: 8px;
-            background-color: #10b981;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            animation: pulse-green 1.5s infinite;
-        }
-        @keyframes pulse-green {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            }
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-            }
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-            }
-        }
-        .empty-state-card {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: #ffffff;
-            border-radius: 16px;
-            border: 2px dashed #cbd5e1;
-            color: #64748b;
-        }
-    </style>
+    
 
     <!-- Header Section -->
     <div class="row mb-4 align-items-center">
         <div class="col-sm-6">
-            <h1 class="h2 font-weight-extrabold text-dark mb-1" style="font-family: 'Inter', sans-serif; font-weight: 800;">
-                <i class="fas fa-graduation-cap text-teal mr-2" style="color: #0d9488;"></i>Online Practice Center
+            <h1 class="h2 font-weight-extrabold text-dark mb-1 css-online-exams-fc38bf">
+                <i class="fas fa-graduation-cap text-teal mr-2 css-online-exams-ed47d5"></i>Online Practice Center
             </h1>
             <p class="text-muted mb-0">Harness your skills through dynamic practice tests and structured scheduled exams.</p>
         </div>
@@ -315,7 +168,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             <div class="card history-card">
                 <div class="card-header bg-white py-3 border-bottom-0">
                     <h5 class="card-title font-weight-bold text-dark mb-0">
-                        <i class="fas fa-history mr-2 text-teal" style="color: #0d9488;"></i>Recent Attempts
+                        <i class="fas fa-history mr-2 text-teal css-online-exams-ed47d5"></i>Recent Attempts
                     </h5>
                 </div>
                 <div class="card-body p-0">
@@ -329,9 +182,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                         </div>
                                         <div class="text-right">
                                             <?php if ($sp['attempt_status'] === 'Submitted'): ?>
-                                                <span class="badge badge-success px-2 py-1" style="border-radius: 6px;">Completed</span>
+                                                <span class="badge badge-success px-2 py-1 css-online-exams-602659">Completed</span>
                                             <?php else: ?>
-                                                <span class="badge badge-warning px-2 py-1 text-dark" style="border-radius: 6px;">Ongoing</span>
+                                                <span class="badge badge-warning px-2 py-1 text-dark css-online-exams-602659">Ongoing</span>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -341,7 +194,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                             <?php echo date('M j, Y - h:i A', strtotime($sp['created_at'])); ?>
                                         </span>
                                         <span>
-                                            <i class="fas fa-star mr-1 text-muted" style="color: #eab308 !important;"></i>
+                                            <i class="fas fa-star mr-1 text-muted css-online-exams-6f4211"></i>
                                             <?php 
                                             if ($sp['attempt_status'] === 'Submitted') {
                                                 echo '<b>' . $sp['total_score'] . '</b> / ' . $sp['total_marks'] . ' Marks';
@@ -361,7 +214,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         </div>
                     <?php else: ?>
                         <div class="text-center py-4 text-muted">
-                            <i class="fas fa-folder-open fa-2x mb-2 text-light" style="color: #e2e8f0 !important;"></i><br>
+                            <i class="fas fa-folder-open fa-2x mb-2 text-light css-online-exams-edf7b3"></i><br>
                             <span class="small font-weight-bold text-slate-400">No recent practice attempts found.</span>
                         </div>
                     <?php endif; ?>
@@ -371,8 +224,8 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
         <!-- RIGHT COLUMN: Official Scheduled Practice Exams -->
         <div class="col-xl-8 col-lg-7 mb-4">
-            <h4 class="font-weight-bold text-dark mb-3" style="font-family: 'Inter', sans-serif; letter-spacing: -0.01em;">
-                <i class="fas fa-calendar-alt text-primary mr-2" style="color: #6366f1 !important;"></i>Official Scheduled Exams
+            <h4 class="font-weight-bold text-dark mb-3 css-online-exams-0eb449">
+                <i class="fas fa-calendar-alt text-primary mr-2 css-online-exams-c66869"></i>Official Scheduled Exams
             </h4>
 
             <?php if (count($exams) > 0): ?>
@@ -397,26 +250,26 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                     ?>
                     <div class="card official-exam-card <?php echo $card_class; ?>">
                         <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start flex-wrap mb-3" style="gap: 10px;">
+                            <div class="d-flex justify-content-between align-items-start flex-wrap mb-3 css-online-exams-2a1170">
                                 <div>
-                                    <h5 class="font-weight-bold text-dark mb-1" style="font-size: 1.15rem;"><?php echo htmlspecialchars($e['title']); ?></h5>
-                                    <p class="text-muted mb-0 small" style="max-width: 450px;"><?php echo htmlspecialchars($e['description'] ?: 'No instructions provided.'); ?></p>
+                                    <h5 class="font-weight-bold text-dark mb-1 css-online-exams-e83e11"><?php echo htmlspecialchars($e['title']); ?></h5>
+                                    <p class="text-muted mb-0 small css-online-exams-2383b5"><?php echo htmlspecialchars($e['description'] ?: 'No instructions provided.'); ?></p>
                                 </div>
                                 <span class="badge <?php echo $status_badge_class; ?> px-3 py-2 font-weight-bold d-flex align-items-center" style="border-radius: 8px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.02em;">
                                     <?php echo $status_label; ?>
                                 </span>
                             </div>
 
-                            <hr class="my-3" style="border-color: #f1f5f9;">
+                            <hr class="my-3 css-online-exams-40c40d">
 
                             <div class="row align-items-center">
                                 <div class="col-md-8 col-sm-12 mb-3 mb-md-0">
-                                    <div class="d-flex flex-wrap" style="gap: 15px;">
+                                    <div class="d-flex flex-wrap css-online-exams-651c59">
                                         <div class="exam-info-pill">
                                             <i class="far fa-clock"></i> <?php echo $e['duration_mins']; ?> Mins
                                         </div>
                                         <div class="exam-info-pill">
-                                            <i class="fas fa-star" style="color: #eab308 !important;"></i> <?php echo $e['total_marks']; ?> Marks
+                                            <i class="fas fa-star css-online-exams-6f4211"></i> <?php echo $e['total_marks']; ?> Marks
                                         </div>
                                         <div class="exam-info-pill">
                                             <i class="far fa-calendar-alt text-primary"></i> 
@@ -426,7 +279,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                 </div>
                                 <div class="col-md-4 col-sm-12 text-md-right">
                                     <?php if ($e['attempt_status'] === 'Submitted'): ?>
-                                        <button disabled class="btn btn-secondary btn-md font-weight-bold px-4" style="border-radius: 10px; opacity: 0.8;">
+                                        <button disabled class="btn btn-secondary btn-md font-weight-bold px-4 css-online-exams-3a1452">
                                             <i class="fas fa-check-double mr-1"></i> Completed
                                         </button>
                                     <?php elseif ($is_live): ?>
@@ -434,7 +287,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                             Start Exam <i class="fas fa-arrow-right ml-2"></i>
                                         </a>
                                     <?php else: ?>
-                                        <button disabled class="btn btn-light btn-md font-weight-bold px-4" style="border-radius: 10px; color: #94a3b8 !important;" title="Locked until exam start time">
+                                        <button disabled class="btn btn-light btn-md font-weight-bold px-4 css-online-exams-81d101" title="Locked until exam start time">
                                             <i class="fas fa-lock mr-2"></i> Upcoming
                                         </button>
                                     <?php endif; ?>
@@ -445,7 +298,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 <?php endforeach; ?>
             <?php else: ?>
                 <div class="empty-state-card">
-                    <i class="fas fa-calendar-times fa-3x mb-3 text-slate-300" style="color: #cbd5e1 !important;"></i>
+                    <i class="fas fa-calendar-times fa-3x mb-3 text-slate-300 css-online-exams-4b71ef"></i>
                     <h5 class="font-weight-bold text-dark">No Active Scheduled Exams</h5>
                     <p class="text-muted mb-0 small">There are no official scheduled practice tests assigned to you at the moment.</p>
                 </div>

@@ -145,7 +145,7 @@ include '../../include/sidebar.php';
                 </div>
 
                 <!-- Installment Schedule Preview -->
-                <div id="schedule_preview" class="mb-3" style="display: none;">
+                <div id="schedule_preview" class="mb-3 css-create-installment-224b51">
                     <label class="form-label">Installment Schedule Preview</label>
                     <div class="table-responsive">
                         <table class="table table-bordered table-sm">

@@ -55,7 +55,7 @@ include '../../include/sidebar.php';
             <div class="card-body py-2">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <form method="POST" style="display:inline;margin:0;">
+                        <form method="POST" class="css-pending-requests-f8e39d">
                             <input type="hidden" name="status" value="all">
                             <button type="submit" class="nav-link <?php echo $status_filter === 'all' ? 'active' : ''; ?>" style="border:none;background:none;cursor:pointer;">
                                 All <span class="badge bg-secondary ms-1"><?php echo $total_count; ?></span>
@@ -63,7 +63,7 @@ include '../../include/sidebar.php';
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form method="POST" style="display:inline;margin:0;">
+                        <form method="POST" class="css-pending-requests-f8e39d">
                             <input type="hidden" name="status" value="pending">
                             <button type="submit" class="nav-link <?php echo $status_filter === 'pending' ? 'active' : ''; ?>" style="border:none;background:none;cursor:pointer;">
                                 Pending <span class="badge bg-warning text-dark ms-1"><?php echo $status_counts['pending'] ?? 0; ?></span>
@@ -71,7 +71,7 @@ include '../../include/sidebar.php';
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form method="POST" style="display:inline;margin:0;">
+                        <form method="POST" class="css-pending-requests-f8e39d">
                             <input type="hidden" name="status" value="under_review">
                             <button type="submit" class="nav-link <?php echo $status_filter === 'under_review' ? 'active' : ''; ?>" style="border:none;background:none;cursor:pointer;">
                                 Under Review <span class="badge bg-info ms-1"><?php echo $status_counts['under_review'] ?? 0; ?></span>
@@ -79,7 +79,7 @@ include '../../include/sidebar.php';
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form method="POST" style="display:inline;margin:0;">
+                        <form method="POST" class="css-pending-requests-f8e39d">
                             <input type="hidden" name="status" value="approved">
                             <button type="submit" class="nav-link <?php echo $status_filter === 'approved' ? 'active' : ''; ?>" style="border:none;background:none;cursor:pointer;">
                                 Approved <span class="badge bg-success ms-1"><?php echo $status_counts['approved'] ?? 0; ?></span>
@@ -87,7 +87,7 @@ include '../../include/sidebar.php';
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form method="POST" style="display:inline;margin:0;">
+                        <form method="POST" class="css-pending-requests-f8e39d">
                             <input type="hidden" name="status" value="rejected">
                             <button type="submit" class="nav-link <?php echo $status_filter === 'rejected' ? 'active' : ''; ?>" style="border:none;background:none;cursor:pointer;">
                                 Rejected <span class="badge bg-danger ms-1"><?php echo $status_counts['rejected'] ?? 0; ?></span>
@@ -106,7 +106,7 @@ include '../../include/sidebar.php';
                     <form method="GET" class="d-inline-block">
                         <input type="hidden" name="status" value="<?php
                                                                     echo htmlspecialchars($status_filter ?? ''); ?>">
-                        <div class="input-group input-group-sm" style="width: 300px;">
+                        <div class="input-group input-group-sm css-pending-requests-88ed85">
                             <input type="text" name="search" class="form-control"
                                 placeholder="Search by name, request no..."
                                 value="<?php
@@ -282,33 +282,4 @@ include '../../include/footer.php'; ?>
     });
 </script>
 
-<style>
-    /* Custom styles for this page */
-    .nav-pills .nav-link {
-        color: #495057;
-        border-radius: 0.375rem;
-        margin-right: 0.5rem;
-    }
 
-    .nav-pills .nav-link.active {
-        background-color: var(--primary-color, #321fdb);
-    }
-
-    .nav-pills .nav-link:hover:not(.active) {
-        background-color: #e9ecef;
-    }
-
-    .table thead th {
-        font-weight: 600;
-        white-space: nowrap;
-    }
-
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-    }
-
-    .card-tools .input-group {
-        flex-wrap: nowrap;
-    }
-</style>

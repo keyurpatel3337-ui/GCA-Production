@@ -170,7 +170,7 @@ include '../../include/sidebar.php';
         </div>
 
         <!-- Fee Difference Preview -->
-        <div id="fee_preview" class="alert alert-info" style="display: none;">
+        <div id="fee_preview" class="alert alert-info css-change-group-request-224b51">
             <h6><i class="fas fa-calculator"></i> Fee Impact Preview</h6>
             <div id="fee_preview_content"></div>
         </div>

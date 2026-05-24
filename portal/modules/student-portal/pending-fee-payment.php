@@ -271,8 +271,7 @@ include '../../include/sidebar.php';
                     </div>
 
                     <!-- Amount Card -->
-                    <div class="amount-card bg-success text-white p-4 rounded-4 text-center mb-4 shadow-sm"
-                        style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                    <div class="amount-card bg-success text-white p-4 rounded-4 text-center mb-4 shadow-sm css-pending-fee-payment-96e92b">
                         <span class="text-uppercase small fw-bold opacity-75 d-block mb-1">Total Payable
                             Amount</span>
                         <h1 class="display-3 fw-bold mb-0">₹<span id="display_amount"><?php echo formatIndianCurrency($fee_amount); ?></span></h1>

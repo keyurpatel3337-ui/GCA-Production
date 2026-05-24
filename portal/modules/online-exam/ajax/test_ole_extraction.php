@@ -152,7 +152,7 @@ if (!empty($oleImageMap)) {
     foreach ($oleImageMap as $key => &$job) {
         $exists = file_exists($job['png']);
         $job['img_html'] = $exists
-            ? '<img src="' . $job['url'] . '" style="max-width:300px;height:auto;margin:5px 0;" />'
+            ? '<img src="' . $job['url'] . '" class="css-test_ole_extraction-3cf331" />'
             : '';
         echo "  $key -> PNG: " . ($exists ? 'CREATED (' . filesize($job['png']) . ' bytes)' : 'MISSING') . "\n";
     }

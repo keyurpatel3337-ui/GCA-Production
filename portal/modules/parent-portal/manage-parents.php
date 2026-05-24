@@ -181,7 +181,7 @@ include '../../include/sidebar.php';
                                                     <?php echo $p['mobile_number']; ?>
                                                 </td>
                                                 <td>
-                                                    <small class="text-muted d-block" style="max-width: 300px;">
+                                                    <small class="text-muted d-block css-manage-parents-c0dc2c">
                                                         <?php echo $p['children_names'] ?: '<span class="text-danger">No children linked</span>'; ?>
                                                     </small>
                                                 </td>

@@ -160,16 +160,16 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
                     </div>
                 </div>
 
-                <div id="backupProgress" style="display: none;">
+                <div id="backupProgress" class="css-receipt-pdf-batch-224b51">
                     <div class="text-center mb-3">
                         <h4 id="progressStatus">Initializing...</h4>
                         <p id="progressSubStatus" class="text-muted">Fetching receipt count...</p>
                     </div>
-                    <div class="progress mb-3" style="height: 25px;">
-                        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                            role="progressbar" style="width: 0%">0%</div>
+                    <div class="progress mb-3 css-receipt-pdf-batch-bd56ab">
+                        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success css-receipt-pdf-batch-759002"
+                            role="progressbar">0%</div>
                     </div>
-                    <div class="list-group list-group-flush border rounded" style="max-height: 200px; overflow-y: auto;"
+                    <div class="list-group list-group-flush border rounded css-receipt-pdf-batch-d98fad"
                         id="logList">
                         <!-- Logs will appear here -->
                     </div>

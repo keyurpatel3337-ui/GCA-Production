@@ -330,22 +330,4 @@ $has_capacity = $requested_division['current_students'] < $requested_division['m
 
     <?php include '../../include/footer.php'; ?>
 
-    <style>
-        .btn-outline-success:has(input:checked),
-        .btn-outline-danger:has(input:checked),
-        .btn-outline-info:has(input:checked) {
-            color: white !important;
-        }
-
-        .btn-outline-success:has(input:checked) {
-            background-color: #198754;
-        }
-
-        .btn-outline-danger:has(input:checked) {
-            background-color: #dc3545;
-        }
-
-        .btn-outline-info:has(input:checked) {
-            background-color: #0dcaf0;
-        }
-    </style>SESSION['error_msg']);
+    SESSION['error_msg']);

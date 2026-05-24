@@ -209,13 +209,13 @@ try {
 
     // Header Content
     $html_header = '
-    <table cellpadding="2" style="width:100%;">
+    <table cellpadding="2" class="css-receipt-register-pdf-8588e4">
         <tr>
-            <td style="text-align:center;">
-                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($org_name ?? '') . '</span><br>
-                ' . (!empty($org_address) ? '<span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>' : '') . '
-                <span style="font-size:12pt; font-weight:bold; background-color:#f0f0f0;">RECEIPT REGISTER</span><br>
-                <span style="font-size:9pt;">Report Period: ' . date('d-M-Y', strtotime($from_date)) . ' to ' . date('d-M-Y', strtotime($to_date)) . '</span>
+            <td class="css-receipt-register-pdf-539b04">
+                <span class="css-receipt-register-pdf-86c905">' . htmlspecialchars($org_name ?? '') . '</span><br>
+                ' . (!empty($org_address) ? '<span class="css-receipt-register-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>' : '') . '
+                <span class="css-receipt-register-pdf-0c5bfa">RECEIPT REGISTER</span><br>
+                <span class="css-receipt-register-pdf-bea288">Report Period: ' . date('d-M-Y', strtotime($from_date)) . ' to ' . date('d-M-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -225,21 +225,21 @@ try {
 
     // Table Header
     $html = '
-    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
+    <table border="0.5" cellpadding="4" class="css-receipt-register-pdf-6eb086">
         <thead>
-            <tr style="background-color:#333; color:#fff; font-weight:bold;">
-                <th width="4%" style="text-align:center;">S.No</th>
-                <th width="7%" style="text-align:center;">Receipt No</th>
-                <th width="7%" style="text-align:center;">Date</th>
+            <tr class="css-receipt-register-pdf-de3663">
+                <th width="4%" class="css-receipt-register-pdf-539b04">S.No</th>
+                <th width="7%" class="css-receipt-register-pdf-539b04">Receipt No</th>
+                <th width="7%" class="css-receipt-register-pdf-539b04">Date</th>
                 <th width="13%">Student Name</th>
                 <th width="7%">Class</th>
                 <th width="7%">Group</th>
                 <th width="6%">Medium</th>
                 <th width="7%">Term</th>
                 <th width="8%">Payment Type</th>
-                <th width="6%" style="text-align:center;">Mode</th>
+                <th width="6%" class="css-receipt-register-pdf-539b04">Mode</th>
                 <th width="9%">Bank/Trans</th>
-                <th width="7%" style="text-align:right;">Amount</th>
+                <th width="7%" class="css-receipt-register-pdf-08a0ed">Amount</th>
                 <th width="6%">Collected By</th>
                 <th width="6%">Remark</th>
             </tr>
@@ -250,7 +250,7 @@ try {
     $totalAmount = 0;
 
     if (empty($receipts)) {
-        $html .= '<tr><td colspan="14" style="text-align:center;">No records found for selected period</td></tr>';
+        $html .= '<tr><td colspan="14" class="css-receipt-register-pdf-539b04">No records found for selected period</td></tr>';
     } else {
         foreach ($receipts as $receipt) {
             $totalAmount += $receipt['amount'];
@@ -268,18 +268,18 @@ try {
 
             $html .= '
             <tr nobr="true">
-                <td width="4%" style="text-align:center;">' . $sno++ . '</td>
-                <td width="7%" style="text-align:center;">' . htmlspecialchars(($receipt['receipt_prefix'] ?? '') . $receipt['receipt_no']) . '</td>
-                <td width="7%" style="text-align:center;">' . date('d-m-Y', strtotime($receipt['payment_date'])) . '</td>
+                <td width="4%" class="css-receipt-register-pdf-539b04">' . $sno++ . '</td>
+                <td width="7%" class="css-receipt-register-pdf-539b04">' . htmlspecialchars(($receipt['receipt_prefix'] ?? '') . $receipt['receipt_no']) . '</td>
+                <td width="7%" class="css-receipt-register-pdf-539b04">' . date('d-m-Y', strtotime($receipt['payment_date'])) . '</td>
                 <td width="13%"><b>' . htmlspecialchars($receipt['student_full_name'] ?? '') . '</b></td>
                 <td width="7%">' . htmlspecialchars($receipt['current_class'] ?: '-' ?? '') . '</td>
                 <td width="7%">' . htmlspecialchars($receipt['group_name'] ?: '-' ?? '') . '</td>
                 <td width="6%">' . htmlspecialchars($receipt['medium_name'] ?: '-' ?? '') . '</td>
                 <td width="7%">' . htmlspecialchars($receipt['term_name'] ?: '-' ?? '') . '</td>
                 <td width="8%">' . htmlspecialchars($receipt['payment_type'] ?? '') . '</td>
-                <td width="6%" style="text-align:center;">' . strtoupper($receipt['payment_mode']) . '</td>
+                <td width="6%" class="css-receipt-register-pdf-539b04">' . strtoupper($receipt['payment_mode']) . '</td>
                 <td width="9%">' . $bankDetails . '</td>
-                <td width="7%" style="text-align:right; font-weight:bold;">' . formatIndianCurrency($receipt['amount']) . '</td>
+                <td width="7%" class="css-receipt-register-pdf-714e9d">' . formatIndianCurrency($receipt['amount']) . '</td>
                 <td width="6%">' . htmlspecialchars($receipt['collected_by'] ?: 'System' ?? '') . '</td>
                 <td width="6%"><small>' . htmlspecialchars($receipt['remarks'] ?: '-' ?? '') . '</small></td>
             </tr>';
@@ -287,9 +287,9 @@ try {
     }
 
     $html .= '
-            <tr style="background-color:#f0f0f0; font-weight:bold;">
-                <td colspan="11" style="text-align:right;">GRAND TOTAL</td>
-                <td style="text-align:right;">' . formatIndianCurrency($totalAmount) . '</td>
+            <tr class="css-receipt-register-pdf-bf35f5">
+                <td colspan="11" class="css-receipt-register-pdf-08a0ed">GRAND TOTAL</td>
+                <td class="css-receipt-register-pdf-08a0ed">' . formatIndianCurrency($totalAmount) . '</td>
                 <td colspan="2"></td>
             </tr>
         </tbody>

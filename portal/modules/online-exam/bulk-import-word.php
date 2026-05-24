@@ -32,7 +32,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h1 class="h3 mb-3"><strong>Bulk</strong> Question Import (Word)</h1>
-                <a href="question-bank.php" class="btn btn-outline-secondary shadow-sm" style="border-radius: 10px;">
+                <a href="question-bank.php" class="btn btn-outline-secondary shadow-sm css-bulk-import-word-1033dd">
                     <i class="fas fa-arrow-left mr-2"></i> Back to Question Bank
                 </a>
             </div>
@@ -43,8 +43,8 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             <div class="col-lg-10">
                 
                 <!-- Card 1: Import Configuration & Upload -->
-                <div class="card shadow-lg border-0 mb-4" style="border-radius: 15px;">
-                    <div class="card-header bg-primary text-white py-3" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <div class="card shadow-lg border-0 mb-4 css-bulk-import-word-dc9ce7">
+                    <div class="card-header bg-primary text-white py-3 css-bulk-import-word-5a5b68">
                         <h5 class="card-title mb-0 text-white"><i class="fas fa-file-import mr-2"></i> Configure Metadata & Select Word File</h5>
                     </div>
                     <div class="card-body p-4">
@@ -54,7 +54,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         <div class="row">
                             <div class="col-md-4 form-group mb-3">
                                 <label class="form-label font-weight-bold">Standard</label>
-                                <select id="bulk_std" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
+                                <select id="bulk_std" class="form-control custom-select shadow-sm css-bulk-import-word-cb968a">
                                     <option value="">Select Standard</option>
                                     <option value="11">11th</option>
                                     <option value="12">12th</option>
@@ -64,7 +64,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
                             <div class="col-md-4 form-group mb-3">
                                 <label class="form-label font-weight-bold">Group</label>
-                                <select id="bulk_grp" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
+                                <select id="bulk_grp" class="form-control custom-select shadow-sm css-bulk-import-word-cb968a">
                                     <option value="">Select Group</option>
                                     <?php
                                     $groups = $conn->query("SELECT id, group_name FROM tbl_group WHERE is_active = 1 ORDER BY group_name ASC")->fetchAll(PDO::FETCH_ASSOC);
@@ -76,21 +76,21 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
                             <div class="col-md-4 form-group mb-3">
                                 <label class="form-label font-weight-bold">Subject</label>
-                                <select id="bulk_sub" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
+                                <select id="bulk_sub" class="form-control custom-select shadow-sm css-bulk-import-word-cb968a">
                                     <option value="">Select Subject</option>
                                 </select>
                             </div>
 
                             <div class="col-md-6 form-group mb-3">
                                 <label class="form-label font-weight-bold">Chapter (Optional)</label>
-                                <select id="bulk_ch" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
+                                <select id="bulk_ch" class="form-control custom-select shadow-sm css-bulk-import-word-cb968a">
                                     <option value="">Select Chapter</option>
                                 </select>
                             </div>
 
                             <div class="col-md-6 form-group mb-3">
                                 <label class="form-label font-weight-bold">Topic (Optional)</label>
-                                <select id="bulk_tp" class="form-control custom-select shadow-sm" style="border-radius: 8px;">
+                                <select id="bulk_tp" class="form-control custom-select shadow-sm css-bulk-import-word-cb968a">
                                     <option value="">Select Topic</option>
                                 </select>
                             </div>
@@ -101,7 +101,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         <!-- Upload Zone -->
                         <div class="form-group mb-0">
                             <label class="form-label font-weight-bold text-primary">Upload Word File</label>
-                            <div class="upload-box p-5 border-dashed rounded text-center bg-light" id="drop-zone" style="border: 2px dashed #007bff; cursor: pointer; border-radius: 12px !important;">
+                            <div class="upload-box p-5 border-dashed rounded text-center bg-light css-bulk-import-word-88b889" id="drop-zone">
                                 <i class="fas fa-file-word fa-4x text-primary mb-3"></i>
                                 <h5 class="mb-1 text-dark font-weight-bold">Drag and drop or click to upload `.docx`</h5>
                                 <span class="text-muted small">Max file size: 10MB</span>
@@ -110,9 +110,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         </div>
 
                         <!-- Progress Section -->
-                        <div id="bulk-progress-wrap" class="mt-4" style="display:none;">
-                            <div class="progress mb-2" style="height: 12px; border-radius: 6px;">
-                                <div id="bulk-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%"></div>
+                        <div id="bulk-progress-wrap" class="mt-4 css-bulk-import-word-93b8ea">
+                            <div class="progress mb-2 css-bulk-import-word-7761ed">
+                                <div id="bulk-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-success css-bulk-import-word-759002" role="progressbar"></div>
                             </div>
                             <p id="bulk-progress-text" class="small text-center text-muted font-weight-bold mb-0">Processing...</p>
                         </div>
@@ -120,15 +120,15 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 </div>
 
                 <!-- Card 2: Spacious Full-Width Preview Panel (Flowing below) -->
-                <div class="card shadow-lg border-0 mb-4" id="preview-card" style="border-radius: 15px; display: none;">
-                    <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                <div class="card shadow-lg border-0 mb-4 css-bulk-import-word-a48428" id="preview-card">
+                    <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center css-bulk-import-word-5a5b68">
                         <h5 class="card-title mb-0 text-white"><i class="fas fa-eye mr-2"></i> Preview & Review Questions</h5>
-                        <button id="bulk-import-btn" class="btn btn-success px-4 font-weight-bold shadow-sm" disabled onclick="submitBulkImport()" style="border-radius: 8px;">
+                        <button id="bulk-import-btn" class="btn btn-success px-4 font-weight-bold shadow-sm css-bulk-import-word-cb968a" disabled onclick="submitBulkImport()">
                             <i class="fas fa-upload mr-2"></i> Import to Question Bank
                         </button>
                     </div>
                     <div class="card-body p-0">
-                        <div id="preview-container" style="max-height: 800px; overflow-y: auto;">
+                        <div id="preview-container" class="css-bulk-import-word-2a2b1b">
                             <!-- Dynamically loaded preview list -->
                         </div>
                     </div>
@@ -143,14 +143,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
     </div>
 </main>
 
-<style>
-    .upload-box:hover { background-color: #e9ecef!important; }
-    .preview-row { border-bottom: 1px solid #eee; padding: 15px; transition: background 0.2s; }
-    .preview-row:hover { background-color: #f8f9fa; }
-    .preview-row img { max-width: 250px; border-radius: 5px; margin: 10px 0; border: 1px solid #ddd; }
-    .option-box { font-size: 0.9rem; color: #555; background: #fff; border: 1px solid #eee; border-radius: 5px; padding: 5px 10px; margin-bottom: 5px; }
-    .border-dashed { border-style: dashed !important; }
-</style>
+
 
 <script>
 let parsedQuestions = [];
@@ -307,10 +300,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (msgFound.length > 0 || msgNotFound.length > 0) {
             let html = '';
             if (msgFound.length > 0) {
-                html += `<div style="color:#1565c0; font-weight:600;"><i class="fas fa-magic mr-1"></i> Auto-filled from file: ${msgFound.join(', ')}</div>`;
+                html += `<div class="css-bulk-import-word-66544a"><i class="fas fa-magic mr-1"></i> Auto-filled from file: ${msgFound.join(', ')}</div>`;
             }
             if (msgNotFound.length > 0) {
-                html += `<div style="color:#e65100; font-weight:600; margin-top:4px;"><i class="fas fa-exclamation-triangle mr-1"></i> Could not map: ${msgNotFound.join(', ')}. Please select manually.</div>`;
+                html += `<div class="css-bulk-import-word-86701e"><i class="fas fa-exclamation-triangle mr-1"></i> Could not map: ${msgNotFound.join(', ')}. Please select manually.</div>`;
             }
             hintWrap.innerHTML = html;
             hintWrap.style.display = 'block';
@@ -388,31 +381,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="d-flex justify-content-between align-items-start">
                     <span class="badge bg-primary text-white mr-3 px-2 py-1">Q${i+1}</span>
                     <div class="flex-grow-1">
-                        <div class="question-text mb-3 ql-editor p-0" style="min-height: auto; font-size: 1.05rem;">
+                        <div class="question-text mb-3 ql-editor p-0 css-bulk-import-word-9efe89">
                             <div class="mb-2"><span class="badge bg-primary text-white mr-1">EN</span> ${q.question_text}</div>
                             ${q.question_text_guj ? `<div class="text-secondary"><span class="badge bg-warning text-dark mr-1">GU</span> ${q.question_text_guj}</div>` : ''}
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-2">
-                                <div class="option-box ql-editor p-2 border rounded" style="min-height: auto; background: #fafafa;">
+                                <div class="option-box ql-editor p-2 border rounded css-bulk-import-word-69a036">
                                     <div><strong class="text-primary">A (EN):</strong> ${q.option_a || '---'}</div>
                                     ${q.option_a_guj ? `<div class="mt-1 text-muted"><strong class="text-warning">A (GU):</strong> ${q.option_a_guj}</div>` : ''}
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
-                                <div class="option-box ql-editor p-2 border rounded" style="min-height: auto; background: #fafafa;">
+                                <div class="option-box ql-editor p-2 border rounded css-bulk-import-word-69a036">
                                     <div><strong class="text-primary">B (EN):</strong> ${q.option_b || '---'}</div>
                                     ${q.option_b_guj ? `<div class="mt-1 text-muted"><strong class="text-warning">B (GU):</strong> ${q.option_b_guj}</div>` : ''}
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
-                                <div class="option-box ql-editor p-2 border rounded" style="min-height: auto; background: #fafafa;">
+                                <div class="option-box ql-editor p-2 border rounded css-bulk-import-word-69a036">
                                     <div><strong class="text-primary">C (EN):</strong> ${q.option_c || '---'}</div>
                                     ${q.option_c_guj ? `<div class="mt-1 text-muted"><strong class="text-warning">C (GU):</strong> ${q.option_c_guj}</div>` : ''}
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
-                                <div class="option-box ql-editor p-2 border rounded" style="min-height: auto; background: #fafafa;">
+                                <div class="option-box ql-editor p-2 border rounded css-bulk-import-word-69a036">
                                     <div><strong class="text-primary">D (EN):</strong> ${q.option_d || '---'}</div>
                                     ${q.option_d_guj ? `<div class="mt-1 text-muted"><strong class="text-warning">D (GU):</strong> ${q.option_d_guj}</div>` : ''}
                                 </div>

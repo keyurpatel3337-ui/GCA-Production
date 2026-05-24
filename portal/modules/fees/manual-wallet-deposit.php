@@ -25,8 +25,7 @@ include '../../include/sidebar.php';
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
                 <div class="card-header bg-white border-0 p-4 d-flex align-items-center">
-                    <div class="icon-box bg-success-light text-success rounded-circle p-2 me-3 d-flex align-items-center justify-content-center"
-                        style="width: 45px; height: 45px;">
+                    <div class="icon-box bg-success-light text-success rounded-circle p-2 me-3 d-flex align-items-center justify-content-center css-manual-wallet-deposit-d2fc39">
                         <i class="fas fa-wallet fs-5"></i>
                     </div>
                     <h5 class="fw-bold mb-0">Manual Wallet Deposit</h5>
@@ -44,8 +43,7 @@ include '../../include/sidebar.php';
                                 <input type="text" class="form-control form-control-lg bg-light border-0 ps-5 rounded-3"
                                     id="studentSearch" placeholder="Search by ID, Name or Mobile..." autocomplete="off">
                                 <div id="searchResults"
-                                    class="position-absolute w-100 shadow-lg rounded-3 mt-1 bg-white overflow-auto d-none"
-                                    style="max-height: 300px; z-index: 1000;">
+                                    class="position-absolute w-100 shadow-lg rounded-3 mt-1 bg-white overflow-auto d-none css-manual-wallet-deposit-a69310">
                                     <!-- Results will be injected here -->
                                 </div>
                             </div>
@@ -57,8 +55,7 @@ include '../../include/sidebar.php';
                             class="d-none mb-4 p-3 rounded-4 bg-light border-start border-primary border-4">
                             <div class="d-flex align-items-center">
                                 <div class="avatar-box me-3">
-                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold"
-                                        style="width: 50px; height: 50px; font-size: 1.2rem;">
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold css-manual-wallet-deposit-e44b08">
                                         <span id="previewInitials">S</span>
                                     </div>
                                 </div>
@@ -130,38 +127,7 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
-<style>
-    .bg-success-light {
-        background-color: rgba(46, 213, 115, 0.1) !important;
-    }
 
-    .bg-info-light {
-        background-color: rgba(0, 123, 255, 0.05) !important;
-    }
-
-    .avatar-box .rounded-circle {
-        border: 2px solid white;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    #studentSearch:focus {
-        background-color: white !important;
-        box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
-    }
-
-    .rounded-4 {
-        border-radius: 1rem !important;
-    }
-
-    .search-item:hover {
-        background-color: #f8f9fa;
-        cursor: pointer;
-    }
-
-    .btn-xl {
-        font-size: 1.1rem;
-    }
-</style>
 
 <script>
     const searchInput = document.getElementById('studentSearch');
@@ -197,12 +163,12 @@ include '../../include/sidebar.php';
                     data.data.forEach(student => {
                         html += `
                 <div class="search-item p-3 border-bottom d-flex align-items-center" onclick="selectStudent('${student.id}', '${student.name.replace(/'/g, "\\'")}', '${student.class}', '${student.initials}')">
-                    <div class="rounded-circle bg-light text-primary d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px; font-weight: bold;">
+                    <div class="rounded-circle bg-light text-primary d-flex align-items-center justify-content-center me-3 css-manual-wallet-deposit-6eaf59">
                         ${student.initials}
                     </div>
                     <div>
                         <div class="fw-bold text-dark small">${student.name}</div>
-                        <div class="text-muted" style="font-size: 0.75rem;">ID: #${student.id} | Class: ${student.class}</div>
+                        <div class="text-muted css-manual-wallet-deposit-af89d6">ID: #${student.id} | Class: ${student.class}</div>
                     </div>
                 </div>`;
                     });

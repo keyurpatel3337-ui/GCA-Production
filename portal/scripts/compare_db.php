@@ -282,124 +282,7 @@ ob_start();
 
 <head>
     <title>DB Sync Tool (Remote)</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            padding: 20px;
-            line-height: 1.5;
-        }
-
-        h2,
-        h3,
-        h4 {
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        .alert {
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-
-        .success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .warn {
-            color: #856404;
-            background-color: #fff3cd;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        th,
-        td {
-            border: 1px solid #dee2e6;
-            padding: 8px;
-            text-align: left;
-            vertical-align: top;
-        }
-
-        th {
-            background: #f8f9fa;
-        }
-
-        pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            background: #f4f4f4;
-            padding: 5px;
-            border: 1px solid #ddd;
-            margin: 0;
-        }
-
-        .btn {
-            padding: 5px 10px;
-            cursor: pointer;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 3px;
-        }
-
-        .btn:hover {
-            background: #0056b3;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 3px 7px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .badge-danger {
-            background: #dc3545;
-            color: white;
-        }
-
-        .badge-warning {
-            background: #ffc107;
-            color: #212529;
-        }
-
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            background: white;
-            padding: 15px 0;
-            border-bottom: 2px solid #eee;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        #fixAllContainer {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-        }
-    </style>
+    
     <script>
         function confirmFix() {
             return true; // confirm("...");
@@ -415,7 +298,7 @@ ob_start();
 
     <div class="sticky-header">
         <div>
-            <h1 style="margin:0;">Database Sync Tool (Remote)</h1>
+            <h1 class="css-compare_db-46dcee">Database Sync Tool (Remote)</h1>
             <small>Source: <strong><?php echo $source_config['host']; ?> (<?php echo $db1_name; ?>)</strong> | Target:
                 <strong><?php echo $target_config['host']; ?> (<?php echo $db2_name; ?>)</strong></small>
         </div>
@@ -450,9 +333,9 @@ ob_start();
                                 <input type="hidden" name="sql" value="<?php echo htmlspecialchars($create_sql); ?>">
                                 <button type="submit" class="btn">Create Table</button>
                             </form>
-                            <details style="margin-top:5px; cursor:pointer;">
-                                <summary style="font-size:12px; color:#666;">View SQL</summary>
-                                <pre style="font-size:11px;"><?php echo htmlspecialchars($create_sql); ?></pre>
+                            <details class="css-compare_db-03ef59">
+                                <summary class="css-compare_db-df038a">View SQL</summary>
+                                <pre class="css-compare_db-643a7c"><?php echo htmlspecialchars($create_sql); ?></pre>
                             </details>
                         </td>
                     </tr>
@@ -603,7 +486,7 @@ foreach ($all_available_tables as $table):
                 <tr>
                     <td>
                         <?php if (in_array($table, $tables1)): ?>
-                            <span class="badge" style="background:#e9ecef; color:#495057;"><?php echo $db1_name; ?></span>
+                            <span class="badge css-compare_db-57f64d"><?php echo $db1_name; ?></span>
                             <strong><?php echo $table; ?></strong>
                         <?php
     else: ?>
@@ -613,7 +496,7 @@ foreach ($all_available_tables as $table):
                     </td>
                     <td>
                         <?php if (in_array($table, $tables2)): ?>
-                            <span class="badge" style="background:#e9ecef; color:#495057;"><?php echo $db2_name; ?></span>
+                            <span class="badge css-compare_db-57f64d"><?php echo $db2_name; ?></span>
                             <strong><?php echo $table; ?></strong>
                         <?php
     else: ?>
@@ -622,14 +505,13 @@ foreach ($all_available_tables as $table):
     endif; ?>
                     </td>
                     <td>
-                        <div style="display:flex; gap:5px;">
+                        <div class="css-compare_db-e4f44f">
                             <?php if (in_array($table, $tables2)): ?>
                                 <form method="POST"
                                     onsubmit="return confirm('Truncate table <?php echo $table; ?> on Target?')">
                                     <input type="hidden" name="action" value="truncate_table">
                                     <input type="hidden" name="table" value="<?php echo $table; ?>">
-                                    <button type="submit" class="btn"
-                                        style="background:#dc3545; padding:3px 8px; font-size:12px;">Truncate</button>
+                                    <button type="submit" class="btn css-compare_db-7873a8">Truncate</button>
                                 </form>
                             <?php
     endif; ?>
@@ -639,8 +521,7 @@ foreach ($all_available_tables as $table):
                                     onsubmit="return confirm('Copy data from Source to Target for table <?php echo $table; ?>? This will truncate Target first!')">
                                     <input type="hidden" name="action" value="copy_single_table">
                                     <input type="hidden" name="table" value="<?php echo $table; ?>">
-                                    <button type="submit" class="btn"
-                                        style="background:#28a745; padding:3px 8px; font-size:12px;">Copy (S->T)</button>
+                                    <button type="submit" class="btn css-compare_db-2a300f">Copy (S->T)</button>
                                 </form>
                             <?php
     endif; ?>
@@ -666,10 +547,10 @@ if (!empty($create_table_queries)) {
     $count = count($create_table_queries);
     $queries_json = htmlspecialchars(json_encode($create_table_queries), ENT_QUOTES, 'UTF-8');
     $buttons_html .= <<<HTML
-        <form method="POST" onsubmit="return confirm('Create {$count} missing tables?')" style="display:inline-block; margin-right:10px;">
+        <form method="POST" onsubmit="return confirm('Create {$count} missing tables?')" class="css-compare_db-ad519d">
             <input type="hidden" name="action" value="create_all_tables">
             <input type="hidden" name="sqls" value='{$queries_json}'>
-            <button type="submit" class="btn" style="background: #17a2b8; font-size: 14px; padding: 10px 20px;">
+            <button type="submit" class="btn css-compare_db-1d2bdf">
                 1. CREATE ALL TABLES ({$count})
             </button>
         </form>
@@ -680,10 +561,10 @@ if (!empty($common_tables)) {
     $count = count($common_tables);
     $tables_json = htmlspecialchars(json_encode(array_values($common_tables)), ENT_QUOTES, 'UTF-8');
     $buttons_html .= <<<HTML
-        <form method="POST" onsubmit="return confirm('Copy data from {$count} tables? This will TRUNCATE target tables first!')" style="display:inline-block; margin-right:10px;">
+        <form method="POST" onsubmit="return confirm('Copy data from {$count} tables? This will TRUNCATE target tables first!')" class="css-compare_db-ad519d">
             <input type="hidden" name="action" value="copy_data">
             <input type="hidden" name="tables" value='{$tables_json}'>
-            <button type="submit" class="btn" style="background: #fd7e14; font-size: 14px; padding: 10px 20px;">
+            <button type="submit" class="btn css-compare_db-9ad453">
                 2. COPY DATA FROM SOURCE ({$count} tables)
             </button>
         </form>
@@ -694,10 +575,10 @@ if (!empty($column_sync_queries)) {
     $count = count($column_sync_queries);
     $queries_json = htmlspecialchars(json_encode($column_sync_queries), ENT_QUOTES, 'UTF-8');
     $buttons_html .= <<<HTML
-        <form method="POST" onsubmit="return confirm('Sync {$count} columns to match source?')" style="display:inline-block; margin-right:10px;">
+        <form method="POST" onsubmit="return confirm('Sync {$count} columns to match source?')" class="css-compare_db-ad519d">
             <input type="hidden" name="action" value="sync_columns">
             <input type="hidden" name="sqls" value='{$queries_json}'>
-            <button type="submit" class="btn" style="background: #6f42c1; font-size: 14px; padding: 10px 20px;">
+            <button type="submit" class="btn css-compare_db-04d74e">
                 3. SYNC COLUMNS ({$count})
             </button>
         </form>
@@ -708,10 +589,10 @@ if (!empty($all_fix_queries)) {
     $count = count($all_fix_queries);
     $queries_json = htmlspecialchars(json_encode($all_fix_queries), ENT_QUOTES, 'UTF-8');
     $buttons_html .= <<<HTML
-        <form method="POST" onsubmit="return confirm('Execute ALL {$count} fixes at once?')" style="display:inline-block;">
+        <form method="POST" onsubmit="return confirm('Execute ALL {$count} fixes at once?')" class="css-compare_db-601a04">
             <input type="hidden" name="action" value="fix_all">
             <input type="hidden" name="sqls" value='{$queries_json}'>
-            <button type="submit" class="btn" style="background: #28a745; font-size: 14px; padding: 10px 20px;">
+            <button type="submit" class="btn css-compare_db-0d0fdd">
                 FIX ALL ISSUES ({$count})
             </button>
         </form>

@@ -31,25 +31,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<style>
-    .glass-header {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
 
-    .form-section-title {
-        font-size: 0.875rem;
-        color: var(--text-light);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-</style>
 
 <div class="content-wrapper">
     <section class="content py-4">

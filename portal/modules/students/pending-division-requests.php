@@ -178,11 +178,11 @@ try {
                 <i class="fas fa-list"></i> Division Change Requests (Total:
                 <?php echo formatIndianCurrency($totalRecords, false); ?>, Showing: <?php echo count($requests); ?>)
             </h3>
-            <form method="POST" class="d-inline-block" style="margin:0;">
+            <form method="POST" class="d-inline-block css-pending-division-requests-46dcee">
                 <input type="hidden" name="status" value="<?php echo htmlspecialchars($status_filter ?? ''); ?>">
                 <input type="hidden" name="page" value="1">
                 <label class="me-2">Per Page:</label>
-                <select name="per_page" class="form-select form-select-sm d-inline-block" style="width: auto;"
+                <select name="per_page" class="form-select form-select-sm d-inline-block css-pending-division-requests-dc251b"
                     onchange="this.form.submit()">
                     <option value="10" <?php echo $perPage == 10 ? 'selected' : ''; ?>>10</option>
                     <option value="25" <?php echo $perPage == 25 ? 'selected' : ''; ?>>25</option>
@@ -252,7 +252,7 @@ try {
                                             <i class="fas fa-times"></i>
                                         </button>
                                     <?php endif; ?>
-                                    <form method="POST" action="details.php" style="display:inline;margin:0;">
+                                    <form method="POST" action="details.php" class="css-pending-division-requests-f8e39d">
                                         <input type="hidden" name="id"
                                             value="<?php echo $request['registration_id'] ?? $request['enrollment_id']; ?>">
                                         <button type="submit" class="btn btn-sm btn-primary" title="View Student">

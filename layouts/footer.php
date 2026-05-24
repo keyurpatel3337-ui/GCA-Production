@@ -16,7 +16,7 @@
 <!-- Bootstrap 5 Bundle (includes Popper) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap Toasts Container -->
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;" id="toastPlacement"></div>
+<div class="toast-container position-fixed top-0 end-0 p-3 css-footer-f2db85" id="toastPlacement"></div>
 
 <!-- AdminLTE 4 -->
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta3/dist/js/adminlte.min.js"></script>
@@ -264,7 +264,7 @@
         if (!card.find('.table-search').length && !table.prev('.table-search-fallback').length) {
             const searchHtml = `
                   <div class="table-search ms-auto">
-                      <div class="input-group input-group-sm" style="width: 200px;">
+                      <div class="input-group input-group-sm css-footer-5c2dc9">
                           <input type="text" class="form-control table-search-input" placeholder="Search...">
                           <span class="input-group-text"><i class="fas fa-search"></i></span>
                       </div>

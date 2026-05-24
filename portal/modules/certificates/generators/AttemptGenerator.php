@@ -57,9 +57,9 @@ class AttemptGenerator extends AbstractGenerator
         $pdf->SetY(82);
         $pdf->SetFont('times', '', 12);
         $html = <<<EOD
-        <div style="text-align: justify; line-height: 1.3; font-family: times; font-size: 12pt;">
-            <p style="text-indent: 40px;">
-                This is to certify that, Master/Miss <span style="text-decoration: underline;"><b>$name</b></span> is 
+        <div class="css-AttemptGenerator-78bb21">
+            <p class="css-AttemptGenerator-999526">
+                This is to certify that, Master/Miss <span class="css-AttemptGenerator-f6bf23"><b>$name</b></span> is 
                 a bonafide student of this School. He/She appeared at the <b>$exam_session</b> 
                 Examination Of Gujarat Secondary & Higher Secondary Education Board and passed of 
                 <u><b>FIRST ATTEMPT</b></u>. To the best of my knowledge & belief He / She bears a good moral character.

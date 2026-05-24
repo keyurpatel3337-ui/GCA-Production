@@ -149,8 +149,7 @@ include '../../include/sidebar.php';
                                             onclick="editType(<?php echo htmlspecialchars(json_encode($type) ?? ''); ?>)">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <form method="POST" action="scholarship-type-toggle.php"
-                                            style="display:inline;margin:0;">
+                                        <form method="POST" action="scholarship-type-toggle.php" class="css-scholarship-types-f8e39d">
                                             <input type="hidden" name="id" value="<?php echo $type['id']; ?>">
                                             <button type="submit"
                                                 class="btn btn-sm <?php echo $type['is_active'] ? 'btn-warning' : 'btn-success'; ?>">

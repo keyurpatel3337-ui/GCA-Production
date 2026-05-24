@@ -100,13 +100,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" style="width:100%;">
+    <table cellpadding="2" class="css-hostel-fees-pdf-8588e4">
         <tr>
-            <td style="text-align:center;">
-                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? 'Mahatma Seva Trust') . '</span><br>
-                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span style="font-size:12pt; font-weight:bold; background-color:#17a2b8; color:#fff;">HOSTEL FEE COLLECTION REPORT</span><br>
-                <span style="font-size:10pt;">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
+            <td class="css-hostel-fees-pdf-539b04">
+                <span class="css-hostel-fees-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? 'Mahatma Seva Trust') . '</span><br>
+                <span class="css-hostel-fees-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span class="css-hostel-fees-pdf-269fc9">HOSTEL FEE COLLECTION REPORT</span><br>
+                <span class="css-hostel-fees-pdf-1b8847">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -114,21 +114,21 @@ try {
     $pdf->Ln(2);
 
     $summaryHtml = '
-    <table cellpadding="4" style="width:100%; border:0.5px solid #ddd; background-color:#f8f9fa;">
+    <table cellpadding="4" class="css-hostel-fees-pdf-f6238b">
         <tr>
             <td width="30%">Transactions: <b>' . count($payments) . '</b></td>
-            <td width="40%" style="text-align:center;">Gender: <b>' . ($gender ?: 'All') . '</b> | Standard: <b>' . ($course_filter ?: 'All') . '</b></td>
-            <td width="30%" style="text-align:right;">Total Collected: <b>' . formatIndianCurrency($totalCollected) . '</b></td>
+            <td width="40%" class="css-hostel-fees-pdf-539b04">Gender: <b>' . ($gender ?: 'All') . '</b> | Standard: <b>' . ($course_filter ?: 'All') . '</b></td>
+            <td width="30%" class="css-hostel-fees-pdf-08a0ed">Total Collected: <b>' . formatIndianCurrency($totalCollected) . '</b></td>
         </tr>
     </table>';
     $pdf->writeHTML($summaryHtml, true, false, false, false, '');
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
+    <table border="0.5" cellpadding="4" class="css-hostel-fees-pdf-6eb086">
         <thead>
-            <tr style="background-color:#eee; font-weight:bold;">
-                <th width="4%" style="text-align:center;">#</th>
+            <tr class="css-hostel-fees-pdf-5f2273">
+                <th width="4%" class="css-hostel-fees-pdf-539b04">#</th>
                 <th width="8%">Date</th>
                 <th width="8%">Receipt No</th>
                 <th width="17%">Student Name</th>
@@ -136,7 +136,7 @@ try {
                 <th width="6%">Gender</th>
                 <th width="9%">Class</th>
                 <th width="11%">Fee Type</th>
-                <th width="9%" style="text-align:right;">Amount</th>
+                <th width="9%" class="css-hostel-fees-pdf-08a0ed">Amount</th>
                 <th width="8%">Mode</th>
                 <th width="10%">Remarks</th>
             </tr>
@@ -144,7 +144,7 @@ try {
         <tbody>';
 
     if (empty($payments)) {
-        $html .= '<tr><td colspan="11" style="text-align:center;">No records found</td></tr>';
+        $html .= '<tr><td colspan="11" class="css-hostel-fees-pdf-539b04">No records found</td></tr>';
     } else {
         $i = 1;
         foreach ($payments as $row) {
@@ -152,7 +152,7 @@ try {
             $feeType = ($row['fee_component'] == 'hostel_security' ? 'Security Deposit' : 'Hostel Fee');
             $html .= '
             <tr nobr="true">
-                <td width="4%" style="text-align:center;">' . $i++ . '</td>
+                <td width="4%" class="css-hostel-fees-pdf-539b04">' . $i++ . '</td>
                 <td width="8%">' . date('d-m-Y', strtotime($row['payment_date'])) . '</td>
                 <td width="8%">' . htmlspecialchars($row['receipt_no'] ?? '') . '</td>
                 <td width="17%"><b>' . htmlspecialchars($fullName ?? '') . '</b></td>
@@ -160,7 +160,7 @@ try {
                 <td width="6%">' . htmlspecialchars($row['gender'] ?? '') . '</td>
                 <td width="9%">' . htmlspecialchars($row['current_class'] ?: '-' ?? '') . '</td>
                 <td width="11%">' . $feeType . '</td>
-                <td width="9%" style="text-align:right; font-weight:bold; color:#28a745;">' . formatIndianCurrency($row['amount']) . '</td>
+                <td width="9%" class="css-hostel-fees-pdf-f3cba8">' . formatIndianCurrency($row['amount']) . '</td>
                 <td width="8%">' . strtoupper($row['payment_mode']) . '</td>
                 <td width="10%"><small>' . htmlspecialchars($row['remarks'] ?: '-' ?? '') . '</small></td>
             </tr>';

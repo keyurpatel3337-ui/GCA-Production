@@ -112,7 +112,7 @@ include '../../include/sidebar.php';
     <!-- Profile Header Section -->
     <div class="row mb-4">
         <div class="col-12">
-            <div class="card border-0 shadow-sm overflow-hidden" style="border-radius: 15px;">
+            <div class="card border-0 shadow-sm overflow-hidden css-details-dc9ce7">
                 <div class="card-body p-0">
                     <div class="bg-gradient-primary p-4 p-md-5 text-white position-relative">
                         <!-- Decorative element -->
@@ -168,7 +168,7 @@ include '../../include/sidebar.php';
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm h-100 text-center p-3 rounded-4">
-                        <div class="icon-box bg-primary bg-opacity-10 text-primary mx-auto mb-2" style="width: 50px; height: 50px; line-height: 50px; border-radius: 12px;">
+                        <div class="icon-box bg-primary bg-opacity-10 text-primary mx-auto mb-2 css-details-da11ce">
                             <i class="fas fa-calendar-day fs-4"></i>
                         </div>
                         <div class="small text-muted mb-1">Date of Birth</div>
@@ -177,7 +177,7 @@ include '../../include/sidebar.php';
                 </div>
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm h-100 text-center p-3 rounded-4">
-                        <div class="icon-box bg-success bg-opacity-10 text-success mx-auto mb-2" style="width: 50px; height: 50px; line-height: 50px; border-radius: 12px;">
+                        <div class="icon-box bg-success bg-opacity-10 text-success mx-auto mb-2 css-details-da11ce">
                             <i class="fas fa-mobile-alt fs-4"></i>
                         </div>
                         <div class="small text-muted mb-1">Mobile Number</div>
@@ -186,7 +186,7 @@ include '../../include/sidebar.php';
                 </div>
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm h-100 text-center p-3 rounded-4">
-                        <div class="icon-box bg-info bg-opacity-10 text-info mx-auto mb-2" style="width: 50px; height: 50px; line-height: 50px; border-radius: 12px;">
+                        <div class="icon-box bg-info bg-opacity-10 text-info mx-auto mb-2 css-details-da11ce">
                             <i class="fas fa-id-card fs-4"></i>
                         </div>
                         <div class="small text-muted mb-1">GR Number</div>
@@ -209,27 +209,27 @@ include '../../include/sidebar.php';
                             <h6 class="text-uppercase text-primary fw-bold small mb-3">PERSONAL & CONTACT</h6>
                             <ul class="list-unstyled mb-0">
                                 <li class="d-flex mb-3">
-                                    <span class="text-muted" style="min-width: 100px;">Gender</span>
+                                    <span class="text-muted css-details-0b69e9">Gender</span>
                                     <span class="fw-bold text-dark"><?php echo ucfirst($student['gender'] ?? 'N/A'); ?></span>
                                 </li>
                                 <li class="d-flex mb-3">
-                                    <span class="text-muted" style="width: 100px;">Aadhaar</span>
+                                    <span class="text-muted css-details-e3d221">Aadhaar</span>
                                     <span class="fw-semibold text-dark"><?php echo htmlspecialchars($student['aadhaar'] ?? 'N/A'); ?></span>
                                 </li>
                                 <?php if (!empty($student['amob'])): ?>
                                     <li class="d-flex mb-3">
-                                        <span class="text-muted" style="width: 100px;">Alt. Mobile</span>
+                                        <span class="text-muted css-details-e3d221">Alt. Mobile</span>
                                         <span class="fw-semibold text-dark"><?php echo htmlspecialchars($student['amob'] ?? ''); ?></span>
                                     </li>
                                 <?php endif; ?>
                                 <li class="d-flex mb-3">
-                                    <span class="text-muted" style="width: 100px;">Email</span>
+                                    <span class="text-muted css-details-e3d221">Email</span>
                                     <a href="mailto:<?php echo htmlspecialchars($student['email'] ?? ''); ?>" class="text-primary fw-semibold text-decoration-none">
                                         <?php echo htmlspecialchars($student['email'] ?: 'N/A' ?? ''); ?>
                                     </a>
                                 </li>
                                 <li class="d-flex mb-3">
-                                    <span class="text-muted" style="width: 100px;">Address</span>
+                                    <span class="text-muted css-details-e3d221">Address</span>
                                     <span class="fw-semibold text-dark"><?php echo htmlspecialchars($student['addr'] ?? ''); ?>, <?php echo htmlspecialchars($student['district'] ?? ''); ?></span>
                                 </li>
                             </ul>
@@ -239,29 +239,29 @@ include '../../include/sidebar.php';
                             <h6 class="text-uppercase text-primary fw-bold small mb-3">ACADEMIC STATUS</h6>
                             <ul class="list-unstyled mb-0">
                                 <li class="d-flex mb-3">
-                                    <span class="text-muted" style="width: 120px;">Academic Year</span>
+                                    <span class="text-muted css-details-b15add">Academic Year</span>
                                     <span class="badge bg-primary bg-opacity-10 text-primary border-0"><?php echo htmlspecialchars($student['academic_year'] ?: 'Not Set' ?? ''); ?></span>
                                 </li>
                                 <li class="d-flex mb-3">
-                                    <span class="text-muted" style="width: 120px;">Board / Medium</span>
+                                    <span class="text-muted css-details-b15add">Board / Medium</span>
                                     <span class="fw-semibold text-dark"><?php echo htmlspecialchars($student['board_name'] ?? 'N/A'); ?> / <?php echo htmlspecialchars($student['medium_name'] ?? 'N/A'); ?></span>
                                 </li>
                                 <li class="d-flex mb-3">
-                                    <span class="text-muted" style="width: 120px;">Group</span>
+                                    <span class="text-muted css-details-b15add">Group</span>
                                     <span class="fw-semibold text-dark"><?php echo htmlspecialchars($student['group_name'] ?? 'N/A'); ?></span>
                                 </li>
                                 <li class="d-flex mb-3">
-                                    <span class="text-muted" style="width: 120px;">Prev. School</span>
+                                    <span class="text-muted css-details-b15add">Prev. School</span>
                                     <span class="fw-semibold text-dark">
                                         <?php echo htmlspecialchars($student['schoolname'] ?? ''); ?>
                                     </span>
                                 </li>
                                 <li class="d-flex mb-3">
-                                    <span class="text-muted" style="width: 120px;">School Addr.</span>
+                                    <span class="text-muted css-details-b15add">School Addr.</span>
                                     <span class="fw-semibold text-dark small"><?php echo htmlspecialchars($student['schaddr'] ?? ''); ?></span>
                                 </li>
                                 <li class="d-flex mb-3">
-                                    <span class="text-muted" style="width: 120px;">Registered On</span>
+                                    <span class="text-muted css-details-b15add">Registered On</span>
                                     <span class="fw-semibold text-dark small"><?php echo date('d M, Y h:i A', strtotime($student['created_at'])); ?></span>
                                 </li>
                             </ul>
@@ -272,7 +272,7 @@ include '../../include/sidebar.php';
 
             <!-- Enrollment Details Section (If Enrolled) -->
             <?php if ($enrollment): ?>
-                <div class="card border-0 shadow-sm rounded-4 mb-4" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-left: 5px solid #0d6efd !important;">
+                <div class="card border-0 shadow-sm rounded-4 mb-4 css-details-232e83">
                     <div class="card-body p-4">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h5 class="fw-bold text-dark mb-0">
@@ -327,7 +327,7 @@ include '../../include/sidebar.php';
                                             <td class="fw-bold"><?php echo htmlspecialchars($result['paper_set_name'] ?? 'N/A'); ?></td>
                                             <td class="text-center">
                                                 <span class="fw-bold"><?php echo $result['score']; ?></span>
-                                                <small class="text-muted d-block" style="font-size: 0.7rem;"><?php echo $result['correct_answers']; ?> Correct</small>
+                                                <small class="text-muted d-block css-details-dcab71"><?php echo $result['correct_answers']; ?> Correct</small>
                                             </td>
                                             <td class="text-center">
                                                 <?php
@@ -335,7 +335,7 @@ include '../../include/sidebar.php';
                                                 $color = $p >= 75 ? 'success' : ($p < 35 ? 'danger' : 'primary');
                                                 ?>
                                                 <div class="d-flex align-items-center justify-content-center">
-                                                    <div class="progress flex-grow-1 me-2" style="height: 6px; width: 60px;">
+                                                    <div class="progress flex-grow-1 me-2 css-details-1d1f4e">
                                                         <div class="progress-bar bg-<?php echo $color; ?>" style="width: <?php echo $p; ?>%"></div>
                                                     </div>
                                                     <span class="fw-bold text-<?php echo $color; ?>"><?php echo $p; ?>%</span>
@@ -364,8 +364,7 @@ include '../../include/sidebar.php';
                 <div class="card-body p-4">
                     <?php if (!empty($student['counsellor_id'])): ?>
                         <div class="text-center mb-4">
-                            <div class="avatar-circle bg-primary bg-gradient text-white mx-auto mb-3 shadow-sm d-flex align-items-center justify-content-center" 
-                                 style="width: 80px; height: 80px; border-radius: 24px; font-size: 32px;">
+                            <div class="avatar-circle bg-primary bg-gradient text-white mx-auto mb-3 shadow-sm d-flex align-items-center justify-content-center css-details-ddd01d">
                                 <?php echo strtoupper(substr($student['counsellor_name'], 0, 1)); ?>
                             </div>
                             <h5 class="fw-bold text-dark mb-1"><?php echo htmlspecialchars($student['counsellor_name'] ?? ''); ?></h5>
@@ -373,11 +372,11 @@ include '../../include/sidebar.php';
                         </div>
                         <div class="p-3 bg-light rounded-3 mb-3">
                             <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-envelope text-muted me-3" style="width: 16px;"></i>
+                                <i class="fas fa-envelope text-muted me-3 css-details-1222e8"></i>
                                 <span class="text-dark small overflow-hidden"><?php echo htmlspecialchars($student['counsellor_email'] ?? 'N/A'); ?></span>
                             </div>
                             <div class="d-flex align-items-center">
-                                <i class="fas fa-phone text-muted me-3" style="width: 16px;"></i>
+                                <i class="fas fa-phone text-muted me-3 css-details-1222e8"></i>
                                 <span class="text-dark small"><?php echo htmlspecialchars($student['counsellor_phone'] ?? 'N/A'); ?></span>
                             </div>
                         </div>
@@ -388,7 +387,7 @@ include '../../include/sidebar.php';
                         <?php endif; ?>
                     <?php else: ?>
                         <div class="text-center py-4">
-                            <div class="bg-warning bg-opacity-10 text-warning mx-auto mb-3" style="width: 60px; height: 60px; line-height: 60px; border-radius: 50%;">
+                            <div class="bg-warning bg-opacity-10 text-warning mx-auto mb-3 css-details-22a028">
                                 <i class="fas fa-user-slash fs-4"></i>
                             </div>
                             <p class="text-muted mb-4">No counsellor has been assigned to this student yet.</p>
@@ -448,7 +447,7 @@ include '../../include/sidebar.php';
                             </div>
                             <div>
                                 <div class="text-muted small">Office Address</div>
-                                <div class="fw-bold text-dark small" style="line-height: 1.2;"><?php echo htmlspecialchars($student['ofcaddr'] ?: 'N/A' ?? ''); ?></div>
+                                <div class="fw-bold text-dark small css-details-363088"><?php echo htmlspecialchars($student['ofcaddr'] ?: 'N/A' ?? ''); ?></div>
                             </div>
                         </div>
                     </div>

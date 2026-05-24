@@ -56,89 +56,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<style>
-    :root {
-        --profile-navy: #1a2a40;
-        --profile-gold: #c5a059;
-        --profile-soft-white: #f8f9fa;
-        --profile-border: #e9ecef;
-    }
 
-    .records-container {
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    }
-
-    .profile-sidebar {
-        background-color: var(--profile-navy);
-        color: white;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    .profile-sidebar .avatar-section {
-        background: rgba(255,255,255,0.05);
-        padding: 40px 20px;
-        text-align: center;
-    }
-
-    .profile-sidebar .avatar-img {
-        width: 120px;
-        height: 120px;
-        border: 4px solid rgba(255,255,255,0.2);
-        padding: 5px;
-        background: white;
-        margin-bottom: 20px;
-    }
-
-    .detail-card {
-        background: white;
-        border-radius: 12px;
-        border: 1px solid var(--profile-border);
-        transition: all 0.3s ease;
-    }
-
-    .section-title {
-        color: var(--profile-navy);
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        position: relative;
-        padding-bottom: 10px;
-        margin-bottom: 25px;
-        font-size: 1.1rem;
-    }
-
-    .section-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 40px;
-        height: 3px;
-        background: var(--profile-gold);
-        border-radius: 2px;
-    }
-
-    .info-label {
-        color: #6c757d;
-        font-size: 0.85rem;
-        margin-bottom: 4px;
-        font-weight: 500;
-    }
-
-    .info-value {
-        color: var(--profile-navy);
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-
-    .status-badge {
-        font-size: 0.75rem;
-        padding: 6px 15px;
-        border-radius: 50px;
-        font-weight: 600;
-    }
-</style>
 
 <div class="content-header p-0 mb-4">
     <div class="container-fluid">
@@ -154,7 +72,7 @@ include '../../include/sidebar.php';
     <div class="row">
         <!-- Sidebar Column -->
         <div class="col-lg-3 mb-4">
-            <div class="profile-sidebar sticky-top" style="top: 20px; z-index: 10;">
+            <div class="profile-sidebar sticky-top css-records-dc1c6c">
                 <div class="avatar-section">
                     <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($student['surname'] . ' ' . $student['student_name']); ?>&size=128&background=random&font-size=0.4" 
                          alt="Profile" class="rounded-circle avatar-img shadow">

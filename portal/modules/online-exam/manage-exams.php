@@ -71,12 +71,12 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
         <div class="container-fluid">
             
             <!-- Filters -->
-            <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px;">
+            <div class="card shadow-sm mb-4 border-0 css-manage-exams-dc9ce7">
                 <div class="card-body p-4">
                     <form method="GET" class="row align-items-end g-3">
                         <div class="col-md-4">
                             <label class="small font-weight-bold text-muted mb-2">Filter by Standard</label>
-                            <select name="standard_id" id="filter_standard" class="form-control" style="border-radius: 10px;" onchange="loadSubjects(this.value)">
+                            <select name="standard_id" id="filter_standard" class="form-control css-manage-exams-1033dd" onchange="loadSubjects(this.value)">
                                 <option value="">-- All Standards --</option>
                                 <?php foreach($standards as $std): ?>
                                     <option value="<?= $std['stdid'] ?>" <?= $f_std == $std['stdid'] ? 'selected' : '' ?>><?= htmlspecialchars($std['stdtext']) ?></option>
@@ -85,16 +85,16 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         </div>
                         <div class="col-md-4">
                             <label class="small font-weight-bold text-muted mb-2">Filter by Subject</label>
-                            <select name="subject_id" id="filter_subject" class="form-control" style="border-radius: 10px;">
+                            <select name="subject_id" id="filter_subject" class="form-control css-manage-exams-1033dd">
                                 <option value="">-- All Subjects --</option>
                                 <!-- Populated via AJAX -->
                             </select>
                         </div>
                         <div class="col-md-4 d-flex gap-2">
-                            <button type="submit" class="btn btn-dark px-4 flex-grow-1" style="border-radius: 10px;">
+                            <button type="submit" class="btn btn-dark px-4 flex-grow-1 css-manage-exams-1033dd">
                                 <i class="fas fa-filter mr-2"></i> Apply Filters
                             </button>
-                            <a href="manage-exams.php" class="btn btn-light px-3 border" style="border-radius: 10px;" title="Reset">
+                            <a href="manage-exams.php" class="btn btn-light px-3 border css-manage-exams-1033dd" title="Reset">
                                 <i class="fas fa-sync-alt"></i>
                             </a>
                         </div>
@@ -103,21 +103,21 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             </div>
 
             <?php if(isset($_GET['msg']) && $_GET['msg'] === 'deleted'): ?>
-            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert" style="border-radius: 12px;">
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm css-manage-exams-838095" role="alert">
                 <i class="fas fa-check-circle mr-2"></i> Exam deleted successfully.
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
             <?php endif; ?>
 
             <?php if(isset($_GET['msg']) && $_GET['msg'] === 'exam_updated'): ?>
-            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert" style="border-radius: 12px; background-color: #d1e7dd; color: #0f5132;">
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm css-manage-exams-e15b08" role="alert">
                 <i class="fas fa-check-circle mr-2"></i> Exam updated successfully.
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
             <?php endif; ?>
 
             <?php if(isset($_GET['msg']) && $_GET['msg'] === 'exam_created'): ?>
-            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert" style="border-radius: 12px; background-color: #d1e7dd; color: #0f5132;">
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm css-manage-exams-e15b08" role="alert">
                 <i class="fas fa-check-circle mr-2"></i> Exam created successfully.
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -133,11 +133,11 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             </script>
             <?php endif; ?>
 
-            <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px;">
+            <div class="card shadow-sm mb-4 border-0 css-manage-exams-dc9ce7">
                 <div class="card-header bg-white border-0 py-4 d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-file-alt mr-2 text-primary"></i> Generated Question Papers</h5>
-                    <a href="exam-setup.php" class="btn btn-primary shadow-sm px-4" style="border-radius: 12px; font-weight: 600;">
-                        <i class="fas fa-plus mr-2" style="font-size: 0.75rem;"></i> Create New Exam
+                    <a href="exam-setup.php" class="btn btn-primary shadow-sm px-4 css-manage-exams-451859">
+                        <i class="fas fa-plus mr-2 css-manage-exams-af89d6"></i> Create New Exam
                     </a>
                 </div>
                 <div class="card-body p-0">
@@ -190,7 +190,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                             ?>
                                         </td>
                                         <td class="pe-4 text-end">
-                                            <div class="btn-group shadow-sm" style="border-radius: 8px; overflow: hidden;">
+                                            <div class="btn-group shadow-sm css-manage-exams-eab8b6">
                                                 <a href="view-student-attempts.php?exam_id=<?= $e['id'] ?>" class="btn btn-sm btn-white border-right text-info font-weight-bold" title="View Results">
                                                     <i class="fas fa-poll"></i> Results
                                                 </a>
@@ -221,7 +221,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 </main>
 
 <!-- Delete Form -->
-<form id="deleteForm" method="POST" style="display:none;">
+<form id="deleteForm" method="POST" class="css-manage-exams-93b8ea">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="id" id="delete_id">
 </form>

@@ -44,60 +44,7 @@ include PORTAL_INCLUDE_PATH . 'navbar.php';
 include PORTAL_INCLUDE_PATH . 'sidebar.php';
 ?>
 
-<style>
-    .question-pool-item, .selected-question-item {
-        cursor: pointer;
-        border-radius: 8px;
-        transition: all 0.2s ease;
-    }
-    .question-pool-item:hover { border-color: #4e73df !important; background: #f0f4ff; }
-    .selected-question-item:hover { border-color: #dc3545 !important; background: #fff5f5; }
-    .selected-question-item { border-left: 4px solid #28a745 !important; }
 
-    .split-panel { display: flex; gap: 20px; }
-    .panel-left, .panel-right { flex: 1; min-width: 0; }
-
-    .q-pool-box, .q-selected-box {
-        height: 520px;
-        overflow-y: auto;
-        border: 1px solid #dee2e6;
-        border-radius: 10px;
-        padding: 10px;
-        background: #f8f9fa;
-    }
-    .q-selected-box { background: #f0fff4; border-color: #c3e6cb; }
-
-    .panel-header {
-        font-size: 0.8rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        padding: 8px 12px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
-    .panel-header.available { background: #e8f0fe; color: #3c4fb5; }
-    .panel-header.selected-h { background: #d4edda; color: #155724; }
-
-    .q-item-card {
-        background: #fff;
-        border: 1px solid #e3e6f0;
-        border-radius: 8px;
-        padding: 10px 12px;
-        margin-bottom: 8px;
-        font-size: 0.85rem;
-    }
-    .q-item-card .q-meta { font-size: 0.75rem; color: #888; margin-top: 4px; }
-    .q-item-card .add-btn, .q-item-card .remove-btn {
-        font-size: 0.75rem;
-        padding: 2px 8px;
-        border-radius: 20px;
-        float: right;
-        margin-left: 8px;
-    }
-    .empty-state { text-align: center; color: #aaa; padding: 40px 20px; font-size: 0.9rem; }
-    .filter-bar { display: flex; gap: 8px; margin-bottom: 12px; }
-</style>
 
 <main class="app-main">
     <div class="app-content pt-3">
@@ -109,7 +56,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 <div class="card shadow-sm mb-4 border-left-primary">
                     <div class="card-header py-3 bg-white d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-info-circle mr-2"></i>Basic Information</h6>
-                        <a href="manage-exams.php" class="btn btn-outline-secondary btn-sm" style="border-radius: 10px;">
+                        <a href="manage-exams.php" class="btn btn-outline-secondary btn-sm css-edit-exam-1033dd">
                             <i class="fas fa-arrow-left mr-2"></i> Back to List
                         </a>
                     </div>
@@ -275,8 +222,8 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 </div>
 
                 <div class="text-right mb-5">
-                    <a href="manage-exams.php" class="btn btn-light px-4 mr-2" style="border-radius: 10px;">Discard Changes</a>
-                    <button type="submit" class="btn btn-warning btn-lg px-5 font-weight-bold" style="border-radius: 10px;">
+                    <a href="manage-exams.php" class="btn btn-light px-4 mr-2 css-edit-exam-1033dd">Discard Changes</a>
+                    <button type="submit" class="btn btn-warning btn-lg px-5 font-weight-bold css-edit-exam-1033dd">
                         <i class="fas fa-save mr-2"></i> Save Updates
                     </button>
                 </div>

@@ -3,7 +3,7 @@
 <?php endif; ?>
 
 <!-- Footer -->
-<footer class="app-footer" style="display: none !important;">
+<footer class="app-footer css-footer-3e2e7c">
     <div class="float-end d-none d-sm-inline">
         <b>Version</b> <?php echo defined('SYSTEM_VERSION') ? SYSTEM_VERSION : '1.0.0'; ?>
     </div>
@@ -21,11 +21,11 @@
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 <!-- Bootstrap Toasts Container -->
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;" id="toastPlacement"></div>
+<div class="toast-container position-fixed top-0 end-0 p-3 css-footer-f2db85" id="toastPlacement"></div>
 
 <!-- Generic Confirmation Modal -->
-<div class="modal fade" id="genericConfirmModal" tabindex="-1" aria-labelledby="genericConfirmModalLabel"
-    aria-hidden="true" style="z-index: 10000;">
+<div class="modal fade css-footer-fa1d8f" id="genericConfirmModal" tabindex="-1" aria-labelledby="genericConfirmModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -72,7 +72,7 @@
     if (typeof Swal !== 'undefined') {
         window.alert = function(message) {
             Swal.fire({
-                html: `<div style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: #2d3748; line-height: 1.5; font-weight: 500;">${message}</div>`,
+                html: `<div class="css-footer-ba9296">${message}</div>`,
                 icon: 'warning',
                 confirmButtonColor: '#0d6efd',
                 confirmButtonText: 'OK',

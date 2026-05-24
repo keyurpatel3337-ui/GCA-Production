@@ -90,10 +90,9 @@ include '../../include/sidebar.php';
                 <div class="icon">
                     <i class="fas fa-calendar"></i>
                 </div>
-                <form method="POST" style="display:inline;margin:0;">
+                <form method="POST" class="css-my-appointments-f8e39d">
                     <input type="hidden" name="status" value="all">
-                    <button type="submit" class="small-box-footer"
-                        style="border:none;background:none;color:inherit;padding:6px 10px;cursor:pointer;width:100%;text-align:center;display:block;">
+                    <button type="submit" class="small-box-footer css-my-appointments-f7c0ff">
                         View All <i class="fas fa-arrow-circle-right"></i>
                     </button>
                 </form>
@@ -108,10 +107,9 @@ include '../../include/sidebar.php';
                 <div class="icon">
                     <i class="fas fa-clock"></i>
                 </div>
-                <form method="POST" style="display:inline;margin:0;">
+                <form method="POST" class="css-my-appointments-f8e39d">
                     <input type="hidden" name="status" value="pending">
-                    <button type="submit" class="small-box-footer"
-                        style="border:none;background:none;color:inherit;padding:6px 10px;cursor:pointer;width:100%;text-align:center;display:block;">
+                    <button type="submit" class="small-box-footer css-my-appointments-f7c0ff">
                         View Pending <i class="fas fa-arrow-circle-right"></i>
                     </button>
                 </form>
@@ -126,10 +124,9 @@ include '../../include/sidebar.php';
                 <div class="icon">
                     <i class="fas fa-check-circle"></i>
                 </div>
-                <form method="POST" style="display:inline;margin:0;">
+                <form method="POST" class="css-my-appointments-f8e39d">
                     <input type="hidden" name="status" value="confirmed">
-                    <button type="submit" class="small-box-footer"
-                        style="border:none;background:none;color:inherit;padding:6px 10px;cursor:pointer;width:100%;text-align:center;display:block;">
+                    <button type="submit" class="small-box-footer css-my-appointments-f7c0ff">
                         View Confirmed <i class="fas fa-arrow-circle-right"></i>
                     </button>
                 </form>
@@ -144,10 +141,9 @@ include '../../include/sidebar.php';
                 <div class="icon">
                     <i class="fas fa-calendar-check"></i>
                 </div>
-                <form method="POST" style="display:inline;margin:0;">
+                <form method="POST" class="css-my-appointments-f8e39d">
                     <input type="hidden" name="status" value="completed">
-                    <button type="submit" class="small-box-footer"
-                        style="border:none;background:none;color:inherit;padding:6px 10px;cursor:pointer;width:100%;text-align:center;display:block;">
+                    <button type="submit" class="small-box-footer css-my-appointments-f7c0ff">
                         View Completed <i class="fas fa-arrow-circle-right"></i>
                     </button>
                 </form>

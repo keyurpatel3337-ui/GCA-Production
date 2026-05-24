@@ -118,7 +118,7 @@ try {
                                             class="badge bg-info text-dark"><?php echo htmlspecialchars($request['requested_division_name'] ?? ''); ?></span>
                                     </td>
                                     <td>
-                                        <span class="text-truncate d-inline-block" style="max-width: 200px;"
+                                        <span class="text-truncate d-inline-block css-my-division-change-requests-1a5c8d"
                                             title="<?php echo htmlspecialchars($request['reason'] ?? ''); ?>">
                                             <?php echo htmlspecialchars(substr($request['reason'], 0, 50) . (strlen($request['reason']) > 50 ? '...' : '') ?? ''); ?>
                                         </span>
@@ -157,7 +157,7 @@ try {
                                     </td>
                                     <td>
                                         <?php if ($request['review_remarks']): ?>
-                                            <span class="text-truncate d-inline-block" style="max-width: 150px;"
+                                            <span class="text-truncate d-inline-block css-my-division-change-requests-7ecc66"
                                                 title="<?php echo htmlspecialchars($request['review_remarks'] ?? ''); ?>">
                                                 <?php echo htmlspecialchars($request['review_remarks'] ?? ''); ?>
                                             </span>

@@ -46,13 +46,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" style="width:100%;">
+    <table cellpadding="2" class="css-gateway-transactions-pdf-8588e4">
         <tr>
-            <td style="text-align:center;">
-                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span style="font-size:12pt; font-weight:bold; background-color:#007bff; color:#fff;">GATEWAY TRANSACTIONS LOG</span><br>
-                <span style="font-size:10pt;">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
+            <td class="css-gateway-transactions-pdf-539b04">
+                <span class="css-gateway-transactions-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span class="css-gateway-transactions-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span class="css-gateway-transactions-pdf-30a8ac">GATEWAY TRANSACTIONS LOG</span><br>
+                <span class="css-gateway-transactions-pdf-1b8847">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -60,14 +60,14 @@ try {
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
+    <table border="0.5" cellpadding="4" class="css-gateway-transactions-pdf-6eb086">
         <thead>
-            <tr style="background-color:#eee; font-weight:bold;">
-                <th width="4%" style="text-align:center;">#</th>
+            <tr class="css-gateway-transactions-pdf-5f2273">
+                <th width="4%" class="css-gateway-transactions-pdf-539b04">#</th>
                 <th width="15%">Date & Time</th>
                 <th width="18%">Order ID</th>
                 <th width="22%">Student</th>
-                <th width="12%" style="text-align:right;">Amount</th>
+                <th width="12%" class="css-gateway-transactions-pdf-08a0ed">Amount</th>
                 <th width="12%">Gateway</th>
                 <th width="17%">Status / Txn ID</th>
             </tr>
@@ -75,7 +75,7 @@ try {
         <tbody>';
 
     if (empty($transactions)) {
-        $html .= '<tr><td colspan="7" style="text-align:center;">No records found</td></tr>';
+        $html .= '<tr><td colspan="7" class="css-gateway-transactions-pdf-539b04">No records found</td></tr>';
     } else {
         $i = 1;
         foreach ($transactions as $t) {
@@ -83,13 +83,13 @@ try {
             $statusColor = $status == 'paid' ? '#28a745' : ($status == 'pending' ? '#ffc107' : '#dc3545');
             $html .= '
             <tr nobr="true">
-                <td width="4%" style="text-align:center;">' . $i++ . '</td>
+                <td width="4%" class="css-gateway-transactions-pdf-539b04">' . $i++ . '</td>
                 <td width="15%">' . date('d-m-Y H:i', strtotime($t['created_at'])) . '</td>
                 <td width="18%"><code>' . htmlspecialchars($t['order_id'] ?: '-' ?? '') . '</code></td>
                 <td width="22%"><b>' . htmlspecialchars($t['student_name'] ?: '-' ?? '') . '</b></td>
-                <td width="12%" style="text-align:right; font-weight:bold;">' . formatIndianCurrency($t['amount'] ?: 0) . '</td>
+                <td width="12%" class="css-gateway-transactions-pdf-714e9d">' . formatIndianCurrency($t['amount'] ?: 0) . '</td>
                 <td width="12%">' . htmlspecialchars($t['gateway'] ?: 'Easebuzz' ?? '') . '</td>
-                <td width="17%" style="color:' . $statusColor . '; font-weight:bold;">' . strtoupper($status) . '<br><small style="color:#666;">' . htmlspecialchars($t['transaction_id'] ?: '-' ?? '') . '</small></td>
+                <td width="17%" class="css-gateway-transactions-pdf-489de4">' . strtoupper($status) . '<br><small class="css-gateway-transactions-pdf-b80428">' . htmlspecialchars($t['transaction_id'] ?: '-' ?? '') . '</small></td>
             </tr>';
         }
     }

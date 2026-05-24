@@ -28,22 +28,7 @@ include '../../include/sidebar.php';
 <!-- Flatpickr CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
-<style>
-    .flatpickr-input[readonly] {
-        background-color: #fff !important;
-    }
 
-    .flatpickr-calendar {
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
-        border: none !important;
-        border-radius: 12px !important;
-    }
-
-    .flatpickr-day.selected {
-        background: #2563EB !important;
-        border-color: #2563EB !important;
-    }
-</style>
 
 
 
@@ -107,8 +92,7 @@ include '../../include/sidebar.php';
                             <div class="row">
                                 <div class="col-md-12">
                                     <div id="student_details"></div>
-                                    <div class="card border-0 shadow-sm mt-3" id="without_gst_container"
-                                        style="display: none;">
+                                    <div class="card border-0 shadow-sm mt-3 css-add-payment-224b51" id="without_gst_container">
                                         <div class="card-body py-2 bg-light">
                                             <div class="form-check form-switch m-0">
                                                 <input class="form-check-input" type="checkbox" id="is_without_gst">
@@ -121,7 +105,7 @@ include '../../include/sidebar.php';
                                         </div>
                                     </div>
                                     <!-- Scholarship Info Section -->
-                                    <div id="scholarship_info_section" style="display: none;" class="mt-3">
+                                    <div id="scholarship_info_section" class="css-add-payment-224b51" class="mt-3">
                                         <div class="alert alert-success mb-0">
                                             <h6 class="alert-heading mb-2"><i class="fas fa-award me-2"></i>Scholarship
                                                 / Discount Information
@@ -146,8 +130,7 @@ include '../../include/sidebar.php';
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row mt-2" id="post_admission_remarks_row"
-                                                style="display: none;">
+                                            <div class="row mt-2 css-add-payment-224b51" id="post_admission_remarks_row">
                                                 <div class="col-12">
                                                     <small class="text-muted">Discount Remarks: <span
                                                             id="disp_discount_remarks"></span></small>
@@ -234,7 +217,7 @@ include '../../include/sidebar.php';
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-2" id="hostel_cash_fee_col" style="display:none">
+                                <div class="col-md-4 mb-2 css-add-payment-cb4589" id="hostel_cash_fee_col">
                                     <div class="form-check custom-checkbox-card">
                                         <input class="form-check-input payment-type-checkbox" type="checkbox"
                                             name="payment_types[]" value="hostel_cash_fee" id="check_hostel_cash_fee">
@@ -270,7 +253,7 @@ include '../../include/sidebar.php';
                             <input type="hidden" name="payment_type" id="payment_type_combined" value="">
 
                             <!-- Other Fee Custom Amount (hidden by default) -->
-                            <div class="row mt-3" id="other_amount_section" style="display: none;">
+                            <div class="row mt-3 css-add-payment-224b51" id="other_amount_section">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Other Fee Description <span
@@ -319,8 +302,7 @@ include '../../include/sidebar.php';
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="selected-fees-summary" id="selected_fees_summary"
-                                        style="display: none;">
+                                    <div class="selected-fees-summary css-add-payment-224b51" id="selected_fees_summary">
                                         <label class="form-label">Selected Fees Breakdown:</label>
                                         <ul class="list-unstyled mb-0" id="fees_breakdown_list"></ul>
                                     </div>
@@ -366,7 +348,7 @@ include '../../include/sidebar.php';
                                 </div>
 
                                 <!-- Smart Discount Options (Hidden by default) -->
-                                <div class="row mt-3" id="smart_options_container" style="display: none;">
+                                <div class="row mt-3 css-add-payment-224b51" id="smart_options_container">
                                     <div class="col-md-12">
                                         <div class="card bg-light border-warning">
                                             <div class="card-body py-2">
@@ -422,7 +404,7 @@ include '../../include/sidebar.php';
                                                     <div class="col-md-5">
                                                         <div class="d-flex align-items-center gap-2">
                                                             <select id="smart_waiver_mode"
-                                                                class="form-select form-select-sm" style="width: auto;">
+                                                                class="form-select form-select-sm css-add-payment-dc251b">
                                                                 <option value="percentage">%</option>
                                                                 <option value="fixed">₹</option>
                                                             </select>
@@ -440,7 +422,7 @@ include '../../include/sidebar.php';
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" id="discount_summary" style="display: none;">
+                            <div class="row css-add-payment-224b51" id="discount_summary">
                                 <div class="col-md-12">
                                     <div class="alert alert-success mb-0">
                                         <div class="d-flex justify-content-between align-items-center">
@@ -503,7 +485,7 @@ include '../../include/sidebar.php';
                                     </div>
                                 </div>
                                 <!-- Cheque Details (Dynamic Container) -->
-                                <div id="cheque_details_container" style="display: none;" class="mt-3">
+                                <div id="cheque_details_container" class="css-add-payment-224b51" class="mt-3">
                                     <!-- Dynamic cheque inputs will be injected here -->
                                 </div>
                             </div>
@@ -545,7 +527,7 @@ include '../../include/sidebar.php';
 
             <!-- Right Column: Summary & Reference -->
             <div class="col-lg-4">
-                <div class="sticky-top" style="top: 20px; z-index: 10;">
+                <div class="sticky-top css-add-payment-dc1c6c">
                     <!-- Payment Summary Card -->
                     <div class="card card-payment mb-4 border-0 shadow-sm">
                         <div class="card-header bg-gradient-info">
@@ -558,13 +540,13 @@ include '../../include/sidebar.php';
                                 <i class="fas fa-receipt fa-3x mb-3 opacity-25"></i>
                                 <p>Select a student and fee types to see the payment summary.</p>
                             </div>
-                            <div id="summary_content" style="display: none;">
+                            <div id="summary_content" class="css-add-payment-224b51">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <span class="text-muted">Total Gross:</span>
                                     <span class="fw-bold fs-5" id="summary_total_gross">₹0</span>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center mb-3 text-danger"
-                                    id="summary_discount_row" style="display: none !important;">
+                                <div class="d-flex justify-content-between align-items-center mb-3 text-danger css-add-payment-3e2e7c"
+                                    id="summary_discount_row">
                                     <span class="text-muted">Discount Applied:</span>
                                     <span class="fw-bold" id="summary_discount_amount">-₹0</span>
                                 </div>
@@ -611,257 +593,7 @@ include '../../include/sidebar.php';
     </form>
 </div>
 
-<style>
-    /* Payment Form Custom Styles */
-    .card-payment,
-    .card-fee-reference,
-    .card-actions {
-        border: none;
-        border-radius: 0.75rem;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    }
 
-    .bg-gradient-primary {
-        background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
-    }
-
-    .bg-gradient-info {
-        background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%) !important;
-    }
-
-    .card-header {
-        border-bottom: none;
-        padding: 1rem 1.25rem;
-    }
-
-    .card-header .card-title {
-        margin-bottom: 0;
-        font-size: 1rem;
-        font-weight: 600;
-    }
-
-    .form-section {
-        background: #f8fafc;
-        border-radius: 0.5rem;
-        padding: 1.25rem;
-        border: 1px solid #e2e8f0;
-    }
-
-    .form-section-title {
-        font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid #e2e8f0;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .form-section-title i {
-        width: 24px;
-        height: 24px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: #fff;
-        border-radius: 0.375rem;
-        font-size: 0.875rem;
-    }
-
-    .form-label {
-        font-weight: 500;
-        color: #374151;
-        font-size: 0.875rem;
-        margin-bottom: 0.375rem;
-    }
-
-    .input-group-text {
-        border-color: #e2e8f0;
-    }
-
-    .form-control,
-    .form-select {
-        border-color: #e2e8f0;
-        border-radius: 0.375rem;
-    }
-
-    .form-control:focus,
-    .form-select:focus {
-        border-color: #2563EB;
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    }
-
-    .form-control-lg {
-        font-size: 1.25rem;
-        font-weight: 600;
-    }
-
-    .fee-row {
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-    }
-
-    .fee-row:hover {
-        background-color: #f0fdf4 !important;
-    }
-
-    .payment-tips {
-        background: #f8fafc;
-        padding: 1rem;
-        border-radius: 0.5rem;
-    }
-
-    .page-title-icon {
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-    }
-
-    .btn-success {
-        background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-        border: none;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
-
-    .btn-success:hover {
-        background: linear-gradient(135deg, #059669 0%, #047857 100%);
-        transform: translateY(-1px);
-        box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4);
-    }
-
-    .btn-outline-secondary {
-        border-color: #e2e8f0;
-        color: #64748b;
-    }
-
-    .btn-outline-secondary:hover {
-        background-color: #f1f5f9;
-        border-color: #cbd5e1;
-        color: #475569;
-    }
-
-    #student_details {
-        margin-top: 1rem;
-    }
-
-    #student_details .alert {
-        margin-bottom: 0;
-        border-radius: 0.5rem;
-    }
-
-    /* Table styles for fee reference */
-    .card-fee-reference .table th {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-weight: 600;
-        color: #64748b;
-        background: #f8fafc;
-        padding: 0.75rem;
-        border: none;
-    }
-
-    .card-fee-reference .table td {
-        padding: 0.75rem;
-        border-color: #f1f5f9;
-        vertical-align: middle;
-    }
-
-    /* Custom Checkbox Card Styles */
-    .custom-checkbox-card {
-        background: #fff;
-        border: 2px solid #e2e8f0;
-        border-radius: 0.5rem;
-        padding: 0.875rem;
-        transition: all 0.2s ease;
-        cursor: pointer;
-        min-height: 70px;
-    }
-
-    .custom-checkbox-card:hover {
-        border-color: #93c5fd;
-        background: #f0f9ff;
-    }
-
-    .custom-checkbox-card .form-check-input {
-        width: 1.25rem;
-        height: 1.25rem;
-        margin-top: 0;
-    }
-
-    .custom-checkbox-card .form-check-input:checked {
-        background-color: #10B981;
-        border-color: #059669;
-    }
-
-    .custom-checkbox-card .form-check-input:checked+.form-check-label {
-        color: #059669;
-    }
-
-    .custom-checkbox-card .form-check-label {
-        cursor: pointer;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        padding-left: 0.5rem;
-    }
-
-    .custom-checkbox-card .fee-type-name {
-        font-weight: 600;
-        color: #1e293b;
-        font-size: 0.875rem;
-    }
-
-    .custom-checkbox-card .fee-type-amount {
-        font-weight: 700;
-        font-size: 0.95rem;
-        margin-top: 0.25rem;
-    }
-
-    .custom-checkbox-card.selected {
-        border-color: #10B981;
-        background: #f0fdf4;
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
-    }
-
-    .custom-checkbox-card.disabled {
-        opacity: 0.6;
-        pointer-events: none;
-        background: #f1f5f9;
-        border-style: dashed;
-    }
-
-    .custom-checkbox-card.disabled .fee-type-name {
-        color: #94a3b8;
-    }
-
-    .enable-fee-link {
-        pointer-events: auto;
-        /* Restore clickability */
-        position: relative;
-        z-index: 5;
-    }
-
-    /* Selected Fees Summary in Left Column */
-    .selected-fees-summary {
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-        border-radius: 0.5rem;
-        padding: 1.25rem;
-    }
-
-    .selected-fees-summary ul li {
-        padding: 0.5rem 0;
-        color: #1e293b;
-        font-size: 0.875rem;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .selected-fees-summary ul li:not(:last-child) {
-        border-bottom: 1px dashed #bbf7d0;
-    }
-</style>
 
 <!-- Payment Confirmation Modal -->
 <div class="modal fade" id="paymentConfirmationModal" tabindex="-1" aria-hidden="true">
@@ -889,7 +621,7 @@ include '../../include/sidebar.php';
                         <span class="text-muted">Payment Mode:</span>
                         <span class="fw-bold text-uppercase" id="confirm_payment_mode"></span>
                     </div>
-                    <div id="confirm_cheque_row" style="display:none;" class="mb-2">
+                    <div id="confirm_cheque_row" class="css-add-payment-93b8ea" class="mb-2">
                         <div class="d-flex justify-content-between">
                             <span class="text-muted">Cheque Details:</span>
                             <div class="text-end fw-bold" id="confirm_cheque_details"></div>
@@ -1484,7 +1216,7 @@ include '../../include/sidebar.php';
                             let total = parseFloat(item.amount);
                             let base = total / 1.18;
                             let gst = total - base;
-                            substructure = `<div class="small text-muted mb-1" style="font-size: 0.75rem;">
+                            substructure = `<div class="small text-muted mb-1 css-add-payment-af89d6">
                                 (\u20B9${formatCurrency(base)} + \u20B9${formatCurrency(gst)} GST)
                             </div>`;
                             // No extra label
@@ -1540,7 +1272,7 @@ include '../../include/sidebar.php';
                 if (!isWithoutGst && paymentMode !== 'deduction') {
                     printWindow = window.open('', '_blank');
                     if (printWindow) {
-                        printWindow.document.write('<html><head><title>Generating Receipt...</title><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#f8f9fa;color:#666;}</style></head><body><div style="text-align:center;padding-top:100px;font-family:sans-serif;color:#666;"><h3>Generating Receipt...</h3><p>Please wait while we process your request.</p></div></body></html>');
+                        printWindow.document.write('<html><head><title>Generating Receipt...</title></head><body><div class="css-add-payment-984622"><h3>Generating Receipt...</h3><p>Please wait while we process your request.</p></div></body></html>');
                     }
                 }
 
@@ -2154,7 +1886,7 @@ include '../../include/sidebar.php';
                         if (withoutGst) {
                             // No extra label
                         } else {
-                            amountHtml += `<div class="text-info small fw-normal mt-1" style="font-size: 0.7rem;">\u20B9${formatCurrency(base)} + \u20B9${formatCurrency(gst)} GST</div>`;
+                            amountHtml += `<div class="text-info small fw-normal mt-1 css-add-payment-dcab71">\u20B9${formatCurrency(base)} + \u20B9${formatCurrency(gst)} GST</div>`;
                         }
                         amountHtml += `<div class="text-muted small text-decoration-line-through fw-normal mt-1">\u20B9${formatCurrency(comp.originalAmount)}</div>`;
                         $amtDisplay.html(amountHtml);
@@ -2177,7 +1909,7 @@ include '../../include/sidebar.php';
                         if (withoutGst && comp.isTuitionPart2) {
                             // No extra label needed
                         } else {
-                            amountHtml += `<div class="text-info small fw-normal mt-1" style="font-size: 0.7rem;">\u20B9${formatCurrency(base)} + \u20B9${formatCurrency(gst)} GST</div>`;
+                            amountHtml += `<div class="text-info small fw-normal mt-1 css-add-payment-dcab71">\u20B9${formatCurrency(base)} + \u20B9${formatCurrency(gst)} GST</div>`;
                         }
                         $amtDisplay.html(amountHtml);
 

@@ -158,7 +158,7 @@ class DocxParser {
                         if (strtolower($ext) === 'gif') $mime = 'image/gif';
                         
                         $base64 = base64_encode($imgData);
-                        $html .= '<img src="data:' . $mime . ';base64,' . $base64 . '" style="max-width:100%; height:auto;" />';
+                        $html .= '<img src="data:' . $mime . ';base64,' . $base64 . '" class="css-DocxParser-642f08" />';
                     }
                 }
                 break;

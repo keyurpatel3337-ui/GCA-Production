@@ -44,22 +44,7 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<style>
-    .target-header {
-        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        border-radius: 12px;
-        padding: 40px;
-        color: white;
-        margin-bottom: 25px;
-        text-align: center;
-    }
 
-    .gauge-container {
-        width: 300px;
-        height: 200px;
-        margin: 0 auto;
-    }
-</style>
 
 <div class="container-fluid text-end mb-3">
     <button class="btn btn-danger btn-sm" onclick="exportToPDF()">
@@ -73,9 +58,8 @@ include '../../../include/sidebar.php';
             <?php echo round($percentage, 1); ?>% Achieved
         </h2>
         <p class="mb-0">Collection Progress</p>
-        <div class="progress mt-3" style="height: 30px; max-width: 600px; margin: 0 auto;">
-            <div class="progress-bar bg-white"
-                style="width: <?php echo min($percentage, 100); ?>%; color: #11998e; font-weight: bold;">
+        <div class="progress mt-3 css-target-vs-actual-8f49fe">
+            <div class="progress-bar bg-white css-target-vs-actual-f0f213">
                 ₹
                 <?php echo formatIndianCurrency($collected); ?>
             </div>
@@ -119,7 +103,7 @@ include '../../../include/sidebar.php';
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    <canvas id="targetChart" style="max-height: 300px;"></canvas>
+                    <canvas id="targetChart" class="css-target-vs-actual-a0b01d"></canvas>
                 </div>
                 <div class="col-md-6">
                     <h5>Collection Analysis</h5>

@@ -220,13 +220,13 @@ include '../../include/sidebar.php';
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <form method="POST" action="details.php" style="display:inline;margin:0;">
+                                            <form method="POST" action="details.php" class="css-admission-confirm-list-f8e39d">
                                                 <input type="hidden" name="id" value="<?php echo $student['id']; ?>">
                                                 <button type="submit" class="btn btn-info" title="View Details">
                                                     <i class="fas fa-eye"></i>
                                                 </button>
                                             </form>
-                                            <form method="POST" action="admission-confirm.php" style="display:inline;margin:0;">
+                                            <form method="POST" action="admission-confirm.php" class="css-admission-confirm-list-f8e39d">
                                                 <input type="hidden" name="id" value="<?php echo $student['id']; ?>">
                                                 <button type="submit" class="btn btn-success" title="Confirm Admission">
                                                     <i class="fas fa-check"></i> Confirm

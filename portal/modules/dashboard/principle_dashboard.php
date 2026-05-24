@@ -201,7 +201,7 @@ include '../../include/sidebar.php'; ?>
     <div class="row g-4 mb-5">
         <div class="col-lg-3 col-md-6">
             <div class="glass-card p-3 d-flex align-items-center h-100">
-                <div class="stat-icon bg-icon-info me-3" style="width: 50px; height: 50px;">
+                <div class="stat-icon bg-icon-info me-3 css-principle_dashboard-4fd294">
                     <i class="fas fa-clock"></i>
                 </div>
                 <div>

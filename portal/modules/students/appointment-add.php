@@ -332,35 +332,7 @@ if (empty($staff_id) && !hasRole(ROLE_RECEPTION) && !hasRole(ROLE_SUPER_ADMIN)) 
     </div>
 </div>
 
-<style>
-    .card-enhanced {
-        border-radius: 1.25rem !important;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
 
-    .card-enhanced:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
-    }
-
-    .input-group-text {
-        color: #6c757d;
-        background-color: #f8f9fa;
-    }
-
-    .form-control:focus,
-    .form-select:focus {
-        border-color: #2563eb;
-        box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.1);
-    }
-
-    .select2-container--bootstrap-5 .select2-selection {
-        border-radius: 0.5rem;
-        min-height: 45px;
-        display: flex;
-        align-items: center;
-    }
-</style>
 
 <script>
     $(document).ready(function () {

@@ -234,19 +234,19 @@ include $_SERVER['DOCUMENT_ROOT'] . '/portal/include/sidebar.php';
             </form>
 
             <!-- PDF Backup Progress (Hidden by default) -->
-            <div id="pdfBackupProgress" class="mt-4 border-top pt-4" style="display: none;">
+            <div id="pdfBackupProgress" class="mt-4 border-top pt-4 css-receipt-reports-224b51">
                 <div class="text-center mb-3">
                     <h4><i class="fas fa-file-pdf text-danger"></i> Generating Receipt PDFs...</h4>
                     <p id="progressSubStatus" class="text-muted">Initializing...</p>
                 </div>
-                <div class="progress mb-3" style="height: 25px;">
-                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                        role="progressbar" style="width: 0%">0%</div>
+                <div class="progress mb-3 css-receipt-reports-bd56ab">
+                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success css-receipt-reports-759002"
+                        role="progressbar">0%</div>
                 </div>
-                <div class="list-group list-group-flush border rounded" style="max-height: 150px; overflow-y: auto;"
+                <div class="list-group list-group-flush border rounded css-receipt-reports-7da9cc"
                     id="logList">
                 </div>
-                <div id="finalizeMessage" class="mt-3" style="display: none;"></div>
+                <div id="finalizeMessage" class="mt-3 css-receipt-reports-224b51"></div>
             </div>
         </div>
     </div>

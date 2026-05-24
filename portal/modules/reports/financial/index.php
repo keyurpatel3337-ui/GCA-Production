@@ -192,59 +192,7 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
-<style>
-    /* Page specific overrides if any, but most should come from global-theme.css */
-    .report-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 1.5rem;
-    }
 
-    @media (max-width: 768px) {
-        .report-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .bg-purple {
-        background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
-    }
-
-    .bg-indigo {
-        background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
-    }
-
-    .bg-wallet-grad {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
-    }
-
-    .report-item-link {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 10px;
-        color: var(--text-dark);
-        text-decoration: none;
-        border-radius: 8px;
-        transition: all 0.2s ease;
-    }
-
-    .report-item-link:hover {
-        background: rgba(37, 99, 235, 0.05);
-        color: var(--primary-color);
-        transform: translateX(5px);
-    }
-
-    .report-item-link i {
-        width: 20px;
-        text-align: center;
-        color: var(--text-light);
-    }
-
-    .report-item-link:hover i {
-        color: var(--primary-color);
-    }
-</style>
 
 
 <div class="container-fluid py-4 pb-5">
@@ -364,7 +312,7 @@ include '../../../include/sidebar.php';
     <div class="row g-3 mb-5">
         <div class="col-xl-3 col-lg-3 col-md-6">
             <a href="<?php echo PORTAL_URL; ?>/modules/payments/financial-reports.php" class="quick-action-btn h-100">
-                <div class="quick-icon bg-soft-primary text-primary" style="background-color: rgba(37, 99, 235, 0.1);">
+                <div class="quick-icon bg-soft-primary text-primary css-index-947eef">
                     <i class="fas fa-chart-line"></i>
                 </div>
                 <div class="quick-info">
@@ -375,7 +323,7 @@ include '../../../include/sidebar.php';
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6">
             <a href="pending-fees.php" class="quick-action-btn h-100">
-                <div class="quick-icon bg-soft-warning text-warning" style="background-color: rgba(245, 158, 11, 0.1);">
+                <div class="quick-icon bg-soft-warning text-warning css-index-8557c1">
                     <i class="fas fa-file-invoice-dollar"></i>
                 </div>
                 <div class="quick-info">
@@ -386,7 +334,7 @@ include '../../../include/sidebar.php';
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6">
             <a href="receipt-register.php" class="quick-action-btn h-100">
-                <div class="quick-icon bg-soft-dark text-dark" style="background-color: rgba(30, 41, 59, 0.1);">
+                <div class="quick-icon bg-soft-dark text-dark css-index-68d287">
                     <i class="fas fa-receipt"></i>
                 </div>
                 <div class="quick-info">
@@ -397,7 +345,7 @@ include '../../../include/sidebar.php';
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6">
             <a href="day-book.php" class="quick-action-btn h-100">
-                <div class="quick-icon bg-soft-info text-info" style="background-color: rgba(6, 182, 212, 0.1);">
+                <div class="quick-icon bg-soft-info text-info css-index-cab35b">
                     <i class="fas fa-book-open"></i>
                 </div>
                 <div class="quick-info">
@@ -437,7 +385,7 @@ include '../../../include/sidebar.php';
                             <a href="<?php echo $report['link']; ?>" class="report-item-link px-1">
                                 <i class="<?php echo $report['icon']; ?>"></i>
                                 <span class="fw-medium"><?php echo $report['name']; ?></span>
-                                <i class="fas fa-chevron-right ms-auto opacity-25 fs-xs" style="font-size: 0.7rem;"></i>
+                                <i class="fas fa-chevron-right ms-auto opacity-25 fs-xs css-index-dcab71"></i>
                             </a>
                         <?php endforeach; ?>
                     </div>

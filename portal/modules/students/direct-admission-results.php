@@ -212,21 +212,6 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
-<style>
-    .bg-light-danger {
-        background-color: #fff5f5;
-        color: #dc3545;
-    }
-    .card {
-        border-radius: 12px;
-        overflow: hidden;
-    }
-    .table thead th {
-        border-top: none;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-</style>
+
 
 <?php include '../../include/footer.php'; ?>

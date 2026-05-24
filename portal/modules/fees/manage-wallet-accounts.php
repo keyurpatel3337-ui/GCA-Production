@@ -30,7 +30,7 @@ include '../../include/sidebar.php';
                         <h6 class="text-uppercase tracking-wider small text-muted mb-1 fw-bold">Total Accounts</h6>
                         <h2 class="fw-bold mb-0 text-dark" id="stat-total-accounts">0</h2>
                     </div>
-                    <div class="icon-box bg-soft-primary text-primary rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 55px; height: 55px; background-color: rgba(0, 123, 255, 0.08);">
+                    <div class="icon-box bg-soft-primary text-primary rounded-circle p-3 d-flex align-items-center justify-content-center css-manage-wallet-accounts-250577">
                         <i class="fas fa-users fs-4"></i>
                     </div>
                 </div>
@@ -44,7 +44,7 @@ include '../../include/sidebar.php';
                         <h6 class="text-uppercase tracking-wider small text-muted mb-1 fw-bold">Total Wallet Funds</h6>
                         <h2 class="fw-bold mb-0 text-dark" id="stat-total-funds">₹0.00</h2>
                     </div>
-                    <div class="icon-box bg-soft-success text-success rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 55px; height: 55px; background-color: rgba(46, 213, 115, 0.08);">
+                    <div class="icon-box bg-soft-success text-success rounded-circle p-3 d-flex align-items-center justify-content-center css-manage-wallet-accounts-ee1935">
                         <i class="fas fa-wallet fs-4"></i>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ include '../../include/sidebar.php';
                         <h6 class="text-uppercase tracking-wider small text-muted mb-1 fw-bold">Flagged / Blocked</h6>
                         <h2 class="fw-bold mb-0 text-danger" id="stat-flagged-accounts">0</h2>
                     </div>
-                    <div class="icon-box bg-soft-danger text-danger rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 55px; height: 55px; background-color: rgba(255, 71, 87, 0.08);">
+                    <div class="icon-box bg-soft-danger text-danger rounded-circle p-3 d-flex align-items-center justify-content-center css-manage-wallet-accounts-2365a2">
                         <i class="fas fa-exclamation-triangle fs-4"></i>
                     </div>
                 </div>
@@ -75,9 +75,9 @@ include '../../include/sidebar.php';
             </div>
             <!-- Search & Actions -->
             <div class="d-flex align-items-center gap-2">
-                <div class="input-group search-input-group" style="width: 320px;">
+                <div class="input-group search-input-group css-manage-wallet-accounts-8ab145">
                     <span class="input-group-text bg-light border-0 text-muted"><i class="fas fa-search"></i></span>
-                    <input type="text" id="search-bar" class="form-control bg-light border-0" placeholder="Search by student name or ID..." style="outline: none; box-shadow: none;">
+                    <input type="text" id="search-bar" class="form-control bg-light border-0 css-manage-wallet-accounts-f3a39b" placeholder="Search by student name or ID...">
                 </div>
                 <button onclick="loadAccounts()" class="btn btn-outline-primary border-0 rounded-3 p-2 px-3" title="Refresh registry data">
                     <i class="fas fa-sync-alt"></i>
@@ -178,48 +178,7 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
-<style>
-    .search-input-group {
-        border: 1px solid rgba(0,0,0,0.08);
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    .custom-accounts-table th {
-        font-weight: 600;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        letter-spacing: 0.05em;
-    }
-    .custom-accounts-table td {
-        padding-top: 18px;
-        padding-bottom: 18px;
-        border-bottom: 1px solid rgba(0,0,0,0.03);
-    }
-    .avatar-char {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background-color: rgba(0, 123, 255, 0.08);
-        color: #007bff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 1.1rem;
-    }
-    .badge-status-active {
-        background-color: rgba(46, 213, 115, 0.1) !important;
-        color: #2ed573 !important;
-    }
-    .badge-status-blocked {
-        background-color: rgba(255, 71, 87, 0.1) !important;
-        color: #ff4757 !important;
-    }
-    .badge-status-suspended {
-        background-color: rgba(255, 165, 2, 0.1) !important;
-        color: #ffa502 !important;
-    }
-</style>
+
 
 <!-- SweetAlert2 integration -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -345,7 +304,7 @@ function renderAccounts(filter = '') {
                 </td>
                 <td>
                     <div class="d-flex align-items-center gap-2">
-                        <span class="badge ${badgeClass} p-2 px-3 rounded-pill fw-bold text-uppercase" style="font-size: 0.72rem;">${acc.status}</span>
+                        <span class="badge ${badgeClass} p-2 px-3 rounded-pill fw-bold text-uppercase css-manage-wallet-accounts-606efc">${acc.status}</span>
                         <button onclick="openStatusModal('${acc.student_id}', '${escapeJS(acc.student_name)}', '${acc.status}')"
                                 class="btn btn-sm btn-light border p-1 px-2 rounded-2 text-secondary" title="Change state locks">
                             <i class="fas fa-lock small"></i>
@@ -355,13 +314,11 @@ function renderAccounts(filter = '') {
                 <td class="pe-4 text-end">
                     <div class="d-flex align-items-center justify-content-end gap-2">
                         <button onclick="resetPin('${acc.student_id}', '${escapeJS(acc.student_name)}')" 
-                                class="btn btn-sm btn-outline-danger border-0 rounded-3 px-3 py-1.5 fw-semibold d-flex align-items-center gap-2" 
-                                style="font-size: 0.8rem;" title="Wipe PIN credentials">
+                                class="btn btn-sm btn-outline-danger border-0 rounded-3 px-3 py-1.5 fw-semibold d-flex align-items-center gap-2 css-manage-wallet-accounts-fb2a71" title="Wipe PIN credentials">
                             <i class="fas fa-key small"></i> Reset PIN
                         </button>
                         <a href="../reports/financial/wallet-reports.php?report_type=transaction_history&student_search=${acc.student_id}" 
-                           class="btn btn-sm btn-outline-primary border-0 rounded-3 px-3 py-1.5 fw-semibold d-flex align-items-center gap-2" 
-                           style="font-size: 0.8rem;" title="View individual statement log">
+                           class="btn btn-sm btn-outline-primary border-0 rounded-3 px-3 py-1.5 fw-semibold d-flex align-items-center gap-2 css-manage-wallet-accounts-fb2a71" title="View individual statement log">
                             <i class="fas fa-file-invoice small"></i> Ledger
                         </a>
                     </div>

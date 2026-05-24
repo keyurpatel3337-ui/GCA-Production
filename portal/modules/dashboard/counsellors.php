@@ -94,8 +94,7 @@ include '../../include/sidebar.php';
                         <h5 class="mb-0">All Counsellors</h5>
                         <form method="POST" class="d-flex gap-2 align-items-center flex-wrap">
                             <input type="hidden" name="page" value="1">
-                            <select name="per_page" class="form-select form-select-sm" onchange="this.form.submit()"
-                                style="width: auto;">
+                            <select name="per_page" class="form-select form-select-sm css-counsellors-dc251b" onchange="this.form.submit()">
                                 <option value="10" <?php echo $perPage == 10 ? 'selected' : ''; ?>>10</option>
                                 <option value="25" <?php echo $perPage == 25 ? 'selected' : ''; ?>>25</option>
                                 <option value="50" <?php echo $perPage == 50 ? 'selected' : ''; ?>>50</option>
@@ -173,7 +172,7 @@ include '../../include/sidebar.php';
                                             endif; ?>
                                         </td>
                                         <td>
-                                            <form method="GET" action="../students/students.php" style="display:inline;margin:0;">
+                                            <form method="GET" action="../students/students.php" class="css-counsellors-f8e39d">
                                                 <input type="hidden" name="counsellor_id"
                                                     value="<?php echo $counsellor['id']; ?>">
                                                 <button type="submit" class="btn btn-sm btn-info" title="View Students">

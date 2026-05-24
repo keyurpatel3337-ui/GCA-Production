@@ -98,8 +98,7 @@ $issuedCertificates = $op->customSelect($query);
                                             </td>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="avatar avatar-sm bg-blue-100 text-blue-600 rounded-circle me-3 d-flex align-items-center justify-content-center"
-                                                        style="width: 35px; height: 35px; background: #e0f2fe; color: #0284c7;">
+                                                    <div class="avatar avatar-sm bg-blue-100 text-blue-600 rounded-circle me-3 d-flex align-items-center justify-content-center css-index-d88edd">
                                                         <?php echo strtoupper(substr($cert['student_full_name'], 0, 1)); ?>
                                                     </div>
                                                     <div class="d-flex flex-column">

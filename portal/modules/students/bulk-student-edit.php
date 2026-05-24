@@ -173,10 +173,10 @@ include '../../include/sidebar.php';
                                 <table class="table table-bordered table-striped align-middle mb-0">
                                     <thead class="table-dark small">
                                         <tr>
-                                            <th style="min-width: 150px;">Student Name</th>
+                                            <th class="css-bulk-student-edit-684a19">Student Name</th>
                                             <th>GR No</th>
                                             <th>Roll No</th>
-                                            <th style="min-width: 150px;">Division</th>
+                                            <th class="css-bulk-student-edit-684a19">Division</th>
                                             <th>Mobile No</th>
                                             <th>Alt Mobile</th>
                                             <th>Email</th>
@@ -253,7 +253,7 @@ include '../../include/sidebar.php';
             </div>
         <?php else: ?>
             <div class="bg-white rounded p-5 text-center shadow-sm border">
-                <div class="w-16 h-16 bg-blue-50 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+                <div class="w-16 h-16 bg-blue-50 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4 css-bulk-student-edit-732c60">
                     <i class="fas fa-filter text-primary fa-3x"></i>
                 </div>
                 <h4 class="fw-bold">Apply Filters to Load Students</h4>

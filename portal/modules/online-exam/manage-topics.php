@@ -93,40 +93,40 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 </script>
             <?php endif; ?>
 
-            <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px;">
+            <div class="card shadow-sm mb-4 border-0 css-manage-topics-dc9ce7">
                 <div class="card-header bg-white border-0 py-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h5 class="mb-0 font-weight-bold text-dark" style="font-size: 1.1rem;">Topic List</h5>
+                            <h5 class="mb-0 font-weight-bold text-dark css-manage-topics-e7ec96">Topic List</h5>
                         </div>
                         <div class="d-flex align-items-center gap-3">
-                            <div class="input-group input-group-sm" style="width: 200px;">
-                                <span class="input-group-text bg-light border-0" style="border-radius: 10px 0 0 10px;">
+                            <div class="input-group input-group-sm css-manage-topics-5c2dc9">
+                                <span class="input-group-text bg-light border-0 css-manage-topics-67aaf6">
                                     <i class="fas fa-search text-muted small"></i>
                                 </span>
-                                <input type="text" id="searchInput" class="form-control border-0 bg-light" placeholder="Search Topic..." style="border-radius: 0 10px 10px 0; font-size: 0.85rem; height: 38px;">
+                                <input type="text" id="searchInput" class="form-control border-0 bg-light css-manage-topics-84dccc" placeholder="Search Topic...">
                             </div>
-                            <select id="filterStandard" class="form-select form-select-sm border-0 bg-light" style="width: 140px; border-radius: 10px; font-size: 0.85rem; height: 38px;" onchange="updateSubjectFilter(this.value)">
+                            <select id="filterStandard" class="form-select form-select-sm border-0 bg-light css-manage-topics-551485" onchange="updateSubjectFilter(this.value)">
                                 <option value="">All Standards</option>
                                 <option value="11th">11th</option>
                                 <option value="12th">12th</option>
                                 <option value="Reneet">Reneet</option>
                             </select>
-                            <select id="filterSubject" class="form-select form-select-sm border-0 bg-light" style="width: 140px; border-radius: 10px; font-size: 0.85rem; height: 38px;" onchange="updateChapterFilter(this.value)">
+                            <select id="filterSubject" class="form-select form-select-sm border-0 bg-light css-manage-topics-551485" onchange="updateChapterFilter(this.value)">
                                 <option value="">All Subjects</option>
                             </select>
-                            <select id="filterChapter" class="form-select form-select-sm border-0 bg-light" style="width: 140px; border-radius: 10px; font-size: 0.85rem; height: 38px;">
+                            <select id="filterChapter" class="form-select form-select-sm border-0 bg-light css-manage-topics-551485">
                                 <option value="">All Chapters</option>
                             </select>
                             <div class="d-flex align-items-center gap-2">
-                                <a href="export-topics.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Export CSV">
+                                <a href="export-topics.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-manage-topics-dbb5d6" title="Export CSV">
                                     <i class="fas fa-download text-muted mr-2"></i> Export
                                 </a>
-                                <a href="import-topics.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Import CSV">
+                                <a href="import-topics.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-manage-topics-dbb5d6" title="Import CSV">
                                     <i class="fas fa-upload text-muted mr-2"></i> Import
                                 </a>
-                                <a href="add-topic.php" class="btn btn-primary shadow-sm d-flex align-items-center justify-content-center px-4" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;">
-                                    <i class="fas fa-plus mr-2" style="font-size: 0.75rem;"></i> Add Topic
+                                <a href="add-topic.php" class="btn btn-primary shadow-sm d-flex align-items-center justify-content-center px-4 css-manage-topics-dbb5d6">
+                                    <i class="fas fa-plus mr-2 css-manage-topics-af89d6"></i> Add Topic
                                 </a>
                             </div>
                         </div>
@@ -165,19 +165,19 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                         <td class="align-middle text-center">
                                             <?php $qc = (int)($tp['q_11th'] ?? 0); ?>
                                             <a href="question-bank.php?topic_id=<?php echo $tp['id']; ?>&standard_id=1" class="text-decoration-none">
-                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(59,130,246,0.12);color:#2563eb' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:38px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
+                                                <span class="badge rounded-pill css-manage-topics-fe1898"><?php echo $qc ?: '—'; ?></span>
                                             </a>
                                         </td>
                                         <td class="align-middle text-center">
                                             <?php $qc = (int)($tp['q_12th'] ?? 0); ?>
                                             <a href="question-bank.php?topic_id=<?php echo $tp['id']; ?>&standard_id=2" class="text-decoration-none">
-                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(16,185,129,0.12);color:#059669' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:38px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
+                                                <span class="badge rounded-pill css-manage-topics-b1b44c"><?php echo $qc ?: '—'; ?></span>
                                             </a>
                                         </td>
                                         <td class="align-middle text-center">
                                             <?php $qc = (int)($tp['q_reneet'] ?? 0); ?>
                                             <a href="question-bank.php?topic_id=<?php echo $tp['id']; ?>&standard_id=3" class="text-decoration-none">
-                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(139,92,246,0.12);color:#7c3aed' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:38px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
+                                                <span class="badge rounded-pill css-manage-topics-eeaafe"><?php echo $qc ?: '—'; ?></span>
                                             </a>
                                         </td>
                                         <td class="text-end px-4 align-middle">

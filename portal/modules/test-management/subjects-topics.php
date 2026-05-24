@@ -151,7 +151,7 @@ include '../../include/sidebar.php';
                     <?php echo count($topics); ?>)
                 </h3>
                 <div class="d-flex align-items-center">
-                    <div class="input-group me-3" style="width: 300px;">
+                    <div class="input-group me-3 css-subjects-topics-88ed85">
                         <span class="input-group-text bg-white border-end-0">
                             <i class="fas fa-search text-muted"></i>
                         </span>
@@ -162,7 +162,7 @@ include '../../include/sidebar.php';
                             <label class="me-2">Per Page:</label>
                             <input type="hidden" name="subject_id" value="<?php echo $subject_id; ?>">
                             <input type="hidden" name="page" value="1">
-                            <select name="per_page" class="form-select form-select-sm d-inline-block" style="width: auto;"
+                            <select name="per_page" class="form-select form-select-sm d-inline-block css-subjects-topics-dc251b"
                                 onchange="this.form.submit()">
                                 <option value="10" <?php echo $perPage == 10 ? 'selected' : ''; ?>>10</option>
                                 <option value="25" <?php echo $perPage == 25 ? 'selected' : ''; ?>>25</option>

@@ -229,12 +229,12 @@ $date_to = date('Y-m-d');
                                 <span class="badge bg-light text-dark tiny">${l.recipient_type || 'N/A'}</span>
                             </td>
                             <td>
-                                <div class="small fw-bold text-truncate" style="max-width: 300px;">${l.subject}</div>
+                                <div class="small fw-bold text-truncate css-email-logs-c0dc2c">${l.subject}</div>
                                 <div class="tiny text-muted uppercase">Template: ${l.template_code || 'Custom'}</div>
                             </td>
                             <td>
                                 <span class="badge bg-${statusClass} uppercase tiny">${l.status}</span>
-                                ${l.error_message ? `<div class="tiny text-danger mt-1 text-truncate" style="max-width: 150px;" title="${l.error_message}">${l.error_message}</div>` : ''}
+                                ${l.error_message ? `<div class="tiny text-danger mt-1 text-truncate css-email-logs-7ecc66" title="${l.error_message}">${l.error_message}</div>` : ''}
                             </td>
                             <td class="small">${time}</td>
                             <td class="text-end pe-3">
@@ -307,13 +307,13 @@ $date_to = date('Y-m-d');
                             <h6 class="fw-bold border-bottom pb-2">Technical Bits</h6>
                             ${l.error_message ? `<div class="alert alert-danger p-2 small"><strong>Error:</strong> ${l.error_message}</div>` : ''}
                             <div class="small mb-1"><strong>Variables Used:</strong></div>
-                            <pre class="bg-light p-2 tiny border rounded" style="max-height: 100px; overflow-y: auto;">${l.variables_used || '{}'}</pre>
+                            <pre class="bg-light p-2 tiny border rounded css-email-logs-6500ac">${l.variables_used || '{}'}</pre>
                             <div class="small mb-1"><strong>SMTP Response:</strong></div>
-                            <pre class="bg-light p-2 tiny border rounded" style="max-height: 100px; overflow-y: auto;">${l.smtp_response || 'No response recorded'}</pre>
+                            <pre class="bg-light p-2 tiny border rounded css-email-logs-6500ac">${l.smtp_response || 'No response recorded'}</pre>
                         </div>
                         <div class="col-md-12 mt-3">
                             <h6 class="fw-bold border-bottom pb-2">Email Content Preview</h6>
-                            <div class="border rounded p-3 bg-white" style="max-height: 400px; overflow-y: auto;">
+                            <div class="border rounded p-3 bg-white css-email-logs-f4d939">
                                 ${l.html_body}
                             </div>
                         </div>
@@ -331,12 +331,3 @@ $date_to = date('Y-m-d');
     });
 </script>
 
-<style>
-    .tiny {
-        font-size: 0.7rem;
-    }
-
-    .uppercase {
-        text-transform: uppercase;
-    }
-</style>

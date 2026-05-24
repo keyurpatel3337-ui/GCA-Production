@@ -22,9 +22,9 @@
     <!-- About Us Content Section -->
     <section class="relative py-12 md:py-24 overflow-hidden bg-gradient-to-b from-white via-blue-50/30 to-white">
         <!-- Decorative background elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float" style="animation-delay: 0s;"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float" style="animation-delay: 1s;"></div>
-        <div class="absolute top-1/2 right-10 w-40 h-40 bg-sky-100 rounded-full opacity-15 animate-float" style="animation-delay: 2s;"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float css-index-f165c4"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float css-index-bd845f"></div>
+        <div class="absolute top-1/2 right-10 w-40 h-40 bg-sky-100 rounded-full opacity-15 animate-float css-index-cffe64"></div>
 
         <div class="container mx-auto px-4 relative z-10">
             <!-- Page Header -->

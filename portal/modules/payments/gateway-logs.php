@@ -125,8 +125,8 @@ include __DIR__ . '/../../include/sidebar.php';
                         <table class="table table-hover align-middle mb-0">
                             <thead class="bg-light text-muted small text-uppercase fw-bold">
                                 <tr>
-                                    <th class="ps-4" style="width: 150px;">Timestamp</th>
-                                    <th style="width: 120px;">Type</th>
+                                    <th class="ps-4 css-gateway-logs-c25159">Timestamp</th>
+                                    <th class="css-gateway-logs-b15add">Type</th>
                                     <th>Transaction ID</th>
                                     <th>Amount</th>
                                     <th>Student Context</th>
@@ -219,7 +219,7 @@ include __DIR__ . '/../../include/sidebar.php';
                     <button class="btn btn-xs btn-light position-absolute top-0 end-0 m-2 border" onclick="copyToClipboard()">
                         <i class="fas fa-copy"></i> Copy
                     </button>
-                    <pre id="modal-json" class="p-4 mb-0" style="max-height: 500px; overflow-y: auto; background: #1e1e1e; color: #d4d4d4; font-family: 'Consolas', monospace; font-size: 0.85rem;"></pre>
+                    <pre id="modal-json" class="p-4 mb-0 css-gateway-logs-84b9c0"></pre>
                 </div>
             </div>
             <div class="modal-footer bg-light border-0">

@@ -143,31 +143,31 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
         <div class="container-fluid">
             
             <?php if($error): ?>
-            <div class="alert alert-danger shadow-sm border-0" style="border-radius: 12px;">
+            <div class="alert alert-danger shadow-sm border-0 css-generate-from-template-838095">
                 <i class="fas fa-exclamation-triangle mr-2"></i> <?= $error ?>
             </div>
             <?php endif; ?>
             
             <?php if($success): ?>
-            <div class="alert alert-success shadow-sm border-0" style="border-radius: 12px;">
+            <div class="alert alert-success shadow-sm border-0 css-generate-from-template-838095">
                 <i class="fas fa-check-circle mr-2"></i> <?= $success ?>
                 <a href="exam-templates.php" class="btn btn-sm btn-success float-right">Back to Templates</a>
             </div>
             <?php else: ?>
 
-            <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px; max-width: 800px; margin: 0 auto;">
+            <div class="card shadow-sm mb-4 border-0 css-generate-from-template-6fa6e7">
                 <div class="card-header bg-white border-0 py-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-magic mr-2 text-primary"></i> Generate Exam</h5>
                             <small class="text-muted">Template: <strong><?= htmlspecialchars($template['template_name']) ?></strong></small>
                         </div>
-                        <a href="exam-templates.php" class="btn btn-light shadow-sm" style="border-radius: 10px;">Cancel</a>
+                        <a href="exam-templates.php" class="btn btn-light shadow-sm css-generate-from-template-1033dd">Cancel</a>
                     </div>
                 </div>
                 <div class="card-body p-4">
                     
-                    <div class="alert bg-light border-0 mb-4" style="border-radius: 12px;">
+                    <div class="alert bg-light border-0 mb-4 css-generate-from-template-838095">
                         <div class="row text-center">
                             <div class="col-4 border-right">
                                 <h4 class="mb-0 text-primary font-weight-bold"><?= $template['total_questions'] ?></h4>
@@ -229,7 +229,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             <label class="custom-control-label small font-weight-bold" for="display_result_immediately">Show Results Instantly</label>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm" style="border-radius: 12px; font-weight: 600;">
+                        <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm css-generate-from-template-451859">
                             <i class="fas fa-magic mr-2"></i> Auto-Generate Exam
                         </button>
                     </form>

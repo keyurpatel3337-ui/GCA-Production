@@ -133,54 +133,7 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-<style>
-    .join-container {
-        max-width: 450px;
-        margin: 60px auto;
-    }
-    .pin-input {
-        letter-spacing: 0.2em;
-        font-size: 2rem;
-        font-weight: 800;
-        text-align: center;
-        text-transform: uppercase;
-        border-radius: 12px;
-        border: 2px solid #ced4da;
-    }
-    .pin-input:focus {
-        border-color: #0d6efd;
-        box-shadow: 0 0 10px rgba(13,110,253,0.15);
-    }
-    .btn-join {
-        border-radius: 50px;
-        padding: 12px 25px;
-        font-weight: 700;
-    }
-    .quiz-option-btn {
-        min-height: 90px;
-        font-size: 1.25rem;
-        font-weight: 700;
-        border-radius: 12px;
-        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        border: none;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    }
-    .quiz-option-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    }
-    .quiz-option-btn:active {
-        transform: scale(0.98);
-    }
-    .btn-opt-a { background: #0d6efd; color: #ffffff; }
-    .btn-opt-b { background: #198754; color: #ffffff; }
-    .btn-opt-c { background: #ffc107; color: #000000; }
-    .btn-opt-d { background: #dc3545; color: #ffffff; }
-</style>
+
 
 <div class="container-fluid py-4">
     <!-- 1. PIN JOIN BOX -->
@@ -202,7 +155,7 @@ include '../../include/sidebar.php';
     </div>
 
     <!-- 2. ACTIVE ARENA SCREEN -->
-    <div class="card shadow border-0 rounded-3 max-w-2xl mx-auto p-4" id="active-arena" style="display: none; max-width: 600px;">
+    <div class="card shadow border-0 rounded-3 max-w-2xl mx-auto p-4 css-quiz-e64c7f" id="active-arena">
         <!-- Lobby State -->
         <div class="text-center py-5" id="arena-lobby">
             <i class="fas fa-circle-notch fa-spin fa-4x text-success mb-3 d-block"></i>
@@ -211,7 +164,7 @@ include '../../include/sidebar.php';
         </div>
 
         <!-- Question Answering State -->
-        <div id="arena-question" style="display: none;">
+        <div id="arena-question" class="css-quiz-224b51">
             <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
                 <span class="badge bg-secondary px-3 py-2 rounded-pill fs-6" id="q-counter">Question --</span>
                 <span class="fw-bold text-muted small" id="live-timer-tracker">Answering...</span>
@@ -235,7 +188,7 @@ include '../../include/sidebar.php';
             </div>
 
             <!-- Block overlay when already submitted -->
-            <div class="text-center py-5 rounded-3 bg-light border" id="submitted-overlay" style="display: none;">
+            <div class="text-center py-5 rounded-3 bg-light border css-quiz-224b51" id="submitted-overlay">
                 <i class="fas fa-check-double fa-3x text-success mb-2 d-block"></i>
                 <h5 class="fw-bold text-dark mb-1">Response Received!</h5>
                 <p class="text-muted small mb-0">Waiting for other players and correct answer reveal...</p>
@@ -243,7 +196,7 @@ include '../../include/sidebar.php';
         </div>
 
         <!-- Result / Scoring Revealed State -->
-        <div class="text-center py-5" id="arena-result" style="display: none;">
+        <div class="text-center py-5 css-quiz-224b51" id="arena-result">
             <div id="result-icon-box">
                 <i class="fas fa-check-circle fa-5x text-success mb-3 d-block"></i>
             </div>

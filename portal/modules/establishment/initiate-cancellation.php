@@ -91,7 +91,7 @@ include '../../include/sidebar.php';
                 </form>
 
                 <?php if (isset($_GET['search'])): ?>
-                    <div class="list-group list-group-flush overflow-auto" style="max-height: 400px;">
+                    <div class="list-group list-group-flush overflow-auto css-initiate-cancellation-790d50">
                         <?php
                         $search_term = $_GET['search'];
                         $search_wildcard = '%' . $search_term . '%';
@@ -211,8 +211,8 @@ include '../../include/sidebar.php';
                                                 </span>
                                             </td>
                                             <td>
-                                                <div class="progress mb-2" style="height:5px;min-width:120px;">
-                                                    <div class="progress-bar bg-success" style="width:<?php echo $percentage; ?>%"></div>
+                                                <div class="progress mb-2 css-initiate-cancellation-aa262b">
+                                                    <div class="progress-bar bg-success css-initiate-cancellation-f22989"></div>
                                                 </div>
                                                 <div class="d-flex gap-1 flex-wrap">
                                                     <span class="badge <?php echo $approval_badge($req['account_status']); ?>" style="font-size:0.6rem;" title="Account">
@@ -252,27 +252,7 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
-<style>
-    .welcome-banner {
-        padding: 2.5rem;
-        background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-        border-radius: 20px;
-        color: white;
-    }
 
-    .glass-card {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
-    }
-
-    .bg-danger-subtle {
-        background: rgba(220, 53, 69, 0.1) !important;
-        color: #dc3545 !important;
-    }
-</style>
 
 <?php include '../../include/footer.php'; ?>
 

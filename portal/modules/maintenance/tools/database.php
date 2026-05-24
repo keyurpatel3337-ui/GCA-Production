@@ -81,7 +81,7 @@ include PORTAL_PATH . 'include/sidebar.php';
                 <div class="card-header">
                     <h3 class="card-title"><i class="fas fa-table"></i> Table Status</h3>
                 </div>
-                <div class="card-body p-0" style="max-height: 400px; overflow-y: auto;">
+                <div class="card-body p-0 css-database-f4d939">
                     <form method="POST">
                         <input type="hidden" name="action" value="optimize">
                         <table class="table table-striped table-hover mb-0">
@@ -136,7 +136,7 @@ include PORTAL_PATH . 'include/sidebar.php';
                     </form>
 
                     <?php if ($query_result && !empty($query_result)): ?>
-                        <div class="mt-3" style="max-height: 300px; overflow: auto;">
+                        <div class="mt-3 css-database-d9839b">
                             <table class="table table-sm table-bordered">
                                 <thead>
                                     <tr>

@@ -81,13 +81,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" style="width:100%;">
+    <table cellpadding="2" class="css-fee-defaulters-pdf-8588e4">
         <tr>
-            <td style="text-align:center;">
-                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span style="font-size:12pt; font-weight:bold; background-color:#333; color:#fff;">FEE DEFAULTERS LIST (' . $threshold_days . '+ Days Overdue)</span><br>
-                <span style="font-size:10pt;">Generated on: ' . date('d M Y h:i A') . '</span>
+            <td class="css-fee-defaulters-pdf-539b04">
+                <span class="css-fee-defaulters-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span class="css-fee-defaulters-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span class="css-fee-defaulters-pdf-96a72c">FEE DEFAULTERS LIST (' . $threshold_days . '+ Days Overdue)</span><br>
+                <span class="css-fee-defaulters-pdf-1b8847">Generated on: ' . date('d M Y h:i A') . '</span>
             </td>
         </tr>
     </table>';
@@ -95,46 +95,46 @@ try {
     $pdf->Ln(2);
 
     $summaryHtml = '
-    <table cellpadding="4" style="width:100%; margin-bottom:10px; border:0.5px solid #ddd;">
-        <tr style="background-color:#f8f9fa;">
+    <table cellpadding="4" class="css-fee-defaulters-pdf-0e766f">
+        <tr class="css-fee-defaulters-pdf-6eb74d">
             <td width="33%">Total Defaulters: <b>' . count($defaulters) . '</b></td>
             <td width="33%">Threshold: <b>' . $threshold_days . '+ Days</b></td>
-            <td width="34%" style="text-align:right;">Total Outstanding: <b>' . formatIndianCurrency($totalOutstanding) . '</b></td>
+            <td width="34%" class="css-fee-defaulters-pdf-08a0ed">Total Outstanding: <b>' . formatIndianCurrency($totalOutstanding) . '</b></td>
         </tr>
     </table>';
     $pdf->writeHTML($summaryHtml, true, false, false, false, '');
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
+    <table border="0.5" cellpadding="4" class="css-fee-defaulters-pdf-6eb086">
         <thead>
-            <tr style="background-color:#eee; font-weight:bold;">
-                <th width="4%" style="text-align:center;">#</th>
+            <tr class="css-fee-defaulters-pdf-5f2273">
+                <th width="4%" class="css-fee-defaulters-pdf-539b04">#</th>
                 <th width="20%">Student Name</th>
                 <th width="15%">Class / Group</th>
                 <th width="18%">Parent / Contact</th>
-                <th width="12%" style="text-align:center;">Due Date</th>
-                <th width="10%" style="text-align:center;">Days Overdue</th>
-                <th width="21%" style="text-align:right;">Outstanding Amount</th>
+                <th width="12%" class="css-fee-defaulters-pdf-539b04">Due Date</th>
+                <th width="10%" class="css-fee-defaulters-pdf-539b04">Days Overdue</th>
+                <th width="21%" class="css-fee-defaulters-pdf-08a0ed">Outstanding Amount</th>
             </tr>
         </thead>
         <tbody>';
 
     if (empty($defaulters)) {
-        $html .= '<tr><td colspan="7" style="text-align:center;">No defaulters found</td></tr>';
+        $html .= '<tr><td colspan="7" class="css-fee-defaulters-pdf-539b04">No defaulters found</td></tr>';
     } else {
         $i = 1;
         foreach ($defaulters as $row) {
             $color = ($row['days_overdue'] > 90) ? '#d9534f' : (($row['days_overdue'] > 60) ? '#f0ad4e' : '#000');
             $html .= '
             <tr nobr="true">
-                <td width="4%" style="text-align:center;">' . $i++ . '</td>
+                <td width="4%" class="css-fee-defaulters-pdf-539b04">' . $i++ . '</td>
                 <td width="20%"><b>' . htmlspecialchars($row['student_name'] ?? '') . '</b></td>
                 <td width="15%">' . htmlspecialchars($row['current_class'] ?: '-' ?? '') . ' (' . htmlspecialchars($row['group_name'] ?: '-' ?? '') . ')</td>
                 <td width="18%">' . htmlspecialchars($row['father_name'] ?: '-' ?? '') . ' / ' . htmlspecialchars($row['mobile'] ?: '-' ?? '') . '</td>
-                <td width="12%" style="text-align:center;">' . ($row['due_date'] ? date('d-m-Y', strtotime($row['due_date'])) : '-') . '</td>
-                <td width="10%" style="text-align:center; color:' . $color . '; font-weight:bold;">' . $row['days_overdue'] . '</td>
-                <td width="21%" style="text-align:right; font-weight:bold; color:#d9534f;">' . formatIndianCurrency($row['pending_amount']) . '</td>
+                <td width="12%" class="css-fee-defaulters-pdf-539b04">' . ($row['due_date'] ? date('d-m-Y', strtotime($row['due_date'])) : '-') . '</td>
+                <td width="10%" class="css-fee-defaulters-pdf-e0e81e">' . $row['days_overdue'] . '</td>
+                <td width="21%" class="css-fee-defaulters-pdf-8983b7">' . formatIndianCurrency($row['pending_amount']) . '</td>
             </tr>';
         }
     }

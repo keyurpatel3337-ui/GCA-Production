@@ -47,13 +47,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" style="width:100%;">
+    <table cellpadding="2" class="css-transaction-audit-pdf-8588e4">
         <tr>
-            <td style="text-align:center;">
-                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span style="font-size:12pt; font-weight:bold; background-color:#343a40; color:#fff;">TRANSACTION AUDIT TRAIL</span><br>
-                <span style="font-size:10pt;">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
+            <td class="css-transaction-audit-pdf-539b04">
+                <span class="css-transaction-audit-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span class="css-transaction-audit-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span class="css-transaction-audit-pdf-3c2a07">TRANSACTION AUDIT TRAIL</span><br>
+                <span class="css-transaction-audit-pdf-1b8847">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -61,14 +61,14 @@ try {
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
+    <table border="0.5" cellpadding="4" class="css-transaction-audit-pdf-6eb086">
         <thead>
-            <tr style="background-color:#eee; font-weight:bold;">
+            <tr class="css-transaction-audit-pdf-5f2273">
                 <th width="12%">Time</th>
                 <th width="12%">Action</th>
                 <th width="10%">Payment ID</th>
                 <th width="24%">Student Name</th>
-                <th width="12%" style="text-align:right;">Amount</th>
+                <th width="12%" class="css-transaction-audit-pdf-08a0ed">Amount</th>
                 <th width="15%">Processed By</th>
                 <th width="15%">IP Address</th>
             </tr>
@@ -76,18 +76,18 @@ try {
         <tbody>';
 
     if (empty($audit)) {
-        $html .= '<tr><td colspan="7" style="text-align:center;">No records found</td></tr>';
+        $html .= '<tr><td colspan="7" class="css-transaction-audit-pdf-539b04">No records found</td></tr>';
     } else {
         foreach ($audit as $a) {
             $html .= '
             <tr nobr="true">
                 <td width="12%">' . date('d-m-Y H:i:s', strtotime($a['created_at'])) . '</td>
-                <td width="12%"><span style="font-weight:bold;">' . strtoupper($a['action'] ?: '-') . '</span></td>
+                <td width="12%"><span class="css-transaction-audit-pdf-043cda">' . strtoupper($a['action'] ?: '-') . '</span></td>
                 <td width="10%"><code>' . htmlspecialchars($a['payment_id'] ?: '-' ?? '') . '</code></td>
                 <td width="24%"><b>' . htmlspecialchars($a['student_name'] ?: '-' ?? '') . '</b></td>
-                <td width="12%" style="text-align:right;">' . formatIndianCurrency($a['amount'] ?: 0) . '</td>
+                <td width="12%" class="css-transaction-audit-pdf-08a0ed">' . formatIndianCurrency($a['amount'] ?: 0) . '</td>
                 <td width="15%">' . htmlspecialchars($a['user_name'] ?: 'System' ?? '') . '</td>
-                <td width="15%"><small style="color:#666;">' . htmlspecialchars($a['ip_address'] ?: '-' ?? '') . '</small></td>
+                <td width="15%"><small class="css-transaction-audit-pdf-b80428">' . htmlspecialchars($a['ip_address'] ?: '-' ?? '') . '</small></td>
             </tr>';
         }
     }

@@ -119,7 +119,7 @@ include '../../include/sidebar.php';
                     <div class="card-body">
 
                         <!-- STEP 1: School & Academic Information -->
-                        <div class="step-content" id="step1" style="display: block;">
+                        <div class="step-content css-add-19fae4" id="step1">
                             <h4 class="text-primary mb-4">
                                 <i class="fas fa-school"></i> School Information & Academic Details
                             </h4>
@@ -324,7 +324,7 @@ endforeach; ?>
                         </div>
 
                         <!-- STEP 2: Personal Information -->
-                        <div class="step-content" id="step2" style="display: none;">
+                        <div class="step-content css-add-224b51" id="step2">
                             <h4 class="text-primary mb-4">
                                 <i class="fas fa-user"></i> Personal Information
                             </h4>
@@ -448,7 +448,7 @@ endforeach; ?>
                         </div>
 
                         <!-- STEP 3: Contact Information -->
-                        <div class="step-content" id="step3" style="display: none;">
+                        <div class="step-content css-add-224b51" id="step3">
                             <h4 class="text-primary mb-4">
                                 <i class="fas fa-phone"></i> Contact Information
                             </h4>
@@ -519,7 +519,7 @@ endforeach; ?>
                         </div>
 
                         <!-- STEP 4: Parent/Guardian Information -->
-                        <div class="step-content" id="step4" style="display: none;">
+                        <div class="step-content css-add-224b51" id="step4">
                             <h4 class="text-primary mb-4">
                                 <i class="fas fa-users"></i> Parent/Guardian Information
                             </h4>
@@ -590,7 +590,7 @@ endforeach; ?>
                         </div>
 
                         <!-- STEP 5: Additional Information -->
-                        <div class="step-content" id="step5" style="display: none;">
+                        <div class="step-content css-add-224b51" id="step5">
                             <h4 class="text-primary mb-4">
                                 <i class="fas fa-info-circle"></i> Additional Information
                             </h4>
@@ -625,7 +625,7 @@ endforeach; ?>
                                                 id="transportNo" value="No" checked required>
                                             <label class="form-check-label" for="transportNo">No</label>
                                         </div>
-                                        <div id="transport_months_container" class="mt-2" style="display: none;">
+                                        <div id="transport_months_container" class="mt-2 css-add-224b51">
                                             <label class="small fw-bold mb-1">Duration (Months)</label>
                                             <input type="number" name="transport_months" id="transport_months" class="form-control form-control-sm" 
                                                    min="1" max="12" placeholder="e.g. 1">
@@ -637,7 +637,7 @@ endforeach; ?>
                         </div>
 
                         <!-- STEP 6: Login Credentials -->
-                        <div class="step-content" id="step6" style="display: none;">
+                        <div class="step-content css-add-224b51" id="step6">
                             <h4 class="text-primary mb-4">
                                 <i class="fas fa-key"></i> Login Credentials
                             </h4>
@@ -691,7 +691,7 @@ endforeach; ?>
                         </div>
 
                         <!-- STEP 7: Review & Save -->
-                        <div class="step-content" id="step7" style="display: none;">
+                        <div class="step-content css-add-224b51" id="step7">
                             <h4 class="text-primary mb-4">
                                 <i class="fas fa-check-circle"></i> Review & Confirm
                             </h4>
@@ -843,7 +843,7 @@ endforeach; ?>
                                 <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">
                                     Next <i class="fas fa-arrow-right"></i>
                                 </button>
-                                <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
+                                <button type="submit" class="btn btn-success css-add-224b51" id="submitBtn">
                                     <i class="fas fa-check"></i> Register Student
                                 </button>
                             </div>
@@ -858,300 +858,7 @@ endforeach; ?>
 <?php
 include '../../include/footer.php'; ?>
 
-<style>
-    /* Card Enhancements */
-    .card {
-        border-radius: 16px !important;
-        border: none !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
-        overflow: hidden;
-    }
 
-    .card-header:first-child {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
-        color: white !important;
-        padding: 1.5rem !important;
-    }
-
-    .card-header .card-title {
-        color: white !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.5px;
-    }
-
-    .card-header .btn-secondary {
-        background: rgba(255, 255, 255, 0.2) !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
-        color: white !important;
-        backdrop-filter: blur(5px);
-    }
-
-    .card-header .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.3) !important;
-    }
-
-    /* Stepper Styling */
-    .stepper-wrapper {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        position: relative;
-        width: 100%;
-        padding: 0 10px;
-    }
-
-    .stepper-item {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 1 1 0;
-        min-width: 0;
-        transition: all 0.3s ease;
-    }
-
-    .stepper-item::before {
-        content: "";
-        position: absolute;
-        top: 25px;
-        left: -50%;
-        width: 100%;
-        height: 2px;
-        background: #e2e8f0;
-        z-index: 1;
-        transition: all 0.3s ease;
-    }
-
-    .stepper-item:first-child::before {
-        content: none;
-    }
-
-    .stepper-item.active::before,
-    .stepper-item.completed::before {
-        background: #2563eb;
-    }
-
-    .step-counter {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: white;
-        border: 2px solid #e2e8f0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 10px;
-        font-weight: 600;
-        color: #64748b;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        position: relative;
-        z-index: 5;
-    }
-
-    .step-name {
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: #64748b;
-        text-align: center;
-        transition: all 0.3s ease;
-    }
-
-    .stepper-item.active .step-counter {
-        background: #2563eb;
-        border-color: #2563eb;
-        color: white;
-        box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
-        transform: scale(1.1);
-    }
-
-    .stepper-item.active .step-name {
-        color: #2563eb;
-    }
-
-    .stepper-item.completed .step-counter {
-        background: #10b981;
-        border-color: #10b981;
-        color: white;
-    }
-
-    .stepper-item.completed .step-name {
-        color: #10b981;
-    }
-
-    /* Form Enhancements */
-    .form-group label {
-        font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 0.5rem;
-    }
-
-    .input-group-text {
-        background: #f8fafc;
-        border-color: #e2e8f0;
-        color: #64748b;
-    }
-
-    .form-control:focus {
-        border-color: #2563eb;
-        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-    }
-
-    /* Animations */
-    .step-content {
-        animation: fadeIn 0.4s ease-out;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Review Dashboard */
-    .review-card {
-        border-radius: 12px;
-        border: 1px solid #e2e8f0;
-        background: #f8fafc;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .review-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 1rem;
-        color: #2563eb;
-        font-weight: 700;
-        border-bottom: 1px solid #e2e8f0;
-        padding-bottom: 0.5rem;
-    }
-
-    .review-item {
-        margin-bottom: 0.5rem;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .review-label {
-        color: #64748b;
-        font-size: 0.9rem;
-    }
-
-    .review-value {
-        color: #1e293b;
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-
-    @media (max-width: 768px) {
-        .stepper-wrapper::before {
-            top: 20px;
-        }
-
-        .step-counter {
-            width: 40px;
-            height: 40px;
-        }
-
-        .step-name {
-            font-size: 0.7rem;
-            display: none;
-        }
-
-        .stepper-item.active .step-name {
-            display: block;
-            margin-top: 5px;
-        }
-    }
-    /* Admission Overlay */
-    .admission-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(15, 23, 42, 0.95);
-        backdrop-filter: blur(10px);
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-
-    .admission-card-container {
-        max-width: 900px;
-        width: 100%;
-    }
-
-    .admission-option-card {
-        background: white;
-        border-radius: 20px;
-        padding: 40px 30px;
-        text-align: center;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        cursor: pointer;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        border: 4px solid transparent;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-
-    .admission-option-card:hover {
-        transform: translateY(-10px);
-        border-color: #2563eb;
-        box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25);
-    }
-
-    .option-icon {
-        width: 80px;
-        height: 80px;
-        background: #f1f5f9;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 25px;
-        font-size: 32px;
-        color: #2563eb;
-        transition: all 0.3s ease;
-    }
-
-    .admission-option-card:hover .option-icon {
-        background: #2563eb;
-        color: white;
-        transform: rotate(10deg);
-    }
-
-    .admission-option-card h3 {
-        font-weight: 800;
-        color: #1e293b;
-        margin-bottom: 15px;
-    }
-
-    .admission-option-card p {
-        color: #64748b;
-        font-size: 0.95rem;
-        margin-bottom: 25px;
-        flex-grow: 1;
-    }
-
-    @media (max-width: 768px) {
-        .admission-option-card {
-            padding: 30px 20px;
-        }
-    }
-</style>
 
 <script>
     let currentStep = 1;
@@ -1194,7 +901,7 @@ include '../../include/footer.php'; ?>
             else if (std == 13) typeLabel = 'Re-NEET';
             
             $('#admissionTypeBadge').remove();
-            $('h4.text-primary.mb-4').first().append(' <span id="admissionTypeBadge" class="badge bg-info ms-2" style="font-size: 0.5em; vertical-align: middle;">' + typeLabel + ' Admission</span>');
+            $('h4.text-primary.mb-4').first().append(' <span id="admissionTypeBadge" class="badge bg-info ms-2 css-add-e42ae2">' + typeLabel + ' Admission</span>');
             
             // Reset course selection if it doesn't match
             $('#course_id').val('');

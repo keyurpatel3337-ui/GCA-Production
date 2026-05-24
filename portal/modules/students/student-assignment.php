@@ -87,11 +87,10 @@ try {
             <div class="card border-0 shadow-sm h-100 border-start border-4 border-warning">
                 <div class="card-body d-flex align-items-center p-4">
                     <div class="flex-grow-1">
-                        <h6 class="text-muted text-uppercase fw-bold mb-1"
-                            style="font-size: 0.8rem; letter-spacing: 0.5px;">Pending Assignment</h6>
+                        <h6 class="text-muted text-uppercase fw-bold mb-1 css-student-assignment-1c323c">Pending Assignment</h6>
                         <h2 class="mb-0 fw-bold text-dark"><?php echo $pending_count; ?></h2>
                     </div>
-                    <div class="text-warning opacity-25" style="font-size: 2.5rem;"><i class="fas fa-user-clock"></i>
+                    <div class="text-warning opacity-25 css-student-assignment-3f60e0"><i class="fas fa-user-clock"></i>
                     </div>
                 </div>
             </div>
@@ -100,11 +99,10 @@ try {
             <div class="card border-0 shadow-sm h-100 border-start border-4 border-success">
                 <div class="card-body d-flex align-items-center p-4">
                     <div class="flex-grow-1">
-                        <h6 class="text-muted text-uppercase fw-bold mb-1"
-                            style="font-size: 0.8rem; letter-spacing: 0.5px;">Students Assigned</h6>
+                        <h6 class="text-muted text-uppercase fw-bold mb-1 css-student-assignment-1c323c">Students Assigned</h6>
                         <h2 class="mb-0 fw-bold text-dark"><?php echo $assigned_count; ?></h2>
                     </div>
-                    <div class="text-success opacity-25" style="font-size: 2.5rem;"><i class="fas fa-user-check"></i>
+                    <div class="text-success opacity-25 css-student-assignment-3f60e0"><i class="fas fa-user-check"></i>
                     </div>
                 </div>
             </div>
@@ -113,11 +111,10 @@ try {
             <div class="card border-0 shadow-sm h-100 border-start border-4 border-info">
                 <div class="card-body d-flex align-items-center p-4">
                     <div class="flex-grow-1">
-                        <h6 class="text-muted text-uppercase fw-bold mb-1"
-                            style="font-size: 0.8rem; letter-spacing: 0.5px;">Active Counsellors</h6>
+                        <h6 class="text-muted text-uppercase fw-bold mb-1 css-student-assignment-1c323c">Active Counsellors</h6>
                         <h2 class="mb-0 fw-bold text-dark"><?php echo $total_counsellors; ?></h2>
                     </div>
-                    <div class="text-info opacity-25" style="font-size: 2.5rem;"><i class="fas fa-users-cog"></i>
+                    <div class="text-info opacity-25 css-student-assignment-3f60e0"><i class="fas fa-users-cog"></i>
                     </div>
                 </div>
             </div>
@@ -226,8 +223,8 @@ try {
                         <label class="form-label fw-bold small text-muted">Mobile Numbers (Comma Separated) <span
                                 class="text-danger">*</span></label>
                         <div class="input-group">
-                            <textarea name="mobile_numbers" id="mobileNumbers" class="form-control" rows="1"
-                                placeholder="9876543210, 9123456789..." style="resize: none;"></textarea>
+                            <textarea name="mobile_numbers" id="mobileNumbers" class="form-control css-student-assignment-6924dc" rows="1"
+                                placeholder="9876543210, 9123456789..."></textarea>
                             <button type="button" class="btn btn-dark px-4" id="previewMobileBtn">
                                 <i class="fas fa-search me-1"></i> Preview
                             </button>
@@ -237,7 +234,7 @@ try {
             </form>
 
             <!-- Preview Table (Hidden by default) -->
-            <div id="mobilePreviewSection" class="mt-4" style="display: none;">
+            <div id="mobilePreviewSection" class="mt-4 css-student-assignment-224b51">
                 <div class="card bg-light border-0">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -312,8 +309,7 @@ try {
                                         <div class="fw-bold text-dark">
                                             <?php echo htmlspecialchars($student['full_name'] ?? ''); ?>
                                         </div>
-                                        <div class="small text-muted"><i class="fas fa-phone-alt me-1"
-                                                style="font-size:0.75em;"></i>
+                                        <div class="small text-muted"><i class="fas fa-phone-alt me-1 css-student-assignment-693f79"></i>
                                             <?php echo htmlspecialchars($student['mob'] ?? ''); ?></div>
                                     </td>
                                     <td>
