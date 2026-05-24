@@ -1,0 +1,51 @@
+Surname,Student Name,Father's Name,Date of Birth,Gender,Mobile Number,Alternate Number,Aadhaar Number,School Name,School Address,Residence District,Father's First Name,Father's Education,Occupation,Office Address,Hostel Required
+Patel,Raj,Kumar,2008-05-15,Male,9876543210,9876543211,123456789012,ABC High School,123 Main St,Ahmedabad,Kumar,B.Tech,Engineer,789 Office Rd,No
+Shah,Priya,Ramesh,2008-03-22,Female,9123456789,9123456790,234567890123,XYZ School,234 Park Ave,Surat,Ramesh,MBA,Business,890 Business Park,Yes
+Sharma,Arjun,Vikram,2008-07-10,Male,9234567890,9234567891,345678901234,DEF Academy,345 School Lane,Rajkot,Vikram,M.Sc,Professor,456 University Rd,No
+Mehta,Ananya,Suresh,2008-11-25,Female,9345678901,9345678902,456789012345,GHI Public School,456 Education St,Vadodara,Suresh,B.Com,Accountant,567 Finance Tower,Yes
+Joshi,Karan,Mahesh,2008-02-08,Male,9456789012,9456789013,567890123456,JKL International,567 Global Ave,Gandhinagar,Mahesh,PhD,Scientist,678 Research Lab,No
+Desai,Sneha,Rajesh,2008-09-14,Female,9567890123,9567890124,678901234567,MNO Vidyalaya,678 Knowledge Park,Bhavnagar,Rajesh,LLB,Lawyer,789 Court Complex,Yes
+Trivedi,Rohan,Nilesh,2008-06-30,Male,9678901234,9678901235,789012345678,PQR School,789 Learning St,Jamnagar,Nilesh,MBBS,Doctor,890 Hospital Rd,No
+Pandya,Kavya,Hitesh,2008-12-05,Female,9789012345,9789012346,890123456789,STU Academy,890 Academic Lane,Junagadh,Hitesh,B.E,Civil Engineer,901 Construction Site,Yes
+Modi,Aditya,Pravin,2008-04-18,Male,9890123456,9890123457,901234567890,VWX High School,901 Scholar Rd,Kutch,Pravin,MBA,Manager,012 Corporate Park,No
+Bhatt,Ishita,Kamlesh,2008-08-22,Female,9901234567,9901234568,012345678901,YZA Public School,012 Student Ave,Mehsana,Kamlesh,M.Tech,IT Professional,123 Tech Park,Yes
+Chauhan,Vivaan,Dinesh,2007-01-12,Male,9012345678,9012345679,123456789013,BCD International,123 World St,Morbi,Dinesh,B.Arch,Architect,234 Design Studio,No
+Rao,Aishwarya,Mohan,2007-05-28,Female,9123456780,9123456781,234567890124,EFG Academy,234 Excellence Lane,Nadiad,Mohan,CA,Chartered Accountant,345 Audit Firm,Yes
+Singh,Vihaan,Jagdish,2007-10-03,Male,9234567891,9234567892,345678901235,HIJ Vidyalaya,345 Study Circle,Navsari,Jagdish,M.Phil,Researcher,456 Institute Rd,No
+Verma,Diya,Ashok,2007-03-17,Female,9345678902,9345678903,456789012346,KLM School,456 Bright St,Patan,Ashok,B.Sc,Lab Technician,567 Medical Lab,Yes
+Gupta,Aryan,Sanjay,2007-07-25,Male,9456789013,9456789014,567890123457,NOP High School,567 Learn Rd,Porbandar,Sanjay,Diploma,Electrician,678 Power Grid,No
+Agarwal,Riya,Manoj,2007-11-09,Female,9567890124,9567890125,678901234568,QRS International,678 Smart Lane,Palanpur,Manoj,B.Tech,Software Developer,789 IT Hub,Yes
+Kumar,Advait,Ramesh,2007-02-14,Male,9678901235,9678901236,789012345679,TUV Academy,789 Knowledge St,Anand,Ramesh,MBA,HR Manager,890 Corporate Tower,No
+Reddy,Saanvi,Venkat,2007-06-20,Female,9789012346,9789012347,890123456780,WXY Vidyalaya,890 Education Ave,Bharuch,Venkat,M.Com,Banker,901 Bank St,Yes
+Thakur,Reyansh,Gopal,2007-09-08,Male,9890123457,9890123458,901234567891,ZAB School,901 School Lane,Surendranagar,Gopal,LLM,Judge,012 Court Rd,No
+Iyer,Anvi,Krishnan,2007-12-31,Female,9901234568,9901234569,012345678902,CDE Public School,012 Campus St,Valsad,Krishnan,PhD,Professor,123 College Rd,Yes
+Nair,Dhruv,Sunil,2008-01-05,Male,9012345679,9012345680,123456789014,FGH High School,123 Academy Ave,Dahod,Sunil,B.E,Mechanical Engineer,234 Factory Rd,No
+Menon,Myra,Anil,2008-04-12,Female,9123456781,9123456782,234567890125,IJK International,234 Global St,Devbhoomi Dwarka,Anil,MBBS,Surgeon,345 Hospital Lane,Yes
+Pillai,Kabir,Ravi,2008-08-19,Male,9234567892,9234567893,345678901236,LMN Academy,345 Edu Park,Gir Somnath,Ravi,M.Sc,Chemist,456 Lab Complex,No
+Nambiar,Kiara,Vijay,2008-11-26,Female,9345678903,9345678904,456789012347,OPQ Vidyalaya,456 Study Ave,Aravalli,Vijay,B.Com,Tax Consultant,567 Finance Rd,Yes
+Krishnan,Aarav,Harish,2008-03-02,Male,9456789014,9456789015,567890123458,RST School,567 Learn Lane,Botad,Harish,MBA,CEO,678 Business Hub,No
+Warrier,Tara,Shyam,2008-06-15,Female,9567890125,9567890126,678901234569,UVW High School,678 Scholar St,Chhota Udaipur,Shyam,B.Tech,Network Engineer,789 Tech Tower,Yes
+Kurup,Siddharth,Pradeep,2008-09-22,Male,9678901236,9678901237,789012345680,XYZ Academy,789 Knowledge Ave,Dang,Pradeep,CA,Finance Manager,890 Accounts Rd,No
+Karnik,Zara,Santosh,2008-12-10,Female,9789012347,9789012348,890123456781,ABC International,890 Campus Lane,Kheda,Santosh,M.Tech,Data Scientist,901 Analytics Hub,Yes
+Kulkarni,Ayaan,Naresh,2007-04-08,Male,9890123458,9890123459,901234567892,DEF Vidyalaya,901 School St,Mahisagar,Naresh,B.Arch,Interior Designer,012 Design Studio,No
+Bhat,Aanya,Girish,2007-07-14,Female,9901234569,9901234570,012345678903,GHI Public School,012 Education Rd,Narmada,Girish,PhD,Research Director,123 Institute Lane,Yes
+Kamath,Rudra,Deepak,2007-10-21,Male,9012345680,9012345681,123456789015,JKL High School,123 Learn St,Panch Mahals,Deepak,LLB,Corporate Lawyer,234 Legal Complex,No
+Shenoy,Sara,Umesh,2007-01-28,Female,9123456782,9123456783,234567890126,MNO Academy,234 Academy Lane,Sabarkantha,Umesh,MBBS,Pediatrician,345 Clinic Rd,Yes
+Hegde,Ishaan,Prakash,2007-05-05,Male,9234567893,9234567894,345678901237,PQR International,345 Global Ave,Tapi,Prakash,M.Com,Investment Banker,456 Bank Tower,No
+Pai,Navya,Kiran,2007-08-12,Female,9345678904,9345678905,456789012348,STU Vidyalaya,456 Study St,Diu,Kiran,B.E,Electronics Engineer,567 Tech Park,Yes
+Shetty,Veer,Suhas,2007-11-19,Male,9456789015,9456789016,567890123459,VWX School,567 School Rd,Daman,Suhas,MBA,Operations Head,678 Factory Complex,No
+Bhandarkar,Avni,Ajay,2007-02-26,Female,9567890126,9567890127,678901234570,YZA High School,678 Campus Ave,Dadra Haveli,Ajay,M.Sc,Biotechnologist,789 Research Lab,Yes
+Dixit,Atharva,Bharat,2008-05-03,Male,9678901237,9678901238,789012345681,BCD Academy,789 Edu Lane,Ahmedabad,Bharat,B.Tech,Aerospace Engineer,890 Space Center,No
+Kulshrestha,Pari,Chetan,2008-08-10,Female,9789012348,9789012349,890123456782,EFG Public School,890 Learn St,Surat,Chetan,CA,CFO,901 Corporate Rd,Yes
+Dwivedi,Taksh,Devendra,2008-11-17,Male,9890123459,9890123460,901234567893,HIJ International,901 World Ave,Rajkot,Devendra,PhD,University Dean,012 Campus Lane,No
+Mishra,Aarna,Eknath,2008-02-24,Female,9901234570,9901234571,012345678904,KLM Vidyalaya,012 Study Rd,Vadodara,Eknath,M.Tech,AI Specialist,123 Tech Hub,Yes
+Awasthi,Shivansh,Firoz,2008-06-01,Male,9012345681,9012345682,123456789016,NOP School,123 Education St,Gandhinagar,Firoz,B.Com,Marketing Director,234 Ad Agency,No
+Saxena,Ira,Ganesh,2008-09-08,Female,9123456783,9123456784,234567890127,QRS High School,234 Academy Rd,Bhavnagar,Ganesh,LLB,Public Prosecutor,345 Court Lane,Yes
+Mathur,Rehan,Harsh,2008-12-15,Male,9234567894,9234567895,345678901238,TUV Academy,345 Learn Lane,Jamnagar,Harsh,MBBS,Cardiologist,456 Heart Center,No
+Tiwari,Mira,Indra,2007-03-22,Female,9345678905,9345678906,456789012349,WXY International,456 Global St,Junagadh,Indra,MBA,Startup Founder,567 Innovation Hub,Yes
+Rastogi,Ved,Jayant,2007-06-29,Male,9456789016,9456789017,567890123460,ZAB Vidyalaya,567 Campus Ave,Kutch,Jayant,B.E,Marine Engineer,678 Port Complex,No
+Chaturvedi,Aadhya,Ketan,2007-10-06,Female,9567890127,9567890128,678901234571,CDE Public School,678 Education Lane,Mehsana,Ketan,M.Sc,Environmental Scientist,789 Green Lab,Yes
+Tripathi,Yug,Lalit,2007-01-13,Male,9678901238,9678901239,789012345682,FGH School,789 Study St,Morbi,Lalit,B.Tech,Robotics Engineer,890 Automation Park,No
+Shukla,Anaya,Milan,2007-04-20,Female,9789012349,9789012350,890123456783,IJK High School,890 Scholar Lane,Nadiad,Milan,PhD,Medical Researcher,901 Pharma Lab,Yes
+Bajpai,Arnav,Neeraj,2007-07-27,Male,9890123460,9890123461,901234567894,LMN Academy,901 Knowledge Rd,Navsari,Neeraj,CA,Audit Partner,012 Accounts Tower,No
+Upadhyay,Kyra,Omkar,2007-11-03,Female,9901234571,9901234572,012345678905,OPQ International,012 World Lane,Patan,Omkar,M.Tech,Cloud Architect,123 Data Center,Yes

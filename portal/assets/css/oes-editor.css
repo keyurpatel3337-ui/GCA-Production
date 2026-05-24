@@ -1,0 +1,266 @@
+/* OES EDITOR — DESIGN SYSTEM */
+:root {
+    --oes-primary: #1a73e8;
+    --oes-secondary: #0d47a1;
+    --oes-danger: #ea4335;
+    --oes-border: #dee2e6;
+    --oes-bg: #f8f9fa;
+    --oes-surface: #ffffff;
+    --oes-radius: 12px;
+    --oes-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --oes-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
+}
+
+.quill-editor {
+    min-height: 150px;
+    background: var(--oes-surface);
+}
+
+.oes-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.52);
+    backdrop-filter: blur(3px);
+}
+
+.oes-modal-content {
+    background: var(--oes-surface);
+    margin: 4% auto;
+    padding: 26px;
+    border-radius: var(--oes-radius);
+    width: 90%;
+    max-width: 900px;
+    position: relative;
+    z-index: 10001;
+    box-shadow: var(--oes-shadow-lg);
+}
+
+.oes-modal-full {
+    height: 90vh;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ql-toolbar.ql-snow {
+    border-radius: var(--oes-radius) var(--oes-radius) 0 0;
+    background: var(--oes-bg);
+    position: relative;
+    z-index: 10;
+}
+
+.ql-container.ql-snow {
+    border-radius: 0 0 var(--oes-radius) var(--oes-radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.ql-snow .ql-picker.ql-expanded {
+    z-index: 1050 !important;
+}
+
+.ql-editor img {
+    max-width: 100%;
+    height: auto;
+}
+
+.card {
+    transform: none !important;
+    transition: none !important;
+    box-shadow: var(--oes-shadow) !important;
+}
+
+.card:hover {
+    transform: none !important;
+    box-shadow: var(--oes-shadow) !important;
+}
+
+.option-editor {
+    min-height: 120px;
+}
+
+/* CSS Grid for MCQ options */
+.mcq-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .mcq-options-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Toolbar icon sizing */
+.ql-snow.ql-toolbar button {
+    width: auto !important;
+    padding: 3px 5px !important;
+}
+
+.ql-snow.ql-toolbar button svg.lucide {
+    width: 15px;
+    height: 15px;
+    stroke-width: 2;
+    vertical-align: middle;
+}
+
+/* Language toggle */
+#lang-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: var(--oes-primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+#lang-toggle-btn:hover {
+    background: var(--oes-secondary);
+}
+
+/* Voice pulsing (kept for future or if needed, even if logic was removed) */
+@keyframes pulse-mic {
+    0%, 100% { opacity: 1 }
+    50% { opacity: .3 }
+}
+
+.voice-pulsing {
+    animation: pulse-mic 1s ease-in-out infinite;
+    color: var(--oes-danger) !important;
+}
+
+/* OCR overlay */
+#ocr-processing-overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .6);
+    border-radius: var(--oes-radius);
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    gap: 8px;
+    font-weight: 600;
+}
+
+#ocr-processing-overlay.active {
+    display: flex;
+}
+
+/* Quill font/size picker labels */
+.ql-snow .ql-picker.ql-font .ql-picker-label::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item::before {
+    content: 'Sans Serif'
+}
+
+.ql-snow .ql-picker.ql-font [data-value="serif"]::before { content: 'Serif' }
+.ql-snow .ql-picker.ql-font [data-value="monospace"]::before { content: 'Monospace' }
+.ql-snow .ql-picker.ql-font [data-value="outfit"]::before { content: 'Outfit' }
+.ql-snow .ql-picker.ql-font [data-value="roboto"]::before { content: 'Roboto' }
+.ql-snow .ql-picker.ql-font [data-value="inter"]::before { content: 'Inter' }
+
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+    content: '14px'
+}
+
+.ql-snow .ql-picker.ql-size [data-value="8px"]::before { content: '8px' }
+.ql-snow .ql-picker.ql-size [data-value="10px"]::before { content: '10px' }
+.ql-snow .ql-picker.ql-size [data-value="12px"]::before { content: '12px' }
+.ql-snow .ql-picker.ql-size [data-value="14px"]::before { content: '14px' }
+.ql-snow .ql-picker.ql-size [data-value="16px"]::before { content: '16px' }
+.ql-snow .ql-picker.ql-size [data-value="18px"]::before { content: '18px' }
+.ql-snow .ql-picker.ql-size [data-value="20px"]::before { content: '20px' }
+.ql-snow .ql-picker.ql-size [data-value="24px"]::before { content: '24px' }
+.ql-snow .ql-picker.ql-size [data-value="30px"]::before { content: '30px' }
+.ql-snow .ql-picker.ql-size [data-value="36px"]::before { content: '36px' }
+.ql-snow .ql-picker.ql-size [data-value="48px"]::before { content: '48px' }
+.ql-snow .ql-picker.ql-size [data-value="60px"]::before { content: '60px' }
+.ql-snow .ql-picker.ql-size [data-value="72px"]::before { content: '72px' }
+
+@media (max-width:1400px) {
+    .app-main { padding: 1rem !important }
+    .container-fluid { padding-left: 10px; padding-right: 10px }
+    .card-body { padding: 1rem !important }
+    .h3 { font-size: 1.25rem }
+    .ql-toolbar.ql-snow {
+        white-space: nowrap;
+        overflow-x: auto;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center
+    }
+    .ql-toolbar.ql-snow .ql-formats { flex-shrink: 0 }
+}
+
+@media (max-width:1200px) {
+    .col-lg-8, .col-lg-4 { width: 100%; max-width: 100%; flex: 0 0 100% }
+    .sticky-top { position: relative !important; top: 0 !important }
+}
+
+@media (max-width:768px) {
+    .app-main { padding: .5rem !important; overflow-x: hidden }
+    .btn-outline-primary { width: 100%; text-align: center }
+    .ql-toolbar.ql-snow { padding: 8px 4px !important }
+    .ql-table-insert-row, .ql-table-insert-column, .ql-table-delete-row, .ql-table-delete-column { 
+        width: 28px !important; 
+        margin-left: 2px !important;
+    }
+    .ql-snow.ql-toolbar button svg.lucide { 
+        width: 16px; 
+        height: 16px; 
+        stroke-width: 2.25; 
+        vertical-align: middle; 
+    }
+
+    .oes-modal-content {
+        margin: 2% auto;
+        padding: 15px;
+        width: 98%;
+        height: 96vh;
+    }
+
+    iframe {
+        height: 100% !important;
+    }
+
+    .oes-modal-full {
+        max-width: 98%;
+        height: 96vh;
+        margin: 2% auto;
+    }
+}
+
+/* Fix for footer overlapping MathLive keyboard */
+.ML__keyboard, 
+.ML__keyboard--visible,
+[data-ml__keyboard],
+.mathlive-keyboard-container {
+    z-index: 99999 !important;
+}
+
+/* Aggressive fix to ensure app-footer stays behind OES modals and keyboards */
+body .app-footer,
+.layout-fixed .app-footer,
+footer.app-footer {
+    z-index: 1 !important;
+}
+
+/* Ensure the modal backdrop doesn't hide the keyboard if it's appended to body */
+.oes-modal {
+    z-index: 10000;
+}

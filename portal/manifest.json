@@ -1,0 +1,25 @@
+{
+  "name": "Gyanmanjari Career Academy",
+  "short_name": "GCA Portal",
+  "description": "Gyanmanjari Group of Colleges (GCA) student portal and academic counselling platform.",
+  "start_url": "./index.php",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e3a8a",
+  "orientation": "portrait",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "./assets/images/logogmn.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/images/logogmn.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

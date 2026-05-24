@@ -1,0 +1,59 @@
+# Dependencies
+/vendor/
+
+# Composer
+composer.phar
+
+# Environment files
+.env
+.env.local
+.env.*.local
+env.config.php
+
+# Logs
+/logs/*.log
+*.log
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Uploads (user generated content)
+/uploads/*
+!/uploads/.gitkeep
+
+# Cache
+*.cache
+/cache/
+
+# Temporary files
+*.tmp
+*.temp
+/tmp/
+
+# Backup files
+*.bak
+*.backup
+
+# Debug files
+*.debug
+
+# Session files
+sess_*

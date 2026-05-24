@@ -1,0 +1,62 @@
+Array
+(
+    [question_id] => 0
+    [standard_id] => 11
+    [group_id] => 1
+    [subject_id] => 1
+    [chapter_id] => 2
+    [topic_id] => 406
+    [question_type_id] => 1
+    [difficulty] => Level A
+    [marks] => 1.0
+    [negative_marks] => 0.0
+    [question_text] => <p>Question 1</p>
+    [question_text_guj] => Question 1
+    [correct_option] => A
+    [option_a] => <table><tbody><tr><td data-row="row-1c9z">Option 1</td><td data-row="row-1c9z">Option 1</td><td data-row="row-1c9z">Option 1</td></tr><tr><td data-row="row-31n4">Option 1</td><td data-row="row-31n4">Option 1</td><td data-row="row-31n4">Option 1</td></tr></tbody></table><p><br></p>
+    [option_a_guj] => Option 1Option 1Option 1Option 1Option 1Option 1
+    [option_b] => <table><tbody><tr><td data-row="row-iqzm">Option 2</td><td data-row="row-iqzm">Option 2</td><td data-row="row-iqzm">Option 2</td></tr><tr><td data-row="row-5dmh">Option 2</td><td data-row="row-5dmh">Option 2</td><td data-row="row-5dmh">Option 2</td></tr></tbody></table><p><br></p>
+    [option_b_guj] => Option 2Option 2Option 2Option 2Option 2Option 2
+    [option_c] => <table><tbody><tr><td data-row="row-iqzm">Option 3</td><td data-row="row-iqzm">Option 3</td><td data-row="row-iqzm">Option 3</td></tr><tr><td data-row="row-5dmh">Option 3</td><td data-row="row-5dmh">Option 3</td><td data-row="row-5dmh">Option 3</td></tr></tbody></table><p><br></p>
+    [option_c_guj] => Option 3Option 3Option 3Option 3Option 3Option 3
+    [option_d] => <table><tbody><tr><td data-row="row-iqzm">Option 4</td><td data-row="row-iqzm">Option 4</td><td data-row="row-iqzm">Option 4</td></tr><tr><td data-row="row-5dmh">Option 4</td><td data-row="row-5dmh">Option 4</td><td data-row="row-5dmh">Option 4</td></tr></tbody></table><p><br></p>
+    [option_d_guj] => Option 4Option 4Option 4Option 4Option 4Option 4
+    [desc_question_1] => 
+    [desc_question_1_guj] => 
+    [desc_solution_1] => 
+    [desc_solution_1_guj] => 
+    [desc_video_1] => 
+    [desc_marks_1] => 1
+    [desc_negative_marks_1] => 0.0
+    [desc_question_2] => 
+    [desc_question_2_guj] => 
+    [desc_solution_2] => 
+    [desc_solution_2_guj] => 
+    [desc_video_2] => 
+    [desc_marks_2] => 2
+    [desc_negative_marks_2] => 0.0
+    [desc_question_3] => 
+    [desc_question_3_guj] => 
+    [desc_solution_3] => 
+    [desc_solution_3_guj] => 
+    [desc_video_3] => 
+    [desc_marks_3] => 3
+    [desc_negative_marks_3] => 0.0
+    [desc_question_4] => 
+    [desc_question_4_guj] => 
+    [desc_solution_4] => 
+    [desc_solution_4_guj] => 
+    [desc_video_4] => 
+    [desc_marks_4] => 4
+    [desc_negative_marks_4] => 0.0
+    [desc_question_5] => 
+    [desc_question_5_guj] => 
+    [desc_solution_5] => 
+    [desc_solution_5_guj] => 
+    [desc_video_5] => 
+    [desc_marks_5] => 5
+    [desc_negative_marks_5] => 0.0
+    [explanation] => <p>Solution</p>
+    [explanation_guj] => Solution
+    [video_solution_url] => https://www.youtube.com/watch?v=jxSNhRxFNqs
+)
