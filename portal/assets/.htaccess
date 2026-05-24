@@ -1,4 +1,0 @@
-# Disable RewriteEngine to ensure static assets are served directly
-<IfModule mod_rewrite.c>
-    RewriteEngine Off
-</IfModule>

@@ -1,4 +1,0 @@
-Standard,Subject,Chapter,Topic,QuestionType,Difficulty,Question,OptionA,OptionB,OptionC,OptionD,CorrectAnswer,Marks,NegativeMarks,Explanation,VideoLink
-11,Physics,Motion,Newton's Laws,MCQ,Level B,"A body of mass 5 kg is acted upon by a force of 20 N. What is its acceleration?","2 m/s²","4 m/s²","10 m/s²","20 m/s²",B,1,0,"F = ma, a = F/m = 20/5 = 4 m/s²",
-11,Chemistry,Chemical Bonding,Ionic Bond,MCQ,Level A,"Which of the following is an ionic compound?",NaCl,CH4,CO2,H2O,A,1,0.25,"NaCl is formed by ionic bond between Na+ and Cl-",
-12,Biology,Genetics,DNA,MCQ,Level C,"DNA stands for:","Dioxyribonucleic Acid","Deoxyribonucleic Acid","Deoxyribonaric Acid","Dioxy ribonuclei Acid",B,1,0,"DNA = Deoxyribonucleic Acid",https://youtube.com/watch?v=example
