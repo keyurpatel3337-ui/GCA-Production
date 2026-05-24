@@ -112,6 +112,15 @@ if (!defined('ROLE_RECEPTION')) {
 if (!defined('ROLE_COMPUTER_OPERATOR')) {
     define('ROLE_COMPUTER_OPERATOR', 28);
 }
+if (!defined('ROLE_DEPT_HEAD')) {
+    define('ROLE_DEPT_HEAD', 12);
+}
+if (!defined('ROLE_ASSISTANT_TEACHER')) {
+    define('ROLE_ASSISTANT_TEACHER', 27);
+}
+if (!defined('ROLE_TEACHER')) {
+    define('ROLE_TEACHER', 29);
+}
 
 // User Status
 if (!defined('STATUS_ACTIVE')) {

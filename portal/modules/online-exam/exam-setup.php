@@ -132,6 +132,43 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext 
                                 </div>
                             </div>
                         </div>
+
+                        <!-- OES Target Mappings Extensions -->
+                        <div class="row border-top pt-3 mt-2">
+                            <div class="col-md-3">
+                                <div class="form-group mb-3">
+                                    <label class="small font-weight-bold">Target Audience Type <span class="text-danger">*</span></label>
+                                    <select name="target_type" id="target-type" class="form-control" required onchange="onTargetTypeChange(this.value)">
+                                        <option value="Common" selected>Common (All Students)</option>
+                                        <option value="Division">Specific Division</option>
+                                        <option value="Students">Specific Student(s)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4" id="target-division-box" style="display: none;">
+                                <div class="form-group mb-3">
+                                    <label class="small font-weight-bold">Select Division <span class="text-danger">*</span></label>
+                                    <select name="division_id" id="division-id" class="form-control">
+                                        <option value="">-- Select Division --</option>
+                                        <?php
+                                        $divs = $conn->query("SELECT id, division_name FROM tbl_division WHERE is_active = 1 ORDER BY display_order ASC");
+                                        while ($d = $divs->fetch()) {
+                                            echo "<option value='{$d['id']}'>Division {$d['division_name']}</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-9" id="target-students-box" style="display: none;">
+                                <div class="form-group mb-3">
+                                    <label class="small font-weight-bold">Select Targeted Student(s) <span class="text-danger">*</span></label>
+                                    <div id="students-checkbox-grid" class="p-2 border rounded" style="max-height: 150px; overflow-y: auto; background-color: #f8f9fa;">
+                                        <div class="text-muted small">Please select target standard to load students...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group mb-0">
                             <label class="small font-weight-bold">Description / Instructions</label>
                             <textarea name="description" rows="2" placeholder="Enter exam instructions..." class="form-control"></textarea>
@@ -398,6 +435,58 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext 
 
     function escapeAttr(str) {
         return stripHtml(str).replace(/"/g, '&quot;');
+    }
+
+    // Target Selection Handlers
+    function onTargetTypeChange(val) {
+        if (val === 'Division') {
+            document.getElementById('target-division-box').style.display = 'block';
+            document.getElementById('target-students-box').style.display = 'none';
+            document.getElementById('division-id').setAttribute('required', 'required');
+        } else if (val === 'Students') {
+            document.getElementById('target-division-box').style.display = 'none';
+            document.getElementById('target-students-box').style.display = 'block';
+            document.getElementById('division-id').removeAttribute('required');
+            loadEnrolledStudents();
+        } else {
+            document.getElementById('target-division-box').style.display = 'none';
+            document.getElementById('target-students-box').style.display = 'none';
+            document.getElementById('division-id').removeAttribute('required');
+        }
+    }
+
+    async function loadEnrolledStudents() {
+        const standardId = document.getElementById('main-standard').value;
+        const grid = document.getElementById('students-checkbox-grid');
+        
+        if (!standardId) {
+            grid.innerHTML = '<div class="text-danger small">Please select a Target Standard first.</div>';
+            return;
+        }
+        
+        grid.innerHTML = '<div class="small text-muted"><i class="fas fa-circle-notch fa-spin me-1"></i> Loading students...</div>';
+        
+        try {
+            const res = await fetch(`ajax/get-students-by-standard.php?standard_id=${standardId}`);
+            const students = await res.json();
+            if (!students || students.length === 0) {
+                grid.innerHTML = '<div class="text-muted small">No students enrolled in this standard.</div>';
+                return;
+            }
+            let html = '<div class="row g-2">';
+            students.forEach(st => {
+                html += `<div class="col-md-4">
+                    <label class="d-flex align-items-center gap-2 mb-0 small p-1 border rounded bg-white" style="cursor:pointer;">
+                        <input type="checkbox" name="student_ids[]" value="${st.id}">
+                        <span>${st.name}</span>
+                    </label>
+                </div>`;
+            });
+            html += '</div>';
+            grid.innerHTML = html;
+        } catch (e) {
+            grid.innerHTML = '<div class="text-danger small">Error loading students.</div>';
+        }
     }
 </script>
 

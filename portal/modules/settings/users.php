@@ -39,6 +39,8 @@ if (!isset($_SESSION['users_pagination'])) {
 // Check for clearing filters
 if (isset($_POST['clear_filter'])) {
     unset($_SESSION['users_role_filter']);
+    unset($_SESSION['users_dept_filter']);
+    unset($_SESSION['users_desig_filter']);
     unset($_SESSION['users_search']);
     $_SESSION['users_pagination']['page'] = 1;
     $_SESSION['users_pagination']['per_page'] = 10;
@@ -64,6 +66,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['page'])) {
             unset($_SESSION['users_role_filter']);
         } else {
             $_SESSION['users_role_filter'] = $_POST['role'];
+        }
+    }
+
+    // Process department filter
+    if (isset($_POST['dept'])) {
+        if ($_POST['dept'] === '') {
+            unset($_SESSION['users_dept_filter']);
+        } else {
+            $_SESSION['users_dept_filter'] = $_POST['dept'];
+        }
+    }
+
+    // Process designation filter
+    if (isset($_POST['designation'])) {
+        if ($_POST['designation'] === '') {
+            unset($_SESSION['users_desig_filter']);
+        } else {
+            $_SESSION['users_desig_filter'] = $_POST['designation'];
         }
     }
 }
@@ -92,30 +112,55 @@ if (isset($_SESSION['users_role_filter']) && $_SESSION['users_role_filter'] !== 
     $requestParams['role'] = $_SESSION['users_role_filter'];
 }
 
+if (isset($_SESSION['users_dept_filter']) && $_SESSION['users_dept_filter'] !== '') {
+    $requestParams['dept'] = $_SESSION['users_dept_filter'];
+}
+
+if (isset($_SESSION['users_desig_filter']) && $_SESSION['users_desig_filter'] !== '') {
+    $requestParams['designation'] = $_SESSION['users_desig_filter'];
+}
+
 $response = $api->get('settings/users', $requestParams);
 
 if ($response && isset($response['success']) && $response['success']) {
     $users = $response['data']['users'] ?? [];
     $roles = $response['data']['roles'] ?? [];
+    $departments = $response['data']['departments'] ?? [];
+    $designations = $response['data']['designations'] ?? [];
     $pagination = $response['data']['pagination'] ?? [];
     $page = $pagination['current_page'] ?? 1;
     $perPage = $pagination['per_page'] ?? 10;
     $totalRecords = $pagination['total_records'] ?? 0;
     $totalPages = $pagination['total_pages'] ?? 1;
     $search = $response['data']['applied_filters']['search'] ?? '';
+    
     $activeRoleFilter = $response['data']['applied_filters']['role'] ?? ($_SESSION['users_role_filter'] ?? '');
     if ($activeRoleFilter !== '') {
         $_SESSION['users_role_filter'] = $activeRoleFilter;
     }
+    
+    $activeDeptFilter = $response['data']['applied_filters']['dept'] ?? ($_SESSION['users_dept_filter'] ?? '');
+    if ($activeDeptFilter !== '') {
+        $_SESSION['users_dept_filter'] = $activeDeptFilter;
+    }
+
+    $activeDesigFilter = $response['data']['applied_filters']['designation'] ?? ($_SESSION['users_desig_filter'] ?? '');
+    if ($activeDesigFilter !== '') {
+        $_SESSION['users_desig_filter'] = $activeDesigFilter;
+    }
 } else {
     $users = [];
     $roles = [];
+    $departments = [];
+    $designations = [];
     $page = 1;
     $perPage = 10;
     $totalRecords = 0;
     $totalPages = 1;
     $search = $_SESSION['users_search'] ?? '';
     $activeRoleFilter = $_SESSION['users_role_filter'] ?? '';
+    $activeDeptFilter = $_SESSION['users_dept_filter'] ?? '';
+    $activeDesigFilter = $_SESSION['users_desig_filter'] ?? '';
     set_flash_message('error', $response['error'] ?? 'Failed to load users');
 }
 
@@ -163,7 +208,7 @@ include '../../include/sidebar.php';
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-body bg-light rounded">
             <form method="POST" class="row g-3 align-items-center">
-                <div class="col-md-5">
+                <div class="col-md-3">
                     <label class="form-label small fw-bold text-muted mb-1">Search User</label>
                     <div class="input-group">
                         <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
@@ -172,9 +217,9 @@ include '../../include/sidebar.php';
                     </div>
                 </div>
                 
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label class="form-label small fw-bold text-muted mb-1">Filter by Role</label>
-                    <select name="role" class="form-select border-start-0" onchange="this.form.submit()">
+                    <select name="role" class="form-select" onchange="this.form.submit()">
                         <option value="">All Roles</option>
                         <?php foreach ($roles as $role): ?>
                             <option value="<?php echo $role['id']; ?>" <?php echo $activeRoleFilter == $role['id'] ? 'selected' : ''; ?>>
@@ -184,11 +229,35 @@ include '../../include/sidebar.php';
                     </select>
                 </div>
 
+                <div class="col-md-2">
+                    <label class="form-label small fw-bold text-muted mb-1">Department</label>
+                    <select name="dept" class="form-select" onchange="this.form.submit()">
+                        <option value="">All Departments</option>
+                        <?php foreach ($departments as $dept_opt): ?>
+                            <option value="<?php echo $dept_opt['id']; ?>" <?php echo $activeDeptFilter == $dept_opt['id'] ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($dept_opt['dept_name'] ?? ''); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label small fw-bold text-muted mb-1">Designation</label>
+                    <select name="designation" class="form-select" onchange="this.form.submit()">
+                        <option value="">All Designations</option>
+                        <?php foreach ($designations as $desig_opt): ?>
+                            <option value="<?php echo htmlspecialchars($desig_opt['designation']); ?>" <?php echo $activeDesigFilter == $desig_opt['designation'] ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($desig_opt['designation']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
                 <div class="col-md-3 d-flex align-items-end gap-2 pt-3">
                     <button type="submit" class="btn btn-primary flex-grow-1">
                         <i class="fas fa-filter me-1"></i> Apply Filters
                     </button>
-                    <?php if (!empty($search) || !empty($activeRoleFilter)): ?>
+                    <?php if (!empty($search) || !empty($activeRoleFilter) || !empty($activeDeptFilter) || !empty($activeDesigFilter)): ?>
                         <button type="submit" name="clear_filter" value="1" class="btn btn-outline-danger">
                             <i class="fas fa-undo-alt me-1"></i> Clear
                         </button>
@@ -209,6 +278,8 @@ include '../../include/sidebar.php';
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <th>Designation</th>
+                    <th>Department</th>
                     <th>Status</th>
                     <th>Created</th>
                     <th>Actions</th>
@@ -223,8 +294,9 @@ include '../../include/sidebar.php';
                         <td><?php echo $user['id']; ?></td>
                         <td><?php echo htmlspecialchars($user['name'] ?? ''); ?></td>
                         <td><?php echo htmlspecialchars($user['email'] ?? ''); ?></td>
-                        <td><span class="badge bg-info"><?php echo htmlspecialchars($user['role_name'] ?? 'N/A'); ?></span>
-                        </td>
+                        <td><span class="badge bg-info"><?php echo htmlspecialchars($user['role_name'] ?? 'N/A'); ?></span></td>
+                        <td><?php echo htmlspecialchars($user['designation'] ?? 'N/A'); ?></td>
+                        <td><?php echo htmlspecialchars($user['department_name'] ?? 'N/A'); ?></td>
                         <td>
                             <?php if ($user['is_active'] ?? true): ?>
                                 <span class="badge bg-success">Active</span>
@@ -260,6 +332,12 @@ include '../../include/sidebar.php';
                 }
                 if (!empty($activeRoleFilter)) {
                     $extraParams['role'] = $activeRoleFilter;
+                }
+                if (!empty($activeDeptFilter)) {
+                    $extraParams['dept'] = $activeDeptFilter;
+                }
+                if (!empty($activeDesigFilter)) {
+                    $extraParams['designation'] = $activeDesigFilter;
                 }
                 echo renderPaginationPost($page, $totalPages, 2, $perPage, $extraParams, $totalRecords, 'users'); 
                 ?>

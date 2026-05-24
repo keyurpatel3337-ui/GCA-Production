@@ -182,9 +182,10 @@ if ($routeAction === 'user-get') {
         sendErrorResponse('ID is required');
 
     try {
-        $stmt = $conn->prepare("SELECT u.*, s.name as staff_name, s.personal_email as staff_email 
+        $stmt = $conn->prepare("SELECT u.*, s.name as staff_name, s.personal_email as staff_email, s.designation, d.dept_name as department_name 
                                 FROM tbl_users u 
                                 LEFT JOIN tbl_staff s ON u.id = s.user_id 
+                                LEFT JOIN tbl_departments d ON s.dept_id = d.id
                                 WHERE u.id = ?");
         $stmt->execute([$id]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -212,6 +213,8 @@ if ($routeAction === 'user-get') {
     $perPage = max(1, (int) ($_GET['per_page'] ?? 50));
     $search = $_GET['search'] ?? '';
     $roleFilter = $_GET['role'] ?? '';
+    $deptFilter = $_GET['dept'] ?? '';
+    $designationFilter = $_GET['designation'] ?? '';
 
     try {
         // Exclude Student and Website Admin roles from the dropdown
@@ -226,6 +229,14 @@ if ($routeAction === 'user-get') {
         $roles = $dbOps->customSelect($roles_query);
         if ($roles === false)
             $roles = [];
+
+        $departments = $dbOps->customSelect("SELECT id, dept_name FROM tbl_departments ORDER BY dept_name ASC");
+        if ($departments === false)
+            $departments = [];
+
+        $designations = $dbOps->customSelect("SELECT DISTINCT designation FROM tbl_staff WHERE designation IS NOT NULL AND designation != '' ORDER BY designation ASC");
+        if ($designations === false)
+            $designations = [];
 
         $where_clauses = [];
         $params = [];
@@ -258,6 +269,16 @@ if ($routeAction === 'user-get') {
             $params[] = $roleFilter;
         }
 
+        if ($deptFilter !== '') {
+            $where_clauses[] = "s.dept_id = ?";
+            $params[] = $deptFilter;
+        }
+
+        if ($designationFilter !== '') {
+            $where_clauses[] = "s.designation = ?";
+            $params[] = $designationFilter;
+        }
+
         if ($search) {
             $where_clauses[] = "(u.name LIKE ? OR u.email LIKE ? OR r.role_name LIKE ? OR s.name LIKE ? OR s.personal_email LIKE ?)";
             $params = array_merge($params, ["%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
@@ -272,12 +293,13 @@ if ($routeAction === 'user-get') {
         $totalPages = ceil($totalRecords / $perPage);
 
         $offset = ($page - 1) * $perPage;
-        $stmt = $conn->prepare("SELECT u.*, r.role_name, s.name as staff_name, s.personal_email as staff_email 
+        $stmt = $conn->prepare("SELECT u.*, r.role_name, s.name as staff_name, s.personal_email as staff_email, s.designation, d.dept_name as department_name 
                               FROM tbl_users u 
                               LEFT JOIN tbl_roles r ON u.role_id = r.id 
                               LEFT JOIN tbl_staff s ON u.id = s.user_id
+                              LEFT JOIN tbl_departments d ON s.dept_id = d.id
                               $where
-                              ORDER BY u.id DESC
+                              ORDER BY u.id ASC
                               LIMIT $perPage OFFSET $offset");
         $stmt->execute($params);
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -294,6 +316,8 @@ if ($routeAction === 'user-get') {
             sendSuccessResponse([
                 'users' => $users,
                 'roles' => $roles,
+                'departments' => $departments,
+                'designations' => $designations,
                 'pagination' => [
                     'current_page' => $page,
                     'per_page' => $perPage,
@@ -302,7 +326,9 @@ if ($routeAction === 'user-get') {
                 ],
                 'applied_filters' => [
                     'search' => $search,
-                    'role' => $roleFilter
+                    'role' => $roleFilter,
+                    'dept' => $deptFilter,
+                    'designation' => $designationFilter
                 ]
             ]);
         }

@@ -306,7 +306,15 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                                          class="fas fa-object-group"></i>
                                     <p>Divisions</p>
                                 </a></li>
-                            <li class="nav-item"><a href="<?php echo $academics_prefix; ?>course-division.php"
+                             <li class="nav-item"><a href="<?php echo $academics_prefix; ?>timetable.php" class="nav-link"><i
+                                         class="fas fa-calendar-alt"></i>
+                                     <p>Timetable</p>
+                                 </a></li>
+                             <li class="nav-item"><a href="<?php echo $academics_prefix; ?>teacher-mapping.php" class="nav-link"><i
+                                         class="fas fa-chalkboard-teacher"></i>
+                                     <p>Teacher Mappings</p>
+                                 </a></li>
+                             <li class="nav-item"><a href="<?php echo $academics_prefix; ?>course-division.php"
                                     class="nav-link"><i class="fas fa-link"></i>
                                     <p>Standard Division</p>
                                 </a></li>
@@ -589,6 +597,10 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                                     class="nav-link"><i class="fas fa-object-group"></i>
                                     <p>Division Assignment</p>
                                 </a></li>
+                            <li class="nav-item"><a href="<?php echo $academics_prefix; ?>timetable.php" class="nav-link"><i
+                                         class="fas fa-calendar-alt"></i>
+                                     <p>Timetable Management</p>
+                                 </a></li>
                             <li class="nav-item"><a
                                     href="<?php echo $portal_root; ?>modules/group-change/pending-requests.php"
                                     class="nav-link"><i class="fas fa-exchange-alt"></i>
@@ -868,6 +880,19 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                     <!-- ===== TEACHING STAFF MENU ===== -->
                     <li class="nav-header text-uppercase opacity-75 small fw-bold mt-2">Academic & Exam Management</li>
 
+                    <!-- Academics -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-graduation-cap text-info"></i>
+                            <p>Academics<i class="nav-arrow fas fa-angle-right"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item"><a href="<?php echo $academics_prefix; ?>materials.php" class="nav-link"><i class="fas fa-book"></i><p>Study Materials</p></a></li>
+                            <li class="nav-item"><a href="<?php echo $academics_prefix; ?>live-quiz.php" class="nav-link"><i class="fas fa-gamepad"></i><p>Live Quiz Lobby</p></a></li>
+                            <li class="nav-item"><a href="<?php echo $academics_prefix; ?>doubt-solving.php" class="nav-link"><i class="fas fa-question-circle"></i><p>Doubt Solving Desk</p></a></li>
+                        </ul>
+                    </li>
+
                     <!-- Online Exam -->
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -1048,6 +1073,36 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
                                 <a href="<?php echo $student_portal_prefix; ?>online-exams.php" class="nav-link">
                                     <i class="fas fa-edit nav-icon"></i>
                                     <p>Practice Tests</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Timetable -->
+                    <li class="nav-item">
+                        <a href="<?php echo $student_portal_prefix; ?>timetable.php" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-alt text-success"></i>
+                            <p>My Timetable</p>
+                        </a>
+                    </li>
+
+                    <!-- Learning Resources -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-graduation-cap text-info"></i>
+                            <p>Academics & Study<i class="nav-arrow fas fa-angle-right"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?php echo $student_portal_prefix; ?>materials-list.php" class="nav-link">
+                                    <i class="fas fa-book nav-icon"></i>
+                                    <p>Study Materials</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo $student_portal_prefix; ?>quiz.php" class="nav-link">
+                                    <i class="fas fa-gamepad nav-icon"></i>
+                                    <p>Join Live Quiz</p>
                                 </a>
                             </li>
                         </ul>

@@ -143,7 +143,13 @@ $routeMap = [
     'academics' => [
         'divisions' => 'controllers/academics/divisions_controller.php',
         'subjects' => 'controllers/academics/subjects_controller.php',
-        'timetable' => 'controllers/academics/timetable_controller.php'
+        'timetable' => 'controllers/academics/timetable_controller.php',
+        'timetable-save' => 'controllers/academics/timetable_controller.php',
+        'timetable-delete' => 'controllers/academics/timetable_controller.php',
+        'timetable-get' => 'controllers/academics/timetable_controller.php',
+        'teacher-mappings' => 'controllers/academics/teacher_mappings_controller.php',
+        'teacher-subject-save' => 'controllers/academics/teacher_mappings_controller.php',
+        'teacher-division-save' => 'controllers/academics/teacher_mappings_controller.php'
     ],
 
     // Profile routes

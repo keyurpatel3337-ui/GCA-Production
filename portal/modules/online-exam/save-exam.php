@@ -13,7 +13,7 @@ if (!hasAnyRole([ROLE_SUPER_ADMIN, ROLE_PRINCIPLE, ROLE_COUNSELLOR, ROLE_DEPT_HE
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $standard_id = (int)$_POST['standard_id']; // Added
+    $standard_id = (int)$_POST['standard_id'];
     $group_id = !empty($_POST['group_id']) ? (int)$_POST['group_id'] : null;
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
@@ -23,6 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $display_result_immediately = isset($_POST['display_result_immediately']) ? 1 : 0;
     $created_by = (int)$_SESSION['user_id'];
     $question_ids = $_POST['question_ids'] ?? [];
+
+    // OES targeting additions
+    $target_type = $_POST['target_type'] ?? 'Common';
+    $division_id = ($target_type === 'Division' && !empty($_POST['division_id'])) ? (int)$_POST['division_id'] : null;
+    $student_ids = ($target_type === 'Students' && !empty($_POST['student_ids'])) ? $_POST['student_ids'] : [];
 
     if (empty($question_ids)) {
         die("Please select at least one question.");
@@ -41,12 +46,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $total_marks = (float)$row['total'];
         }
 
-        // 1. Insert Exam (Included standard_id and exam_mode)
-        $stmt = $conn->prepare("INSERT INTO tbl_oes_exams (title, description, standard_id, group_id, start_time, end_time, duration_mins, total_marks, exam_mode, shuffle_questions, display_result_immediately, status, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Scheduled', ?)");
-        $stmt->execute([$title, $description, $standard_id, $group_id, $start_time, $end_time, $duration_mins, $total_marks, $exam_mode, $shuffle_questions, $display_result_immediately, $created_by]);
+        // 1. Insert Exam with division_id and initial status
+        $stmt = $conn->prepare("INSERT INTO tbl_oes_exams (title, description, standard_id, division_id, group_id, start_time, end_time, duration_mins, total_marks, exam_mode, shuffle_questions, display_result_immediately, status, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Scheduled', ?)");
+        $stmt->execute([$title, $description, $standard_id, $division_id, $group_id, $start_time, $end_time, $duration_mins, $total_marks, $exam_mode, $shuffle_questions, $display_result_immediately, $created_by]);
         $exam_id = $conn->lastInsertId();
 
-        // 2. Insert Exam Questions
+        // 2. Insert targeted student mappings if specific student targeting is active
+        if ($target_type === 'Students' && !empty($student_ids)) {
+            $stmt_stud = $conn->prepare("INSERT INTO tbl_oes_exam_students (exam_id, student_id) VALUES (?, ?)");
+            foreach ($student_ids as $st_id) {
+                $stmt_stud->execute([$exam_id, (int)$st_id]);
+            }
+        }
+
+        // 3. Insert Exam Questions
         $stmt_q = $conn->prepare("INSERT INTO tbl_oes_exam_questions (exam_id, question_id, order_no) VALUES (?, ?, ?)");
         foreach ($question_ids as $index => $q_id) {
             $order_no = $index + 1;
