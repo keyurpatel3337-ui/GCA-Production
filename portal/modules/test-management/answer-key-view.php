@@ -263,4 +263,17 @@ $page_breadcrumb = "Key -";
 
 <?php include '../../include/footer.php'; ?>
 
+<style media="print">
+    .content-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 
+    .card-tools,
+    .card-footer,
+    .breadcrumb,
+    .btn {
+        display: none !important;
+    }
+    }
+</style>

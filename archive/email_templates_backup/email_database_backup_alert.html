@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: white;
+      padding: 25px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .content {
+      background: #f9f9f9;
+      padding: 25px;
+      border: 1px solid #ddd;
+    }
+
+    .status-box {
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .status-success {
+      background: #d4edda;
+      border: 2px solid #28a745;
+    }
+
+    .status-warning {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+    }
+
+    .status-error {
+      background: #f8d7da;
+      border: 2px solid #dc3545;
+    }
+
+    .status-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .details-table td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .details-table td:first-child {
+      font-weight: bold;
+      width: 40%;
+      background: #f0f0f0;
+    }
+
+    .file-list {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      margin: 15px 0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>💾 Database Backup Alert</h2>
+      <p>Automated Backup Notification</p>
+    </div>
+
+    <div class="content">
+      <div class="status-box {{backup_status_class}}">
+        <div class="status-icon">{{status_icon}}</div>
+        <h3 style="margin: 10px 0; color: #333;">{{status_title}}</h3>
+        <p style="margin: 5px 0; color: #666;">{{status_message}}</p>
+      </div>
+
+      <p>Dear IT Admin,</p>
+      <p>This is an automated notification regarding the scheduled database backup for Gyan Manjari Counselling System.
+      </p>
+
+      <h3 style="color: #2c3e50;">📋 Backup Details</h3>
+      <table class="details-table">
+        <tr>
+          <td>Backup ID</td>
+          <td>{{backup_id}}</td>
+        </tr>
+        <tr>
+          <td>Backup Type</td>
+          <td>{{backup_type}}</td>
+        </tr>
+        <tr>
+          <td>Status</td>
+          <td><strong>{{backup_status}}</strong></td>
+        </tr>
+        <tr>
+          <td>Start Time</td>
+          <td>{{start_time}}</td>
+        </tr>
+        <tr>
+          <td>End Time</td>
+          <td>{{end_time}}</td>
+        </tr>
+        <tr>
+          <td>Duration</td>
+          <td>{{duration}}</td>
+        </tr>
+        <tr>
+          <td>Database Name</td>
+          <td>{{database_name}}</td>
+        </tr>
+        <tr>
+          <td>Server</td>
+          <td>{{server_name}}</td>
+        </tr>
+      </table>
+
+      <h3 style="color: #2c3e50;">📊 Backup Statistics</h3>
+      <table class="details-table">
+        <tr>
+          <td>Total Size</td>
+          <td>{{backup_size}}</td>
+        </tr>
+        <tr>
+          <td>Compressed Size</td>
+          <td>{{compressed_size}}</td>
+        </tr>
+        <tr>
+          <td>Compression Ratio</td>
+          <td>{{compression_ratio}}%</td>
+        </tr>
+        <tr>
+          <td>Tables Backed Up</td>
+          <td>{{table_count}}</td>
+        </tr>
+        <tr>
+          <td>Total Records</td>
+          <td>{{record_count}}</td>
+        </tr>
+        <tr>
+          <td>Backup Location</td>
+          <td>{{backup_location}}</td>
+        </tr>
+      </table>
+
+      <h3 style="color: #2c3e50;">📁 Backup Files</h3>
+      <div class="file-list">
+        {{#backup_files}}
+        {{file_name}} ({{file_size}})
+        {{/backup_files}}
+      </div>
+
+      {{#backup_success}}
+      <div style="background: #d4edda; padding: 15px; border-left: 4px solid #28a745; margin: 20px 0;">
+        <strong>✅ Verification Status:</strong><br>
+        • Backup integrity check: PASSED<br>
+        • File corruption check: PASSED<br>
+        • Backup is ready for restoration if needed
+      </div>
+      {{/backup_success}}
+
+      {{#backup_warning}}
+      <div style="background: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0;">
+        <strong>⚠️ Warnings:</strong><br>
+        {{#warnings}}
+        • {{warning_message}}<br>
+        {{/warnings}}
+      </div>
+      {{/backup_warning}}
+
+      {{#backup_error}}
+      <div style="background: #f8d7da; padding: 15px; border-left: 4px solid #dc3545; margin: 20px 0;">
+        <strong>❌ Error Details:</strong><br>
+        {{error_message}}<br>
+        <br>
+        <strong>Recommended Actions:</strong><br>
+        {{#error_actions}}
+        • {{action}}<br>
+        {{/error_actions}}
+      </div>
+      {{/backup_error}}
+
+      <h3 style="color: #2c3e50;">🔄 Backup Retention Policy</h3>
+      <table class="details-table">
+        <tr>
+          <td>Daily Backups Retained</td>
+          <td>{{daily_retention}} days</td>
+        </tr>
+        <tr>
+          <td>Weekly Backups Retained</td>
+          <td>{{weekly_retention}} weeks</td>
+        </tr>
+        <tr>
+          <td>Monthly Backups Retained</td>
+          <td>{{monthly_retention}} months</td>
+        </tr>
+        <tr>
+          <td>Next Scheduled Backup</td>
+          <td>{{next_backup_time}}</td>
+        </tr>
+      </table>
+
+      <h3 style="color: #2c3e50;">📈 Backup History (Last 7 Days)</h3>
+      <table class="details-table">
+        <tr>
+          <td style="width: 30%;"><strong>Date</strong></td>
+          <td><strong>Status</strong></td>
+        </tr>
+        {{#backup_history}}
+        <tr>
+          <td>{{date}}</td>
+          <td>{{status}}</td>
+        </tr>
+        {{/backup_history}}
+      </table>
+
+      <p style="text-align: center; margin-top: 30px;">
+        <a href="{{backup_logs_url}}"
+          style="background: #2c3e50; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 5px;">View
+          Backup Logs →</a>
+        {{#backup_success}}
+        <a href="{{download_backup_url}}"
+          style="background: #28a745; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 5px;">Download
+          Backup →</a>
+        {{/backup_success}}
+      </p>
+
+      <p style="margin-top: 30px; padding: 15px; background: #e7f3ff; border-radius: 5px; font-size: 0.95em;">
+        <strong>📌 Note:</strong> This is an automated email. All backups are encrypted and stored securely. Please
+        verify backup integrity regularly and test restoration procedures periodically.
+      </p>
+    </div>
+
+    <div class="footer">
+      <p><strong>Gyan Manjari System Monitoring</strong></p>
+      <p>Backup Alert ID: {{alert_id}} | Generated at {{generated_time}}</p>
+    </div>
+  </div>
+</body>
+
+</html>

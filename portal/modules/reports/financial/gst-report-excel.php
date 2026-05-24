@@ -58,7 +58,7 @@ header("Expires: 0");
 
 echo '<table border="1">';
 echo '<thead>
-        <tr class="css-gst-report-excel-2ec452">
+        <tr style="background-color: #333; color: #fff; font-weight: bold;">
             <th>#</th>
             <th>Date</th>
             <th>Fee Type</th>
@@ -74,7 +74,7 @@ echo '<thead>
 echo '<tbody>';
 
 if (empty($payments)) {
-    echo '<tr><td colspan="10" class="css-gst-report-excel-539b04">No records found</td></tr>';
+    echo '<tr><td colspan="10" style="text-align:center;">No records found</td></tr>';
 } else {
     $i = 1;
     $totalCollection = 0;
@@ -124,7 +124,7 @@ if (empty($payments)) {
         $totalSGST += $sgst;
     }
 
-    echo '<tr class="css-gst-report-excel-3b62fc">
+    echo '<tr style="font-weight: bold; background-color: #f0f0f0;">
             <td colspan="5" align="right">GRAND TOTAL</td>
             <td>' . round($totalCollection, 2) . '</td>
             <td>' . round($totalTaxable, 2) . '</td>

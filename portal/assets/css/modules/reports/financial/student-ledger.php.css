@@ -1,0 +1,156 @@
+/* Styles for portal/modules/reports/financial/student-ledger.php */
+
+/* Premium Design System - Student Ledger */
+    :root {
+        --glass-bg: rgba(255, 255, 255, 0.95);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --ledger-primary: #2563eb;
+        --ledger-secondary: #7c3aed;
+        --ledger-accent: #f59e0b;
+        --ledger-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    }
+
+    .ledger-search-box {
+        background: var(--ledger-gradient);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ledger-search-box::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .stat-card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.75rem;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-icon i {
+        font-size: 1rem;
+        color: white;
+        margin: 0;
+    }
+
+    /* Timeline Styles */
+    .ledger-timeline {
+        position: relative;
+        padding-left: 45px;
+    }
+
+    .ledger-timeline::before {
+        content: '';
+        position: absolute;
+        left: 15px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #f1f5f9;
+        border-radius: 2px;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+    }
+
+    .timeline-dot {
+        position: absolute;
+        left: -38px;
+        top: 0;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        border: 3px solid var(--ledger-primary);
+        z-index: 2;
+        box-shadow: 0 0 0 4px #fff;
+    }
+
+    .timeline-content {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f1f5f9;
+    }
+
+    /* Tabs & Tables */
+    .nav-tabs-custom {
+        border-bottom: 2px solid #f1f5f9;
+    }
+
+    .nav-tabs-custom .nav-link {
+        border: none;
+        padding: 1rem 1.25rem;
+        font-weight: 600;
+        color: #64748b;
+        position: relative;
+    }
+
+    .nav-tabs-custom .nav-link.active {
+        color: var(--ledger-primary);
+        background: transparent;
+    }
+
+    .nav-tabs-custom .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--ledger-primary);
+        border-radius: 2px;
+    }
+
+    .table-ledger th {
+        background: #f8fafc;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        border: none;
+        padding: 0.75rem 1rem;
+    }
+
+    .table-ledger tr td {
+        padding: 1rem;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .search-result-pill {
+        cursor: pointer;
+        border-radius: 8px;
+        margin-bottom: 0.25rem;
+    }
+
+    /* Profile Avatar */
+    .profile-avatar-ledger {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border: 2px solid #fff;
+    }

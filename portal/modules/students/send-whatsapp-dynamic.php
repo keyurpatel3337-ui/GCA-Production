@@ -107,7 +107,7 @@ if ($target_student_id) {
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    <div id="searchResults" class="list-group shadow-sm mt-1 css-send-whatsapp-dynamic-829a89"></div>
+                                    <div id="searchResults" class="list-group shadow-sm mt-1" style="display:none; position:absolute; z-index:100; width:95%;"></div>
                                     <small class="text-muted" id="mobDisplay">
                                         <?php if ($target_student_mob): ?>
                                             <i class="fas fa-phone mr-1"></i>Mobile: <strong><?php echo $target_student_mob; ?></strong>
@@ -150,7 +150,7 @@ if ($target_student_id) {
                                 </div>
 
                                 <!-- Student name auto-fill note for parent_update_not -->
-                                <div id="auto_name_info" class="alert alert-light border py-2 mb-3 css-send-whatsapp-dynamic-93b8ea">
+                                <div id="auto_name_info" class="alert alert-light border py-2 mb-3" style="display:none;">
                                     <small>
                                         <i class="fas fa-info-circle text-primary mr-1"></i>
                                         <strong>{{2}}</strong> will be auto-filled with the selected student's name.
@@ -185,15 +185,15 @@ if ($target_student_id) {
                 <div class="col-md-5">
 
                     <!-- WhatsApp Preview -->
-                    <div class="card shadow-sm border-0 css-send-whatsapp-dynamic-d47ccf">
-                        <div class="card-header bg-success text-white css-send-whatsapp-dynamic-686579">
+                    <div class="card shadow-sm border-0" style="border-radius:15px;">
+                        <div class="card-header bg-success text-white" style="border-radius:15px 15px 0 0;">
                             <h3 class="card-title mb-0"><i class="fab fa-whatsapp mr-2"></i>WhatsApp Preview</h3>
                         </div>
-                        <div class="card-body css-send-whatsapp-dynamic-db16c6">
-                            <div class="wa-bubble p-3 bg-white shadow-sm css-send-whatsapp-dynamic-e23099">
+                        <div class="card-body" style="background-color:#e5ddd5; border-radius:0 0 15px 15px; min-height:220px;">
+                            <div class="wa-bubble p-3 bg-white shadow-sm" style="border-radius:10px; max-width:95%; position:relative; font-size:13.5px; line-height:1.7; white-space:pre-line;">
                                 <span id="previewText"></span>
                                 <div class="text-right mt-1">
-                                    <small class="text-muted css-send-whatsapp-dynamic-49f064"><?php echo date('H:i'); ?> <i class="fas fa-check-double text-primary"></i></small>
+                                    <small class="text-muted" style="font-size:10px;"><?php echo date('H:i'); ?> <i class="fas fa-check-double text-primary"></i></small>
                                 </div>
                             </div>
                         </div>
@@ -458,6 +458,54 @@ $(document).ready(function () {
 });
 </script>
 
+<style>
+/* Template selection cards */
+.tpl-card {
+    cursor: pointer;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px 8px;
+    text-align: center;
+    transition: all .18s ease;
+    background: #fff;
+    user-select: none;
+}
+.tpl-card:hover {
+    border-color: #adb5bd;
+    background: #f8f9fa;
+}
+.tpl-card .tpl-icon { color: #6c757d; transition: color .18s; }
+.tpl-card .tpl-name { color: #adb5bd; font-size: 11px; }
 
+.tpl-card.tpl-active {
+    border-color: #007bff;
+    background: #eef5ff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,.12);
+}
+.tpl-card.tpl-active .tpl-icon { color: #007bff; }
+.tpl-card.tpl-active .tpl-name { color: #4a9eff; }
+.tpl-card.tpl-active strong    { color: #0056b3; }
+
+.tpl-card.tpl-active-green {
+    border-color: #28a745;
+    background: #edfff2;
+    box-shadow: 0 0 0 3px rgba(40,167,69,.12);
+}
+.tpl-card.tpl-active-green .tpl-icon { color: #28a745; }
+.tpl-card.tpl-active-green .tpl-name { color: #5cb85c; }
+.tpl-card.tpl-active-green strong    { color: #1e7e34; }
+
+/* WhatsApp bubble tail */
+.wa-bubble::after {
+    content: '';
+    position: absolute;
+    right: -9px;
+    top: 8px;
+    width: 0; height: 0;
+    border: 8px solid transparent;
+    border-left-color: #fff;
+    border-top: 0; border-right: 0;
+}
+</style>
 
 <?php include '../../include/footer.php'; ?>

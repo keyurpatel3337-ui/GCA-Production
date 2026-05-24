@@ -76,7 +76,7 @@ include '../../include/sidebar.php';
                     <table class="table table-bordered mb-0 align-middle">
                         <thead class="bg-light">
                             <tr>
-                                <th class="css-direct-admission-preview-ae1f13">Approve</th>
+                                <th style="width: 50px;">Approve</th>
                                 <th>Student (Aadhar/Mob)</th>
                                 <th>Field Comparison</th>
                             </tr>
@@ -98,7 +98,7 @@ include '../../include/sidebar.php';
                                     <table class="table table-sm table-borderless mb-0 small">
                                         <?php foreach ($item['diff'] as $field => $values): ?>
                                         <tr>
-                                            <td class="text-uppercase text-muted fw-bold css-direct-admission-preview-b15add"><?php echo str_replace('_', ' ', $field); ?>:</td>
+                                            <td class="text-uppercase text-muted fw-bold" style="width: 120px;"><?php echo str_replace('_', ' ', $field); ?>:</td>
                                             <td class="text-danger strike-through"><?php echo htmlspecialchars($values['old'] ?? ''); ?></td>
                                             <td class="text-primary fw-bold"><i class="fas fa-arrow-right mx-2"></i> <?php echo htmlspecialchars($values['new'] ?? ''); ?></td>
                                         </tr>
@@ -160,7 +160,11 @@ include '../../include/sidebar.php';
     </form>
 </div>
 
-
+<style>
+    .strike-through { text-decoration: line-through; opacity: 0.7; }
+    .table-danger { --bs-table-bg: #fff5f5; }
+    .update-check { width: 20px; height: 20px; cursor: pointer; }
+</style>
 
 <script>
 function selectAll(checked) {

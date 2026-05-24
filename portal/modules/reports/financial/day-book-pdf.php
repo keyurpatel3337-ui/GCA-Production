@@ -88,13 +88,13 @@ try {
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     // Header
     $headerHtml = '
-    <table cellpadding="2" class="css-day-book-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-day-book-pdf-539b04">
-                <span class="css-day-book-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span class="css-day-book-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span class="css-day-book-pdf-0c5bfa">DAY BOOK REPORT</span><br>
-                <span class="css-day-book-pdf-a93898">Date: ' . date('l, d F Y', strtotime($selected_date)) . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#f0f0f0;">DAY BOOK REPORT</span><br>
+                <span style="font-size:10pt; font-weight:bold;">Date: ' . date('l, d F Y', strtotime($selected_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -102,35 +102,35 @@ try {
 
     // Summary Cards Section
     $summaryHtml = '
-    <table cellpadding="4" class="css-day-book-pdf-b45b08">
+    <table cellpadding="4" style="width:100%; margin-top:10px;">
         <tr>
-            <td width="25%" class="css-day-book-pdf-12d00b">
-                <span class="css-day-book-pdf-5d6f1c">Opening Balance</span><br>
-                <span class="css-day-book-pdf-62eeb4">' . formatIndianCurrency($openingBalance) . '</span>
+            <td width="25%" style="border:0.5px solid #ddd; background-color:#f9f9f9;">
+                <span style="font-size:8pt; color:#666;">Opening Balance</span><br>
+                <span style="font-size:11pt; font-weight:bold;">' . formatIndianCurrency($openingBalance) . '</span>
             </td>
-            <td width="25%" class="css-day-book-pdf-12d00b">
-                <span class="css-day-book-pdf-5d6f1c">Today\'s Collection</span><br>
-                <span class="css-day-book-pdf-62eeb4">' . formatIndianCurrency($grandTotal) . '</span>
+            <td width="25%" style="border:0.5px solid #ddd; background-color:#f9f9f9;">
+                <span style="font-size:8pt; color:#666;">Today\'s Collection</span><br>
+                <span style="font-size:11pt; font-weight:bold;">' . formatIndianCurrency($grandTotal) . '</span>
             </td>
-            <td width="25%" class="css-day-book-pdf-12d00b">
-                <span class="css-day-book-pdf-5d6f1c">Closing Balance</span><br>
-                <span class="css-day-book-pdf-62eeb4">' . formatIndianCurrency($closingBalance) . '</span>
+            <td width="25%" style="border:0.5px solid #ddd; background-color:#f9f9f9;">
+                <span style="font-size:8pt; color:#666;">Closing Balance</span><br>
+                <span style="font-size:11pt; font-weight:bold;">' . formatIndianCurrency($closingBalance) . '</span>
             </td>
-            <td width="25%" class="css-day-book-pdf-12d00b">
-                <span class="css-day-book-pdf-5d6f1c">Total Transactions</span><br>
-                <span class="css-day-book-pdf-62eeb4">' . $totalTransactions . '</span>
+            <td width="25%" style="border:0.5px solid #ddd; background-color:#f9f9f9;">
+                <span style="font-size:8pt; color:#666;">Total Transactions</span><br>
+                <span style="font-size:11pt; font-weight:bold;">' . $totalTransactions . '</span>
             </td>
         </tr>
     </table>';
     $pdf->writeHTML($summaryHtml, true, false, false, false, '');
 
     $modeHtml = '
-    <table cellpadding="4" class="css-day-book-pdf-e5f328">
+    <table cellpadding="4" style="width:100%; margin-top:5px;">
         <tr>
-            <td width="25%" class="css-day-book-pdf-25bbb1"><b>Cash:</b> ' . formatIndianCurrency($cashTotal) . '</td>
-            <td width="25%" class="css-day-book-pdf-25bbb1"><b>Online/UPI:</b> ' . formatIndianCurrency($onlineTotal) . '</td>
-            <td width="25%" class="css-day-book-pdf-25bbb1"><b>Cheque:</b> ' . formatIndianCurrency($chequeTotal) . '</td>
-            <td width="25%" class="css-day-book-pdf-25bbb1"><b>Other:</b> ' . formatIndianCurrency($otherTotal) . '</td>
+            <td width="25%" style="border:0.5px solid #ddd;"><b>Cash:</b> ' . formatIndianCurrency($cashTotal) . '</td>
+            <td width="25%" style="border:0.5px solid #ddd;"><b>Online/UPI:</b> ' . formatIndianCurrency($onlineTotal) . '</td>
+            <td width="25%" style="border:0.5px solid #ddd;"><b>Cheque:</b> ' . formatIndianCurrency($chequeTotal) . '</td>
+            <td width="25%" style="border:0.5px solid #ddd;"><b>Other:</b> ' . formatIndianCurrency($otherTotal) . '</td>
         </tr>
     </table>';
     $pdf->writeHTML($modeHtml, true, false, false, false, '');
@@ -138,44 +138,44 @@ try {
 
     // Main Table
     $html = '
-    <table border="0.5" cellpadding="4" class="css-day-book-pdf-6eb086">
+    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
         <thead>
-            <tr class="css-day-book-pdf-de3663">
-                <th width="5%" class="css-day-book-pdf-539b04">S.No</th>
-                <th width="10%" class="css-day-book-pdf-539b04">Time</th>
-                <th width="12%" class="css-day-book-pdf-539b04">Receipt No</th>
+            <tr style="background-color:#333; color:#fff; font-weight:bold;">
+                <th width="5%" style="text-align:center;">S.No</th>
+                <th width="10%" style="text-align:center;">Time</th>
+                <th width="12%" style="text-align:center;">Receipt No</th>
                 <th width="25%">Student Name</th>
                 <th width="15%">Class</th>
                 <th width="13%">Payment Type</th>
-                <th width="10%" class="css-day-book-pdf-539b04">Mode</th>
-                <th width="10%" class="css-day-book-pdf-08a0ed">Amount</th>
+                <th width="10%" style="text-align:center;">Mode</th>
+                <th width="10%" style="text-align:right;">Amount</th>
             </tr>
         </thead>
         <tbody>';
 
     $sno = 1;
     if (empty($transactions)) {
-        $html .= '<tr><td colspan="8" class="css-day-book-pdf-539b04">No transactions recorded on this date</td></tr>';
+        $html .= '<tr><td colspan="8" style="text-align:center;">No transactions recorded on this date</td></tr>';
     } else {
         foreach ($transactions as $txn) {
             $html .= '
             <tr nobr="true">
-                <td width="5%" class="css-day-book-pdf-539b04">' . $sno++ . '</td>
-                <td width="10%" class="css-day-book-pdf-539b04">' . date('h:i A', strtotime($txn['created_at'])) . '</td>
-                <td width="12%" class="css-day-book-pdf-539b04">' . htmlspecialchars($txn['receipt_no'] ?? '') . '</td>
+                <td width="5%" style="text-align:center;">' . $sno++ . '</td>
+                <td width="10%" style="text-align:center;">' . date('h:i A', strtotime($txn['created_at'])) . '</td>
+                <td width="12%" style="text-align:center;">' . htmlspecialchars($txn['receipt_no'] ?? '') . '</td>
                 <td width="25%"><b>' . htmlspecialchars($txn['student_name'] ?? '') . '</b></td>
                 <td width="15%">' . htmlspecialchars($txn['current_class'] ?: '-' ?? '') . '</td>
                 <td width="13%">' . htmlspecialchars($txn['payment_type'] ?? '') . '</td>
-                <td width="10%" class="css-day-book-pdf-539b04">' . strtoupper($txn['payment_mode']) . '</td>
-                <td width="10%" class="css-day-book-pdf-714e9d">' . formatIndianCurrency($txn['amount']) . '</td>
+                <td width="10%" style="text-align:center;">' . strtoupper($txn['payment_mode']) . '</td>
+                <td width="10%" style="text-align:right; font-weight:bold;">' . formatIndianCurrency($txn['amount']) . '</td>
             </tr>';
         }
     }
 
     $html .= '
-            <tr class="css-day-book-pdf-bf35f5">
-                <td colspan="7" class="css-day-book-pdf-08a0ed">DAY TOTAL</td>
-                <td class="css-day-book-pdf-08a0ed">' . formatIndianCurrency($grandTotal) . '</td>
+            <tr style="background-color:#f0f0f0; font-weight:bold;">
+                <td colspan="7" style="text-align:right;">DAY TOTAL</td>
+                <td style="text-align:right;">' . formatIndianCurrency($grandTotal) . '</td>
             </tr>
         </tbody>
     </table>';
@@ -184,10 +184,10 @@ try {
 
     $pdf->Ln(10);
     $pdf->writeHTML('
-    <table class="css-day-book-pdf-8588e4">
+    <table style="width:100%;">
         <tr>
-            <td class="css-day-book-pdf-539b04">_______________________<br>Prepared By</td>
-            <td class="css-day-book-pdf-539b04">_______________________<br>Verified By</td>
+            <td style="text-align:center;">_______________________<br>Prepared By</td>
+            <td style="text-align:center;">_______________________<br>Verified By</td>
         </tr>
     </table>', true, false, false, false, '');
 

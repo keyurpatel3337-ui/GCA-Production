@@ -1,0 +1,9 @@
+/* Custom classes for inline styles */
+.admin-dashboard-custom-1 {
+    display: inline;
+}
+
+.admin-dashboard-custom-2 {
+    width: 50px;
+    height: 50px;
+}

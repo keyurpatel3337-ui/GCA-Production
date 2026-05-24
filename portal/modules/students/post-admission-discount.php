@@ -466,7 +466,7 @@ include '../../include/sidebar.php';
                                                 <td class="text-end text-danger">₹<span id="detail_feespending">0</span>
                                                 </td>
                                             </tr>
-                                            <tr id="scholarshipRow" class="css-post-admission-discount-224b51">
+                                            <tr id="scholarshipRow" style="display: none;">
                                                 <th>Admission Scholarship:</th>
                                                 <td class="text-end text-info">
                                                     <span class="badge bg-warning text-dark"><i
@@ -475,7 +475,7 @@ include '../../include/sidebar.php';
                                                     <br><small id="scholarship_breakdown" class="text-muted"></small>
                                                 </td>
                                             </tr>
-                                            <tr id="existingDiscountRow" class="css-post-admission-discount-224b51">
+                                            <tr id="existingDiscountRow" style="display: none;">
                                                 <th>Post-Admission Discount:</th>
                                                 <td class="text-end text-warning">
                                                     ₹<span id="detail_existingdiscount">0</span>
@@ -519,7 +519,8 @@ include '../../include/sidebar.php';
                                             <input type="number" name="discount_value" id="discount_value"
                                                 class="form-control" min="0" step="1" required
                                                 placeholder="Enter discount value">
-                                            <span class="input-group-text css-post-admission-discount-224b51" id="discountSuffix">%</span>
+                                            <span class="input-group-text" id="discountSuffix"
+                                                style="display: none;">%</span>
                                         </div>
                                     </div>
                                 </div>

@@ -97,7 +97,125 @@ $page_breadcrumb = "Reports";
 
 
 
+<style>
+    :root {
+        --glass-bg: rgba(255, 255, 255, 0.95);
+        --glass-border: rgba(255, 255, 255, 0.5);
+    }
 
+    .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+    }
+
+    .report-filter-box {
+        padding: 1.5rem;
+    }
+
+    .stat-card {
+        padding: 1.5rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .stat-value {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: #1e293b;
+        letter-spacing: -1px;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .stat-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+    }
+
+    .bg-icon-info {
+        background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    }
+
+    .bg-icon-success {
+        background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .table-enhanced {
+        border-collapse: separate;
+        border-spacing: 0 8px;
+    }
+
+    .table-enhanced thead th {
+        background: transparent;
+        color: #64748b;
+        border: none;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 1rem;
+    }
+
+    .table-enhanced tbody tr {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s;
+    }
+
+    .table-enhanced tbody tr:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .table-enhanced tbody td {
+        border: none;
+        padding: 1.25rem 1rem;
+        vertical-align: middle;
+    }
+
+    .table-enhanced tbody td:first-child {
+        border-radius: 12px 0 0 12px;
+    }
+
+    .table-enhanced tbody td:last-child {
+        border-radius: 0 12px 12px 0;
+    }
+
+    @media (max-width: 1366px) {
+        .stat-value {
+            font-size: 1.75rem;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+            font-size: 1.125rem;
+        }
+
+        .report-filter-box {
+            padding: 1rem;
+        }
+    }
+</style>
 
 <div class="container-fluid py-4">
     <!-- Filters -->
@@ -107,7 +225,8 @@ $page_breadcrumb = "Reports";
                     <div class="row align-items-end g-3">
                         <div class="col-md-3">
                             <label class="form-label fw-bold small text-uppercase opacity-75">View Type</label>
-                            <select name="chart_view" id="chart_view" class="form-select border-0 shadow-sm bg-white css-financial-reports-0bac8d">
+                            <select name="chart_view" id="chart_view" class="form-select border-0 shadow-sm bg-white"
+                                style="height: 45px;">
                                 <option value="daily" <?php echo ($chart_view ?? 'daily') === 'daily' ? 'selected' : ''; ?>>
                                     Daily Breakdown</option>
                                 <option value="weekly" <?php echo ($chart_view ?? '') === 'weekly' ? 'selected' : ''; ?>>
@@ -118,7 +237,8 @@ $page_breadcrumb = "Reports";
                         </div>
                         <div class="col-md-3">
                             <label class="form-label fw-bold small text-uppercase opacity-75">Quick Range</label>
-                            <select name="date_range" id="date_range" class="form-select border-0 shadow-sm bg-white css-financial-reports-0bac8d" onchange="handleDateRangeChange()">
+                            <select name="date_range" id="date_range" class="form-select border-0 shadow-sm bg-white"
+                                style="height: 45px;" onchange="handleDateRangeChange()">
                                 <option value="current_month"
                                     <?php echo ($date_range ?? 'current_month') === 'current_month' ? 'selected' : ''; ?>>
                                     Current Month</option>
@@ -146,22 +266,22 @@ $page_breadcrumb = "Reports";
                         <div class="col-md-2">
                             <label class="form-label fw-bold small text-uppercase opacity-75">From</label>
                             <input type="date" name="from_date" id="from_date"
-                                class="form-control border-0 shadow-sm bg-white css-financial-reports-0bac8d"
+                                class="form-control border-0 shadow-sm bg-white" style="height: 45px;"
                                 value="<?php echo $from_date; ?>"
                                 <?php echo ($date_range ?? 'current_month') !== 'custom' ? 'readonly' : ''; ?>>
                         </div>
                         <div class="col-md-2">
                             <label class="form-label fw-bold small text-uppercase opacity-75">To</label>
                             <input type="date" name="to_date" id="to_date"
-                                class="form-control border-0 shadow-sm bg-white css-financial-reports-0bac8d"
+                                class="form-control border-0 shadow-sm bg-white" style="height: 45px;"
                                 value="<?php echo $to_date; ?>"
                                 <?php echo ($date_range ?? 'current_month') !== 'custom' ? 'readonly' : ''; ?>>
                         </div>
                         <div class="col-md-2 d-flex gap-2">
-                            <button type="submit" class="btn btn-primary w-100 shadow-sm css-financial-reports-0bac8d">
+                            <button type="submit" class="btn btn-primary w-100 shadow-sm" style="height: 45px;">
                                 <i class="fas fa-sync-alt"></i> Apply
                             </button>
-                            <button type="button" onclick="exportToPDF()" class="btn btn-danger shadow-sm css-financial-reports-0bac8d">
+                            <button type="button" onclick="exportToPDF()" class="btn btn-danger shadow-sm" style="height: 45px;">
                                 <i class="fas fa-file-pdf me-1"></i> Export PDF
                             </button>
                         </div>
@@ -315,7 +435,7 @@ $page_breadcrumb = "Reports";
                         </h5>
                     </div>
                     <div class="card-body px-4 pb-4">
-                        <canvas id="collectionChart" class="css-financial-reports-186c7b"></canvas>
+                        <canvas id="collectionChart" style="height: 320px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -329,7 +449,7 @@ $page_breadcrumb = "Reports";
                         </h5>
                     </div>
                     <div class="card-body px-4 pb-4">
-                        <canvas id="modeChart" class="css-financial-reports-186c7b"></canvas>
+                        <canvas id="modeChart" style="height: 320px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -359,7 +479,7 @@ $page_breadcrumb = "Reports";
                                     <?php foreach ($mode_breakdown as $mode): ?>
                                         <tr>
                                             <td class="ps-4">
-                                                <span class="badge bg-soft-info text-info bg-opacity-10 text-uppercase fw-bold css-financial-reports-488ab5">
+                                                <span class="badge bg-soft-info text-info bg-opacity-10 text-uppercase fw-bold" style="letter-spacing: 0.5px;">
                                                     <?php echo htmlspecialchars($mode['payment_mode'] ?? ''); ?>
                                                 </span>
                                             </td>
@@ -417,7 +537,7 @@ $page_breadcrumb = "Reports";
             <div class="card-header bg-transparent border-0 px-4 pt-4 d-flex align-items-center justify-content-between">
                 <h6 class="stat-label mb-0">
                     <i class="fas fa-graduation-cap me-2 text-primary"></i> Course-wise Collection Breakdown
-                    <small class="text-muted fw-normal ms-2 css-financial-reports-8c2b14">(click a row to expand)</small>
+                    <small class="text-muted fw-normal ms-2" style="font-size:0.75rem; text-transform:none;">(click a row to expand)</small>
                 </h6>
                 <button class="btn btn-sm btn-success px-3 shadow-sm" onclick="exportTableToExcel('courseTable')">
                     <i class="fas fa-file-excel me-1"></i> Export Excel
@@ -428,7 +548,7 @@ $page_breadcrumb = "Reports";
                     <table class="table table-enhanced mb-0" id="courseTable">
                         <thead>
                             <tr>
-                                <th class="ps-4 css-financial-reports-91b323"></th>
+                                <th class="ps-4" style="width:32px;"></th>
                                 <th>COURSE</th>
                                 <th class="text-center">STUDENTS</th>
                                 <th class="text-center">TRANSACTIONS</th>
@@ -464,7 +584,7 @@ $page_breadcrumb = "Reports";
                                 <!-- Summary row -->
                                 <tr class="course-summary-row" data-target="<?php echo $rowId; ?>" style="cursor:pointer;">
                                     <td class="ps-4 text-center">
-                                        <i class="fas fa-chevron-right course-chevron text-muted css-financial-reports-d9e5ca"></i>
+                                        <i class="fas fa-chevron-right course-chevron text-muted" style="font-size:0.75rem; transition:transform 0.2s;"></i>
                                     </td>
                                     <td class="fw-bold text-dark"><?php echo htmlspecialchars($row['course_name'] ?? ''); ?></td>
                                     <td class="text-center">
@@ -476,21 +596,21 @@ $page_breadcrumb = "Reports";
                                     <td class="text-center text-warning fw-medium">₹<?php echo formatIndianCurrency($row['cash']); ?></td>
                                     <td class="text-center text-primary fw-medium">₹<?php echo formatIndianCurrency($row['online_amount']); ?></td>
                                     <td class="text-center text-secondary fw-medium">₹<?php echo formatIndianCurrency($row['offline_amount']); ?></td>
-                                    <td class="pe-4 text-end text-dark fw-bold css-financial-reports-e755e4">₹<?php echo formatIndianCurrency($row['total_collection']); ?></td>
+                                    <td class="pe-4 text-end text-dark fw-bold" style="font-size:1.05rem;">₹<?php echo formatIndianCurrency($row['total_collection']); ?></td>
                                 </tr>
                                 <!-- Expandable detail row -->
                                 <tr id="<?php echo $rowId; ?>" class="course-detail-row" style="display:none;">
-                                    <td colspan="8" class="p-0 css-financial-reports-9546e0">
+                                    <td colspan="8" class="p-0" style="background:#f8faff; border-top:none;">
                                         <div class="px-4 py-3">
                                             <div class="row g-3">
                                                 <!-- Type breakdown -->
                                                 <div class="col-md-7">
-                                                    <div class="fw-bold text-muted small text-uppercase mb-2 css-financial-reports-c7ca63">
+                                                    <div class="fw-bold text-muted small text-uppercase mb-2" style="letter-spacing:0.5px;">
                                                         <i class="fas fa-tags me-1 text-primary"></i> Fee Type Breakdown
                                                     </div>
-                                                    <table class="table table-sm table-borderless mb-0 css-financial-reports-b30001">
+                                                    <table class="table table-sm table-borderless mb-0" style="font-size:0.85rem;">
                                                         <thead>
-                                                            <tr class="css-financial-reports-183d24">
+                                                            <tr style="color:#64748b; font-size:0.75rem; text-transform:uppercase;">
                                                                 <th class="ps-0">Type</th>
                                                                 <th class="text-center">Txn</th>
                                                                 <th class="text-end pe-0">Amount</th>
@@ -512,12 +632,12 @@ $page_breadcrumb = "Reports";
                                                 </div>
                                                 <!-- Mode breakdown -->
                                                 <div class="col-md-5">
-                                                    <div class="fw-bold text-muted small text-uppercase mb-2 css-financial-reports-c7ca63">
+                                                    <div class="fw-bold text-muted small text-uppercase mb-2" style="letter-spacing:0.5px;">
                                                         <i class="fas fa-credit-card me-1 text-success"></i> Payment Mode Breakdown
                                                     </div>
-                                                    <table class="table table-sm table-borderless mb-0 css-financial-reports-b30001">
+                                                    <table class="table table-sm table-borderless mb-0" style="font-size:0.85rem;">
                                                         <thead>
-                                                            <tr class="css-financial-reports-183d24">
+                                                            <tr style="color:#64748b; font-size:0.75rem; text-transform:uppercase;">
                                                                 <th class="ps-0">Mode</th>
                                                                 <th class="text-center">Txn</th>
                                                                 <th class="text-end pe-0">Amount</th>
@@ -527,7 +647,15 @@ $page_breadcrumb = "Reports";
                                                             <?php foreach ($row['mode_breakdown'] as $m): ?>
                                                             <tr>
                                                                 <td class="ps-0">
-                                                                    <span class="badge text-uppercase fw-bold css-financial-reports-3cdf9e">
+                                                                    <span class="badge text-uppercase fw-bold" style="font-size:0.7rem; background:<?php
+                                                                        $mc = strtolower($m['payment_mode'] ?? '');
+                                                                        echo match(true) {
+                                                                            in_array($mc, ['online','upi','bank transfer','bank_transfer']) => '#dbeafe; color:#1d4ed8',
+                                                                            $mc === 'cash'    => '#fef9c3; color:#92400e',
+                                                                            $mc === 'cheque'  => '#dcfce7; color:#166534',
+                                                                            default           => '#f1f5f9; color:#475569'
+                                                                        };
+                                                                    ?>;">
                                                                         <?php echo htmlspecialchars($m['payment_mode'] ?? 'N/A'); ?>
                                                                     </span>
                                                                 </td>
@@ -547,15 +675,15 @@ $page_breadcrumb = "Reports";
                                 </tr>
                                 <?php endforeach; ?>
                                 <!-- Grand Total Row -->
-                                <tr class="css-financial-reports-239437">
+                                <tr style="background:#f0f4ff; border-top:2px solid #2563eb;">
                                     <td class="ps-4"></td>
-                                    <td class="fw-bold text-primary css-financial-reports-e4c354">GRAND TOTAL</td>
+                                    <td class="fw-bold text-primary" style="font-size:1rem;">GRAND TOTAL</td>
                                     <td class="text-center fw-bold text-primary"><?php echo number_format($grand_students); ?></td>
                                     <td class="text-center fw-bold"><?php echo number_format($grand_txn); ?></td>
                                     <td class="text-center fw-bold text-warning">₹<?php echo formatIndianCurrency($grand_cash); ?></td>
                                     <td class="text-center fw-bold text-primary">₹<?php echo formatIndianCurrency($grand_online); ?></td>
                                     <td class="text-center fw-bold text-secondary">₹<?php echo formatIndianCurrency($grand_offline); ?></td>
-                                    <td class="pe-4 text-end fw-bold text-success css-financial-reports-e061ff">₹<?php echo formatIndianCurrency($grand_total); ?></td>
+                                    <td class="pe-4 text-end fw-bold text-success" style="font-size:1.1rem;">₹<?php echo formatIndianCurrency($grand_total); ?></td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
@@ -624,7 +752,7 @@ $page_breadcrumb = "Reports";
                                             <td class="text-center text-muted">
                                                 ₹<?php echo formatIndianCurrency($row['types'][$pt] ?? 0); ?></td>
                                         <?php endforeach; ?>
-                                        <td class="pe-4 text-end text-dark fw-bold css-financial-reports-e3c98a">
+                                        <td class="pe-4 text-end text-dark fw-bold" style="font-size: 1.05rem;">
                                             ₹<?php echo formatIndianCurrency($row['day_total']); ?></td>
                                     </tr>
                                 <?php endforeach; ?>

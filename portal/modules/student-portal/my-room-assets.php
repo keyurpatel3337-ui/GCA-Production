@@ -75,7 +75,7 @@ $assets = [
                 <div class="col-md-3">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-body text-center p-4">
-                            <div class="bg-light p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 css-my-room-assets-13ce31">
+                            <div class="bg-light p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
                                 <i class="fas <?php echo $asset['icon']; ?> text-primary fs-4"></i>
                             </div>
                             <h5 class="fw-bold mb-1"><?php echo $asset['name']; ?></h5>

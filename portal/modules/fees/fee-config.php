@@ -134,7 +134,8 @@ include '../../include/sidebar.php';
             <button type="button" class="btn btn-success" onclick="exportToExcel()">
                 <i class="fas fa-file-excel"></i> Export to Excel
             </button>
-            <button type="button" class="btn btn-danger css-fee-config-93b8ea" id="deleteSelectedBtn" onclick="deleteSelected()">
+            <button type="button" class="btn btn-danger" id="deleteSelectedBtn" onclick="deleteSelected()"
+                style="display:none;">
                 <i class="fas fa-trash"></i> Delete Selected
             </button>
         </div>
@@ -392,7 +393,7 @@ include '../../include/sidebar.php';
                     </div>
 
                     <!-- Fee Type Selection Section (Shows after Term, Medium, Group selected) -->
-                    <div id="feeTypeSection" class="css-fee-config-224b51">
+                    <div id="feeTypeSection" style="display: none;">
                         <hr class="my-4">
                         <h6 class="mb-3 text-primary"><i class="fas fa-money-bill-wave"></i> Select Fee Types to
                             Configure</h6>
@@ -586,7 +587,7 @@ include '../../include/sidebar.php';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-3 css-fee-config-224b51" id="installmentSection">
+                                <div class="row mt-3" id="installmentSection" style="display: none;">
                                     <div class="col-md-6 offset-md-3">
                                         <label class="form-label">Number of Installments</label>
                                         <input type="number" name="number_of_installments" id="number_of_installments"
@@ -609,7 +610,7 @@ include '../../include/sidebar.php';
                         </div>
                     </div>
 
-                    <div class="alert alert-info css-fee-config-224b51" id="installmentBreakdown">
+                    <div class="alert alert-info" id="installmentBreakdown" style="display: none;">
                         <h6><i class="fas fa-calculator"></i> Installment Breakdown:</h6>
                         <ul class="mb-0">
                             <li>Token Fee (Tuition Part-1 + GST): <strong id="displayTokenFee">?0.00</strong></li>
@@ -676,7 +677,8 @@ include '../../include/sidebar.php';
 
                     <div id="fee_upload_preview" class="d-none">
                         <h6 class="text-primary">File Preview:</h6>
-                        <div id="fee_preview_content" class="table-responsive css-fee-config-3db978">
+                        <div id="fee_preview_content" class="table-responsive"
+                            style="max-height: 300px; overflow-y: auto;">
                             <!-- Preview will be shown here -->
                         </div>
                     </div>
@@ -1000,7 +1002,7 @@ include '../../include/sidebar.php';
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-3 css-fee-config-224b51" id="editInstallmentSection">
+                            <div class="row mt-3" id="editInstallmentSection" style="display: none;">
                                 <div class="col-md-6 offset-md-3">
                                     <label class="form-label">Number of Installments</label>
                                     <input type="number" name="number_of_installments" id="edit_number_of_installments"
@@ -1021,7 +1023,7 @@ include '../../include/sidebar.php';
                             </div>
                         </div>
                     </div>
-                    <div class="alert alert-info css-fee-config-224b51" id="editInstallmentBreakdown">
+                    <div class="alert alert-info" id="editInstallmentBreakdown" style="display: none;">
                         <h6><i class="fas fa-calculator"></i> Installment Breakdown:</h6>
                         <ul class="mb-0">
                             <li>Token Fee (Tuition Part-1 + GST): <strong id="editDisplayTokenFee">?0.00</strong></li>
@@ -2002,7 +2004,7 @@ include '../../include/sidebar.php';
                     const allConfigs = response.data.fee_configs;
 
                     // Create a hidden table for TableUtils
-                    const $tempTable = $('<table id="tempExportTable" class="css-fee-config-cb4589"></table>');
+                    const $tempTable = $('<table id="tempExportTable" style="display:none"></table>');
                     $tempTable.append('<thead>' + $('#feeConfigTable thead').html() + '</thead>');
                     const $tbody = $('<tbody></tbody>');
 

@@ -17,7 +17,14 @@ $pageTitle = 'Digital Wallet Policies & Documentation';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/gm-public.css">
-    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .policy-section {
+            scroll-margin-top: 100px;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">

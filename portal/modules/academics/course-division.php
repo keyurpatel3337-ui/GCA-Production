@@ -107,7 +107,7 @@ include '../../include/sidebar.php';
                     onclick="exportToExcel()">
                     <i class="fas fa-file-excel me-1"></i> Export
                 </button>
-                <div id="deleteSelectedBtn" class="css-course-division-224b51">
+                <div id="deleteSelectedBtn" style="display: none;">
                     <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="deleteSelected()">
                         <i class="fas fa-trash-alt me-1"></i> Delete Selected
                     </button>

@@ -116,8 +116,10 @@ try {
     <div class="card card-outline card-primary shadow-sm mb-4 border-0">
         <div class="card-body p-0">
             <div class="row g-0">
-                <div class="col-md-auto bg-primary text-white p-4 d-flex flex-column align-items-center justify-content-center css-session-details-684a19">
-                    <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center mb-2 css-session-details-14ff6c">
+                <div class="col-md-auto bg-primary text-white p-4 d-flex flex-column align-items-center justify-content-center"
+                    style="min-width: 150px;">
+                    <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center mb-2"
+                        style="width: 64px; height: 64px; font-size: 24px; font-weight: bold;">
                         <?php echo strtoupper(substr($student_data['surname'], 0, 1) . substr($student_data['student_name'], 0, 1)); ?>
                     </div>
                     <div class="text-center">
@@ -152,13 +154,13 @@ try {
                                 <a href="sessions.php" class="btn btn-outline-secondary">
                                     <i class="fas fa-arrow-left me-1"></i> Back to List
                                 </a>
-                                <form method="POST" action="create-session.php" class="css-session-details-5f8f4a">
+                                <form method="POST" action="create-session.php" style="display:inline;">
                                     <input type="hidden" name="student_id" value="<?php echo $student_id; ?>">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fas fa-plus me-1"></i> New Session
                                     </button>
                                 </form>
-                                <form method="POST" action="details.php" class="css-session-details-5f8f4a">
+                                <form method="POST" action="details.php" style="display:inline;">
                                     <input type="hidden" name="id" value="<?php echo $student_id; ?>">
                                     <button type="submit" class="btn btn-warning">
                                         <i class="fas fa-user-graduate me-1"></i> Full Profile
@@ -215,7 +217,7 @@ try {
                                     <?php endif; ?>
                                 </div>
                                 <div class="card-footer bg-light py-2">
-                                    <form method="POST" action="../test-marks/view.php" class="css-session-details-f8e39d">
+                                    <form method="POST" action="../test-marks/view.php" style="display:inline;margin:0;">
                                         <input type="hidden" name="id" value="<?php echo $tm['id']; ?>">
                                         <button type="submit" class="btn btn-sm btn-outline-primary">
                                             <i class="fas fa-eye"></i> Details
@@ -254,7 +256,7 @@ try {
                 <div class="alert alert-info py-4 text-center">
                     <i class="fas fa-info-circle fa-2x mb-3 d-block"></i>
                     <p class="mb-0">No counselling sessions have been recorded for this student yet.</p>
-                    <a onclick="document.getElementById('form_create-session_student_id').submit()" class="css-session-details-b202c6"
+                    <a onclick="document.getElementById('form_create-session_student_id').submit()" style="cursor:pointer"
                         class="btn btn-primary mt-3">Record First Session</a>
                 </div>
             <?php else: ?>
@@ -343,7 +345,81 @@ try {
 </div>
 
 <?php include '../../include/footer.php'; ?>
+<style>
+    .timeline {
+        margin: 0 0 45px;
+        padding: 0;
+        position: relative;
+    }
 
+    .timeline::before {
+        border-radius: .25rem;
+        background-color: #dee2e6;
+        bottom: 0;
+        content: "";
+        left: 31px;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        width: 4px;
+    }
+
+    .timeline>div {
+        margin-bottom: 15px;
+        margin-right: 10px;
+        position: relative;
+    }
+
+    .timeline>div>.timeline-item {
+        border-radius: .25rem;
+        background-color: #fff;
+        color: #495057;
+        margin-left: 60px;
+        margin-right: 15px;
+        margin-top: 0;
+        padding: 0;
+        position: relative;
+    }
+
+    .timeline>div>i {
+        background-color: #adb5bd;
+        border-radius: 50%;
+        font-size: 16px;
+        height: 30px;
+        left: 18px;
+        line-height: 30px;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 30px;
+        color: #fff;
+        z-index: 1;
+    }
+
+    .timeline>.time-label>span {
+        border-radius: 4px;
+        display: inline-block;
+        font-weight: 600;
+        padding: 5px;
+        color: #fff;
+    }
+
+    .timeline>div>.timeline-item>.time {
+        color: #999;
+        float: right;
+        font-size: 12px;
+        padding: 15px;
+    }
+
+    .timeline>div>.timeline-item>.timeline-header {
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
+        color: #495057;
+        font-size: 16px;
+        line-height: 1.1;
+        margin: 0;
+        padding: 10px;
+    }
+</style>
 </div>
 
 <?php include '../../include/footer.php'; ?>

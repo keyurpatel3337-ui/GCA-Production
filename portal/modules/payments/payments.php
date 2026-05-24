@@ -292,7 +292,8 @@ include '../../include/sidebar.php';
                         if (empty($payments)): ?>
                             <tr>
                                 <td colspan="8" class="text-center py-4">
-                                    <div class="empty-state-icon d-inline-flex mb-2 css-payments-605046">
+                                    <div class="empty-state-icon d-inline-flex mb-2"
+                                        style="width:60px;height:60px;font-size:1.5rem;">
                                         <i class="fas fa-receipt"></i>
                                     </div>
                                     <div class="text-muted">No payments found matching your criteria</div>

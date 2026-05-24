@@ -150,7 +150,336 @@ $amount_in_words = numberToWords($sample_receipt['amount']);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Receipt Preview - <?php echo htmlspecialchars($config['organization_name'] ?? ''); ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #000;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+
+        .preview-header {
+            background: #fff;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-header h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        .preview-note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .preview-note i {
+            color: #ffc107;
+            margin-right: 8px;
+        }
+
+        .receipt-container {
+            width: 210mm;
+            height: 148mm;
+            max-height: 148mm;
+            margin: 0 auto;
+            padding: 8mm;
+            border: 2px solid #000;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .receipt-header {
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            flex: 0 0 80px;
+            margin-right: 15px;
+        }
+
+        .logo-section img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            font-size: 11px;
+            color: #999;
+            text-align: center;
+        }
+
+        .header-info {
+            flex: 1;
+            text-align: center;
+        }
+
+        .org-name {
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .org-address {
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        .org-details {
+            font-size: 11px;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .student-info {
+            margin: 12px 0;
+            border-bottom: 1px solid #000;
+            padding-bottom: 8px;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 5px;
+        }
+
+        .info-row .label {
+            font-weight: bold;
+            min-width: 150px;
+        }
+
+        .info-row .value {
+            flex: 1;
+        }
+
+        .receipt-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .meta-item {
+            display: flex;
+            font-size: 12px;
+        }
+
+        .meta-item .label {
+            font-weight: bold;
+            min-width: 100px;
+        }
+
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .fee-table th,
+        .fee-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .fee-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .fee-table .sr-no {
+            width: 60px;
+            text-align: center;
+        }
+
+        .fee-table .amount {
+            width: 150px;
+            text-align: right;
+        }
+
+        .fee-table .total-row {
+            font-weight: bold;
+            background-color: #f5f5f5;
+        }
+
+        .amount-words {
+            margin: 10px 0;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border: 1px solid #000;
+        }
+
+        .amount-words .label {
+            font-weight: bold;
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        .bank-details {
+            margin: 15px 0 25px 0;
+            font-size: 12px;
+        }
+
+        .bank-details div {
+            margin: 3px 0;
+        }
+
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 30px;
+            min-height: 100px;
+        }
+
+        .cheque-info {
+            flex: 0 0 30%;
+            font-size: 12px;
+        }
+
+        .jurisdiction-center {
+            flex: 0 0 40%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .signature-right {
+            flex: 0 0 30%;
+            text-align: center;
+        }
+
+        .signature-box {
+            display: inline-block;
+            text-align: center;
+            min-width: 150px;
+            padding: 0;
+            margin-top: 5px;
+        }
+
+        .signature-line {
+            padding-top: 5px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .jurisdiction-bottom {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .footer-note {
+            margin-top: 10px;
+            font-size: 11px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        @page {
+            size: A5 landscape;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .preview-header,
+            .preview-note {
+                display: none !important;
+            }
+
+            .receipt-container {
+                box-shadow: none;
+                margin: 0;
+                page-break-after: always;
+                width: 210mm;
+                height: 148mm;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -279,7 +608,7 @@ $amount_in_words = numberToWords($sample_receipt['amount']);
             </div>
         </div>
 
-        <div class="meta-item css-receipt-config-preview-3301ea">
+        <div class="meta-item" style="margin-bottom: 10px;">
             <span class="label">GR No.</span>
             <span class="value"><?php echo htmlspecialchars($sample_receipt['student_id'] ?? ''); ?></span>
         </div>
@@ -300,8 +629,8 @@ $amount_in_words = numberToWords($sample_receipt['amount']);
                     <td class="amount"><?php echo formatIndianCurrency($sample_receipt['amount'], false); ?></td>
                 </tr>
                 <tr class="total-row">
-                    <td colspan="2" class="css-receipt-config-preview-e701f2">Total</td>
-                    <td class="amount css-receipt-config-preview-6d007e"><?php echo formatIndianCurrency($sample_receipt['amount'], false); ?></td>
+                    <td colspan="2" style="text-align: right; padding-right: 20px; border-right: 0;">Total</td>
+                    <td class="amount" style="border-left: 0;"><?php echo formatIndianCurrency($sample_receipt['amount'], false); ?></td>
                 </tr>
             </tbody>
         </table>

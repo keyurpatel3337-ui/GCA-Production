@@ -160,7 +160,28 @@ try {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    
+    <style>
+        .stat-card {
+            border-start: 4px solid;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -386,8 +407,8 @@ try {
                                     <td><?php echo $stat['request_count']; ?></td>
                                     <td><?php echo $stat['approved_count']; ?></td>
                                     <td>
-                                        <div class="progress css-group-change-report-bd56ab">
-                                            <div class="progress-bar bg-success css-group-change-report-bf8124">
+                                        <div class="progress" style="height: 25px;">
+                                            <div class="progress-bar bg-success" style="width: <?php echo $rate; ?>%">
                                                 <?php echo $rate; ?>%
                                             </div>
                                         </div>

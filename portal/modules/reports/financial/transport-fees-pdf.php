@@ -75,13 +75,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" class="css-transport-fees-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-transport-fees-pdf-539b04">
-                <span class="css-transport-fees-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? 'Mahatma Seva Trust') . '</span><br>
-                <span class="css-transport-fees-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span class="css-transport-fees-pdf-72668f">TRANSPORT FEE COLLECTION REPORT</span><br>
-                <span class="css-transport-fees-pdf-1b8847">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? 'Mahatma Seva Trust') . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#ffc107; color:#000;">TRANSPORT FEE COLLECTION REPORT</span><br>
+                <span style="font-size:10pt;">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -89,27 +89,27 @@ try {
     $pdf->Ln(2);
 
     $summaryHtml = '
-    <table cellpadding="4" class="css-transport-fees-pdf-f6238b">
+    <table cellpadding="4" style="width:100%; border:0.5px solid #ddd; background-color:#f8f9fa;">
         <tr>
             <td width="30%">Transactions: <b>' . count($payments) . '</b></td>
-            <td width="40%" class="css-transport-fees-pdf-539b04">Gender: <b>' . ($gender ?: 'All') . '</b></td>
-            <td width="30%" class="css-transport-fees-pdf-08a0ed">Total Collected: <b>' . formatIndianCurrency($totalCollected) . '</b></td>
+            <td width="40%" style="text-align:center;">Gender: <b>' . ($gender ?: 'All') . '</b></td>
+            <td width="30%" style="text-align:right;">Total Collected: <b>' . formatIndianCurrency($totalCollected) . '</b></td>
         </tr>
     </table>';
     $pdf->writeHTML($summaryHtml, true, false, false, false, '');
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" class="css-transport-fees-pdf-6eb086">
+    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
         <thead>
-            <tr class="css-transport-fees-pdf-5f2273">
-                <th width="4%" class="css-transport-fees-pdf-539b04">#</th>
+            <tr style="background-color:#eee; font-weight:bold;">
+                <th width="4%" style="text-align:center;">#</th>
                 <th width="10%">Date</th>
                 <th width="10%">Receipt No</th>
                 <th width="22%">Student Name</th>
                 <th width="8%">Gender</th>
                 <th width="12%">Class</th>
-                <th width="12%" class="css-transport-fees-pdf-08a0ed">Amount</th>
+                <th width="12%" style="text-align:right;">Amount</th>
                 <th width="10%">Mode</th>
                 <th width="12%">Remarks</th>
             </tr>
@@ -117,20 +117,20 @@ try {
         <tbody>';
 
     if (empty($payments)) {
-        $html .= '<tr><td colspan="9" class="css-transport-fees-pdf-539b04">No records found</td></tr>';
+        $html .= '<tr><td colspan="9" style="text-align:center;">No records found</td></tr>';
     } else {
         $i = 1;
         foreach ($payments as $row) {
             $fullName = trim($row['surname'] . ' ' . $row['student_name'] . ' ' . $row['fathers_name']);
             $html .= '
             <tr nobr="true">
-                <td width="4%" class="css-transport-fees-pdf-539b04">' . $i++ . '</td>
+                <td width="4%" style="text-align:center;">' . $i++ . '</td>
                 <td width="10%">' . date('d-m-Y', strtotime($row['payment_date'])) . '</td>
                 <td width="10%">' . htmlspecialchars($row['receipt_no'] ?? '') . '</td>
                 <td width="22%"><b>' . htmlspecialchars($fullName ?? '') . '</b></td>
                 <td width="8%">' . htmlspecialchars($row['gender'] ?? '') . '</td>
                 <td width="12%">' . htmlspecialchars($row['current_class'] ?: '-' ?? '') . '</td>
-                <td width="12%" class="css-transport-fees-pdf-f3cba8">' . formatIndianCurrency($row['amount']) . '</td>
+                <td width="12%" style="text-align:right; font-weight:bold; color:#28a745;">' . formatIndianCurrency($row['amount']) . '</td>
                 <td width="10%">' . strtoupper($row['payment_mode']) . '</td>
                 <td width="12%"><small>' . htmlspecialchars($row['remarks'] ?: '-' ?? '') . '</small></td>
             </tr>';

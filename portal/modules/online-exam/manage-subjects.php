@@ -91,20 +91,20 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 </script>
             <?php endif; ?>
 
-            <div class="card shadow-sm mb-4 border-0 css-manage-subjects-dc9ce7">
+            <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px;">
                 <div class="card-header bg-white border-0 py-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h5 class="mb-0 font-weight-bold text-dark css-manage-subjects-e7ec96">Subject List</h5>
+                            <h5 class="mb-0 font-weight-bold text-dark" style="font-size: 1.1rem;">Subject List</h5>
                         </div>
                         <div class="d-flex align-items-center gap-3">
-                            <div class="input-group input-group-sm css-manage-subjects-d4150c">
-                                <span class="input-group-text bg-light border-0 css-manage-subjects-67aaf6">
+                            <div class="input-group input-group-sm" style="width: 220px;">
+                                <span class="input-group-text bg-light border-0" style="border-radius: 10px 0 0 10px;">
                                     <i class="fas fa-search text-muted small"></i>
                                 </span>
-                                <input type="text" id="searchInput" class="form-control border-0 bg-light css-manage-subjects-84dccc" placeholder="Search Subject...">
+                                <input type="text" id="searchInput" class="form-control border-0 bg-light" placeholder="Search Subject..." style="border-radius: 0 10px 10px 0; font-size: 0.85rem; height: 38px;">
                             </div>
-                            <select id="filterStandard" class="form-select form-select-sm border-0 bg-light css-manage-subjects-b5f3ef">
+                            <select id="filterStandard" class="form-select form-select-sm border-0 bg-light" style="width: 180px; border-radius: 10px; font-size: 0.85rem; height: 38px;">
                                 <option value="">All Standards</option>
                                 <?php
                                 $stds = $conn->query("SELECT id, course_name FROM tbl_courses WHERE is_active = 1 ORDER BY id ASC");
@@ -114,14 +114,14 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                 ?>
                             </select>
                             <div class="d-flex align-items-center gap-2">
-                                <a href="export-subjects.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-manage-subjects-dbb5d6" title="Export CSV">
+                                <a href="export-subjects.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Export CSV">
                                     <i class="fas fa-download text-muted mr-2"></i> Export
                                 </a>
-                                <a href="import-subjects.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-manage-subjects-dbb5d6" title="Import CSV">
+                                <a href="import-subjects.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Import CSV">
                                     <i class="fas fa-upload text-muted mr-2"></i> Import
                                 </a>
-                                <a href="add-subject.php" class="btn btn-primary shadow-sm d-flex align-items-center justify-content-center px-4 css-manage-subjects-dbb5d6">
-                                    <i class="fas fa-plus mr-2 css-manage-subjects-af89d6"></i> Add Subject
+                                <a href="add-subject.php" class="btn btn-primary shadow-sm d-flex align-items-center justify-content-center px-4" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;">
+                                    <i class="fas fa-plus mr-2" style="font-size: 0.75rem;"></i> Add Subject
                                 </a>
                             </div>
                         </div>
@@ -151,19 +151,19 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                         <td class="align-middle text-center">
                                             <?php $qc = (int)($s['q_11th'] ?? 0); ?>
                                             <a href="question-bank.php?subject_id=<?php echo $s['id']; ?>&standard_id=1" class="text-decoration-none">
-                                                <span class="badge rounded-pill css-manage-subjects-e1335f"><?php echo $qc ?: '—'; ?></span>
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(59,130,246,0.12);color:#2563eb' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:42px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
                                             </a>
                                         </td>
                                         <td class="align-middle text-center">
                                             <?php $qc = (int)($s['q_12th'] ?? 0); ?>
                                             <a href="question-bank.php?subject_id=<?php echo $s['id']; ?>&standard_id=2" class="text-decoration-none">
-                                                <span class="badge rounded-pill css-manage-subjects-cf9661"><?php echo $qc ?: '—'; ?></span>
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(16,185,129,0.12);color:#059669' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:42px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
                                             </a>
                                         </td>
                                         <td class="align-middle text-center">
                                             <?php $qc = (int)($s['q_reneet'] ?? 0); ?>
                                             <a href="question-bank.php?subject_id=<?php echo $s['id']; ?>&standard_id=3" class="text-decoration-none">
-                                                <span class="badge rounded-pill css-manage-subjects-a635ca"><?php echo $qc ?: '—'; ?></span>
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(139,92,246,0.12);color:#7c3aed' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:42px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
                                             </a>
                                         </td>
                                         <td class="align-middle">

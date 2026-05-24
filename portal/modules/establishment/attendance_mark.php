@@ -194,7 +194,7 @@ include '../../include/sidebar.php';
                                                         <tr>
                                                             <td class="text-center fw-bold text-muted small"><?php echo $s['roll_no'] ?: '-'; ?></td>
                                                             <td>
-                                                                <span class="fw-bold d-block text-truncate css-attendance_mark-1a5c8d">
+                                                                <span class="fw-bold d-block text-truncate" style="max-width: 200px;">
                                                                     <?php echo htmlspecialchars($s['surname'] . ' ' . $s['student_name'] ?? ''); ?>
                                                                 </span>
                                                                 <small class="text-muted d-block small"><i class="fas fa-phone-alt me-1"></i> <?php echo $s['mob']; ?></small>

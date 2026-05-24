@@ -292,7 +292,7 @@ else: ?>
                                             </td>
                                             <td><?php echo htmlspecialchars($row['standard_display'] ?? $row['course_name']); ?></td>
                                             <td>
-                                                <span class="badge bg-soft-secondary text-dark css-without-gst-report-3dfca5">
+                                                <span class="badge bg-soft-secondary text-dark" style="background-color: #f1f5f9;">
                                                     <?php echo formatFeeKey($row['fee_component']); ?>
                                                 </span>
                                             </td>

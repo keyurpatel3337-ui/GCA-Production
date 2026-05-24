@@ -251,7 +251,439 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Admin Login - <?php echo htmlspecialchars($SYSTEM_NAME ?? ''); ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/portal.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+            padding: 2rem;
+        }
+
+        /* Main Login Container */
+        .login-container {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Left Panel - Branding */
+        .brand-panel {
+            flex: 0 0 380px;
+            background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2.5rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .brand-logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .brand-logo i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 280px;
+        }
+
+        .brand-features {
+            list-style: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .brand-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            padding: 0.75rem 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .brand-features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-icon i {
+            font-size: 0.85rem;
+            color: #60a5fa;
+        }
+
+        /* Right Panel - Login Form */
+        .login-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+        }
+
+        .login-header {
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+            border-start: 4px solid #ef4444;
+            color: #dc2626;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group label .required {
+            color: #ef4444;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: #2563eb;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: #94a3b8;
+        }
+
+        select.form-control {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%239CA3AF' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.25rem;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .toggle-password:hover {
+            color: #2563eb;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 1rem;
+            background: #1e3a5f;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0.5rem;
+        }
+
+        .btn-login:hover {
+            background: #0f172a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(30, 58, 95, 0.3);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: #10b981;
+            font-size: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .security-badge i {
+            font-size: 0.75rem;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider span {
+            padding: 0 1rem;
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+
+        .alt-login {
+            text-align: center;
+        }
+
+        .alt-login p {
+            color: #64748b;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-student-login {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-student-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-home a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s ease;
+        }
+
+        .back-home a:hover {
+            color: #2563eb;
+        }
+
+        /* Mobile Responsive & Laptop Optimization */
+        @media (max-width: 1400px) {
+            body {
+                padding: 1rem;
+            }
+
+            .login-container {
+                max-width: 800px;
+                border-radius: 16px;
+            }
+
+            .brand-panel {
+                flex: 0 0 320px;
+                padding: 2rem 1.5rem;
+            }
+
+            .login-panel {
+                padding: 2rem;
+            }
+
+            .login-header {
+                margin-bottom: 1rem;
+            }
+
+            .login-header h2 {
+                font-size: 1.35rem;
+            }
+
+            .brand-logo {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 1rem;
+                padding: 0.5rem;
+            }
+
+            .brand-logo i {
+                font-size: 1.75rem;
+            }
+
+            .brand-name {
+                font-size: 1.25rem;
+            }
+
+            .brand-tagline {
+                margin-bottom: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .brand-features li {
+                padding: 0.4rem 0;
+            }
+
+            .divider {
+                margin: 0.75rem 0;
+            }
+
+            .security-badge {
+                margin-top: 0.75rem;
+            }
+
+            .back-home {
+                margin-top: 0.75rem;
+            }
+
+            .form-group {
+                margin-bottom: 0.75rem;
+            }
+
+            .form-control {
+                padding: 0.6rem 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .btn-login {
+                padding: 0.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .login-container {
+                flex-direction: column;
+                max-width: 450px;
+            }
+
+            .brand-panel {
+                flex: none;
+                padding: 2rem;
+            }
+
+            .brand-features {
+                display: none;
+            }
+
+            .brand-tagline {
+                margin-bottom: 0;
+            }
+
+            .login-panel {
+                padding: 2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -323,11 +755,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
 
-                <div class="form-group login-checkbox-group">
+                <div class="form-group" style="display: flex; align-items: center; gap: 8px; margin-top: 1rem;">
                     <input type="checkbox" name="trust_device" id="trust_device"
-                        class="login-checkbox">
+                        style="width: 16px; height: 16px; cursor: pointer;">
                     <label for="trust_device"
-                        class="login-checkbox-label">Trust this device
+                        style="margin-bottom: 0; cursor: pointer; font-size: 0.9rem; color: #64748b;">Trust this device
                         for 7 days</label>
                 </div>
 

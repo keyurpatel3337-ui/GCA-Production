@@ -388,7 +388,40 @@ try {
 
 <?php include '../../include/footer.php'; ?>
 
+<style>
+    /* Timeline styles */
+    .timeline-item {
+        border-left: 3px solid var(--primary-color, #321fdb);
+        padding-left: 15px;
+        margin-bottom: 15px;
+        position: relative;
+    }
 
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -7px;
+        top: 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--primary-color, #321fdb);
+    }
+
+    .timeline-header {
+        font-size: 0.95rem;
+    }
+
+    .timeline-body {
+        margin-top: 5px;
+        font-size: 0.9rem;
+    }
+
+    /* Card title fixes */
+    .card-title {
+        margin-bottom: 0;
+    }
+</style>
 
 <script>
     $(document).ready(function () {

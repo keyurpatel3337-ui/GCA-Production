@@ -32,7 +32,13 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-
+<style>
+    .glass-header {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+</style>
 
 <div class="content-wrapper">
     <section class="content py-4">

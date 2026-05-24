@@ -123,7 +123,181 @@ if (isset($_POST['stdid'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>GCA Receipt</title>
-        
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .main {
+                max-width: 840px;
+                margin: 0 auto;
+                padding: 20px;
+                border: 2px solid #000;
+                position: relative;
+                box-shadow: 0.1rem 0.1rem 0;
+            }
+
+            .header {
+                display: flex;
+            }
+
+            .logo {
+                height: 80px;
+                align-self: center;
+            }
+
+            .title {
+                margin-left: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100px;
+                text-transform: uppercase;
+            }
+
+            .name {
+                font-size: 27px;
+                font-weight: bold;
+            }
+
+            .address {
+                font-size: 15px;
+            }
+
+            .tag {
+                display: block;
+                position: absolute;
+                right: 1px;
+                top: 1px;
+                padding: 5px;
+                background-color: #000;
+                color: #fff;
+                text-transform: uppercase;
+            }
+
+            .print-button {
+                margin: 20px;
+                padding: 10px;
+                font-size: 20px;
+                background-color: #007bff;
+                border-radius: 5px;
+                font-weight: 600;
+                color: white;
+            }
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                align-items: end;
+            }
+
+            .student {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .student-1 {
+                display: flex;
+                justify-content: space-between;
+                font-size: 19px;
+                margin-bottom: 8px;
+            }
+
+            table {
+                font-size: 19px;
+                width: 100%;
+                border: 2px solid black;
+                border-collapse: collapse;
+            }
+
+            thead,
+            tfoot {
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+
+            thead td,
+            tfoot td {
+
+                padding-left: 5px;
+            }
+
+            tr,
+            td {
+                border: 2px solid black;
+            }
+
+            .line {
+                border: 2px solid black;
+            }
+
+            .table-row {
+                margin: 0;
+                margin-left: 5px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .mb-30 {
+                margin-bottom: 50px;
+            }
+
+            .foot-boottm {
+                font-weight: normal;
+                display: flex;
+                font-size: 19px;
+                text-transform: none;
+                justify-content: space-between;
+                border: 1px solid;
+                border-top: 0px;
+            }
+
+            .title-main {
+                width: 100%
+            }
+
+            .pr1 {
+                margin-bottom: 50px;
+            }
+
+            @media screen and (max-width: 400px) {
+                .header {
+                    flex-wrap: wrap;
+                }
+
+
+                table {
+                    overflow-x: auto;
+                }
+
+                .tag {
+                    display: none;
+                }
+            }
+
+            @media print {
+                @page {
+                    margin: 5px;
+                }
+
+                .print-button {
+                    display: none;
+                }
+
+                .main {
+                    margin-top: 20px;
+                }
+
+                .pr1 {
+                    page-break-after: always;
+
+                }
+            }
+        </style>
     </head>
 
     <body onload="check()">
@@ -167,7 +341,7 @@ if (isset($_POST['stdid'])) {
                 </div>
                 <div class="student-1">
                     <div class="student-term">
-                        Term - <?= $term ?> <span class="css-token_receipt-58a1e2"></span>
+                        Term - <?= $term ?> <span style="margin-right: 10px;"></span>
                     </div>
                 </div>
                 <div class="student-1">
@@ -175,7 +349,7 @@ if (isset($_POST['stdid'])) {
                         Medium - <?= $medium ?>
                     </div>
                     <div class="student-medium">
-                        Payment Status - <span class="css-token_receipt-a1f46f"><?= $payment_status ?></span>
+                        Payment Status - <span style="text-transform: capitalize;"><?= $payment_status ?></span>
                     </div>
                 </div>
                 <div class="student-1">
@@ -192,13 +366,13 @@ if (isset($_POST['stdid'])) {
                 <table>
                     <thead>
                         <tr>
-                            <td class="css-token_receipt-1c30ab">
+                            <td style="width: 10%;">
                                 Sr No
                             </td>
-                            <td class="css-token_receipt-a2aac1">
+                            <td style="width: auto; display: flex; justify-content: center; border: 2px;">
                                 Particulars
                             </td>
-                            <td class="css-token_receipt-c7ee80">
+                            <td style="width: 15%;">
                                 Amount
                             </td>
                         </tr>
@@ -230,12 +404,12 @@ if (isset($_POST['stdid'])) {
                     <tfoot>
                         <tr>
                             <td colspan="2">
-                                <div class="css-token_receipt-50c3a9">
+                                <div style="display:flex; justify-content: space-between; border: 0;">
                                     <div>Rupees - <?= numberToWords((float) $school_value_split) ?></div>
                                     <div>Total&nbsp;&nbsp;</div>
                                 </div>
                             </td>
-                            <td class="css-token_receipt-44a8b3">
+                            <td style="padding-left: 0px;">
                                 <p class="table-row mb-30">
                                     ₹
                                     <?php
@@ -253,13 +427,14 @@ if (isset($_POST['stdid'])) {
                     </tfoot>
                 </table>
                 <div class="foot-boottm">
-                    <div class="css-token_receipt-af18ea">
+                    <div style="font-size: 20px;">
                         <p class="table-row">- Subject to realization of online transaction.</p>
                         <p class="table-row">- Fees once paid is non-refundable and non-transferable.</p>
                     </div>
-                    <div class="css-token_receipt-e625cd">
-                        <p style=""><img src="../include/sign-GCA-reciept.png" alt="" class="css-token_receipt-25c662"></p>
-                        <p class="css-token_receipt-46dcee">Authorised Signatory</p>
+                    <div
+                        style="display:flex; flex-direction: column; justify-content: center; align-items: center;margin-left:10px;margin-right: 10px;margin-bottom: 10px;">
+                        <p style=""><img src="../include/sign-GCA-reciept.png" alt="" style="width: 70px; height:70px;"></p>
+                        <p style="margin:0;">Authorised Signatory</p>
                     </div>
                 </div>
             </div>
@@ -312,7 +487,7 @@ if (isset($_POST['stdid'])) {
                 </div>
                 <div class="student-1">
                     <div class="student-term">
-                        Term - <?= $term ?> <span class="css-token_receipt-58a1e2"></span>
+                        Term - <?= $term ?> <span style="margin-right: 10px;"></span>
                     </div>
                 </div>
                 <div class="student-1">
@@ -320,7 +495,7 @@ if (isset($_POST['stdid'])) {
                         Medium - <?= $medium ?>
                     </div>
                     <div class="student-medium">
-                        Payment Status - <span class="css-token_receipt-a1f46f"><?= $payment_status ?></span>
+                        Payment Status - <span style="text-transform: capitalize;"><?= $payment_status ?></span>
                     </div>
                 </div>
                 <div class="student-1">
@@ -337,13 +512,13 @@ if (isset($_POST['stdid'])) {
                 <table>
                     <thead>
                         <tr>
-                            <td class="css-token_receipt-1c30ab">
+                            <td style="width: 10%;">
                                 Sr No
                             </td>
-                            <td class="css-token_receipt-a2aac1">
+                            <td style="width: auto; display: flex; justify-content: center; border: 2px;">
                                 Particulars
                             </td>
-                            <td class="css-token_receipt-c7ee80">
+                            <td style="width: 15%;">
                                 Amount
                             </td>
                         </tr>
@@ -375,12 +550,12 @@ if (isset($_POST['stdid'])) {
                     <tfoot>
                         <tr>
                             <td colspan="2">
-                                <div class="css-token_receipt-50c3a9">
+                                <div style="display:flex; justify-content: space-between; border: 0;">
                                     <div>Rupees - <?= numberToWords((float) $institute_value_split) ?></div>
                                     <div>Total&nbsp;&nbsp;</div>
                                 </div>
                             </td>
-                            <td class="css-token_receipt-44a8b3">
+                            <td style="padding-left: 0px;">
                                 <p class="table-row mb-30">
                                     ₹
                                     <?php
@@ -398,13 +573,14 @@ if (isset($_POST['stdid'])) {
                     </tfoot>
                 </table>
                 <div class="foot-boottm">
-                    <div class="css-token_receipt-af18ea">
+                    <div style="font-size: 20px;">
                         <p class="table-row">- Subject to realization of online transaction.</p>
                         <p class="table-row">- Fees once paid is non-refundable and non-transferable.</p>
                     </div>
-                    <div class="css-token_receipt-e625cd">
-                        <p style=""><img src="../include/sign-GCA-reciept.png" alt="" class="css-token_receipt-25c662"></p>
-                        <p class="css-token_receipt-46dcee">Authorised Signatory</p>
+                    <div
+                        style="display:flex; flex-direction: column; justify-content: center; align-items: center;margin-left:10px;margin-right: 10px;margin-bottom: 10px;">
+                        <p style=""><img src="../include/sign-GCA-reciept.png" alt="" style="width: 70px; height:70px;"></p>
+                        <p style="margin:0;">Authorised Signatory</p>
                     </div>
                 </div>
             </div>

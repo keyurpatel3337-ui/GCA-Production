@@ -139,7 +139,7 @@ if (isset($_POST['payment_id'])) {
                         </div>
 
                         <!-- Transaction ID (for online/card) -->
-                        <div class="col-md-6 css-generate-receipt-224b51" id="transaction_id_div">
+                        <div class="col-md-6" id="transaction_id_div" style="display: none;">
                             <div class="form-group">
                                 <label>Transaction ID</label>
                                 <input type="text" name="transaction_id" class="form-control"
@@ -149,7 +149,7 @@ if (isset($_POST['payment_id'])) {
                         </div>
 
                         <!-- Cheque Details -->
-                        <div id="cheque_details" class="css-generate-receipt-015a2b">
+                        <div id="cheque_details" style="display: none; width: 100%;">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Cheque Number</label>

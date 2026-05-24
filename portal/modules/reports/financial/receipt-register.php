@@ -219,7 +219,88 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
+<style>
+    .filter-card {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        border: none;
+        border-radius: 12px;
+    }
 
+    .filter-card .form-label {
+        color: white;
+        font-weight: 500;
+    }
+
+    .stat-box {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid;
+    }
+
+    .stat-box.info {
+        border-color: #17a2b8;
+    }
+
+    .stat-box.success {
+        border-color: #28a745;
+    }
+
+    .stat-box.warning {
+        border-color: #ffc107;
+    }
+
+    .stat-box.danger {
+        border-color: #dc3545;
+    }
+
+    .stat-box h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .mode-badge {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+
+    .receipt-link {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .receipt-link:hover {
+        text-decoration: underline;
+    }
+
+    .mode-summary {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .mode-card {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 12px 20px;
+        text-align: center;
+        min-width: 120px;
+    }
+
+    .mode-card strong {
+        display: block;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .mode-card small {
+        color: #666;
+    }
+</style>
 
 
 
@@ -618,8 +699,8 @@ include '../../../include/sidebar.php';
             endforeach; ?>
         </tbody>
         <tfoot>
-            <tr class="css-receipt-register-3157f5">
-                <th colspan="13" class="css-receipt-register-7851db">Total Amount:</th>
+            <tr style="font-weight: bold; background-color: #f2f2f2;">
+                <th colspan="13" style="text-align: right;">Total Amount:</th>
                 <th><?php echo round($totalAmount); ?></th>
                 <th colspan="2"></th>
             </tr>

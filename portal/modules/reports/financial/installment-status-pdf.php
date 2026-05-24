@@ -45,13 +45,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" class="css-installment-status-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-installment-status-pdf-539b04">
-                <span class="css-installment-status-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span class="css-installment-status-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span class="css-installment-status-pdf-269fc9">INSTALLMENT TRACKING REPORT</span><br>
-                <span class="css-installment-status-pdf-1b8847">Snapshot as of: ' . date('d M Y h:i A') . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#17a2b8; color:#fff;">INSTALLMENT TRACKING REPORT</span><br>
+                <span style="font-size:10pt;">Snapshot as of: ' . date('d M Y h:i A') . '</span>
             </td>
         </tr>
     </table>';
@@ -59,14 +59,14 @@ try {
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" class="css-installment-status-pdf-c6ad08">
+    <table border="0.5" cellpadding="4" style="width:100%; font-size:9pt;">
         <thead>
-            <tr class="css-installment-status-pdf-5f2273">
-                <th width="4%" class="css-installment-status-pdf-539b04">#</th>
+            <tr style="background-color:#eee; font-weight:bold;">
+                <th width="4%" style="text-align:center;">#</th>
                 <th width="22%">Student Name</th>
                 <th width="12%">Class</th>
                 <th width="18%">Installment</th>
-                <th width="12%" class="css-installment-status-pdf-08a0ed">Amount</th>
+                <th width="12%" style="text-align:right;">Amount</th>
                 <th width="12%">Due Date</th>
                 <th width="10%">Status</th>
                 <th width="10%">Mobile</th>
@@ -75,7 +75,7 @@ try {
         <tbody>';
 
     if (empty($installments)) {
-        $html .= '<tr><td colspan="8" class="css-installment-status-pdf-539b04">No installments found</td></tr>';
+        $html .= '<tr><td colspan="8" style="text-align:center;">No installments found</td></tr>';
     } else {
         $i = 1;
         foreach ($installments as $inst) {
@@ -83,13 +83,13 @@ try {
             $statusColor = $status == 'paid' ? '#28a745' : ($status == 'partial' ? '#ffc107' : '#dc3545');
             $html .= '
             <tr nobr="true">
-                <td width="4%" class="css-installment-status-pdf-539b04">' . $i++ . '</td>
+                <td width="4%" style="text-align:center;">' . $i++ . '</td>
                 <td width="22%"><b>' . htmlspecialchars($inst['student_name'] ?? '') . '</b></td>
                 <td width="12%">' . htmlspecialchars($inst['current_class'] ?: '-' ?? '') . '</td>
                 <td width="18%">' . htmlspecialchars($inst['installment_name'] ?: 'Installment' ?? '') . '</td>
-                <td width="12%" class="css-installment-status-pdf-714e9d">' . formatIndianCurrency($inst['amount'] ?: 0) . '</td>
+                <td width="12%" style="text-align:right; font-weight:bold;">' . formatIndianCurrency($inst['amount'] ?: 0) . '</td>
                 <td width="12%">' . date('d-m-Y', strtotime($inst['due_date'])) . '</td>
-                <td width="10%" class="css-installment-status-pdf-489de4">' . strtoupper($status) . '</td>
+                <td width="10%" style="color:' . $statusColor . '; font-weight:bold;">' . strtoupper($status) . '</td>
                 <td width="10%">' . htmlspecialchars($inst['mobile'] ?: '-' ?? '') . '</td>
             </tr>';
         }

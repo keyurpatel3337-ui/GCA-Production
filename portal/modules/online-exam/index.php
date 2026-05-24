@@ -86,9 +86,9 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 <link rel="stylesheet" href="../../assets/css/oes-editor.css?v=<?php echo time(); ?>">
 
 <!-- Hidden OCR Input -->
-<input type="file" id="ocr-input" class="css-index-224b51" accept="image/*">
+<input type="file" id="ocr-input" style="display: none;" accept="image/*">
 <!-- Hidden Document Import Input -->
-<input type="file" id="doc-import-input" class="css-index-224b51" accept=".docx,.xlsx,.xls,.csv">
+<input type="file" id="doc-import-input" style="display: none;" accept=".docx,.xlsx,.xls,.csv">
 
 <main class="app-main">
     <div class="app-content pt-4">
@@ -99,7 +99,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                     <div class="d-flex align-items-center">
                         <i class="fas fa-check-circle text-success fa-2x mr-3"></i>
                         <div>
-                            <strong class="text-success d-block css-index-e7ec96">Question Saved Successfully!</strong>
+                            <strong class="text-success d-block" style="font-size: 1.1rem;">Question Saved Successfully!</strong>
                             <span class="text-muted small">A new blank form is ready. The locked configuration remains active.</span>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 <!-- Step 1: Pre-Configuration Setup Form -->
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-8">
-                        <div class="card shadow-sm border-0 rounded-lg mt-4 css-index-8115b8">
+                        <div class="card shadow-sm border-0 rounded-lg mt-4" style="border-top: 5px solid var(--primary) !important;">
                             <div class="card-header bg-white text-center py-4 border-bottom-0 d-block">
                                 <h4 class="font-weight-bold text-primary mb-1 d-block"><i class="fas fa-sliders-h mr-2"></i>Exam Question Setup</h4>
                                 <span class="text-muted small d-block mt-2">Set configuration once, create multiple questions easily.</span>
@@ -194,12 +194,12 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                         </div>
 
                                         <!-- Row 5: Dynamic Counts based on Question Type -->
-                                        <div class="col-12 form-group mb-4 css-index-224b51" id="mcq_count_wrapper">
+                                        <div class="col-12 form-group mb-4" id="mcq_count_wrapper" style="display: none;">
                                             <label class="small font-weight-bold text-secondary mb-1">Number of MCQ Questions to Create</label>
                                             <input type="number" name="mcq_question_count" id="setup_mcq_count" class="form-control text-primary font-weight-bold" min="1" max="50" value="<?php echo htmlspecialchars($pre['mcq_question_count'] ?? '1'); ?>" style="border-radius: 8px;">
                                         </div>
 
-                                        <div class="col-12 form-group mb-4 css-index-224b51" id="desc_counts_wrapper">
+                                        <div class="col-12 form-group mb-4" id="desc_counts_wrapper" style="display: none;">
                                             <label class="small font-weight-bold text-secondary mb-2">Number of Descriptive Questions to Create per Mark Level</label>
                                             <div class="row">
                                                 <?php for ($m = 1; $m <= 5; $m++): ?>
@@ -297,27 +297,27 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                     '11' => '11th', '12' => '12th', '13' => 'Re-Neet', default => $cfg['standard_id']
                 };
             ?>
-                <div class="card shadow-sm border-0 mb-4 rounded-lg css-index-0106bd">
+                <div class="card shadow-sm border-0 mb-4 rounded-lg" style="border: 1px solid #e3e6f0; border-left: 4px solid #1a73e8 !important; border-radius: 12px; overflow: hidden;">
                     <div class="card-body p-3">
                         <div class="row align-items-center">
                             <!-- Column 1: Setup Locked Badge -->
                             <div class="col-md-auto mb-2 mb-md-0">
-                                <span class="badge text-white px-3 py-2 font-weight-bold text-uppercase d-inline-flex align-items-center shadow-sm css-index-7faf3b">
+                                <span class="badge text-white px-3 py-2 font-weight-bold text-uppercase d-inline-flex align-items-center shadow-sm" style="border-radius: 8px; font-size: 0.8rem; letter-spacing: 0.5px; background-color: #1a73e8 !important; white-space: nowrap;">
                                     <i class="fas fa-lock mr-2"></i> SETUP LOCKED
                                 </span>
                             </div>
                             <!-- Column 2: Active Configuration Info Table -->
                             <div class="col-md mb-2 mb-md-0 text-dark">
-                                <span class="font-weight-bold text-dark d-block mb-1 css-index-6e47c6">
+                                <span class="font-weight-bold text-dark d-block mb-1" style="font-size: 0.95rem;">
                                     <i class="fas fa-sliders-h mr-1 text-primary"></i> Active Configuration Details:
                                 </span>
                                 <div class="table-responsive">
-                                    <table class="table table-sm table-borderless mb-0 css-index-76e313">
+                                    <table class="table table-sm table-borderless mb-0" style="font-size: 0.85rem; line-height: 1.4; width: 100%; min-width: 500px;">
                                         <tbody>
                                             <tr>
-                                                <td class="text-secondary py-1 pl-0 css-index-fcb9f7">Standard: <strong class="text-dark"><?php echo $cfg_standard_label; ?></strong></td>
-                                                <td class="text-secondary py-1 css-index-3af624">Subject: <strong class="text-dark"><?php echo htmlspecialchars($cfg_subject_name); ?></strong></td>
-                                                <td class="text-secondary py-1 css-index-3af624">Type: <strong class="text-dark"><?php echo ($cfg['question_type_id'] == '1') ? 'MCQ' : 'Descriptive'; ?></strong></td>
+                                                <td class="text-secondary py-1 pl-0" style="width: 30%;">Standard: <strong class="text-dark"><?php echo $cfg_standard_label; ?></strong></td>
+                                                <td class="text-secondary py-1" style="width: 35%;">Subject: <strong class="text-dark"><?php echo htmlspecialchars($cfg_subject_name); ?></strong></td>
+                                                <td class="text-secondary py-1" style="width: 35%;">Type: <strong class="text-dark"><?php echo ($cfg['question_type_id'] == '1') ? 'MCQ' : 'Descriptive'; ?></strong></td>
                                             </tr>
                                             <tr>
                                                 <td class="text-secondary py-1 pl-0"><?php if ($cfg_group_name): ?>Group: <strong class="text-dark"><?php echo htmlspecialchars($cfg_group_name); ?></strong><?php else: ?><span class="text-muted-light">-</span><?php endif; ?></td>
@@ -343,10 +343,10 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             </div>
                             <!-- Column 3: Action Buttons -->
                             <div class="col-md-auto text-md-right d-flex align-items-center justify-content-md-end flex-wrap gap-2">
-                                <a href="index.php?action=edit_config" class="btn btn-outline-primary btn-sm px-3 py-1.5 font-weight-bold mr-2 d-inline-flex align-items-center css-index-bfd120">
+                                <a href="index.php?action=edit_config" class="btn btn-outline-primary btn-sm px-3 py-1.5 font-weight-bold mr-2 d-inline-flex align-items-center" style="border-radius: 8px; font-size: 0.85rem; border-color: #1a73e8; color: #1a73e8; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05); white-space: nowrap;">
                                     <i class="fas fa-edit mr-1"></i> Change Setup
                                 </a>
-                                <a href="index.php?action=reset_config" class="btn btn-outline-danger btn-sm px-3 py-1.5 font-weight-bold d-inline-flex align-items-center css-index-f5a116" title="Clear configuration completely">
+                                <a href="index.php?action=reset_config" class="btn btn-outline-danger btn-sm px-3 py-1.5 font-weight-bold d-inline-flex align-items-center" style="border-radius: 8px; font-size: 0.85rem; border-color: #ea4335; color: #ea4335; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05);" title="Clear configuration completely">
                                     <i class="fas fa-times mr-1"></i> Reset
                                 </a>
                             </div>
@@ -407,19 +407,19 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                 $rendered_editors[] = "explanation-$idx";
                                 $rendered_editors[] = "explanation-guj-$idx";
                         ?>
-                                <div class="card shadow-sm border-0 mb-5 rounded-lg css-index-7a951e">
+                                <div class="card shadow-sm border-0 mb-5 rounded-lg" style="border: 1px solid #e3e6f0; border-top: 5px solid var(--primary) !important; border-radius: 12px; overflow: hidden;">
                                     <div class="card-header py-3 bg-white border-bottom d-flex align-items-center justify-content-between">
                                         <h5 class="m-0 font-weight-bold text-primary"><i class="fas fa-question-circle mr-2"></i> MCQ Question #<?php echo $idx; ?></h5>
-                                        <span class="badge bg-primary text-white px-3 py-2 css-index-e7992d">MCQ</span>
+                                        <span class="badge bg-primary text-white px-3 py-2" style="font-size: 0.85rem;">MCQ</span>
                                     </div>
                                     <div class="card-body p-4">
                                         <!-- Marks & Neg Marks for this question -->
                                         <div class="row mb-4">
                                             <div class="col-md-6 mb-3 mb-md-0">
-                                                <div class="card shadow-none border css-index-cb968a">
+                                                <div class="card shadow-none border" style="border-radius: 8px;">
                                                     <div class="card-body p-2 d-flex align-items-center">
-                                                        <div class="bg-primary-light text-primary p-2 rounded-circle mr-3 css-index-c35d94">
-                                                            <i class="fas fa-star css-index-33dd45"></i>
+                                                        <div class="bg-primary-light text-primary p-2 rounded-circle mr-3" style="background: rgba(26, 115, 232, 0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                                                            <i class="fas fa-star" style="font-size: 0.9rem;"></i>
                                                         </div>
                                                         <div class="flex-grow-1">
                                                             <label class="font-weight-bold small text-muted mb-0">Question Marks</label>
@@ -429,10 +429,10 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="card shadow-none border css-index-cb968a">
+                                                <div class="card shadow-none border" style="border-radius: 8px;">
                                                     <div class="card-body p-2 d-flex align-items-center">
-                                                        <div class="bg-danger-light text-danger p-2 rounded-circle mr-3 css-index-a839ff">
-                                                            <i class="fas fa-minus-circle css-index-33dd45"></i>
+                                                        <div class="bg-danger-light text-danger p-2 rounded-circle mr-3" style="background: rgba(234, 67, 53, 0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                                                            <i class="fas fa-minus-circle" style="font-size: 0.9rem;"></i>
                                                         </div>
                                                         <div class="flex-grow-1">
                                                             <label class="font-weight-bold small text-muted mb-0">Negative Marks</label>
@@ -509,7 +509,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                         </div>
 
                                         <!-- Solution and Explanation block for this MCQ -->
-                                        <div class="card shadow-none border mb-4 css-index-cb968a">
+                                        <div class="card shadow-none border mb-4" style="border-radius: 8px;">
                                             <div class="card-header py-2 bg-light d-flex align-items-center">
                                                 <i class="fas fa-lightbulb text-warning mr-2"></i>
                                                 <h6 class="m-0 font-weight-bold text-dark">Explanation & Solution</h6>
@@ -570,10 +570,10 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                     $rendered_editors[] = "desc-s{$m}-{$idx}";
                                     $rendered_editors[] = "desc-s{$m}-{$idx}-guj";
                         ?>
-                                    <div class="card shadow-sm border-0 mb-5 rounded-lg css-index-523e15">
+                                    <div class="card shadow-sm border-0 mb-5 rounded-lg" style="border: 1px solid #e3e6f0; border-top: 5px solid var(--info) !important; border-radius: 12px; overflow: hidden;">
                                         <div class="card-header py-3 bg-white border-bottom d-flex align-items-center justify-content-between">
                                             <h5 class="m-0 font-weight-bold text-info"><i class="fas fa-pen-alt mr-2"></i> <?php echo $m; ?>-Mark Question - #<?php echo $idx; ?></h5>
-                                            <span class="badge bg-info text-white px-3 py-2 css-index-e7992d">Descriptive</span>
+                                            <span class="badge bg-info text-white px-3 py-2" style="font-size: 0.85rem;">Descriptive</span>
                                         </div>
                                         <div class="card-body p-4">
                                             <!-- Marks and Negative Marks for this Descriptive Question -->
@@ -672,27 +672,27 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             <!-- Marks and Negative Marks Cards -->
                             <div class="row mb-4" id="marks_neg_container">
                                 <div class="col-md-6">
-                                    <div class="card shadow-sm border-0 css-index-521eda">
+                                    <div class="card shadow-sm border-0" style="border-radius: 12px; border: 1px solid #e3e6f0; border-left: 4px solid #1a73e8 !important;">
                                         <div class="card-body p-3 d-flex align-items-center">
-                                            <div class="bg-primary-light text-primary p-3 rounded-circle mr-3 css-index-a8bd9d">
-                                                <i class="fas fa-star css-index-14fa87"></i>
+                                            <div class="bg-primary-light text-primary p-3 rounded-circle mr-3" style="background: rgba(26, 115, 232, 0.1); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                                                <i class="fas fa-star" style="font-size: 1.25rem;"></i>
                                             </div>
                                             <div class="flex-grow-1">
                                                 <label class="font-weight-bold small text-muted mb-1">Question Marks</label>
-                                                <input type="number" step="0.01" min="0" name="marks" id="marks_input" class="form-control form-control-lg border-0 shadow-none font-weight-bold p-0 text-primary css-index-5fc230" value="<?php echo $default_marks; ?>" required>
+                                                <input type="number" step="0.01" min="0" name="marks" id="marks_input" class="form-control form-control-lg border-0 shadow-none font-weight-bold p-0 text-primary" style="font-size: 1.4rem; background: transparent; height: auto;" value="<?php echo $default_marks; ?>" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="card shadow-sm border-0 css-index-4a80d4">
+                                    <div class="card shadow-sm border-0" style="border-radius: 12px; border: 1px solid #e3e6f0; border-left: 4px solid #ea4335 !important;">
                                         <div class="card-body p-3 d-flex align-items-center">
-                                            <div class="bg-danger-light text-danger p-3 rounded-circle mr-3 css-index-df09d7">
-                                                <i class="fas fa-minus-circle css-index-14fa87"></i>
+                                            <div class="bg-danger-light text-danger p-3 rounded-circle mr-3" style="background: rgba(234, 67, 53, 0.1); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                                                <i class="fas fa-minus-circle" style="font-size: 1.25rem;"></i>
                                             </div>
                                             <div class="flex-grow-1">
                                                 <label class="font-weight-bold small text-muted mb-1">Negative Marks</label>
-                                                <input type="number" step="0.01" min="0" name="negative_marks" id="negative_marks_input" class="form-control form-control-lg border-0 shadow-none font-weight-bold p-0 text-danger css-index-5fc230" value="<?php echo $default_neg; ?>" required>
+                                                <input type="number" step="0.01" min="0" name="negative_marks" id="negative_marks_input" class="form-control form-control-lg border-0 shadow-none font-weight-bold p-0 text-danger" style="font-size: 1.4rem; background: transparent; height: auto;" value="<?php echo $default_neg; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -714,7 +714,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                                 <label class="font-weight-bold small text-muted mb-2">
                                                     <span class="badge bg-primary text-white mr-1">EN</span> Question Text (English)
                                                 </label>
-                                                <div id="editor-main" class="quill-editor css-index-7b393f"></div>
+                                                <div id="editor-main" class="quill-editor" style="min-height: 150px;"></div>
                                                 <textarea name="question_text" id="question_text" class="d-none"></textarea>
                                             </div>
                                         </div>
@@ -723,7 +723,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                                 <label class="font-weight-bold small text-muted mb-2">
                                                     <span class="badge bg-warning text-dark mr-1">GU</span> Question Text (Gujarati)
                                                 </label>
-                                                <div id="editor-main-guj" class="quill-editor css-index-7b393f"></div>
+                                                <div id="editor-main-guj" class="quill-editor" style="min-height: 150px;"></div>
                                                 <textarea name="question_text_guj" id="question_text_guj" class="d-none"></textarea>
                                             </div>
                                         </div>
@@ -732,7 +732,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             </div>
 
                             <!-- MCQ Specific Section -->
-                            <div id="mcq_section" class="css-index-224b51">
+                            <div id="mcq_section" style="display: none;">
                                 <!-- Hidden Correct Answer Input -->
                                 <input type="hidden" name="correct_option" id="correct_option_hidden" value="A">
       
@@ -780,7 +780,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                             </div>
 
                             <!-- Bulk Descriptive Section -->
-                            <div id="descriptive_bulk_section" class="css-index-224b51">
+                            <div id="descriptive_bulk_section" style="display: none;">
                                 <?php for ($i = 1; $i <= 5; $i++): ?>
                                     <div class="card shadow-sm mb-4">
                                         <div class="card-header py-3 bg-info text-white d-flex justify-content-between align-items-center">
@@ -913,7 +913,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                                     <label class="font-weight-bold small text-muted mb-2">
                                                         <span class="badge bg-primary text-white mr-1">EN</span> Text Solution / Explanation (English)
                                                     </label>
-                                                    <div id="editor-explanation" class="quill-editor css-index-092e03"></div>
+                                                    <div id="editor-explanation" class="quill-editor" style="min-height: 120px;"></div>
                                                     <textarea name="explanation" id="explanation" class="d-none"></textarea>
                                                 </div>
                                             </div>
@@ -922,7 +922,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                                     <label class="font-weight-bold small text-muted mb-2">
                                                         <span class="badge bg-warning text-dark mr-1">GU</span> Text Solution / Explanation (Gujarati)
                                                     </label>
-                                                    <div id="editor-explanation-guj" class="quill-editor css-index-092e03"></div>
+                                                    <div id="editor-explanation-guj" class="quill-editor" style="min-height: 120px;"></div>
                                                     <textarea name="explanation_guj" id="explanation_guj" class="d-none"></textarea>
                                                 </div>
                                             </div>
@@ -958,20 +958,20 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         <?php endif; ?>
 
                         <!-- bottom action buttons card -->
-                        <div class="card shadow-sm border-0 mb-4 css-index-f89417">
+                        <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px; background: #fff; border: 1px solid #e3e6f0;">
                             <div class="card-body p-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
                                 <div>
                                     <h6 class="m-0 font-weight-bold text-dark">Ready to save your question?</h6>
                                     <p class="text-muted small mb-0">Please verify all bilingual inputs, custom marks, and explanations before submitting.</p>
                                 </div>
                                 <div class="d-flex align-items-center gap-2">
-                                    <button type="button" onclick="clearOesDraft()" class="btn btn-outline-danger px-3 font-weight-bold mr-2 css-index-cb968a" title="Reset all typed fields and clear draft">
+                                    <button type="button" onclick="clearOesDraft()" class="btn btn-outline-danger px-3 font-weight-bold mr-2" style="border-radius: 8px;" title="Reset all typed fields and clear draft">
                                         <i class="fas fa-undo mr-1"></i> Reset
                                     </button>
-                                    <button type="button" onclick="previewQuestion()" class="btn btn-outline-info px-4 font-weight-bold mr-2 css-index-cb968a">
+                                    <button type="button" onclick="previewQuestion()" class="btn btn-outline-info px-4 font-weight-bold mr-2" style="border-radius: 8px;">
                                         <i class="fas fa-eye mr-1"></i> Preview
                                     </button>
-                                    <button type="submit" class="btn btn-primary px-5 py-2 font-weight-bold shadow-sm css-index-2145db">
+                                    <button type="submit" class="btn btn-primary px-5 py-2 font-weight-bold shadow-sm" style="border-radius: 8px; background: #1a73e8; border: none; transition: all 0.2s;">
                                         <i class="fas fa-save mr-2"></i> Save Question
                                     </button>
                                 </div>
@@ -982,7 +982,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                     <!-- Right Side: Configuration -->
                     <?php if (!$has_active_config || $qData): ?>
                     <div class="col-lg-4">
-                        <div class="card shadow-sm sticky-top css-index-9ad971">
+                        <div class="card shadow-sm sticky-top" style="top: 20px;">
                             <div class="card-header py-3 bg-primary text-white">
                                 <h6 class="m-0 font-weight-bold">Configuration</h6>
                             </div>
@@ -1115,7 +1115,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
         <div class="alert alert-info py-2 small mb-3">
             <strong>Tip:</strong> For Chemistry, use <code>\ce{...}</code>. Example: <code>\ce{H2O}</code>
         </div>
-        <math-field id="math-input" class="w-100 p-3 border rounded-lg mb-4 css-index-fa415b"></math-field>
+        <math-field id="math-input" class="w-100 p-3 border rounded-lg mb-4" style="font-size: 1.5rem;"></math-field>
         <div class="d-flex justify-content-end gap-2">
             <button type="button" onclick="closeModal('mathModal')" class="btn btn-light">Cancel</button>
             <button type="button" id="confirm-math-btn" class="btn btn-primary px-4">Insert Equation</button>
@@ -1124,7 +1124,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 </div>
 
 <!-- OCR Modal -->
-<div id="ocrModal" class="oes-modal css-index-51b49c">
+<div id="ocrModal" class="oes-modal" style="background: rgba(0,0,0,0.9);">
     <div class="oes-modal-content oes-modal-full bg-dark text-white">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="m-0 font-weight-bold text-white">Select Text Area</h5>
@@ -1132,7 +1132,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
         </div>
         <div
             class="flex-grow-1 overflow-hidden d-flex align-items-center justify-content-center bg-black rounded position-relative">
-            <img id="ocr-preview-img" class="css-index-4ac983">
+            <img id="ocr-preview-img" style="max-width: 100%; max-height: 100%;">
             <div id="ocr-processing-overlay">
                 <div class="spinner-border text-light" role="status"></div>
                 <span>Processing Image...</span>
@@ -1186,12 +1186,12 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
 <!-- Preview Modal -->
 <div id="previewModal" class="oes-modal">
-    <div class="oes-modal-content css-index-ea0c3d">
+    <div class="oes-modal-content" style="max-width: 850px; border-top: 5px solid var(--primary);">
         <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
             <h5 class="m-0 font-weight-bold text-primary"><i class="fas fa-eye mr-2"></i> Question Preview</h5>
             <button type="button" onclick="closeModal('previewModal')" class="btn-close"></button>
         </div>
-        <div id="preview-content" class="p-2 css-index-39ece0">
+        <div id="preview-content" class="p-2" style="font-family: 'Inter', sans-serif;">
             <!-- Rendered content goes here -->
         </div>
         <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">

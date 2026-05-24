@@ -16,7 +16,45 @@ require_once ENV_CONFIG_FILE;
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
-    
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #4f46e5 0%, #1e1b4b 100%);
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            border-color: #4f46e5;
+            box-shadow: 0 30px 60px -12px rgba(79, 70, 229, 0.15);
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-slow {
+
+            0%,
+            100% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.3;
+                transform: scale(1.1);
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-white text-slate-900 overflow-x-hidden">

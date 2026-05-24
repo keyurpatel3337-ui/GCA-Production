@@ -31,7 +31,95 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-
+<style>
+    .mapping-card {
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid #e9ecef;
+    }
+    .mapping-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.06) !important;
+    }
+    .pill-badge {
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .pill-subject {
+        background-color: #e3f2fd;
+        color: #0d47a1;
+        border: 1px solid #bbdefb;
+    }
+    .pill-division {
+        background-color: #efebe9;
+        color: #4e342e;
+        border: 1px solid #d7ccc8;
+    }
+    .pill-empty {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        border: 1px solid #dee2e6;
+    }
+    .nav-tabs .nav-link {
+        font-weight: 600;
+        color: #495057;
+        border: none;
+        border-bottom: 3px solid transparent;
+        padding: 12px 20px;
+        transition: all 0.2s ease;
+    }
+    .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        border-bottom: 3px solid #0d6efd;
+        background: transparent;
+    }
+    .search-box-container {
+        position: relative;
+    }
+    .search-box-container .fa-search {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+    }
+    .search-box-container input {
+        padding-left: 40px;
+    }
+    .checkbox-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 12px;
+        max-height: 350px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+    }
+    .checkbox-item {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+    .checkbox-item:hover {
+        border-color: #cbd5e1;
+        background-color: #f1f5f9;
+    }
+    .checkbox-item input {
+        cursor: pointer;
+    }
+</style>
 
 <div class="container-fluid py-4">
     <!-- Header -->
@@ -75,7 +163,7 @@ include '../../include/sidebar.php';
                 </ul>
 
                 <!-- Live Search Bar -->
-                <div class="search-box-container css-teacher-mapping-1f44ea">
+                <div class="search-box-container" style="min-width: 280px;">
                     <i class="fas fa-search"></i>
                     <input type="text" id="liveSearchInput" class="form-control rounded-pill shadow-sm" placeholder="Search teacher by name or dept...">
                 </div>

@@ -59,7 +59,7 @@ include '../../../include/sidebar.php';
 
     <div class="card">
         <div class="card-header"><h5 class="card-title mb-0">Term Comparison</h5></div>
-        <div class="card-body"><canvas id="termChart" class="css-term-wise-a0b01d"></canvas></div>
+        <div class="card-body"><canvas id="termChart" style="max-height: 300px;"></canvas></div>
     </div>
 
     <div class="card mt-4">

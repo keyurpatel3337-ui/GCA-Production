@@ -139,7 +139,17 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
+<style>
+    @media print {
+        .no-print {
+            display: none !important;
+        }
 
+        .card {
+            border: 1px solid #ddd !important;
+        }
+    }
+</style>
 
 
 
@@ -520,7 +530,7 @@ include '../../../include/sidebar.php';
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="5" class="css-day-book-7851db">Day Total:</th>
+                <th colspan="5" style="text-align: right;">Day Total:</th>
                 <th><?php echo round($grandTotal); ?></th>
                 <th></th>
             </tr>
@@ -593,7 +603,7 @@ include '../../../include/sidebar.php';
                         </tr>
                     </table>
 
-                    <div class="mt-4 pt-4 border-top d-print-block css-day-book-224b51">
+                    <div class="mt-4 pt-4 border-top d-print-block" style="display: none;">
                         <div class="row">
                             <div class="col-6 text-center">
                                 <p class="mb-5">_______________________</p>

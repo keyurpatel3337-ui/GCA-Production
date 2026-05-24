@@ -43,7 +43,81 @@ include '../../include/sidebar.php';
 ?>
 
 <!-- Glassmorphic Styles -->
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+        --info-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        --purple-gradient: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+        --orange-gradient: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    }
 
+    body {
+        background-color: #f8fafc;
+    }
+
+    .glass-metric-card {
+        background: white;
+        border-radius: 16px;
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .glass-metric-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+
+    .glass-metric-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+    }
+
+    .metric-teal::before { background: var(--primary-gradient); }
+    .metric-blue::before { background: var(--info-gradient); }
+    .metric-purple::before { background: var(--purple-gradient); }
+    .metric-orange::before { background: var(--orange-gradient); }
+
+    .quick-glow-btn {
+        background: white;
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: block;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .quick-glow-btn:hover {
+        transform: translateY(-2px);
+        border-color: #0d9488;
+        box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.1), 0 4px 6px -4px rgba(13, 148, 136, 0.1);
+    }
+
+    .quick-icon-wrapper {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        font-size: 1.25rem;
+        transition: all 0.2s ease;
+    }
+
+    .quick-glow-btn:hover .quick-icon-wrapper {
+        transform: scale(1.1);
+    }
+</style>
 
 <div class="container-fluid py-4">
     <?php include '../../include/mfa_alert.php'; ?>
@@ -54,7 +128,7 @@ include '../../include/sidebar.php';
             <h2 class="fw-bold text-slate-800">Welcome Back, <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Assistant Teacher'); ?>!</h2>
             <p class="text-muted mb-0">Here is your academic helper panel to manage exams, question banks, and bulk uploads.</p>
         </div>
-        <span class="badge bg-teal px-3 py-2 rounded-pill shadow-sm css-assistant_teacher_dashboard-4c1be4"><i class="fas fa-hands-helping me-1"></i> Assistant Teacher Portal</span>
+        <span class="badge bg-teal px-3 py-2 rounded-pill shadow-sm" style="background-color: #0d9488;"><i class="fas fa-hands-helping me-1"></i> Assistant Teacher Portal</span>
     </div>
 
     <!-- Stats Cards -->
@@ -67,7 +141,7 @@ include '../../include/sidebar.php';
                         <span class="text-muted small fw-bold text-uppercase d-block mb-1">Total Questions</span>
                         <h3 class="fw-bold mb-0 text-slate-900"><?php echo number_format($total_questions); ?></h3>
                     </div>
-                    <div class="p-3 bg-teal bg-opacity-10 text-teal rounded-3 css-assistant_teacher_dashboard-ed47d5">
+                    <div class="p-3 bg-teal bg-opacity-10 text-teal rounded-3" style="color: #0d9488;">
                         <i class="fas fa-book fa-lg"></i>
                     </div>
                 </div>
@@ -101,7 +175,7 @@ include '../../include/sidebar.php';
                         <span class="text-muted small fw-bold text-uppercase d-block mb-1">Total Chapters</span>
                         <h3 class="fw-bold mb-0 text-slate-900"><?php echo number_format($total_chapters); ?></h3>
                     </div>
-                    <div class="p-3 bg-purple bg-opacity-10 text-purple rounded-3 css-assistant_teacher_dashboard-e33b5b">
+                    <div class="p-3 bg-purple bg-opacity-10 text-purple rounded-3" style="color: #7c3aed;">
                         <i class="fas fa-bookmark fa-lg"></i>
                     </div>
                 </div>
@@ -117,7 +191,7 @@ include '../../include/sidebar.php';
                         <span class="text-muted small fw-bold text-uppercase d-block mb-1">Total Topics</span>
                         <h3 class="fw-bold mb-0 text-slate-900"><?php echo number_format($total_topics); ?></h3>
                     </div>
-                    <div class="p-3 bg-warning bg-opacity-10 text-warning rounded-3 css-assistant_teacher_dashboard-c5d9c2">
+                    <div class="p-3 bg-warning bg-opacity-10 text-warning rounded-3" style="color: #ea580c;">
                         <i class="fas fa-tags fa-lg"></i>
                     </div>
                 </div>
@@ -138,7 +212,7 @@ include '../../include/sidebar.php';
                     <div class="row g-4">
                         <div class="col-md-6 col-lg-4">
                             <a href="<?php echo PORTAL_URL; ?>/modules/online-exam/index.php" class="quick-glow-btn">
-                                <div class="quick-icon-wrapper bg-teal bg-opacity-10 text-teal css-assistant_teacher_dashboard-fe5996">
+                                <div class="quick-icon-wrapper bg-teal bg-opacity-10 text-teal" style="background-color: rgba(13, 148, 136, 0.1); color: #0d9488;">
                                     <i class="fas fa-plus"></i>
                                 </div>
                                 <h6 class="fw-bold text-slate-800 mb-1">Create Question</h6>
@@ -156,7 +230,7 @@ include '../../include/sidebar.php';
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <a href="<?php echo PORTAL_URL; ?>/modules/test-marks/bulk-upload.php" class="quick-glow-btn">
-                                <div class="quick-icon-wrapper bg-warning bg-opacity-10 text-warning css-assistant_teacher_dashboard-7c0466">
+                                <div class="quick-icon-wrapper bg-warning bg-opacity-10 text-warning" style="background-color: rgba(245, 158, 11, 0.1); color: #ea580c;">
                                     <i class="fas fa-file-excel"></i>
                                 </div>
                                 <h6 class="fw-bold text-slate-800 mb-1">Upload Marks</h6>
@@ -174,7 +248,7 @@ include '../../include/sidebar.php';
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <a href="<?php echo PORTAL_URL; ?>/modules/test-marks/add.php" class="quick-glow-btn">
-                                <div class="quick-icon-wrapper bg-purple bg-opacity-10 text-purple css-assistant_teacher_dashboard-f505c4">
+                                <div class="quick-icon-wrapper bg-purple bg-opacity-10 text-purple" style="background-color: rgba(124, 58, 237, 0.1); color: #7c3aed;">
                                     <i class="fas fa-user-edit"></i>
                                 </div>
                                 <h6 class="fw-bold text-slate-800 mb-1">Single Marks</h6>
@@ -188,12 +262,12 @@ include '../../include/sidebar.php';
 
         <!-- Instructions Panel -->
         <div class="col-xl-4">
-            <div class="card border-0 shadow-sm rounded-4 h-100 bg-gradient-dark text-slate-800 css-assistant_teacher_dashboard-3dfca5">
+            <div class="card border-0 shadow-sm rounded-4 h-100 bg-gradient-dark text-slate-800" style="background-color: #f1f5f9;">
                 <div class="card-body p-4">
-                    <h5 class="fw-bold mb-3"><i class="fas fa-info-circle text-teal me-2 css-assistant_teacher_dashboard-ed47d5"></i>Guidelines for Assistant Staff</h5>
+                    <h5 class="fw-bold mb-3"><i class="fas fa-info-circle text-teal me-2" style="color: #0d9488;"></i>Guidelines for Assistant Staff</h5>
                     <ul class="list-unstyled mb-0">
                         <li class="d-flex gap-3 mb-3">
-                            <div class="p-2 bg-white rounded-3 shadow-sm flex-shrink-0 css-assistant_teacher_dashboard-eb60ca">
+                            <div class="p-2 bg-white rounded-3 shadow-sm flex-shrink-0" style="width: 36px; height: 36px; display:flex; align-items:center; justify-content:center;">
                                 <i class="fas fa-shield-alt text-success"></i>
                             </div>
                             <div>
@@ -202,7 +276,7 @@ include '../../include/sidebar.php';
                             </div>
                         </li>
                         <li class="d-flex gap-3 mb-3">
-                            <div class="p-2 bg-white rounded-3 shadow-sm flex-shrink-0 css-assistant_teacher_dashboard-eb60ca">
+                            <div class="p-2 bg-white rounded-3 shadow-sm flex-shrink-0" style="width: 36px; height: 36px; display:flex; align-items:center; justify-content:center;">
                                 <i class="fas fa-file-word text-primary"></i>
                             </div>
                             <div>
@@ -211,7 +285,7 @@ include '../../include/sidebar.php';
                             </div>
                         </li>
                         <li class="d-flex gap-3">
-                            <div class="p-2 bg-white rounded-3 shadow-sm flex-shrink-0 css-assistant_teacher_dashboard-eb60ca">
+                            <div class="p-2 bg-white rounded-3 shadow-sm flex-shrink-0" style="width: 36px; height: 36px; display:flex; align-items:center; justify-content:center;">
                                 <i class="fas fa-exclamation-triangle text-warning"></i>
                             </div>
                             <div>

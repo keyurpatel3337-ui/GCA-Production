@@ -66,7 +66,7 @@ include '../../include/sidebar.php';
                                 <i class="fas fa-check-circle text-success"></i>
                             <?php else: ?>
                                 <i class="fas fa-exclamation-triangle text-warning"></i>
-                                <span class="text-muted css-fee-splits-beab58">
+                                <span class="text-muted" style="font-size: 16px;">
                                     (Should total 100%)
                                 </span>
                             <?php endif; ?>

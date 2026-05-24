@@ -1,0 +1,25 @@
+.hover-shadow:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    border-color: #4e73df !important;
+}
+
+.pointer {
+    cursor: pointer !important;
+}
+
+.transition-all {
+    transition: all 0.2s !important;
+}
+
+.btn-rounded-10 {
+    border-radius: 10px !important;
+}
+
+.max-h-600-overflow {
+    max-height: 600px !important;
+    overflow-y: auto !important;
+}
+
+.sticky-top-20 {
+    top: 20px !important;
+}

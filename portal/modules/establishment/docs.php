@@ -164,7 +164,7 @@ include '../../include/sidebar.php';
                 </form>
 
                 <?php if (isset($_GET['search'])): ?>
-                    <div class="mt-3 overflow-auto css-docs-59cb08">
+                    <div class="mt-3 overflow-auto" style="max-height: 450px;">
                         <?php
                         $search_term = $_GET['search'];
                         $search_wildcard = '%' . $search_term . '%';
@@ -183,7 +183,8 @@ include '../../include/sidebar.php';
                                 class="text-decoration-none d-block py-3 border-bottom student-list-item <?php echo $is_active ? 'bg-primary bg-opacity-10 border-start border-primary border-4' : ''; ?>"
                                 style="transition: all 0.2s ease;">
                                 <div class="px-2">
-                                    <div class="fw-bold text-dark text-uppercase small mb-1 css-docs-4237ea">
+                                    <div class="fw-bold text-dark text-uppercase small mb-1"
+                                        style="letter-spacing: 0.01em; line-height: 1.4;">
                                         <?php echo htmlspecialchars($row['full_name'] ?? ''); ?>
                                     </div>
                                     <div class="text-muted smaller">ID: <?php echo $row['id']; ?></div>
@@ -385,6 +386,32 @@ include '../../include/sidebar.php';
         </div>
     </div>
 
-    
+    <style>
+        .welcome-banner {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+            border-radius: 20px;
+            color: white;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+        }
+
+        .list-group-item.active {
+            background: rgba(0, 82, 204, 0.1);
+            color: #0052CC;
+            border-color: #0052CC;
+        }
+
+        .bg-primary-subtle {
+            background: rgba(0, 82, 204, 0.1);
+            color: #0052CC;
+        }
+    </style>
     <?php include '../../include/footer.php'; ?>
 

@@ -140,7 +140,7 @@ include '../../include/sidebar.php';
                     <hr>
 
                     <!-- OMR MCQ Section -->
-                    <div id="omrSection" class="css-edit-3d7736">
+                    <div id="omrSection" style="<?php echo $mark['test_type'] !== 'omr_mcq' ? 'display:none;' : ''; ?>">
                         <h5 class="mb-3"><i class="fas fa-qrcode text-primary"></i> OMR MCQ Test Details</h5>
 
                         <div class="row mb-3">
@@ -251,7 +251,8 @@ include '../../include/sidebar.php';
                     </div>
 
                     <!-- Descriptive Section -->
-                    <div id="descriptiveSection" class="css-edit-53c152">
+                    <div id="descriptiveSection"
+                        style="<?php echo $mark['test_type'] !== 'descriptive' ? 'display:none;' : ''; ?>">
                         <h5 class="mb-3"><i class="fas fa-pencil-alt text-success"></i> Descriptive Test Details</h5>
 
                         <div class="row mb-3">

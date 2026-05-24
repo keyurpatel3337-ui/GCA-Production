@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .content {
+      background: #f9f9f9;
+      padding: 25px;
+      border: 1px solid #ddd;
+    }
+
+    .reminder-icon {
+      font-size: 64px;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .student-info {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    .details-table td {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .details-table td:first-child {
+      font-weight: bold;
+      width: 40%;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 35px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      margin: 20px 0;
+    }
+
+    .urgency-box {
+      background: #fff3cd;
+      padding: 15px;
+      border-left: 4px solid #ffc107;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>🔔 Admission Reminder</h2>
+      <p>Complete Your Admission Process</p>
+    </div>
+
+    <div class="content">
+      <div class="reminder-icon">⏰</div>
+
+      <p>Dear {{student_name}},</p>
+      <p>This is a friendly reminder regarding your admission process at <strong>Gyan Manjari</strong>.</p>
+
+      <div class="student-info">
+        <h3 style="margin-top: 0; color: #667eea;">📋 Your Application Details</h3>
+        <table class="details-table">
+          <tr>
+            <td>Application ID</td>
+            <td>{{application_id}}</td>
+          </tr>
+          <tr>
+            <td>Student Name</td>
+            <td>{{student_name}}</td>
+          </tr>
+          <tr>
+            <td>Course Applied</td>
+            <td>{{course_name}}</td>
+          </tr>
+          <tr>
+            <td>Registration Date</td>
+            <td>{{registration_date}}</td>
+          </tr>
+          <tr>
+            <td>Current Status</td>
+            <td><strong>{{current_status}}</strong></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="urgency-box">
+        <h3 style="margin-top: 0; color: #856404;">⚠️ Action Required</h3>
+        <p style="font-size: 1.05em; margin: 10px 0;">
+          <strong>{{pending_action}}</strong>
+        </p>
+        <p style="margin: 5px 0;">
+          Deadline: <strong>{{deadline_date}}</strong> ({{days_remaining}} days remaining)
+        </p>
+      </div>
+
+      <h3 style="color: #667eea;">✅ Pending Steps</h3>
+      <ul style="line-height: 2; font-size: 1.05em;">
+        {{#pending_steps}}
+        <li>{{step}}</li>
+        {{/pending_steps}}
+      </ul>
+
+      <h3 style="color: #667eea;">💰 Fee Payment Status</h3>
+      <table class="details-table">
+        <tr>
+          <td>Total Fee</td>
+          <td>₹{{total_fee}}</td>
+        </tr>
+        <tr>
+          <td>Amount Paid</td>
+          <td>₹{{amount_paid}}</td>
+        </tr>
+        <tr>
+          <td>Pending Amount</td>
+          <td><strong>₹{{pending_amount}}</strong></td>
+        </tr>
+        <tr>
+          <td>Payment Deadline</td>
+          <td>{{payment_deadline}}</td>
+        </tr>
+      </table>
+
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="{{portal_url}}" class="cta-button">Complete Admission Process →</a>
+      </div>
+
+      <h3 style="color: #667eea;">📞 Need Help?</h3>
+      <div style="background: #e7f3ff; padding: 15px; border-radius: 5px;">
+        <p style="margin: 5px 0;"><strong>Assigned Counsellor:</strong> {{counsellor_name}}</p>
+        <p style="margin: 5px 0;"><strong>Contact Number:</strong> {{counsellor_phone}}</p>
+        <p style="margin: 5px 0;"><strong>Email:</strong> {{counsellor_email}}</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>Gyan Manjari Counselling System</strong></p>
+      <p>{{institution_address}}</p>
+    </div>
+  </div>
+</body>
+
+</html>

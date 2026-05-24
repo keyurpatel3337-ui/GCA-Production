@@ -67,7 +67,7 @@ include '../../include/sidebar.php';
                             </p>
                         </div>
                         <div class="col-md-4 text-end">
-                            <div class="form-check form-switch css-enrollment-settings-fa415b">
+                            <div class="form-check form-switch" style="font-size: 1.5rem;">
                                 <input class="form-check-input" type="checkbox" id="autoAssignEnabled"
                                     name="auto_assign_enabled" value="1" <?php echo $auto_assign_enabled ? 'checked' : ''; ?>>
                                 <label class="form-check-label" for="autoAssignEnabled">
@@ -96,7 +96,8 @@ include '../../include/sidebar.php';
                 </ul>
             </div>
 
-            <div class="alert alert-warning css-enrollment-settings-c8b8b9" id="warningBox">
+            <div class="alert alert-warning" id="warningBox"
+                style="<?php echo $auto_assign_enabled ? 'display:none;' : ''; ?>">
                 <h6><i class="fas fa-exclamation-triangle"></i> Important:</h6>
                 <p class="mb-0">
                     When automatic assignment is disabled, you must manually assign divisions to students from:

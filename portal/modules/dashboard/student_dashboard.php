@@ -103,7 +103,32 @@ include '../../include/sidebar.php'; ?>
 
 
 <div class="container-fluid py-4 pb-5">
-    
+    <style>
+        .pulse-live {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse-green 1.5s infinite;
+            vertical-align: middle;
+        }
+        @keyframes pulse-green {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+    </style>
     <?php
     if (isset($_SESSION['success'])): ?>
         <div class="alert alert-success alert-dismissible fade show rounded-3 border-0 shadow-sm mb-4" role="alert">
@@ -157,7 +182,7 @@ include '../../include/sidebar.php'; ?>
     <!-- Token Payment Status Banner -->
     <?php
     if (!$student_info['token_fees_paid'] && ($student_info['course_id'] ?? 0) != 6): ?>
-        <div class="alert alert-warning mb-4 shadow-sm css-student_dashboard-ca0273">
+        <div class="alert alert-warning mb-4 shadow-sm" style="border-start: 4px solid #ff9800;">
             <div class="d-flex align-items-center">
                 <div class="me-3">
                     <i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
@@ -198,22 +223,22 @@ include '../../include/sidebar.php'; ?>
     <!-- Welcome & Enrollment Banner -->
     <div class="row mb-4">
         <div class="col-12">
-            <div class="welcome-banner p-4 rounded-4 shadow-sm text-white position-relative overflow-hidden mb-2 css-student_dashboard-99a07b">
+            <div class="welcome-banner p-4 rounded-4 shadow-sm text-white position-relative overflow-hidden mb-2" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);">
                 <!-- Background decorative shapes/gradients -->
-                <div class="position-absolute css-student_dashboard-405434">
+                <div class="position-absolute" style="right: -30px; bottom: -30px; opacity: 0.15; font-size: 9rem; pointer-events: none; color: #fff;">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
                 
-                <div class="row align-items-center position-relative css-student_dashboard-587f46">
+                <div class="row align-items-center position-relative" style="z-index: 1;">
                     <!-- Left side: Welcome message & basic student status -->
                     <div class="col-lg-6 mb-3 mb-lg-0">
                         <div class="d-flex align-items-center">
-                            <div class="avatar-container rounded-circle d-flex align-items-center justify-content-center me-3 css-student_dashboard-43c40d">
+                            <div class="avatar-container rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 64px; height: 64px; border: 2px solid rgba(255, 255, 255, 0.4); flex-shrink: 0; background: rgba(255, 255, 255, 0.25);">
                                 <i class="fas fa-user-graduate fa-2x text-white"></i>
                             </div>
                             <div>
-                                <span class="badge mb-2 px-2 py-1 small fw-semibold text-uppercase tracking-wider text-white css-student_dashboard-b941ed">Student Portal</span>
-                                <h2 class="fw-bold mb-1 text-white css-student_dashboard-6eee75">
+                                <span class="badge mb-2 px-2 py-1 small fw-semibold text-uppercase tracking-wider text-white" style="background: rgba(255, 255, 255, 0.2) !important; border: 1px solid rgba(255, 255, 255, 0.25);">Student Portal</span>
+                                <h2 class="fw-bold mb-1 text-white" style="font-size: 1.75rem; letter-spacing: -0.5px;">
                                     Welcome back, <?php echo htmlspecialchars($_SESSION['student_name'] ?? 'Student'); ?>!
                                 </h2>
                                 <p class="mb-0 text-white-50 small">
@@ -226,61 +251,61 @@ include '../../include/sidebar.php'; ?>
                     <!-- Right side: Enrollment details (only if $enrollment_info exists) -->
                     <?php if ($enrollment_info): ?>
                         <div class="col-lg-6">
-                            <div class="p-3 rounded-3 css-student_dashboard-6ae59b">
-                                <div class="d-flex justify-content-between align-items-center mb-2 pb-2 css-student_dashboard-0fbed7">
+                            <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);">
+                                <div class="d-flex justify-content-between align-items-center mb-2 pb-2" style="border-bottom: 1px solid rgba(255, 255, 255, 0.15);">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-id-card text-white me-2"></i>
                                         <span class="fw-semibold text-white small">Enrollment Details</span>
                                     </div>
-                                    <span class="badge fw-bold px-2 py-1 small css-student_dashboard-894aa6">
+                                    <span class="badge fw-bold px-2 py-1 small" style="background-color: #ffffff !important; color: #1e40af !important;">
                                         No: <?php echo htmlspecialchars($enrollment_info['enrollment_no'] ?? ''); ?>
                                     </span>
                                 </div>
                                 <div class="row g-2 text-center d-flex align-items-stretch">
                                     <div class="col">
-                                        <div class="p-2 rounded h-100 d-flex flex-column justify-content-center css-student_dashboard-08869b">
-                                            <div class="text-white-50 small css-student_dashboard-7b9f95">Course</div>
+                                        <div class="p-2 rounded h-100 d-flex flex-column justify-content-center" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.08);">
+                                            <div class="text-white-50 small" style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px;">Course</div>
                                             <div class="fw-bold text-white small text-truncate" title="<?php echo htmlspecialchars($enrollment_info['course_name'] ?? 'N/A'); ?>">
                                                 <?php echo htmlspecialchars($enrollment_info['course_name'] ?? 'N/A'); ?>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="p-2 rounded h-100 d-flex flex-column justify-content-center css-student_dashboard-08869b">
-                                            <div class="text-white-50 small css-student_dashboard-7b9f95">Medium</div>
+                                        <div class="p-2 rounded h-100 d-flex flex-column justify-content-center" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.08);">
+                                            <div class="text-white-50 small" style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px;">Medium</div>
                                             <div class="fw-bold text-white small text-truncate" title="<?php echo htmlspecialchars($enrollment_info['medium_name'] ?? 'N/A'); ?>">
                                                 <?php echo htmlspecialchars($enrollment_info['medium_name'] ?? 'N/A'); ?>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="p-2 rounded h-100 d-flex flex-column justify-content-center css-student_dashboard-08869b">
-                                            <div class="text-white-50 small css-student_dashboard-7b9f95">Group</div>
-                                            <div class="fw-bold text-white small css-student_dashboard-e360f0" title="<?php echo htmlspecialchars($enrollment_info['group_name'] ?? 'N/A'); ?>">
+                                        <div class="p-2 rounded h-100 d-flex flex-column justify-content-center" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.08);">
+                                            <div class="text-white-50 small" style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px;">Group</div>
+                                            <div class="fw-bold text-white small" style="white-space: normal; word-wrap: break-word; line-height: 1.2;" title="<?php echo htmlspecialchars($enrollment_info['group_name'] ?? 'N/A'); ?>">
                                                 <?php echo htmlspecialchars($enrollment_info['group_name'] ?? 'N/A'); ?>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="p-2 rounded h-100 d-flex flex-column justify-content-center css-student_dashboard-08869b">
-                                            <div class="text-white-50 small css-student_dashboard-7b9f95">Division</div>
+                                        <div class="p-2 rounded h-100 d-flex flex-column justify-content-center" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.08);">
+                                            <div class="text-white-50 small" style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px;">Division</div>
                                             <div class="fw-bold text-white small text-truncate">
                                                 <?php if ($enrollment_info['division_id']): ?>
                                                     <span class="text-white fw-bold"><?php echo htmlspecialchars($enrollment_info['division_name'] ?? ''); ?></span>
                                                 <?php else: ?>
-                                                    <span class="text-warning small css-student_dashboard-af89d6">Not Assigned</span>
+                                                    <span class="text-warning small" style="font-size: 0.75rem;">Not Assigned</span>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="p-2 rounded h-100 d-flex flex-column justify-content-center css-student_dashboard-08869b">
-                                            <div class="text-white-50 small css-student_dashboard-7b9f95">Roll No</div>
+                                        <div class="p-2 rounded h-100 d-flex flex-column justify-content-center" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.08);">
+                                            <div class="text-white-50 small" style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px;">Roll No</div>
                                             <div class="fw-bold text-white small text-truncate">
                                                 <?php if ($enrollment_info['roll_no']): ?>
                                                     <span class="text-white fw-bold"><?php echo $enrollment_info['roll_no']; ?></span>
                                                 <?php else: ?>
-                                                    <span class="text-warning small css-student_dashboard-af89d6">Not Assigned</span>
+                                                    <span class="text-warning small" style="font-size: 0.75rem;">Not Assigned</span>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -291,7 +316,7 @@ include '../../include/sidebar.php'; ?>
                     <?php else: ?>
                         <!-- If not enrolled yet, display status -->
                         <div class="col-lg-6 text-lg-end">
-                            <div class="d-inline-block px-3 py-2 rounded-3 text-start css-student_dashboard-6ae59b">
+                            <div class="d-inline-block px-3 py-2 rounded-3 text-start" style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.15);">
                                 <span class="d-block small text-white-50"><i class="fas fa-info-circle me-1"></i> Account Status</span>
                                 <span class="fw-semibold text-warning"><i class="fas fa-spinner fa-spin me-1"></i> Awaiting Enrollment Approval</span>
                             </div>
@@ -372,13 +397,13 @@ include '../../include/sidebar.php'; ?>
             <div class="card card-enhanced">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h3 class="card-title mb-0">
-                        <i class="fas fa-calendar-alt me-2 css-student_dashboard-1f22ec"></i> Official Scheduled Exams
+                        <i class="fas fa-calendar-alt me-2" style="color: #ffffff !important;"></i> Official Scheduled Exams
                     </h3>
                     <span class="badge bg-light text-dark fs-6">
                         Active: <?php echo count($scheduled_exams); ?>
                     </span>
                 </div>
-                <div class="card-body p-4 css-student_dashboard-bb6e32">
+                <div class="card-body p-4" style="max-height: 520px; overflow-y: auto;">
                     <?php if (count($scheduled_exams) > 0): ?>
                         <div class="d-flex flex-column gap-3">
                             <?php foreach ($scheduled_exams as $e): 
@@ -402,8 +427,8 @@ include '../../include/sidebar.php'; ?>
                                 <div class="card border shadow-sm p-3 mb-2 <?php echo $card_border; ?>" style="border-radius: 12px; transition: transform 0.2s ease;">
                                     <div class="d-flex justify-content-between align-items-start mb-2">
                                         <div>
-                                            <h6 class="fw-bold text-dark mb-1 css-student_dashboard-6e47c6"><?php echo htmlspecialchars($e['title']); ?></h6>
-                                            <p class="text-muted mb-0 small text-truncate css-student_dashboard-d54b0a" title="<?php echo htmlspecialchars($e['description'] ?: 'No instructions provided.'); ?>">
+                                            <h6 class="fw-bold text-dark mb-1" style="font-size: 0.95rem;"><?php echo htmlspecialchars($e['title']); ?></h6>
+                                            <p class="text-muted mb-0 small text-truncate" style="max-width: 250px;" title="<?php echo htmlspecialchars($e['description'] ?: 'No instructions provided.'); ?>">
                                                 <?php echo htmlspecialchars($e['description'] ?: 'No instructions provided.'); ?>
                                             </p>
                                         </div>
@@ -418,11 +443,11 @@ include '../../include/sidebar.php'; ?>
                                         </div>
                                         <div>
                                             <?php if ($e['attempt_status'] === 'Submitted'): ?>
-                                                <button disabled class="btn btn-secondary btn-sm py-1 px-3 font-weight-bold small css-student_dashboard-36947d">Completed</button>
+                                                <button disabled class="btn btn-secondary btn-sm py-1 px-3 font-weight-bold small" style="border-radius: 8px; opacity: 0.8;">Completed</button>
                                             <?php elseif ($is_live): ?>
                                                 <a href="<?php echo PORTAL_URL; ?>/modules/student-portal/take-exam.php?id=<?php echo $e['id']; ?>" class="btn btn-sm py-1 px-3 font-weight-bold text-white small" style="border-radius: 8px; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); border: none; box-shadow: 0 4px 10px rgba(99, 102, 241, 0.25);">Start <i class="fas fa-arrow-right ms-1"></i></a>
                                             <?php else: ?>
-                                                <button disabled class="btn btn-light btn-sm py-1 px-3 text-muted small css-student_dashboard-cb968a" title="Locked until start time"><i class="fas fa-lock me-1"></i> Locked</button>
+                                                <button disabled class="btn btn-light btn-sm py-1 px-3 text-muted small" style="border-radius: 8px;" title="Locked until start time"><i class="fas fa-lock me-1"></i> Locked</button>
                                             <?php endif; ?>
                                         </div>
                                     </div>

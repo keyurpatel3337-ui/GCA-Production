@@ -41,7 +41,193 @@ ob_start();
     <!-- Notification Bell CSS -->
     <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/notification-bell.css">
 
-    <link rel="stylesheet" href="<?php echo PORTAL_URL; ?>/assets/css/portal.css">
+    <style>
+        /* AdminLTE 4 Custom Overrides */
+        :root {
+            --lte-sidebar-width: 280px;
+            --lte-sidebar-collapsed-width: 70px;
+        }
+
+        /* Global Reset for Top Whitespace */
+        html,
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100%;
+        }
+
+        /* Specific fix for AdminLTE wrapper */
+        .app-wrapper {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Ensure navbar sticks to top */
+        .app-header {
+            margin-top: 0 !important;
+        }
+
+        /* Custom scrollbar for better look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .app-wrapper {
+            min-height: 100vh;
+            /* margin-top: 0 !important; */
+            /* This rule is now redundant and can be removed or commented out */
+            /* padding-top: 0 !important; */
+            /* This rule is now redundant and can be removed or commented out */
+        }
+
+        .app-header {
+            /* margin-top: 0 !important; */
+            /* This rule is now redundant and can be removed or commented out */
+        }
+
+        /* Card enhancements */
+        .card {
+            border: none;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            background: transparent;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* Info box improvements */
+        .info-box,
+        .small-box {
+            border-radius: 0.5rem;
+        }
+
+        /* ============================================ */
+        /* DISABLE ALL SIDEBAR TRANSITIONS ON PAGE LOAD */
+        /* ============================================ */
+        body.preload-transitions *,
+        body.preload-transitions aside,
+        body.preload-transitions aside *,
+        body.preload-transitions .sidebar,
+        body.preload-transitions .sidebar *,
+        body.preload-transitions .app-sidebar,
+        body.preload-transitions .app-sidebar *,
+        body.preload-transitions .nav-item,
+        body.preload-transitions .nav-item *,
+        body.preload-transitions .nav-link,
+        body.preload-transitions .nav-link *,
+        body.preload-transitions .nav-arrow,
+        body.preload-transitions .nav-treeview,
+        body.preload-transitions .sidebar-menu,
+        body.preload-transitions .sidebar-menu *,
+        body.preload-transitions i {
+            -webkit-transition: none !important;
+            -moz-transition: none !important;
+            -o-transition: none !important;
+            transition: none !important;
+            -webkit-animation: none !important;
+            -moz-animation: none !important;
+            animation: none !important;
+        }
+
+        /* Fix Table Dark Header Visibility */
+        .table-dark th,
+        .table-dark td,
+        .table-dark thead th,
+        .table-dark tbody+tbody {
+            background-color: #343a40 !important;
+            color: #fff !important;
+            border-color: #454d55;
+        }
+
+        /* Pagination Styling */
+        .pagination {
+            gap: 0.25rem;
+        }
+
+        .pagination .page-item .page-link {
+            border-radius: 0.375rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.15s ease-in-out;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            color: white;
+        }
+
+        .pagination .page-item:not(.active):not(.disabled) .page-link:hover {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+            color: #6c757d;
+        }
+
+        /* ========================================== */
+        /* SIDEBAR COLLAPSE ANIMATION & FUNCTIONALITY */
+        /* ========================================== */
+
+        /* Sidebar toggle button highlight */
+        [data-lte-toggle="sidebar"] {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        [data-lte-toggle="sidebar"]:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 0.25rem;
+        }
+
+        /* Smooth transitions for sidebar (let AdminLTE handle positioning) */
+        .app-sidebar {
+            transition: transform 0.3s ease-in-out, margin-left 0.3s ease-in-out !important;
+        }
+
+        .app-main {
+            transition: margin-left 0.3s ease-in-out !important;
+        }
+
+        /* Mobile overlay when sidebar is open */
+        @media (max-width: 991.98px) {
+            body.sidebar-open::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1037;
+            }
+        }
+    </style>
 </head>
 
 <body class="sidebar-expand-lg sidebar-mini bg-body-tertiary preload-transitions">

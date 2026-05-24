@@ -242,7 +242,7 @@ include '../../include/sidebar.php';
                         <button type="submit" class="btn btn-success-custom px-4" id="uploadBtn">
                             <i class="fas fa-cloud-upload-alt me-2"></i>Upload Students
                         </button>
-                        <button type="button" class="btn btn-secondary px-4 css-upload-93b8ea" id="uploadingBtn"
+                        <button type="button" class="btn btn-secondary px-4" id="uploadingBtn" style="display:none;"
                             disabled>
                             <span class="spinner-border spinner-border-sm me-2"></span>Processing...
                         </button>
@@ -285,7 +285,162 @@ include '../../include/sidebar.php';
     </form>
 </div>
 
+<style>
+    /* Global Overrides for this page */
+    /* Academic Card Styling from Image */
+    .academic-card {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
 
+    .academic-card .card-header {
+        background: #2563eb !important;
+        /* Force blue from image */
+        color: white !important;
+        padding: 1rem 1.5rem;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border-bottom: none;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .academic-card .card-header i {
+        font-size: 1.25rem;
+    }
+
+    .card-body {
+        padding: 2rem 2.5rem;
+    }
+
+    .selection-field-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding-bottom: 0.75rem;
+    }
+
+    .academic-field-label {
+        font-weight: 600;
+        font-size: 1rem;
+        color: #1f2937;
+        margin-bottom: 0.25rem;
+    }
+
+    .custom-icon-box {
+        width: 38px;
+        height: 38px;
+        background: #fff;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        flex-shrink: 0;
+    }
+
+    .custom-icon-box i {
+        color: #4b5563;
+        font-size: 1rem;
+    }
+
+    .custom-select-minimal {
+        border: 1px solid #d1d5db !important;
+        border-radius: 8px !important;
+        background-color: #fff !important;
+        color: #111827 !important;
+        font-size: 1rem !important;
+        padding: 0.625rem 1rem !important;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.2s ease;
+    }
+
+    .custom-select-minimal:focus {
+        border-color: #2563eb !important;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+    }
+
+    .card-enhanced {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-enhanced .card-header {
+        padding: 1rem 1.5rem;
+        font-weight: 600;
+    }
+
+    .border-dashed {
+        border: 2px dashed #cbd5e1 !important;
+    }
+
+    .btn-success-custom {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background-color: #059669;
+        border-color: #059669;
+        color: #fff;
+        font-weight: 600;
+        padding: 0.625rem 1.5rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .btn-success-custom:hover {
+        background-color: #047857;
+        border-color: #047857;
+        transform: translateY(-1px);
+    }
+
+    .btn-primary-custom {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background-color: #2563eb;
+        border-color: #2563eb;
+        color: #fff;
+        font-weight: 600;
+        padding: 0.625rem 1.5rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .btn-primary-custom:hover {
+        background-color: #1d4ed8;
+        border-color: #1d4ed8;
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
+    }
+
+    .border-left-primary {
+        border-left: 4px solid #2563eb !important;
+    }
+
+    /* Fixed Layout Header for consistency */
+    .d-flex.justify-content-between.align-items-center.mb-4 h1 {
+        font-size: 1.75rem;
+        color: #111827;
+    }
+</style>
 
 <script>
     document.getElementById('bulkUploadForm').addEventListener('submit', function (e) {

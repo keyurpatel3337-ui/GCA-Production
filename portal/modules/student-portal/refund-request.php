@@ -176,7 +176,7 @@ include '../../include/sidebar.php';
                                                         Passbook/Cheque Image
                                                     </button>
                                                     <input type="file" name="proof_file" id="proof_file"
-                                                        accept="image/*,.pdf" class="css-refund-request-cb4589"
+                                                        accept="image/*,.pdf" style="display:none"
                                                         onchange="updateFileName(this)">
                                                 </div>
                                             </div>

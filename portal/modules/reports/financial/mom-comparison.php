@@ -78,7 +78,80 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
+<style>
+    .comparison-header {
+        background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        border-radius: 12px;
+        padding: 30px;
+        color: white;
+        margin-bottom: 25px;
+    }
 
+    .comparison-box {
+        text-align: center;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+    }
+
+    .comparison-box h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .comparison-box p {
+        margin: 0;
+        opacity: 0.8;
+    }
+
+    .change-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.9rem;
+        padding: 5px 12px;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+
+    .change-up {
+        background: rgba(40, 167, 69, 0.2);
+        color: #28a745;
+    }
+
+    .change-down {
+        background: rgba(220, 53, 69, 0.2);
+        color: #dc3545;
+    }
+
+    .vs-badge {
+        background: white;
+        color: #333;
+        font-size: 1.5rem;
+        font-weight: 700;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 400px;
+    }
+
+    .trend-table tr.highlight-current {
+        background: #e8f5e9 !important;
+    }
+
+    .trend-table tr.highlight-previous {
+        background: #fff3e0 !important;
+    }
+</style>
 
 
 

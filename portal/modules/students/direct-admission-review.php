@@ -91,7 +91,7 @@ include '../../include/sidebar.php';
                     <table class="table align-middle mb-0">
                         <thead class="bg-light">
                             <tr>
-                                <th class="css-direct-admission-review-ae1f13" class="text-center">Approve</th>
+                                <th style="width: 50px;" class="text-center">Approve</th>
                                 <th>Student & Match Status</th>
                                 <th>Data Comparison</th>
                             </tr>
@@ -125,7 +125,7 @@ include '../../include/sidebar.php';
                                 <td class="p-0">
                                     <table class="table table-sm table-borderless mb-0 bg-transparent">
                                         <tr>
-                                            <th class="css-direct-admission-review-b15add" class="small text-muted py-1">Field</th>
+                                            <th style="width: 120px;" class="small text-muted py-1">Field</th>
                                             <th class="small text-muted py-1">Current (Database)</th>
                                             <th class="small text-muted py-1">New (CSV)</th>
                                         </tr>
@@ -167,7 +167,13 @@ include '../../include/sidebar.php';
     </form>
 </div>
 
-
+<style>
+    .bg-light-danger { background-color: #fff5f5 !important; }
+    .bg-warning-light { background-color: #fff9db; border-radius: 4px; padding: 0 4px; }
+    .table-sm th { font-size: 0.7rem; letter-spacing: 0.5px; }
+    .form-check-input { width: 1.4em; height: 1.4em; cursor: pointer; }
+    .badge { font-size: 0.7rem; font-weight: 600; }
+</style>
 
 <script>
 function toggleAll(checked) {

@@ -16,7 +16,22 @@ require_once ENV_CONFIG_FILE;
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .exam-gradient {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+        }
+
+        .monitor-frame {
+            border: 20px solid #1e293b;
+            border-bottom: 60px solid #1e293b;
+            border-radius: 40px;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+        }
+    </style>
 </head>
 
 <body class="bg-slate-50 text-slate-900">

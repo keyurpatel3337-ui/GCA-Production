@@ -37,7 +37,7 @@ include '../../include/sidebar.php';
                     data-bs-target="#addModal">
                     <i class="fas fa-plus me-1"></i> Add Group
                 </button>
-                <div id="deleteSelectedBtn" class="css-group-224b51">
+                <div id="deleteSelectedBtn" style="display: none;">
                     <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="deleteSelected()">
                         <i class="fas fa-trash-alt me-1"></i> Delete Selected
                     </button>

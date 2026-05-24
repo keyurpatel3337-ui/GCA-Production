@@ -171,72 +171,172 @@ $page_breadcrumb = "Card -";
 ?>
 <?php include '../../include/header.php'; ?>
 
+<style>
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+
+        .content-wrapper {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .card {
+            page-break-inside: avoid;
+        }
+
+        body {
+            font-size: 12px;
+        }
+    }
+
+    .report-header {
+        text-align: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 8px 8px 0 0;
+        margin-bottom: 0;
+    }
+
+    .student-info-table td,
+    .student-info-table th {
+        padding: 8px 12px;
+        border: 1px solid #dee2e6;
+    }
+
+    .subject-table th {
+        background: #f8f9fa;
+        font-weight: 600;
+        text-align: center;
+        font-size: 11px;
+        padding: 8px 4px;
+        border: 1px solid #dee2e6;
+    }
+
+    .subject-table td {
+        text-align: center;
+        padding: 6px 4px;
+        border: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+
+    .topic-table th {
+        background: #e9ecef;
+        padding: 10px;
+        border: 1px solid #dee2e6;
+    }
+
+    .topic-table td {
+        padding: 8px;
+        border: 1px solid #dee2e6;
+    }
+
+    .strength-strong {
+        background-color: #28a745;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+    }
+
+    .strength-weak {
+        background-color: #ffc107;
+        color: #000;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+    }
+
+    .chart-bar {
+        background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+        height: 30px;
+        line-height: 30px;
+        color: white;
+        text-align: right;
+        padding-right: 8px;
+        border-radius: 4px;
+        font-weight: 600;
+    }
+
+    .recommendation-box {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px 0;
+    }
+</style>
 
 
-
-<div class="app-content css-result-e1ddcb">
+<div class="app-content" style="padding-top: 20px;">
     <div class="container-fluid">
         <!-- Page 1: Subject-wise Detailed Breakdown -->
-        <div class="card shadow-sm css-result-76ffa0">
+        <div class="card shadow-sm" style="page-break-after: always;">
             <div class="report-header">
-                <h3 class="css-result-ce3c7d">
+                <h3 style="margin: 0; font-size: 20px; font-weight: 700;">
                     <?php echo SYSTEM_NAME; ?>
                 </h3>
-                <p class="css-result-62fa68">GMSAT 2026 COUNSELING - Detailed Performance Report</p>
+                <p style="margin: 5px 0 0 0; font-size: 14px;">GMSAT 2026 COUNSELING - Detailed Performance Report</p>
             </div>
 
-            <div class="card-body css-result-822d04">
+            <div class="card-body" style="padding: 25px;">
                 <!-- Student Information -->
                 <table class="table table-bordered student-info-table mb-4">
                     <tr>
-                        <th class="css-result-5c6268">Roll No</th>
-                        <td class="css-result-db1172"><?php echo htmlspecialchars($result['roll_number'] ?? ''); ?></td>
-                        <th class="css-result-5c6268">Paper Code</th>
+                        <th style="background: #f8f9fa; width: 120px;">Roll No</th>
+                        <td style="font-weight: 600;"><?php echo htmlspecialchars($result['roll_number'] ?? ''); ?></td>
+                        <th style="background: #f8f9fa; width: 120px;">Paper Code</th>
                         <td><?php echo htmlspecialchars($result['paper_code'] ?? ''); ?></td>
                     </tr>
                     <tr>
-                        <th class="css-result-2ff067">Name</th>
-                        <td colspan="3" class="css-result-db1172">
+                        <th style="background: #f8f9fa;">Name</th>
+                        <td colspan="3" style="font-weight: 600;">
                             <?php echo htmlspecialchars($result['student_name'] ?? ''); ?>
                         </td>
                     </tr>
                     <tr>
-                        <th class="css-result-2ff067">Mo.</th>
+                        <th style="background: #f8f9fa;">Mo.</th>
                         <td><?php echo htmlspecialchars($result['mobile_number'] ?? ''); ?></td>
-                        <th class="css-result-2ff067">Test Date</th>
+                        <th style="background: #f8f9fa;">Test Date</th>
                         <td><?php echo date('d M Y', strtotime($result['created_at'])); ?></td>
                     </tr>
                 </table>
 
                 <!-- Subject-wise Detailed Table -->
-                <h5 class="mb-3 css-result-705192">
+                <h5 class="mb-3"
+                    style="color: #495057; font-weight: 700; border-bottom: 2px solid #007bff; padding-bottom: 8px;">
                     Subject-wise Performance Analysis
                 </h5>
                 <div class="table-responsive">
                     <table class="table table-bordered subject-table">
                         <thead>
                             <tr>
-                                <th rowspan="2" class="css-result-3d1f6b">Sub.</th>
-                                <th rowspan="2" class="css-result-3d1f6b">Sr No.</th>
-                                <th rowspan="2" class="css-result-3d1f6b">Topic</th>
-                                <th colspan="2" class="css-result-45221e">Low</th>
-                                <th colspan="2" class="css-result-f9cd49">Medium</th>
-                                <th colspan="2" class="css-result-71a5fc">High</th>
-                                <th colspan="2" class="css-result-d5bdb1">Total</th>
-                                <th rowspan="2" class="css-result-5bd753">Total<br />Question
+                                <th rowspan="2" style="vertical-align: middle;">Sub.</th>
+                                <th rowspan="2" style="vertical-align: middle;">Sr No.</th>
+                                <th rowspan="2" style="vertical-align: middle;">Topic</th>
+                                <th colspan="2" style="background: #d4edda;">Low</th>
+                                <th colspan="2" style="background: #fff3cd;">Medium</th>
+                                <th colspan="2" style="background: #f8d7da;">High</th>
+                                <th colspan="2" style="background: #d1ecf1;">Total</th>
+                                <th rowspan="2" style="vertical-align: middle; background: #e2e3e5;">Total<br />Question
                                 </th>
-                                <th rowspan="2" class="css-result-0ce980">Right<br />Question
+                                <th rowspan="2" style="vertical-align: middle; background: #d4edda;">Right<br />Question
                                 </th>
                             </tr>
                             <tr>
-                                <th class="css-result-45221e">Question</th>
-                                <th class="css-result-45221e">Right Q.</th>
-                                <th class="css-result-f9cd49">Question</th>
-                                <th class="css-result-f9cd49">Right Q.</th>
-                                <th class="css-result-71a5fc">Question</th>
-                                <th class="css-result-71a5fc">Right Q.</th>
-                                <th class="css-result-d5bdb1">Question</th>
-                                <th class="css-result-d5bdb1">Right Q.</th>
+                                <th style="background: #d4edda;">Question</th>
+                                <th style="background: #d4edda;">Right Q.</th>
+                                <th style="background: #fff3cd;">Question</th>
+                                <th style="background: #fff3cd;">Right Q.</th>
+                                <th style="background: #f8d7da;">Question</th>
+                                <th style="background: #f8d7da;">Right Q.</th>
+                                <th style="background: #d1ecf1;">Question</th>
+                                <th style="background: #d1ecf1;">Right Q.</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -290,31 +390,31 @@ $page_breadcrumb = "Card -";
                                         </td>
                                     <?php endif; ?>
                                     <td><?php echo str_pad($topic['sr_no'], 2, '0', STR_PAD_LEFT); ?></td>
-                                    <td class="css-result-85ae51">
+                                    <td style="text-align: left; padding-left: 10px;">
                                         <?php echo htmlspecialchars($topic['topic_name_english'] ?? ''); ?>
                                     </td>
 
                                     <!-- Low Level -->
-                                    <td class="css-result-12936e"><?php echo $topic_data['low_total']; ?></td>
-                                    <td class="css-result-b03bdc">
+                                    <td style="background: #e8f5e9;"><?php echo $topic_data['low_total']; ?></td>
+                                    <td style="background: #c8e6c9; font-weight: 600;">
                                         <?php echo $topic_data['low_correct']; ?>
                                     </td>
 
                                     <!-- Medium Level -->
-                                    <td class="css-result-e390bc"><?php echo $topic_data['medium_total']; ?></td>
-                                    <td class="css-result-65d96b">
+                                    <td style="background: #fff9c4;"><?php echo $topic_data['medium_total']; ?></td>
+                                    <td style="background: #fff59d; font-weight: 600;">
                                         <?php echo $topic_data['medium_correct']; ?>
                                     </td>
 
                                     <!-- High Level -->
-                                    <td class="css-result-8963da"><?php echo $topic_data['high_total']; ?></td>
-                                    <td class="css-result-7a3d4c">
+                                    <td style="background: #ffebee;"><?php echo $topic_data['high_total']; ?></td>
+                                    <td style="background: #ffcdd2; font-weight: 600;">
                                         <?php echo $topic_data['high_correct']; ?>
                                     </td>
 
                                     <!-- Total -->
-                                    <td class="css-result-487916"><?php echo $topic_data['total']; ?></td>
-                                    <td class="css-result-8c260a"><?php echo $topic_data['correct']; ?>
+                                    <td style="background: #e1f5fe;"><?php echo $topic_data['total']; ?></td>
+                                    <td style="background: #b3e5fc; font-weight: 600;"><?php echo $topic_data['correct']; ?>
                                     </td>
 
                                     <?php if ($is_first_row): ?>
@@ -331,20 +431,20 @@ $page_breadcrumb = "Card -";
                             <?php endforeach; ?>
 
                             <!-- Grand Total Row -->
-                            <tr class="css-result-ea1f50">
-                                <td colspan="3" class="css-result-e03ec8">Total</td>
+                            <tr style="background: #e9ecef; font-weight: 700;">
+                                <td colspan="3" style="text-align: right; padding-right: 15px;">Total</td>
                                 <td><?php echo $result['low_level_correct'] + $result['low_level_wrong']; ?></td>
-                                <td class="css-result-d0cb9e"><?php echo $result['low_level_correct']; ?></td>
+                                <td style="background: #c8e6c9;"><?php echo $result['low_level_correct']; ?></td>
                                 <td><?php echo $result['medium_level_correct'] + $result['medium_level_wrong']; ?></td>
-                                <td class="css-result-bffedf"><?php echo $result['medium_level_correct']; ?></td>
+                                <td style="background: #fff59d;"><?php echo $result['medium_level_correct']; ?></td>
                                 <td><?php echo $result['high_level_correct'] + $result['high_level_wrong']; ?></td>
-                                <td class="css-result-ae6780"><?php echo $result['high_level_correct']; ?></td>
+                                <td style="background: #ffcdd2;"><?php echo $result['high_level_correct']; ?></td>
                                 <td><?php echo $result['total_questions']; ?></td>
-                                <td class="css-result-d36771"><?php echo $result['correct_answers']; ?></td>
-                                <td class="css-result-61808b">
+                                <td style="background: #b3e5fc;"><?php echo $result['correct_answers']; ?></td>
+                                <td style="background: #f5f5f5; font-size: 15px;">
                                     <?php echo $result['total_questions']; ?>
                                 </td>
-                                <td class="css-result-9f56eb">
+                                <td style="background: #4caf50; color: white; font-size: 15px;">
                                     <?php echo $result['correct_answers']; ?>
                                 </td>
                             </tr>
@@ -367,42 +467,43 @@ $page_breadcrumb = "Card -";
         <!-- Page 2: Topic-wise Analysis & Stream Recommendation -->
         <div class="card shadow-sm">
             <div class="report-header">
-                <h3 class="css-result-ce3c7d">
+                <h3 style="margin: 0; font-size: 20px; font-weight: 700;">
                     <?php echo SYSTEM_NAME; ?>
                 </h3>
-                <p class="css-result-62fa68">GMSAT 2026 COUNSELING - Topic Analysis & Stream Guidance
+                <p style="margin: 5px 0 0 0; font-size: 14px;">GMSAT 2026 COUNSELING - Topic Analysis & Stream Guidance
                 </p>
             </div>
 
-            <div class="card-body css-result-822d04">
+            <div class="card-body" style="padding: 25px;">
                 <!-- Student Information Header -->
                 <table class="table table-bordered student-info-table mb-3">
                     <tr>
-                        <th class="css-result-4532f2">Roll No.</th>
-                        <td class="css-result-db1172"><?php echo htmlspecialchars($result['roll_number'] ?? ''); ?></td>
+                        <th style="background: #f8f9fa; width: 150px;">Roll No.</th>
+                        <td style="font-weight: 600;"><?php echo htmlspecialchars($result['roll_number'] ?? ''); ?></td>
                     </tr>
                     <tr>
-                        <th class="css-result-2ff067">Student Name</th>
-                        <td class="css-result-db1172"><?php echo htmlspecialchars($result['student_name'] ?? ''); ?></td>
+                        <th style="background: #f8f9fa;">Student Name</th>
+                        <td style="font-weight: 600;"><?php echo htmlspecialchars($result['student_name'] ?? ''); ?></td>
                     </tr>
                     <tr>
-                        <th class="css-result-2ff067">Date of Counseling</th>
+                        <th style="background: #f8f9fa;">Date of Counseling</th>
                         <td><?php echo date('d M Y'); ?></td>
                     </tr>
                     <tr>
-                        <th class="css-result-2ff067">Counselor Name</th>
+                        <th style="background: #f8f9fa;">Counselor Name</th>
                         <td><!-- To be filled --></td>
                     </tr>
                 </table>
 
                 <!-- Topic-wise Performance -->
-                <h5 class="mb-3 css-result-705192">
+                <h5 class="mb-3"
+                    style="color: #495057; font-weight: 700; border-bottom: 2px solid #007bff; padding-bottom: 8px;">
                     Topic-wise Detailed Performance
                 </h5>
                 <div class="table-responsive">
                     <table class="table table-bordered topic-table">
                         <thead>
-                            <tr class="css-result-81d3f5">
+                            <tr style="background: #495057; color: white;">
                                 <th>Subject</th>
                                 <th>Topic</th>
                                 <th>Question Range</th>
@@ -420,16 +521,16 @@ $page_breadcrumb = "Card -";
                                 $q_range = "Q({$topic['start_q']} - {$topic['end_q']})";
                                 ?>
                                 <tr>
-                                    <td class="css-result-db1172">
+                                    <td style="font-weight: 600;">
                                         <?php echo htmlspecialchars($topic['subject_category'] ?? ''); ?>
                                     </td>
-                                    <td class="css-result-102b7f">
+                                    <td style="text-align: left;">
                                         <?php echo htmlspecialchars($topic['topic_name_english'] ?? ''); ?>
                                     </td>
                                     <td><?php echo $q_range; ?></td>
-                                    <td class="css-result-db1172"><?php echo $topic['total_questions']; ?></td>
-                                    <td class="css-result-db50da"><?php echo $stat['correct']; ?></td>
-                                    <td class="css-result-db1172">
+                                    <td style="font-weight: 600;"><?php echo $topic['total_questions']; ?></td>
+                                    <td style="font-weight: 600; color: #2e7d32;"><?php echo $stat['correct']; ?></td>
+                                    <td style="font-weight: 600;">
                                         <span
                                             class="badge <?php echo $stat['percentage'] >= 75 ? 'bg-success' : ($stat['percentage'] >= 50 ? 'bg-warning text-dark' : 'bg-danger'); ?>">
                                             <?php echo formatIndianCurrency($stat['percentage']); ?>%
@@ -451,9 +552,9 @@ $page_breadcrumb = "Card -";
 
                 <!-- Stream Recommendation -->
                 <div class="recommendation-box mt-4">
-                    <p class="css-result-cf07f5">Automated Stream Recommendation (Based on Sectional
+                    <p style="margin: 0; font-size: 16px;">Automated Stream Recommendation (Based on Sectional
                         Performance)</p>
-                    <h4 class="css-result-62d9ae">
+                    <h4 style="margin: 10px 0 0 0; font-size: 24px; text-transform: uppercase;">
                         <?php echo $recommended_stream; ?>
                     </h4>
                 </div>
@@ -468,7 +569,8 @@ $page_breadcrumb = "Card -";
                 </div>
 
                 <!-- Section-wise Strength Chart -->
-                <h5 class="mt-4 mb-3 css-result-705192">
+                <h5 class="mt-4 mb-3"
+                    style="color: #495057; font-weight: 700; border-bottom: 2px solid #007bff; padding-bottom: 8px;">
                     Section-wise Strength Chart
                 </h5>
                 <div class="row">
@@ -476,11 +578,12 @@ $page_breadcrumb = "Card -";
                         <?php foreach ($section_percentages as $subject => $percentage): ?>
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between mb-1">
-                                    <span class="css-result-db1172"><?php echo htmlspecialchars($subject ?? ''); ?></span>
-                                    <span class="css-result-1a231d"><?php echo formatIndianCurrency($percentage); ?>%</span>
+                                    <span style="font-weight: 600;"><?php echo htmlspecialchars($subject ?? ''); ?></span>
+                                    <span
+                                        style="font-weight: 600; color: #007bff;"><?php echo formatIndianCurrency($percentage); ?>%</span>
                                 </div>
-                                <div class="css-result-effb3c">
-                                    <div class="chart-bar css-result-27f14a">
+                                <div style="background: #e9ecef; height: 30px; border-radius: 4px; overflow: hidden;">
+                                    <div class="chart-bar" style="width: <?php echo $percentage; ?>%;">
                                         <?php if ($percentage > 10): ?>
                                             <?php echo formatIndianCurrency($percentage); ?>%
                                         <?php endif; ?>
@@ -492,10 +595,10 @@ $page_breadcrumb = "Card -";
                 </div>
 
                 <!-- Major Subject -->
-                <div class="text-center mt-4 css-result-c0c07c">
-                    <h6 class="css-result-523d25">
+                <div class="text-center mt-4" style="padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                    <h6 style="margin: 0; font-weight: 700; color: #495057;">
                         Suggested Major Focus:
-                        <span class="css-result-8e24db">
+                        <span style="color: #007bff;">
                             <?php
                             arsort($section_percentages);
                             $top_subject = array_key_first($section_percentages);

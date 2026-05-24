@@ -1,5 +1,76 @@
 <!-- Facilities Section - Redesigned with Icons and Animations -->
+<style>
+    .facility-btn {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        flex: 0 0 auto;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8);
+        outline: none !important;
+    }
 
+    .facility-btn.active {
+        background-color: white;
+        color: #1e3a8a;
+        border: none !important;
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    }
+
+    .facility-btn:not(.active):hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.4);
+        color: white;
+    }
+
+    /* Custom scrollbar for the horizontal menu */
+    .facility-scroll-container::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .facility-scroll-container::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .facility-scroll-container::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+    }
+
+    .facility-content-animate {
+        animation: fadeInScale 0.4s ease-out forwards;
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.98) translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    .icon-wrapper {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .facility-btn.active .icon-wrapper {
+        background: rgba(30, 58, 138, 0.1);
+        color: #1e3a8a;
+    }
+</style>
 
 <div class="max-w-6xl mx-auto px-4 py-12">
     <div class="text-center mb-16">

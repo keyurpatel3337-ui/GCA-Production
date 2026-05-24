@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div class="container">
+    <div class="header" style="background: #6c757d;">
+      <h3>📋 Today's Appointment Schedule</h3>
+      <p>{{date}}</p>
+    </div>
+    <div class="content">
+      <p>Dear {{counsellor_name}},</p>
+      <p>You have <strong>{{count}}</strong> appointments scheduled for today:</p>
+
+      <table class="data-table">
+        <tr>
+          <th>Time</th>
+          <th>Student</th>
+          <th>Purpose</th>
+          <th>Status</th>
+        </tr>
+        {{#appointments}}
+        <tr>
+          <td>{{time}}</td>
+          <td>{{student_name}}<br><small>{{mobile}}</small></td>
+          <td>{{purpose}}</td>
+          <td>{{status}}</td>
+        </tr>
+        {{/appointments}}
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>

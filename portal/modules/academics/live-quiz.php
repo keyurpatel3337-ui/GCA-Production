@@ -189,10 +189,10 @@ include '../../include/sidebar.php';
     <div class="row">
         <!-- Presenter Panel -->
         <div class="col-lg-8 mb-4">
-            <div class="card shadow border-0 rounded-3 css-live-quiz-6ebde4">
+            <div class="card shadow border-0 rounded-3" style="min-height: 480px;">
                 <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center">
                     <h6 class="m-0 fw-bold" id="quiz-header-title"><i class="fas fa-play me-2"></i> Presentation Monitor</h6>
-                    <span class="badge bg-danger rounded-pill css-live-quiz-224b51" id="live-quiz-badge">LIVE RUNNING</span>
+                    <span class="badge bg-danger rounded-pill" id="live-quiz-badge" style="display: none;">LIVE RUNNING</span>
                 </div>
                 <div class="card-body bg-light d-flex flex-column align-items-center justify-content-center" id="monitor-content">
                     <!-- Idle State -->
@@ -203,9 +203,9 @@ include '../../include/sidebar.php';
                     </div>
 
                     <!-- Lobby Waiting State -->
-                    <div class="w-100 text-center py-4 css-live-quiz-224b51" id="lobby-screen">
+                    <div class="w-100 text-center py-4" id="lobby-screen" style="display: none;">
                         <span class="text-muted small d-block mb-1">JOIN CODE:</span>
-                        <h1 class="display-1 fw-extrabold text-primary mb-3 css-live-quiz-501590" id="lobby-code">------</h1>
+                        <h1 class="display-1 fw-extrabold text-primary mb-3" style="letter-spacing: 0.1em;" id="lobby-code">------</h1>
                         <h4 class="fw-bold" id="lobby-title">Quiz Title</h4>
                         <div class="my-4 py-3 bg-white rounded-3 border">
                             <h2 class="fw-extrabold text-success mb-0" id="lobby-student-count">0</h2>
@@ -217,7 +217,7 @@ include '../../include/sidebar.php';
                     </div>
 
                     <!-- Active Question Presentation State -->
-                    <div class="w-100 css-live-quiz-224b51" id="question-screen">
+                    <div class="w-100" id="question-screen" style="display: none;">
                         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
                             <span class="badge bg-primary" id="q-number-pill">Question 1</span>
                             <span class="fw-bold fs-4 text-danger"><i class="far fa-clock me-1"></i> <span id="quiz-timer">30</span>s</span>
@@ -249,34 +249,34 @@ include '../../include/sidebar.php';
                         </div>
 
                         <!-- Bar chart count overlay -->
-                        <div id="chart-overlay" class="mt-4 p-3 bg-white border rounded shadow-sm css-live-quiz-224b51">
+                        <div id="chart-overlay" class="mt-4 p-3 bg-white border rounded shadow-sm" style="display: none;">
                             <h6 class="fw-bold small text-muted mb-2">Student Response Breakdown:</h6>
                             <div class="d-flex flex-column gap-2">
                                 <div class="d-flex align-items-center">
-                                    <span class="small fw-bold css-live-quiz-ec5c70">A:</span>
-                                    <div class="progress flex-grow-1 css-live-quiz-945cc2">
-                                        <div class="progress-bar bg-primary css-live-quiz-1f28c3" id="bar-a"></div>
+                                    <span class="small fw-bold" style="width: 30px;">A:</span>
+                                    <div class="progress flex-grow-1" style="height: 12px;">
+                                        <div class="progress-bar bg-primary" id="bar-a" style="width: 0%;"></div>
                                     </div>
                                     <span class="small ms-2 fw-bold" id="cnt-a">0</span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <span class="small fw-bold css-live-quiz-ec5c70">B:</span>
-                                    <div class="progress flex-grow-1 css-live-quiz-945cc2">
-                                        <div class="progress-bar bg-success css-live-quiz-1f28c3" id="bar-b"></div>
+                                    <span class="small fw-bold" style="width: 30px;">B:</span>
+                                    <div class="progress flex-grow-1" style="height: 12px;">
+                                        <div class="progress-bar bg-success" id="bar-b" style="width: 0%;"></div>
                                     </div>
                                     <span class="small ms-2 fw-bold" id="cnt-b">0</span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <span class="small fw-bold css-live-quiz-ec5c70">C:</span>
-                                    <div class="progress flex-grow-1 css-live-quiz-945cc2">
-                                        <div class="progress-bar bg-warning css-live-quiz-1f28c3" id="bar-c"></div>
+                                    <span class="small fw-bold" style="width: 30px;">C:</span>
+                                    <div class="progress flex-grow-1" style="height: 12px;">
+                                        <div class="progress-bar bg-warning" id="bar-c" style="width: 0%;"></div>
                                     </div>
                                     <span class="small ms-2 fw-bold" id="cnt-c">0</span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <span class="small fw-bold css-live-quiz-ec5c70">D:</span>
-                                    <div class="progress flex-grow-1 css-live-quiz-945cc2">
-                                        <div class="progress-bar bg-danger css-live-quiz-1f28c3" id="bar-d"></div>
+                                    <span class="small fw-bold" style="width: 30px;">D:</span>
+                                    <div class="progress flex-grow-1" style="height: 12px;">
+                                        <div class="progress-bar bg-danger" id="bar-d" style="width: 0%;"></div>
                                     </div>
                                     <span class="small ms-2 fw-bold" id="cnt-d">0</span>
                                 </div>
@@ -289,8 +289,8 @@ include '../../include/sidebar.php';
                         <!-- Footer actions -->
                         <div class="d-flex justify-content-end gap-2 border-top pt-3 mt-4" id="presenter-actions-bar">
                             <button type="button" class="btn btn-warning rounded-pill px-4" id="revealBtn" onclick="revealAnswer()"><i class="fas fa-eye me-1"></i> Reveal Answer</button>
-                            <button type="button" class="btn btn-primary rounded-pill px-4 css-live-quiz-224b51" id="nextBtn" onclick="nextQuestion()"><i class="fas fa-arrow-right me-1"></i> Next Question</button>
-                            <button type="button" class="btn btn-dark rounded-pill px-4 css-live-quiz-224b51" id="completeBtn" onclick="completeQuiz()"><i class="fas fa-flag-checkered me-1"></i> End Quiz</button>
+                            <button type="button" class="btn btn-primary rounded-pill px-4" id="nextBtn" onclick="nextQuestion()" style="display: none;"><i class="fas fa-arrow-right me-1"></i> Next Question</button>
+                            <button type="button" class="btn btn-dark rounded-pill px-4" id="completeBtn" onclick="completeQuiz()" style="display: none;"><i class="fas fa-flag-checkered me-1"></i> End Quiz</button>
                         </div>
                     </div>
                 </div>
@@ -299,7 +299,7 @@ include '../../include/sidebar.php';
 
         <!-- Leaderboard / Competitive Stats -->
         <div class="col-lg-4 mb-4">
-            <div class="card shadow border-0 rounded-3 css-live-quiz-6ebde4">
+            <div class="card shadow border-0 rounded-3" style="min-height: 480px;">
                 <div class="card-header bg-primary text-white py-3">
                     <h6 class="m-0 fw-bold"><i class="fas fa-crown me-2"></i> Live Leaderboard</h6>
                 </div>
@@ -309,7 +309,7 @@ include '../../include/sidebar.php';
                         <h6>Quiz statistics will populate here once answers are submitted!</h6>
                     </div>
                     <!-- Ranking List -->
-                    <div id="leaderboard-list" class="d-flex flex-column gap-3 css-live-quiz-3e2e7c">
+                    <div id="leaderboard-list" class="d-flex flex-column gap-3" style="display: none !important;">
                         <!-- JS generated items -->
                     </div>
                 </div>
@@ -327,7 +327,7 @@ include '../../include/sidebar.php';
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <form id="createQuizForm">
-                <div class="modal-body p-4 css-live-quiz-7260ae">
+                <div class="modal-body p-4" style="max-height: 450px; overflow-y: auto;">
                     <div class="row">
                         <div class="col-md-8 mb-3">
                             <label class="form-label fw-bold">Quiz Title <span class="text-danger">*</span></label>
@@ -607,7 +607,7 @@ include '../../include/sidebar.php';
             html += `
                 <div class="d-flex align-items-center justify-content-between p-2 border rounded bg-white shadow-sm">
                     <div class="d-flex align-items-center gap-2">
-                        <span class="badge bg-dark rounded-circle d-flex align-items-center justify-content-center css-live-quiz-86ddee">${i + 1}</span>
+                        <span class="badge bg-dark rounded-circle d-flex align-items-center justify-content-center" style="width: 25px; height: 25px;">${i + 1}</span>
                         <span class="fw-bold text-dark">${crown}${escapeHtml(b.name)}</span>
                     </div>
                     <span class="badge bg-primary fs-6 px-3 py-1 rounded-pill">${b.score} pts</span>

@@ -20,7 +20,62 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext ASC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<style>
+    .question-pool-item, .selected-question-item {
+        cursor: pointer;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+    .question-pool-item:hover { border-color: #4e73df !important; background: #f0f4ff; }
+    .selected-question-item:hover { border-color: #dc3545 !important; background: #fff5f5; }
+    .selected-question-item { border-left: 4px solid #28a745 !important; }
 
+    .split-panel { display: flex; gap: 20px; }
+    .panel-left, .panel-right { flex: 1; min-width: 0; }
+
+    .q-pool-box, .q-selected-box {
+        height: 480px;
+        overflow-y: auto;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 10px;
+        background: #f8f9fa;
+    }
+    .q-selected-box { background: #f0fff4; border-color: #c3e6cb; }
+
+    .panel-header {
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    .panel-header.available { background: #e8f0fe; color: #3c4fb5; }
+    .panel-header.selected-h { background: #d4edda; color: #155724; }
+
+    .q-item-card {
+        background: #fff;
+        border: 1px solid #e3e6f0;
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+    }
+    .q-item-card .q-meta { font-size: 0.75rem; color: #888; margin-top: 4px; }
+    .q-item-card .add-btn, .q-item-card .remove-btn {
+        font-size: 0.75rem;
+        padding: 2px 8px;
+        border-radius: 20px;
+        float: right;
+        margin-left: 8px;
+    }
+    .empty-state { text-align: center; color: #aaa; padding: 40px 20px; font-size: 0.9rem; }
+    .filter-bar { display: flex; gap: 8px; margin-bottom: 12px; }
+    .filter-bar select { flex: 1; font-size: 0.85rem; }
+    .filter-bar button { white-space: nowrap; font-size: 0.85rem; }
+</style>
 
 <main class="app-main">
     <div class="app-content pt-3">
@@ -31,7 +86,7 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext 
                 <div class="card shadow-sm mb-4">
                     <div class="card-header py-3 d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-info-circle mr-2"></i>Basic Information</h6>
-                        <a href="exam-templates.php" class="btn btn-outline-primary btn-sm css-exam-setup-1033dd">
+                        <a href="exam-templates.php" class="btn btn-outline-primary btn-sm" style="border-radius: 10px;">
                             <i class="fas fa-magic mr-2"></i> Auto-Generate via Template
                         </a>
                     </div>
@@ -90,7 +145,7 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext 
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4 css-exam-setup-224b51" id="target-division-box">
+                            <div class="col-md-4" id="target-division-box" style="display: none;">
                                 <div class="form-group mb-3">
                                     <label class="small font-weight-bold">Select Division <span class="text-danger">*</span></label>
                                     <select name="division_id" id="division-id" class="form-control">
@@ -104,10 +159,10 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext 
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-9 css-exam-setup-224b51" id="target-students-box">
+                            <div class="col-md-9" id="target-students-box" style="display: none;">
                                 <div class="form-group mb-3">
                                     <label class="small font-weight-bold">Select Targeted Student(s) <span class="text-danger">*</span></label>
-                                    <div id="students-checkbox-grid" class="p-2 border rounded css-exam-setup-e9eb8e">
+                                    <div id="students-checkbox-grid" class="p-2 border rounded" style="max-height: 150px; overflow-y: auto; background-color: #f8f9fa;">
                                         <div class="text-muted small">Please select target standard to load students...</div>
                                     </div>
                                 </div>
@@ -222,8 +277,8 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext 
                 <div id="hidden-question-inputs"></div>
 
                 <div class="text-right mb-5">
-                    <a href="manage-exams.php" class="btn btn-light px-4 mr-2 css-exam-setup-1033dd">Cancel</a>
-                    <button type="submit" class="btn btn-success btn-lg px-5 css-exam-setup-1033dd">
+                    <a href="manage-exams.php" class="btn btn-light px-4 mr-2" style="border-radius: 10px;">Cancel</a>
+                    <button type="submit" class="btn btn-success btn-lg px-5" style="border-radius: 10px;">
                         <i class="fas fa-rocket mr-2"></i> Launch Exam
                     </button>
                 </div>
@@ -421,7 +476,7 @@ $standards = $conn->query("SELECT stdid, stdtext FROM standard ORDER BY stdtext 
             let html = '<div class="row g-2">';
             students.forEach(st => {
                 html += `<div class="col-md-4">
-                    <label class="d-flex align-items-center gap-2 mb-0 small p-1 border rounded bg-white css-exam-setup-58aba5">
+                    <label class="d-flex align-items-center gap-2 mb-0 small p-1 border rounded bg-white" style="cursor:pointer;">
                         <input type="checkbox" name="student_ids[]" value="${st.id}">
                         <span>${st.name}</span>
                     </label>

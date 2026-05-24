@@ -17,7 +17,13 @@ require_once ENV_CONFIG_FILE; ?>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="../assets/css/gm-public.css">
-    
+    <style>
+        /* Ensure content is visible by default - reveal animation is enhancement */
+        .reveal-content {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
 </head>
 
 <body class="text-gray-800">
@@ -28,12 +34,12 @@ require_once ENV_CONFIG_FILE; ?>
     <section class="relative py-16 md:py-24 overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         <!-- Animated Background Bubbles -->
         <div class="absolute inset-0 pointer-events-none overflow-hidden">
-            <div class="absolute top-10 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-float css-advisory-committee-f165c4"></div>
-            <div class="absolute top-1/4 right-20 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl animate-float css-advisory-committee-bd845f"></div>
-            <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-float css-advisory-committee-cffe64"></div>
-            <div class="absolute top-1/2 right-1/3 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl animate-float css-advisory-committee-6da30b"></div>
-            <div class="absolute bottom-1/4 right-10 w-72 h-72 bg-indigo-300/10 rounded-full blur-3xl animate-float css-advisory-committee-fb66aa"></div>
-            <div class="absolute top-3/4 left-1/2 w-56 h-56 bg-purple-300/10 rounded-full blur-3xl animate-float css-advisory-committee-c84216"></div>
+            <div class="absolute top-10 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-float" style="animation-delay: 0s;"></div>
+            <div class="absolute top-1/4 right-20 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl animate-float" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/2 right-1/3 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl animate-float" style="animation-delay: 1.5s;"></div>
+            <div class="absolute bottom-1/4 right-10 w-72 h-72 bg-indigo-300/10 rounded-full blur-3xl animate-float" style="animation-delay: 2.5s;"></div>
+            <div class="absolute top-3/4 left-1/2 w-56 h-56 bg-purple-300/10 rounded-full blur-3xl animate-float" style="animation-delay: 3s;"></div>
         </div>
 
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -55,10 +61,10 @@ require_once ENV_CONFIG_FILE; ?>
                     <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-indigo-500/5 to-blue-500/5"></div>
 
                     <!-- Decorative Bubbles inside Card -->
-                    <div class="absolute top-10 right-10 w-32 h-32 bg-blue-400/10 rounded-full blur-2xl animate-float css-advisory-committee-623c98"></div>
-                    <div class="absolute bottom-20 left-10 w-24 h-24 bg-indigo-400/10 rounded-full blur-2xl animate-float css-advisory-committee-6da30b"></div>
-                    <div class="absolute top-1/2 right-1/4 w-20 h-20 bg-blue-300/10 rounded-full blur-2xl animate-float css-advisory-committee-cffe64"></div>
-                    <div class="absolute bottom-10 right-20 w-16 h-16 bg-indigo-300/10 rounded-full blur-2xl animate-float css-advisory-committee-fb66aa"></div>
+                    <div class="absolute top-10 right-10 w-32 h-32 bg-blue-400/10 rounded-full blur-2xl animate-float" style="animation-delay: 0.5s;"></div>
+                    <div class="absolute bottom-20 left-10 w-24 h-24 bg-indigo-400/10 rounded-full blur-2xl animate-float" style="animation-delay: 1.5s;"></div>
+                    <div class="absolute top-1/2 right-1/4 w-20 h-20 bg-blue-300/10 rounded-full blur-2xl animate-float" style="animation-delay: 2s;"></div>
+                    <div class="absolute bottom-10 right-20 w-16 h-16 bg-indigo-300/10 rounded-full blur-2xl animate-float" style="animation-delay: 2.5s;"></div>
 
                     <div class="relative p-8 md:p-12 lg:p-16">
                         <div class="flex flex-col lg:flex-row items-center gap-12">
@@ -117,10 +123,10 @@ require_once ENV_CONFIG_FILE; ?>
                     <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-indigo-500/5 to-purple-500/5"></div>
 
                     <!-- Decorative Bubbles inside Card -->
-                    <div class="absolute top-10 left-10 w-32 h-32 bg-purple-400/10 rounded-full blur-2xl animate-float css-advisory-committee-623c98"></div>
-                    <div class="absolute bottom-20 right-10 w-24 h-24 bg-indigo-400/10 rounded-full blur-2xl animate-float css-advisory-committee-6da30b"></div>
-                    <div class="absolute top-1/2 left-1/4 w-20 h-20 bg-purple-300/10 rounded-full blur-2xl animate-float css-advisory-committee-cffe64"></div>
-                    <div class="absolute bottom-10 left-20 w-16 h-16 bg-indigo-300/10 rounded-full blur-2xl animate-float css-advisory-committee-fb66aa"></div>
+                    <div class="absolute top-10 left-10 w-32 h-32 bg-purple-400/10 rounded-full blur-2xl animate-float" style="animation-delay: 0.5s;"></div>
+                    <div class="absolute bottom-20 right-10 w-24 h-24 bg-indigo-400/10 rounded-full blur-2xl animate-float" style="animation-delay: 1.5s;"></div>
+                    <div class="absolute top-1/2 left-1/4 w-20 h-20 bg-purple-300/10 rounded-full blur-2xl animate-float" style="animation-delay: 2s;"></div>
+                    <div class="absolute bottom-10 left-20 w-16 h-16 bg-indigo-300/10 rounded-full blur-2xl animate-float" style="animation-delay: 2.5s;"></div>
 
                     <div class="relative p-8 md:p-12 lg:p-16">
                         <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
@@ -179,11 +185,11 @@ require_once ENV_CONFIG_FILE; ?>
             <div class="max-w-5xl mx-auto mt-16 reveal-content">
                 <div class="relative bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-[2.5rem] p-8 md:p-12 shadow-2xl overflow-hidden">
                     <!-- Decorative Bubbles -->
-                    <div class="absolute top-5 right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-float css-advisory-committee-f165c4"></div>
-                    <div class="absolute bottom-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-float css-advisory-committee-bd845f"></div>
-                    <div class="absolute top-1/2 right-1/4 w-24 h-24 bg-white/10 rounded-full blur-2xl animate-float css-advisory-committee-6da30b"></div>
-                    <div class="absolute bottom-5 right-20 w-48 h-48 bg-white/10 rounded-full blur-2xl animate-float css-advisory-committee-cffe64"></div>
-                    <div class="absolute top-10 left-1/3 w-56 h-56 bg-white/10 rounded-full blur-2xl animate-float css-advisory-committee-fb66aa"></div>
+                    <div class="absolute top-5 right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-float" style="animation-delay: 0s;"></div>
+                    <div class="absolute bottom-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-float" style="animation-delay: 1s;"></div>
+                    <div class="absolute top-1/2 right-1/4 w-24 h-24 bg-white/10 rounded-full blur-2xl animate-float" style="animation-delay: 1.5s;"></div>
+                    <div class="absolute bottom-5 right-20 w-48 h-48 bg-white/10 rounded-full blur-2xl animate-float" style="animation-delay: 2s;"></div>
+                    <div class="absolute top-10 left-1/3 w-56 h-56 bg-white/10 rounded-full blur-2xl animate-float" style="animation-delay: 2.5s;"></div>
 
                     <div class="relative z-10">
                         <div class="flex items-center justify-center gap-4 mb-6">

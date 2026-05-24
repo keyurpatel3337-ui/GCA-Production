@@ -46,13 +46,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" class="css-target-vs-actual-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-target-vs-actual-pdf-539b04">
-                <span class="css-target-vs-actual-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span class="css-target-vs-actual-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span class="css-target-vs-actual-pdf-39a82f">TARGET VS ACTUAL COLLECTION REPORT</span><br>
-                <span class="css-target-vs-actual-pdf-1b8847">Generated on: ' . date('d M Y h:i A') . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#11998e; color:#fff;">TARGET VS ACTUAL COLLECTION REPORT</span><br>
+                <span style="font-size:10pt;">Generated on: ' . date('d M Y h:i A') . '</span>
             </td>
         </tr>
     </table>';
@@ -60,16 +60,16 @@ try {
     $pdf->Ln(5);
 
     $html = '
-    <table nobr="true" cellpadding="10" class="css-target-vs-actual-pdf-9b6852">
+    <table nobr="true" cellpadding="10" style="width:100%; border:0.5px solid #ddd; font-size:11pt;">
         <tr>
-            <td width="60%" class="css-target-vs-actual-pdf-1673b4">
-                <span class="css-target-vs-actual-pdf-34c301">' . round($percentage, 1) . '% Achieved</span><br>
-                <span class="css-target-vs-actual-pdf-b80428">Current progress towards 100% collection target.</span>
+            <td width="60%" style="border-right:0.5px solid #ddd;">
+                <span style="font-size:14pt; font-weight:bold; color:#11998e;">' . round($percentage, 1) . '% Achieved</span><br>
+                <span style="color:#666;">Current progress towards 100% collection target.</span>
             </td>
-            <td width="40%" class="css-target-vs-actual-pdf-08a0ed">
+            <td width="40%" style="text-align:right;">
                 Target: <b>' . formatIndianCurrency($target) . '</b><br>
-                Collected: <b class="css-target-vs-actual-pdf-caaaed">' . formatIndianCurrency($collected) . '</b><br>
-                Pending: <b class="css-target-vs-actual-pdf-b75578">' . formatIndianCurrency($pending) . '</b>
+                Collected: <b style="color:#28a745;">' . formatIndianCurrency($collected) . '</b><br>
+                Pending: <b style="color:#dc3545;">' . formatIndianCurrency($pending) . '</b>
             </td>
         </tr>
     </table>';
@@ -77,26 +77,26 @@ try {
     $pdf->Ln(10);
 
     $tableHtml = '
-    <table border="0.5" cellpadding="8" class="css-target-vs-actual-pdf-0f0770">
-        <tr class="css-target-vs-actual-pdf-5f2273">
+    <table border="0.5" cellpadding="8" style="width:100%; font-size:10pt;">
+        <tr style="background-color:#eee; font-weight:bold;">
             <th width="70%">Collection Metric</th>
-            <th width="30%" class="css-target-vs-actual-pdf-08a0ed">Amount / Rate</th>
+            <th width="30%" style="text-align:right;">Amount / Rate</th>
         </tr>
         <tr nobr="true">
             <td width="70%">Total Fee Expected (Target)</td>
-            <td width="30%" class="css-target-vs-actual-pdf-08a0ed"><b>' . formatIndianCurrency($target) . '</b></td>
+            <td width="30%" style="text-align:right;"><b>' . formatIndianCurrency($target) . '</b></td>
         </tr>
         <tr nobr="true">
             <td width="70%">Total Amount Collected (Actual)</td>
-            <td width="30%" class="css-target-vs-actual-pdf-7c0ace"><b>' . formatIndianCurrency($collected) . '</b></td>
+            <td width="30%" style="text-align:right; color:#28a745;"><b>' . formatIndianCurrency($collected) . '</b></td>
         </tr>
         <tr nobr="true">
             <td width="70%">Total Amount Pending</td>
-            <td width="30%" class="css-target-vs-actual-pdf-897e36"><b>' . formatIndianCurrency($pending) . '</b></td>
+            <td width="30%" style="text-align:right; color:#dc3545;"><b>' . formatIndianCurrency($pending) . '</b></td>
         </tr>
-        <tr class="css-target-vs-actual-pdf-6eb74d">
+        <tr style="background-color:#f8f9fa;">
             <td width="70%"><b>Collection Achievement Rate</b></td>
-            <td width="30%" class="css-target-vs-actual-pdf-c77f51">' . round($percentage, 2) . '%</td>
+            <td width="30%" style="text-align:right; font-size:12pt; font-weight:bold;">' . round($percentage, 2) . '%</td>
         </tr>
     </table>';
     $pdf->writeHTML($tableHtml, true, false, false, false, '');

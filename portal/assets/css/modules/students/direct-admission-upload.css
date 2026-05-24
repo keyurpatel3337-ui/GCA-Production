@@ -1,0 +1,4 @@
+/* Styles for portal/modules/students/direct-admission-upload.php */
+.border-dashed {
+    border: 2px dashed #dee2e6 !important;
+}

@@ -143,7 +143,22 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-
+<style>
+    .btn-success-custom {
+        background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+    }
+    .btn-success-custom:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 8px -1px rgba(16, 185, 129, 0.2);
+        color: white;
+        background: linear-gradient(135deg, #047857 0%, #059669 100%);
+    }
+</style>
 
 
 
@@ -159,9 +174,10 @@ include '../../include/sidebar.php';
                     <div class="icon">
                         <i class="fas fa-clipboard-list"></i>
                     </div>
-                    <form method="POST" class="small-box-footer css-index-ee35d7">
+                    <form method="POST" class="small-box-footer" style="margin:0;padding:0;">
                         <input type="hidden" name="type" value="all">
-                        <button type="submit" class="css-index-afc5b0">
+                        <button type="submit"
+                            style="background:none;border:none;color:inherit;width:100%;text-align:center;padding:3px 0;cursor:pointer;display:block;">
                             View All <i class="fas fa-arrow-circle-right"></i>
                         </button>
                     </form>
@@ -177,9 +193,10 @@ include '../../include/sidebar.php';
                     <div class="icon">
                         <i class="fas fa-qrcode"></i>
                     </div>
-                    <form method="POST" class="small-box-footer css-index-ee35d7">
+                    <form method="POST" class="small-box-footer" style="margin:0;padding:0;">
                         <input type="hidden" name="type" value="omr_mcq">
-                        <button type="submit" class="css-index-afc5b0">
+                        <button type="submit"
+                            style="background:none;border:none;color:inherit;width:100%;text-align:center;padding:3px 0;cursor:pointer;display:block;">
                             View OMR Tests <i class="fas fa-arrow-circle-right"></i>
                         </button>
                     </form>
@@ -195,9 +212,10 @@ include '../../include/sidebar.php';
                     <div class="icon">
                         <i class="fas fa-pencil-alt"></i>
                     </div>
-                    <form method="POST" class="small-box-footer css-index-ee35d7">
+                    <form method="POST" class="small-box-footer" style="margin:0;padding:0;">
                         <input type="hidden" name="type" value="descriptive">
-                        <button type="submit" class="css-index-afc5b0">
+                        <button type="submit"
+                            style="background:none;border:none;color:inherit;width:100%;text-align:center;padding:3px 0;cursor:pointer;display:block;">
                             View Descriptive <i class="fas fa-arrow-circle-right"></i>
                         </button>
                     </form>
@@ -293,7 +311,7 @@ include '../../include/sidebar.php';
                     ?>
                 </h3>
                 <div class="card-tools d-flex align-items-center">
-                    <div class="me-3 css-index-fa3505">
+                    <div class="me-3" style="width: 250px;">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text bg-white border-end-0">
                                 <i class="fas fa-search text-muted"></i>

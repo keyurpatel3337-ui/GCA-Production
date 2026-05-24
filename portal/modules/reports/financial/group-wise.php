@@ -97,7 +97,92 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
+<style>
+    .filter-card {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        border: none;
+        border-radius: 12px;
+    }
 
+    .filter-card .form-label {
+        color: white;
+        font-weight: 500;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 350px;
+    }
+
+    .group-card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .group-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .group-header {
+        padding: 20px;
+        color: white;
+        text-align: center;
+    }
+
+    .group-header h4 {
+        margin: 0;
+        font-weight: 700;
+    }
+
+    .group-header p {
+        margin: 5px 0 0;
+        opacity: 0.9;
+        font-size: 0.9rem;
+    }
+
+    .group-stats {
+        padding: 20px;
+        background: white;
+    }
+
+    .group-stat-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .group-stat-row:last-child {
+        border-bottom: none;
+    }
+
+    .group-stat-row .label {
+        color: #666;
+    }
+
+    .group-stat-row .value {
+        font-weight: 600;
+    }
+
+    .bg-science {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .bg-commerce {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .bg-arts {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .bg-default {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+</style>
 
 
 
@@ -185,9 +270,9 @@ include '../../../include/sidebar.php';
                                 <?php echo formatIndianCurrency($row['online_amount']); ?>
                             </span>
                         </div>
-                        <div class="group-stat-row css-group-wise-b718f1">
+                        <div class="group-stat-row" style="background: #f0f9ff; margin: 0 -20px -20px; padding: 15px 20px;">
                             <span class="label"><strong>Total Collection</strong></span>
-                            <span class="value text-dark css-group-wise-b28cb1">₹
+                            <span class="value text-dark" style="font-size: 1.2rem;">₹
                                 <?php echo formatIndianCurrency($row['total_collected']); ?>
                             </span>
                         </div>

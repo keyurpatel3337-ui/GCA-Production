@@ -143,11 +143,11 @@ try {
                 <?php echo $totalRecords; ?>, Showing:
                 <?php echo count($requests); ?>)
             </h3>
-            <form method="POST" class="d-inline-block css-leave-applications-46dcee">
+            <form method="POST" class="d-inline-block" style="margin:0;">
                 <input type="hidden" name="status" value="<?php echo htmlspecialchars($status_filter ?? ''); ?>">
                 <input type="hidden" name="page" value="1">
                 <label class="me-2">Per Page:</label>
-                <select name="per_page" class="form-select form-select-sm d-inline-block css-leave-applications-dc251b"
+                <select name="per_page" class="form-select form-select-sm d-inline-block" style="width: auto;"
                     onchange="this.form.submit()">
                     <option value="10" <?php echo $perPage == 10 ? 'selected' : ''; ?>>10</option>
                     <option value="25" <?php echo $perPage == 25 ? 'selected' : ''; ?>>25</option>

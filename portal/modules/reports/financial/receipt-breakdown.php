@@ -152,7 +152,98 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
+<style>
+    .filter-card {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        border: none;
+        border-radius: 12px;
+    }
 
+    .filter-card .form-label {
+        color: white;
+        font-weight: 500;
+    }
+
+    .stat-box {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid;
+    }
+
+    .stat-box.info {
+        border-color: #17a2b8;
+    }
+
+    .stat-box.success {
+        border-color: #28a745;
+    }
+
+    .stat-box.warning {
+        border-color: #ffc107;
+    }
+
+    .stat-box.danger {
+        border-color: #dc3545;
+    }
+
+    .stat-box h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .card-outline {
+        border-top: 3px solid #007bff;
+        border-radius: 8px;
+        box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    }
+
+    .mode-item {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .mode-item:last-child {
+        border-bottom: none;
+    }
+
+    .amount-text {
+        letter-spacing: -0.5px;
+    }
+
+    .no-data {
+        text-align: center;
+        padding: 60px 20px;
+        color: #6c757d;
+    }
+
+    .no-data i {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        opacity: 0.3;
+    }
+
+    @media print {
+
+        .filter-card,
+        .btn,
+        .breadcrumb,
+        .no-print {
+            display: none !important;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            box-shadow: none;
+        }
+    }
+</style>
 
 
 
@@ -346,7 +437,7 @@ include '../../../include/sidebar.php';
                                                         };
                                                         ?>
                                                         <div class="mode-item">
-                                                            <div class="d-flex align-items-center css-receipt-breakdown-63b005">
+                                                            <div class="d-flex align-items-center" style="width: 45%;">
                                                                 <span class="badge <?php echo $badgeClass; ?> me-2"
                                                                     style="width: 80px;">
                                                                     <?php echo $mode; ?>
@@ -355,12 +446,14 @@ include '../../../include/sidebar.php';
                                                                     <?php echo $modeData['count']; ?> txns
                                                                 </small>
                                                             </div>
-                                                            <div class="d-flex align-items-center justify-content-end css-receipt-breakdown-244c75">
+                                                            <div class="d-flex align-items-center justify-content-end"
+                                                                style="width: 55%;">
                                                                 <div class="text-end me-2">
                                                                     <div class="fw-bold amount-text">₹
                                                                         <?php echo formatIndianCurrency($modeData['amount']); ?>
                                                                     </div>
-                                                                    <div class="progress css-receipt-breakdown-65468d">
+                                                                    <div class="progress"
+                                                                        style="height: 3px; width: 80px; margin-left: auto;">
                                                                         <div class="progress-bar <?php echo $badgeClass; ?>"
                                                                             style="width: <?php echo $modePercentage; ?>%"></div>
                                                                     </div>

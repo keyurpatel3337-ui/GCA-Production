@@ -106,7 +106,7 @@ include '../../include/sidebar.php';
                                         <?php echo htmlspecialchars($row['requested_by_name'] ?? 'System'); ?>
                                     </td>
                                     <td>
-                                        <div class="input-group input-group-sm css-pending-discount-approvals-7ecc66">
+                                        <div class="input-group input-group-sm" style="max-width: 150px;">
                                             <span class="input-group-text">₹</span>
                                             <input type="number" class="form-control approval-amount"
                                                 value="<?php echo round($row['discount_amount']); ?>"

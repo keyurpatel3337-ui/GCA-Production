@@ -106,11 +106,11 @@ if (!empty($user_name)) {
                     <?php if (!empty($user_avatar)): ?>
                         <img src="<?php echo $user_avatar; ?>" class="user-image rounded-circle shadow me-2" alt="User Image" style="width: 32px; height: 32px;">
                     <?php else: ?>
-                        <span class="user-image rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center me-2 css-navbar-1e7ac6">
+                        <span class="user-image rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px; font-size: 12px;">
                             <?php echo $initials; ?>
                         </span>
                     <?php endif; ?>
-                    <span class="d-none d-md-inline text-truncate css-navbar-7ecc66">
+                    <span class="d-none d-md-inline text-truncate" style="max-width: 150px;">
                         <?php echo htmlspecialchars($user_name ?? ''); ?>
                     </span>
                 </a>
@@ -120,7 +120,7 @@ if (!empty($user_name)) {
                         <?php if (!empty($user_avatar)): ?>
                             <img src="<?php echo $user_avatar; ?>" class="rounded-circle shadow" alt="User Image">
                         <?php else: ?>
-                            <div class="rounded-circle bg-white text-primary d-inline-flex align-items-center justify-content-center mx-auto css-navbar-b6d397">
+                            <div class="rounded-circle bg-white text-primary d-inline-flex align-items-center justify-content-center mx-auto" style="width: 90px; height: 90px; font-size: 32px; font-weight: 600;">
                                 <?php echo $initials; ?>
                             </div>
                         <?php endif; ?>

@@ -62,13 +62,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" class="css-cancelled-payments-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-cancelled-payments-pdf-539b04">
-                <span class="css-cancelled-payments-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span class="css-cancelled-payments-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span class="css-cancelled-payments-pdf-96a72c">CANCELLED / FAILED / REFUNDED PAYMENTS</span><br>
-                <span class="css-cancelled-payments-pdf-1b8847">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#333; color:#fff;">CANCELLED / FAILED / REFUNDED PAYMENTS</span><br>
+                <span style="font-size:10pt;">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -76,49 +76,49 @@ try {
     $pdf->Ln(2);
 
     $summaryHtml = '
-    <table cellpadding="4" class="css-cancelled-payments-pdf-0e766f">
-        <tr class="css-cancelled-payments-pdf-6eb74d">
+    <table cellpadding="4" style="width:100%; margin-bottom:10px; border:0.5px solid #ddd;">
+        <tr style="background-color:#f8f9fa;">
             <td width="33%">Total Records: <b>' . count($cancelled) . '</b></td>
             <td width="33%">Search: <b>' . ($search_query ?: 'None') . '</b></td>
-            <td width="34%" class="css-cancelled-payments-pdf-08a0ed">Total Amount Voided: <b>' . formatIndianCurrency($totalCancelled) . '</b></td>
+            <td width="34%" style="text-align:right;">Total Amount Voided: <b>' . formatIndianCurrency($totalCancelled) . '</b></td>
         </tr>
     </table>';
     $pdf->writeHTML($summaryHtml, true, false, false, false, '');
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" class="css-cancelled-payments-pdf-6eb086">
+    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
         <thead>
-            <tr class="css-cancelled-payments-pdf-5f2273">
-                <th width="3%" class="css-cancelled-payments-pdf-539b04">#</th>
+            <tr style="background-color:#eee; font-weight:bold;">
+                <th width="3%" style="text-align:center;">#</th>
                 <th width="10%">Date</th>
                 <th width="18%">Student Name</th>
                 <th width="10%">Receipt No</th>
-                <th width="10%" class="css-cancelled-payments-pdf-08a0ed">Amount</th>
+                <th width="10%" style="text-align:right;">Amount</th>
                 <th width="10%">Mode</th>
                 <th width="16%">Remarks</th>
                 <th width="12%">Issued By</th>
-                <th width="11%" class="css-cancelled-payments-pdf-539b04">Status</th>
+                <th width="11%" style="text-align:center;">Status</th>
             </tr>
         </thead>
         <tbody>';
 
     if (empty($cancelled)) {
-        $html .= '<tr><td colspan="9" class="css-cancelled-payments-pdf-539b04">No records found</td></tr>';
+        $html .= '<tr><td colspan="9" style="text-align:center;">No records found</td></tr>';
     } else {
         $i = 1;
         foreach ($cancelled as $row) {
             $html .= '
             <tr nobr="true">
-                <td width="3%" class="css-cancelled-payments-pdf-539b04">' . $i++ . '</td>
+                <td width="3%" style="text-align:center;">' . $i++ . '</td>
                 <td width="10%">' . date('d-m-Y', strtotime($row['payment_date'])) . '</td>
                 <td width="18%"><b>' . htmlspecialchars($row['student_full_name'] ?? '') . '</b></td>
                 <td width="10%">' . htmlspecialchars($row['receipt_no'] ?: '-' ?? '') . '</td>
-                <td width="10%" class="css-cancelled-payments-pdf-714e9d">' . formatIndianCurrency($row['amount']) . '</td>
+                <td width="10%" style="text-align:right; font-weight:bold;">' . formatIndianCurrency($row['amount']) . '</td>
                 <td width="10%">' . strtoupper($row['payment_mode']) . '</td>
                 <td width="16%"><small>' . htmlspecialchars($row['remarks'] ?: '-' ?? '') . '</small></td>
                 <td width="12%">' . htmlspecialchars($row['issued_by_name'] ?: '-' ?? '') . '</td>
-                <td width="11%" class="css-cancelled-payments-pdf-539b04"><b>' . strtoupper($row['status']) . '</b></td>
+                <td width="11%" style="text-align:center;"><b>' . strtoupper($row['status']) . '</b></td>
             </tr>';
         }
     }

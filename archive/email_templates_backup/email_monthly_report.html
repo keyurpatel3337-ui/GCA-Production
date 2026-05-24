@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .content {
+      background: #f9f9f9;
+      padding: 30px;
+      border: 1px solid #ddd;
+    }
+
+    .month-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-top: 4px solid #11998e;
+    }
+
+    .stat-card .number {
+      font-size: 36px;
+      font-weight: bold;
+      color: #11998e;
+      margin-bottom: 5px;
+    }
+
+    .stat-card .label {
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .section {
+      margin: 30px 0;
+    }
+
+    .section-title {
+      color: #11998e;
+      border-bottom: 3px solid #11998e;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .comparison-table th {
+      background: #11998e;
+      color: white;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+
+    .trend-up {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .trend-down {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 5px solid #11998e;
+    }
+
+    .chart-placeholder {
+      background: #e9ecef;
+      padding: 60px;
+      text-align: center;
+      border-radius: 8px;
+      margin: 20px 0;
+      color: #666;
+      font-style: italic;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-size: 12px;
+      border-top: 2px solid #dee2e6;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="month-title">📈 Monthly Performance Report</div>
+      <p style="font-size: 1.2em; margin: 10px 0;">{{month_name}} {{year}}</p>
+      <p style="opacity: 0.9;">Comprehensive Monthly Analysis</p>
+    </div>
+
+    <div class="content">
+      <p>Dear {{recipient_name}},</p>
+      <p>Here is the comprehensive monthly performance report for Gyan Manjari Counselling System.</p>
+
+      <div class="highlight-box">
+        <h3 style="margin-top: 0; color: #11998e;">🎯 Monthly Highlights</h3>
+        <p style="font-size: 1.1em; margin: 10px 0;"><strong>Total Revenue:</strong> ₹{{total_revenue}}</p>
+        <p style="font-size: 1.1em; margin: 10px 0;"><strong>New Admissions:</strong> {{total_admissions}} students</p>
+        <p style="font-size: 1.1em; margin: 10px 0;"><strong>Conversion Rate:</strong> {{conversion_rate}}%</p>
+        <p style="font-size: 1.1em; margin: 10px 0;"><strong>Month-over-Month Growth:</strong> <span
+            class="{{#growth_positive}}trend-up{{/growth_positive}}{{#growth_negative}}trend-down{{/growth_negative}}">{{growth_percentage}}%
+            {{#growth_positive}}📈{{/growth_positive}}{{#growth_negative}}📉{{/growth_negative}}</span></p>
+      </div>
+
+      <h3 class="section-title">📊 Key Performance Indicators</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">{{total_registrations}}</div>
+          <div class="label">Total Registrations</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">{{total_admissions}}</div>
+          <div class="label">Admissions</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">{{conversion_rate}}%</div>
+          <div class="label">Conversion Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">₹{{avg_fee}}</div>
+          <div class="label">Avg Fee/Student</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">📈 Month-over-Month Comparison</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>Metric</th>
+            <th>This Month</th>
+            <th>Last Month</th>
+            <th>Change</th>
+          </tr>
+          <tr>
+            <td>Registrations</td>
+            <td>{{current_registrations}}</td>
+            <td>{{previous_registrations}}</td>
+            <td class="{{#reg_increase}}trend-up{{/reg_increase}}{{#reg_decrease}}trend-down{{/reg_decrease}}">
+              {{reg_change}}%</td>
+          </tr>
+          <tr>
+            <td>Admissions</td>
+            <td>{{current_admissions}}</td>
+            <td>{{previous_admissions}}</td>
+            <td class="{{#adm_increase}}trend-up{{/adm_increase}}{{#adm_decrease}}trend-down{{/adm_decrease}}">
+              {{adm_change}}%</td>
+          </tr>
+          <tr>
+            <td>Revenue</td>
+            <td>₹{{current_revenue}}</td>
+            <td>₹{{previous_revenue}}</td>
+            <td class="{{#rev_increase}}trend-up{{/rev_increase}}{{#rev_decrease}}trend-down{{/rev_decrease}}">
+              {{rev_change}}%</td>
+          </tr>
+          <tr>
+            <td>Conversion Rate</td>
+            <td>{{current_conversion}}%</td>
+            <td>{{previous_conversion}}%</td>
+            <td class="{{#conv_increase}}trend-up{{/conv_increase}}{{#conv_decrease}}trend-down{{/conv_decrease}}">
+              {{conv_change}}%</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">👥 Counsellor Performance</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>Counsellor</th>
+            <th>Registrations</th>
+            <th>Admissions</th>
+            <th>Conversion %</th>
+            <th>Revenue</th>
+            <th>Rank</th>
+          </tr>
+          {{#counsellor_data}}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{registrations}}</td>
+            <td>{{admissions}}</td>
+            <td>{{conversion}}%</td>
+            <td>₹{{revenue}}</td>
+            <td>{{rank}}</td>
+          </tr>
+          {{/counsellor_data}}
+        </table>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">📚 Course-wise Performance</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>Course</th>
+            <th>Registrations</th>
+            <th>Admissions</th>
+            <th>Revenue</th>
+            <th>Avg Fee</th>
+          </tr>
+          {{#course_data}}
+          <tr>
+            <td>{{course_name}}</td>
+            <td>{{registrations}}</td>
+            <td>{{admissions}}</td>
+            <td>₹{{revenue}}</td>
+            <td>₹{{avg_fee}}</td>
+          </tr>
+          {{/course_data}}
+        </table>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">💰 Financial Summary</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>Category</th>
+            <th>Amount (₹)</th>
+            <th>% of Total</th>
+          </tr>
+          <tr>
+            <td>Total Fee Collection</td>
+            <td>{{total_collection}}</td>
+            <td>100%</td>
+          </tr>
+          <tr>
+            <td>Token Fees</td>
+            <td>{{token_fees}}</td>
+            <td>{{token_percentage}}%</td>
+          </tr>
+          <tr>
+            <td>Installments</td>
+            <td>{{installment_fees}}</td>
+            <td>{{installment_percentage}}%</td>
+          </tr>
+          <tr>
+            <td>Pending Fees</td>
+            <td>{{pending_fees}}</td>
+            <td>{{pending_percentage}}%</td>
+          </tr>
+          <tr style="background: #d4edda; font-weight: bold;">
+            <td>Net Collection</td>
+            <td>{{net_collection}}</td>
+            <td>{{collection_rate}}%</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">🎯 Target Achievement</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>Target Type</th>
+            <th>Target</th>
+            <th>Achieved</th>
+            <th>Achievement %</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+            <td>Admission Target</td>
+            <td>{{admission_target}}</td>
+            <td>{{admission_achieved}}</td>
+            <td>{{admission_percentage}}%</td>
+            <td>{{admission_status}}</td>
+          </tr>
+          <tr>
+            <td>Revenue Target</td>
+            <td>₹{{revenue_target}}</td>
+            <td>₹{{revenue_achieved}}</td>
+            <td>{{revenue_percentage}}%</td>
+            <td>{{revenue_status}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">📝 Key Insights & Recommendations</h3>
+        <ul style="line-height: 2;">
+          {{#insights}}
+          <li>{{insight}}</li>
+          {{/insights}}
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">⚠️ Areas of Concern</h3>
+        <ul style="line-height: 2;">
+          {{#concerns}}
+          <li style="color: #dc3545;">{{concern}}</li>
+          {{/concerns}}
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">🎯 Action Items for Next Month</h3>
+        <ul style="line-height: 2;">
+          {{#action_items}}
+          <li><strong>{{action}}</strong> - {{description}}</li>
+          {{/action_items}}
+        </ul>
+      </div>
+
+      <p style="text-align: center; margin-top: 40px;">
+        <a href="{{detailed_report_url}}"
+          style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; padding: 15px 40px; text-decoration: none; border-radius: 8px; display: inline-block; font-size: 1.1em;">View
+          Detailed Dashboard →</a>
+      </p>
+    </div>
+
+    <div class="footer">
+      <p><strong>Gyan Manjari Counselling System</strong> | Monthly Report</p>
+      <p>Generated on {{generated_date}} at {{generated_time}}</p>
+      <p>Report Period: {{start_date}} to {{end_date}}</p>
+    </div>
+  </div>
+</body>
+
+</html>

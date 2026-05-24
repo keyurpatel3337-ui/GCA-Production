@@ -139,7 +139,7 @@ try {
                             </div>
                         </div>
 
-                        <div id="single_student_info" class="alert alert-info css-change-school-224b51">
+                        <div id="single_student_info" class="alert alert-info" style="display: none;">
                             <strong>Current School:</strong> <span id="current_school_name"></span><br>
                             <strong>Standard:</strong> <span id="current_standard"></span>
                         </div>
@@ -203,7 +203,7 @@ try {
                     </div>
 
                     <!-- Preview Section -->
-                    <div id="mobilePreviewSection" class="mt-4 css-change-school-224b51">
+                    <div id="mobilePreviewSection" class="mt-4" style="display: none;">
                         <div class="alert alert-info">
                             <strong><i class="fas fa-users"></i> Students Found:</strong>
                             <span id="mobilePreviewCount">0</span> student(s) matched
@@ -224,7 +224,7 @@ try {
                                 </tbody>
                             </table>
                         </div>
-                        <div id="mobileNotFoundSection" class="alert alert-warning mt-2 css-change-school-224b51">
+                        <div id="mobileNotFoundSection" class="alert alert-warning mt-2" style="display: none;">
                             <strong><i class="fas fa-exclamation-triangle"></i> Not Found:</strong>
                             <span id="mobileNotFoundList"></span>
                         </div>

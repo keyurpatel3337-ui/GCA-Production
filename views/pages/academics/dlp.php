@@ -17,7 +17,11 @@ require_once ENV_CONFIG_FILE; ?>
     <link href="https://fonts.googleapis.com/css2?family=Anek+Gujarati:wght@100..800&family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="../assets/css/gm-public.css">
-    
+    <style>
+        .font-gujarati {
+            font-family: 'Anek Gujarati', 'Jost', sans-serif;
+        }
+    </style>
 </head>
 
 <body class="text-gray-800 bg-slate-50">
@@ -27,9 +31,9 @@ require_once ENV_CONFIG_FILE; ?>
     <!-- DLP Content Section -->
     <section class="relative py-12 md:py-24 overflow-hidden bg-gradient-to-b from-slate-50 via-indigo-50/30 to-slate-50">
         <!-- Decorative background elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float css-dlp-f165c4"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float css-dlp-bd845f"></div>
-        <div class="absolute top-1/4 left-10 w-40 h-40 bg-purple-100 rounded-full opacity-15 animate-float css-dlp-cffe64"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-100 rounded-full translate-x-1/2 -translate-y-1/2 opacity-20 animate-float" style="animation-delay: 0s;"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-100 rounded-full -translate-x-1/2 translate-y-1/2 opacity-20 animate-float" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/4 left-10 w-40 h-40 bg-purple-100 rounded-full opacity-15 animate-float" style="animation-delay: 2s;"></div>
 
         <div class="container mx-auto px-4 relative z-10">
             <!-- Page Header -->

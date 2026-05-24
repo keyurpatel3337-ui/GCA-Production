@@ -28,7 +28,7 @@ require_once PORTAL_PATH . 'session_config.php';
 <script>
 const log = (msg, color='#0f0') => {
     const el = document.getElementById('log');
-    el.innerHTML += `<span class="css-mic-test-6bb2e2">[${new Date().toLocaleTimeString()}] ${msg}</span>\n`;
+    el.innerHTML += `<span style="color:${color}">[${new Date().toLocaleTimeString()}] ${msg}</span>\n`;
 };
 
 async function checkPermission() {

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Templates - Gyan Manjari Counselling System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .category {
+      margin-bottom: 40px;
+    }
+
+    .category-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .category-header h2 {
+      font-size: 1.5em;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9em;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .template-card {
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      background: #fafafa;
+    }
+
+    .template-card:hover {
+      border-color: #667eea;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+      transform: translateY(-5px);
+    }
+
+    .template-card h3 {
+      color: #1e3c72;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+
+    .template-code {
+      background: #e7f3ff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85em;
+      color: #0066cc;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .template-info {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .template-info strong {
+      color: #333;
+    }
+
+    .view-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .view-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .stat-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 3em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-size: 1em;
+      opacity: 0.9;
+    }
+
+    .footer {
+      background: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+      color: #666;
+      border-top: 2px solid #e0e0e0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📧 Email Templates</h1>
+      <p>Gyan Manjari Counselling System</p>
+    </div>
+
+    <div class="content">
+      <div class="stats">
+        <div class="stat-box">
+          <div class="stat-number">24</div>
+          <div class="stat-label">Total Templates</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">7</div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Ready to Use</div>
+        </div>
+      </div>
+
+      <!-- Admission Notifications -->
+      <div class="category">
+        <div class="category-header">
+          <h2>📝 Admission Notifications</h2>
+          <span class="badge">4 Templates</span>
+        </div>
+        <div class="template-grid">
+          <div class="template-card">
+            <h3>EMAIL-ADM-001: New Registration Alert</h3>
+            <div class="template-code">email_new_registration</div>
+            <div class="template-info"><strong>Recipients:</strong> Assigned Counsellor</div>
+            <div class="template-info"><strong>Subject:</strong> [New Registration] {{student_name}}</div>
+            <a href="email_new_registration.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-ADM-002: Admission Confirmed</h3>
+            <div class="template-code">email_admission_confirmed_counsellor</div>
+            <div class="template-info"><strong>Recipients:</strong> Counsellor</div>
+            <div class="template-info"><strong>Subject:</strong> [Admission Confirmed] {{student_name}}</div>
+            <a href="email_admission_confirmed_counsellor.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-ADM-003: Daily Registration Summary</h3>
+            <div class="template-code">email_daily_registration_summary</div>
+            <div class="template-info"><strong>Recipients:</strong> Super Admin, Principal</div>
+            <div class="template-info"><strong>Subject:</strong> [Daily Report] Registration Summary</div>
+            <a href="email_daily_registration_summary.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-ADM-004: Document Verification</h3>
+            <div class="template-code">email_document_verification</div>
+            <div class="template-info"><strong>Recipients:</strong> Assigned Counsellor</div>
+            <div class="template-info"><strong>Subject:</strong> [Action Required] Document Verification</div>
+            <a href="email_document_verification.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Notifications -->
+      <div class="category">
+        <div class="category-header">
+          <h2>💰 Payment Notifications</h2>
+          <span class="badge">5 Templates</span>
+        </div>
+        <div class="template-grid">
+          <div class="template-card">
+            <h3>EMAIL-PAY-001: Payment Received</h3>
+            <div class="template-code">email_payment_received</div>
+            <div class="template-info"><strong>Recipients:</strong> Accountant, Super Admin</div>
+            <div class="template-info"><strong>Subject:</strong> [Payment] ₹{{amount}} received</div>
+            <a href="email_payment_received.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-PAY-002: Daily Collection Report</h3>
+            <div class="template-code">email_daily_collection</div>
+            <div class="template-info"><strong>Recipients:</strong> Super Admin, Accountant</div>
+            <div class="template-info"><strong>Subject:</strong> [Daily Report] Fee Collection</div>
+            <a href="email_daily_collection.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-PAY-003: Payment Failed Alert</h3>
+            <div class="template-code">email_payment_failed</div>
+            <div class="template-info"><strong>Recipients:</strong> Super Admin, IT Admin</div>
+            <div class="template-info"><strong>Subject:</strong> [Alert] Payment Failed</div>
+            <a href="email_payment_failed.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-PAY-004: Refund Processed</h3>
+            <div class="template-code">email_refund_processed</div>
+            <div class="template-info"><strong>Recipients:</strong> Accountant, Super Admin</div>
+            <div class="template-info"><strong>Subject:</strong> [Refund] ₹{{amount}} processed</div>
+            <a href="email_refund_processed.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-PAY-005: Overdue Fees Summary</h3>
+            <div class="template-code">email_overdue_summary</div>
+            <div class="template-info"><strong>Recipients:</strong> Super Admin, Accountant</div>
+            <div class="template-info"><strong>Subject:</strong> [Alert] Overdue Fees Summary</div>
+            <a href="email_overdue_summary.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appointment Notifications -->
+      <div class="category">
+        <div class="category-header">
+          <h2>📅 Appointment Notifications</h2>
+          <span class="badge">3 Templates</span>
+        </div>
+        <div class="template-grid">
+          <div class="template-card">
+            <h3>EMAIL-APT-001: New Appointment Request</h3>
+            <div class="template-code">email_appointment_request</div>
+            <div class="template-info"><strong>Recipients:</strong> Assigned Counsellor</div>
+            <div class="template-info"><strong>Subject:</strong> [Appointment] New request</div>
+            <a href="email_appointment_request.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-APT-002: Daily Appointment Schedule</h3>
+            <div class="template-code">email_daily_appointments</div>
+            <div class="template-info"><strong>Recipients:</strong> Counsellor</div>
+            <div class="template-info"><strong>Subject:</strong> [Today's Schedule] {{count}} appointments</div>
+            <a href="email_daily_appointments.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-APT-003: Missed Appointment Alert</h3>
+            <div class="template-code">email_missed_appointment</div>
+            <div class="template-info"><strong>Recipients:</strong> Counsellor, Super Admin</div>
+            <div class="template-info"><strong>Subject:</strong> [Missed] Appointment</div>
+            <a href="email_missed_appointment.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group Change Request -->
+      <div class="category">
+        <div class="category-header">
+          <h2>🔄 Group Change Request</h2>
+          <span class="badge">5 Templates</span>
+        </div>
+        <div class="template-grid">
+          <div class="template-card">
+            <h3>EMAIL-GCR-001: New Request (Principal)</h3>
+            <div class="template-code">gcr_email_new_request_principal</div>
+            <div class="template-info"><strong>Recipients:</strong> Principal</div>
+            <div class="template-info"><strong>Subject:</strong> [Action Required] New Group Change Request</div>
+            <a href="gcr_email_new_request_principal.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-GCR-002: Request Approved (Staff)</h3>
+            <div class="template-code">gcr_email_approved_staff</div>
+            <div class="template-info"><strong>Recipients:</strong> Counsellor, Super Admin</div>
+            <div class="template-info"><strong>Subject:</strong> [Approved] Group Change Request</div>
+            <a href="gcr_email_approved_staff.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-GCR-003: Request Rejected</h3>
+            <div class="template-code">gcr_email_rejected_counsellor</div>
+            <div class="template-info"><strong>Recipients:</strong> Counsellor</div>
+            <div class="template-info"><strong>Subject:</strong> [Rejected] Group Change Request</div>
+            <a href="gcr_email_rejected_counsellor.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-GCR-004: Fee Adjusted</h3>
+            <div class="template-code">gcr_email_fee_adjusted</div>
+            <div class="template-info"><strong>Recipients:</strong> Accountant, Super Admin</div>
+            <div class="template-info"><strong>Subject:</strong> [Fee Update] Group Change Fee Adjustment</div>
+            <a href="gcr_email_fee_adjusted.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-GCR-005: New Request (Counsellor)</h3>
+            <div class="template-code">gcr_email_new_request_counsellor</div>
+            <div class="template-info"><strong>Recipients:</strong> Counsellor</div>
+            <div class="template-info"><strong>Subject:</strong> [Info] Student Group Change Request</div>
+            <a href="gcr_email_new_request_counsellor.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Email Templates -->
+      <div class="category">
+        <div class="category-header">
+          <h2>🎓 Student Email Templates</h2>
+          <span class="badge">3 Templates</span>
+        </div>
+        <div class="template-grid">
+          <div class="template-card">
+            <h3>EMAIL-STU-001: Welcome Email</h3>
+            <div class="template-code">email_student_welcome</div>
+            <div class="template-info"><strong>Recipients:</strong> Student Email</div>
+            <div class="template-info"><strong>Subject:</strong> Welcome to Gyan Manjari</div>
+            <a href="email_student_welcome.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-STU-002: Fee Receipt Email</h3>
+            <div class="template-code">email_fee_receipt</div>
+            <div class="template-info"><strong>Recipients:</strong> Student Email</div>
+            <div class="template-info"><strong>Subject:</strong> Fee Receipt - {{receipt_no}}</div>
+            <a href="email_fee_receipt.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-STU-003: Password Reset Email</h3>
+            <div class="template-code">email_password_reset</div>
+            <div class="template-info"><strong>Recipients:</strong> Student Email</div>
+            <div class="template-info"><strong>Subject:</strong> Password Reset Request</div>
+            <a href="email_password_reset.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Daily Reports -->
+      <div class="category">
+        <div class="category-header">
+          <h2>📊 Daily Reports</h2>
+          <span class="badge">2 Templates</span>
+        </div>
+        <div class="template-grid">
+          <div class="template-card">
+            <h3>EMAIL-RPT-001: System Daily Summary</h3>
+            <div class="template-code">email_daily_summary</div>
+            <div class="template-info"><strong>Recipients:</strong> Super Admin, Management</div>
+            <div class="template-info"><strong>Subject:</strong> [Daily Summary] Gyan Manjari</div>
+            <a href="email_daily_summary.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-RPT-002: Weekly Performance Report</h3>
+            <div class="template-code">email_weekly_report</div>
+            <div class="template-info"><strong>Recipients:</strong> Super Admin, Principal</div>
+            <div class="template-info"><strong>Subject:</strong> [Weekly Report] Performance Summary</div>
+            <a href="email_weekly_report.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- System Alerts -->
+      <div class="category">
+        <div class="category-header">
+          <h2>🚨 System Alerts</h2>
+          <span class="badge">2 Templates</span>
+        </div>
+        <div class="template-grid">
+          <div class="template-card">
+            <h3>EMAIL-SYS-001: Login Failed Alert</h3>
+            <div class="template-code">email_login_failed_alert</div>
+            <div class="template-info"><strong>Recipients:</strong> IT Admin, Super Admin</div>
+            <div class="template-info"><strong>Subject:</strong> [Security Alert] Multiple Failed Login Attempts</div>
+            <a href="email_login_failed_alert.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+
+          <div class="template-card">
+            <h3>EMAIL-SYS-002: System Error Alert</h3>
+            <div class="template-code">email_system_error</div>
+            <div class="template-info"><strong>Recipients:</strong> IT Admin</div>
+            <div class="template-info"><strong>Subject:</strong> [Critical] System Error Detected</div>
+            <a href="email_system_error.html" class="view-btn" target="_blank">View Template →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>Gyan Manjari Counselling System</strong> | Email Templates v1.0.0</p>
+      <p>Last Updated: December 28, 2025</p>
+    </div>
+  </div>
+</body>
+
+</html>

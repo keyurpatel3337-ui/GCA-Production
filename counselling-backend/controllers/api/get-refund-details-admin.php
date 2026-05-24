@@ -230,7 +230,21 @@ function generateTimeline($req)
 
     $html .= '</div>';
 
-    $html .= '';
+    $html .= '<style>
+        .timeline { position: relative; padding-left: 30px; }
+        .timeline-item { position: relative; padding-bottom: 20px; }
+        .timeline-marker { position: absolute; left: -30px; width: 12px; height: 12px; border-radius: 50%; }
+        .timeline-item:not(:last-child)::before {
+            content: "";
+            position: absolute;
+            left: -24px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% - 12px);
+            background: #dee2e6;
+        }
+        .timeline-item.active .timeline-marker { box-shadow: 0 0 0 4px rgba(0,123,255,0.2); }
+    </style>';
 
     return $html;
 }

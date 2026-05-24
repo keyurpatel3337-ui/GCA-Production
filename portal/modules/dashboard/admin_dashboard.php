@@ -184,7 +184,7 @@ include '../../include/sidebar.php'; ?>
     <div class="row g-4 mb-5">
         <div class="col-lg-4 col-md-6">
             <div class="glass-card p-3 d-flex align-items-center h-100">
-                <div class="stat-icon bg-icon-purple me-3 css-admin_dashboard-4fd294">
+                <div class="stat-icon bg-icon-purple me-3" style="width: 50px; height: 50px;">
                     <i class="fas fa-key"></i>
                 </div>
                 <div>
@@ -197,7 +197,7 @@ include '../../include/sidebar.php'; ?>
 
         <div class="col-lg-4 col-md-6">
             <div class="glass-card p-3 d-flex align-items-center h-100">
-                <div class="stat-icon bg-icon-info me-3 css-admin_dashboard-4fd294">
+                <div class="stat-icon bg-icon-info me-3" style="width: 50px; height: 50px;">
                     <i class="fas fa-file-upload"></i>
                 </div>
                 <div>
@@ -210,7 +210,7 @@ include '../../include/sidebar.php'; ?>
 
         <div class="col-lg-4 col-md-6">
             <div class="glass-card p-3 d-flex align-items-center h-100">
-                <div class="stat-icon bg-icon-success me-3 css-admin_dashboard-4fd294">
+                <div class="stat-icon bg-icon-success me-3" style="width: 50px; height: 50px;">
                     <i class="fas fa-check-circle"></i>
                 </div>
                 <div>

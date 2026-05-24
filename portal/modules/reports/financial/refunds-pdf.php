@@ -50,13 +50,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" class="css-refunds-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-refunds-pdf-539b04">
-                <span class="css-refunds-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span class="css-refunds-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span class="css-refunds-pdf-20df51">REFUND REPORT</span><br>
-                <span class="css-refunds-pdf-1b8847">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#dc3545; color:#fff;">REFUND REPORT</span><br>
+                <span style="font-size:10pt;">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -64,42 +64,42 @@ try {
     $pdf->Ln(2);
 
     $summaryHtml = '
-    <table cellpadding="4" class="css-refunds-pdf-0e766f">
-        <tr class="css-refunds-pdf-6eb74d">
+    <table cellpadding="4" style="width:100%; margin-bottom:10px; border:0.5px solid #ddd;">
+        <tr style="background-color:#f8f9fa;">
             <td width="50%">Total Transactions: <b>' . count($refunds) . '</b></td>
-            <td width="50%" class="css-refunds-pdf-08a0ed">Total Refund Amount: <b>' . formatIndianCurrency($totalRefunds) . '</b></td>
+            <td width="50%" style="text-align:right;">Total Refund Amount: <b>' . formatIndianCurrency($totalRefunds) . '</b></td>
         </tr>
     </table>';
     $pdf->writeHTML($summaryHtml, true, false, false, false, '');
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" class="css-refunds-pdf-6eb086">
+    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
         <thead>
-            <tr class="css-refunds-pdf-5f2273">
-                <th width="5%" class="css-refunds-pdf-539b04">#</th>
+            <tr style="background-color:#eee; font-weight:bold;">
+                <th width="5%" style="text-align:center;">#</th>
                 <th width="15%">Date</th>
                 <th width="25%">Student</th>
-                <th width="15%" class="css-refunds-pdf-08a0ed">Amount</th>
+                <th width="15%" style="text-align:right;">Amount</th>
                 <th width="25%">Reason</th>
-                <th width="15%" class="css-refunds-pdf-539b04">Status</th>
+                <th width="15%" style="text-align:center;">Status</th>
             </tr>
         </thead>
         <tbody>';
 
     if (empty($refunds)) {
-        $html .= '<tr><td colspan="6" class="css-refunds-pdf-539b04">No refunds found</td></tr>';
+        $html .= '<tr><td colspan="6" style="text-align:center;">No refunds found</td></tr>';
     } else {
         $i = 1;
         foreach ($refunds as $row) {
             $html .= '
             <tr nobr="true">
-                <td width="5%" class="css-refunds-pdf-539b04">' . $i++ . '</td>
+                <td width="5%" style="text-align:center;">' . $i++ . '</td>
                 <td width="15%">' . date('d-m-Y', strtotime($row['created_at'])) . '</td>
                 <td width="25%"><b>' . htmlspecialchars($row['student_name'] ?? '') . '</b></td>
-                <td width="15%" class="css-refunds-pdf-d2e3c5">' . formatIndianCurrency($row['amount']) . '</td>
+                <td width="15%" style="text-align:right; font-weight:bold; color:#dc3545;">' . formatIndianCurrency($row['amount']) . '</td>
                 <td width="25%">' . htmlspecialchars($row['reason'] ?: '-' ?? '') . '</td>
-                <td width="15%" class="css-refunds-pdf-539b04">' . strtoupper($row['status'] ?: 'pending') . '</td>
+                <td width="15%" style="text-align:center;">' . strtoupper($row['status'] ?: 'pending') . '</td>
             </tr>';
         }
     }

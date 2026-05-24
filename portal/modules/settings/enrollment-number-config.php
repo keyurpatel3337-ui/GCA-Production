@@ -440,7 +440,7 @@ include '../../include/sidebar.php';
                                                 <?php if ($config['is_default']): ?>
                                                     <span class="badge bg-success"><i class="fas fa-check"></i> Default</span>
                                                 <?php else: ?>
-                                                    <form method="POST" class="css-enrollment-number-config-3df0a3">
+                                                    <form method="POST" style="display: inline;">
                                                         <input type="hidden" name="action" value="set_default">
                                                         <input type="hidden" name="config_id" value="<?php echo $config['id']; ?>">
                                                         <button type="submit" class="btn btn-sm btn-outline-primary"
@@ -457,7 +457,7 @@ include '../../include/sidebar.php';
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                                 <?php if (!$config['is_default']): ?>
-                                                    <form method="POST" class="css-enrollment-number-config-3df0a3">
+                                                    <form method="POST" style="display: inline;">
                                                         <input type="hidden" name="action" value="delete">
                                                         <input type="hidden" name="config_id" value="<?php echo $config['id']; ?>">
                                                         <button type="submit" class="btn btn-sm btn-danger"

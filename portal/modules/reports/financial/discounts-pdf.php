@@ -91,13 +91,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" class="css-discounts-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-discounts-pdf-539b04">
-                <span class="css-discounts-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span class="css-discounts-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span class="css-discounts-pdf-0aca67">DISCOUNT GIVEN REPORT</span><br>
-                <span class="css-discounts-pdf-1b8847">' . ($from_date ? "Period: $from_date to $to_date" : "All Record Snapshot") . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#28a745; color:#fff;">DISCOUNT GIVEN REPORT</span><br>
+                <span style="font-size:10pt;">' . ($from_date ? "Period: $from_date to $to_date" : "All Record Snapshot") . '</span>
             </td>
         </tr>
     </table>';
@@ -105,26 +105,26 @@ try {
     $pdf->Ln(2);
 
     $summaryHtml = '
-    <table cellpadding="4" class="css-discounts-pdf-f6238b">
+    <table cellpadding="4" style="width:100%; border:0.5px solid #ddd; background-color:#f8f9fa;">
         <tr>
             <td width="30%">Records: <b>' . count($discounts) . '</b></td>
-            <td width="40%" class="css-discounts-pdf-539b04">Search: <b>' . ($search ?: 'None') . '</b></td>
-            <td width="30%" class="css-discounts-pdf-08a0ed">Total Discount: <b>' . formatIndianCurrency($totalDiscount) . '</b></td>
+            <td width="40%" style="text-align:center;">Search: <b>' . ($search ?: 'None') . '</b></td>
+            <td width="30%" style="text-align:right;">Total Discount: <b>' . formatIndianCurrency($totalDiscount) . '</b></td>
         </tr>
     </table>';
     $pdf->writeHTML($summaryHtml, true, false, false, false, '');
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" class="css-discounts-pdf-6eb086">
+    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
         <thead>
-            <tr class="css-discounts-pdf-5f2273">
-                <th width="4%" class="css-discounts-pdf-539b04">#</th>
+            <tr style="background-color:#eee; font-weight:bold;">
+                <th width="4%" style="text-align:center;">#</th>
                 <th width="10%">Date</th>
                 <th width="20%">Student Name</th>
                 <th width="10%">Class</th>
                 <th width="20%">Discount Type</th>
-                <th width="12%" class="css-discounts-pdf-08a0ed">Amount</th>
+                <th width="12%" style="text-align:right;">Amount</th>
                 <th width="16%">Remarks</th>
                 <th width="8%">Status</th>
             </tr>
@@ -132,27 +132,27 @@ try {
         <tbody>';
 
     if (empty($discounts)) {
-        $html .= '<tr><td colspan="8" class="css-discounts-pdf-539b04">No discounts found</td></tr>';
+        $html .= '<tr><td colspan="8" style="text-align:center;">No discounts found</td></tr>';
     } else {
         $i = 1;
         foreach ($discounts as $d) {
             $html .= '
             <tr nobr="true">
-                <td width="4%" class="css-discounts-pdf-539b04">' . $i++ . '</td>
+                <td width="4%" style="text-align:center;">' . $i++ . '</td>
                 <td width="10%">' . date('d-m-Y', strtotime($d['discount_date'])) . '</td>
                 <td width="20%"><b>' . htmlspecialchars($d['student_name'] ?? '') . '</b></td>
                 <td width="10%">' . htmlspecialchars($d['current_class'] ?: '-' ?? '') . '</td>
                 <td width="20%">' . htmlspecialchars($d['discount_type'] ?? '') . '</td>
-                <td width="12%" class="css-discounts-pdf-f3cba8">' . formatIndianCurrency($d['amount']) . '</td>
+                <td width="12%" style="text-align:right; font-weight:bold; color:#28a745;">' . formatIndianCurrency($d['amount']) . '</td>
                 <td width="16%">' . htmlspecialchars($d['remarks'] ?: '-' ?? '') . '</td>
                 <td width="8%">' . strtoupper($d['status']) . '</td>
             </tr>';
         }
     }
     $html .= '
-        <tr class="css-discounts-pdf-5f2273">
-            <td colspan="5" class="css-discounts-pdf-08a0ed">TOTAL DISCOUNT GIVEN</td>
-            <td class="css-discounts-pdf-08a0ed">' . formatIndianCurrency($totalDiscount) . '</td>
+        <tr style="background-color:#eee; font-weight:bold;">
+            <td colspan="5" style="text-align:right;">TOTAL DISCOUNT GIVEN</td>
+            <td style="text-align:right;">' . formatIndianCurrency($totalDiscount) . '</td>
             <td colspan="2"></td>
         </tr>
     </tbody></table>';

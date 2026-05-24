@@ -92,37 +92,37 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                 </script>
             <?php endif; ?>
 
-            <div class="card shadow-sm mb-4 border-0 css-manage-chapters-dc9ce7">
+            <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px;">
                 <div class="card-header bg-white border-0 py-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h5 class="mb-0 font-weight-bold text-dark css-manage-chapters-e7ec96">Chapter List</h5>
+                            <h5 class="mb-0 font-weight-bold text-dark" style="font-size: 1.1rem;">Chapter List</h5>
                         </div>
                         <div class="d-flex align-items-center gap-3">
-                            <div class="input-group input-group-sm css-manage-chapters-d4150c">
-                                <span class="input-group-text bg-light border-0 css-manage-chapters-67aaf6">
+                            <div class="input-group input-group-sm" style="width: 220px;">
+                                <span class="input-group-text bg-light border-0" style="border-radius: 10px 0 0 10px;">
                                     <i class="fas fa-search text-muted small"></i>
                                 </span>
-                                <input type="text" id="searchInput" class="form-control border-0 bg-light css-manage-chapters-84dccc" placeholder="Search Chapter...">
+                                <input type="text" id="searchInput" class="form-control border-0 bg-light" placeholder="Search Chapter..." style="border-radius: 0 10px 10px 0; font-size: 0.85rem; height: 38px;">
                             </div>
-                            <select id="filterStandard" class="form-select form-select-sm border-0 bg-light css-manage-chapters-267d83" onchange="updateSubjectFilter(this.value)">
+                            <select id="filterStandard" class="form-select form-select-sm border-0 bg-light" style="width: 160px; border-radius: 10px; font-size: 0.85rem; height: 38px;" onchange="updateSubjectFilter(this.value)">
                                 <option value="">All Standards</option>
                                 <option value="11th">11th</option>
                                 <option value="12th">12th</option>
                                 <option value="Reneet">Reneet</option>
                             </select>
-                            <select id="filterSubject" class="form-select form-select-sm border-0 bg-light css-manage-chapters-267d83">
+                            <select id="filterSubject" class="form-select form-select-sm border-0 bg-light" style="width: 160px; border-radius: 10px; font-size: 0.85rem; height: 38px;">
                                 <option value="">All Subjects</option>
                             </select>
                             <div class="d-flex align-items-center gap-2">
-                                <a href="export-chapters.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-manage-chapters-dbb5d6" title="Export CSV">
+                                <a href="export-chapters.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Export CSV">
                                     <i class="fas fa-download text-muted mr-2"></i> Export
                                 </a>
-                                <a href="import-chapters.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-manage-chapters-dbb5d6" title="Import CSV">
+                                <a href="import-chapters.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Import CSV">
                                     <i class="fas fa-upload text-muted mr-2"></i> Import
                                 </a>
-                                <a href="add-chapter.php" class="btn btn-primary shadow-sm d-flex align-items-center justify-content-center px-4 css-manage-chapters-dbb5d6">
-                                    <i class="fas fa-plus mr-2 css-manage-chapters-af89d6"></i> Add Chapter
+                                <a href="add-chapter.php" class="btn btn-primary shadow-sm d-flex align-items-center justify-content-center px-4" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;">
+                                    <i class="fas fa-plus mr-2" style="font-size: 0.75rem;"></i> Add Chapter
                                 </a>
                             </div>
                         </div>
@@ -157,19 +157,19 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                         <td class="align-middle text-center">
                                             <?php $qc = (int)($ch['q_11th'] ?? 0); ?>
                                             <a href="question-bank.php?chapter_id=<?php echo $ch['chpid']; ?>&standard_id=1" class="text-decoration-none">
-                                                <span class="badge rounded-pill css-manage-chapters-fe1898"><?php echo $qc ?: '—'; ?></span>
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(59,130,246,0.12);color:#2563eb' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:38px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
                                             </a>
                                         </td>
                                         <td class="align-middle text-center">
                                             <?php $qc = (int)($ch['q_12th'] ?? 0); ?>
                                             <a href="question-bank.php?chapter_id=<?php echo $ch['chpid']; ?>&standard_id=2" class="text-decoration-none">
-                                                <span class="badge rounded-pill css-manage-chapters-b1b44c"><?php echo $qc ?: '—'; ?></span>
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(16,185,129,0.12);color:#059669' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:38px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
                                             </a>
                                         </td>
                                         <td class="align-middle text-center">
                                             <?php $qc = (int)($ch['q_reneet'] ?? 0); ?>
                                             <a href="question-bank.php?chapter_id=<?php echo $ch['chpid']; ?>&standard_id=3" class="text-decoration-none">
-                                                <span class="badge rounded-pill css-manage-chapters-eeaafe"><?php echo $qc ?: '—'; ?></span>
+                                                <span class="badge rounded-pill" style="background:<?php echo $qc > 0 ? 'rgba(139,92,246,0.12);color:#7c3aed' : 'rgba(107,114,128,0.09);color:#9ca3af'; ?>;font-size:0.8rem;padding:4px 9px;min-width:38px;display:inline-block;"><?php echo $qc ?: '—'; ?></span>
                                             </a>
                                         </td>
                                         <td class="text-end px-4 align-middle">
@@ -197,7 +197,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 </main>
 
 <!-- Delete Form -->
-<form id="deleteForm" method="POST" class="css-manage-chapters-93b8ea">
+<form id="deleteForm" method="POST" style="display:none;">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="chpid" id="delete_chpid">
 </form>

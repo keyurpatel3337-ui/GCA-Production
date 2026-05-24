@@ -336,7 +336,7 @@ try {
                             </button>
                         </div>
                     </div>
-                    <div id="capacityWarning" class="alert alert-warning mt-2 css-division-assignment-224b51">
+                    <div id="capacityWarning" class="alert alert-warning mt-2" style="display: none;">
                         <i class="fas fa-exclamation-triangle"></i> <span id="warningText"></span>
                     </div>
                 </form>

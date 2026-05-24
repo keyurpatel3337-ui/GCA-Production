@@ -259,7 +259,230 @@ $full_name = trim(($receipts[0]['surname'] ?? '') . ' ' . ($receipts[0]['student
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Receipt - <?php echo htmlspecialchars($receipts[0]['receipt_no'] ?? ''); ?></title>
-    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #000;
+            background: #f0f2f5;
+            padding: 20px 0;
+        }
+
+        .receipt-container {
+            width: 210mm;
+            min-height: 148mm;
+            margin: 0 auto;
+            padding: 8mm;
+            border: 1px solid #000;
+            background: #fff;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+            margin-bottom: 20px;
+        }
+
+        .receipt-header {
+            border-bottom: 1px solid #000;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            flex: 0 0 80px;
+        }
+
+        .logo-section img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .header-info {
+            flex: 1;
+            text-align: left;
+            padding: 0 15px;
+        }
+
+        .org-name {
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .org-address {
+            font-size: 13px;
+            margin-bottom: 2px;
+            max-width: 500px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .org-details {
+            flex: 0 0 160px;
+            font-size: 12px;
+            text-align: right;
+            padding-top: 15px;
+        }
+
+        .student-info-box {
+            border: 1px solid #000;
+            padding: 4px 10px;
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .student-info-box .label {
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .receipt-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 4px 15px;
+            margin: 8px 0;
+        }
+
+        .meta-item {
+            display: flex;
+            font-size: 10.5px;
+        }
+
+        .meta-item .label {
+            font-weight: bold;
+            flex: 0 0 75px;
+        }
+
+        .meta-item .colon {
+            flex: 0 0 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+        }
+
+        .fee-table th,
+        .fee-table td {
+            border: 1px solid #000;
+            padding: 4px 8px;
+            text-align: left;
+        }
+
+        .fee-table th {
+            font-weight: bold;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .fee-table td {
+            font-size: 13px;
+        }
+
+        .fee-table .amount {
+            text-align: right;
+            width: 100px;
+        }
+
+        .amount-words-box {
+            border: 1px solid #000;
+            padding: 4px 10px;
+            margin: 8px 0;
+            display: flex;
+            font-size: 10.5px;
+        }
+
+        .amount-words-box .label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .payment-notes {
+            flex: 1;
+            font-size: 10px;
+        }
+
+        .payment-notes p {
+            margin-bottom: 2px;
+        }
+
+        .signature-section {
+            flex: 0 0 180px;
+            text-align: center;
+        }
+
+        .signature-box {
+            border: 1px solid #000;
+            height: 70px;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .signature-box img {
+            max-width: 160px;
+            max-height: 60px;
+        }
+
+        .auth-label {
+            font-weight: bold;
+            font-size: 10.5px;
+        }
+
+        .jurisdiction {
+            margin-top: 8px;
+            font-size: 9px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .system-generated {
+            font-size: 8px;
+            font-style: italic;
+            color: #444;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .receipt-container {
+                box-shadow: none;
+                margin: 0 auto;
+                border: 1px solid #000;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -323,7 +546,7 @@ $full_name = trim(($receipts[0]['surname'] ?? '') . ' ' . ($receipts[0]['student
                 </div>
                 <div>
                     <span class="label">Date :</span>
-                    <span class="css-view-receipt-ca37eb"><?php echo date('d/m/Y', strtotime($receipt['issued_date'])); ?></span>
+                    <span style="margin-left: 40px;"><?php echo date('d/m/Y', strtotime($receipt['issued_date'])); ?></span>
                 </div>
             </div>
 
@@ -382,14 +605,14 @@ $full_name = trim(($receipts[0]['surname'] ?? '') . ' ' . ($receipts[0]['student
             <table class="fee-table">
                 <thead>
                     <tr>
-                        <th class="css-view-receipt-ae1f13">Sr. No.</th>
+                        <th style="width: 50px;">Sr. No.</th>
                         <th>Particulars</th>
                         <th class="amount">Amount</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="css-view-receipt-cdd8ca">1</td>
+                        <td style="text-align: center;">1</td>
                         <td>
                             <?php
                             $p_text = $receipt['payment_for'] ?? 'Fee Payment';
@@ -416,23 +639,24 @@ $full_name = trim(($receipts[0]['surname'] ?? '') . ' ' . ($receipts[0]['student
                         </td>
                         <td class="amount"><?php echo formatIndianCurrency($receipt['amount']); ?></td>
                     </tr>
-                    <tr class="css-view-receipt-871e53">
-                        <td class="css-view-receipt-bc26f6"></td>
-                        <td class="css-view-receipt-bc26f6"></td>
-                        <td class="css-view-receipt-bc26f6"></td>
+                    <tr style="height: 30px;">
+                        <td style="border-bottom: 1px solid #000;"></td>
+                        <td style="border-bottom: 1px solid #000;"></td>
+                        <td style="border-bottom: 1px solid #000;"></td>
                     </tr>
                 </tbody>
             </table>
 
             <!-- Amount in words with Total -->
             <div class="amount-words-box">
-                <div class="css-view-receipt-a50885">
+                <div style="flex: 1; display: flex;">
                     <span class="label">Rupees :</span>
-                    <span class="css-view-receipt-d2abfb"><?php echo $amount_in_words; ?></span>
+                    <span style="font-weight: 500;"><?php echo $amount_in_words; ?></span>
                 </div>
-                <div class="css-view-receipt-f1af5b">
-                    <span class="label css-view-receipt-c02c7d">Total:</span>
-                    <span class="css-view-receipt-0222a1"><?php echo formatIndianCurrency($receipt['amount']); ?></span>
+                <div style="flex: 0 0 150px; text-align: right; border-left: 1px solid #000; padding-left: 10px;">
+                    <span class="label" style="margin-right: 5px;">Total:</span>
+                    <span
+                        style="font-weight: bold; font-size: 14px;"><?php echo formatIndianCurrency($receipt['amount']); ?></span>
                 </div>
             </div>
 

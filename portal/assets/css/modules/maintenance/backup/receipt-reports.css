@@ -1,0 +1,12 @@
+.receipt-reports-custom-1 {
+    display: none;
+}
+
+.receipt-reports-custom-2 {
+    height: 25px;
+}
+
+.receipt-reports-custom-3 {
+    max-height: 150px;
+    overflow-y: auto;
+}

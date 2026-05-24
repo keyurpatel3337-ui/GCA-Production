@@ -179,7 +179,7 @@ $badge_class = $status_classes[$appointment['status']] ?? 'secondary';
                         </div>
                         <table class="table table-sm">
                             <tr>
-                                <th class="css-appointment-details-8e0008">Name:</th>
+                                <th style="width: 40%">Name:</th>
                                 <td><?php echo htmlspecialchars($appointment['surname'] . ' ' . $appointment['student_name'] ?? ''); ?>
                                 </td>
                             </tr>
@@ -192,7 +192,7 @@ $badge_class = $status_classes[$appointment['status']] ?? 'secondary';
                                 <td><?php echo htmlspecialchars($appointment['aadhaar'] ?? 'N/A'); ?></td>
                             </tr>
                         </table>
-                        <form method="POST" action="../students/details.php" class="css-appointment-details-46dcee">
+                        <form method="POST" action="../students/details.php" style="margin:0;">
                             <input type="hidden" name="id" value="<?php echo $appointment['student_id']; ?>">
                             <button type="submit" class="btn btn-primary btn-block btn-sm">
                                 <i class="fas fa-eye"></i> View Full Profile
@@ -211,7 +211,7 @@ $badge_class = $status_classes[$appointment['status']] ?? 'secondary';
                     <div class="card-body">
                         <table class="table table-sm">
                             <tr>
-                                <th class="css-appointment-details-8e0008">Name:</th>
+                                <th style="width: 40%">Name:</th>
                                 <td><?php echo htmlspecialchars($appointment['counsellor_name'] ?? 'N/A'); ?></td>
                             </tr>
                             <tr>

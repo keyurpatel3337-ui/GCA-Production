@@ -203,8 +203,8 @@ include '../../include/sidebar.php';
                                         <?php echo formatIndianCurrency($course['count'], false); ?>
                                     </span>
                                 </div>
-                                <div class="progress rounded-pill css-consolidated_report-d82698">
-                                    <div class="progress-bar bg-primary rounded-pill css-consolidated_report-4da982">
+                                <div class="progress rounded-pill" style="height: 8px;">
+                                    <div class="progress-bar bg-primary rounded-pill" style="width: <?php echo $percent; ?>%">
                                     </div>
                                 </div>
                             </div>
@@ -216,6 +216,41 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
+<style>
+    .glass-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 16px;
+    }
 
+    .bg-blue-subtle {
+        background-color: #ebf5ff;
+    }
+
+    .bg-green-subtle {
+        background-color: #f0fdf4;
+    }
+
+    .bg-orange-subtle {
+        background-color: #fffaf0;
+    }
+
+    .bg-indigo-subtle {
+        background-color: #eef2ff;
+    }
+
+    @media print {
+        .content-wrapper {
+            margin-left: 0 !important;
+        }
+
+        .sidebar,
+        .navbar,
+        .btn {
+            display: none !important;
+        }
+    }
+</style>
 
 <?php include '../../include/footer.php'; ?>

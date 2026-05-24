@@ -121,11 +121,11 @@ function processLatex($text, $img_h = 32)
             if (!empty($svg_content) && strpos($svg_content, '<svg') !== false) {
                 file_put_contents($cache_file, $svg_content);
             } else {
-                return '<span class="css-generate-pdf-paper-b64e6d">$' . $latex . '$</span>';
+                return '<span style="color:red">$' . $latex . '$</span>';
             }
         }
 
-        return '<img src="' . $cache_file . '" class="css-generate-pdf-paper-7eaa82">';
+        return '<img src="' . $cache_file . '" style="height:' . round($final_h) . 'pt; vertical-align:middle; margin:0 1pt;">';
     }, $text);
 }
 
@@ -143,7 +143,79 @@ $html = '
 <!DOCTYPE html>
 <html>
 <head>
-    
+    <style>
+        body {
+            font-family: ' . ($font_fam === 'sans' ? '"timesnewroman", "freesans", "shruti", sans-serif' : '"timesnewroman", "freeserif", "shruti", serif') . ';
+            font-size: ' . $font_size . ';
+            line-height: 1.5;
+            color: #000;
+        }
+        .header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px; }
+        .header h1 { margin: 0; font-size: 20pt; }
+        .header h2 { margin: 5px 0; font-size: 16pt; }
+        .meta-info { width: 100%; margin-bottom: 20px; border-bottom: 1px solid #000; padding-bottom: 5px; }
+        
+        .subject-title {
+            text-align: center;
+            text-decoration: underline;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 15pt 0 10pt 0;
+            background: #f0f0f0;
+            padding: 5pt;
+        }
+        
+        .question-block {
+            margin-bottom: 15px;
+        }
+        .q-num { font-weight: bold; margin-right: 5px; }
+        .q-text { display: inline; }
+        .q-marks { font-style: italic; font-size: 0.9em; }
+        
+        .q-row-table { width: 100%; border-collapse: collapse; margin-bottom: 2px; }
+        .q-row-table td { vertical-align: top; }
+        .q-num-cell { width: 30pt; font-weight: bold; }
+        .q-text-cell { padding-right: 5pt; }
+        .q-text-cell img {
+            vertical-align: middle !important;
+            margin: 2px 5px !important;
+        }
+        .q-img-cell { width: 1%; white-space: nowrap; vertical-align: top; padding-left: 10pt; }
+
+        .options-container { margin-top: 5px; margin-left: 30pt; }
+        .option-item { margin-bottom: 5px; }
+        
+        .grid-options { width: 100%; border-collapse: collapse; margin-top: 5pt; page-break-inside: avoid; }
+        .grid-options td { width: 50%; padding: 4px 5px; vertical-align: middle; }
+        
+        .inline-options { width: 100%; border-collapse: collapse; margin-top: 5pt; page-break-inside: avoid; }
+        .inline-options td { width: 25%; padding: 10px 0; vertical-align: middle; }
+
+        img.q-img { max-width: 100%; }
+        .img-right { float: right; margin-left: 10px; margin-bottom: 5px; }
+        .img-below { display: block; margin: 10px 0; }
+
+        /* Force all paragraphs, divs, and block tags inside options to stay completely inline next to labels (A), (B), (C), (D) */
+        .option-item p,
+        .grid-options td p,
+        .inline-options td p,
+        .option-item div,
+        .grid-options td div,
+        .inline-options td div {
+            display: inline !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        /* Align option images (chemistry diagrams, SVG LaTeX equations) neatly next to the option labels */
+        .option-item img,
+        .grid-options td img,
+        .inline-options td img {
+            vertical-align: middle;
+            display: inline-block !important;
+            margin: 2px 0 2px 4px !important;
+        }
+    </style>
 </head>
 <body>
     <div class="header">
@@ -194,7 +266,7 @@ foreach ($questions as $q) {
                                 <td class="q-num-cell">' . $q['order_no'] . '.</td>
                                 <td class="q-text-cell">' . $q_text . ' ' . $marks . '</td>
                                 <td class="q-img-cell">
-                                    <img src="' . $img_path . '" class="css-generate-pdf-paper-359463">
+                                    <img src="' . $img_path . '" style="height:' . $img_scale . 'pt; max-width: 250pt;">
                                 </td>
                             </tr>
                           </table>';
@@ -206,8 +278,8 @@ foreach ($questions as $q) {
                                 <td class="q-text-cell">' . $q_text . ' ' . $marks . '</td>
                             </tr>
                           </table>
-                          <div class="css-generate-pdf-paper-af3b25">
-                            <img src="' . $img_path . '" class="css-generate-pdf-paper-1ec888">
+                          <div style="margin: 10pt 0 10pt 30pt;">
+                            <img src="' . $img_path . '" style="height:' . $img_scale . 'pt; max-width: 100%;">
                           </div>';
             }
         } else {
@@ -251,11 +323,11 @@ foreach ($questions as $q) {
     if ($opt_style === 'list') {
         $html .= '<div class="options-container">';
         foreach ($opts as $lbl => $val) {
-            $html .= '<div class="option-item css-generate-pdf-paper-6d61bb">
-                        <table class="css-generate-pdf-paper-250fc7">
+            $html .= '<div class="option-item" style="margin-bottom: 5px; page-break-inside: avoid;">
+                        <table style="width: 100%; border-collapse: collapse; border: none; margin: 0; padding: 0;">
                             <tr>
-                                <td class="css-generate-pdf-paper-f58c7d">(' . $lbl . ')</td>
-                                <td class="css-generate-pdf-paper-392387">' . $val . '</td>
+                                <td style="width: 25pt; vertical-align: middle; font-weight: bold; border: none; padding: 0; margin: 0;">(' . $lbl . ')</td>
+                                <td style="vertical-align: middle; border: none; padding: 0; margin: 0;">' . $val . '</td>
                             </tr>
                         </table>
                       </div>';
@@ -264,11 +336,11 @@ foreach ($questions as $q) {
     } elseif ($opt_style === 'inline') {
         $html .= '<table class="inline-options"><tr>';
         foreach ($opts as $lbl => $val) {
-            $html .= '<td class="css-generate-pdf-paper-19f684">
-                        <table class="css-generate-pdf-paper-250fc7">
+            $html .= '<td style="vertical-align: middle; padding-bottom: 4pt; width: 25%;">
+                        <table style="width: 100%; border-collapse: collapse; border: none; margin: 0; padding: 0;">
                             <tr>
-                                <td class="css-generate-pdf-paper-f58c7d">(' . $lbl . ')</td>
-                                <td class="css-generate-pdf-paper-392387">' . $val . '</td>
+                                <td style="width: 25pt; vertical-align: middle; font-weight: bold; border: none; padding: 0; margin: 0;">(' . $lbl . ')</td>
+                                <td style="vertical-align: middle; border: none; padding: 0; margin: 0;">' . $val . '</td>
                             </tr>
                         </table>
                       </td>';
@@ -279,11 +351,11 @@ foreach ($questions as $q) {
                     <tr>';
         foreach (['A', 'B'] as $lbl) {
             $val = $opts[$lbl];
-            $html .= '<td class="css-generate-pdf-paper-2e4ad7">
-                        <table class="css-generate-pdf-paper-250fc7">
+            $html .= '<td style="vertical-align: middle; padding-bottom: 4pt; width: 50%;">
+                        <table style="width: 100%; border-collapse: collapse; border: none; margin: 0; padding: 0;">
                             <tr>
-                                <td class="css-generate-pdf-paper-f58c7d">(' . $lbl . ')</td>
-                                <td class="css-generate-pdf-paper-392387">' . $val . '</td>
+                                <td style="width: 25pt; vertical-align: middle; font-weight: bold; border: none; padding: 0; margin: 0;">(' . $lbl . ')</td>
+                                <td style="vertical-align: middle; border: none; padding: 0; margin: 0;">' . $val . '</td>
                             </tr>
                         </table>
                       </td>';
@@ -292,11 +364,11 @@ foreach ($questions as $q) {
                     <tr>';
         foreach (['C', 'D'] as $lbl) {
             $val = $opts[$lbl];
-            $html .= '<td class="css-generate-pdf-paper-2e4ad7">
-                        <table class="css-generate-pdf-paper-250fc7">
+            $html .= '<td style="vertical-align: middle; padding-bottom: 4pt; width: 50%;">
+                        <table style="width: 100%; border-collapse: collapse; border: none; margin: 0; padding: 0;">
                             <tr>
-                                <td class="css-generate-pdf-paper-f58c7d">(' . $lbl . ')</td>
-                                <td class="css-generate-pdf-paper-392387">' . $val . '</td>
+                                <td style="width: 25pt; vertical-align: middle; font-weight: bold; border: none; padding: 0; margin: 0;">(' . $lbl . ')</td>
+                                <td style="vertical-align: middle; border: none; padding: 0; margin: 0;">' . $val . '</td>
                             </tr>
                         </table>
                       </td>';
@@ -309,7 +381,7 @@ foreach ($questions as $q) {
 }
 
 $html .= ($num_cols > 1 ? '</columns>' : '') . '
-    <div class="css-generate-pdf-paper-afd679">
+    <div style="text-align:center; margin-top:30px; border-top:1px solid #000; padding-top:10px; font-weight:bold;">
         *** END OF PAPER ***
     </div>
 </body>

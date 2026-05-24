@@ -177,7 +177,80 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
+<style>
+    .glass-header {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
 
+    .form-section-title {
+        font-size: 0.875rem;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .mark-input {
+        width: 80px;
+        text-align: center;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        padding: 0.4rem;
+    }
+
+    .mark-input:focus {
+        border-color: var(--theme-blue);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        outline: none;
+    }
+
+    .table thead th {
+        background: var(--theme-blue) !important;
+        color: white !important;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+        border: none;
+        vertical-align: middle;
+    }
+
+    .btn-success-custom {
+        background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-success-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2), 0 4px 6px -2px rgba(16, 185, 129, 0.1);
+        background: linear-gradient(135deg, #047857 0%, #059669 100%);
+        color: white;
+    }
+
+    .btn-success-custom:active {
+        transform: translateY(0);
+    }
+
+    .marks-footer {
+        background: white;
+        padding: 1.5rem;
+        border-top: 1px solid #f1f5f9;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 1rem;
+    }
+</style>
 
 <div class="content-wrapper">
     <section class="content py-4">
@@ -296,7 +369,7 @@ include '../../include/sidebar.php';
                             <small class="text-muted">Use the <strong>Tab</strong> key to navigate quickly down the
                                 columns.</small>
                         </div>
-                        <div class="css-bulk-marks-entry-88ed85">
+                        <div style="width: 300px;">
                             <div class="input-group">
                                 <span class="input-group-text bg-white border-end-0">
                                     <i class="fas fa-search text-muted"></i>
@@ -316,7 +389,7 @@ include '../../include/sidebar.php';
                             <input type="hidden" name="subject_id" value="<?php echo htmlspecialchars($selected_subject ?? ''); ?>">
                             <input type="hidden" name="exam_type" value="<?php echo htmlspecialchars($selected_exam ?? ''); ?>">
 
-                            <div class="table-responsive css-bulk-marks-entry-911727">
+                            <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
                                 <table class="table table-hover align-middle mb-0">
                                     <thead class="sticky-top">
                                         <tr>

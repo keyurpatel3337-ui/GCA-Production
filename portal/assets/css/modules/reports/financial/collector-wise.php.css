@@ -1,0 +1,84 @@
+/* Styles for portal/modules/reports/financial/collector-wise.php */
+
+.filter-card {
+        background: linear-gradient(135deg, #232526 0%, #414345 100%);
+        border: none;
+        border-radius: 12px;
+    }
+
+    .filter-card .form-label {
+        color: white;
+        font-weight: 500;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 350px;
+    }
+
+    .collector-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .collector-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .collector-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 auto 15px;
+    }
+
+    .collector-name {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+
+    .collector-role {
+        color: #6c757d;
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+    }
+
+    .collector-amount {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #28a745;
+    }
+
+    .collector-stats {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .collector-stat {
+        text-align: center;
+    }
+
+    .collector-stat .value {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .collector-stat .label {
+        color: #6c757d;
+        font-size: 0.8rem;
+    }

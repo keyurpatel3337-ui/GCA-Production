@@ -123,7 +123,7 @@ if (file_exists($jsonFile)) {
                                     </a>
                                 </div>
                             </div>
-                            <div class="card-body p-0 css-email-template-gallery-47143d">
+                            <div class="card-body p-0" style="height: 600px; background-color: #fff;">
                                 <iframe id="preview_${t.id}" class="preview-iframe w-100 h-100 border-0"></iframe>
                             </div>
                             <div class="card-footer bg-white border-top-0 d-print-none">
@@ -171,7 +171,10 @@ if (file_exists($jsonFile)) {
         doc.write(`
             <html>
                 <head>
-                    
+                    <style>
+                        body { margin: 20px; font-family: 'Inter', sans-serif; }
+                        * { max-width: 100%; box-sizing: border-box; }
+                    </style>
                 </head>
                 <body>${content}</body>
             </html>
@@ -195,7 +198,7 @@ if (file_exists($jsonFile)) {
         });
 
         return `
-            <div class="css-email-template-gallery-2060cc">
+            <div style="font-family: 'Inter', sans-serif; padding: 20px; background: white;">
                 ${content}
             </div>
         `;
@@ -303,4 +306,40 @@ if (file_exists($jsonFile)) {
     });
 </script>
 
-
+<style>
+    .template-card-wrapper {
+        page-break-inside: avoid;
+    }
+    .tiny {
+        font-size: 0.7rem;
+    }
+    .uppercase {
+        text-transform: uppercase;
+    }
+    @media print {
+        .app-content {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .container-fluid {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+        .row {
+            display: block !important;
+        }
+        .template-card-wrapper {
+            width: 100% !important;
+            margin-bottom: 2rem !important;
+            page-break-after: always;
+        }
+        .card {
+            box-shadow: none !important;
+            border: 1px solid #eee !important;
+        }
+        body {
+            background-color: white !important;
+        }
+    }
+</style>

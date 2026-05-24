@@ -151,11 +151,11 @@ include '../../include/sidebar.php';
                     <table class="table table-hover align-middle mb-0">
                         <thead class="bg-light">
                             <tr>
-                                <th class="border-0 ps-4 py-3 css-upload-documents-ae1f13">Status</th>
+                                <th class="border-0 ps-4 py-3" style="width: 50px;">Status</th>
                                 <th class="border-0 py-3">Document Type</th>
                                 <th class="border-0 py-3">Description</th>
-                                <th class="border-0 py-3 text-center css-upload-documents-5c2dc9">Actions</th>
-                                <th class="border-0 pe-4 py-3 text-end css-upload-documents-c25159">Preview</th>
+                                <th class="border-0 py-3 text-center" style="width: 200px;">Actions</th>
+                                <th class="border-0 pe-4 py-3 text-end" style="width: 150px;">Preview</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -227,6 +227,30 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
+<style>
+    .glass-card {
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 20px;
+    }
 
+    .table-hover tbody tr:hover {
+        background-color: rgba(79, 70, 229, 0.02) !important;
+    }
+
+    .smaller {
+        font-size: 0.75rem;
+    }
+
+    .form-check-input:checked {
+        background-color: #10b981;
+        border-color: #10b981;
+    }
+
+    .welcome-banner {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+</style>
 
 <?php include '../../include/footer.php'; ?>

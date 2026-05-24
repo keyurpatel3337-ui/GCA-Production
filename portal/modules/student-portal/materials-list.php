@@ -78,14 +78,155 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
+<style>
+    :root {
+        --glass-bg: rgba(255, 255, 255, 0.7);
+        --glass-border: rgba(226, 232, 240, 0.8);
+        --pdf-color: #ef4444;
+        --ppt-color: #f59e0b;
+        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+    }
 
+    body {
+        background-color: #f8fafc;
+    }
+
+    .glass-header-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+    }
+
+    .search-filter-row {
+        background: #ffffff;
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .material-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-column: column;
+    }
+
+    .material-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--card-hover-shadow);
+        border-color: #cbd5e1;
+    }
+
+    .material-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+    }
+
+    .card-type-pdf::before { background: var(--pdf-color); }
+    .card-type-ppt::before { background: var(--ppt-color); }
+
+    .file-icon-wrapper {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        transition: all 0.2s ease;
+    }
+
+    .icon-pdf {
+        background-color: rgba(239, 68, 68, 0.08);
+        color: var(--pdf-color);
+    }
+
+    .icon-ppt {
+        background-color: rgba(245, 158, 11, 0.08);
+        color: var(--ppt-color);
+    }
+
+    .material-card:hover .file-icon-wrapper {
+        transform: scale(1.08);
+    }
+
+    .kindle-stat-badge {
+        font-size: 0.76rem;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+    }
+
+    .badge-bookmark {
+        background-color: rgba(245, 158, 11, 0.06);
+        color: #d97706;
+        border-color: rgba(245, 158, 11, 0.15);
+    }
+
+    .badge-note {
+        background-color: rgba(59, 130, 246, 0.06);
+        color: #2563eb;
+        border-color: rgba(59, 130, 246, 0.15);
+    }
+
+    .badge-doubt-unresolved {
+        background-color: rgba(239, 68, 68, 0.06);
+        color: #dc2626;
+        border-color: rgba(239, 68, 68, 0.15);
+    }
+
+    .badge-doubt-resolved {
+        background-color: rgba(16, 185, 129, 0.06);
+        color: #059669;
+        border-color: rgba(16, 185, 129, 0.15);
+    }
+
+    .btn-kindle-open {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        color: #ffffff;
+        border: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-kindle-open:hover {
+        background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    }
+
+    .empty-library-state {
+        min-height: 380px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+    }
+</style>
 
 <div class="container-fluid py-4">
     <!-- Header -->
     <div class="card glass-header-card p-4 mb-4 border-0">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
             <div>
-                <h1 class="fw-bold text-slate-800 mb-1 css-materials-list-0082f5" id="main-library-title">
+                <h1 class="fw-bold text-slate-800 mb-1" id="main-library-title" style="font-size: 1.75rem;">
                     <i class="fas fa-book-reader text-primary me-2"></i> Study Materials Library
                 </h1>
                 <p class="text-muted mb-0">
@@ -98,10 +239,10 @@ include '../../include/sidebar.php';
             </div>
             <?php if ($enroll_data): ?>
                 <div class="d-flex flex-wrap gap-2">
-                    <span class="badge bg-primary px-3 py-2 rounded-pill shadow-xs css-materials-list-e7992d">
+                    <span class="badge bg-primary px-3 py-2 rounded-pill shadow-xs" style="font-size: 0.85rem;">
                         <i class="fas fa-graduation-cap me-1"></i> Class: <?= htmlspecialchars($enroll_data['course_id']) ?>
                     </span>
-                    <span class="badge bg-success px-3 py-2 rounded-pill shadow-xs css-materials-list-e7992d">
+                    <span class="badge bg-success px-3 py-2 rounded-pill shadow-xs" style="font-size: 0.85rem;">
                         <i class="fas fa-object-group me-1"></i> Division: <?= htmlspecialchars($enroll_data['division_id']) ?>
                     </span>
                 </div>
@@ -112,11 +253,11 @@ include '../../include/sidebar.php';
     <?php if (!$enroll_data): ?>
         <!-- Enrollment Warning Empty State -->
         <div class="empty-library-state d-flex flex-column align-items-center justify-content-center text-center p-5 shadow-xs">
-            <div class="p-4 bg-warning bg-opacity-10 text-warning rounded-circle mb-3 css-materials-list-2a1188">
+            <div class="p-4 bg-warning bg-opacity-10 text-warning rounded-circle mb-3" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2.25rem;">
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
             <h4 class="fw-bold text-slate-900">Enrollment Required</h4>
-            <p class="text-muted mx-auto css-materials-list-10768a">
+            <p class="text-muted mx-auto" style="max-width: 460px;">
                 You are currently registered in the system but have not been assigned to a specific standard or division. Please contact the administrative department to activate your academic enrollment.
             </p>
         </div>
@@ -154,11 +295,11 @@ include '../../include/sidebar.php';
         <!-- Materials Grid -->
         <?php if (empty($materials)): ?>
             <div class="empty-library-state d-flex flex-column align-items-center justify-content-center text-center p-5 shadow-xs">
-                <div class="p-4 bg-primary bg-opacity-10 text-primary rounded-circle mb-3 css-materials-list-2a1188">
+                <div class="p-4 bg-primary bg-opacity-10 text-primary rounded-circle mb-3" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2.25rem;">
                     <i class="fas fa-folder-open"></i>
                 </div>
                 <h4 class="fw-bold text-slate-900">Library is Empty</h4>
-                <p class="text-muted mx-auto css-materials-list-10768a">
+                <p class="text-muted mx-auto" style="max-width: 460px;">
                     Your teachers have not uploaded any study materials or textbook references for your standard yet. Check back later!
                 </p>
             </div>
@@ -193,8 +334,8 @@ include '../../include/sidebar.php';
 
                             <!-- Title & Description -->
                             <div class="flex-grow-1 mb-3">
-                                <h5 class="fw-bold text-slate-900 mb-1.5 text-truncate-2 css-materials-list-e363e7"><?= htmlspecialchars($m['title']) ?></h5>
-                                <p class="text-muted small text-truncate-2 mb-0 css-materials-list-83552b"><?= htmlspecialchars($m['description'] ?: 'No topics description provided.') ?></p>
+                                <h5 class="fw-bold text-slate-900 mb-1.5 text-truncate-2" style="font-size: 1.05rem; line-height: 1.35; min-height: 2.7rem;"><?= htmlspecialchars($m['title']) ?></h5>
+                                <p class="text-muted small text-truncate-2 mb-0" style="min-height: 2.4rem; line-height: 1.45;"><?= htmlspecialchars($m['description'] ?: 'No topics description provided.') ?></p>
                             </div>
 
                             <!-- Kindle E-Reader Personal Stats Badge Grid -->
@@ -236,7 +377,7 @@ include '../../include/sidebar.php';
 
                             <!-- Actions Row -->
                             <div class="d-flex align-items-center justify-content-between pt-2 border-top mt-auto">
-                                <div class="small text-muted text-truncate css-materials-list-1da871">
+                                <div class="small text-muted text-truncate" style="max-width: 60%;">
                                     <i class="far fa-user me-1"></i> <?= htmlspecialchars($m['teacher_name'] ?: 'Unknown') ?>
                                 </div>
                                 <a href="view-material.php?id=<?= $m['id'] ?>" class="btn btn-kindle-open rounded-pill px-4 btn-sm fw-bold shadow-xs">

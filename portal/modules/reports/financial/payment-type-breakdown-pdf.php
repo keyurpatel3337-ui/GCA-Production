@@ -91,13 +91,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" class="css-payment-type-breakdown-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-payment-type-breakdown-pdf-539b04">
-                <span class="css-payment-type-breakdown-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span class="css-payment-type-breakdown-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span class="css-payment-type-breakdown-pdf-0c5bfa">PAYMENT TYPE BREAKDOWN REPORT</span><br>
-                <span class="css-payment-type-breakdown-pdf-1b8847">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#f0f0f0;">PAYMENT TYPE BREAKDOWN REPORT</span><br>
+                <span style="font-size:10pt;">Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -105,48 +105,48 @@ try {
     $pdf->Ln(2);
 
     $html = '
-    <table cellpadding="4" class="css-payment-type-breakdown-pdf-9f2285">
-        <tr class="css-payment-type-breakdown-pdf-6eb74d">
-            <td width="33%" class="css-payment-type-breakdown-pdf-2b03f1">
+    <table cellpadding="4" style="width:100%; margin-bottom:10px;">
+        <tr style="background-color:#f8f9fa;">
+            <td width="33%" style="border:0.5px solid #ddd; text-align:center;">
                 <small>Total Transactions</small><br><b>' . $grandCount . '</b>
             </td>
-            <td width="34%" class="css-payment-type-breakdown-pdf-2b03f1">
+            <td width="34%" style="border:0.5px solid #ddd; text-align:center;">
                 <small>Total Collection</small><br><b>' . formatIndianCurrency($grandTotal) . '</b>
             </td>
-            <td width="33%" class="css-payment-type-breakdown-pdf-2b03f1">
+            <td width="33%" style="border:0.5px solid #ddd; text-align:center;">
                 <small>Average/Txn</small><br><b>' . ($grandCount > 0 ? formatIndianCurrency($grandTotal / $grandCount) : 0) . '</b>
             </td>
         </tr>
     </table>';
     $pdf->writeHTML($html, true, false, false, false, '');
 
-    $tbody = '<table border="0.5" cellpadding="4" class="css-payment-type-breakdown-pdf-c6ad08">
+    $tbody = '<table border="0.5" cellpadding="4" style="width:100%; font-size:9pt;">
         <thead>
-            <tr class="css-payment-type-breakdown-pdf-de3663">
+            <tr style="background-color:#333; color:#fff; font-weight:bold;">
                 <th width="40%">Payment Type / Mode</th>
-                <th width="15%" class="css-payment-type-breakdown-pdf-539b04">Txns</th>
-                <th width="25%" class="css-payment-type-breakdown-pdf-08a0ed">Amount</th>
-                <th width="20%" class="css-payment-type-breakdown-pdf-539b04">% Share</th>
+                <th width="15%" style="text-align:center;">Txns</th>
+                <th width="25%" style="text-align:right;">Amount</th>
+                <th width="20%" style="text-align:center;">% Share</th>
             </tr>
         </thead>
         <tbody>';
 
     foreach ($breakdown as $type => $data) {
         $typePercentage = $grandTotal > 0 ? ($data['total_amount'] / $grandTotal * 100) : 0;
-        $tbody .= '<tr nobr="true" class="css-payment-type-breakdown-pdf-6a2c79">
+        $tbody .= '<tr nobr="true" style="background-color:#e9ecef; font-weight:bold;">
             <td width="40%">' . htmlspecialchars($type ?? '') . '</td>
-            <td width="15%" class="css-payment-type-breakdown-pdf-539b04">' . $data['total_count'] . '</td>
-            <td width="25%" class="css-payment-type-breakdown-pdf-08a0ed">' . formatIndianCurrency($data['total_amount']) . '</td>
-            <td width="20%" class="css-payment-type-breakdown-pdf-539b04">' . round($typePercentage, 1) . '%</td>
+            <td width="15%" style="text-align:center;">' . $data['total_count'] . '</td>
+            <td width="25%" style="text-align:right;">' . formatIndianCurrency($data['total_amount']) . '</td>
+            <td width="20%" style="text-align:center;">' . round($typePercentage, 1) . '%</td>
         </tr>';
 
         foreach ($data['modes'] as $mode => $modeData) {
             $modePercentage = $data['total_amount'] > 0 ? ($modeData['amount'] / $data['total_amount'] * 100) : 0;
             $tbody .= '<tr nobr="true">
-                <td width="40%" class="css-payment-type-breakdown-pdf-77d93f">  • ' . $mode . '</td>
-                <td width="15%" class="css-payment-type-breakdown-pdf-539b04">' . $modeData['count'] . '</td>
-                <td width="25%" class="css-payment-type-breakdown-pdf-08a0ed">' . formatIndianCurrency($modeData['amount']) . '</td>
-                <td width="20%" class="css-payment-type-breakdown-pdf-249255">' . round($modePercentage, 0) . '%</td>
+                <td width="40%" style="padding-left:20px;">  • ' . $mode . '</td>
+                <td width="15%" style="text-align:center;">' . $modeData['count'] . '</td>
+                <td width="25%" style="text-align:right;">' . formatIndianCurrency($modeData['amount']) . '</td>
+                <td width="20%" style="text-align:center; color:#666;">' . round($modePercentage, 0) . '%</td>
             </tr>';
         }
     }

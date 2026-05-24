@@ -120,7 +120,59 @@ include PORTAL_INCLUDE_PATH . 'header.php';
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/mhchem.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: false}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: false}]});"></script>
-
+<style>
+    /* Premium Compact Inline KaTeX Spacing Overrides to keep flow beautiful */
+    .katex-display, .katex-display > .katex {
+        display: inline !important;
+        text-align: inherit !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .katex {
+        display: inline-block !important;
+        white-space: nowrap !important;
+        text-indent: 0 !important;
+    }
+    .ql-formula {
+        display: inline-block !important;
+        margin: 0 4px !important;
+    }
+    /* Ensure paragraph tags inside question text and options don't break lines, but protect tables! */
+    .question-content p, .option-card p, .question-card p, .p-2.border p:not(table p), .p-2.border div:not(table div) {
+        display: inline !important;
+        margin: 0 !important;
+    }
+    /* Premium Option Table Styling */
+    .p-2.border table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        margin: 10px 0 !important;
+        display: table !important;
+        background: #ffffff !important;
+        border-radius: 6px !important;
+        overflow: hidden !important;
+        border: 1px solid #dee2e6 !important;
+    }
+    .p-2.border tr {
+        display: table-row !important;
+    }
+    .p-2.border td, .p-2.border th {
+        border: 1px solid #dee2e6 !important;
+        padding: 8px 12px !important;
+        display: table-cell !important;
+        text-align: left !important;
+        vertical-align: middle !important;
+        color: #212529 !important;
+    }
+    .p-2.border th {
+        background-color: #f8f9fa !important;
+        font-weight: 700 !important;
+    }
+    .p-2.border table p, .p-2.border table div {
+        display: block !important;
+        margin: 0 !important;
+    }
+</style>
 
 <?php
 include PORTAL_INCLUDE_PATH . 'navbar.php';
@@ -136,35 +188,35 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                     <p class="text-muted small">View and filter questions for your exams.</p>
                 </div>
                 <div class="d-flex align-items-center gap-2 flex-wrap">
-                    <a href="export-questions.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-question-bank-dbb5d6" title="Export CSV">
+                    <a href="export-questions.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Export CSV">
                         <i class="fas fa-download text-muted mr-2"></i> Export
                     </a>
                     <!-- Hidden file inputs for bulk import -->
-                    <input type="file" id="bulk-csv-input" accept=".csv" class="css-question-bank-93b8ea">
-                    <input type="file" id="bulk-word-input" accept=".docx" class="css-question-bank-93b8ea">
+                    <input type="file" id="bulk-csv-input" accept=".csv" style="display:none;">
+                    <input type="file" id="bulk-word-input" accept=".docx" style="display:none;">
                     <!-- Hiding Bulk CSV as requested -->
                     <!--
-                    <button onclick="document.getElementById('bulk-csv-input').click()" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-question-bank-dbb5d6" title="Bulk Import via CSV">
+                    <button onclick="document.getElementById('bulk-csv-input').click()" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Bulk Import via CSV">
                         <i class="fas fa-file-csv text-success mr-2"></i> Bulk CSV
                     </button>
                     -->
-                    <a href="bulk-import-word.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-question-bank-dbb5d6" title="Bulk Import via Word (.docx)">
+                    <a href="bulk-import-word.php" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Bulk Import via Word (.docx)">
                         <i class="fas fa-file-word text-primary mr-2"></i> Bulk Word
                     </a>
                     <!-- Hiding CSV Template as requested -->
                     <!--
-                    <a href="sample_questions_template.csv" download class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-question-bank-dbb5d6" title="Download CSV Template">
+                    <a href="sample_questions_template.csv" download class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Download CSV Template">
                         <i class="fas fa-table text-warning mr-2"></i> CSV Template
                     </a>
                     -->
-                    <a href="download-word-template.php?type=simple" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-question-bank-dbb5d6" title="Download Simplified Word Template (11 Columns)">
+                    <a href="download-word-template.php?type=simple" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Download Simplified Word Template (11 Columns)">
                         <i class="fas fa-file-word text-success mr-2"></i> Word Template (Simple)
                     </a>
-                    <a href="download-word-template.php?type=full" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3 css-question-bank-dbb5d6" title="Download Full Word Template (22 Columns)">
+                    <a href="download-word-template.php?type=full" class="btn btn-light shadow-sm d-flex align-items-center justify-content-center px-3" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;" title="Download Full Word Template (22 Columns)">
                         <i class="fas fa-file-word text-info mr-2"></i> Word Template (Full)
                     </a>
-                    <a href="index.php" class="btn btn-primary shadow-sm d-flex align-items-center justify-content-center px-4 css-question-bank-dbb5d6">
-                        <i class="fas fa-plus mr-2 css-question-bank-af89d6"></i> Create New Question
+                    <a href="index.php" class="btn btn-primary shadow-sm d-flex align-items-center justify-content-center px-4" style="border-radius: 12px; height: 38px; font-size: 0.85rem; font-weight: 600;">
+                        <i class="fas fa-plus mr-2" style="font-size: 0.75rem;"></i> Create New Question
                     </a>
                 </div>
             </div>
@@ -203,13 +255,13 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             <?php endif; ?>
 
             <!-- Smart Filter -->
-            <div class="card shadow-sm mb-4 border-0 css-question-bank-f1ccc3">
+            <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px; background: #f8f9fa;">
                 <div class="card-body p-4">
                     <form method="GET" id="filter-form" class="row g-3 align-items-end">
                         <!-- Step 1: Standard -->
                         <div class="col-md-2">
                             <label class="small font-weight-bold text-uppercase text-muted mb-2"><i class="fas fa-graduation-cap mr-1"></i> 1. Standard</label>
-                            <select name="standard_id" id="filter_standard" class="form-control border-0 shadow-sm css-question-bank-1033dd">
+                            <select name="standard_id" id="filter_standard" class="form-control border-0 shadow-sm" style="border-radius: 10px;">
                                 <option value="">Select Standard</option>
                                 <option value="11" <?php echo ($standard_filter == 11) ? 'selected' : ''; ?>>11th</option>
                                 <option value="12" <?php echo ($standard_filter == 12) ? 'selected' : ''; ?>>12th</option>
@@ -220,7 +272,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         <!-- Step 1b: Group -->
                         <div class="col-md-2">
                             <label class="small font-weight-bold text-uppercase text-muted mb-2"><i class="fas fa-users mr-1"></i> Group</label>
-                            <select name="group_id" id="filter_group" class="form-control border-0 shadow-sm css-question-bank-1033dd">
+                            <select name="group_id" id="filter_group" class="form-control border-0 shadow-sm" style="border-radius: 10px;">
                                 <option value="">Select Group</option>
                                 <?php
                                 $groups = $conn->query("SELECT id, group_name FROM tbl_group WHERE is_active = 1 ORDER BY group_name ASC");
@@ -235,7 +287,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         <!-- Step 2: Subject -->
                         <div class="col-md-2 filter-step" id="step_subject" <?php echo !$standard_filter ? 'style="display:none;"' : ''; ?>>
                             <label class="small font-weight-bold text-uppercase text-muted mb-2"><i class="fas fa-book mr-1"></i> 2. Subject</label>
-                            <select name="subject_id" id="filter_subject" class="form-control border-0 shadow-sm css-question-bank-1033dd">
+                            <select name="subject_id" id="filter_subject" class="form-control border-0 shadow-sm" style="border-radius: 10px;">
                                 <option value="">Select Subject</option>
                                 <?php
                                 if ($standard_filter) {
@@ -259,7 +311,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         <!-- Step 3: Chapter -->
                         <div class="col-md-2 filter-step" id="step_chapter" <?php echo !$subject_filter ? 'style="display:none;"' : ''; ?>>
                             <label class="small font-weight-bold text-uppercase text-muted mb-2"><i class="fas fa-bookmark mr-1"></i> 3. Chapter</label>
-                            <select name="chapter_id" id="filter_chapter" class="form-control border-0 shadow-sm css-question-bank-1033dd">
+                            <select name="chapter_id" id="filter_chapter" class="form-control border-0 shadow-sm" style="border-radius: 10px;">
                                 <option value="">Select Chapter</option>
                                 <?php
                                 if ($subject_filter) {
@@ -277,7 +329,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         <!-- Step 4: Topic -->
                         <div class="col-md-2 filter-step" id="step_topic" <?php echo !$chapter_filter ? 'style="display:none;"' : ''; ?>>
                             <label class="small font-weight-bold text-uppercase text-muted mb-2"><i class="fas fa-tag mr-1"></i> 4. Topic</label>
-                            <select name="topic_id" id="filter_topic" class="form-control border-0 shadow-sm css-question-bank-1033dd">
+                            <select name="topic_id" id="filter_topic" class="form-control border-0 shadow-sm" style="border-radius: 10px;">
                                 <option value="">Select Topic</option>
                                 <?php
                                 if ($subject_filter) {
@@ -295,7 +347,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         <!-- Step 5: Question Type -->
                         <div class="col-md-1 filter-step" id="step_type" <?php echo !$topic_filter ? 'style="display:none;"' : ''; ?>>
                             <label class="small font-weight-bold text-uppercase text-muted mb-2">5. Type</label>
-                            <select name="question_type_id" id="filter_type" class="form-control border-0 shadow-sm css-question-bank-ef6051">
+                            <select name="question_type_id" id="filter_type" class="form-control border-0 shadow-sm" style="border-radius: 10px; font-size: 11px; padding: 5px;">
                                 <option value="">Type</option>
                                 <?php
                                 $q_types = $conn->query("SELECT id, type_name FROM tbl_oes_question_types WHERE status = 1 ORDER BY type_name ASC");
@@ -310,7 +362,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         <!-- Step 6: Difficulty -->
                         <div class="col-md-1 filter-step" id="step_difficulty" <?php echo !$type_filter ? 'style="display:none;"' : ''; ?>>
                             <label class="small font-weight-bold text-uppercase text-muted mb-2">6. Level</label>
-                            <select name="difficulty" id="filter_difficulty" class="form-control border-0 shadow-sm css-question-bank-ef6051">
+                            <select name="difficulty" id="filter_difficulty" class="form-control border-0 shadow-sm" style="border-radius: 10px; font-size: 11px; padding: 5px;">
                                 <option value="">Lvl</option>
                                 <?php foreach(['Level A', 'Level B', 'Level C', 'Level D', 'Level E'] as $lvl): ?>
                                     <option value="<?php echo $lvl; ?>" <?php echo $difficulty_filter == $lvl ? 'selected' : ''; ?>><?php echo str_replace('Level ', '', $lvl); ?></option>
@@ -321,7 +373,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         <!-- Step 7: Exam Type -->
                         <div class="col-md-2">
                             <label class="small font-weight-bold text-uppercase text-muted mb-2"><i class="fas fa-clipboard-list mr-1"></i> Exam Type</label>
-                            <select name="exam_type" id="filter_exam_type" class="form-control border-0 shadow-sm css-question-bank-1033dd">
+                            <select name="exam_type" id="filter_exam_type" class="form-control border-0 shadow-sm" style="border-radius: 10px;">
                                 <option value="">All Exam Types</option>
                                 <option value="both" <?php echo $exam_type_filter == 'both' ? 'selected' : ''; ?>>Practice & Final</option>
                                 <option value="practice" <?php echo $exam_type_filter == 'practice' ? 'selected' : ''; ?>>Practice Test Only</option>
@@ -330,7 +382,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                         </div>
 
                         <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary w-100 shadow-sm css-question-bank-ec1b6d">
+                            <button type="submit" class="btn btn-primary w-100 shadow-sm" style="border-radius: 10px; height: 45px;">
                                 <i class="fas fa-search mr-1"></i> Search
                             </button>
                         </div>
@@ -374,7 +426,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                                 <span class="text-muted ml-2"><?php echo $q['marks']; ?> Marks</span>
                                             </div>
                                             <?php if ($q['exam_count'] > 0): ?>
-                                                <div class="mt-1 mb-2 text-xs text-muted css-question-bank-d05093">
+                                                <div class="mt-1 mb-2 text-xs text-muted" style="font-size: 0.78rem;">
                                                     <i class="fas fa-calendar-alt text-info mr-1"></i> Asked in: 
                                                     <?php 
                                                     $ex_arr = explode('||', $q['exams_list']);
@@ -399,7 +451,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                             <div class="tab-content" id="langTabContent-<?php echo $q['id']; ?>">
                                                 <!-- English Version Content -->
                                                 <div class="tab-pane fade show active" id="en-content-<?php echo $q['id']; ?>" role="tabpanel">
-                                                    <div class="h5 mb-3 font-weight-bold text-gray-800 question-content css-question-bank-8172fa">
+                                                    <div class="h5 mb-3 font-weight-bold text-gray-800 question-content" style="line-height: 1.5;">
                                                         <?php echo $q['question_text']; ?>
                                                     </div>
                                                     
@@ -419,7 +471,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 
                                                 <!-- Gujarati Version Content -->
                                                 <div class="tab-pane fade" id="guj-content-<?php echo $q['id']; ?>" role="tabpanel">
-                                                    <div class="h5 mb-3 font-weight-bold text-gray-800 question-content css-question-bank-8172fa">
+                                                    <div class="h5 mb-3 font-weight-bold text-gray-800 question-content" style="line-height: 1.5;">
                                                         <?php echo !empty($q['question_text_guj']) ? $q['question_text_guj'] : '<span class="text-muted italic small">No Gujarati text provided.</span>'; ?>
                                                     </div>
                                                     
@@ -464,7 +516,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             <!-- Pagination -->
             <?php if ($totalPages > 1): ?>
             <div class="mt-4 mb-5">
-                <div class="card shadow-sm border-0 css-question-bank-dc9ce7">
+                <div class="card shadow-sm border-0" style="border-radius: 15px;">
                     <div class="card-body py-3">
                         <?php echo renderPagination($currentPage, $totalPages, $baseUrl, 2, $totalItems, 'questions'); ?>
                     </div>
@@ -475,7 +527,12 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
     </div>
 </main>
 
-
+<style>
+    .question-content img { max-width: 150px; }
+    .border-left-primary { border-left: .25rem solid #4e73df!important; }
+    .badge { padding: 5px 10px; border-radius: 5px; font-weight: 600; }
+    .filter-step { transition: all 0.3s ease; }
+</style>
 
 <script>
 const allSubjects = <?php 
@@ -640,60 +697,60 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================
      BULK IMPORT MODAL
      ============================ -->
-<div id="bulkImportModal" class="css-question-bank-af13cf">
-  <div class="css-question-bank-122042">
+<div id="bulkImportModal" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); overflow-y:auto;">
+  <div style="background:#fff; border-radius:16px; max-width:980px; width:94%; margin:40px auto; padding:0; box-shadow:0 20px 60px rgba(0,0,0,0.3); overflow:hidden;">
 
     <!-- Modal Header -->
-    <div class="css-question-bank-7fc4bc">
-      <div class="css-question-bank-b59271">
-        <h5 class="css-question-bank-89496a"><i class="fas fa-layer-group mr-2"></i> Bulk Question Import</h5>
-        <small id="bulk-source-label" class="css-question-bank-19416b">Preparing...</small>
+    <div style="background:linear-gradient(135deg,#1a73e8,#0d47a1); padding:20px 28px; display:flex; align-items:center; justify-content:space-between;">
+      <div style="color:#fff;">
+        <h5 style="margin:0; font-weight:700; font-size:1.1rem;"><i class="fas fa-layer-group mr-2"></i> Bulk Question Import</h5>
+        <small id="bulk-source-label" style="opacity:.8;">Preparing...</small>
       </div>
-      <button onclick="closeBulkModal()" class="css-question-bank-ab2050">&times;</button>
+      <button onclick="closeBulkModal()" style="background:rgba(255,255,255,.2); border:none; color:#fff; border-radius:50%; width:34px; height:34px; font-size:1.1rem; cursor:pointer;">&times;</button>
     </div>
 
     <!-- Progress Bar -->
-    <div id="bulk-progress-wrap" class="css-question-bank-bf9203">
-      <div class="css-question-bank-d523cf">
-        <div id="bulk-progress-bar" class="css-question-bank-f840f4"></div>
+    <div id="bulk-progress-wrap" style="display:none; padding:12px 28px 0;">
+      <div style="height:6px; background:#e9ecef; border-radius:4px; overflow:hidden;">
+        <div id="bulk-progress-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#1a73e8,#34a853); transition:width .3s;"></div>
       </div>
-      <p id="bulk-progress-text" class="css-question-bank-b61c88">Importing...</p>
+      <p id="bulk-progress-text" style="font-size:0.8rem; color:#555; margin:6px 0 0;">Importing...</p>
     </div>
 
     <!-- Modal Body -->
-    <div class="css-question-bank-991ddc">
+    <div style="padding:20px 28px;">
 
       <!-- Stats Row -->
-      <div id="bulk-stats" class="css-question-bank-eaf2d1">
-        <div class="css-question-bank-781735">
-          <div class="css-question-bank-990318">
-            <div id="stat-total" class="css-question-bank-ded405">0</div>
-            <div class="css-question-bank-7009ca">Total Rows</div>
+      <div id="bulk-stats" style="display:none; margin-bottom:16px;">
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <div style="background:#e8f5e9; border-radius:10px; padding:10px 18px; flex:1; min-width:120px; text-align:center;">
+            <div id="stat-total" style="font-size:1.6rem; font-weight:800; color:#2e7d32;">0</div>
+            <div style="font-size:0.75rem; color:#555;">Total Rows</div>
           </div>
-          <div class="css-question-bank-8c411c">
-            <div id="stat-valid" class="css-question-bank-20d97e">0</div>
-            <div class="css-question-bank-7009ca">Valid</div>
+          <div style="background:#e3f2fd; border-radius:10px; padding:10px 18px; flex:1; min-width:120px; text-align:center;">
+            <div id="stat-valid" style="font-size:1.6rem; font-weight:800; color:#1565c0;">0</div>
+            <div style="font-size:0.75rem; color:#555;">Valid</div>
           </div>
-          <div class="css-question-bank-9a4a0f">
-            <div id="stat-skip" class="css-question-bank-6aaca3">0</div>
-            <div class="css-question-bank-7009ca">Skipped</div>
+          <div style="background:#fff3e0; border-radius:10px; padding:10px 18px; flex:1; min-width:120px; text-align:center;">
+            <div id="stat-skip" style="font-size:1.6rem; font-weight:800; color:#e65100;">0</div>
+            <div style="font-size:0.75rem; color:#555;">Skipped</div>
           </div>
         </div>
       </div>
 
       <!-- Validation Errors -->
-      <div id="bulk-errors" class="css-question-bank-16bd73">
-        <strong class="css-question-bank-9a4c60"><i class="fas fa-exclamation-triangle mr-1"></i> Validation Issues (skipped rows):</strong>
-        <ul id="bulk-error-list" class="css-question-bank-2e40a9"></ul>
+      <div id="bulk-errors" style="display:none; background:#fff3e0; border:1px solid #ffb300; border-radius:10px; padding:12px 16px; margin-bottom:14px; max-height:120px; overflow-y:auto;">
+        <strong style="font-size:0.85rem; color:#e65100;"><i class="fas fa-exclamation-triangle mr-1"></i> Validation Issues (skipped rows):</strong>
+        <ul id="bulk-error-list" style="margin:6px 0 0; padding-left:18px; font-size:0.8rem; color:#6d4c41;"></ul>
       </div>
 
       <!-- Global Metadata Selection -->
-      <div id="bulk-metadata-wrap" class="css-question-bank-d34ebf">
-        <p class="css-question-bank-837479"><i class="fas fa-cog mr-1 text-primary"></i> Apply to all questions in this file:</p>
-        <div class="css-question-bank-cafc78">
-            <div class="css-question-bank-a5ad82">
-                <label class="css-question-bank-9279ec">Standard</label>
-                <select id="bulk_std" class="form-control form-control-sm css-question-bank-8dd799">
+      <div id="bulk-metadata-wrap" style="display:none; background:#f8f9fa; border-radius:12px; padding:15px; margin-bottom:16px; border:1px solid #e9ecef;">
+        <p style="font-size:0.8rem; font-weight:700; color:#444; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.5px;"><i class="fas fa-cog mr-1 text-primary"></i> Apply to all questions in this file:</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:150px;">
+                <label style="font-size:0.7rem; color:#888; font-weight:600; margin-bottom:4px; display:block;">Standard</label>
+                <select id="bulk_std" class="form-control form-control-sm" style="border-radius:8px; font-size:0.8rem; height:35px; border-color:#dce0e4;">
                     <option value="">Select Standard</option>
                     <?php
                     $stds = $conn->query("SELECT stdid, stdtext FROM standard WHERE stdtext NOT LIKE '%Merged%' ORDER BY stdtext ASC");
@@ -701,21 +758,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     ?>
                 </select>
             </div>
-            <div class="css-question-bank-a5ad82">
-                <label class="css-question-bank-9279ec">Subject</label>
-                <select id="bulk_sub" class="form-control form-control-sm css-question-bank-8dd799">
+            <div style="flex:1; min-width:150px;">
+                <label style="font-size:0.7rem; color:#888; font-weight:600; margin-bottom:4px; display:block;">Subject</label>
+                <select id="bulk_sub" class="form-control form-control-sm" style="border-radius:8px; font-size:0.8rem; height:35px; border-color:#dce0e4;">
                     <option value="">Select Subject</option>
                 </select>
             </div>
-            <div class="css-question-bank-a5ad82">
-                <label class="css-question-bank-9279ec">Chapter</label>
-                <select id="bulk_ch" class="form-control form-control-sm css-question-bank-8dd799">
+            <div style="flex:1; min-width:150px;">
+                <label style="font-size:0.7rem; color:#888; font-weight:600; margin-bottom:4px; display:block;">Chapter</label>
+                <select id="bulk_ch" class="form-control form-control-sm" style="border-radius:8px; font-size:0.8rem; height:35px; border-color:#dce0e4;">
                     <option value="">Select Chapter</option>
                 </select>
             </div>
-            <div class="css-question-bank-a5ad82">
-                <label class="css-question-bank-9279ec">Topic</label>
-                <select id="bulk_tp" class="form-control form-control-sm css-question-bank-8dd799">
+            <div style="flex:1; min-width:150px;">
+                <label style="font-size:0.7rem; color:#888; font-weight:600; margin-bottom:4px; display:block;">Topic</label>
+                <select id="bulk_tp" class="form-control form-control-sm" style="border-radius:8px; font-size:0.8rem; height:35px; border-color:#dce0e4;">
                     <option value="">Select Topic</option>
                 </select>
             </div>
@@ -723,24 +780,24 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
 
       <!-- Preview Table -->
-      <div class="css-question-bank-491ef4">
-        <table id="bulk-preview-table" class="css-question-bank-fe5fec">
-          <thead id="bulk-preview-head" class="css-question-bank-e7a1b8"></thead>
+      <div style="overflow-x:auto; max-height:360px; overflow-y:auto; border:1px solid #e0e0e0; border-radius:10px;">
+        <table id="bulk-preview-table" style="width:100%; border-collapse:collapse; font-size:0.78rem;">
+          <thead id="bulk-preview-head" style="background:#f5f5f5; position:sticky; top:0; z-index:1;"></thead>
           <tbody id="bulk-preview-body"></tbody>
         </table>
-        <div id="bulk-empty-state" class="css-question-bank-49f536">
-          <i class="fas fa-file-import css-question-bank-803b30"></i>
+        <div id="bulk-empty-state" style="padding:40px; text-align:center; color:#9e9e9e;">
+          <i class="fas fa-file-import" style="font-size:2rem; margin-bottom:10px; display:block;"></i>
           No file selected. Upload a CSV or Word (.docx) file to preview.
         </div>
       </div>
     </div>
 
     <!-- Modal Footer -->
-    <div class="css-question-bank-c2d8f5">
-      <span id="bulk-footer-hint" class="css-question-bank-e1a0a5">Review the preview above before importing.</span>
-      <div class="css-question-bank-618605">
-        <button onclick="closeBulkModal()" class="btn btn-light css-question-bank-52e27d">Cancel</button>
-        <button id="bulk-import-btn" onclick="submitBulkImport()" class="btn btn-primary css-question-bank-f68a5a" disabled>
+    <div style="padding:16px 28px; background:#f8f9fa; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+      <span id="bulk-footer-hint" style="font-size:0.8rem; color:#777;">Review the preview above before importing.</span>
+      <div style="display:flex; gap:10px;">
+        <button onclick="closeBulkModal()" class="btn btn-light" style="border-radius:10px;">Cancel</button>
+        <button id="bulk-import-btn" onclick="submitBulkImport()" class="btn btn-primary" style="border-radius:10px; min-width:140px;" disabled>
           <i class="fas fa-cloud-upload-alt mr-2"></i> Import Questions
         </button>
       </div>
@@ -890,10 +947,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (msgFound.length > 0 || msgNotFound.length > 0) {
         let html = '';
         if (msgFound.length > 0) {
-            html += `<div class="css-question-bank-66544a"><i class="fas fa-magic mr-1"></i> Auto-filled from file: ${msgFound.join(', ')}</div>`;
+            html += `<div style="color:#1565c0; font-weight:600;"><i class="fas fa-magic mr-1"></i> Auto-filled from file: ${msgFound.join(', ')}</div>`;
         }
         if (msgNotFound.length > 0) {
-            html += `<div class="css-question-bank-86701e"><i class="fas fa-exclamation-triangle mr-1"></i> Could not map: ${msgNotFound.join(', ')}. Please select manually.</div>`;
+            html += `<div style="color:#e65100; font-weight:600; margin-top:4px;"><i class="fas fa-exclamation-triangle mr-1"></i> Could not map: ${msgNotFound.join(', ')}. Please select manually.</div>`;
         }
         hintWrap.innerHTML = html;
         hintWrap.style.display = 'block';
@@ -1027,7 +1084,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const cols = ['#','Subject','Chapter','Type','Difficulty','Question (preview)','Options','Answer','Marks'];
     head.innerHTML = '<tr>' + cols.map(c =>
-      `<th class="css-question-bank-1bc383">${c}</th>`
+      `<th style="padding:8px 10px; border-bottom:2px solid #dee2e6; white-space:nowrap; font-size:0.75rem; text-transform:uppercase; color:#555;">${c}</th>`
     ).join('') + '</tr>';
 
     const validRows = [];
@@ -1051,26 +1108,26 @@ document.addEventListener('DOMContentLoaded', function() {
         { label: 'C', text: q.option_c },
         { label: 'D', text: q.option_d }
       ].filter(o => o.text && o.text.trim()).map(o => 
-        `<div class="css-question-bank-3b02f3">
-            <b class="css-question-bank-ab88e8">${o.label}:</b> 
-            <div class="css-question-bank-9c69a0">${o.text}</div>
+        `<div style="margin-bottom:4px; padding:4px 6px; background:#f1f3f4; border-radius:6px; font-size:0.7rem; display:flex; align-items:start; gap:4px;">
+            <b style="color:#1a73e8; min-width:14px;">${o.label}:</b> 
+            <div style="word-break:break-word;">${o.text}</div>
          </div>`
       ).join('');
 
-      return `<tr class="css-question-bank-8a51a5">
-        <td class="css-question-bank-087b8c">${i+1}${isValid ? '' : ' <span class="css-question-bank-ecfcff" title="'+rowErrors.join(', ')+'">⚠</span>'}</td>
-        <td class="css-question-bank-3b0395">${q.subject||document.getElementById('bulk_sub').options[document.getElementById('bulk_sub').selectedIndex]?.text||'-'}</td>
-        <td class="css-question-bank-28d3c6">${q.chapter||document.getElementById('bulk_ch').options[document.getElementById('bulk_ch').selectedIndex]?.text||'-'}</td>
-        <td class="css-question-bank-3b0395">${q.question_type||'MCQ'}</td>
-        <td class="css-question-bank-3b0395">${q.difficulty||'Level A'}</td>
-        <td class="css-question-bank-18bff6">
-            <div class="css-question-bank-4a3db9">${filteredHtml}</div>
+      return `<tr style="${bg} border-bottom:1px solid #f0f0f0;">
+        <td style="padding:10px; color:#888; vertical-align:top;">${i+1}${isValid ? '' : ' <span style="color:#f57c00" title="'+rowErrors.join(', ')+'">⚠</span>'}</td>
+        <td style="padding:10px; vertical-align:top;">${q.subject||document.getElementById('bulk_sub').options[document.getElementById('bulk_sub').selectedIndex]?.text||'-'}</td>
+        <td style="padding:10px; color:#777; vertical-align:top;">${q.chapter||document.getElementById('bulk_ch').options[document.getElementById('bulk_ch').selectedIndex]?.text||'-'}</td>
+        <td style="padding:10px; vertical-align:top;">${q.question_type||'MCQ'}</td>
+        <td style="padding:10px; vertical-align:top;">${q.difficulty||'Level A'}</td>
+        <td style="padding:10px; max-width:320px; min-width:200px; vertical-align:top;">
+            <div style="font-weight:600; max-height:150px; overflow-y:auto; padding-right:5px;">${filteredHtml}</div>
         </td>
-        <td class="css-question-bank-9942be">
-            <div class="css-question-bank-bc3747">${optsHtml || '<span class="css-question-bank-e0a2d1">No options</span>'}</div>
+        <td style="padding:10px; min-width:200px; vertical-align:top;">
+            <div style="max-height:150px; overflow-y:auto; padding-right:5px;">${optsHtml || '<span style="color:#ccc;">No options</span>'}</div>
         </td>
-        <td class="css-question-bank-2582cb">${q.correct_option||'-'}</td>
-        <td class="css-question-bank-210c5d">${q.marks||1}</td>
+        <td style="padding:10px; font-weight:700; color:#1565c0; text-align:center; vertical-align:top;">${q.correct_option||'-'}</td>
+        <td style="padding:10px; text-align:center; vertical-align:top;">${q.marks||1}</td>
       </tr>`;
     }).join('');
 
@@ -1226,7 +1283,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show SweetAlert2 result
         let detailHtml = '';
         if (data.fail_reasons && data.fail_reasons.length) {
-          detailHtml = '<ul class="css-question-bank-ffb8d8">' +
+          detailHtml = '<ul style="text-align:left;font-size:0.85rem;margin-top:10px;">' +
             data.fail_reasons.map(r => `<li>${r}</li>`).join('') + '</ul>';
         }
 

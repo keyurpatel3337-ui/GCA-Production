@@ -165,7 +165,7 @@ try {
                         </table>
 
                         <!-- Current Assignment -->
-                        <div class="mt-3 p-3 css-division-assignment-single-880786">
+                        <div class="mt-3 p-3" style="background: #f8f9fa; border-radius: 5px;">
                             <h5 class="mb-3"><i class="fas fa-info-circle"></i> Current Assignment</h5>
                             <div class="row">
                                 <div class="col-6">
@@ -221,7 +221,7 @@ try {
                             </div>
 
                             <!-- Auto Assignment Section -->
-                            <div id="autoAssignSection" class="css-division-assignment-single-224b51">
+                            <div id="autoAssignSection" style="display: none;">
                                 <div class="alert alert-info">
                                     <i class="fas fa-info-circle"></i> The system will automatically assign the next available roll number from the selected division.
                                 </div>
@@ -248,17 +248,17 @@ try {
                                     </select>
                                 </div>
 
-                                <div id="autoAssignInfo" class="alert alert-success css-division-assignment-single-224b51">
+                                <div id="autoAssignInfo" class="alert alert-success" style="display: none;">
                                     <strong>Next Roll Number:</strong> <span id="nextRollNumber"></span>
                                 </div>
 
-                                <div id="capacityWarningAuto" class="alert alert-warning css-division-assignment-single-224b51">
+                                <div id="capacityWarningAuto" class="alert alert-warning" style="display: none;">
                                     <i class="fas fa-exclamation-triangle"></i> <span id="warningTextAuto"></span>
                                 </div>
                             </div>
 
                             <!-- Manual Assignment Section -->
-                            <div id="manualAssignSection" class="css-division-assignment-single-224b51">
+                            <div id="manualAssignSection" style="display: none;">
                                 <div class="alert alert-warning">
                                     <i class="fas fa-exclamation-triangle"></i> <strong>Caution:</strong> Manual assignment may cause roll number conflicts. Use only if necessary.
                                 </div>
@@ -291,7 +291,7 @@ try {
                                     <small class="text-muted">Note: Ensure this roll number doesn't conflict with existing assignments.</small>
                                 </div>
 
-                                <div id="rollConflictWarning" class="alert alert-danger css-division-assignment-single-224b51">
+                                <div id="rollConflictWarning" class="alert alert-danger" style="display: none;">
                                     <i class="fas fa-exclamation-circle"></i> <span id="conflictText"></span>
                                 </div>
                             </div>

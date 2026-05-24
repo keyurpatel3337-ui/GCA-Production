@@ -49,13 +49,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" class="css-term-wise-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-term-wise-pdf-539b04">
-                <span class="css-term-wise-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span class="css-term-wise-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span class="css-term-wise-pdf-f53435">TERM-WISE FEE COLLECTION SUMMARY</span><br>
-                <span class="css-term-wise-pdf-1b8847">Academic Cycle: ' . $year . '-' . ($year + 1) . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#6f42c1; color:#fff;">TERM-WISE FEE COLLECTION SUMMARY</span><br>
+                <span style="font-size:10pt;">Academic Cycle: ' . $year . '-' . ($year + 1) . '</span>
             </td>
         </tr>
     </table>';
@@ -63,13 +63,13 @@ try {
     $pdf->Ln(5);
 
     $html = '
-    <table border="0.5" cellpadding="8" class="css-term-wise-pdf-0f0770">
+    <table border="0.5" cellpadding="8" style="width:100%; font-size:10pt;">
         <thead>
-            <tr class="css-term-wise-pdf-5f2273">
+            <tr style="background-color:#eee; font-weight:bold;">
                 <th width="40%">Academic Term</th>
-                <th width="20%" class="css-term-wise-pdf-539b04">Transactions</th>
-                <th width="25%" class="css-term-wise-pdf-08a0ed">Collection Amount</th>
-                <th width="15%" class="css-term-wise-pdf-539b04">Share (%)</th>
+                <th width="20%" style="text-align:center;">Transactions</th>
+                <th width="25%" style="text-align:right;">Collection Amount</th>
+                <th width="15%" style="text-align:center;">Share (%)</th>
             </tr>
         </thead>
         <tbody>';
@@ -79,18 +79,18 @@ try {
         $html .= '
         <tr nobr="true">
             <td width="40%"><b>' . htmlspecialchars($term['name'] ?? '') . '</b></td>
-            <td width="20%" class="css-term-wise-pdf-539b04">' . number_format($term['count']) . '</td>
-            <td width="25%" class="css-term-wise-pdf-f3cba8">' . formatIndianCurrency($term['total']) . '</td>
-            <td width="15%" class="css-term-wise-pdf-539b04">' . round($share, 1) . '%</td>
+            <td width="20%" style="text-align:center;">' . number_format($term['count']) . '</td>
+            <td width="25%" style="text-align:right; font-weight:bold; color:#28a745;">' . formatIndianCurrency($term['total']) . '</td>
+            <td width="15%" style="text-align:center;">' . round($share, 1) . '%</td>
         </tr>';
     }
 
     $html .= '
-        <tr class="css-term-wise-pdf-5f2273">
+        <tr style="background-color:#eee; font-weight:bold;">
             <td width="40%">GRAND TOTAL</td>
-            <td width="20%" class="css-term-wise-pdf-539b04">' . number_format($totalCount) . '</td>
-            <td width="25%" class="css-term-wise-pdf-08a0ed">' . formatIndianCurrency($grandTotal) . '</td>
-            <td width="15%" class="css-term-wise-pdf-539b04">100%</td>
+            <td width="20%" style="text-align:center;">' . number_format($totalCount) . '</td>
+            <td width="25%" style="text-align:right;">' . formatIndianCurrency($grandTotal) . '</td>
+            <td width="15%" style="text-align:center;">100%</td>
         </tr>
     </tbody></table>';
 

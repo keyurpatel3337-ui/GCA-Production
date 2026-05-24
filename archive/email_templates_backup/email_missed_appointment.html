@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div class="container">
+    <div class="header" style="background: #ffc107; color: #333;">
+      <h3>⚠️ Missed Appointment</h3>
+    </div>
+    <div class="content">
+      <p>The following appointment was marked as missed:</p>
+
+      <table>
+        <tr>
+          <td><strong>Student</strong></td>
+          <td>{{student_name}}</td>
+        </tr>
+        <tr>
+          <td><strong>Scheduled Time</strong></td>
+          <td>{{scheduled_time}}</td>
+        </tr>
+        <tr>
+          <td><strong>Purpose</strong></td>
+          <td>{{purpose}}</td>
+        </tr>
+        <tr>
+          <td><strong>Counsellor</strong></td>
+          <td>{{counsellor_name}}</td>
+        </tr>
+      </table>
+
+      <p>Please follow up with the student to reschedule.</p>
+    </div>
+  </div>
+</body>
+
+</html>

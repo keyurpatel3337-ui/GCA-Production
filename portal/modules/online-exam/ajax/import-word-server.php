@@ -228,7 +228,7 @@ $fileName = $_FILES['word_file']['name'];
                         $style_str .= ' max-width:300px; height:auto;';
                     }
                     
-                    $job['img_html'] = '<img src="' . htmlspecialchars($job['url']) . '" class="css-import-word-server-f4edb7" />';
+                    $job['img_html'] = '<img src="' . htmlspecialchars($job['url']) . '" style="' . $style_str . '" />';
                 } else {
                     $job['img_html'] = '';
                 }
@@ -530,11 +530,11 @@ function localName($node) {
 function getCellText($cell, $plainText = false) {
     $text = '';
     if ($cell instanceof \PhpOffice\PhpWord\Element\Table) {
-        if (!$plainText) $text .= '<table class="table table-bordered table-sm css-import-word-server-613364">';
+        if (!$plainText) $text .= '<table class="table table-bordered table-sm" style="width:auto; margin:10px 0;">';
         foreach ($cell->getRows() as $row) {
             if (!$plainText) $text .= '<tr>';
             foreach ($row->getCells() as $cellObj) {
-                if (!$plainText) $text .= '<td class="css-import-word-server-de08ee">';
+                if (!$plainText) $text .= '<td style="padding:5px; border:1px solid #ddd;">';
                 $text .= getCellText($cellObj, $plainText);
                 if (!$plainText) $text .= '</td>';
             }
@@ -602,10 +602,10 @@ function getElementContent($element, $plainText) {
                     $filePath = $uploadDir . $filename;
                     if (file_put_contents($filePath, $binaryData)) {
                         $imgUrl = BASE_URL . '/uploads/oes/' . $filename;
-                        $content .= '<img src="' . $imgUrl . '" class="css-import-word-server-2d0a16" />';
+                        $content .= '<img src="' . $imgUrl . '" style="' . $img_style_str . '" />';
                     } else {
                         // Fallback to base64 if saving fails
-                        $content .= '<img src="data:image/png;base64,' . $imageData . '" class="css-import-word-server-2d0a16" />';
+                        $content .= '<img src="data:image/png;base64,' . $imageData . '" style="' . $img_style_str . '" />';
                     }
                 } else {
                     $content .= ' [Image] ';

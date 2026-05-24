@@ -27,7 +27,44 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-
+<style>
+    .day-column {
+        background: #f8f9fa;
+        border-radius: 12px;
+        min-height: 500px;
+        transition: all 0.2s ease;
+        border: 1px solid #e9ecef;
+    }
+    .day-header {
+        background: #ffffff;
+        border-radius: 12px 12px 0 0;
+        border-bottom: 2px solid #e9ecef;
+    }
+    .lecture-card {
+        background: #ffffff;
+        border-radius: 8px;
+        border-left: 4px solid #007bff;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        cursor: pointer;
+    }
+    .lecture-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+    .subject-pill {
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+    .empty-state {
+        min-height: 350px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+    }
+</style>
 
 <div class="container-fluid py-4">
     <!-- Filter Panel -->
@@ -40,7 +77,7 @@ include '../../include/sidebar.php';
                 <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3" onclick="exportTimetable()">
                     <i class="fas fa-file-excel me-1"></i> Export Excel
                 </button>
-                <button type="button" class="btn btn-primary btn-sm rounded-pill px-3 css-timetable-224b51" id="addBtn" onclick="openAddModal()">
+                <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" id="addBtn" style="display: none;" onclick="openAddModal()">
                     <i class="fas fa-plus me-1"></i> Add Lecture
                 </button>
             </div>
@@ -96,7 +133,7 @@ include '../../include/sidebar.php';
                 <div class="empty-state">
                     <i class="fas fa-calendar-week fa-4x mb-3 text-muted"></i>
                     <h5 class="fw-bold">No Schedule Displayed</h5>
-                    <p class="text-muted text-center css-timetable-fbe98b">
+                    <p class="text-muted text-center" style="max-width: 400px;">
                         Please select a Course, Group, Division, and Academic Year from the filters above to load the schedule workspace.
                     </p>
                 </div>
@@ -181,7 +218,7 @@ include '../../include/sidebar.php';
                     </div>
                 </div>
                 <div class="modal-footer border-top py-3">
-                    <button type="button" class="btn btn-outline-danger me-auto css-timetable-224b51" id="deleteSlotBtn" onclick="deleteSlot()">
+                    <button type="button" class="btn btn-outline-danger me-auto" id="deleteSlotBtn" style="display: none;" onclick="deleteSlot()">
                         <i class="fas fa-trash me-1"></i> Delete
                     </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -277,10 +314,11 @@ include '../../include/sidebar.php';
                 dayLectures.forEach(lec => {
                     const color = getPastelColor(lec.subject_name);
                     html += `
-                        <div class="lecture-card p-3 mb-3 border-left-4 border border-1 rounded shadow-xs css-timetable-acf3bb" 
+                        <div class="lecture-card p-3 mb-3 border-left-4 border border-1 rounded shadow-xs" 
+                             style="border-left-color: ${color} !important;" 
                              onclick="openEditModal(${lec.id})">
                             <div class="d-flex align-items-start justify-content-between mb-1">
-                                <span class="subject-pill text-dark text-truncate d-inline-block css-timetable-ce586b" title="${lec.subject_name}">
+                                <span class="subject-pill text-dark text-truncate d-inline-block" style="max-width: 90%;" title="${lec.subject_name}">
                                     ${lec.subject_name}
                                 </span>
                                 <span class="text-muted small fw-bold">${lec.room_no || 'N/A'}</span>

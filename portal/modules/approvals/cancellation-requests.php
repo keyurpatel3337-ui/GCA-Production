@@ -148,7 +148,7 @@ include '../../include/sidebar.php';
         <div>
             <form method="GET" class="d-flex gap-2">
                 <input type="text" name="search" class="form-control form-control-sm" placeholder="Student Name/ID..." value="<?php echo htmlspecialchars($search_filter ?? ''); ?>" style="width: 200px;">
-                <select name="status" class="form-select form-select-sm css-cancellation-requests-c25159">
+                <select name="status" class="form-select form-select-sm" style="width: 150px;">
                     <option value="">All Statuses</option>
                     <option value="pending" <?php echo $status_filter === 'pending' ? 'selected' : ''; ?>>Pending</option>
                     <option value="cancelled" <?php echo $status_filter === 'cancelled' ? 'selected' : ''; ?>>Finalized</option>
@@ -310,7 +310,28 @@ include '../../include/sidebar.php';
         }
     </script>
 
-    
+    <style>
+        .welcome-banner {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+            border-radius: 20px;
+            color: white;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+        }
+
+        .badge {
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-weight: 500;
+        }
+    </style>
 
     <?php include '../../include/footer.php'; ?>
 

@@ -43,7 +43,18 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
+<style>
+    .filter-card {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        border: none;
+        border-radius: 12px;
+    }
 
+    .filter-card .form-label {
+        color: white;
+        font-weight: 500;
+    }
+</style>
 
 <div class="container-fluid">
     <div class="card filter-card mb-4">

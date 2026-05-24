@@ -292,7 +292,7 @@ include '../../include/sidebar.php';
 
                                 <!-- Detailed Info Section -->
                                 <!-- Scholarship Info Section -->
-                                <div id="scholarship_info_section" class="css-move-to-enrolled-224b51" class="mt-3">
+                                <div id="scholarship_info_section" style="display: none;" class="mt-3">
                                     <div class="alert alert-success mb-0">
                                         <h6 class="alert-heading mb-2"><i class="fas fa-award me-2"></i>Scholarship
                                             / Discount Information</h6>
@@ -379,17 +379,18 @@ include '../../include/sidebar.php';
 
                             <!-- Manual Marks Entry Toggle -->
                             <div class="mt-2">
-                                <button type="button" class="btn btn-sm btn-outline-primary css-move-to-enrolled-24c749" id="showManualMarksEntry">
+                                <button type="button" class="btn btn-sm btn-outline-primary" id="showManualMarksEntry"
+                                    style="<?php echo $marks_found ? 'display:none;' : ''; ?>">
                                     <i class="fas fa-edit"></i> Enter Marks Manually
                                 </button>
-                                <button type="button" class="btn btn-sm btn-link text-decoration-none css-move-to-enrolled-7f5d75"
-                                    id="changeMarksBtn">
+                                <button type="button" class="btn btn-sm btn-link text-decoration-none"
+                                    id="changeMarksBtn" style="<?php echo !$marks_found ? 'display:none;' : ''; ?>">
                                     <i class="fas fa-pen"></i> Change Marks
                                 </button>
                             </div>
 
                             <!-- Manual Marks Form -->
-                            <div id="manualMarksSection" class="card bg-light mt-3 css-move-to-enrolled-224b51">
+                            <div id="manualMarksSection" class="card bg-light mt-3" style="display: none;">
                                 <div class="card-header bg-secondary text-white py-2">
                                     <h6 class="card-title mb-0 small"><i class="fas fa-calculator"></i> Check
                                         Eligibility</h6>
@@ -400,22 +401,22 @@ include '../../include/sidebar.php';
                                         requirements.
                                     </div>
 
-                                    <div id="manualMarksForm" class="css-move-to-enrolled-93b8ea">
+                                    <div id="manualMarksForm" style="display:none;">
                                         <div class="row g-2">
-                                            <div class="col-md-6 css-move-to-enrolled-93b8ea" id="gmsatMarksField">
+                                            <div class="col-md-6" id="gmsatMarksField" style="display:none;">
                                                 <label class="form-label small mb-1">GMSAT Marks</label>
                                                 <input type="number" id="input_gmsat_marks"
                                                     class="form-control form-control-sm" step="0.01"
                                                     placeholder="Enter Marks">
-                                                <small class="text-muted css-move-to-enrolled-dcab71"
+                                                <small class="text-muted" style="font-size: 0.7rem;"
                                                     id="gmsatRangeInfo"></small>
                                             </div>
-                                            <div class="col-md-6 css-move-to-enrolled-93b8ea" id="boardPercentageField">
+                                            <div class="col-md-6" id="boardPercentageField" style="display:none;">
                                                 <label class="form-label small mb-1">Board %</label>
                                                 <input type="number" id="input_board_percentage"
                                                     class="form-control form-control-sm" step="0.01" max="100"
                                                     placeholder="Enter %">
-                                                <small class="text-muted css-move-to-enrolled-dcab71"
+                                                <small class="text-muted" style="font-size: 0.7rem;"
                                                     id="boardRangeInfo"></small>
                                             </div>
                                             <div class="col-12 mt-2">
@@ -572,7 +573,7 @@ include '../../include/sidebar.php';
                         </div>
 
                         <!-- Other Fee Custom Amount (hidden by default) -->
-                        <div class="row mt-2 css-move-to-enrolled-224b51" id="other_amount_section">
+                        <div class="row mt-2" id="other_amount_section" style="display: none;">
                             <div class="col-6">
                                 <input type="text" name="other_description" id="other_description"
                                     class="form-control form-control-sm" placeholder="Description">
@@ -604,7 +605,7 @@ include '../../include/sidebar.php';
                             </div>
                         </div>
 
-                        <div class="row mt-2 css-move-to-enrolled-224b51" id="cheque_details">
+                        <div class="row mt-2" id="cheque_details" style="display: none;">
                             <div class="col-6">
                                 <input type="text" name="cheque_no" class="form-control form-control-sm"
                                     placeholder="Cheque No">
@@ -640,7 +641,40 @@ include '../../include/sidebar.php';
     </form>
 </div>
 
+<style>
+    .custom-checkbox-card {
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
 
+    .custom-checkbox-card:hover {
+        background-color: #f8f9fa;
+        border-color: #adb5bd;
+    }
+
+    .custom-checkbox-card.selected {
+        border-color: #198754;
+        background-color: #e8f5e9;
+    }
+
+    .custom-checkbox-card.disabled {
+        opacity: 0.6;
+        pointer-events: none;
+        background-color: #e9ecef;
+    }
+
+    .fee-type-name {
+        font-weight: 500;
+        display: block;
+    }
+
+    .fee-type-amount {
+        font-weight: bold;
+    }
+</style>
 
 <?php include '../../include/footer.php'; ?>
 

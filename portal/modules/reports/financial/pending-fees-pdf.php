@@ -168,13 +168,13 @@ try {
 
     $org_address = ($config['address'] ?? '') . ', ' . ($config['city'] ?? '');
     $headerHtml = '
-    <table cellpadding="2" class="css-pending-fees-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-pending-fees-pdf-539b04">
-                <span class="css-pending-fees-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span class="css-pending-fees-pdf-1b8847">' . htmlspecialchars($org_address ?? '') . '</span><br>
-                <span class="css-pending-fees-pdf-0c5bfa">FEE DUE (OUTSTANDING) REPORT</span><br>
-                <span class="css-pending-fees-pdf-1b8847">Generated on: ' . date('d M Y h:i A') . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($org_address ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#f0f0f0;">FEE DUE (OUTSTANDING) REPORT</span><br>
+                <span style="font-size:10pt;">Generated on: ' . date('d M Y h:i A') . '</span>
             </td>
         </tr>
     </table>';
@@ -182,19 +182,19 @@ try {
     $pdf->Ln(2);
 
     $summaryHtml = '
-    <table cellpadding="4" class="css-pending-fees-pdf-9f2285">
-        <tr class="css-pending-fees-pdf-c3504b">
+    <table cellpadding="4" style="width:100%; margin-bottom:10px;">
+        <tr style="background-color:#f8f9fa; border:0.5px solid #ddd;">
             <td width="50%">Total Defaulters: <b>' . count($results) . '</b></td>
-            <td width="50%" class="css-pending-fees-pdf-08a0ed">Total Outstanding: <b>' . formatIndianCurrency($totalPending) . '</b></td>
+            <td width="50%" style="text-align:right;">Total Outstanding: <b>' . formatIndianCurrency($totalPending) . '</b></td>
         </tr>
     </table>';
     $pdf->writeHTML($summaryHtml, true, false, false, false, '');
     $pdf->Ln(2);
 
     $html = '
-    <table border="0.5" cellpadding="4" class="css-pending-fees-pdf-6eb086">
+    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
         <thead>
-            <tr class="css-pending-fees-pdf-da6020">
+            <tr style="background-color:#333; color:#fff; font-weight:bold; text-align:center;">
                 <th width="5%">#</th>
                 <th align="left" width="22%">Student Name</th>
                 <th align="left" width="15%">Class/Group</th>
@@ -208,7 +208,7 @@ try {
         <tbody>';
 
     if (empty($results)) {
-        $html .= '<tr><td colspan="21" class="css-pending-fees-pdf-539b04">No pending fees found</td></tr>';
+        $html .= '<tr><td colspan="21" style="text-align:center;">No pending fees found</td></tr>';
     }
     else {
         $i = 1;
@@ -224,18 +224,18 @@ try {
                 <td width="15%">' . htmlspecialchars($displayClass ?? '') . ' / ' . htmlspecialchars($row['group_name'] ?: '-' ?? '') . '</td>
                 <td width="12%">' . htmlspecialchars($row['mobile'] ?: '-' ?? '') . '</td>
                 <td align="right" width="12%"><b>' . formatIndianCurrency($row['total_fee']) . '</b></td>
-                <td align="right" width="12%" class="css-pending-fees-pdf-4a256a"><b>' . formatIndianCurrency($row['total_paid']) . '</b></td>
+                <td align="right" width="12%" style="color:green;"><b>' . formatIndianCurrency($row['total_paid']) . '</b></td>
                 <td align="right" width="12%"><b>' . formatIndianCurrency($row['total_waiver']) . '</b></td>
-                <td align="right" width="12%" class="css-pending-fees-pdf-16a15d"><b>' . formatIndianCurrency($row['pending_amount']) . '</b></td>
+                <td align="right" width="12%" style="color:#d9534f;"><b>' . formatIndianCurrency($row['pending_amount']) . '</b></td>
             </tr>';
         }
     }
 
     $html .= '</tbody>
-        <tfoot class="css-pending-fees-pdf-5f2273">
+        <tfoot style="background-color:#eee; font-weight:bold;">
             <tr>
-                <td colspan="7" class="css-pending-fees-pdf-08a0ed">GRAND TOTAL OUTSTANDING</td>
-                <td class="css-pending-fees-pdf-08a0ed">' . formatIndianCurrency($totalPending) . '</td>
+                <td colspan="7" style="text-align:right;">GRAND TOTAL OUTSTANDING</td>
+                <td style="text-align:right;">' . formatIndianCurrency($totalPending) . '</td>
             </tr>
         </tfoot>
     </table>';

@@ -120,22 +120,22 @@ try {
     $org_address = implode(', ', $addr_parts);
 
     $headerHtml = '
-    <div class="css-receipt-breakdown-pdf-539b04">
-        <h1 class="css-receipt-breakdown-pdf-8f2f77">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</h1>
-        <p class="css-receipt-breakdown-pdf-704355">' . htmlspecialchars($org_address ?? '') . '</p>
-        <h3 class="css-receipt-breakdown-pdf-af89a1">RECEIPT BREAKDOWN REPORT</h3>
+    <div style="text-align:center;">
+        <h1 style="margin-bottom:2px;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</h1>
+        <p style="font-size:10pt; margin-top:0;">' . htmlspecialchars($org_address ?? '') . '</p>
+        <h3 style="background-color:#eee; padding:5px;">RECEIPT BREAKDOWN REPORT</h3>
         <p>Period: ' . date('d-m-Y', strtotime($from_date)) . ' to ' . date('d-m-Y', strtotime($to_date)) . '</p>
     </div>';
 
     $pdf->writeHTML($headerHtml, true, false, false, false, '');
 
-    $html = '<table border="0.5" cellpadding="5" class="css-receipt-breakdown-pdf-8588e4">
+    $html = '<table border="0.5" cellpadding="5" style="width:100%;">
                 <thead>
-                    <tr class="css-receipt-breakdown-pdf-aa32cc">
+                    <tr style="background-color:#2d3436; color:#ffffff; font-weight:bold;">
                         <th width="45%">Receipt / Type / Mode</th>
-                        <th width="10%" class="css-receipt-breakdown-pdf-539b04">Txns</th>
-                        <th width="25%" class="css-receipt-breakdown-pdf-08a0ed">Amount</th>
-                        <th width="20%" class="css-receipt-breakdown-pdf-539b04">Share (%)</th>
+                        <th width="10%" style="text-align:center;">Txns</th>
+                        <th width="25%" style="text-align:right;">Amount</th>
+                        <th width="20%" style="text-align:center;">Share (%)</th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -144,41 +144,41 @@ try {
         $share = $grandTotal > 0 ? ($data['total_amount'] / $grandTotal * 100) : 0;
 
         // Level 1: Receipt Title (Main Category)
-        $html .= '<tr class="css-receipt-breakdown-pdf-d578d9">
+        $html .= '<tr style="background-color:#d1dce8; font-weight:bold;">
                     <td width="45%">' . htmlspecialchars($title ?? '') . '</td>
-                    <td width="10%" class="css-receipt-breakdown-pdf-539b04">' . $data['total_count'] . '</td>
-                    <td width="25%" class="css-receipt-breakdown-pdf-08a0ed">' . formatIndianCurrency($data['total_amount']) . '</td>
-                    <td width="20%" class="css-receipt-breakdown-pdf-539b04">' . number_format($share, 1) . '%</td>
+                    <td width="10%" style="text-align:center;">' . $data['total_count'] . '</td>
+                    <td width="25%" style="text-align:right;">' . formatIndianCurrency($data['total_amount']) . '</td>
+                    <td width="20%" style="text-align:center;">' . number_format($share, 1) . '%</td>
                   </tr>';
 
         foreach ($data['types'] as $typeName => $typeData) {
             $label = ucwords(str_replace('_', ' ', $typeName));
             
             // Level 2: Payment Type (Sub-category)
-            $html .= '<tr class="css-receipt-breakdown-pdf-697d1c">
+            $html .= '<tr style="background-color:#f9f9f9;">
                         <td width="45%">&nbsp;&nbsp;&nbsp;↳ ' . htmlspecialchars($label ?? '') . '</td>
-                        <td width="10%" class="css-receipt-breakdown-pdf-539b04">' . $typeData['total_count'] . '</td>
-                        <td width="25%" class="css-receipt-breakdown-pdf-08a0ed">' . formatIndianCurrency($typeData['total_amount']) . '</td>
+                        <td width="10%" style="text-align:center;">' . $typeData['total_count'] . '</td>
+                        <td width="25%" style="text-align:right;">' . formatIndianCurrency($typeData['total_amount']) . '</td>
                         <td width="20%"></td>
                       </tr>';
 
             foreach ($typeData['modes'] as $mode => $modeData) {
                 // Level 3: Payment Mode (Cash/Cheque/etc)
                 $html .= '<tr>
-                            <td width="45%" class="css-receipt-breakdown-pdf-023c9b">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; ' . $mode . '</td>
-                            <td class="css-receipt-breakdown-pdf-364d53" width="10%">' . $modeData['count'] . '</td>
-                            <td class="css-receipt-breakdown-pdf-4e2e66" width="25%">' . formatIndianCurrency($modeData['amount']) . '</td>
+                            <td width="45%" style="color:#555;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; ' . $mode . '</td>
+                            <td style="text-align:center; color:#555;" width="10%">' . $modeData['count'] . '</td>
+                            <td style="text-align:right; color:#555;" width="25%">' . formatIndianCurrency($modeData['amount']) . '</td>
                             <td width="20%"></td>
                           </tr>';
             }
         }
     }
 
-    $html .= '<tr class="css-receipt-breakdown-pdf-aa32cc">
+    $html .= '<tr style="background-color:#2d3436; color:#ffffff; font-weight:bold;">
                 <td width="45%">GRAND TOTAL</td>
-                <td width="10%" class="css-receipt-breakdown-pdf-539b04">' . $grandCount . '</td>
-                <td width="25%" class="css-receipt-breakdown-pdf-08a0ed">' . formatIndianCurrency($grandTotal) . '</td>
-                <td width="20%" class="css-receipt-breakdown-pdf-539b04">100%</td>
+                <td width="10%" style="text-align:center;">' . $grandCount . '</td>
+                <td width="25%" style="text-align:right;">' . formatIndianCurrency($grandTotal) . '</td>
+                <td width="20%" style="text-align:center;">100%</td>
               </tr></tbody></table>';
 
     $pdf->writeHTML($html, true, false, false, false, '');

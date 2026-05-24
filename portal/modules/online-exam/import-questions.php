@@ -87,16 +87,16 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
 <main class="app-main">
     <div class="app-content pt-4">
         <div class="container-fluid">
-            <div class="card shadow-sm mb-4 border-0 css-import-questions-6fa6e7">
+            <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px; max-width: 800px; margin: 0 auto;">
                 <div class="card-header bg-white border-0 py-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-file-csv mr-2 text-primary"></i> Import Questions</h5>
-                        <a href="question-bank.php" class="btn btn-sm btn-light shadow-sm css-import-questions-1033dd"><i class="fas fa-arrow-left mr-1"></i> Back</a>
+                        <a href="question-bank.php" class="btn btn-sm btn-light shadow-sm" style="border-radius: 10px;"><i class="fas fa-arrow-left mr-1"></i> Back</a>
                     </div>
                 </div>
                 <div class="card-body p-4">
                     
-                    <div class="alert border-0 mb-4 d-flex align-items-start css-import-questions-4ad229">
+                    <div class="alert border-0 mb-4 d-flex align-items-start" style="border-radius: 12px; background: #e7f3ff; color: #004085; padding: 1.25rem;">
                         <i class="fas fa-info-circle fa-2x mr-3 mt-1 text-primary"></i>
                         <div>
                             <h6 class="font-weight-bold mb-1">CSV Format Requirements (13 Columns)</h6>
@@ -128,7 +128,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                     </div>
 
                     <div class="text-center mb-4">
-                        <a href="download-sample.php?type=question" class="btn btn-outline-primary shadow-sm css-import-questions-186171">
+                        <a href="download-sample.php?type=question" class="btn btn-outline-primary shadow-sm" style="border-radius: 10px; font-weight: 600;">
                             <i class="fas fa-download mr-2"></i> Download Sample CSV
                         </a>
                     </div>
@@ -136,14 +136,14 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                     <form method="POST" enctype="multipart/form-data">
                         <div class="form-group mb-5">
                             <label class="small font-weight-bold text-muted mb-2">Select Filled CSV File <span class="text-danger">*</span></label>
-                            <div class="custom-file css-import-questions-e09a76">
-                                <input type="file" name="csv_file" class="form-control border-0 shadow-sm css-import-questions-e8db52" accept=".csv" required>
+                            <div class="custom-file" style="height: 50px;">
+                                <input type="file" name="csv_file" class="form-control border-0 shadow-sm" style="background: #f8f9fa; border-radius: 10px; height: 50px; padding: 12px;" accept=".csv" required>
                             </div>
                         </div>
                         
                         <div class="d-flex justify-content-end gap-2">
-                            <a href="question-bank.php" class="btn btn-light shadow-sm px-4 css-import-questions-8925b1">Cancel</a>
-                            <button type="submit" class="btn btn-primary shadow-sm px-4 css-import-questions-756f01">
+                            <a href="question-bank.php" class="btn btn-light shadow-sm px-4" style="border-radius: 12px; height: 45px; line-height: 33px; font-weight: 600;">Cancel</a>
+                            <button type="submit" class="btn btn-primary shadow-sm px-4" style="border-radius: 12px; height: 45px; font-weight: 600;">
                                 <i class="fas fa-cloud-upload-alt mr-2"></i> Upload & Import
                             </button>
                         </div>

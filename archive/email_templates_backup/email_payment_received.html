@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .amount-highlight {
+      font-size: 28px;
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .receipt-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .receipt-table td {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header" style="background: #28a745; color: white;">
+      <h3>💰 Payment Received</h3>
+    </div>
+    <div class="content">
+      <p class="amount-highlight">₹{{amount}}</p>
+
+      <table class="receipt-table">
+        <tr>
+          <td><strong>Student</strong></td>
+          <td>{{student_name}}</td>
+        </tr>
+        <tr>
+          <td><strong>Enrollment No</strong></td>
+          <td>{{enrollment_no}}</td>
+        </tr>
+        <tr>
+          <td><strong>Receipt No</strong></td>
+          <td>{{receipt_no}}</td>
+        </tr>
+        <tr>
+          <td><strong>Payment Mode</strong></td>
+          <td>{{payment_mode}}</td>
+        </tr>
+        <tr>
+          <td><strong>Transaction ID</strong></td>
+          <td>{{transaction_id}}</td>
+        </tr>
+        <tr>
+          <td><strong>Date/Time</strong></td>
+          <td>{{payment_datetime}}</td>
+        </tr>
+        <tr>
+          <td><strong>Collected By</strong></td>
+          <td>{{collected_by}}</td>
+        </tr>
+      </table>
+
+      <p>Receipt has been generated and student notified via WhatsApp.</p>
+    </div>
+  </div>
+</body>
+
+</html>

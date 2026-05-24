@@ -121,9 +121,9 @@ include '../../include/sidebar.php';
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="p-2 border rounded bg-light small text-dark fw-bold css-doubt-solving-4f5f61"><?= htmlspecialchars($d['doubt_text']) ?></div>
+                                        <div class="p-2 border rounded bg-light small text-dark fw-bold" style="white-space: pre-wrap;"><?= htmlspecialchars($d['doubt_text']) ?></div>
                                         <?php if ($d['status'] === 'Resolved'): ?>
-                                            <div class="mt-2 p-2 border rounded small bg-white text-success border-success css-doubt-solving-4f5f61">
+                                            <div class="mt-2 p-2 border rounded small bg-white text-success border-success" style="white-space: pre-wrap;">
                                                 <i class="fas fa-reply me-1"></i> <strong>Your Reply:</strong> <?= htmlspecialchars($d['reply_text']) ?>
                                             </div>
                                         <?php endif; ?>

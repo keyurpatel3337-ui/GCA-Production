@@ -115,7 +115,38 @@ if (!function_exists('getStatusBadge')) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../assets/css/admin-style.css" rel="stylesheet">
-    
+    <style>
+        .stat-card {
+            border-start: 4px solid;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .action-buttons .btn {
+            margin: 2px;
+        }
+
+        .priority-high {
+            border-start-color: #dc3545 !important;
+        }
+
+        .priority-medium {
+            border-start-color: #ffc107 !important;
+        }
+
+        .priority-low {
+            border-start-color: #28a745 !important;
+        }
+    </style>
 </head>
 
 <body>

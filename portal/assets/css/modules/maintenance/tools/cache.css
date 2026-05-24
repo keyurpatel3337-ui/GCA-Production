@@ -1,0 +1,26 @@
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05) !important;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+}
+
+.icon-box {
+    transition: transform 0.2s ease;
+}
+
+.list-group-item:hover .icon-box {
+    transform: scale(1.1);
+}
+
+.cache-custom-1 {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

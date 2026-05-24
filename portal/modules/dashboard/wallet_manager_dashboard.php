@@ -150,7 +150,7 @@ include '../../include/sidebar.php';
             <a href="<?php echo PORTAL_URL; ?>/modules/fees/manage-wallet-accounts.php"
                 class="card border-0 shadow-sm rounded-4 text-decoration-none h-100 action-card">
                 <div class="card-body p-4 d-flex align-items-center">
-                    <div class="icon-box bg-danger-light text-danger rounded-circle p-3 me-3 css-wallet_manager_dashboard-8adbaa">
+                    <div class="icon-box bg-danger-light text-danger rounded-circle p-3 me-3" style="background-color: rgba(255, 71, 87, 0.1); color: #ff4757;">
                         <i class="fas fa-users-cog fs-3"></i>
                     </div>
                     <div>
@@ -184,6 +184,33 @@ include '../../include/sidebar.php';
     </div>
 </div>
 
+<style>
+    .bg-success-light {
+        background-color: rgba(46, 213, 115, 0.1);
+    }
 
+    .bg-primary-light {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .bg-danger-light {
+        background-color: rgba(255, 71, 87, 0.1);
+    }
+
+    .action-card {
+        transition: all 0.3s ease;
+        border: 1px solid transparent !important;
+    }
+
+    .action-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(0, 123, 255, 0.2) !important;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .tracking-wider {
+        letter-spacing: 0.1em;
+    }
+</style>
 
 <?php include '../../include/footer.php'; ?>

@@ -21,7 +21,7 @@ if (!empty($pending_requests)): ?>
                     <div class="bg-white p-3 rounded-3 border d-flex justify-content-between align-items-center">
                         <div>
                             <div class="fw-bold text-dark small"><?php echo htmlspecialchars($req['device_name'] ?? ''); ?></div>
-                            <div class="text-muted css-mfa_alert-af89d6">
+                            <div class="text-muted" style="font-size: 0.75rem;">
                                 Requested: <?php echo date('h:i A, d M', strtotime($req['created_at'])); ?>
                             </div>
                         </div>

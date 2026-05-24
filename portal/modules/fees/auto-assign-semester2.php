@@ -139,7 +139,7 @@ include '../../include/sidebar.php';
                                 <span class="ms-3">To Be Assigned: <span id="toAssignCount">0</span></span>
                             </div>
 
-                            <div class="table-responsive css-auto-assign-semester2-911727">
+                            <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark sticky-top">
                                         <tr>

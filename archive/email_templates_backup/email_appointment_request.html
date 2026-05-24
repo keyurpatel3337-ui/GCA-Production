@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div class="container">
+    <div class="header" style="background: #17a2b8;">
+      <h3>📅 New Appointment Request</h3>
+    </div>
+    <div class="content">
+      <p>Dear {{counsellor_name}},</p>
+      <p>You have received a new appointment request:</p>
+
+      <table>
+        <tr>
+          <td><strong>Student</strong></td>
+          <td>{{student_name}}</td>
+        </tr>
+        <tr>
+          <td><strong>Mobile</strong></td>
+          <td>{{student_mobile}}</td>
+        </tr>
+        <tr>
+          <td><strong>Requested Date</strong></td>
+          <td>{{requested_date}}</td>
+        </tr>
+        <tr>
+          <td><strong>Requested Time</strong></td>
+          <td>{{requested_time}}</td>
+        </tr>
+        <tr>
+          <td><strong>Purpose</strong></td>
+          <td>{{purpose}}</td>
+        </tr>
+      </table>
+
+      <div style="text-align: center; margin: 20px;">
+        <a href="{{confirm_url}}"
+          style="background: #28a745; color: white; padding: 10px 20px; text-decoration: none; margin: 5px;">✅
+          Confirm</a>
+        <a href="{{reschedule_url}}"
+          style="background: #ffc107; color: #333; padding: 10px 20px; text-decoration: none; margin: 5px;">📅
+          Reschedule</a>
+        <a href="{{decline_url}}"
+          style="background: #dc3545; color: white; padding: 10px 20px; text-decoration: none; margin: 5px;">❌
+          Decline</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -87,7 +87,8 @@ $maintenance_prefix = $portal_root . 'modules/maintenance/';
             <img src="<?php echo BASE_URL; ?>/assets/images/logo-icon.png" alt="Logo" class="brand-image me-2"
                 style="width: 32px; height: 32px;">
             <div class="brand-info flex-grow-1">
-                <span class="brand-text fw-bold text-dark d-block css-sidebar-d8b7ac"><?php echo defined('SYSTEM_SHORT_NAME') ? SYSTEM_SHORT_NAME : 'GCA'; ?></span>
+                <span class="brand-text fw-bold text-dark d-block"
+                    style="font-size: 1rem; line-height: 1.2;"><?php echo defined('SYSTEM_SHORT_NAME') ? SYSTEM_SHORT_NAME : 'GCA'; ?></span>
                 <span class="brand-subtitle text-muted small d-block">Portal v2.0</span>
             </div>
         </a>

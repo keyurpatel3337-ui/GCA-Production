@@ -1,0 +1,49 @@
+/* Module: students | File: send-whatsapp-dynamic.css */
+
+/* Template selection cards */
+.tpl-card {
+    cursor: pointer;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px 8px;
+    text-align: center;
+    transition: all .18s ease;
+    background: #fff;
+    user-select: none;
+}
+.tpl-card:hover {
+    border-color: #adb5bd;
+    background: #f8f9fa;
+}
+.tpl-card .tpl-icon { color: #6c757d; transition: color .18s; }
+.tpl-card .tpl-name { color: #adb5bd; font-size: 11px; }
+
+.tpl-card.tpl-active {
+    border-color: #007bff;
+    background: #eef5ff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,.12);
+}
+.tpl-card.tpl-active .tpl-icon { color: #007bff; }
+.tpl-card.tpl-active .tpl-name { color: #4a9eff; }
+.tpl-card.tpl-active strong    { color: #0056b3; }
+
+.tpl-card.tpl-active-green {
+    border-color: #28a745;
+    background: #edfff2;
+    box-shadow: 0 0 0 3px rgba(40,167,69,.12);
+}
+.tpl-card.tpl-active-green .tpl-icon { color: #28a745; }
+.tpl-card.tpl-active-green .tpl-name { color: #5cb85c; }
+.tpl-card.tpl-active-green strong    { color: #1e7e34; }
+
+/* WhatsApp bubble tail */
+.wa-bubble::after {
+    content: '';
+    position: absolute;
+    right: -9px;
+    top: 8px;
+    width: 0; height: 0;
+    border: 8px solid transparent;
+    border-left-color: #fff;
+    border-top: 0; border-right: 0;
+}

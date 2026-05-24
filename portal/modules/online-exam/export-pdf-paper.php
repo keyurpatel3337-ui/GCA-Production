@@ -34,7 +34,93 @@ include PORTAL_INCLUDE_PATH . 'header.php';
     pdfjsLib.GlobalWorkerOptions.workerSrc = '<?= PORTAL_URL ?>/assets/js/pdf.worker.min.js';
 </script>
 
-
+<style>
+    .pdf-page-wrapper {
+        margin: 0 auto 20px auto;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        background: #fff;
+        display: block;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .pdf-page-wrapper:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+    #pdf-view-viewport::-webkit-scrollbar {
+        width: 10px;
+    }
+    #pdf-view-viewport::-webkit-scrollbar-track {
+        background: #2d2d2d;
+    }
+    #pdf-view-viewport::-webkit-scrollbar-thumb {
+        background: #555;
+        border-radius: 5px;
+    }
+    #pdf-view-viewport::-webkit-scrollbar-thumb:hover {
+        background: #888;
+    }
+    .preview-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .preview-card {
+        background: #525659;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        border: 1px solid #333;
+    }
+    .preview-header {
+        background: #2d2d2d;
+        color: #fff;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #live-preview-iframe {
+        width: 100%;
+        height: calc(100vh - 250px);
+        border: none;
+        display: block;
+        background: #fff;
+    }
+    .info-bar {
+        background: #fff;
+        border-radius: 12px;
+        padding: 15px 25px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .btn-print {
+        background: #dc3545;
+        color: #fff;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 12px 25px;
+        transition: all 0.2s;
+        border: none;
+        text-decoration: none !important;
+    }
+    .btn-print:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        color: #fff;
+    }
+    .status-badge {
+        font-size: 0.75rem;
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-weight: 700;
+    }
+</style>
 
 <?php include PORTAL_INCLUDE_PATH . 'navbar.php'; ?>
 <?php include PORTAL_INCLUDE_PATH . 'sidebar.php'; ?>
@@ -52,7 +138,7 @@ include PORTAL_INCLUDE_PATH . 'header.php';
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                    <div class="btn-group shadow-sm css-export-pdf-paper-d08429" role="group">
+                    <div class="btn-group shadow-sm" role="group" style="border-radius: 10px; overflow: hidden; border: 1px solid #dee2e6;">
                         <button type="button" class="btn btn-sm btn-primary px-3 font-weight-bold" id="btn-col-1" onclick="changeCols(1)">
                             <i class="fas fa-stop mr-1"></i> Single
                         </button>
@@ -66,7 +152,7 @@ include PORTAL_INCLUDE_PATH . 'header.php';
                     <a href="#" id="final-print-btn" target="_blank" class="btn btn-print shadow-sm">
                         <i class="fas fa-print mr-2"></i> Print Paper
                     </a>
-                    <a href="manage-exams.php" class="btn btn-outline-secondary shadow-sm css-export-pdf-paper-186171">
+                    <a href="manage-exams.php" class="btn btn-outline-secondary shadow-sm" style="border-radius: 10px; font-weight: 600;">
                         <i class="fas fa-arrow-left mr-1"></i> Back to Exams
                     </a>
                 </div>
@@ -80,21 +166,21 @@ include PORTAL_INCLUDE_PATH . 'header.php';
                     <div class="d-flex align-items-center gap-3 w-100 w-sm-auto justify-content-between justify-content-md-end">
                         <!-- Custom toolbar for PDF controls -->
                         <div class="d-flex align-items-center gap-2">
-                            <div class="btn-group shadow-sm css-export-pdf-paper-4c7456" role="group">
-                                <button type="button" class="btn btn-sm btn-dark text-white px-2 css-export-pdf-paper-1a9f21" onclick="zoomOut()" title="Zoom Out">
+                            <div class="btn-group shadow-sm" role="group" style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15);">
+                                <button type="button" class="btn btn-sm btn-dark text-white px-2" onclick="zoomOut()" title="Zoom Out" style="background: #1e1e1e; border: none;">
                                     <i class="fas fa-search-minus"></i>
                                 </button>
-                                <span class="input-group-text bg-dark text-white border-0 small px-3 font-weight-bold css-export-pdf-paper-846751" id="zoom-percent">100%</span>
-                                <button type="button" class="btn btn-sm btn-dark text-white px-2 css-export-pdf-paper-1a9f21" onclick="zoomIn()" title="Zoom In">
+                                <span class="input-group-text bg-dark text-white border-0 small px-3 font-weight-bold" id="zoom-percent" style="font-size: 0.8rem; background: #2b2b2b !important;">100%</span>
+                                <button type="button" class="btn btn-sm btn-dark text-white px-2" onclick="zoomIn()" title="Zoom In" style="background: #1e1e1e; border: none;">
                                     <i class="fas fa-search-plus"></i>
                                 </button>
-                                <button type="button" class="btn btn-sm btn-dark text-white px-2 css-export-pdf-paper-1a9f21" onclick="zoomFit()" title="Fit to Width">
+                                <button type="button" class="btn btn-sm btn-dark text-white px-2" onclick="zoomFit()" title="Fit to Width" style="background: #1e1e1e; border: none;">
                                     <i class="fas fa-expand"></i>
                                 </button>
                             </div>
                             
                             <!-- Floating Page indicator -->
-                            <span class="badge bg-dark border border-secondary text-white px-3 py-2 font-weight-bold css-export-pdf-paper-a49cd5" id="page-indicator">
+                            <span class="badge bg-dark border border-secondary text-white px-3 py-2 font-weight-bold" id="page-indicator" style="font-size: 0.8rem; background: #1e1e1e !important;">
                                 Page 1 of 1
                             </span>
                         </div>
@@ -102,8 +188,8 @@ include PORTAL_INCLUDE_PATH . 'header.php';
                         <div id="load-status" class="small text-white-50"><i class="fas fa-sync fa-spin mr-2"></i>Loading Preview...</div>
                     </div>
                 </div>
-                <div class="card-body p-0 css-export-pdf-paper-057ab3" id="pdf-view-viewport">
-                    <div id="pdf-pages-container" class="css-export-pdf-paper-df5dc4"></div>
+                <div class="card-body p-0" id="pdf-view-viewport" style="background: #3c4043; overflow-y: auto; height: calc(100vh - 250px); text-align: center; position: relative;">
+                    <div id="pdf-pages-container" style="display: inline-block; padding: 25px 0;"></div>
                 </div>
             </div>
 

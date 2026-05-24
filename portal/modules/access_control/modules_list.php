@@ -127,7 +127,7 @@ include PORTAL_PATH . 'include/sidebar.php';
                                     <th>Name</th>
                                     <th>Key</th>
                                     <th>Description</th>
-                                    <th class="css-modules_list-ebf032">Action</th>
+                                    <th style="width: 50px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -290,7 +290,7 @@ include '../../common/pagination.php';
                                         endif; ?>
                                     </td>
                                     <td>
-                                        <form method="POST" action="add-payment.php" class="css-pending-payments-3df0a3">
+                                        <form method="POST" action="add-payment.php" style="display: inline;">
                                             <input type="hidden" name="student_id"
                                                 value="<?php echo $fee['student_id'] ?? ''; ?>">
                                             <input type="hidden" name="fee_id" value="<?php echo $fee['id'] ?? ''; ?>">
@@ -298,7 +298,8 @@ include '../../common/pagination.php';
                                                 <i class="fas fa-plus"></i> Pay
                                             </button>
                                         </form>
-                                        <form method="POST" action="../reports/financial/student-ledger.php" class="css-pending-payments-3df0a3">
+                                        <form method="POST" action="../reports/financial/student-ledger.php"
+                                            style="display: inline;">
                                             <input type="hidden" name="student_id"
                                                 value="<?php echo $fee['student_id'] ?? ''; ?>">
                                             <button type="submit" class="btn btn-sm btn-info" title="Payment History">

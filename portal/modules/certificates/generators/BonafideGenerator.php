@@ -51,9 +51,9 @@ class BonafideGenerator extends AbstractGenerator
         // Main Content - Positioned to clear header
         $pdf->SetY(60);
         $html = <<<EOD
-        <div class="css-BonafideGenerator-6fdfdb">
+        <div style="text-align: justify; line-height: 1.5; font-family: times; font-size: 13pt;">
             <p>This is to certify that,</p>
-            <p class="css-BonafideGenerator-999526">
+            <p style="text-indent: 40px;">
                 Mr. / Ms. <u><b>$name</b></u> a bonafide student of this school. 
                 He / She is studying Std. <u><b>$course</b></u> Class with G.R.No./ Reg.No <u><b>G.R. No. $enrollment_no</b></u> 
                 in the Academic year <u><b>$academic_year</b></u> & Date of Birth is <u><b>$dob</b></u> 

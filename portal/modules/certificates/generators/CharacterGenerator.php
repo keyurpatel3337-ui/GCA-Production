@@ -52,7 +52,7 @@ class CharacterGenerator extends AbstractGenerator
         // Class and Roll No position
         $pdf->SetXY(15, 75);
         $html_class = <<<EOD
-        <div class="css-CharacterGenerator-233cbc">
+        <div style="text-align: right; font-family: times; font-size: 11pt;">
             CLASS. <u><b>$course</b></u> ROLLNO. <u><b>$roll_no</b></u>
         </div>
 EOD;
@@ -60,8 +60,8 @@ EOD;
 
         // Main content starting position
         $html_content = <<<EOD
-        <div class="css-CharacterGenerator-75d032">
-            <p class="css-CharacterGenerator-999526">
+        <div style="text-align: justify; line-height: 1.8; font-family: times; font-size: 13pt;">
+            <p style="text-indent: 40px;">
                 This is to Certify that, Master/Miss. <u><b>$name</b></u> is a 
                 bonafide Student of <u><b>$course</b></u>. of this Institute. 
                 his / her general registration no is.<u><b>$enrollment_no</b></u> 

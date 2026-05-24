@@ -39,7 +39,7 @@ class SLCGenerator extends AbstractGenerator
         $dob = !empty($student['dob']) ? date('d-m-Y', strtotime($student['dob'])) : 'N/A';
 
         $html = <<<EOD
-        <table cellspacing="5" cellpadding="5" border="0" class="css-SLCGenerator-8172fa">
+        <table cellspacing="5" cellpadding="5" border="0" style="line-height: 1.5;">
             <tr><td width="5%">1.</td><td width="40%">Name of Pupil</td><td width="55%">: <b>$name</b></td></tr>
             <tr><td>2.</td><td>Father's / Guardian's Name</td><td>: <b>$father</b></td></tr>
             <tr><td>3.</td><td>Mother's Name</td><td>: <b>$mother</b></td></tr>

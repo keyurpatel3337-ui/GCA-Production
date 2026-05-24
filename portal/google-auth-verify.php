@@ -109,7 +109,16 @@ $SYSTEM_NAME = "GCA Portal";
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .verify-card { max-width: 450px; width: 100%; padding: 2.5rem; background: white; border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .icon-box { width: 80px; height: 80px; background: #f1f5f9; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+        .icon-box i { font-size: 2.5rem; color: #1e3a5f; }
+        .otp-input { letter-spacing: 0.5rem; font-size: 1.5rem; font-weight: 700; text-align: center; border-radius: 12px; border: 2px solid #e2e8f0; height: 60px; }
+        .otp-input:focus { border-color: #1e3a5f; box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.1); outline: none; }
+        .btn-verify { background: #1e3a5f; color: white; border: none; padding: 0.8rem; border-radius: 12px; font-weight: 600; transition: all 0.2s; width: 100%; }
+        .btn-verify:hover { background: #0f172a; transform: translateY(-1px); }
+    </style>
 </head>
 <body>
     <div class="verify-card text-center">

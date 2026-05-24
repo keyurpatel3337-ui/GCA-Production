@@ -152,8 +152,8 @@ if ($format === 'excel') {
     $pdf->AddPage();
     
     $html = '<h2>' . ucfirst($currentView) . ' Students List</h2>';
-    $html .= '<table border="1" cellpadding="5" cellspacing="0" class="css-export-ecfba0">';
-    $html .= '<tr class="css-export-c8474b">';
+    $html .= '<table border="1" cellpadding="5" cellspacing="0" style="width:100%; font-size: 10px;">';
+    $html .= '<tr style="background-color:#f2f2f2; font-weight:bold;">';
     $html .= '<th>ID</th><th>Name</th><th>Mobile</th><th>Aadhaar</th><th>Campus</th><th>Father\'s Name</th><th>DOB</th><th>Counsellor</th><th>Adm Date</th><th>Course</th><th>Board</th>';
     if ($currentView === 'enrolled') {
         $html .= '<th>Div</th><th>Roll</th><th>Paid</th><th>Pending</th>';

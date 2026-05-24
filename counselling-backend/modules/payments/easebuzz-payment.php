@@ -352,7 +352,111 @@ if (isset($payment_url) && !empty($payment_url)) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Processing Payment...</title>
-        
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+
+            .payment-container {
+                background: white;
+                padding: 40px;
+                border-radius: 15px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                max-width: 500px;
+            }
+
+            .spinner {
+                border: 4px solid #f3f3f3;
+                border-top: 4px solid #667eea;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                animation: spin 1s linear infinite;
+                margin: 20px auto;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            h2 {
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            p {
+                color: #666;
+                margin: 10px 0;
+            }
+
+            .amount {
+                font-size: 28px;
+                color: #667eea;
+                font-weight: bold;
+                margin: 20px 0;
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 12px 30px;
+                margin: 10px 5px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                text-decoration: none;
+                transition: all 0.3s;
+            }
+
+            .btn-primary {
+                background-color: #667eea;
+                color: white;
+            }
+
+            .btn-primary:hover {
+                background-color: #5568d3;
+            }
+
+            .btn-secondary {
+                background-color: #6c757d;
+                color: white;
+            }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+            }
+
+            .info-box {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 20px 0;
+                font-size: 14px;
+                color: #495057;
+            }
+
+            .warning {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px 15px;
+                margin: 15px 0;
+                font-size: 13px;
+                text-align: left;
+            }
+        </style>
     </head>
 
     <body>
@@ -368,7 +472,7 @@ if (isset($payment_url) && !empty($payment_url)) {
                 <p><strong>Student:</strong> <?php echo htmlspecialchars($firstname ?? ''); ?></p>
             </div>
 
-            <div class="css-easebuzz-payment-194b57">
+            <div style="margin-top: 20px;">
                 <a href="../student-portal/<?php echo ($payment_type === 'token_fee') ? 'token-fee-payment.php' : 'my-fees.php'; ?>"
                     class="btn btn-secondary">
                     Cancel & Go Back

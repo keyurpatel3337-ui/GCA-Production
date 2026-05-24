@@ -16,7 +16,51 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
-
+<style>
+    .mobile-tab-btn {
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        padding: 6px 16px;
+        transition: all 0.2s ease;
+    }
+    .mobile-tab-btn.active {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        border-color: #0d6efd !important;
+        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+    }
+    .timeline-card {
+        background: #ffffff;
+        border-radius: 12px;
+        border-left: 5px solid #0d6efd;
+        transition: all 0.2s ease;
+    }
+    .timeline-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.06) !important;
+    }
+    .time-badge {
+        background: #eef2ff;
+        color: #3b82f6;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 8px;
+    }
+    .day-column-student {
+        background: #f8f9fa;
+        border-radius: 16px;
+        border: 1px solid #eef0f2;
+    }
+    .empty-state {
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #8c98a5;
+    }
+</style>
 
 <div class="container-fluid py-4">
     <!-- Header Summary Card -->
@@ -31,13 +75,13 @@ include '../../include/sidebar.php';
                 </p>
             </div>
             <div>
-                <span class="badge bg-primary rounded-pill px-3 py-2 fs-6 shadow-sm css-timetable-224b51" id="classBadge"></span>
+                <span class="badge bg-primary rounded-pill px-3 py-2 fs-6 shadow-sm" id="classBadge" style="display: none;"></span>
             </div>
         </div>
     </div>
 
     <!-- Mobile Day Switcher (Visible on small screens) -->
-    <div class="d-lg-none mb-3 overflow-auto py-2 d-flex gap-2 css-timetable-0ca503" id="mobileDayTabs">
+    <div class="d-lg-none mb-3 overflow-auto py-2 d-flex gap-2" id="mobileDayTabs" style="white-space: nowrap;">
         <button class="btn btn-outline-secondary mobile-tab-btn active" onclick="switchMobileDay('Monday')">Mon</button>
         <button class="btn btn-outline-secondary mobile-tab-btn" onclick="switchMobileDay('Tuesday')">Tue</button>
         <button class="btn btn-outline-secondary mobile-tab-btn" onclick="switchMobileDay('Wednesday')">Wed</button>
@@ -131,15 +175,15 @@ include '../../include/sidebar.php';
                 dayLectures.forEach(lec => {
                     const color = getPastelColor(lec.subject_name);
                     html += `
-                        <div class="timeline-card p-3 mb-3 border shadow-xs css-timetable-acf3bb">
+                        <div class="timeline-card p-3 mb-3 border shadow-xs" style="border-left-color: ${color} !important;">
                             <div class="fw-bold text-dark small text-truncate mb-1" title="${lec.subject_name}">${lec.subject_name}</div>
-                            <div class="text-primary small fw-semibold mb-2 css-timetable-d05093">
+                            <div class="text-primary small fw-semibold mb-2" style="font-size: 0.78rem;">
                                 <i class="far fa-clock me-1"></i> ${lec.time_range}
                             </div>
-                            <div class="text-muted small text-truncate css-timetable-af89d6">
+                            <div class="text-muted small text-truncate" style="font-size: 0.75rem;">
                                 <i class="fas fa-chalkboard-teacher me-1"></i> ${lec.teacher_name}
                             </div>
-                            ${lec.room_no ? `<div class="text-muted mt-1 css-timetable-af89d6"><i class="fas fa-map-marker-alt me-1"></i> ${lec.room_no}</div>` : ''}
+                            ${lec.room_no ? `<div class="text-muted mt-1" style="font-size: 0.75rem;"><i class="fas fa-map-marker-alt me-1"></i> ${lec.room_no}</div>` : ''}
                         </div>
                     `;
                 });
@@ -173,9 +217,9 @@ include '../../include/sidebar.php';
             dayLectures.forEach(lec => {
                 const color = getPastelColor(lec.subject_name);
                 html += `
-                    <div class="card border border-light-dark shadow-sm rounded-3 timeline-card css-timetable-a868aa">
+                    <div class="card border border-light-dark shadow-sm rounded-3 timeline-card" style="border-left: 5px solid ${color} !important;">
                         <div class="card-body p-3 d-flex align-items-center justify-content-between">
-                            <div class="css-timetable-60dfc2">
+                            <div style="max-width: 70%;">
                                 <h5 class="fw-bold text-dark mb-1 fs-6">${lec.subject_name}</h5>
                                 <div class="text-muted small mb-2">
                                     <i class="fas fa-chalkboard-teacher me-1"></i> ${lec.teacher_name}

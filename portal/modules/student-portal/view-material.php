@@ -118,7 +118,64 @@ include '../../include/sidebar.php';
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 </script>
 
-
+<style>
+    .kindle-container {
+        display: flex;
+        gap: 20px;
+        min-height: calc(100vh - 120px);
+    }
+    .kindle-viewer {
+        flex: 1;
+        background: #faf7f2; /* Kindle paperwhite sepia texture */
+        border: 1px solid #dee2e6;
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        min-width: 0;
+    }
+    .kindle-sidebar {
+        width: 320px;
+        flex-shrink: 0;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .pdf-canvas-wrapper {
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        background: #ffffff;
+        max-width: 100%;
+        margin-top: 15px;
+        position: relative;
+    }
+    .btn-reader {
+        transition: all 0.2s ease;
+        border-radius: 50px;
+    }
+    .btn-reader:hover {
+        transform: scale(1.05);
+    }
+    .kindle-tab-btn {
+        font-weight: 600;
+        border: none;
+        background: transparent;
+        padding: 10px;
+        border-bottom: 2px solid transparent;
+        color: #64748b;
+        flex: 1;
+        transition: all 0.2s ease;
+    }
+    .kindle-tab-btn.active {
+        color: #0d6efd;
+        border-bottom-color: #0d6efd;
+    }
+</style>
 
 <div class="container-fluid py-3">
     <!-- Header Back Navigation -->
@@ -175,7 +232,7 @@ include '../../include/sidebar.php';
                 <button class="kindle-tab-btn" onclick="switchSidebarTab('doubts')"><i class="fas fa-comments me-1"></i> Doubts Log</button>
             </div>
 
-            <div class="flex-grow-1 p-3 overflow-auto css-view-material-2b39c0" id="sidebar-tab-content">
+            <div class="flex-grow-1 p-3 overflow-auto" id="sidebar-tab-content" style="max-height: 480px;">
                 <!-- Tab: Notes -->
                 <div id="notes-tab-pane">
                     <label class="form-label small fw-bold text-muted mb-2">Write Notes for Page <span class="current-page-num">1</span></label>
@@ -187,7 +244,7 @@ include '../../include/sidebar.php';
                 </div>
 
                 <!-- Tab: Doubts -->
-                <div id="doubts-tab-pane" class="css-view-material-224b51">
+                <div id="doubts-tab-pane" style="display: none;">
                     <label class="form-label small fw-bold text-muted mb-2">Your flagged page doubts</label>
                     <div id="doubts-log-list" class="d-flex flex-column gap-3">
                         <?php if (empty($doubts)): ?>
@@ -205,7 +262,7 @@ include '../../include/sidebar.php';
                                     </div>
                                     <div class="small fw-bold text-dark"><?= htmlspecialchars($d['doubt_text']) ?></div>
                                     <?php if (!empty($d['reply_text'])): ?>
-                                        <div class="mt-2 p-1 border-top small text-primary css-view-material-abf8e1">
+                                        <div class="mt-2 p-1 border-top small text-primary" style="background-color: #f0f4ff;">
                                             <strong>Teacher reply:</strong> <?= htmlspecialchars($d['reply_text']) ?>
                                         </div>
                                     <?php endif; ?>

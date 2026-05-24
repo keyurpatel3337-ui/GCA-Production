@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .summary-table {
+      width: 100%;
+      margin: 20px 0;
+    }
+
+    .summary-table td {
+      padding: 15px;
+      background: #f8f9fa;
+    }
+
+    .total-row {
+      background: #28a745 !important;
+      color: white;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header" style="background: #6f42c1;">
+      <h2>💵 Daily Collection Report</h2>
+      <p>{{date}}</p>
+    </div>
+    <div class="content">
+      <h3>Collection Summary</h3>
+      <table class="summary-table">
+        <tr>
+          <td><strong>Cash Collection</strong></td>
+          <td align="right">₹{{cash_total}}</td>
+        </tr>
+        <tr>
+          <td><strong>Online (EaseBuzz)</strong></td>
+          <td align="right">₹{{online_total}}</td>
+        </tr>
+        <tr>
+          <td><strong>Cheque/DD</strong></td>
+          <td align="right">₹{{cheque_total}}</td>
+        </tr>
+        <tr>
+          <td><strong>UPI/NEFT</strong></td>
+          <td align="right">₹{{upi_total}}</td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>TOTAL COLLECTION</strong></td>
+          <td align="right"><strong>₹{{grand_total}}</strong></td>
+        </tr>
+      </table>
+
+      <h3>Receipt-wise Breakdown</h3>
+      <table class="data-table">
+        <tr>
+          <th>Receipt Type</th>
+          <th>Count</th>
+          <th>Amount</th>
+        </tr>
+        <tr>
+          <td>GM Receipt (School)</td>
+          <td>{{gm_count}}</td>
+          <td>₹{{gm_amount}}</td>
+        </tr>
+        <tr>
+          <td>MST Receipt (Trust)</td>
+          <td>{{mst_count}}</td>
+          <td>₹{{mst_amount}}</td>
+        </tr>
+        <tr>
+          <td>GCA Receipt (Tuition)</td>
+          <td>{{gca_count}}</td>
+          <td>₹{{gca_amount}}</td>
+        </tr>
+      </table>
+
+      <p><a href="{{detailed_report_url}}">View Detailed Report →</a></p>
+    </div>
+  </div>
+</body>
+
+</html>

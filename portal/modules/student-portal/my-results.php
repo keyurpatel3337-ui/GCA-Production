@@ -16,7 +16,28 @@ include '../../include/navbar.php';
 include '../../include/sidebar.php';
 ?>
 
+<style>
+    .result-score {
+        font-weight: 600;
+        text-align: center;
+        padding: 0.5rem;
+    }
 
+    .glass-header {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .exam-card {
+        transition: transform 0.2s;
+        cursor: pointer;
+    }
+
+    .exam-card:hover {
+        transform: translateY(-2px);
+    }
+</style>
 
 <div class="content-wrapper">
     <section class="content py-4">
@@ -37,7 +58,7 @@ include '../../include/sidebar.php';
                             <i class="fas fa-spinner fa-spin fa-2x text-primary"></i> <br> Loading results...
                         </div>
 
-                        <div class="table-responsive css-my-results-224b51" id="exam_table_wrapper">
+                        <div class="table-responsive" id="exam_table_wrapper" style="display: none;">
                             <table class="table table-hover align-middle mb-0">
                                 <thead class="table-light">
                                     <tr>
@@ -52,7 +73,7 @@ include '../../include/sidebar.php';
                             </table>
                         </div>
 
-                        <div id="no_exams_msg" class="p-5 text-center text-muted css-my-results-224b51">
+                        <div id="no_exams_msg" class="p-5 text-center text-muted" style="display: none;">
                             <i class="fas fa-clipboard-list fa-3x mb-3 text-light-gray"></i>
                             <p>No academic results found.</p>
                         </div>

@@ -115,7 +115,7 @@ include '../../include/sidebar.php';
     <div class="container-fluid">
 
         <!-- Info Banner -->
-        <div class="alert alert-info border-0 shadow-sm mb-4 css-db-content-monitor-d850e3">
+        <div class="alert alert-info border-0 shadow-sm mb-4" style="border-radius: 16px;">
             <div class="d-flex align-items-center">
                 <i class="fas fa-info-circle fs-3 me-3"></i>
                 <div>
@@ -137,7 +137,7 @@ include '../../include/sidebar.php';
             ?>
 
             <div class="col-md-3">
-                <div class="card border-0 shadow-sm css-db-content-monitor-d850e3">
+                <div class="card border-0 shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="bg-primary bg-opacity-10 p-3 rounded-3 me-3">
@@ -153,7 +153,7 @@ include '../../include/sidebar.php';
             </div>
 
             <div class="col-md-3">
-                <div class="card border-0 shadow-sm css-db-content-monitor-d850e3">
+                <div class="card border-0 shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="bg-success bg-opacity-10 p-3 rounded-3 me-3">
@@ -169,7 +169,7 @@ include '../../include/sidebar.php';
             </div>
 
             <div class="col-md-3">
-                <div class="card border-0 shadow-sm css-db-content-monitor-d850e3">
+                <div class="card border-0 shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="bg-warning bg-opacity-10 p-3 rounded-3 me-3">
@@ -185,7 +185,7 @@ include '../../include/sidebar.php';
             </div>
 
             <div class="col-md-3">
-                <div class="card border-0 shadow-sm css-db-content-monitor-d850e3">
+                <div class="card border-0 shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="bg-danger bg-opacity-10 p-3 rounded-3 me-3">
@@ -205,7 +205,8 @@ include '../../include/sidebar.php';
         <div class="row">
             <?php foreach ($dbTables as $index => $table): ?>
                 <div class="col-lg-6 mb-4">
-                    <div class="card border-0 shadow-sm h-100 css-db-content-monitor-400ace">
+                    <div class="card border-0 shadow-sm h-100"
+                        style="border-radius: 16px; border-left: 4px solid var(--bs-<?php echo $table['color']; ?>) !important;">
                         <div class="card-body">
                             <!-- Header -->
                             <div class="d-flex align-items-start justify-content-between mb-3">
@@ -320,7 +321,7 @@ include '../../include/sidebar.php';
 <!-- Preview Modal -->
 <div class="modal fade" id="previewModal" tabindex="-1">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
-        <div class="modal-content css-db-content-monitor-d850e3">
+        <div class="modal-content" style="border-radius: 16px;">
             <div class="modal-header border-0 bg-light">
                 <h5 class="modal-title fw-bold">
                     <i class="fas fa-eye me-2"></i>

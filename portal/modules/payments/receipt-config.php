@@ -291,7 +291,8 @@ include '../../include/sidebar.php';
                                             onchange="previewImage(this, 'logoPreview')">
                                         <small class="text-muted">Recommended: 200x80 pixels (PNG/JPG)</small>
                                         <div class="mt-2">
-                                            <img id="logoPreview" src="" alt="Logo Preview" class="img-thumbnail d-none css-receipt-config-196f5c">
+                                            <img id="logoPreview" src="" alt="Logo Preview" class="img-thumbnail d-none"
+                                                style="max-height: 100px;">
                                             <input type="hidden" name="existing_logo" id="existing_logo">
                                         </div>
                                     </div>
@@ -304,7 +305,7 @@ include '../../include/sidebar.php';
                                         <small class="text-muted">Recommended: 200x80 pixels (PNG/JPG)</small>
                                         <div class="mt-2">
                                             <img id="signaturePreview" src="" alt="Signature Preview"
-                                                class="img-thumbnail d-none css-receipt-config-196f5c">
+                                                class="img-thumbnail d-none" style="max-height: 100px;">
                                             <input type="hidden" name="existing_signature" id="existing_signature">
                                         </div>
                                     </div>

@@ -44,12 +44,12 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
             </div>
             <?php endif; ?>
 
-            <div class="card shadow-sm mb-4 border-0 css-exam-templates-dc9ce7">
+            <div class="card shadow-sm mb-4 border-0" style="border-radius: 15px;">
                 <div class="card-header bg-white border-0 py-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="mb-0 font-weight-bold text-dark"><i class="fas fa-layer-group mr-2 text-primary"></i> Template Library</h5>
-                        <a href="create-template.php" class="btn btn-primary shadow-sm px-4 css-exam-templates-451859">
-                            <i class="fas fa-plus mr-2 css-exam-templates-af89d6"></i> Create New Template
+                        <a href="create-template.php" class="btn btn-primary shadow-sm px-4" style="border-radius: 12px; font-weight: 600;">
+                            <i class="fas fa-plus mr-2" style="font-size: 0.75rem;"></i> Create New Template
                         </a>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                     <tr class="border-bottom">
                                         <td class="ps-4 py-3">
                                             <div class="font-weight-bold text-dark"><?= htmlspecialchars($t['template_name']) ?></div>
-                                            <div class="small text-muted text-truncate css-exam-templates-1a5c8d"><?= htmlspecialchars($t['description']) ?></div>
+                                            <div class="small text-muted text-truncate" style="max-width: 200px;"><?= htmlspecialchars($t['description']) ?></div>
                                         </td>
                                         <td><span class="badge bg-light text-dark border"><?= htmlspecialchars($t['stdtext']) ?></span></td>
                                         <td><span class="badge bg-info text-white"><?= $t['total_questions'] ?> Qs</span></td>
@@ -93,7 +93,7 @@ include PORTAL_INCLUDE_PATH . 'sidebar.php';
                                             <form method="POST" class="d-inline" onsubmit="return confirm('Delete this template?');">
                                                 <input type="hidden" name="action" value="delete">
                                                 <input type="hidden" name="id" value="<?= $t['id'] ?>">
-                                                <button type="submit" class="btn btn-sm btn-outline-danger css-exam-templates-cb968a">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" style="border-radius: 8px;">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

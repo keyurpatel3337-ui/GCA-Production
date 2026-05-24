@@ -178,12 +178,12 @@ $categories = $conn->query("SELECT DISTINCT action_category FROM tbl_audit_logs 
                 <table class="table table-hover mb-0 no-auto-paginate">
                     <thead>
                         <tr>
-                            <th class="css-audit-logs-ed5b9a">Date/Time</th>
-                            <th class="css-audit-logs-ed5b9a">User</th>
-                            <th class="css-audit-logs-ed5b9a">Action Type</th>
-                            <th class="css-audit-logs-db8a21">Category</th>
+                            <th style="width:150px;">Date/Time</th>
+                            <th style="width:150px;">User</th>
+                            <th style="width:150px;">Action Type</th>
+                            <th style="width:120px;">Category</th>
                             <th>Description</th>
-                            <th class="css-audit-logs-db8a21">IP Address</th>
+                            <th style="width:120px;">IP Address</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -245,7 +245,7 @@ include '../../include/sidebar.php';
                                     <td><?= $m['id'] ?></td>
                                     <td>
                                         <div class="fw-bold text-dark"><?= htmlspecialchars($m['title']) ?></div>
-                                        <div class="text-muted small text-truncate css-materials-d54b0a"><?= htmlspecialchars($m['description'] ?? 'No description') ?></div>
+                                        <div class="text-muted small text-truncate" style="max-width: 250px;"><?= htmlspecialchars($m['description'] ?? 'No description') ?></div>
                                     </td>
                                     <td>
                                         <span class="badge bg-primary"><?= htmlspecialchars($m['course_name']) ?></span>

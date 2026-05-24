@@ -277,7 +277,7 @@ $date_to = date('Y-m-d');
                                 <div class="tiny text-muted uppercase">${l.category || ''}</div>
                             </td>
                             <td>
-                                <div class="small text-muted text-truncate css-whatsapp-message-logs-c0dc2c">
+                                <div class="small text-muted text-truncate" style="max-width: 300px;">
                                     ${l.message_content || l.body_text || ''}
                                 </div>
                             </td>
@@ -432,7 +432,7 @@ $date_to = date('Y-m-d');
                             <tr><th class="bg-light">Recipient</th><td><i class="fab fa-whatsapp text-success me-1"></i>${l.recipient_number}</td></tr>
                             <tr><th class="bg-light">Provider</th><td>${l.provider_name || 'BhashSMS'}</td></tr>
                             <tr><th class="bg-light">Template</th><td>${l.template_name || 'N/A'} (${l.category || ''})</td></tr>
-                            <tr><th class="bg-light">Content</th><td class="css-whatsapp-message-logs-4f5f61">${l.message_content || ''}</td></tr>
+                            <tr><th class="bg-light">Content</th><td style="white-space: pre-wrap;">${l.message_content || ''}</td></tr>
                             <tr><th class="bg-light">Variables</th><td><code>${l.variables || '[]'}</code></td></tr>
                             <tr><th class="bg-light">Status</th><td><span class="badge bg-${getStatusClass(l.status)}">${l.status}</span></td></tr>
                             ${l.error_message ? `<tr><th class="bg-light">Error</th><td class="text-danger">${l.error_message}</td></tr>` : ''}
@@ -443,7 +443,7 @@ $date_to = date('Y-m-d');
                     </div>
                     <div class="mt-3">
                         <label class="small text-muted fw-bold">API Response:</label>
-                        <pre class="bg-light p-2 small border rounded css-whatsapp-message-logs-d98fad">${apiResp}</pre>
+                        <pre class="bg-light p-2 small border rounded" style="max-height: 200px; overflow-y: auto;">${apiResp}</pre>
                     </div>
                 `;
                     $('#logDetailsBody').html(detailHtml);
@@ -482,4 +482,29 @@ $date_to = date('Y-m-d');
         });
     </script>
 
-    
+    <style>
+        .tiny {
+            font-size: 0.75rem;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .col-md-5th {
+            flex: 0 0 auto;
+            width: 20%;
+        }
+
+        @media (max-width: 991.98px) {
+            .col-md-5th {
+                width: 33.333%;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .col-md-5th {
+                width: 50%;
+            }
+        }
+    </style>

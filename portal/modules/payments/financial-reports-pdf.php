@@ -56,13 +56,13 @@ try {
     $pdf->AddPage();
 
     $headerHtml = '
-    <table cellpadding="2" class="css-financial-reports-pdf-8588e4">
+    <table cellpadding="2" style="width:100%;">
         <tr>
-            <td class="css-financial-reports-pdf-539b04">
-                <span class="css-financial-reports-pdf-86c905">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
-                <span class="css-financial-reports-pdf-1b8847">' . htmlspecialchars($config['address'] ?? '') . '</span><br>
-                <span class="css-financial-reports-pdf-b898e5">COLLECTION SUMMARY REPORT</span><br>
-                <span class="css-financial-reports-pdf-1b8847">Period: ' . date('d M Y', strtotime($from_date)) . ' to ' . date('d M Y', strtotime($to_date)) . '</span>
+            <td style="text-align:center;">
+                <span style="font-size:16pt; font-weight:bold;">' . htmlspecialchars($config['organization_name'] ?? SYSTEM_NAME) . '</span><br>
+                <span style="font-size:10pt;">' . htmlspecialchars($config['address'] ?? '') . '</span><br>
+                <span style="font-size:12pt; font-weight:bold; background-color:#fefefe;">COLLECTION SUMMARY REPORT</span><br>
+                <span style="font-size:10pt;">Period: ' . date('d M Y', strtotime($from_date)) . ' to ' . date('d M Y', strtotime($to_date)) . '</span>
             </td>
         </tr>
     </table>';
@@ -71,15 +71,15 @@ try {
 
     // Stats Row
     $statsHtml = '
-    <table cellpadding="4" class="css-financial-reports-pdf-9f2285">
-        <tr class="css-financial-reports-pdf-6eb74d">
-            <td width="50%" class="css-financial-reports-pdf-2b03f1">
-                <span class="css-financial-reports-pdf-0ed7c9">Total Transactions</span><br>
-                <span class="css-financial-reports-pdf-e3ba8d">' . $collection_stats['count'] . '</span>
+    <table cellpadding="4" style="width:100%; margin-bottom:10px;">
+        <tr style="background-color:#f8f9fa;">
+            <td width="50%" style="border:0.5px solid #ddd; text-align:center;">
+                <span style="font-size:9pt; color:#666;">Total Transactions</span><br>
+                <span style="font-size:12pt; font-weight:bold;">' . $collection_stats['count'] . '</span>
             </td>
-            <td width="50%" class="css-financial-reports-pdf-2b03f1">
-                <span class="css-financial-reports-pdf-0ed7c9">Total Collection</span><br>
-                <span class="css-financial-reports-pdf-e3ba8d">' . formatIndianCurrency($collection_stats['total']) . '</span>
+            <td width="50%" style="border:0.5px solid #ddd; text-align:center;">
+                <span style="font-size:9pt; color:#666;">Total Collection</span><br>
+                <span style="font-size:12pt; font-weight:bold;">' . formatIndianCurrency($collection_stats['total']) . '</span>
             </td>
         </tr>
     </table>';
@@ -88,24 +88,24 @@ try {
 
     // Breakdown Tables (Two columns)
     $breakdownHtml = '
-    <table cellpadding="0" class="css-financial-reports-pdf-8588e4">
+    <table cellpadding="0" style="width:100%;">
         <tr>
             <td width="48%">
-                <table border="0.5" cellpadding="4" class="css-financial-reports-pdf-6eb086">
-                    <tr class="css-financial-reports-pdf-5f2273"><td colspan="3">Mode Breakdown</td></tr>
-                    <tr class="css-financial-reports-pdf-697d1c"><th>Mode</th><th>Txns</th><th class="css-financial-reports-pdf-08a0ed">Amount</th></tr>';
+                <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
+                    <tr style="background-color:#eee; font-weight:bold;"><td colspan="3">Mode Breakdown</td></tr>
+                    <tr style="background-color:#f9f9f9;"><th>Mode</th><th>Txns</th><th style="text-align:right;">Amount</th></tr>';
     foreach ($mode_breakdown as $m) {
-        $breakdownHtml .= '<tr><td>' . strtoupper($m['payment_mode']) . '</td><td>' . $m['count'] . '</td><td class="css-financial-reports-pdf-08a0ed">' . formatIndianCurrency($m['total']) . '</td></tr>';
+        $breakdownHtml .= '<tr><td>' . strtoupper($m['payment_mode']) . '</td><td>' . $m['count'] . '</td><td style="text-align:right;">' . formatIndianCurrency($m['total']) . '</td></tr>';
     }
     $breakdownHtml .= '</table>
             </td>
             <td width="4%"></td>
             <td width="48%">
-                <table border="0.5" cellpadding="4" class="css-financial-reports-pdf-6eb086">
-                    <tr class="css-financial-reports-pdf-5f2273"><td colspan="3">Type Breakdown</td></tr>
-                    <tr class="css-financial-reports-pdf-697d1c"><th>Type</th><th>Txns</th><th class="css-financial-reports-pdf-08a0ed">Amount</th></tr>';
+                <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
+                    <tr style="background-color:#eee; font-weight:bold;"><td colspan="3">Type Breakdown</td></tr>
+                    <tr style="background-color:#f9f9f9;"><th>Type</th><th>Txns</th><th style="text-align:right;">Amount</th></tr>';
     foreach (array_slice($type_breakdown, 0, 10) as $t) {
-        $breakdownHtml .= '<tr><td>' . htmlspecialchars($t['payment_type'] ?? '') . '</td><td>' . $t['count'] . '</td><td class="css-financial-reports-pdf-08a0ed">' . formatIndianCurrency($t['total']) . '</td></tr>';
+        $breakdownHtml .= '<tr><td>' . htmlspecialchars($t['payment_type'] ?? '') . '</td><td>' . $t['count'] . '</td><td style="text-align:right;">' . formatIndianCurrency($t['total']) . '</td></tr>';
     }
     $breakdownHtml .= '</table>
             </td>
@@ -116,19 +116,19 @@ try {
 
     // Daily Breakdown
     $dailyHtml = '
-    <div class="css-financial-reports-pdf-c9735f">Daily Collection Breakdown</div>
-    <table border="0.5" cellpadding="4" class="css-financial-reports-pdf-6eb086">
+    <div style="font-size:10pt; font-weight:bold; background-color:#333; color:#fff; padding:5px;">Daily Collection Breakdown</div>
+    <table border="0.5" cellpadding="4" style="width:100%; font-size:8pt;">
         <thead>
-            <tr class="css-financial-reports-pdf-bf35f5">
+            <tr style="background-color:#f0f0f0; font-weight:bold;">
                 <th width="11%">Date</th>
-                <th width="11%" class="css-financial-reports-pdf-08a0ed">Online</th>
-                <th width="11%" class="css-financial-reports-pdf-08a0ed">Offline</th>';
+                <th width="11%" style="text-align:right;">Online</th>
+                <th width="11%" style="text-align:right;">Offline</th>';
     $p_types = $daily_breakdown['payment_types'] ?? [];
     $type_width = count($p_types) > 0 ? (40 / count($p_types)) : 0;
     foreach ($p_types as $pt) {
-        $dailyHtml .= '<th width="' . $type_width . '%" class="css-financial-reports-pdf-08a0ed">' . strtoupper(substr($pt, 0, 8)) . '</th>';
+        $dailyHtml .= '<th width="' . $type_width . '%" style="text-align:right;">' . strtoupper(substr($pt, 0, 8)) . '</th>';
     }
-    $dailyHtml .= '<th width="15%" class="css-financial-reports-pdf-08a0ed">Total</th>
+    $dailyHtml .= '<th width="15%" style="text-align:right;">Total</th>
             </tr>
         </thead>
         <tbody>';
@@ -136,12 +136,12 @@ try {
     foreach ($daily_breakdown['data'] ?? [] as $row) {
         $dailyHtml .= '<tr>
             <td>' . date('d-m-Y', strtotime($row['date'])) . '</td>
-            <td class="css-financial-reports-pdf-08a0ed">' . formatIndianCurrency($row['online_total']) . '</td>
-            <td class="css-financial-reports-pdf-08a0ed">' . formatIndianCurrency($row['offline_total']) . '</td>';
+            <td style="text-align:right;">' . formatIndianCurrency($row['online_total']) . '</td>
+            <td style="text-align:right;">' . formatIndianCurrency($row['offline_total']) . '</td>';
         foreach ($p_types as $pt) {
-            $dailyHtml .= '<td class="css-financial-reports-pdf-08a0ed">' . formatIndianCurrency($row['types'][$pt] ?? 0) . '</td>';
+            $dailyHtml .= '<td style="text-align:right;">' . formatIndianCurrency($row['types'][$pt] ?? 0) . '</td>';
         }
-        $dailyHtml .= '<td class="css-financial-reports-pdf-714e9d">' . formatIndianCurrency($row['day_total']) . '</td>
+        $dailyHtml .= '<td style="text-align:right; font-weight:bold;">' . formatIndianCurrency($row['day_total']) . '</td>
         </tr>';
     }
     $dailyHtml .= '</tbody></table>';

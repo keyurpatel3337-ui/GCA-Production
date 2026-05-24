@@ -293,7 +293,7 @@ if ($filter_division) {
                 <?php if ($totalRecords > 0): ?>
                     <div>
                         <label class="me-2">Per Page:</label>
-                        <select class="form-select form-select-sm d-inline-block css-division-shuffle-dc251b"
+                        <select class="form-select form-select-sm d-inline-block" style="width: auto;"
                             onchange="document.getElementById('per_page_hidden').value=this.value; document.getElementById('filterForm').submit();">
                             <option value="25" <?php echo $perPage == 25 ? 'selected' : ''; ?>>25</option>
                             <option value="50" <?php echo $perPage == 50 ? 'selected' : ''; ?>>50</option>
@@ -348,7 +348,8 @@ if ($filter_division) {
                                             class="badge bg-success"><?php echo htmlspecialchars($student['division_name'] ?? 'N/A'); ?></span>
                                     </td>
                                     <td>
-                                        <a onclick="document.getElementById('form_details_student['registration_id']').submit()" class="css-division-shuffle-b202c6" class="btn btn-sm btn-primary" title="View Details">
+                                        <a onclick="document.getElementById('form_details_student['registration_id']').submit()"
+                                            style="cursor:pointer" class="btn btn-sm btn-primary" title="View Details">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>

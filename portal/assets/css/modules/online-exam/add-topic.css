@@ -1,0 +1,28 @@
+.add-topic-custom-1 {
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.add-topic-custom-2 {
+    border-radius: 10px;
+}
+
+.add-topic-custom-3 {
+    background: #f8f9fa;
+    border-radius: 10px;
+    height: 45px;
+}
+
+.add-topic-custom-4 {
+    border-radius: 12px;
+    height: 45px;
+    line-height: 33px;
+    font-weight: 600;
+}
+
+.add-topic-custom-5 {
+    border-radius: 12px;
+    height: 45px;
+    font-weight: 600;
+}

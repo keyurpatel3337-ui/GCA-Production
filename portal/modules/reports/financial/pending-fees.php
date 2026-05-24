@@ -256,7 +256,54 @@ include '../../../include/navbar.php';
 include '../../../include/sidebar.php';
 ?>
 
+<style>
+    .filter-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 12px;
+    }
 
+    .filter-card .form-label {
+        color: white;
+        font-weight: 500;
+    }
+
+    .stat-box {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        /* Reduced padding */
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-box h3 {
+        font-size: 1.5rem;
+        /* Reduced font size */
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .stat-box p {
+        color: #6c757d;
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f8f9ff;
+    }
+
+    .amount-high {
+        color: #dc3545;
+        font-weight: 600;
+    }
+
+    .action-btns .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+</style>
 
 
 

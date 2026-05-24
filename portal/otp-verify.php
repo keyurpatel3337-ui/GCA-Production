@@ -110,13 +110,38 @@ $timeLeft = max(0, 60 - $seconds_passed);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+        .verify-container { background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); width: 100%; max-width: 440px; text-align: center; }
+        .icon-box { width: 48px; height: 48px; background: #2563eb; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.25rem; }
+        h2 { margin: 0 0 0.5rem; color: #0f172a; font-weight: 700; font-size: 1.5rem; }
+        p { color: #475569; font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.5; }
+        
+        /* OTP 6-Digit Slots */
+        .otp-wrapper { display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 2rem; }
+        .digit-input { width: 50px; height: 56px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 1.5rem; font-weight: 700; text-align: center; color: #0f172a; transition: all 0.2s; background: #fff; }
+        .digit-input:focus { border-color: #2563eb; outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); background: #f0f7ff; }
+        .digit-input.active { border-color: #2563eb; }
+
+        .btn-verify { width: 100%; padding: 1rem; background: #0f172a; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-size: 1rem; margin-top: 0.5rem; }
+        .btn-verify:hover { background: #1e293b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15); }
+        .btn-verify:active { transform: translateY(0); }
+        
+        .error { color: #dc2626; background: #fef2f2; padding: 0.75rem; border-radius: 8px; font-size: 0.875rem; margin-bottom: 1.5rem; border: 1px solid #fee2e2; }
+        .success { color: #16a34a; background: #f0fdf4; padding: 0.75rem; border-radius: 8px; font-size: 0.875rem; margin-bottom: 1.5rem; border: 1px solid #dcfce7; }
+        
+        .timer-container { margin-top: 2rem; font-size: 0.875rem; color: #64748b; }
+        .timer-container span { font-weight: 500; }
+        .resend-link { color: #2563eb; text-decoration: none; font-weight: 600; cursor: pointer; display: none; }
+        .resend-link:hover { text-decoration: underline; }
+        .countdown { color: #94a3b8; }
+    </style>
 </head>
 <body>
     <div class="verify-container">
         <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
         <h2>Verify your login</h2>
-        <p>We've sent a 6-digit verification code to<br><span class="css-otp-verify-d446b6"><?php echo substr($user['email'], 0, 3) . '.....' . substr($user['email'], strpos($user['email'], '@')); ?></span></p>
+        <p>We've sent a 6-digit verification code to<br><span style="color: #0f172a; font-weight: 600;"><?php echo substr($user['email'], 0, 3) . '.....' . substr($user['email'], strpos($user['email'], '@')); ?></span></p>
         
         <?php if ($error): ?><div class="error"><?php echo $error; ?></div><?php
 endif; ?>
@@ -134,17 +159,17 @@ endif; ?>
                 <input type="text" class="digit-input" maxlength="1" pattern="\d*" inputmode="numeric">
             </div>
 
-            <div class="css-otp-verify-de092e">
-                <input type="checkbox" name="trust_device" id="trustDevice" class="css-otp-verify-094a63" <?php echo (isset($_SESSION['trust_device_requested']) && $_SESSION['trust_device_requested']) ? 'checked' : ''; ?>>
-                <label for="trustDevice" class="css-otp-verify-640c78">Trust this device for 7 days</label>
+            <div style="margin-bottom: 1.5rem; text-align: left; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <input type="checkbox" name="trust_device" id="trustDevice" style="width: 16px; height: 16px; cursor: pointer;" <?php echo (isset($_SESSION['trust_device_requested']) && $_SESSION['trust_device_requested']) ? 'checked' : ''; ?>>
+                <label for="trustDevice" style="font-size: 0.9rem; color: #475569; cursor: pointer;">Trust this device for 7 days</label>
             </div>
 
             <button type="submit" class="btn-verify">Verify</button>
         </form>
 
         <div class="timer-container">
-            <div id="countdownBox" class="css-otp-verify-1bcbb7">Resend code in <span id="timerText">0:<?php echo str_pad($timeLeft, 2, '0', STR_PAD_LEFT); ?></span></div>
-            <a href="?resend=1" class="resend-link css-otp-verify-fb8f75" id="resendBtn">Resend Code</a>
+            <div id="countdownBox" style="display: <?php echo $timeLeft > 0 ? 'block' : 'none'; ?>;">Resend code in <span id="timerText">0:<?php echo str_pad($timeLeft, 2, '0', STR_PAD_LEFT); ?></span></div>
+            <a href="?resend=1" class="resend-link" id="resendBtn" style="display: <?php echo $timeLeft <= 0 ? 'block' : 'none'; ?>;">Resend Code</a>
         </div>
     </div>
 
